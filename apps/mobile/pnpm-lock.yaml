@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@react-navigation/bottom-tabs':
+        specifier: ^7.3.13
+        version: 7.3.13(@react-navigation/native@7.1.9(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.4.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-screens@4.10.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       '@react-navigation/elements':
         specifier: ^2.4.2
         version: 2.4.2(@react-navigation/native@7.1.9(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.4.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
@@ -754,6 +757,15 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  '@react-navigation/bottom-tabs@7.3.13':
+    resolution: {integrity: sha512-J3MWXBJc3y6hefZNRqdj/JD4nzIDLzZL5GIYj89pR6oRf2Iibz9t1qV7yzxEc1KOaNDkXVZ/5U16PArEJFfykQ==}
+    peerDependencies:
+      '@react-navigation/native': ^7.1.9
+      react: '>= 18.2.0'
+      react-native: '*'
+      react-native-safe-area-context: '>= 4.0.0'
+      react-native-screens: '>= 4.0.0'
 
   '@react-navigation/core@7.9.2':
     resolution: {integrity: sha512-lqCyKMWWaSwGK4VV3wRXXEKvl5IKrVH207Kp77TLCnITnd4KQIdgjzzJ/Pr62ugki3VTAErq1vg0yRlcXciCbg==}
@@ -3715,6 +3727,18 @@ snapshots:
       react-native: 0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0)
     optionalDependencies:
       '@types/react': 19.0.14
+
+  '@react-navigation/bottom-tabs@7.3.13(@react-navigation/native@7.1.9(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.4.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-screens@4.10.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      '@react-navigation/elements': 2.4.2(@react-navigation/native@7.1.9(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.4.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      '@react-navigation/native': 7.1.9(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      color: 4.2.3
+      react: 19.0.0
+      react-native: 0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0)
+      react-native-safe-area-context: 5.4.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      react-native-screens: 4.10.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+    transitivePeerDependencies:
+      - '@react-native-masked-view/masked-view'
 
   '@react-navigation/core@7.9.2(react@19.0.0)':
     dependencies:
