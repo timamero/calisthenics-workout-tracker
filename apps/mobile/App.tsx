@@ -4,6 +4,10 @@ import { createStaticNavigation, useNavigation, StaticParamList } from '@react-n
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import {
+  MD3LightTheme as DefaultTheme,
+  PaperProvider,
+} from 'react-native-paper';
 
 type RootStackParamList = StaticParamList<typeof RootStack>;
 
@@ -29,7 +33,7 @@ function HomeScreen() {
 
 function DetailsScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.primary }}>
       <Text>Details Screen</Text>
       <Ionicons name="checkmark-circle" size={32} color="green" />
     </View>
@@ -54,6 +58,19 @@ const RootStack = createNativeStackNavigator({
 
 const Navigation = createStaticNavigation(RootStack);
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'tomato',
+    secondary: 'yellow',
+  },
+};
+
 export default function App() {
-  return <Navigation />;
+  return (
+    <PaperProvider theme={theme}>
+      <Navigation />
+    </PaperProvider>
+  );
 }
