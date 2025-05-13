@@ -8,6 +8,8 @@ import {
   MD3LightTheme as DefaultTheme,
   PaperProvider,
 } from 'react-native-paper';
+import HomeScreen from './screens/Home';
+import AboutScreen from './screens/About';
 
 type RootStackParamList = StaticParamList<typeof RootStack>;
 
@@ -18,27 +20,27 @@ declare global {
 }
 
 
-function HomeScreen() {
-  const navigation = useNavigation();
+// function HomeScreen() {
+//   const navigation = useNavigation();
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPressIn={() => navigation.navigate('Details')}>
-        Go to Details
-      </Button>
-    </View>
-  );
-}
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text>Home Screen</Text>
+//       <Button onPressIn={() => navigation.navigate('Details')}>
+//         Go to Details
+//       </Button>
+//     </View>
+//   );
+// }
 
-function DetailsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.primary }}>
-      <Text>Details Screen</Text>
-      <Ionicons name="checkmark-circle" size={32} color="green" />
-    </View>
-  );
-}
+// function DetailsScreen() {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.primary }}>
+//       <Text>Details Screen</Text>
+//       <Ionicons name="checkmark-circle" size={32} color="green" />
+//     </View>
+//   );
+// }
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
@@ -52,7 +54,7 @@ const RootStack = createNativeStackNavigator({
         title: 'Overview',
       }
     },
-    Details: DetailsScreen,
+    About: AboutScreen,
   },
 });
 
@@ -62,8 +64,8 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'tomato',
-    secondary: 'yellow',
+    primary: 'snow',
+    secondary: 'thistle',
   },
 };
 
