@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import { createStaticNavigation, useNavigation, StaticParamList } from '@react-navigation/native';
+import { createStaticNavigation, StaticParamList } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from '@react-navigation/elements';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import {
   MD3LightTheme as DefaultTheme,
   PaperProvider,
 } from 'react-native-paper';
 import HomeScreen from './screens/Home';
 import AboutScreen from './screens/About';
+
 
 type RootStackParamList = StaticParamList<typeof RootStack>;
 
@@ -18,29 +17,6 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
-
-
-// function HomeScreen() {
-//   const navigation = useNavigation();
-
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text>Home Screen</Text>
-//       <Button onPressIn={() => navigation.navigate('Details')}>
-//         Go to Details
-//       </Button>
-//     </View>
-//   );
-// }
-
-// function DetailsScreen() {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.colors.primary }}>
-//       <Text>Details Screen</Text>
-//       <Ionicons name="checkmark-circle" size={32} color="green" />
-//     </View>
-//   );
-// }
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
@@ -51,7 +27,7 @@ const RootStack = createNativeStackNavigator({
     Home: {
       screen: HomeScreen,
       options: {
-        title: 'Overview',
+        title: 'Home',
       }
     },
     About: AboutScreen,
