@@ -6,6 +6,7 @@
   ],
   "compilerOptions": {
     "strict": true,
+    "module": "ESNext",
     "moduleResolution": "bundler"
   }
 }
