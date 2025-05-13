@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { Title } from '@mantine/core';
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -7,7 +8,7 @@ export const Route = createFileRoute('/')({
 function Index() {
   return (
     <div>
-      <h3>Welcome Home!</h3>
+      <Title>Welcome Home!</Title>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 import { AppShell, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { NavLink } from '@mantine/core';
 
 
 export const Route = createRootRoute({
@@ -32,12 +33,8 @@ function RootComponent() {
       </AppShell.Header>
 
       <AppShell.Navbar p="md">
-        <Link to="/" onClick={toggle}>
-           Home
-         </Link>{' '}
-         <Link to="/about" onClick={toggle}>
-           About
-         </Link>
+        <NavLink label="Home" component={Link} to="/" onClick={toggle} />
+        <NavLink label="About" component={Link} to="/about" onClick={toggle} />
         </AppShell.Navbar>
 
       <AppShell.Main>
