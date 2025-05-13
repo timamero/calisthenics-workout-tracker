@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { createStaticNavigation, useNavigation, StaticParamList } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from '@react-navigation/elements';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 type RootStackParamList = StaticParamList<typeof RootStack>;
 
@@ -30,6 +31,7 @@ function DetailsScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
+      <Ionicons name="checkmark-circle" size={32} color="green" />
     </View>
   );
 }
