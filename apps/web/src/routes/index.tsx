@@ -9,6 +9,7 @@ function Index() {
   return (
     <div>
       <Title>Welcome Home!</Title>
+      <p>This application is in a container.</p>
     </div>
   )
 }
