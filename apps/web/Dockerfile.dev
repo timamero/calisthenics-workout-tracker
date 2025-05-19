@@ -1,13 +1,20 @@
 FROM node:20
 
+# Configure PNPM environment
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+# Enable corepack (makes pnpm available)
+RUN corepack enable
+
 # Create app directory
 WORKDIR /web
 
-# Copy package files separately to install deps first
-COPY package*.json ./
+# Copy lockfile and package.json before other files (to cache deps)
+COPY pnpm-lock.yaml package.json ./
 
 # Install dependencies
-RUN npm install
+RUN pnpm install
 
 # Copy the rest of the app
 COPY . .
@@ -16,4 +23,4 @@ COPY . .
 EXPOSE 5173
 
 # Start Vite dev server
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["pnpm", "dev"]
