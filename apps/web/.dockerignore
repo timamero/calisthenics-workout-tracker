@@ -4,3 +4,4 @@ dist
 Dockerfile
 Dockerfile.dev
 *.log
+.gitignore
