@@ -20,6 +20,7 @@ COPY pnpm-lock.yaml package.json ./
 
 # Install dependencies
 RUN pnpm install
+RUN npm install --global @expo/ngrok@^4.1.0
 
 # Copy the rest of the app
 COPY . .
@@ -31,4 +32,4 @@ EXPOSE 8081
 ENV NODE_ENV=development
 
 # Start Expo with hot reloading
-CMD ["pnpm", "expo", "start", "--dev-client", "--tunnel"]
+CMD ["pnpm", "expo", "start", "--tunnel"]

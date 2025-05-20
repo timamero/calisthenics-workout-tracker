@@ -8,6 +8,7 @@ export default function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Welcome Home!</Text>
+      <Text>This app is in a container.</Text>
       <Button onPressIn={() => navigation.navigate('About')}>
         Go to About
       </Button>
