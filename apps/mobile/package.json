@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "docker-build": "docker build -t calisthenics-mobile .",
+    "docker-build": "docker build -f Dockerfile.dev -t calisthenics-mobile .",
     "docker-run": "docker run --rm -it -p 8081:8081 -p 19000:19000 -p 19001:19001 -v $(pwd):/mobile -w /mobile calisthenics-mobile"
   },
   "dependencies": {
