@@ -5,10 +5,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential curl && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Poetry
-ENV POETRY_VERSION=1.8.2
-RUN curl -sSL https://install.python-poetry.org | python3 - && \
-    ln -s /root/.local/bin/poetry /usr/local/bin/poetry
+# Install Poetry (latest recommended method)
+ENV POETRY_HOME="/opt/poetry"
+ENV PATH="$POETRY_HOME/bin:$PATH"
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
 # Set workdir
 WORKDIR /backend
@@ -16,11 +16,12 @@ WORKDIR /backend
 # Copy only poetry files to leverage Docker cache
 COPY pyproject.toml poetry.lock* /backend/
 
-# Install dependencies (no venv, system-wide)
-RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
+# Configure Poetry to not use virtualenvs and install dependencies
+RUN poetry config virtualenvs.create false --local && \
+    poetry install --no-root
 
 # Copy app code
-COPY . /app
+COPY . /backend
 
 # Expose port
 EXPOSE 8000
