@@ -1,0 +1,33 @@
+FROM python:3.11-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Poetry
+ENV POETRY_VERSION=1.8.2
+RUN curl -sSL https://install.python-poetry.org | python3 - && \
+    ln -s /root/.local/bin/poetry /usr/local/bin/poetry
+
+# Set workdir
+WORKDIR /backend
+
+# Copy only poetry files to leverage Docker cache
+COPY pyproject.toml poetry.lock* /backend/
+
+# Install dependencies (no venv, system-wide)
+RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
+
+# Copy app code
+COPY . /app
+
+# Expose port
+EXPOSE 8000
+
+# Set environment variables for development
+ENV PYTHONUNBUFFERED=1 \
+    POETRY_NO_INTERACTION=1
+
+# Run with hot reload
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
