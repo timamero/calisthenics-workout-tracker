@@ -8,7 +8,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"HELLO": "WORLD"}
 
 
 @app.get("/items/{item_id}")
