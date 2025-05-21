@@ -2,8 +2,9 @@ from typing import Union
 
 from fastapi import FastAPI
 import httpx
+from .config import settings
 
-app = FastAPI()
+app = FastAPI(title=settings.app_name, debug=settings.debug)
 
 
 @app.get("/")
