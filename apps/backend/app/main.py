@@ -1,10 +1,22 @@
+from functools import lru_cache
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from typing_extensions import Annotated
 import httpx
-from .config import settings
+from . import config
 
-app = FastAPI(title=settings.app_name, debug=settings.debug)
+
+@lru_cache
+def get_settings():
+    return config.Settings()
+
+
+app = FastAPI(
+    title=get_settings().app_name,
+    debug=get_settings().debug,
+    version=get_settings().version,
+)
 
 
 @app.get("/")
@@ -21,3 +33,11 @@ def read_item(item_id: int, q: Union[str, None] = None):
 def read_test():
     r = httpx.get("https://www.example.org/")
     return r.text
+
+
+@app.get("/info")
+async def info(settings: Annotated[config.Settings, Depends(get_settings)]):
+    return {
+        "app_name": settings.app_name,
+        "debug": settings.debug,
+    }
