@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "docker-build": "docker build -f Dockerfile.dev -t calisthenics-web-dev .",
     "docker-run": "docker run --rm -it -p 5173:5173 -v $PWD:/web -v /web/node_modules calisthenics-web-dev",
+    "check-types": "tsc --noEmit",
     "lint": "eslint .",
     "preview": "vite preview"
   },
