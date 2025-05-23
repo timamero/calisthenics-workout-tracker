@@ -38,6 +38,9 @@ coverage/
 *.egg-info/
 .eggs/
 
+# Turborepo
+.turbo
+
 # Docker
 *.pid
 *.sock
