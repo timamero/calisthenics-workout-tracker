@@ -3,6 +3,11 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "dev-backend": "turbo run dev --filter=backend",
+    "dev-web": "turbo run dev --filter=web",
+    "dev-mobile": "turbo run dev --filter=mobile",
+    "dev-web+backend": "turbo run dev --filter=web --filter=backend",
+    "dev-mobile+backend": "turbo run dev --filter=mobile --filter=backend",
     "lint": "turbo run lint"
   },
 	"devDependencies": {
