@@ -1,2 +1,3 @@
 packages:
-  - 'apps/frontend/*'
+  - 'apps/frontend/web'
+  - 'apps/frontend/mobile'
