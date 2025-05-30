@@ -24,3 +24,8 @@ build-backend = "poetry.core.masonry.api"
 flake8 = "^7.2.0"
 black = "^25.1.0"
 
+[tool.black]
+line-length = 88
+target-version = ['py313']
+skip-string-normalization = false
+
