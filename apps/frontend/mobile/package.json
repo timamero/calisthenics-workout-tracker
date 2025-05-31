@@ -9,7 +9,8 @@
     "web": "expo start --web",
     "check-types": "tsc --noEmit",
     "docker-build": "docker build -f Dockerfile.dev -t calisthenics-mobile-dev .",
-    "docker-run": "docker run --rm -it -p 8081:8081 -p 19000:19000 -p 19001:19001 -v $(pwd):/mobile -w /mobile calisthenics-mobile-dev"
+    "docker-run": "docker run --rm -it -p 8081:8081 -p 19000:19000 -p 19001:19001 -v $(pwd):/mobile -w /mobile calisthenics-mobile-dev",
+    "lint": "expo lint"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^7.3.13",
@@ -27,6 +28,8 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
+    "eslint": "^9.28.0",
+    "eslint-config-expo": "~9.2.0",
     "typescript": "~5.8.3"
   },
   "private": true,
