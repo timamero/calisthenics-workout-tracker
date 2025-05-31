@@ -14,12 +14,7 @@ function App() {
       padding="md"
     >
       <AppShell.Header>
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          hiddenFrom="sm"
-          size="sm"
-        />
+        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         <div>Logo</div>
       </AppShell.Header>
 
@@ -30,4 +25,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
