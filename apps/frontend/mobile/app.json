@@ -25,11 +25,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "owner": "fcamero",
     "extra": {
       "eas": {
         "projectId": "7d3f3567-d6ae-4932-a521-23c22bbbe813"
       }
-    },
-    "owner": "fcamero"
+    }
   }
 }
