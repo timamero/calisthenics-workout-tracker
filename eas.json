@@ -5,9 +5,7 @@
   },
   "build": {
     "development": {
-      "env": {
-        "EAS_BUILD_WORKINGDIR": "apps/frontend/mobile"
-      },
+      "projectRoot": "apps/frontend/mobile",
       "developmentClient": true,
       "distribution": "internal"
     },
