@@ -4,7 +4,6 @@ jobs:
   android_development_build:
     name: Build Android
     type: build
-    workingDirectory: apps/frontend/mobile
     params:
       platform: android
       profile: development
