@@ -1,24 +1,25 @@
 {
 	"private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "dev": "turbo run dev",
-    "dev-backend": "turbo run dev --filter=backend",
-    "dev-web": "turbo run dev --filter=web",
-    "dev-mobile": "turbo run dev --filter=mobile",
-    "dev-web+backend": "turbo run dev --filter=web --filter=backend",
-    "dev-mobile+backend": "turbo run dev --filter=mobile --filter=backend",
-    "docker:mobile:build": "docker build -f apps/frontend/mobile/Dockerfile.dev -t calisthenics-mobile-dev ./apps/frontend/mobile",
-    "docker:mobile:run": "docker run --rm -it -p 8081:8081 -p 19000:19000 -p 19001:19001 -v $(pwd)/apps/frontend/mobile:/mobile -w /mobile calisthenics-mobile-dev",
-    "docker:web:build": "docker build -f apps/frontend/web/Dockerfile.dev -t calisthenics-web-dev ./apps/frontend/web",
-    "docker:web:run": "docker run --rm -it -p 8081:8081 -p 19000:19000 -p 19001:19001 -v $(pwd)/apps/frontend/web:/web -w /web calisthenics-web-dev",
-    "docker:backend:build": "docker build -f apps/backend/Dockerfile.dev -t calisthenics-backend-dev ./apps/backend",
-    "docker:backend:run": "docker run --rm -it -p 8081:8081 -p 19000:19000 -p 19001:19001 -v $(pwd)/apps/backend:/backend -w /backend calisthenics-backend-dev",
-    "docker-build-all": "pnpm docker:mobile:build; pnpm docker:web:build; pnpm docker:backend:build"
-  },
+	"scripts": {
+		"build": "turbo run build",
+		"lint": "turbo run lint",
+		"dev": "turbo run dev",
+		"dev-backend": "turbo run dev --filter=backend",
+		"dev-web": "turbo run dev --filter=web",
+		"dev-mobile": "turbo run dev --filter=mobile",
+		"dev-web+backend": "turbo run dev --filter=web --filter=backend",
+		"dev-mobile+backend": "turbo run dev --filter=mobile --filter=backend",
+		"docker:mobile:build": "docker build -f apps/frontend/mobile/Dockerfile.dev -t calisthenics-mobile-dev ./apps/frontend/mobile",
+		"docker:mobile:run": "docker run --rm -it -p 8081:8081 -p 19000:19000 -p 19001:19001 -v $(pwd)/apps/frontend/mobile:/mobile -w /mobile calisthenics-mobile-dev",
+		"docker:web:build": "docker build -f apps/frontend/web/Dockerfile.dev -t calisthenics-web-dev ./apps/frontend/web",
+		"docker:web:run": "docker run --rm -it -p 8081:8081 -p 19000:19000 -p 19001:19001 -v $(pwd)/apps/frontend/web:/web -w /web calisthenics-web-dev",
+		"docker:backend:build": "docker build -f apps/backend/Dockerfile.dev -t calisthenics-backend-dev ./apps/backend",
+		"docker:backend:run": "docker run --rm -it -p 8081:8081 -p 19000:19000 -p 19001:19001 -v $(pwd)/apps/backend:/backend -w /backend calisthenics-backend-dev",
+		"docker-build-all": "pnpm docker:mobile:build; pnpm docker:web:build; pnpm docker:backend:build"
+	},
 	"devDependencies": {
+		"husky": "^9.1.7",
 		"turbo": "^2.5.3"
 	},
-	"packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977"
+	"packageManager": "pnpm@10.11.1"
 }
