@@ -38,3 +38,6 @@ yarn-error.*
 
 # Turborepo
 .turbo
+
+# EAS
+credentials.json
