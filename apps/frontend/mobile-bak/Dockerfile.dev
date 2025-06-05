@@ -1,0 +1,35 @@
+FROM node:20
+
+# Install watchman for better file watching (hot reload)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    watchman \
+ && rm -rf /var/lib/apt/lists/*
+
+# Configure PNPM environment
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+# Enable corepack (makes pnpm available)
+RUN corepack enable
+
+# Set working directory
+WORKDIR /mobile
+
+# Copy only package manager files first for better caching
+COPY pnpm-lock.yaml package.json ./
+
+# Install dependencies
+RUN pnpm install
+RUN npm install --global @expo/ngrok@^4.1.0
+
+# Copy the rest of the app
+COPY . .
+
+# Expose Expo dev server port
+EXPOSE 8081
+
+# Set environment variable for development
+ENV NODE_ENV=development
+
+# Start Expo with hot reloading
+CMD ["pnpm", "expo", "start", "--tunnel"]
