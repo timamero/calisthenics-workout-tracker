@@ -1,3 +1,0 @@
-- run:
-    name: Write credentials.json
-    command: echo "$ANDROID_CREDENTIALS_JSON" > credentials.json
