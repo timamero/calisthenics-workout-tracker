@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'react-native-paper';
 
 export default function AboutScreen() {
