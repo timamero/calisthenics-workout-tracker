@@ -5,7 +5,7 @@ import {
   MD3LightTheme as DefaultTheme,
   PaperProvider,
 } from 'react-native-paper';
-// import Ionicons from '@expo/vector-icons/Ionicons'; // This package is in pnpm-lock; need to figure out how resolve importing it
+import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './screens/Home';
 import AboutScreen from './screens/About';
 
