@@ -6,7 +6,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     return {
       ...config,
       name: 'cwt_mobile-preview',
-      slug: 'cwt_mobile-preview',
       icon: './assets/icon-preview.png',
       android: {
         ...config.android,
@@ -18,7 +17,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   return {
     ...config,
     name: 'cwt_mobile-dev',
-    slug: 'cwt_mobile-dev',
     icon: './assets/icon-development.png',
     android: {
       ...config.android,
