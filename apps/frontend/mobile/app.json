@@ -17,6 +17,11 @@
       },
       "edgeToEdgeEnabled": true
     },
-    "owner": "fcamero"
+    "owner": "fcamero",
+    "extra": {
+      "eas": {
+        "projectId": "689e750c-56c3-457d-b77a-27845d807795"
+      }
+    }
   }
 }
