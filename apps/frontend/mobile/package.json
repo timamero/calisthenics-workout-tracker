@@ -13,10 +13,13 @@
     "lint": "expo lint"
   },
   "dependencies": {
+    "@expo/vector-icons": "^14.1.0",
     "@react-navigation/bottom-tabs": "^7.3.14",
     "@react-navigation/native": "^7.1.10",
     "expo": "~53.0.10",
     "expo-dev-client": "~5.2.0",
+    "expo-modules-autolinking": "~2.1.10",
+    "expo-modules-core": "~2.4.0",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
     "react-native": "0.79.3",
@@ -31,9 +34,6 @@
     "eslint": "^9.28.0",
     "eslint-config-expo": "~9.2.0",
     "eslint-config-prettier": "^10.1.5",
-    "eslint-import-resolver-node": "^0.3.9",
-    "eslint-import-resolver-typescript": "^4.4.2",
-    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.4.1",
     "prettier": "^3.5.3",
     "typescript": "~5.8.3"
