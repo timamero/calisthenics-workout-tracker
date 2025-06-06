@@ -6,10 +6,11 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     return {
       ...config,
       name: 'cwt_mobile-preview',
+      slug: 'cwt-mobile',
       icon: './assets/icon-preview.png',
       android: {
         ...config.android,
-        package: 'com.cwt.mobile-preview',
+        package: 'com.cwt.mobile_preview',
       },
     };
   }
@@ -17,10 +18,11 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   return {
     ...config,
     name: 'cwt_mobile-dev',
+    slug: 'cwt-mobile',
     icon: './assets/icon-development.png',
     android: {
       ...config.android,
-      package: 'com.cwt.mobile-development',
+      package: 'com.cwt.mobile_development',
     },
   };
 };
