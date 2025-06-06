@@ -6,7 +6,6 @@
  */
 
 const commonConfig = {
-  slug: 'cwt-mobile',
   version: '0.1.0',
   orientation: 'portrait',
   userInterfaceStyle: 'light',
@@ -26,7 +25,6 @@ const commonConfig = {
       backgroundColor: '#ffffff',
     },
     edgeToEdgeEnabled: true,
-    package: 'com.fcamero.mobile',
   },
   web: {
     favicon: './assets/favicon.png',
@@ -44,14 +42,24 @@ module.exports = () => {
   if (profile === 'preview') {
     return {
       ...commonConfig,
-      name: 'mobile-preview',
+      name: 'cwt_mobile-preview',
+      slug: 'cwt_mobile-preview',
       icon: './assets/icon-preview.png',
+      android: {
+        ...commonConfig.android,
+        package: 'com.cwt.mobile-preview',
+      },
     };
   }
   // Default to development
   return {
     ...commonConfig,
-    name: 'mobile-dev',
+    name: 'cwt_mobile-dev',
+    slug: 'cwt_mobile-dev',
     icon: './assets/icon-development.png',
+    android: {
+      ...commonConfig.android,
+      package: 'com.cwt.mobile-development',
+    },
   };
 };
