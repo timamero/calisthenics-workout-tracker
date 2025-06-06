@@ -1,4 +1,4 @@
 packages:
   - apps/backend
   - apps/frontend/web
-  - appes/frontend/mobile
+  - apps/frontend/mobile
