@@ -7,9 +7,6 @@ module.exports = defineConfig([
   expoConfig,
   eslintPluginPrettierRecommended,
   {
-    plugins: {
-      import: importPlugin,
-    },
     ignores: ['dist/*'],
   },
 ]);
