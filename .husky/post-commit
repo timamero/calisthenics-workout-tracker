@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# shellcheck source=/dev/null
+. "$(dirname "$0")/_/husky.sh"
+
+# Get the current branch name
+BRANCH=$(git symbolic-ref --short HEAD)
+
+echo "Running pre-push hook on branch: $BRANCH"
+
+# Conditionally run commands based on branch
+if [ "$BRANCH" = "develop" ]; then
+  echo "Building mobile app"
+  cd apps/frontend/mobile || exit
+  pnpm dev-build
+else
+  echo "Skipping mobile app build on branch: $BRANCH"
+fi
