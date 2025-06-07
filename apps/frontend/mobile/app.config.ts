@@ -36,7 +36,7 @@ const getIcon = () => {
     return './assets/icon-preview.png';
   }
 
-  return 'CWT';
+  return './assets/icon.png';
 };
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
