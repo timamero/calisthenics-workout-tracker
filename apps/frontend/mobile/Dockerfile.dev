@@ -15,8 +15,9 @@ RUN corepack enable
 # Set working directory
 WORKDIR /mobile
 
-# Copy only package manager files first for better caching
-COPY pnpm-lock.yaml package.json ./
+# Copy package.json and root pnpm-lock.yaml for dependency installation
+COPY package.json ./
+COPY ../../pnpm-lock.yaml ./
 
 # Install dependencies
 RUN pnpm install
