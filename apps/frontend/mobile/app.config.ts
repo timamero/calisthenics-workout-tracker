@@ -22,7 +22,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     icon: './assets/icon-development.png',
     android: {
       ...config.android,
-      package: 'com.fcamero.cwtmobile_development',
+      package: 'com.fcamero.cwtmobile_preview',
     },
   };
 };
