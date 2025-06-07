@@ -1,7 +1,0 @@
-node_modules
-dist
-.dockerignore
-Dockerfile
-Dockerfile.dev
-*.log
-.gitignore
