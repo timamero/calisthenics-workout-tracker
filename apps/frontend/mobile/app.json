@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ctw-mobile",
-    "slug": "ctw-mobile",
+    "name": "cwt-mobile",
+    "slug": "cwt-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
