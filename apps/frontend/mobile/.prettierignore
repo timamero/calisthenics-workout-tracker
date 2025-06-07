@@ -1,0 +1,31 @@
+# Ignore artifacts:
+node_modules
+dist
+build
+web-build
+coverage
+.pnpm
+.expo
+.expo-shared
+.expo-cache
+.expo-dev-tools
+
+# Ignore lock files
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Ignore OS and editor files
+.DS_Store
+*.log
+*.tmp
+*.swp
+.vscode
+.idea
+
+# Ignore generated files
+*.gen.ts
+
+# Ignore environment files
+.env
+.env.*
