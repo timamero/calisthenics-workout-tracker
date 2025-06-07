@@ -10,8 +10,9 @@ RUN corepack enable
 # Create app directory
 WORKDIR /web
 
-# Copy lockfile and package.json before other files (to cache deps)
-COPY pnpm-lock.yaml package.json ./
+# Copy package.json and root pnpm-lock.yaml for dependency installation
+COPY package.json ./
+COPY ../../pnpm-lock.yaml ./
 
 # Install dependencies
 RUN pnpm install
