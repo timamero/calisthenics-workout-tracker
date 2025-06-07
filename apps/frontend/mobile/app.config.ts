@@ -10,7 +10,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       icon: './assets/icon-preview.png',
       android: {
         ...config.android,
-        package: 'com.fcamero.ctwmobile_preview',
+        package: 'com.fcamero.cwtmobile_preview',
       },
     };
   }
@@ -22,7 +22,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     icon: './assets/icon-development.png',
     android: {
       ...config.android,
-      package: 'com.fcamero.ctwmobile_development',
+      package: 'com.fcamero.cwtmobile_development',
     },
   };
 };
