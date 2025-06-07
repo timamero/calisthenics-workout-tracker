@@ -58,3 +58,4 @@ logs/
 *.bak
 *.tmp
 .cache/
+.backup/
