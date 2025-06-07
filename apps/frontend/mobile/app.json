@@ -11,10 +11,6 @@
       "backgroundColor": "#ffffff"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
       "edgeToEdgeEnabled": true
     },
     "owner": "fcamero",
