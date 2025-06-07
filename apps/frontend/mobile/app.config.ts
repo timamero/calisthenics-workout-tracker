@@ -43,9 +43,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: getAppName(),
   slug: config.slug ?? 'cwt-mobile',
-  icon: getIcon(),
   android: {
     ...config.android,
     package: getUniqueIdentifier(),
+    icon: getIcon(),
   },
 });
