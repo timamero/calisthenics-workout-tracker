@@ -1,20 +1,55 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { createStaticNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  MD3LightTheme as DefaultTheme,
+  PaperProvider,
+} from 'react-native-paper';
+import { Ionicons } from '@expo/vector-icons';
+import HomeScreen from './screens/Home';
+import AboutScreen from './screens/About';
+
+const MyTabs = createBottomTabNavigator({
+  screenOptions: ({ route }) => ({
+    tabBarIcon: ({ focused, color, size }) => {
+      let iconName;
+
+      if (route.name === 'Home') {
+        iconName = focused ? 'home' : 'home-outline';
+      } else if (route.name === 'About') {
+        iconName = focused
+          ? 'information-circle'
+          : 'information-circle-outline';
+      }
+
+      // You can return any component that you like here!
+      // @ts-ignore
+      return <Ionicons name={iconName} size={size} color={color} />;
+    },
+    tabBarActiveTintColor: 'tomato',
+    tabBarInactiveTintColor: 'gray',
+  }),
+  screens: {
+    Home: HomeScreen,
+    About: AboutScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(MyTabs);
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'snow',
+    secondary: 'thistle',
+  },
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Launched development build!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider theme={theme}>
+      <Navigation />
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
