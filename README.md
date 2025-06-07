@@ -27,3 +27,7 @@ v0.1.0
 ### Mobile
 
 1. Run mobile docker image: `pnpm docker:mobile:run`
+
+
+### Debugging resources
+https://github.com/expo/eas-cli/issues/2789
