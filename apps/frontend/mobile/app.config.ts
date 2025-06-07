@@ -12,7 +12,7 @@ const getUniqueIdentifier = () => {
     return 'com.fcamero.cwtmobile_preview';
   }
 
-  return 'com.yourname.stickersmash';
+  return 'com.fcamero.cwtmobile';
 };
 
 const getAppName = () => {
