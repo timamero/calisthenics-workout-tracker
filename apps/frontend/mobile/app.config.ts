@@ -1,7 +1,7 @@
 import { ExpoConfig, ConfigContext } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
-  const profile = process.env.EAS_BUILD_PROFILE;
+  const profile = process.env.APP_VARIANT;
   if (profile === 'preview') {
     return {
       ...config,
@@ -22,7 +22,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     icon: './assets/icon-development.png',
     android: {
       ...config.android,
-      package: 'com.fcamero.cwtmobile_preview',
+      package: 'com.fcamero.cwtmobile_development',
     },
   };
 };
