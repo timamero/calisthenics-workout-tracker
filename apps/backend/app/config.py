@@ -5,7 +5,7 @@ from pydantic import Field
 class Settings(BaseSettings):
     app_name: str = Field("Calisthenics Workout Tracker", env="APP_NAME")
     version: str = Field("0.1.0", env="VERSION")
-    secret_key: str = Field(..., env="SECRET_KEY")
+    secret_key: str = Field("dummy-key", env="SECRET_KEY")
     debug: bool = Field(False, env="DEBUG")
 
     class Config:
