@@ -1,16 +1,16 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
 
 
 class Settings(BaseSettings):
-    app_name: str = Field("Calisthenics Workout Tracker", env="APP_NAME")
-    version: str = Field("0.1.0", env="VERSION")
-    secret_key: str = Field("dummy-key", env="SECRET_KEY")
-    debug: bool = Field(False, env="DEBUG")
+    app_name: str = Field(
+        default="Calisthenics Workout Tracker", validation_alias="APP_NAME"
+    )
+    version: str = Field(default="0.1.0", validation_alias="VERSION")
+    secret_key: str = Field(default="dummy-key", validation_alias="SECRET_KEY")
+    debug: bool = Field(default=False, validation_alias="DEBUG")
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 
 settings = Settings()
