@@ -9,7 +9,8 @@
     "check-types": "tsc --noEmit",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@mantine/core": "^8.0.0",
