@@ -3,8 +3,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 
-console.log('✅ Vite config loaded');
-
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [

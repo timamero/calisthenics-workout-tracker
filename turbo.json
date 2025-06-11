@@ -20,15 +20,11 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": ["transit"],
       "outputs": []
     },
     "test:watch": {
       "cache": false,
       "persistent": true
-    },
-    "transit": {
-      "dependsOn": ["^transit"]
     }
   }
 }
