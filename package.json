@@ -10,6 +10,9 @@
 		"dev:mobile": "turbo run dev --filter=mobile",
 		"dev:web+backend": "turbo run dev --filter=web --filter=backend",
 		"dev:mobile+backend": "turbo run dev --filter=mobile --filter=backend",
+		"test": "turbo run test",
+		"test:watch": "turbo run test:watch",
+		"test:web": "vitest",
 		"prepare": "husky"
 	},
 	"devDependencies": {
