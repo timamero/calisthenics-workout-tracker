@@ -9,7 +9,7 @@
     "preview-build": "eas build --platform android --profile preview",
     "check-types": "tsc --noEmit",
     "lint": "expo lint",
-    "test": "jest --watchAll"
+    "test": "jest"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
