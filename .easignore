@@ -2,3 +2,4 @@
 .husky
 /apps/backend
 /apps/frontend/web
+/__tests__
