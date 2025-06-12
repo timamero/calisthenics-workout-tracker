@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# shellcheck disable=SC1091
-. "$(dirname "$0")/_/husky.sh"
-
 echo "🔒 Scanning backend for secrets..."
 
 cd apps/backend || exit 1
