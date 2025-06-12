@@ -6,6 +6,9 @@ from typing_extensions import Annotated
 import httpx
 from . import config
 
+FAKE_API_KEY_ID = "AKIAIOSFODNN7EXAMPLE"
+FAKE_API_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+
 
 @lru_cache
 def get_settings():
