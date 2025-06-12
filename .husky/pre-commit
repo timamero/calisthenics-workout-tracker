@@ -1,1 +1,20 @@
+#!/bin/sh
+
+# shellcheck disable=SC1091
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔒 Scanning backend for secrets..."
+
+cd apps/backend || exit 1
+poetry run detect-secrets-hook --baseline .secrets.baseline
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "❌ Secrets detected in staged files! Commit blocked."
+  exit 1
+fi
+
+echo "✅ No secrets detected. Running lint and test..."
+
+cd ../../  # Go back to root
 pnpm lint && pnpm test
