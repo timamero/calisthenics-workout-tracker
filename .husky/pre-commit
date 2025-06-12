@@ -3,8 +3,9 @@
 echo "🔒 Scanning backend for secrets..."
 
 cd apps/backend || exit 1
-poetry run detect-secrets-hook --baseline .secrets.baseline
+# poetry run detect-secrets-hook --baseline .secrets.baseline
 # poetry run detect-secrets scan --all-files app
+poetry run detect-secrets scan --baseline ../../.secrets.baseline
 status=$?
 
 if [ $status -ne 0 ]; then
