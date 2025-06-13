@@ -1,2 +1,17 @@
 #!/bin/sh
-pnpm lint && pnpm test
+
+# --- Backend checks (Poetry) ---
+echo "Running poetry check in /apps/backend..."
+# Change to the backend directory
+cd apps/backend || { echo "Failed to change directory to apps/backend. Aborting commit."; exit 1; }
+# Run poetry check
+poetry check || { echo "Poetry check failed in apps/backend. Aborting commit."; exit 1; }
+# Change back to the root directory
+cd ../.. || { echo "Failed to change back to root directory. Aborting commit."; exit 1; }
+
+# --- Root-level checks (pnpm) ---
+echo "Running pnpm lint..."
+pnpm lint || { echo "Linting failed. Aborting commit."; exit 1; }
+
+echo "Running pnpm test..."
+pnpm test || { echo "Tests failed. Aborting commit."; exit 1; }
