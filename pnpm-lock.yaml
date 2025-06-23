@@ -183,6 +183,10 @@ importers:
       zustand:
         specifier: ^5.0.5
         version: 5.0.5(@types/react@19.1.6)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
+    devDependencies:
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
 
 packages:
 
