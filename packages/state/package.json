@@ -1,0 +1,10 @@
+{
+  "name": "@cwt/state",
+  "version": "0.1.0",
+  "description": "State management for CWT",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  }
+}
