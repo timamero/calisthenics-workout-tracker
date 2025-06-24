@@ -19,6 +19,9 @@ importers:
 
   apps/frontend/mobile:
     dependencies:
+      '@cwt/state':
+        specifier: workspace:*
+        version: link:../../../packages/state
       '@expo/vector-icons':
         specifier: ^14.1.0
         version: 14.1.0(expo-font@13.3.1(expo@53.0.10(@babel/core@7.27.4)(react-native@0.79.3(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react@19.0.0))(react-native@0.79.3(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
