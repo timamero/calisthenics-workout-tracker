@@ -95,6 +95,9 @@ importers:
 
   apps/frontend/web:
     dependencies:
+      '@cwt/state':
+        specifier: workspace:*
+        version: link:../../../packages/state
       '@mantine/core':
         specifier: ^8.0.0
         version: 8.0.2(@mantine/hooks@8.0.2(react@19.1.0))(@types/react@19.1.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
