@@ -3,6 +3,7 @@
 	"scripts": {
 		"build": "turbo run build",
 		"build:web": "turbo run build --filter=web",
+		"build:state": "turbo run build --filter=@cwt/state",
 		"lint": "turbo run lint",
 		"dev": "turbo run dev",
 		"dev:backend": "turbo run dev --filter=backend",
