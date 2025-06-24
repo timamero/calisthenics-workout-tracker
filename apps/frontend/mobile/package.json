@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@cwt/state": "workspace:*",
     "@expo/vector-icons": "^14.1.0",
     "@react-navigation/bottom-tabs": "^7.3.14",
     "@react-navigation/native": "^7.1.10",
