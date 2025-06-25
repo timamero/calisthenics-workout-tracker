@@ -1,0 +1,22 @@
+{
+  "name": "@cwt/schema",
+  "version": "0.1.0",
+  "description": "Schema validation for CWT",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./sampleSchema": {
+      "types": "./src/sampleSchema.ts",
+      "default": "./dist/sampleSchema.js"
+    }
+  },
+  "dependencies": {
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3"
+  }
+}
