@@ -184,6 +184,16 @@ importers:
         specifier: ^3.2.3
         version: 3.2.3(@types/node@22.15.30)(happy-dom@17.6.3)(jsdom@26.1.0)(lightningcss@1.27.0)(sugarss@4.0.1(postcss@8.5.4))(terser@5.41.0)(tsx@4.19.4)
 
+  packages/schema:
+    dependencies:
+      zod:
+        specifier: ^3.25.67
+        version: 3.25.67
+    devDependencies:
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
   packages/state:
     dependencies:
       zustand:
@@ -5572,6 +5582,9 @@ packages:
 
   zod@3.25.56:
     resolution: {integrity: sha512-rd6eEF3BTNvQnR2e2wwolfTmUTnp70aUTqr0oaGbHifzC3BKJsoV+Gat8vxUMR1hwOKBs6El+qWehrHbCpW6SQ==}
+
+  zod@3.25.67:
+    resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
 
   zustand@5.0.5:
     resolution: {integrity: sha512-mILtRfKW9xM47hqxGIxCv12gXusoY/xTSHBYApXozR0HmQv299whhBeeAcRy+KrPPybzosvJBCOmVjq6x12fCg==}
@@ -12048,6 +12061,8 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   zod@3.25.56: {}
+
+  zod@3.25.67: {}
 
   zustand@5.0.5(@types/react@19.1.6)(react@19.0.0)(use-sync-external-store@1.5.0(react@19.0.0)):
     optionalDependencies:
