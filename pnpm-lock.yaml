@@ -98,6 +98,9 @@ importers:
 
   apps/frontend/web:
     dependencies:
+      '@cwt/schema':
+        specifier: workspace:*
+        version: link:../../../packages/schema
       '@cwt/state':
         specifier: workspace:*
         version: link:../../../packages/state
