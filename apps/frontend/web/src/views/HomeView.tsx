@@ -2,7 +2,7 @@ import { Title } from '@mantine/core';
 import { useBearStore } from '@cwt/state/counter';
 import { User } from '@cwt/schema/sampleSchema';
 
-export const HomeView = () => {
+export const Index = () => {
   const bears = useBearStore((state) => state.bears);
   const increase = useBearStore((state) => state.increase);
   const user: User = {
