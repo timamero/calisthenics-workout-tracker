@@ -3,7 +3,10 @@ import { createStaticNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/Home';
-import AboutScreen from '../screens/About';
+import StartWorkoutScreen from '../screens/StartWorkoutScreen';
+import LibraryScreen from '../screens/LibraryScreen';
+import HistoryScreen from '../screens/HistoryScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const MyTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => ({
@@ -27,7 +30,10 @@ const MyTabs = createBottomTabNavigator({
   }),
   screens: {
     Home: HomeScreen,
-    About: AboutScreen,
+    Library: LibraryScreen,
+    Workout: StartWorkoutScreen,
+    History: HistoryScreen,
+    Settings: SettingsScreen,
   },
 });
 
