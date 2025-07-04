@@ -19,6 +19,8 @@ const MyTabs = createBottomTabNavigator({
         iconName = focused
           ? 'information-circle'
           : 'information-circle-outline';
+      } else {
+        iconName = 'brush';
       }
 
       // You can return any component that you like here!
