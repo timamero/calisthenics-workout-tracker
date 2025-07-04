@@ -35,6 +35,12 @@ function RootComponent() {
           to="/library"
           onClick={toggle}
         />
+        <NavLink
+          label="Past Workouts"
+          component={Link}
+          to="/history"
+          onClick={toggle}
+        />
       </AppShell.Navbar>
 
       <AppShell.Main>
