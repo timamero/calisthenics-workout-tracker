@@ -28,7 +28,13 @@ function RootComponent() {
 
       <AppShell.Navbar p="md">
         <NavLink label="Home" component={Link} to="/" onClick={toggle} />
-        <NavLink label="About" component={Link} to="/about" onClick={toggle} />
+        {/* <NavLink label="About" component={Link} to="/about" onClick={toggle} /> */}
+        <NavLink
+          label="Start Workout"
+          component={Link}
+          to="/startWorkout"
+          onClick={toggle}
+        />
         <NavLink
           label="Library"
           component={Link}
