@@ -47,6 +47,7 @@ function RootComponent() {
           to="/history"
           onClick={toggle}
         />
+        <NavLink label="Profile" component={Link} to="/user" onClick={toggle} />
       </AppShell.Navbar>
 
       <AppShell.Main>
