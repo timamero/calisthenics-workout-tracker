@@ -48,6 +48,12 @@ function RootComponent() {
           onClick={toggle}
         />
         <NavLink label="Profile" component={Link} to="/user" onClick={toggle} />
+        <NavLink
+          label="Settings"
+          component={Link}
+          to="/settings"
+          onClick={toggle}
+        />
       </AppShell.Navbar>
 
       <AppShell.Main>
