@@ -9,7 +9,7 @@ export default function HomeScreen() {
   const increase = useBearStore((state) => state.increase);
   const user: User = {
     name: 'Jane Doe',
-    xp: 100,
+    xp: 90,
   };
 
   return (
