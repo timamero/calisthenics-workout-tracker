@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as UserImport } from './routes/user'
 import { Route as StartWorkoutImport } from './routes/startWorkout'
+import { Route as SettingsImport } from './routes/settings'
 import { Route as LibraryImport } from './routes/library'
 import { Route as HistoryImport } from './routes/history'
 import { Route as AboutImport } from './routes/about'
@@ -29,6 +30,12 @@ const UserRoute = UserImport.update({
 const StartWorkoutRoute = StartWorkoutImport.update({
   id: '/startWorkout',
   path: '/startWorkout',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SettingsRoute = SettingsImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryImport
       parentRoute: typeof rootRoute
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsImport
+      parentRoute: typeof rootRoute
+    }
     '/startWorkout': {
       id: '/startWorkout'
       path: '/startWorkout'
@@ -112,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/history': typeof HistoryRoute
   '/library': typeof LibraryRoute
+  '/settings': typeof SettingsRoute
   '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
 }
@@ -121,6 +136,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/history': typeof HistoryRoute
   '/library': typeof LibraryRoute
+  '/settings': typeof SettingsRoute
   '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
 }
@@ -131,6 +147,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/history': typeof HistoryRoute
   '/library': typeof LibraryRoute
+  '/settings': typeof SettingsRoute
   '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
 }
@@ -142,16 +159,25 @@ export interface FileRouteTypes {
     | '/about'
     | '/history'
     | '/library'
+    | '/settings'
     | '/startWorkout'
     | '/user'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/history' | '/library' | '/startWorkout' | '/user'
+  to:
+    | '/'
+    | '/about'
+    | '/history'
+    | '/library'
+    | '/settings'
+    | '/startWorkout'
+    | '/user'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/history'
     | '/library'
+    | '/settings'
     | '/startWorkout'
     | '/user'
   fileRoutesById: FileRoutesById
@@ -162,6 +188,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   HistoryRoute: typeof HistoryRoute
   LibraryRoute: typeof LibraryRoute
+  SettingsRoute: typeof SettingsRoute
   StartWorkoutRoute: typeof StartWorkoutRoute
   UserRoute: typeof UserRoute
 }
@@ -171,6 +198,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   HistoryRoute: HistoryRoute,
   LibraryRoute: LibraryRoute,
+  SettingsRoute: SettingsRoute,
   StartWorkoutRoute: StartWorkoutRoute,
   UserRoute: UserRoute,
 }
@@ -189,6 +217,7 @@ export const routeTree = rootRoute
         "/about",
         "/history",
         "/library",
+        "/settings",
         "/startWorkout",
         "/user"
       ]
@@ -204,6 +233,9 @@ export const routeTree = rootRoute
     },
     "/library": {
       "filePath": "library.tsx"
+    },
+    "/settings": {
+      "filePath": "settings.tsx"
     },
     "/startWorkout": {
       "filePath": "startWorkout.tsx"
