@@ -7,6 +7,7 @@
     "web": "expo start --web",
     "dev-build": "eas build --platform android --profile development",
     "preview-build": "eas build --platform android --profile preview",
+    "postinstall": "cd ../../.. && pnpm install --filter=@cwt/state && pnpm install --filter=@cwt/schema && pnpm build:state && pnpm build:schema",
     "check-types": "tsc --noEmit",
     "lint": "expo lint",
     "test": "jest"
