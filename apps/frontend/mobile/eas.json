@@ -15,7 +15,15 @@
       "distribution": "internal",
       "env": {
         "APP_VARIANT": "preview"
-      }
+      },
+      "node": {
+        "install": {
+          "args": ["--frozen-lockfile"]
+        }
+      },
+      "channel": "preview",
+      "command": "sh -c \"cd ../../.. && pnpm install --frozen-lockfile && pnpm turbo build --filter=@cwt/state... --filter=@cwt/schema... && pnpm --filter @cwt/frontend-mobile eas-build\"",
+      "developmentClient": true
     },
     "production": {
       "autoIncrement": true
