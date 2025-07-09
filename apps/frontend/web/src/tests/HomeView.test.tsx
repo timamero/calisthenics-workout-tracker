@@ -1,16 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-// import { HomeView } from '../views/HomeView';
-import { Title } from '@mantine/core';
+import { HomeView } from '../views/HomeView';
 import { MantineProvider } from '@mantine/core';
-
-export const HomeView = () => {
-  return (
-    <div>
-      <Title>Welcome Home Jane Doe!!</Title>
-    </div>
-  );
-};
 
 test('loads and displays greeting', async () => {
   // ARRANGE
@@ -21,17 +12,19 @@ test('loads and displays greeting', async () => {
   );
 
   // ASSERT
-  // expect(screen.getByRole('heading')).toHaveTextContent(
-  //   'Welcome Home Jane Doe!',
-  // );
   const heading = await screen.findByRole('heading', {
     name: /Welcome Home Jane Doe!/i,
   });
+  const para1 = screen.getByText('xp = 100');
+  const para2 = screen.getByText('0 bears around here');
   expect(heading).toBeInTheDocument();
   expect(heading).toHaveTextContent('Welcome Home Jane Doe!');
-  // await waitFor(() => {
-  //   expect(screen.getByRole('heading')).toHaveTextContent(
-  //     'Welcome Home Jane Doe!',
-  //   );
-  // });
+  expect(para1).toBeInTheDocument();
+  expect(para2).toBeInTheDocument();
+
+  const button = screen.getByRole('button', { name: /one up/i });
+  expect(button).toBeInTheDocument();
+
+  await button.click();
+  expect(screen.getByText('1 bears around here')).toBeInTheDocument();
 });
