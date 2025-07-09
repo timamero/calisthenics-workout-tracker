@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
 import { afterEach } from 'vitest';
-// import { useBearStore } from '@cwt/state/counter'; // Adjust path if needed
+import { useBearStore } from '@cwt/state/counter'; // Adjust path if needed
 
 // Mock window.matchMedia
 // This mock is robust enough for most UI libraries that use matchMedia for color scheme, etc.
@@ -23,4 +23,5 @@ Object.defineProperty(window, 'matchMedia', {
 afterEach(() => {
   cleanup(); // Cleans up the DOM after each test
   // Reset Zustand store state
+  useBearStore.setState({ bears: 0 }); // Assuming initial bears is 0
 });
