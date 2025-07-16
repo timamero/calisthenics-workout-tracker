@@ -8,9 +8,9 @@
     "build": "tsc"
   },
   "exports": {
-    "./counter": {
-      "types": "./src/counter.ts",
-      "default": "./dist/counter.js"
+    "./supabase": {
+      "types": "./src/supabase.ts",
+      "default": "./dist/supabase.js"
     }
   },
   "devDependencies": {
