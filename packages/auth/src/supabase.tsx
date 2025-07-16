@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
 // Create a single supabase client for interacting with auth
-export const createSupabaseClient = (supabaseUrl, supabaseAnonKey) => {
+export const supabaseClient = (supabaseUrl, supabaseAnonKey) => {
   if (!supabaseUrl || !supabaseAnonKey) {
     throw new Error('Supabase URL and Anon Key must be provided in environment variables.')
   }
