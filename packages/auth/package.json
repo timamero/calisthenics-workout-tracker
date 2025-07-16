@@ -11,6 +11,10 @@
     "./supabase": {
       "types": "./src/supabase.ts",
       "default": "./dist/supabase.js"
+    },
+    "./createUser": {
+      "types": "./src/createUser.ts",
+      "default": "./dist/createUser.js"
     }
   },
   "devDependencies": {
