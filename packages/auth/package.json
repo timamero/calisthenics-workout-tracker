@@ -1,0 +1,19 @@
+{
+  "name": "@cwt/auth",
+  "version": "0.1.0",
+  "description": "Authentication for CWT",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./counter": {
+      "types": "./src/counter.ts",
+      "default": "./dist/counter.js"
+    }
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3"
+  }
+}

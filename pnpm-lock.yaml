@@ -202,6 +202,12 @@ importers:
         specifier: ^3.2.3
         version: 3.2.3(@types/node@22.15.30)(happy-dom@17.6.3)(jsdom@26.1.0)(lightningcss@1.27.0)(sugarss@4.0.1(postcss@8.5.4))(terser@5.41.0)(tsx@4.19.4)
 
+  packages/auth:
+    devDependencies:
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
   packages/schema:
     dependencies:
       zod:
