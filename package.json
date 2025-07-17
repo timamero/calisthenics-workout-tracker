@@ -5,6 +5,7 @@
 		"build:web": "turbo run build --filter=web",
 		"build:state": "turbo run build --filter=@cwt/state",
 		"build:schema": "turbo run build --filter=@cwt/schema",
+		"build:auth": "turbo run build --filter=@cwt/auth",
 		"lint": "turbo run lint",
 		"dev": "turbo run dev",
 		"dev:backend": "turbo run dev --filter=backend",
