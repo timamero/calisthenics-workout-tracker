@@ -1,7 +1,7 @@
 /***
  * Sign out a user using Supabase authentication.
  * @param {Object} supabase - The Supabase client instance.
- * @throws Will log an error if signing in fails.
+ * @throws Will log an error if signing out fails.
  */
 
 export const signOut = async (supabase) => {
