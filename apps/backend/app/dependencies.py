@@ -15,7 +15,7 @@ jwks_cache = TTLCache(maxsize=1, ttl=600)
 
 
 @cached(jwks_cache)
-def fetch_jwks(supabase_url: str) -> Dict[str, Any]:
+def fetch_jwks(jwks_url: str) -> Dict[str, Any]:
     """Fetches JWKS from Supabase's endpoint and caches it."""
     jwks_url = f"{supabase_url}/auth/v1/.well-known/jwks.json"
     try:
@@ -77,7 +77,7 @@ def get_current_user_id(authorization: Annotated[str, Header()]) -> str:
     token = authorization.split(" ")[1]
 
     try:
-        jwks = fetch_jwks(settings.supabase_url)
+        jwks = fetch_jwks(settings.supabase_jwtk_url)
 
         header = jwt.get_unverified_header(token)
         kid = header.get("kid")
