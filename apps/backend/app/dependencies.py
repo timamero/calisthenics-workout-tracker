@@ -17,7 +17,6 @@ jwks_cache = TTLCache(maxsize=1, ttl=600)
 @cached(jwks_cache)
 def fetch_jwks(jwks_url: str) -> Dict[str, Any]:
     """Fetches JWKS from Supabase's endpoint and caches it."""
-    jwks_url = f"{supabase_url}/auth/v1/.well-known/jwks.json"
     try:
         response = requests.get(jwks_url)
         response.raise_for_status()
@@ -89,6 +88,7 @@ def get_current_user_id(authorization: Annotated[str, Header()]) -> str:
                 detail="Invalid token header: Missing KID or ALG.",
             )
 
+        # Find the matching JWK based on KID and ALG
         matching_jwk = None
         for key_data in jwks.get("keys", []):
             if key_data.get("kid") == kid and key_data.get("alg") == alg:
@@ -104,6 +104,7 @@ def get_current_user_id(authorization: Annotated[str, Header()]) -> str:
         # Delegate public key construction to a helper function
         public_key = _construct_public_key(matching_jwk, alg)
 
+        # Decode and verify the JWT
         payload = jwt.decode(
             token,
             public_key.public_bytes(
