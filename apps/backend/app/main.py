@@ -4,7 +4,9 @@ from typing import Union
 from fastapi import Depends, FastAPI
 from typing_extensions import Annotated
 import httpx
+
 from . import config
+from .dependencies import get_current_user_id
 
 
 @lru_cache
@@ -40,4 +42,15 @@ async def info(settings: Annotated[config.Settings, Depends(get_settings)]):
     return {
         "app_name": settings.app_name,
         "debug": settings.debug,
+    }
+
+
+@app.get("/protected-route")
+async def read_protected_data(user_id: Annotated[str, Depends(get_current_user_id)]):
+    """
+    This route requires a valid Supabase JWT signed with asymmetric keys.
+    The user_id from the token's 'sub' claim is injected.
+    """
+    return {
+        "message": f"Welcome, authenticated user {user_id}! This is protected data."
     }
