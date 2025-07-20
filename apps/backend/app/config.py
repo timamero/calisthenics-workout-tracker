@@ -10,6 +10,10 @@ class Settings(BaseSettings):
     secret_key: str = Field(default="dummy-key", validation_alias="SECRET_KEY")
     debug: bool = Field(default=False, validation_alias="DEBUG")
 
+    supabase_url: str = Field(default="", validation_alias="SUPABASE_URL")
+    supabase_jwt_key_id: str = Field(default="", validation_alias="SUPABASE_JWT_KEY_ID")
+    supabase_jwtk_url: str = Field(default="", validation_alias="SUPABASE_JWTK_URL")
+
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 
