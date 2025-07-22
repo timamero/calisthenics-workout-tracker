@@ -6,10 +6,10 @@
  */
 import { SupabaseClient } from '@supabase/supabase-js';
 
-export const signIn = async (supabase:SupabaseClient) => {
+export const signIn = async (supabase:SupabaseClient, email:string, password:string) => {
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: 'example@email.com',
-    password: 'example-password',
+    email: email,
+    password: password,
   })
 
   if (error) {
