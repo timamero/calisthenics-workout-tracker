@@ -15,6 +15,7 @@ import { Route as UserImport } from './routes/user'
 import { Route as StartWorkoutImport } from './routes/startWorkout'
 import { Route as SignupImport } from './routes/signup'
 import { Route as SettingsImport } from './routes/settings'
+import { Route as OnboardingCompleteImport } from './routes/onboardingComplete'
 import { Route as OnboardingImport } from './routes/onboarding'
 import { Route as LoginImport } from './routes/login'
 import { Route as LibraryImport } from './routes/library'
@@ -46,6 +47,12 @@ const SignupRoute = SignupImport.update({
 const SettingsRoute = SettingsImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const OnboardingCompleteRoute = OnboardingCompleteImport.update({
+  id: '/onboardingComplete',
+  path: '/onboardingComplete',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -144,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingImport
       parentRoute: typeof rootRoute
     }
+    '/onboardingComplete': {
+      id: '/onboardingComplete'
+      path: '/onboardingComplete'
+      fullPath: '/onboardingComplete'
+      preLoaderRoute: typeof OnboardingCompleteImport
+      parentRoute: typeof rootRoute
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -185,6 +199,7 @@ export interface FileRoutesByFullPath {
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/onboardingComplete': typeof OnboardingCompleteRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/startWorkout': typeof StartWorkoutRoute
@@ -199,6 +214,7 @@ export interface FileRoutesByTo {
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/onboardingComplete': typeof OnboardingCompleteRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/startWorkout': typeof StartWorkoutRoute
@@ -214,6 +230,7 @@ export interface FileRoutesById {
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/onboardingComplete': typeof OnboardingCompleteRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/startWorkout': typeof StartWorkoutRoute
@@ -230,6 +247,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/login'
     | '/onboarding'
+    | '/onboardingComplete'
     | '/settings'
     | '/signup'
     | '/startWorkout'
@@ -243,6 +261,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/login'
     | '/onboarding'
+    | '/onboardingComplete'
     | '/settings'
     | '/signup'
     | '/startWorkout'
@@ -256,6 +275,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/login'
     | '/onboarding'
+    | '/onboardingComplete'
     | '/settings'
     | '/signup'
     | '/startWorkout'
@@ -271,6 +291,7 @@ export interface RootRouteChildren {
   LibraryRoute: typeof LibraryRoute
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
+  OnboardingCompleteRoute: typeof OnboardingCompleteRoute
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   StartWorkoutRoute: typeof StartWorkoutRoute
@@ -285,6 +306,7 @@ const rootRouteChildren: RootRouteChildren = {
   LibraryRoute: LibraryRoute,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
+  OnboardingCompleteRoute: OnboardingCompleteRoute,
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   StartWorkoutRoute: StartWorkoutRoute,
@@ -308,6 +330,7 @@ export const routeTree = rootRoute
         "/library",
         "/login",
         "/onboarding",
+        "/onboardingComplete",
         "/settings",
         "/signup",
         "/startWorkout",
@@ -334,6 +357,9 @@ export const routeTree = rootRoute
     },
     "/onboarding": {
       "filePath": "onboarding.tsx"
+    },
+    "/onboardingComplete": {
+      "filePath": "onboardingComplete.tsx"
     },
     "/settings": {
       "filePath": "settings.tsx"
