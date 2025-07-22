@@ -11,6 +11,10 @@
     "./counter": {
       "types": "./src/counter.ts",
       "default": "./dist/counter.js"
+    },
+    "./auth": {
+      "types": "./src/auth.ts",
+      "default": "./dist/auth.js"
     }
   },
   "dependencies": {
