@@ -1,15 +1,23 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title } from '@mantine/core';
+import { Title, Button } from '@mantine/core';
+import { signOut } from '@cwt/auth/signOut';
+import { supabase } from '../supabaseClient';
 
 export const Route = createFileRoute('/settings')({
   component: SettingsView,
 });
 
 function SettingsView() {
+  const handleSignOut = () => {
+    signOut(supabase);
+  };
   return (
     <div>
       <Title>Settings Page</Title>
       <p>This page will contain the app settings.</p>
+      <Button onClick={handleSignOut} size="md">
+        Log Out
+      </Button>
     </div>
   );
 }
