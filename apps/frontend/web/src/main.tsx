@@ -5,6 +5,7 @@ import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
 import { supabaseClient } from '@cwt/auth/supabase';
+import { useAuthStore } from '@cwt/state/auth';
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
@@ -24,6 +25,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = supabaseClient(supabaseUrl, supabaseAnonKey);
 
 console.log('Supabase Client:', supabase);
+useAuthStore.getState().setSupabase(supabase);
 
 const theme = createTheme({
   /** Put your mantine theme override here */
