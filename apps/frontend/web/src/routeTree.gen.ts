@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as UserImport } from './routes/user'
 import { Route as StartWorkoutImport } from './routes/startWorkout'
+import { Route as SignupImport } from './routes/signup'
 import { Route as SettingsImport } from './routes/settings'
 import { Route as LoginImport } from './routes/login'
 import { Route as LibraryImport } from './routes/library'
@@ -32,6 +33,12 @@ const UserRoute = UserImport.update({
 const StartWorkoutRoute = StartWorkoutImport.update({
   id: '/startWorkout',
   path: '/startWorkout',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SignupRoute = SignupImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -130,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsImport
       parentRoute: typeof rootRoute
     }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupImport
+      parentRoute: typeof rootRoute
+    }
     '/startWorkout': {
       id: '/startWorkout'
       path: '/startWorkout'
@@ -157,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
+  '/signup': typeof SignupRoute
   '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
 }
@@ -169,6 +184,7 @@ export interface FileRoutesByTo {
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
+  '/signup': typeof SignupRoute
   '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
 }
@@ -182,6 +198,7 @@ export interface FileRoutesById {
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
+  '/signup': typeof SignupRoute
   '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
 }
@@ -196,6 +213,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/login'
     | '/settings'
+    | '/signup'
     | '/startWorkout'
     | '/user'
   fileRoutesByTo: FileRoutesByTo
@@ -207,6 +225,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/login'
     | '/settings'
+    | '/signup'
     | '/startWorkout'
     | '/user'
   id:
@@ -218,6 +237,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/login'
     | '/settings'
+    | '/signup'
     | '/startWorkout'
     | '/user'
   fileRoutesById: FileRoutesById
@@ -231,6 +251,7 @@ export interface RootRouteChildren {
   LibraryRoute: typeof LibraryRoute
   LoginRoute: typeof LoginRoute
   SettingsRoute: typeof SettingsRoute
+  SignupRoute: typeof SignupRoute
   StartWorkoutRoute: typeof StartWorkoutRoute
   UserRoute: typeof UserRoute
 }
@@ -243,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   LibraryRoute: LibraryRoute,
   LoginRoute: LoginRoute,
   SettingsRoute: SettingsRoute,
+  SignupRoute: SignupRoute,
   StartWorkoutRoute: StartWorkoutRoute,
   UserRoute: UserRoute,
 }
@@ -264,6 +286,7 @@ export const routeTree = rootRoute
         "/library",
         "/login",
         "/settings",
+        "/signup",
         "/startWorkout",
         "/user"
       ]
@@ -288,6 +311,9 @@ export const routeTree = rootRoute
     },
     "/settings": {
       "filePath": "settings.tsx"
+    },
+    "/signup": {
+      "filePath": "signup.tsx"
     },
     "/startWorkout": {
       "filePath": "startWorkout.tsx"
