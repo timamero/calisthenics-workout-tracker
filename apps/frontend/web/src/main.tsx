@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
 
 // Import the generated route tree
