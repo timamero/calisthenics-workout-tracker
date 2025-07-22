@@ -4,6 +4,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
+import { supabaseClient } from '@cwt/auth/supabase';
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
@@ -17,6 +18,12 @@ declare module '@tanstack/react-router' {
     router: typeof router;
   }
 }
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase = supabaseClient(supabaseUrl, supabaseAnonKey);
+
+console.log('Supabase Client:', supabase);
 
 const theme = createTheme({
   /** Put your mantine theme override here */
