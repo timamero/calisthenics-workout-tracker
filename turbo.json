@@ -7,7 +7,8 @@
         "dist/**",
         "web-build/**",
         "build/**"
-      ]
+      ],
+      "env": ["SUPABASE_URL", "SUPABASE_ANON_KEY"]
     },
     "check-types": {
       "dependsOn": ["^check-types"]
