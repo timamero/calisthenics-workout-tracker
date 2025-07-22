@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as UserImport } from './routes/user'
 import { Route as StartWorkoutImport } from './routes/startWorkout'
 import { Route as SettingsImport } from './routes/settings'
+import { Route as LoginImport } from './routes/login'
 import { Route as LibraryImport } from './routes/library'
 import { Route as LandingImport } from './routes/landing'
 import { Route as HistoryImport } from './routes/history'
@@ -37,6 +38,12 @@ const StartWorkoutRoute = StartWorkoutImport.update({
 const SettingsRoute = SettingsImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginRoute = LoginImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -109,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryImport
       parentRoute: typeof rootRoute
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -141,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/history': typeof HistoryRoute
   '/landing': typeof LandingRoute
   '/library': typeof LibraryRoute
+  '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
   '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
@@ -152,6 +167,7 @@ export interface FileRoutesByTo {
   '/history': typeof HistoryRoute
   '/landing': typeof LandingRoute
   '/library': typeof LibraryRoute
+  '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
   '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
@@ -164,6 +180,7 @@ export interface FileRoutesById {
   '/history': typeof HistoryRoute
   '/landing': typeof LandingRoute
   '/library': typeof LibraryRoute
+  '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
   '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
@@ -177,6 +194,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/landing'
     | '/library'
+    | '/login'
     | '/settings'
     | '/startWorkout'
     | '/user'
@@ -187,6 +205,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/landing'
     | '/library'
+    | '/login'
     | '/settings'
     | '/startWorkout'
     | '/user'
@@ -197,6 +216,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/landing'
     | '/library'
+    | '/login'
     | '/settings'
     | '/startWorkout'
     | '/user'
@@ -209,6 +229,7 @@ export interface RootRouteChildren {
   HistoryRoute: typeof HistoryRoute
   LandingRoute: typeof LandingRoute
   LibraryRoute: typeof LibraryRoute
+  LoginRoute: typeof LoginRoute
   SettingsRoute: typeof SettingsRoute
   StartWorkoutRoute: typeof StartWorkoutRoute
   UserRoute: typeof UserRoute
@@ -220,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   HistoryRoute: HistoryRoute,
   LandingRoute: LandingRoute,
   LibraryRoute: LibraryRoute,
+  LoginRoute: LoginRoute,
   SettingsRoute: SettingsRoute,
   StartWorkoutRoute: StartWorkoutRoute,
   UserRoute: UserRoute,
@@ -240,6 +262,7 @@ export const routeTree = rootRoute
         "/history",
         "/landing",
         "/library",
+        "/login",
         "/settings",
         "/startWorkout",
         "/user"
@@ -259,6 +282,9 @@ export const routeTree = rootRoute
     },
     "/library": {
       "filePath": "library.tsx"
+    },
+    "/login": {
+      "filePath": "login.tsx"
     },
     "/settings": {
       "filePath": "settings.tsx"
