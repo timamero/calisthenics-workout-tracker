@@ -15,6 +15,7 @@ import { Route as UserImport } from './routes/user'
 import { Route as StartWorkoutImport } from './routes/startWorkout'
 import { Route as SignupImport } from './routes/signup'
 import { Route as SettingsImport } from './routes/settings'
+import { Route as OnboardingImport } from './routes/onboarding'
 import { Route as LoginImport } from './routes/login'
 import { Route as LibraryImport } from './routes/library'
 import { Route as LandingImport } from './routes/landing'
@@ -45,6 +46,12 @@ const SignupRoute = SignupImport.update({
 const SettingsRoute = SettingsImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const OnboardingRoute = OnboardingImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -130,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingImport
+      parentRoute: typeof rootRoute
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -170,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/landing': typeof LandingRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/startWorkout': typeof StartWorkoutRoute
@@ -183,6 +198,7 @@ export interface FileRoutesByTo {
   '/landing': typeof LandingRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/startWorkout': typeof StartWorkoutRoute
@@ -197,6 +213,7 @@ export interface FileRoutesById {
   '/landing': typeof LandingRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/startWorkout': typeof StartWorkoutRoute
@@ -212,6 +229,7 @@ export interface FileRouteTypes {
     | '/landing'
     | '/library'
     | '/login'
+    | '/onboarding'
     | '/settings'
     | '/signup'
     | '/startWorkout'
@@ -224,6 +242,7 @@ export interface FileRouteTypes {
     | '/landing'
     | '/library'
     | '/login'
+    | '/onboarding'
     | '/settings'
     | '/signup'
     | '/startWorkout'
@@ -236,6 +255,7 @@ export interface FileRouteTypes {
     | '/landing'
     | '/library'
     | '/login'
+    | '/onboarding'
     | '/settings'
     | '/signup'
     | '/startWorkout'
@@ -250,6 +270,7 @@ export interface RootRouteChildren {
   LandingRoute: typeof LandingRoute
   LibraryRoute: typeof LibraryRoute
   LoginRoute: typeof LoginRoute
+  OnboardingRoute: typeof OnboardingRoute
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   StartWorkoutRoute: typeof StartWorkoutRoute
@@ -263,6 +284,7 @@ const rootRouteChildren: RootRouteChildren = {
   LandingRoute: LandingRoute,
   LibraryRoute: LibraryRoute,
   LoginRoute: LoginRoute,
+  OnboardingRoute: OnboardingRoute,
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   StartWorkoutRoute: StartWorkoutRoute,
@@ -285,6 +307,7 @@ export const routeTree = rootRoute
         "/landing",
         "/library",
         "/login",
+        "/onboarding",
         "/settings",
         "/signup",
         "/startWorkout",
@@ -308,6 +331,9 @@ export const routeTree = rootRoute
     },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/onboarding": {
+      "filePath": "onboarding.tsx"
     },
     "/settings": {
       "filePath": "settings.tsx"
