@@ -16,6 +16,7 @@
   "dependencies": {
     "@cwt/schema": "workspace:*",
     "@cwt/state": "workspace:*",
+    "@cwt/auth": "workspace:*",
     "@mantine/core": "^8.0.0",
     "@mantine/dates": "^8.2.1",
     "@mantine/form": "^8.0.0",
