@@ -15,6 +15,22 @@
     "./createUser": {
       "types": "./src/createUser.ts",
       "default": "./dist/createUser.js"
+    },
+    "./session": {
+      "types": "./src/session.ts",
+      "default": "./dist/session.js"
+    },
+    "./signIn": {
+      "types": "./src/signIn.ts",
+      "default": "./dist/signIn.js"
+    },
+    "./signOut": {
+      "types": "./src/signOut.ts",
+      "default": "./dist/signOut.js"
+    },
+    "./user": {
+      "types": "./src/user.ts",
+      "default": "./dist/user.js"
     }
   },
   "devDependencies": {
