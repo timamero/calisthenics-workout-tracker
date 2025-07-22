@@ -6,10 +6,10 @@
  */
 import { SupabaseClient } from '@supabase/supabase-js';
 
-export const createUser = async (supabase:SupabaseClient) => {
+export const createUser = async (supabase:SupabaseClient, email:string, password:string) => {
   const { data, error } = await supabase.auth.signUp({
-    email: 'example@email.com',
-    password: 'example-password',
+    email: email,
+    password: password,
   })
 
   if (error) {
