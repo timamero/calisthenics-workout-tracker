@@ -1,11 +1,19 @@
 import { create } from 'zustand';
 
 interface AuthState {
-  supabase: any; // Replace 'any' with your Supabase client type if available
-  setSupabase: (client: any) => void;
+  session: any; // Replace 'any' with SupabaseSession type if available
+  user: any;    // Replace 'any' with SupabaseUser type if available
+  loading: boolean;
+  setSession: (session: any) => void;
+  setUser: (user: any) => void;
+  setLoading: (loading: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  supabase: null,
-  setSupabase: (client) => set({ supabase: client }),
+  session: null,
+  user: null,
+  loading: false,
+  setSession: (session) => set({ session }),
+  setUser: (user) => set({ user }),
+  setLoading: (loading) => set({ loading }),
 }));
