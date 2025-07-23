@@ -3,13 +3,17 @@ import { Title, Button } from '@mantine/core';
 import { signOut } from '@cwt/auth/signOut';
 import { supabase } from '../supabaseClient';
 
+import { useAuthStore } from '@cwt/state/auth';
+
 export const Route = createFileRoute('/settings')({
   component: SettingsView,
 });
 
 function SettingsView() {
+  const setSession = useAuthStore((state) => state.setSession);
   const handleSignOut = () => {
     signOut(supabase);
+    setSession(null); // Clear the session in the store
   };
   return (
     <div>

@@ -8,6 +8,7 @@ import {
   Title,
 } from '@mantine/core';
 import { signIn } from '@cwt/auth/signIn';
+import { useAuthStore } from '@cwt/state/auth';
 import { supabase } from '../supabaseClient';
 
 export const Route = createFileRoute('/login')({
@@ -15,6 +16,8 @@ export const Route = createFileRoute('/login')({
 });
 
 function LoginView() {
+  const setSession = useAuthStore((state) => state.setSession);
+
   const handleSignIn = async (event: React.FormEvent) => {
     event.preventDefault();
     const email = (event.target as HTMLFormElement).email.value;
@@ -22,8 +25,14 @@ function LoginView() {
 
     // TODO: Validate
 
-    const user = signIn(supabase, email, password);
+    const user = await signIn(supabase, email, password);
     console.log('User:', user);
+    if (user) {
+      const { data: session } = await supabase.auth.getSession();
+      setSession(session);
+    } else {
+      console.error('Sign in failed');
+    }
   };
 
   return (

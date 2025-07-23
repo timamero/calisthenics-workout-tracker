@@ -20,8 +20,8 @@ function RootComponent() {
 
   const supabaseSession = useAuthStore((state) => state.session);
   const setSession = useAuthStore((state) => state.setSession);
-  const loading = useAuthStore((state) => state.loading);
-  const setLoading = useAuthStore((state) => state.setLoading);
+  // const loading = useAuthStore((state) => state.loading);
+  // const setLoading = useAuthStore((state) => state.setLoading);
 
   useEffect(() => {
     const initAuth = async () => {
