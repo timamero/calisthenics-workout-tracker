@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
@@ -5,12 +6,43 @@ import { AppShell, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { NavLink } from '@mantine/core';
 
+import { useAuthStore } from '@cwt/state/auth';
+// import { user } from '@cwt/auth/user';
+import { session } from '@cwt/auth/session';
+import { supabase } from '../supabaseClient';
+
 export const Route = createRootRoute({
   component: RootComponent,
 });
 
 function RootComponent() {
   const [opened, { toggle }] = useDisclosure();
+
+  const supabaseSession = useAuthStore((state) => state.session);
+  const setSession = useAuthStore((state) => state.setSession);
+  console.log('RootComponent rendered');
+  console.log('supabaseSession', supabaseSession);
+
+  useEffect(() => {
+    const initAuth = async () => {
+      const supabaseSession = await session(supabase);
+      setSession(supabaseSession);
+      // const supabaseUser = await user(supabase);
+
+      // Auth.setSession(supabaseSession);
+    };
+
+    initAuth();
+  });
+
+  if (!supabaseSession) {
+    return (
+      <div>
+        <Outlet />
+        <TanStackRouterDevtools />
+      </div>
+    );
+  }
   return (
     <AppShell
       header={{ height: 60 }}
