@@ -21,19 +21,27 @@ function RootComponent() {
   const supabaseSession = useAuthStore((state) => state.session);
   const setSession = useAuthStore((state) => state.setSession);
   console.log('RootComponent rendered');
-  console.log('supabaseSession', supabaseSession);
+  // console.log('supabaseSession', supabaseSession);
 
   useEffect(() => {
+    console.log('Initializing auth...');
     const initAuth = async () => {
+      // const supabaseSession = null;
       const supabaseSession = await session(supabase);
-      setSession(supabaseSession);
+      if (supabaseSession) {
+        console.log('Supabase session found:', supabaseSession);
+        setSession(supabaseSession);
+      }
       // const supabaseUser = await user(supabase);
 
       // Auth.setSession(supabaseSession);
     };
 
-    initAuth();
-  });
+    if (!supabaseSession) {
+      console.log('No session found, initializing...');
+      initAuth();
+    }
+  }, []);
 
   if (!supabaseSession) {
     return (
