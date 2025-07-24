@@ -7,6 +7,11 @@ import StartWorkoutScreen from '../screens/StartWorkoutScreen';
 import LibraryScreen from '../screens/LibraryScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import LandingScreen from '../screens/LandingScreen';
+import LoginScreen from '../screens/LoginScreen';
+import SignupScreen from '../screens/SignupScreen';
+import OnboardingScreen from '../screens/OnboardingScreen';
+import OnboardingComplete from '../screens/OnboardingComplete';
 
 const MyTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => ({
@@ -31,7 +36,8 @@ const MyTabs = createBottomTabNavigator({
     tabBarInactiveTintColor: 'gray',
   }),
   screens: {
-    Home: HomeScreen,
+    // Home: HomeScreen,
+    Home: OnboardingComplete,
     Library: LibraryScreen,
     Workout: StartWorkoutScreen,
     History: HistoryScreen,
