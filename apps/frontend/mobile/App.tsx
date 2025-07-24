@@ -9,8 +9,9 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'snow',
+    primary: 'tomato',
     secondary: 'thistle',
+    background: 'snow',
   },
 };
 
