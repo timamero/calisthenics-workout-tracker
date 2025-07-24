@@ -1,5 +1,5 @@
-import { View, Text, Button } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { View } from 'react-native';
+import { useTheme, Text, Button } from 'react-native-paper';
 
 export default function LandingScreen() {
   const theme = useTheme();
@@ -13,15 +13,22 @@ export default function LandingScreen() {
         backgroundColor: theme.colors.primary,
       }}
     >
-      <Text>Sign Up or Log In</Text>
+      <Text variant="displayLarge">Sign Up or Log In</Text>
       <Button
-        title="Sign Up"
+        mode="contained"
+        buttonColor="tomato"
         onPress={() => console.log('Navigate to Sign Up')}
-      />
+      >
+        Sign Up
+      </Button>
       <Button
-        title="Log In"
+        mode="outlined"
+        buttonColor="tomato"
+        textColor={theme.colors.outline}
         onPress={() => console.log('Navigate to Log In')}
-      />
+      >
+        Log In
+      </Button>
     </View>
   );
 }
