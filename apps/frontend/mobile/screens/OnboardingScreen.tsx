@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import {
   useTheme,
   TextInput,
@@ -19,16 +19,18 @@ export default function OnboardingScreen() {
   const [duration, setDuration] = React.useState<string>('15-30 min');
 
   return (
-    <View
+    <ScrollView
       style={{
+        backgroundColor: theme.colors.background,
+      }}
+      contentContainerStyle={{
         display: 'flex',
         flexDirection: 'column',
-        flex: 1,
+        // flex: 1,
         gap: 16,
         paddingHorizontal: 16,
         alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: theme.colors.background,
       }}
     >
       <Card>
@@ -156,6 +158,6 @@ export default function OnboardingScreen() {
       >
         Finish
       </Button>
-    </View>
+    </ScrollView>
   );
 }
