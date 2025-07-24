@@ -17,7 +17,7 @@ export default function LoginScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displayLarge">Log In</Text>
+      <Text variant="displaySmall">Log In</Text>
       <TextInput label="Email" />
       <TextInput label="Password" />
       <Button
