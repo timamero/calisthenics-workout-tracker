@@ -8,9 +8,11 @@ export default function LandingScreen() {
     <View
       style={{
         flex: 1,
-        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.background,
       }}
     >
       <Text variant="displayLarge">Sign Up or Log In</Text>
@@ -23,7 +25,7 @@ export default function LandingScreen() {
       </Button>
       <Button
         mode="outlined"
-        buttonColor="tomato"
+        buttonColor={theme.colors.primary}
         textColor={theme.colors.outline}
         onPress={() => console.log('Navigate to Log In')}
       >

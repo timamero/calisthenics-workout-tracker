@@ -22,7 +22,7 @@ export default function LoginScreen() {
       <TextInput label="Password" />
       <Button
         mode="contained"
-        buttonColor="tomato"
+        buttonColor={theme.colors.primary}
         onPress={() => console.log('Navigate to Log In')}
       >
         Log In
