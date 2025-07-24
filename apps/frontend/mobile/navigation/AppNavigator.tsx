@@ -44,6 +44,7 @@ const MyTabs = createBottomTabNavigator({
     History: HistoryScreen,
     Settings: SettingsScreen,
   },
+  initialRouteName: 'Home',
 });
 
 // Auth Stack Navigator
@@ -58,19 +59,27 @@ const AuthStack = createNativeStackNavigator({
   initialRouteName: 'Landing',
 });
 
+function useIsSignedIn() {
+  return true;
+}
+function useIsSignedOut() {
+  return false;
+}
+
 // Root Stack Navigator
 const RootStack = createNativeStackNavigator({
   screens: {
     Auth: {
+      if: useIsSignedOut,
       screen: AuthStack,
       options: { headerShown: false },
     },
     App: {
+      if: useIsSignedIn,
       screen: MyTabs,
       options: { headerShown: false },
     },
   },
-  initialRouteName: 'Auth',
 });
 
 export const Navigation = createStaticNavigation(RootStack);
