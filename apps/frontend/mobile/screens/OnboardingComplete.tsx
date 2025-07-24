@@ -29,7 +29,7 @@ export default function OnboardingComplete() {
         buttonColor={theme.colors.primary}
         onPress={() => console.log('Go to Dashboard')}
       >
-        Log In
+        Go to Dashboard
       </Button>
     </View>
   );
