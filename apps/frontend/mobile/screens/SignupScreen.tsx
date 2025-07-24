@@ -17,7 +17,7 @@ export default function SignupScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displayLarge">Log In</Text>
+      <Text variant="displayLarge">Sign Up</Text>
       <TextInput label="Email" />
       <TextInput label="Password" />
       <TextInput label="Confirm Password" />
