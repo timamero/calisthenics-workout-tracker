@@ -1,5 +1,5 @@
-import { View, Button } from 'react-native';
-import { useTheme, TextInput, Text } from 'react-native-paper';
+import { View } from 'react-native';
+import { useTheme, TextInput, Text, Button } from 'react-native-paper';
 
 export default function LoginScreen() {
   const theme = useTheme();
@@ -7,19 +7,26 @@ export default function LoginScreen() {
   return (
     <View
       style={{
+        display: 'flex',
+        flexDirection: 'column',
         flex: 1,
-        alignItems: 'center',
+        gap: 16,
+        paddingHorizontal: 16,
+        alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.background,
       }}
     >
       <Text variant="displayLarge">Log In</Text>
       <TextInput label="Email" />
-      <TextInput label="Email" />
+      <TextInput label="Password" />
       <Button
-        title="Log In"
+        mode="contained"
+        buttonColor="tomato"
         onPress={() => console.log('Navigate to Log In')}
-      />
+      >
+        Log In
+      </Button>
     </View>
   );
 }
