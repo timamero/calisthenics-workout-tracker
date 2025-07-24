@@ -12,7 +12,9 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import OnboardingComplete from '../screens/OnboardingComplete';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// App Navigator
 const MyTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {
@@ -36,8 +38,7 @@ const MyTabs = createBottomTabNavigator({
     tabBarInactiveTintColor: 'gray',
   }),
   screens: {
-    // Home: HomeScreen,
-    Home: OnboardingComplete,
+    Home: HomeScreen,
     Library: LibraryScreen,
     Workout: StartWorkoutScreen,
     History: HistoryScreen,
@@ -45,4 +46,31 @@ const MyTabs = createBottomTabNavigator({
   },
 });
 
-export const Navigation = createStaticNavigation(MyTabs);
+// Auth Stack Navigator
+const AuthStack = createNativeStackNavigator({
+  screens: {
+    Landing: LandingScreen,
+    Login: LoginScreen,
+    Signup: SignupScreen,
+    Onboarding: OnboardingScreen,
+    OnboardingComplete: OnboardingComplete,
+  },
+  initialRouteName: 'Landing',
+});
+
+// Root Stack Navigator
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Auth: {
+      screen: AuthStack,
+      options: { headerShown: false },
+    },
+    App: {
+      screen: MyTabs,
+      options: { headerShown: false },
+    },
+  },
+  initialRouteName: 'Auth',
+});
+
+export const Navigation = createStaticNavigation(RootStack);
