@@ -10,14 +10,14 @@ export default function OnboardingComplete() {
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
-        gap: 16,
+        gap: 8,
         paddingHorizontal: 16,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displayLarge">Welcome User!</Text>
+      <Text variant="headlineLarge">Welcome User!</Text>
       <Text
         variant="bodyLarge"
         style={{ textAlign: 'center', marginBottom: 16 }}
