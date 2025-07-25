@@ -19,6 +19,9 @@ importers:
 
   apps/frontend/mobile:
     dependencies:
+      '@cwt/auth':
+        specifier: workspace:*
+        version: link:../../../packages/auth
       '@cwt/schema':
         specifier: workspace:*
         version: link:../../../packages/schema

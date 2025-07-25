@@ -15,6 +15,7 @@
   "dependencies": {
     "@cwt/schema": "workspace:*",
     "@cwt/state": "workspace:*",
+    "@cwt/auth": "workspace:*",
     "@expo/vector-icons": "^14.1.0",
     "@react-navigation/bottom-tabs": "^7.4.2",
     "@react-navigation/native": "^7.1.14",
