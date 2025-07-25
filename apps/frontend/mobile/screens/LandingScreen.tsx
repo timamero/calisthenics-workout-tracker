@@ -1,8 +1,10 @@
 import { View } from 'react-native';
 import { useTheme, Text, Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 export default function LandingScreen() {
   const theme = useTheme();
+  const navigation = useNavigation<any>();
 
   return (
     <View
@@ -21,14 +23,14 @@ export default function LandingScreen() {
       <Button
         mode="contained"
         buttonColor="tomato"
-        onPress={() => console.log('Navigate to Sign Up')}
+        onPress={() => navigation.navigate('Signup')}
       >
         Sign Up
       </Button>
       <Button
         mode="outlined"
         textColor={theme.colors.outline}
-        onPress={() => console.log('Navigate to Log In')}
+        onPress={() => navigation.navigate('Login')}
       >
         Log In
       </Button>
