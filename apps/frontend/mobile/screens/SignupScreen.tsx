@@ -42,7 +42,6 @@ export default function SignupScreen() {
         onChangeText={setConfirmPassword}
         secureTextEntry
       />
-      <TextInput label="Confirm Password" />
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
