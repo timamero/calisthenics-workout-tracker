@@ -1,7 +1,11 @@
 import { View } from 'react-native';
 import { useTheme, TextInput, Text, Button } from 'react-native-paper';
+import { supabase } from '../services/supabaseClient';
+import React, { useState } from 'react';
 
 export default function LoginScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const theme = useTheme();
 
   return (
@@ -18,8 +22,19 @@ export default function LoginScreen() {
       }}
     >
       <Text variant="displaySmall">Log In</Text>
-      <TextInput label="Email" />
-      <TextInput label="Password" />
+      <TextInput
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        keyboardType="email-address"
+      />
+      <TextInput
+        label="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
