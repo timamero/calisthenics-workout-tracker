@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useTheme, TextInput, Text, Button } from 'react-native-paper';
 
 // eslint-disable-next-line import/no-unresolved
-import { createUser } from '@cwt/auth/createUser';
+import { signIn } from '@cwt/auth/signIn';
 import { supabase } from '../services/supabaseClient';
 
 export default function LoginScreen() {
@@ -13,7 +13,7 @@ export default function LoginScreen() {
   const theme = useTheme();
 
   const handleLogin = async () => {
-    const user = await createUser(supabase, email, password);
+    const user = await signIn(supabase, email, password);
     console.log('User:', user);
   };
 
