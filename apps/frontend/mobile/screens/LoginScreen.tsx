@@ -1,12 +1,21 @@
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useTheme, TextInput, Text, Button } from 'react-native-paper';
+
+// eslint-disable-next-line import/no-unresolved
+import { createUser } from '@cwt/auth/createUser';
 import { supabase } from '../services/supabaseClient';
-import React, { useState } from 'react';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const theme = useTheme();
+
+  const handleLogin = async () => {
+    const user = await createUser(supabase, email, password);
+    console.log('User:', user);
+  };
 
   return (
     <View
@@ -38,7 +47,7 @@ export default function LoginScreen() {
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
-        onPress={() => console.log('Navigate to Log In')}
+        onPress={() => handleLogin()}
       >
         Log In
       </Button>
