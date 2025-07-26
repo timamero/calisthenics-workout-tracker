@@ -1,8 +1,17 @@
 import { View, Text } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useTheme, Button } from 'react-native-paper';
+
+// eslint-disable-next-line import/no-unresolved
+import { signOut } from '@cwt/auth/signOut';
+import { supabase } from '../services/supabaseClient';
 
 export default function SettingsScreen() {
   const theme = useTheme();
+
+  const handleLogOut = async () => {
+    await signOut(supabase);
+    // setSession(null); // Clear the session in the store
+  };
 
   return (
     <View
@@ -15,6 +24,13 @@ export default function SettingsScreen() {
     >
       <Text>Settings Screen</Text>
       <Text>This page will contain the app settings.</Text>
+      <Button
+        mode="outlined"
+        textColor={theme.colors.outline}
+        onPress={() => handleLogOut()}
+      >
+        Log out
+      </Button>
     </View>
   );
 }
