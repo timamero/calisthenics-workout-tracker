@@ -15,9 +15,6 @@ import OnboardingComplete from '../screens/OnboardingComplete';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAuthStore } from '@cwt/state/auth';
-// import { supabase } from '../services/supabaseClient';
-
-// console.log('Supabase Client:', supabase);
 
 // App Navigator
 const MyTabs = createBottomTabNavigator({
