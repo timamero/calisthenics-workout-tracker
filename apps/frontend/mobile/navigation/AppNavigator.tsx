@@ -14,6 +14,11 @@ import OnboardingScreen from '../screens/OnboardingScreen';
 import OnboardingComplete from '../screens/OnboardingComplete';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { useAuthStore } from '@cwt/state/auth';
+// import { supabase } from '../services/supabaseClient';
+
+// console.log('Supabase Client:', supabase);
+
 // App Navigator
 const MyTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => ({
@@ -60,10 +65,20 @@ const AuthStack = createNativeStackNavigator({
 });
 
 function useIsSignedIn() {
-  return true;
+  const supabaseSession = useAuthStore((state) => state.session);
+  if (supabaseSession) {
+    console.log('User is signed in:');
+    return true;
+  }
+  return false;
 }
 function useIsSignedOut() {
-  return false;
+  const supabaseSession = useAuthStore((state) => state.session);
+  if (supabaseSession) {
+    console.log('User is signed out:');
+    return false;
+  }
+  return true;
 }
 
 // Root Stack Navigator
