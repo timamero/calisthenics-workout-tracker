@@ -14,7 +14,7 @@
     },
     "./protectedData": {
       "types": "./src/protectedData.ts",
-      "default": "./dist/protectedtData.js"
+      "default": "./dist/protectedData.js"
     }
   },
   "devDependencies": {
