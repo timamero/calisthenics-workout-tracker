@@ -13,8 +13,8 @@
       "default": "./dist/projectData.js"
     },
     "./protectedData": {
-      "types": "./src/projectData.ts",
-      "default": "./dist/projectData.js"
+      "types": "./src/protectedData.ts",
+      "default": "./dist/protectedtData.js"
     }
   },
   "devDependencies": {
