@@ -22,10 +22,10 @@ app = FastAPI(
 )
 
 origins = [
-    "http://localhost:5173/",
-    "http://REDACTED_IP:5173/",
+    "http://localhost:5173",
+    "http://REDACTED_IP:5173",
     "http://localhost:8081",
-    "REDACTED_IP:8081",
+    "http://REDACTED_IP:8081",
 ]
 
 app.add_middleware(
