@@ -7,9 +7,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { NavLink } from '@mantine/core';
 
 import { useAuthStore } from '@cwt/state/auth';
-// import { user } from '@cwt/auth/user';
-import { session } from '@cwt/auth/session';
 import { supabase } from '../supabaseClient';
+import type { Subscription } from '@supabase/auth-js';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -24,18 +23,90 @@ function RootComponent() {
   // const setLoading = useAuthStore((state) => state.setLoading);
 
   useEffect(() => {
-    const initAuth = async () => {
-      const currentSession = await session(supabase);
+    let authListener: {
+      unsubscribe: () => void;
+      subscription: Subscription;
+    } | null = null;
 
-      setSession(currentSession);
+    const setupAuth = async () => {
+      console.log(
+        'Setting up Supabase authentication listener and initial session check...',
+      );
+      // setLoading(true);
+
+      // Get the initial session from Supabase's storage
+      try {
+        const {
+          data: { session: initialSession },
+        } = await supabase.auth.getSession();
+        setSession(initialSession);
+        console.log(
+          'Initial session retrieved:',
+          initialSession ? 'present' : 'null',
+        );
+      } catch (error) {
+        console.error('Error getting initial session:', error);
+        setSession(null); // Ensure session is null on error
+      }
+
+      // Set up the real-time auth state listener
+      const { data } = supabase.auth.onAuthStateChange(
+        (event, currentSession) => {
+          console.log(
+            'Auth event:',
+            event,
+            'Current Session:',
+            currentSession ? 'present' : 'null',
+          );
+
+          switch (event) {
+            case 'SIGNED_IN':
+            case 'USER_UPDATED':
+              setSession(currentSession);
+              console.log('User signed in or updated, session set.');
+              break;
+            case 'SIGNED_OUT':
+              setSession(null);
+              console.log('User signed out, session cleared.');
+              break;
+            case 'PASSWORD_RECOVERY':
+              console.log('Password recovery initiated.');
+              // You might want to navigate to a password reset screen here
+              break;
+            case 'INITIAL_SESSION':
+              // This event fires after getSession() if a session exists.
+              // It's often redundant if you've already called getSession()
+              // but good to log for debugging.
+              console.log('Initial session event received.');
+              setSession(currentSession);
+              break;
+            default:
+              // Handle other events if necessary
+              console.log(`Unhandled auth event: ${event}`);
+              break;
+          }
+          // setLoading(false);
+        },
+      );
+      authListener = {
+        subscription: data.subscription,
+        unsubscribe: () => data.subscription.unsubscribe(),
+      }; // Assign the listener object to the variable for cleanup
+
+      // Ensure loading is set to false after initial check and listener setup
+      // This handles cases where no auth event fires immediately but initial session is known.
       // setLoading(false);
     };
 
-    if (!supabaseSession) {
-      console.log('No session found, initializing...');
-      initAuth();
-    }
-  }, [supabaseSession, setSession]);
+    setupAuth();
+
+    return () => {
+      if (authListener) {
+        authListener.unsubscribe();
+        console.log('Supabase auth listener unsubscribed.');
+      }
+    };
+  }, [setSession]);
 
   if (!supabaseSession) {
     return (
