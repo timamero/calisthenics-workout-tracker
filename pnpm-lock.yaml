@@ -113,6 +113,9 @@ importers:
 
   apps/frontend/web:
     dependencies:
+      '@cwt/api':
+        specifier: workspace:*
+        version: link:../../../packages/api
       '@cwt/auth':
         specifier: workspace:*
         version: link:../../../packages/auth
