@@ -11,6 +11,10 @@
     "./projectData": {
       "types": "./src/projectData.ts",
       "default": "./dist/projectData.js"
+    },
+    "./protectedData": {
+      "types": "./src/projectData.ts",
+      "default": "./dist/projectData.js"
     }
   },
   "devDependencies": {
