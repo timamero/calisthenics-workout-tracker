@@ -1,0 +1,19 @@
+{
+  "name": "@cwt/api",
+  "version": "0.1.0",
+  "description": "API for CWT",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./projectData": {
+      "types": "./src/projectData.ts",
+      "default": "./dist/projectData.js"
+    }
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3"
+  }
+}
