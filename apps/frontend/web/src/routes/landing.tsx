@@ -26,7 +26,7 @@ function LandingView() {
       }
     };
     asyncFetchProtectedData();
-  }, []);
+  }, [session]);
   return (
     <div>
       <Title>Sign Up or Log In</Title>
