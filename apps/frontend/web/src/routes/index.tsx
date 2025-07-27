@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Title } from '@mantine/core';
 import { useBearStore } from '@cwt/state/counter';
 import { User } from '@cwt/schema/sampleSchema';
-// import { HomeView } from '../views/HomeView';
 
 export const Route = createFileRoute('/')({
   component: HomeView,
@@ -15,6 +15,12 @@ function HomeView() {
     name: 'Jane Doe',
     xp: 100,
   };
+
+  useEffect(() => {
+    console.log('Fetching data from public route...');
+    getData();
+  }, []);
+
   return (
     <div>
       <Title>Welcome Home {user.name}!</Title>
@@ -23,4 +29,19 @@ function HomeView() {
       <button onClick={() => increase(1)}>one up</button>
     </div>
   );
+}
+
+async function getData() {
+  const url = 'http://127.0.0.1:8000/info';
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Resonse status: $(response.status}`);
+    }
+
+    const json = await response.json();
+    console.log('Data fethed from FastAPI: ', json);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 }
