@@ -13,10 +13,8 @@ export const Route = createFileRoute('/settings')({
 
 function SettingsView() {
   const session = useAuthStore((state) => state.session);
-  const setSession = useAuthStore((state) => state.setSession);
   const handleSignOut = () => {
     signOut(supabase);
-    setSession(null); // Clear the session in the store
   };
 
   useEffect(() => {
