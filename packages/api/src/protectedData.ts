@@ -10,7 +10,7 @@ export async function getProtectedData(baseUrl: string, token: string) {
       headers: headers
     });
     if (!response.ok) {
-      throw new Error(`Resonse status: $(response.status}`);
+      throw new Error(`Response status: $(response.status}`);
     }
 
     const json = await response.json();
