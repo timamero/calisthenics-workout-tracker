@@ -19,7 +19,6 @@ function LandingView() {
 
     const asyncFetchProtectedData = async () => {
       if (session) {
-        console.log('token: ', session.access_token);
         await getProtectedData(baseUrl, session.access_token);
       } else {
         console.log('No protected data to fetch on landing page.');
