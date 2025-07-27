@@ -2,6 +2,7 @@ from functools import lru_cache
 from typing import Union
 
 from fastapi import Depends, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from typing_extensions import Annotated
 import httpx
 
@@ -18,6 +19,21 @@ app = FastAPI(
     title=get_settings().app_name,
     debug=get_settings().debug,
     version=get_settings().version,
+)
+
+origins = [
+    "http://localhost:5173/",
+    "http://REDACTED_IP:5173/",
+    "http://localhost:8081",
+    "REDACTED_IP:8081",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
