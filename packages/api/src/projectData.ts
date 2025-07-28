@@ -8,6 +8,7 @@ export async function getData(baseUrl: string) {
 
     const json = await response.json();
     console.log('Data fethed from FastAPI: ', json);
+    return json;
   } catch (error) {
     console.error('Error fetching data:', error);
   }
