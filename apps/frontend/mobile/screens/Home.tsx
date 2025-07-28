@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useBearStore } from '@cwt/state/counter';
@@ -9,15 +9,25 @@ export default function HomeScreen() {
   const navigation = useNavigation<any>();
   const bears = useBearStore((state) => state.bears);
   const increase = useBearStore((state) => state.increase);
+  const [data, setData] = useState(null);
   const user: User = {
     name: 'Jane Doe',
     xp: 90,
   };
 
+  console.log('Data', data);
   useEffect(() => {
     console.log('Fetching data from public route...');
-    const baseUrl = 'http://127.0.0.1:8000';
-    getData(baseUrl);
+    const baseUrl = 'http://REDACTED_IP:8000';
+    const fetchData = async () => {
+      try {
+        const result = await getData(baseUrl);
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
