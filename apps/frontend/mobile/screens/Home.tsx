@@ -1,7 +1,9 @@
+import React, { useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useBearStore } from '@cwt/state/counter';
 import { User } from '@cwt/schema/sampleSchema';
+import { getData } from '@cwt/api/projectData';
 
 export default function HomeScreen() {
   const navigation = useNavigation<any>();
@@ -11,6 +13,12 @@ export default function HomeScreen() {
     name: 'Jane Doe',
     xp: 90,
   };
+
+  useEffect(() => {
+    console.log('Fetching data from public route...');
+    const baseUrl = 'http://127.0.0.1:8000';
+    getData(baseUrl);
+  }, []);
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
