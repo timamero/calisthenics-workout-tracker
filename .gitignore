@@ -61,3 +61,4 @@ logs/
 *.tmp
 .cache/
 .backup/
+.secrets.baseline
