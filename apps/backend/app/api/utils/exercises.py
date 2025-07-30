@@ -1,9 +1,9 @@
 from app.services.supabase_client import supabase
 
 
-async def get_exercises():
+def get_exercises():
     try:
-        response = await supabase.table("planets").select("*").range(0, 1).execute()
-        return response
+        response = supabase.table("exercises").select("*").range(0, 10).execute()
+        return response.data
     except Exception as e:
         print(f"Error fetching exercises: {e}")
