@@ -8,6 +8,7 @@ import httpx
 
 from .core import config
 from .core.dependencies import get_current_user_id
+from .api.main import api_router
 
 
 @lru_cache
@@ -35,6 +36,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(api_router)
 
 
 @app.get("/")
