@@ -1,4 +1,3 @@
-import datetime
 import requests
 from typing import Annotated, Dict, Any
 
@@ -138,37 +137,37 @@ def get_current_user_id(authorization: Annotated[str, Header()]) -> str:
         )
 
 
-def generate_supabase_test_jwt(
-    user_id: str = settings.test_uid,
-    email: str = settings.test_email,
-    role: str = "authenticated",
-    custom_claims: dict = None,
-    expires_in_minutes: int = 60,
-) -> str:
-    """
-    Generates a signed JWT compatible with Supabase for testing.
-    TODO: User this function later when creating tests.
-    """
-    supabase_jwt_secret = settings.supabase_jwt_key_id  # Get from environment variable
-    if not supabase_jwt_secret:
-        raise ValueError("SUPABASE_JWT_SECRET environment variable not set.")
+# def generate_supabase_test_jwt(
+#     user_id: str = settings.test_uid,
+#     email: str = settings.test_email,
+#     role: str = "authenticated",
+#     custom_claims: dict = None,
+#     expires_in_minutes: int = 60,
+# ) -> str:
+#     """
+#     Generates a signed JWT compatible with Supabase for testing.
+#     TODO: User this function later when creating tests.
+#     """
+#     supabase_jwt_secret = settings.supabase_jwt_key_id # Get from environment variable
+#     if not supabase_jwt_secret:
+#         raise ValueError("SUPABASE_JWT_SECRET environment variable not set.")
 
-    now = datetime.datetime.now()
-    expiration = now + datetime.timedelta(minutes=expires_in_minutes)
+#     now = datetime.datetime.now()
+#     expiration = now + datetime.timedelta(minutes=expires_in_minutes)
 
-    payload = {
-        "aud": "authenticated",
-        "exp": int(expiration.timestamp()),
-        "iat": int(now.timestamp()),
-        "iss": "supabase",
-        "sub": user_id,
-        "role": role,
-        "email": email,
-        "app_metadata": custom_claims if custom_claims else {},
-    }
+#     payload = {
+#         "aud": "authenticated",
+#         "exp": int(expiration.timestamp()),
+#         "iat": int(now.timestamp()),
+#         "iss": "supabase",
+#         "sub": user_id,
+#         "role": role,
+#         "email": email,
+#         "app_metadata": custom_claims if custom_claims else {},
+#     }
 
-    # Ensure the secret is bytes
-    secret_bytes = supabase_jwt_secret.encode("utf-8")
+#     # Ensure the secret is bytes
+#     secret_bytes = supabase_jwt_secret.encode("utf-8")
 
-    signed_jwt = jwt.encode(claims=payload, key=secret_bytes, algorithm="HS256")
-    return signed_jwt
+#     signed_jwt = jwt.encode(claims=payload, key=secret_bytes, algorithm="HS256")
+#     return signed_jwt
