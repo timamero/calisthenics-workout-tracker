@@ -147,12 +147,13 @@ def generate_supabase_test_jwt(
 ) -> str:
     """
     Generates a signed JWT compatible with Supabase for testing.
+    TODO: User this function later when creating tests.
     """
     supabase_jwt_secret = settings.supabase_jwt_key_id  # Get from environment variable
     if not supabase_jwt_secret:
         raise ValueError("SUPABASE_JWT_SECRET environment variable not set.")
 
-    now = datetime.now()
+    now = datetime.datetime.now()
     expiration = now + datetime.timedelta(minutes=expires_in_minutes)
 
     payload = {
