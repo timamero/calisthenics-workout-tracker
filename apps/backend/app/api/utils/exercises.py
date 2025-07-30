@@ -8,3 +8,18 @@ def get_exercises(access_token: str):
         return response.data
     except Exception as e:
         print(f"Error fetching exercises: {e}")
+
+
+def get_exercise_by_id(exercise_id: int):
+    supabase = get_supabase_client()
+    try:
+        response = (
+            supabase.table("exercises")
+            .select("*")
+            .eq("id", exercise_id)
+            .single()
+            .execute()
+        )
+        return response.data
+    except Exception as e:
+        print(f"Error fetching exercise with ID {exercise_id}: {e}")
