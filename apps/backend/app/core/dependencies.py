@@ -8,7 +8,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
 from base64 import urlsafe_b64decode
 
-from app.config import settings
+from .config import settings
 
 # Cache JWKS for 10 minutes to reduce network requests.
 jwks_cache = TTLCache(maxsize=1, ttl=600)

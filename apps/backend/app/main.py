@@ -6,8 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing_extensions import Annotated
 import httpx
 
-from . import config
-from .dependencies import get_current_user_id
+from .core import config
+from .core.dependencies import get_current_user_id
 
 
 @lru_cache
