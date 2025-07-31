@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 import { Exercise, Muscles, Equipment, Emphasis, Difficulty } from '@cwt/schema/exerciseSchema';
 
-type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis; difficulty: Difficulty}
+type Filter = { muscle: Muscles[]; equipment: Equipment[]; emphasis: Emphasis; difficulty: Difficulty}
 
 interface ExercisesState {
-  masterExercises: Exercise[] | null;
-  displayedExercises: Exercise[] | null;
+  masterExercises: Exercise[];
+  displayedExercises: Exercise[];
   filter: Filter;
   search: string;
   setMasterExercises: (masterExercises: Exercise[]) => void;
@@ -13,9 +13,9 @@ interface ExercisesState {
 }
 
 export const useExercisesStore = create<ExercisesState>((set) => ({
-  masterExercises: null,
-  displayedExercises: null,
-  filter: {muscle: [""], equipment: [""], emphasis: "", difficulty: ""},
+  masterExercises: [],
+  displayedExercises: [],
+  filter: {muscle: [], equipment: [], emphasis: "", difficulty: ""},
   search: "",
   setMasterExercises: (masterExercises) => set({ masterExercises }),
   setDisplayedExercises: (displayedExercises) => set({ displayedExercises }),
