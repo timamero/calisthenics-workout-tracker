@@ -8,6 +8,10 @@
     "build": "tsc"
   },
   "exports": {
+    "./exerciseSchema": {
+      "types": "./src/exerciseSchema.ts",
+      "default": "./src/exerciseSchema.ts"
+    },
     "./sampleSchema": {
       "types": "./src/sampleSchema.ts",
       "default": "./dist/sampleSchema.js"
