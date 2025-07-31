@@ -10,31 +10,24 @@ def get_exercises(access_token: str, filter_query: ExerciseFilterParams):
     difficulty = filter_query.difficulty
     emphasis = filter_query.emphasis
 
-    print("muscles filter", muscles)
-
     try:
         query = supabase.table("exercises").select("*").range(0, 20)
 
         conditions = ""
 
-        # Apply target_muscles filter (OR logic)
         if muscles:
             muscle_conditions = ",".join(
                 [f'target_muscles.cs.{{"{m}"}}' for m in muscles]
             )
             conditions = conditions + muscle_conditions
-        # query = query.or_(",".join(muscle_conditions))
 
-        # Apply equipment filter (OR logic)
         if equipments:
             equipment_conditions = ",".join(
                 [f'required_equipment.cs.{{"{e}"}}' for e in equipments]
             )
             conditions = conditions + "," + equipment_conditions
-        # query = query.or_(",".join(equipment_conditions))
 
         if conditions:
-            # query = query.or_(",".join(conditions))
             query = query.or_(conditions)
 
         if difficulty:
