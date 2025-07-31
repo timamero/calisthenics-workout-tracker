@@ -9,7 +9,9 @@ interface ExercisesState {
   filter: Filter;
   search: string;
   setMasterExercises: (masterExercises: Exercise[]) => void;
-  setDisplayedExercises: (displayed: Exercise[]) => void;
+  setDisplayedExercises: (displayedExercises: Exercise[]) => void;
+  setFilter: (filter: Partial<Filter>) => void;
+  setSearch: (search: string) => void;
 }
 
 export const useExercisesStore = create<ExercisesState>((set) => ({
@@ -19,4 +21,8 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
   search: "",
   setMasterExercises: (masterExercises) => set({ masterExercises }),
   setDisplayedExercises: (displayedExercises) => set({ displayedExercises }),
+  setFilter: (partial) => set((state) => ({
+    filter: { ...state.filter, ...partial}
+  })),
+  setSearch: (search) => set({ search })
 }));
