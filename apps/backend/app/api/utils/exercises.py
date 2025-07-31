@@ -9,6 +9,7 @@ def get_exercises(access_token: str, filter_query: ExerciseFilterParams):
     equipments = filter_query.equipments
     difficulty = filter_query.difficulty
     emphasis = filter_query.emphasis
+    q = filter_query.q
 
     try:
         query = supabase.table("exercises").select("*").range(0, 20)
@@ -35,6 +36,9 @@ def get_exercises(access_token: str, filter_query: ExerciseFilterParams):
 
         if emphasis:
             query.eq("emphasis", emphasis)
+
+        if q:
+            query.ilike("name", f"%{q}%")
 
         response = query.range(0, 20).execute()
         return response.data
