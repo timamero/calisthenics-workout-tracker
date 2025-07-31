@@ -10,8 +10,8 @@ def get_exercises(access_token: str):
         print(f"Error fetching exercises: {e}")
 
 
-def get_exercise_by_id(exercise_id: int):
-    supabase = get_supabase_client()
+def get_exercise_by_id(exercise_id: str, access_token: str):
+    supabase = get_supabase_client(access_token)
     try:
         response = (
             supabase.table("exercises")
