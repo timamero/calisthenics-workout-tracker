@@ -13,6 +13,7 @@ class ExerciseSchema(BaseModel):
 
 
 class ExerciseFilterParams(BaseModel):
+    q: str | None = None
     muscles: list[str] = []
     equipments: list[str] = []
     difficulty: Literal["beginner", "intermediate", "advanced", ""] = ""

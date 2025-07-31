@@ -1,9 +1,8 @@
-from typing import List, Literal, Annotated
+from typing import List, Annotated
 
-from pydantic import BaseModel
 from fastapi import APIRouter, Request, HTTPException, Query
 
-from app.schemas.exercise import ExerciseSchema
+from app.schemas.exercise import ExerciseSchema, ExerciseFilterParams
 from app.api.utils.exercises import get_exercises, get_exercise_by_id
 
 router = APIRouter(prefix="/exercises")
@@ -28,15 +27,6 @@ sample_exercises = [
         "tags": ["leg day", "lower"],
     },
 ]
-
-
-class ExerciseFilterParams(BaseModel):
-    muscles: list[str] = []
-    equipments: list[str] = []
-    difficulty: Literal["beginner", "intermediate", "advanced", ""] = ""
-    emphasis: Literal[
-        "plyometrics", "mobility", "power", "endurance", "strength", ""
-    ] = ""
 
 
 @router.get("/", response_model=List[ExerciseSchema])
