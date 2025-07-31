@@ -8,8 +8,7 @@ interface ExercisesState {
   displayedExercises: Exercise[];
   filter: Filter;
   search: string;
-  setMasterExercises: (masterExercises: Exercise[]) => void;
-  setDisplayedExercises: (displayedExercises: Exercise[]) => void;
+  setExercises: (exercises: Exercise[]) => void;
   setFilter: (filter: Partial<Filter>) => void;
   setSearch: (search: string) => void;
 }
@@ -19,8 +18,10 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
   displayedExercises: [],
   filter: {muscle: [], equipment: [], emphasis: "", difficulty: ""},
   search: "",
-  setMasterExercises: (masterExercises) => set({ masterExercises }),
-  setDisplayedExercises: (displayedExercises) => set({ displayedExercises }),
+  setExercises: (exercises) => set({
+    masterExercises: exercises,
+    displayedExercises: exercises,
+  }),
   setFilter: (partial) => set((state) => ({
     filter: { ...state.filter, ...partial}
   })),
