@@ -60,7 +60,10 @@ def read_filtered_exercises(filter_query: Annotated[ExerciseFilterParams, Query(
     """
     Retrieve a list of exercises.
     """
-    print("Filter Query:", filter_query)
+    print("Filter Query - muscles:", filter_query.muscles)
+    print("Filter Query - equipments:", filter_query.equipments)
+    print("Filter Query - difficulty:", filter_query.difficulty)
+    print("Filter Query - emphasis:", filter_query.emphasis)
     # auth_header = request.headers.get("Authorization")
     # if not auth_header or not auth_header.startswith("Bearer "):
     #     raise HTTPException(status_code=401, detail="Authentication required")
@@ -68,7 +71,7 @@ def read_filtered_exercises(filter_query: Annotated[ExerciseFilterParams, Query(
     # access_token = auth_header.split(" ")[1]
     access_token = None
 
-    exercises = get_exercises(access_token)
+    exercises = get_exercises(access_token=access_token, filter_query=filter_query)
     return exercises
 
 
