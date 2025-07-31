@@ -39,31 +39,11 @@ class ExerciseFilterParams(BaseModel):
     ] = ""
 
 
-# @router.get("/", response_model=List[ExerciseSchema])
-# def read_exercises(request: Request):
-#     """
-#     Retrieve a list of exercises.
-#     """
-#     # auth_header = request.headers.get("Authorization")
-#     # if not auth_header or not auth_header.startswith("Bearer "):
-#     #     raise HTTPException(status_code=401, detail="Authentication required")
-
-#     # access_token = auth_header.split(" ")[1]
-#     access_token = None
-
-#     exercises = get_exercises(access_token)
-#     return exercises
-
-
 @router.get("/", response_model=List[ExerciseSchema])
 def read_filtered_exercises(filter_query: Annotated[ExerciseFilterParams, Query()]):
     """
     Retrieve a list of exercises.
     """
-    print("Filter Query - muscles:", filter_query.muscles)
-    print("Filter Query - equipments:", filter_query.equipments)
-    print("Filter Query - difficulty:", filter_query.difficulty)
-    print("Filter Query - emphasis:", filter_query.emphasis)
     # auth_header = request.headers.get("Authorization")
     # if not auth_header or not auth_header.startswith("Bearer "):
     #     raise HTTPException(status_code=401, detail="Authentication required")
