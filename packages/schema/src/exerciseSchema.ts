@@ -1,5 +1,11 @@
 import * as z from "zod";
 
+export const Emphasis = z.enum(["plyometrics", "mobility", "power", "endurance", "strength"]);
+export type Emphasis = z.infer<typeof Emphasis>;
+
+export const Difficulty = z.enum(["beginner", "intermediate", "advanced"]);
+export type Difficulty = z.infer<typeof Difficulty>;
+
 export const Exercise = z.object({
   id: z.number(),
   name: z.string(),
