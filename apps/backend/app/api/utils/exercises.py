@@ -12,7 +12,7 @@ def get_exercises(access_token: str, filter_query: ExerciseFilterParams):
     q = filter_query.q
 
     try:
-        query = supabase.table("exercises").select("*").range(0, 20)
+        query = supabase.table("exercises").select("*")
 
         conditions = ""
 
