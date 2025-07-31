@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Request, HTTPException
 
 from app.schemas.exercise import ExerciseSchema
-from app.api.utils.exercises import get_exercises
+from app.api.utils.exercises import get_exercises, get_exercise_by_id
 
 router = APIRouter(prefix="/exercises")
 
@@ -24,7 +24,7 @@ def read_exercises(request: Request):
 
 
 @router.get("/{exercise_id}", response_model=ExerciseSchema)
-def read_exercise_item(exercise_id: int):
+def read_exercise_item(exercise_id: str, request: Request):
     """
     Retrieve a list of exercises.
     """
@@ -32,16 +32,19 @@ def read_exercise_item(exercise_id: int):
     # if not auth_header or not auth_header.startswith("Bearer "):
     #     raise HTTPException(status_code=401, detail="Authentication required")
 
+    access_token = None
     # access_token = auth_header.split(" ")[1]
 
-    exercise = {
-        "id": 1,
-        "name": "Sample Exercise",
-        "target_muscles": ["biceps", "triceps"],
-        "required_equipment": ["dumbbells"],
-        "emphasis": "strength",
-        "difficulty": "beginner",
-        "tags": ["sample", "exercise"],
-        "instructions": "Follow the instructions to complete the exercise.",
-    }
+    # exercise = {
+    #     "id": 1,
+    #     "name": "Sample Exercise",
+    #     "target_muscles": ["biceps", "triceps"],
+    #     "required_equipment": ["dumbbells"],
+    #     "emphasis": "strength",
+    #     "difficulty": "beginner",
+    #     "tags": ["sample", "exercise"],
+    #     "instructions": "Follow the instructions to complete the exercise.",
+    # }
+
+    exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=access_token)
     return exercise
