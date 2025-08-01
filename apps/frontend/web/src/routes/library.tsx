@@ -2,7 +2,6 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Title, Text, Paper, Group, Badge, Stack } from '@mantine/core';
 import { Exercise } from '@cwt/schema/exerciseSchema';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const sampleExercises: Exercise[] = [
   {
     id: 1,
@@ -325,35 +324,53 @@ export const Route = createFileRoute('/library')({
   component: LibraryView,
 });
 
+function ExerciseCard({ exercise }: { exercise: Exercise }) {
+  return (
+    <Paper shadow="xs" p="md" radius="lg">
+      <Stack
+        bg="var(--mantine-color-body)"
+        align="stretch"
+        justify="center"
+        gap="sm"
+      >
+        <Group justify="space-between" mb="sm">
+          <Title order={2} size="h3">
+            {exercise.name}
+          </Title>
+          <Badge color="yellow">{exercise.difficulty}</Badge>
+        </Group>
+        <Group>
+          <Text c="gray.7">MUSCLES: </Text>
+          {exercise.target_muscles.map((muscle, i) => {
+            return (
+              <Badge color="pink" key={i}>
+                {muscle}
+              </Badge>
+            );
+          })}
+        </Group>
+        <Group>
+          <Text c="gray.7">EQUIPMENT: </Text>
+          {exercise.required_equipment == null ||
+          exercise.required_equipment.length == 0 ? (
+            <Badge>None</Badge>
+          ) : (
+            exercise.required_equipment.map((equipment, i) => (
+              <Badge key={i}>{equipment}</Badge>
+            ))
+          )}
+          <Badge>None</Badge>
+        </Group>
+      </Stack>
+    </Paper>
+  );
+}
+
 function LibraryView() {
   return (
     <div>
       <Title>Library Page</Title>
-      <Paper shadow="xs" p="md" radius="lg">
-        <Stack
-          bg="var(--mantine-color-body)"
-          align="stretch"
-          justify="center"
-          gap="sm"
-        >
-          <Group justify="space-between" mb="sm">
-            <Title order={2} size="h3">
-              Push Up
-            </Title>
-            <Badge color="yellow">Intermediate</Badge>
-          </Group>
-          <Group>
-            <Text c="gray.7">Muscles: </Text>
-            <Badge color="pink">Chest</Badge>
-            <Badge color="pink">Triceps</Badge>
-            <Badge color="pink">Shoulders</Badge>
-          </Group>
-          <Group>
-            <Text c="gray.7">Equipment: </Text>
-            <Badge>None</Badge>
-          </Group>
-        </Stack>
-      </Paper>
+      <ExerciseCard exercise={sampleExercises[0]} />
     </div>
   );
 }
