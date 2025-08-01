@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title, Stack } from '@mantine/core';
+import { Title, Stack, SimpleGrid } from '@mantine/core';
 import { useExercisesStore } from '@cwt/state/exercises';
 
 import ExerciseCard from '../components/ExerciseCard';
@@ -13,11 +13,20 @@ function LibraryView() {
   return (
     <Stack gap="xl">
       <Title size="h6">Exercise Library</Title>
-      <Stack align="stretch" justify="center" gap="lg">
-        {exercises.map((exercise, i) => (
-          <ExerciseCard key={i} exercise={exercise} />
-        ))}
+      {/* <Stack align="stretch" justify="center" gap="lg"> */}
+      <Stack align="center">
+        <SimpleGrid
+          cols={{ base: 1, md: 2, lg: 3 }}
+          spacing={{ base: 'lg' }}
+          verticalSpacing={{ base: 'lg' }}
+          // w="max-content"
+        >
+          {exercises.map((exercise, i) => (
+            <ExerciseCard key={i} exercise={exercise} />
+          ))}
+        </SimpleGrid>
       </Stack>
+      {/* </Stack> */}
     </Stack>
   );
 }
