@@ -21,9 +21,12 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
   displayedExercises: [],
   filter: {muscle: [], equipment: [], emphasis: "", difficulty: ""},
   search: "",
-  setExercises: (exercises) => set({
-    masterExercises: exercises,
-    displayedExercises: exercises,
+  setExercises: (exercises) => set((state) => {
+    const sortedExercises = exercises.sort((a, b) => a.name.localeCompare(b.name))
+    return {
+      masterExercises: sortedExercises,
+      displayedExercises: sortedExercises,
+    }
   }),
   resetDisplayedExercises: () => set((state) => ({
     displayedExercises: state.masterExercises
