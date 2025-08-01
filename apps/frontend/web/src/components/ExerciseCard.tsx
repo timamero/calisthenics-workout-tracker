@@ -2,6 +2,12 @@ import { Title, Text, Paper, Group, Badge, Stack } from '@mantine/core';
 import { Exercise } from '@cwt/schema/exerciseSchema';
 
 export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
+  const difficultyColor =
+    exercise.difficulty == 'beginner'
+      ? 'blue'
+      : exercise.difficulty == 'intermediate'
+        ? 'yellow'
+        : 'red';
   return (
     <Paper shadow="lg" p="md" radius="lg" withBorder>
       <Stack
@@ -11,7 +17,7 @@ export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
         gap="sm"
       >
         <Group justify="flex-end">
-          <Badge color="yellow">{exercise.difficulty}</Badge>
+          <Badge color={difficultyColor}>{exercise.difficulty}</Badge>
         </Group>
         <Group justify="space-between" mb="sm">
           <Title order={2} size="h5">
@@ -39,8 +45,8 @@ export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
           <Group gap={8}>
             {exercise.required_equipment == null ||
             exercise.required_equipment.length == 0 ? (
-              <Badge color="dark" variant="outline">
-                None
+              <Badge color="dark" variant="transparent">
+                ---
               </Badge>
             ) : (
               exercise.required_equipment.map((equipment, i) => (
