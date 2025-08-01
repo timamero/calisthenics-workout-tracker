@@ -370,9 +370,11 @@ function LibraryView() {
   return (
     <div>
       <Title>Library Page</Title>
-      {sampleExercises.map((exercise, i) => (
-        <ExerciseCard key={i} exercise={exercise} />
-      ))}
+      <Stack align="stretch" justify="center" gap="lg">
+        {sampleExercises.map((exercise, i) => (
+          <ExerciseCard key={i} exercise={exercise} />
+        ))}
+      </Stack>
     </div>
   );
 }
