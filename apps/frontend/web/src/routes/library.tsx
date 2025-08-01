@@ -11,6 +11,7 @@ import {
   ActionIcon,
   Modal,
   Text,
+  Button,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IoSearchOutline } from 'react-icons/io5';
@@ -20,6 +21,11 @@ import { IoFilterOutline } from 'react-icons/io5';
 import { useExercisesStore } from '@cwt/state/exercises';
 
 import ExerciseCard from '../components/ExerciseCard';
+import {
+  musclesEnum,
+  equipmentEnum,
+  difficultyEnum,
+} from '@cwt/schema/exerciseSchema';
 
 export const Route = createFileRoute('/library')({
   component: LibraryView,
@@ -121,9 +127,85 @@ function LibraryView() {
       <Modal
         opened={filterOpened}
         onClose={() => filterHandler.close()}
-        title="Exercise Filters"
+        title="Filter Exercises"
+        styles={{
+          title: {
+            fontFamily: 'var(--mantine-font-family-headings)',
+            fontWeight: 700,
+          },
+        }}
       >
-        <Text>Muscle Groups</Text>
+        <Stack gap="xl">
+          <Stack gap="sm">
+            <Text
+              tt="uppercase"
+              style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
+            >
+              Muscle Groups
+            </Text>
+            <Group gap={4}>
+              {musclesEnum.map((muscle) => (
+                <Button
+                  m={4}
+                  size="xs"
+                  variant="outline"
+                  color="gray"
+                  radius="xl"
+                >
+                  {muscle.toUpperCase()}
+                </Button>
+              ))}
+            </Group>
+          </Stack>
+          <Stack gap="sm">
+            <Text
+              tt="uppercase"
+              style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
+            >
+              Equipment
+            </Text>
+            <Group gap={4}>
+              {equipmentEnum.map((equipment) => (
+                <Button
+                  m={4}
+                  size="xs"
+                  variant="outline"
+                  color="gray"
+                  radius="xl"
+                >
+                  {equipment.toUpperCase()}
+                </Button>
+              ))}
+            </Group>
+          </Stack>
+          <Stack gap="sm">
+            <Text
+              tt="uppercase"
+              style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
+            >
+              Difficulty
+            </Text>
+            <Group gap={4}>
+              {difficultyEnum.map((difficulty) => (
+                <Button
+                  m={4}
+                  size="xs"
+                  variant="outline"
+                  color="gray"
+                  radius="xl"
+                >
+                  {difficulty.toUpperCase()}
+                </Button>
+              ))}
+            </Group>
+            <Group mt="lg" grow>
+              <Button color="gray" variant="outline">
+                Clear All
+              </Button>
+              <Button color="orange">Apply Filters</Button>
+            </Group>
+          </Stack>
+        </Stack>
       </Modal>
     </Stack>
   );
