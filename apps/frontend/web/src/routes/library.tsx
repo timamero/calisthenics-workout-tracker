@@ -6,8 +6,9 @@ import {
   TextInput,
   Combobox,
   useCombobox,
-  Text,
 } from '@mantine/core';
+import { IoSearchOutline } from 'react-icons/io5';
+
 import { useExercisesStore } from '@cwt/state/exercises';
 
 import ExerciseCard from '../components/ExerciseCard';
@@ -53,7 +54,7 @@ function LibraryView() {
         <Combobox.Target>
           <TextInput
             // label="Pick value or type anything"
-            leftSection={<Text>Icon</Text>}
+            leftSection={<IoSearchOutline />}
             placeholder="Search exercises"
             value={search}
             onChange={(event) => {
