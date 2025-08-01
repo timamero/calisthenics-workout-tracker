@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { Exercise, Muscles, Equipment, Emphasis, Difficulty } from '@cwt/schema/exerciseSchema';
 
-type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis; difficulty: Difficulty}
+export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis; difficulty: Difficulty}
 
 interface ExercisesState {
   masterExercises: Exercise[];
