@@ -9,7 +9,7 @@ export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
         ? 'yellow'
         : 'red';
   return (
-    <Paper shadow="lg" p="md" radius="lg" withBorder>
+    <Paper shadow="lg" p="md" radius="lg" maw={460} withBorder>
       <Stack
         bg="var(--mantine-color-body)"
         align="stretch"
