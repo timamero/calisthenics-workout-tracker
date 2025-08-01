@@ -370,7 +370,9 @@ function LibraryView() {
   return (
     <div>
       <Title>Library Page</Title>
-      <ExerciseCard exercise={sampleExercises[0]} />
+      {sampleExercises.map((exercise, i) => (
+        <ExerciseCard key={i} exercise={exercise} />
+      ))}
     </div>
   );
 }
