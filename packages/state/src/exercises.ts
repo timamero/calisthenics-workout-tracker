@@ -11,6 +11,7 @@ interface ExercisesState {
   setExercises: (exercises: Exercise[]) => void;
   resetDisplayedExercises: () => void;
   filterDisplayedExercises: (filter: Filter) => void;
+  searchDisplayedExercises: (search: string) => void;
   setFilter: (filter: Partial<Filter>) => void;
   setSearch: (search: string) => void;
 }
@@ -57,6 +58,15 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
 
     return {
       displayedExercises: filteredExercises
+    }
+  }),
+  searchDisplayedExercises: (search) => set((state) => {
+    const exercises = state.displayedExercises
+
+    const matchedExercises = exercises.filter((ex) => ex.name.toLowerCase().includes(search))
+
+    return {
+      displayedExercises: matchedExercises
     }
   }),
   setFilter: (partial) => set((state) => ({
