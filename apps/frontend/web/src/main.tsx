@@ -19,7 +19,11 @@ declare module '@tanstack/react-router' {
 }
 
 const theme = createTheme({
-  /** Put your mantine theme override here */
+  fontFamily: 'Optima, Candara, Noto Sans, source-sans-pro, sans-serif',
+  headings: {
+    fontFamily:
+      'ui-monospace, Cascadia Code, Source Code Pro, Menlo, Consolas, DejaVu Sans Mono, monospace',
+  },
 });
 
 // Render the app
