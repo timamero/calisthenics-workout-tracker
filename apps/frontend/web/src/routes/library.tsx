@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import {
   Title,
@@ -63,6 +64,26 @@ function LibraryView() {
   const handleClickFilter = () => {
     console.log('clicked filter btn');
     filterHandler.open();
+  };
+
+  const FilterButton = ({ children }: { children: React.ReactNode }) => {
+    const [active, setActive] = useState<boolean>(false);
+
+    const handleFilterButtonClick = () => {
+      setActive((state) => !state);
+    };
+    return (
+      <Button
+        m={4}
+        size="xs"
+        variant={active ? 'filled' : 'outline'}
+        color="gray"
+        radius="xl"
+        onClick={handleFilterButtonClick}
+      >
+        {children}
+      </Button>
+    );
   };
 
   return (
@@ -144,16 +165,8 @@ function LibraryView() {
               Muscle Groups
             </Text>
             <Group gap={4}>
-              {musclesEnum.map((muscle) => (
-                <Button
-                  m={4}
-                  size="xs"
-                  variant="outline"
-                  color="gray"
-                  radius="xl"
-                >
-                  {muscle.toUpperCase()}
-                </Button>
+              {musclesEnum.map((muscle, i) => (
+                <FilterButton key={i}>{muscle.toUpperCase()}</FilterButton>
               ))}
             </Group>
           </Stack>
@@ -165,16 +178,8 @@ function LibraryView() {
               Equipment
             </Text>
             <Group gap={4}>
-              {equipmentEnum.map((equipment) => (
-                <Button
-                  m={4}
-                  size="xs"
-                  variant="outline"
-                  color="gray"
-                  radius="xl"
-                >
-                  {equipment.toUpperCase()}
-                </Button>
+              {equipmentEnum.map((equipment, i) => (
+                <FilterButton key={i}>{equipment.toUpperCase()}</FilterButton>
               ))}
             </Group>
           </Stack>
@@ -186,16 +191,8 @@ function LibraryView() {
               Difficulty
             </Text>
             <Group gap={4}>
-              {difficultyEnum.map((difficulty) => (
-                <Button
-                  m={4}
-                  size="xs"
-                  variant="outline"
-                  color="gray"
-                  radius="xl"
-                >
-                  {difficulty.toUpperCase()}
-                </Button>
+              {difficultyEnum.map((difficulty, i) => (
+                <FilterButton key={i}>{difficulty.toUpperCase()}</FilterButton>
               ))}
             </Group>
             <Group mt="lg" grow>
