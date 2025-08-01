@@ -12,6 +12,10 @@
       "types": "./src/counter.ts",
       "default": "./dist/counter.js"
     },
+    "./exercises": {
+      "types": "./src/exercises.ts",
+      "default": "./dist/exercises.js"
+    },
     "./auth": {
       "types": "./src/auth.ts",
       "default": "./dist/auth.js"
