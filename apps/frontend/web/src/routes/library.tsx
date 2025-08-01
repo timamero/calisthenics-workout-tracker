@@ -6,8 +6,10 @@ import {
   TextInput,
   Combobox,
   useCombobox,
+  CloseButton,
 } from '@mantine/core';
 import { IoSearchOutline } from 'react-icons/io5';
+import { IoCloseOutline } from 'react-icons/io5';
 
 import { useExercisesStore } from '@cwt/state/exercises';
 
@@ -41,6 +43,10 @@ function LibraryView() {
     </Combobox.Option>
   ));
 
+  const handleClearSearch = () => {
+    setSearch('');
+  };
+
   return (
     <Stack gap="xl">
       <Title size="h6">Exercise Library</Title>
@@ -55,6 +61,14 @@ function LibraryView() {
           <TextInput
             // label="Pick value or type anything"
             leftSection={<IoSearchOutline />}
+            rightSection={
+              search && (
+                <CloseButton
+                  onClick={handleClearSearch}
+                  icon={<IoCloseOutline />}
+                />
+              )
+            }
             placeholder="Search exercises"
             value={search}
             onChange={(event) => {
