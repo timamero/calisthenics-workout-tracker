@@ -6,6 +6,7 @@ import {
   TextInput,
   Combobox,
   useCombobox,
+  Text,
 } from '@mantine/core';
 import { useExercisesStore } from '@cwt/state/exercises';
 
@@ -52,6 +53,7 @@ function LibraryView() {
         <Combobox.Target>
           <TextInput
             // label="Pick value or type anything"
+            leftSection={<Text>Icon</Text>}
             placeholder="Search exercises"
             value={search}
             onChange={(event) => {
