@@ -20,6 +20,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import { useExercisesStore } from '@cwt/state/exercises';
+import type { Filter } from '@cwt/state/exercises';
 
 import ExerciseCard from '../components/ExerciseCard';
 import {
@@ -28,6 +29,14 @@ import {
   difficultyEnum,
 } from '@cwt/schema/exerciseSchema';
 
+const FilterGroup = {
+  muscle: 'muscle',
+  equipment: 'equipment',
+  emphasis: 'emphasis',
+  difficulty: 'difficulty',
+} as const;
+type FilterGroup = (typeof FilterGroup)[keyof typeof FilterGroup];
+
 export const Route = createFileRoute('/library')({
   component: LibraryView,
 });
@@ -35,10 +44,12 @@ export const Route = createFileRoute('/library')({
 function LibraryView() {
   const exercises = useExercisesStore((state) => state.displayedExercises);
   const search = useExercisesStore((state) => state.search);
+  const filter = useExercisesStore((state) => state.filter);
   const setSearch = useExercisesStore((state) => state.setSearch);
 
   const combobox = useCombobox();
   const [filterOpened, filterHandler] = useDisclosure(false);
+  const [selectedFilters, setSelectedFilters] = useState<Filter>(filter);
 
   const shouldFilterOptions = !exercises.some(
     (exercise) => exercise.name === search,
@@ -66,12 +77,27 @@ function LibraryView() {
     filterHandler.open();
   };
 
-  const FilterButton = ({ children }: { children: React.ReactNode }) => {
+  const FilterButton = ({
+    filterGroup,
+    children,
+  }: {
+    filterGroup: FilterGroup;
+    children: string;
+  }) => {
     const [active, setActive] = useState<boolean>(false);
 
+    // todo: declare handle click button outside of FilterButton
     const handleFilterButtonClick = () => {
+      console.log('filterGroup', filterGroup);
+      setSelectedFilters((state) => ({
+        ...state,
+        [filterGroup.toString()]: [...state[filterGroup], children],
+      }));
+      // setActive is not working
       setActive((state) => !state);
+      console.log('selected filters', selectedFilters);
     };
+
     return (
       <Button
         m={4}
@@ -166,7 +192,9 @@ function LibraryView() {
             </Text>
             <Group gap={4}>
               {musclesEnum.map((muscle, i) => (
-                <FilterButton key={i}>{muscle.toUpperCase()}</FilterButton>
+                <FilterButton filterGroup={FilterGroup.muscle} key={i}>
+                  {muscle.toUpperCase()}
+                </FilterButton>
               ))}
             </Group>
           </Stack>
@@ -179,7 +207,9 @@ function LibraryView() {
             </Text>
             <Group gap={4}>
               {equipmentEnum.map((equipment, i) => (
-                <FilterButton key={i}>{equipment.toUpperCase()}</FilterButton>
+                <FilterButton filterGroup={FilterGroup.equipment} key={i}>
+                  {equipment.toUpperCase()}
+                </FilterButton>
               ))}
             </Group>
           </Stack>
@@ -192,7 +222,9 @@ function LibraryView() {
             </Text>
             <Group gap={4}>
               {difficultyEnum.map((difficulty, i) => (
-                <FilterButton key={i}>{difficulty.toUpperCase()}</FilterButton>
+                <FilterButton filterGroup={FilterGroup.difficulty} key={i}>
+                  {difficulty.toUpperCase()}
+                </FilterButton>
               ))}
             </Group>
             <Group mt="lg" grow>
