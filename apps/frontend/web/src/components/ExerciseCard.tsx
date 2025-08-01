@@ -3,7 +3,7 @@ import { Exercise } from '@cwt/schema/exerciseSchema';
 
 export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
   return (
-    <Paper shadow="lg" p="md" radius="lg">
+    <Paper shadow="lg" p="md" radius="lg" withBorder>
       <Stack
         bg="var(--mantine-color-body)"
         align="stretch"
