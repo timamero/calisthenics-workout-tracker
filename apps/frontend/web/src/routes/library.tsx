@@ -50,6 +50,10 @@ function LibraryView() {
     setSearch('');
   };
 
+  const handleClickFilter = () => {
+    console.log('clicked filter btn');
+  };
+
   return (
     <Stack gap="xl">
       <Title size="h6">Exercise Library</Title>
@@ -92,7 +96,7 @@ function LibraryView() {
           variant="outline"
           color="gray.5"
           aria-label="Exercise filter"
-          // w="min-content"
+          onClick={handleClickFilter}
         >
           <IoFilterOutline />
         </ActionIcon>
