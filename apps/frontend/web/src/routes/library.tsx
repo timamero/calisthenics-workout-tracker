@@ -11,13 +11,13 @@ export const Route = createFileRoute('/library')({
 function LibraryView() {
   const exercises = useExercisesStore((state) => state.displayedExercises);
   return (
-    <div>
-      <Title>Library Page</Title>
+    <Stack gap="xl">
+      <Title size="h6">Exercise Library</Title>
       <Stack align="stretch" justify="center" gap="lg">
         {exercises.map((exercise, i) => (
           <ExerciseCard key={i} exercise={exercise} />
         ))}
       </Stack>
-    </div>
+    </Stack>
   );
 }
