@@ -9,7 +9,10 @@ import {
   CloseButton,
   Group,
   ActionIcon,
+  Modal,
+  Text,
 } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { IoSearchOutline } from 'react-icons/io5';
 import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
@@ -28,6 +31,7 @@ function LibraryView() {
   const setSearch = useExercisesStore((state) => state.setSearch);
 
   const combobox = useCombobox();
+  const [filterOpened, filterHandler] = useDisclosure(false);
 
   const shouldFilterOptions = !exercises.some(
     (exercise) => exercise.name === search,
@@ -52,6 +56,7 @@ function LibraryView() {
 
   const handleClickFilter = () => {
     console.log('clicked filter btn');
+    filterHandler.open();
   };
 
   return (
@@ -113,7 +118,13 @@ function LibraryView() {
           ))}
         </SimpleGrid>
       </Stack>
-      {/* </Stack> */}
+      <Modal
+        opened={filterOpened}
+        onClose={() => filterHandler.close()}
+        title="Exercise Filters"
+      >
+        <Text>Muscle Groups</Text>
+      </Modal>
     </Stack>
   );
 }
