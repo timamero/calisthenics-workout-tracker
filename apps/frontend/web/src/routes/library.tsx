@@ -77,7 +77,7 @@ function LibraryView() {
         m={4}
         size="xs"
         variant={active ? 'filled' : 'outline'}
-        color="gray"
+        color={active ? 'orange' : 'gray'}
         radius="xl"
         onClick={handleFilterButtonClick}
       >
