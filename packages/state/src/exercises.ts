@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { Exercise, Muscles, Equipment, Emphasis, Difficulty } from '@cwt/schema/exerciseSchema';
 
-export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis; difficulty: Difficulty}
+export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis[]; difficulty: Difficulty[]}
 
 interface ExercisesState {
   masterExercises: Exercise[];
@@ -19,7 +19,7 @@ interface ExercisesState {
 export const useExercisesStore = create<ExercisesState>((set) => ({
   masterExercises: [],
   displayedExercises: [],
-  filter: {muscle: [], equipment: [], emphasis: "", difficulty: ""},
+  filter: {muscle: [], equipment: [], emphasis: [], difficulty: []},
   search: "",
   setExercises: (exercises) => set((state) => {
     const sortedExercises = exercises.sort((a, b) => a.name.localeCompare(b.name))
@@ -49,12 +49,12 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
       if (filter.equipment.length > 0 && ex.required_equipment != null) {
         conditions.push(filter.equipment.some((eq) => ex.required_equipment?.includes(eq)))
       }
-      if (filter.emphasis) {
-        conditions.push(filter.emphasis == ex.difficulty)
-      }
-      if (filter.difficulty) {
-        conditions.push(filter.difficulty == ex.difficulty)
-      }
+      if (filter.emphasis.length > 0) {
+        conditions.push(filter.emphasis.some((emp) => ex.emphasis == emp))
+      } 
+      if (filter.difficulty.length > 0) {
+        conditions.push(filter.difficulty.some((dif) => ex.difficulty == dif))
+      } 
 
       return conditions.some((con) => con)
     })
