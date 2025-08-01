@@ -10,6 +10,7 @@ class ExerciseSchema(BaseModel):
     emphasis: Literal["plyometrics", "mobility", "power", "endurance", "strength"]
     difficulty: Literal["beginner", "intermediate", "advanced"]
     tags: List[str]
+    instructions: List[str]
 
 
 class ExerciseFilterParams(BaseModel):
