@@ -7,9 +7,12 @@ import {
   Combobox,
   useCombobox,
   CloseButton,
+  Group,
+  ActionIcon,
 } from '@mantine/core';
 import { IoSearchOutline } from 'react-icons/io5';
 import { IoCloseOutline } from 'react-icons/io5';
+import { IoFilterOutline } from 'react-icons/io5';
 
 import { useExercisesStore } from '@cwt/state/exercises';
 
@@ -50,41 +53,50 @@ function LibraryView() {
   return (
     <Stack gap="xl">
       <Title size="h6">Exercise Library</Title>
-      <Combobox
-        onOptionSubmit={(optionValue) => {
-          setSearch(optionValue);
-          combobox.closeDropdown();
-        }}
-        store={combobox}
-      >
-        <Combobox.Target>
-          <TextInput
-            // label="Pick value or type anything"
-            leftSection={<IoSearchOutline />}
-            rightSection={
-              search && (
-                <CloseButton
-                  onClick={handleClearSearch}
-                  icon={<IoCloseOutline />}
-                />
-              )
-            }
-            placeholder="Search exercises"
-            value={search}
-            onChange={(event) => {
-              setSearch(event.currentTarget.value);
-              combobox.openDropdown();
-            }}
-            onClick={() => combobox.openDropdown()}
-            onFocus={() => combobox.openDropdown()}
-            onBlur={() => combobox.closeDropdown()}
-          />
-        </Combobox.Target>
-
-        <Combobox.Dropdown hidden={options.length === 0}>
-          <Combobox.Options>{options}</Combobox.Options>
-        </Combobox.Dropdown>
-      </Combobox>
+      <Group>
+        <Combobox
+          onOptionSubmit={(optionValue) => {
+            setSearch(optionValue);
+            combobox.closeDropdown();
+          }}
+          store={combobox}
+        >
+          <Combobox.Target>
+            <TextInput
+              style={{ flex: 1 }}
+              leftSection={<IoSearchOutline />}
+              rightSection={
+                search && (
+                  <CloseButton
+                    onClick={handleClearSearch}
+                    icon={<IoCloseOutline />}
+                  />
+                )
+              }
+              placeholder="Search exercises"
+              value={search}
+              onChange={(event) => {
+                setSearch(event.currentTarget.value);
+                combobox.openDropdown();
+              }}
+              onClick={() => combobox.openDropdown()}
+              onFocus={() => combobox.openDropdown()}
+              onBlur={() => combobox.closeDropdown()}
+            />
+          </Combobox.Target>
+          <Combobox.Dropdown hidden={options.length === 0}>
+            <Combobox.Options>{options}</Combobox.Options>
+          </Combobox.Dropdown>
+        </Combobox>
+        <ActionIcon
+          variant="outline"
+          color="gray.5"
+          aria-label="Exercise filter"
+          // w="min-content"
+        >
+          <IoFilterOutline />
+        </ActionIcon>
+      </Group>
       <Stack align="center">
         <SimpleGrid
           cols={{ base: 1, md: 2, lg: 3 }}
