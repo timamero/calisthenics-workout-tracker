@@ -1,5 +1,4 @@
 import { Stack, Group, Modal, Text, Button } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 
 import {
   musclesEnum,
@@ -41,9 +40,9 @@ const filterSelectionItemsGrouped = filterKeys.map((key, i) => {
 });
 
 function FilterSelections() {
-  const filterSelections = filterSelectionItemsGrouped.map((fs) => {
+  const filterSelections = filterSelectionItemsGrouped.map((fs, i) => {
     return (
-      <Stack gap="sm">
+      <Stack gap="sm" key={i}>
         <Text
           tt="uppercase"
           style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
@@ -60,13 +59,17 @@ function FilterSelections() {
   });
   return <Stack gap="xl">{filterSelections}</Stack>;
 }
-export default function FilterOverlay() {
-  const [filterOpened, filterHandler] = useDisclosure(false);
+interface FilterOverlayProps {
+  opened: boolean;
+  handler: { close: () => void };
+}
+
+export default function FilterOverlay({ opened, handler }: FilterOverlayProps) {
 
   return (
     <Modal
-      opened={filterOpened}
-      onClose={() => filterHandler.close()}
+      opened={opened}
+      onClose={() => handler.close()}
       title="Filter Exercises"
       styles={{
         title: {
@@ -76,15 +79,12 @@ export default function FilterOverlay() {
       }}
     >
       <FilterSelections />
-      {/* <Stack gap="sm"> */}
       <Group mt="lg" grow>
         <Button color="gray" variant="outline">
           Clear All
         </Button>
         <Button color="orange">Apply Filters</Button>
       </Group>
-      {/* </Stack> */}
-      {/* </Stack> */}
     </Modal>
   );
 }

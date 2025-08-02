@@ -10,6 +10,7 @@ import {
   Group,
   ActionIcon,
 } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { IoSearchOutline } from 'react-icons/io5';
 import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
@@ -28,6 +29,7 @@ function LibraryView() {
   const search = useExercisesStore((state) => state.search);
   const setSearch = useExercisesStore((state) => state.setSearch);
 
+  const [filterOpened, filterHandler] = useDisclosure(false);
   const combobox = useCombobox();
 
   const shouldFilterOptions = !exercises.some(
@@ -51,10 +53,10 @@ function LibraryView() {
     setSearch('');
   };
 
-  // const handleClickFilter = () => {
-  //   console.log('clicked filter btn');
-  //   filterHandler.open();
-  // };
+  const handleClickFilter = () => {
+    console.log('clicked filter btn');
+    filterHandler.open();
+  };
 
   return (
     <Stack gap="xl">
@@ -98,7 +100,7 @@ function LibraryView() {
           variant="outline"
           color="gray.5"
           aria-label="Exercise filter"
-          // onClick={handleClickFilter}
+          onClick={handleClickFilter}
         >
           <IoFilterOutline />
         </ActionIcon>
@@ -114,7 +116,7 @@ function LibraryView() {
           ))}
         </SimpleGrid>
       </Stack>
-      <FilterOverlay />
+      <FilterOverlay opened={filterOpened} handler={filterHandler} />
     </Stack>
   );
 }
