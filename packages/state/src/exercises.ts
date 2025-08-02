@@ -61,7 +61,7 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
         conditions.push(filter.muscle.some((mus) => ex.target_muscles.includes(mus.toLowerCase())))
       } 
       if (filter.equipment.length > 0 && ex.required_equipment != null) {
-        if (filter.equipment.includes("NONE") && ex.required_equipment.length === 0) {
+        if (filter.equipment.includes("none") && ex.required_equipment.length === 0) {
           conditions.push(true)
         } else {
           conditions.push(filter.equipment.some((eq) => ex.required_equipment?.includes(eq.toLocaleLowerCase())))
