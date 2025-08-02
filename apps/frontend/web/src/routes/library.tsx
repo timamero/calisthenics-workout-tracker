@@ -78,7 +78,7 @@ function LibraryView() {
     filterHandler.open();
   };
 
-  const FilterButton = ({ children }: { children: string }) => {
+  const FilterCheckbox = ({ children }: { children: string }) => {
     const active = false;
 
     return (
@@ -174,7 +174,7 @@ function LibraryView() {
             </Text>
             <Group gap={4}>
               {musclesEnum.map((muscle, i) => (
-                <FilterButton key={i}>{muscle.toUpperCase()}</FilterButton>
+                <FilterCheckbox key={i}>{muscle.toUpperCase()}</FilterCheckbox>
               ))}
             </Group>
           </Stack>
@@ -187,7 +187,7 @@ function LibraryView() {
             </Text>
             <Group gap={4}>
               {equipmentEnum.map((equipment, i) => (
-                <FilterButton key={i}>{equipment.toUpperCase()}</FilterButton>
+                <FilterCheckbox key={i}>{equipment.toUpperCase()}</FilterCheckbox>
               ))}
             </Group>
           </Stack>
@@ -200,7 +200,7 @@ function LibraryView() {
             </Text>
             <Group gap={4}>
               {difficultyEnum.map((difficulty, i) => (
-                <FilterButton key={i}>{difficulty.toUpperCase()}</FilterButton>
+                <FilterCheckbox key={i}>{difficulty.toUpperCase()}</FilterCheckbox>
               ))}
             </Group>
             <Group mt="lg" grow>
