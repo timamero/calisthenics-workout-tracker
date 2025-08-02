@@ -6,6 +6,13 @@ import {
   equipmentEnum,
   difficultyEnum,
 } from '@cwt/schema/exerciseSchema';
+// import type { Filter } from '@cwt/state/exercises';
+
+// const filterSelectionItems = [
+//   {
+//     filterGroup:
+//   }
+// ]
 
 const FilterCheckbox = ({ children }: { children: string }) => {
   const active = false;

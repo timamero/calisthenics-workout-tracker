@@ -1,6 +1,9 @@
 import { create } from 'zustand';
 import { Exercise, Muscles, Equipment, Emphasis, Difficulty } from '@cwt/schema/exerciseSchema';
 
+type FilterKey = keyof Filter;
+export const filterKeys: FilterKey[] = ["muscle", "equipment", "emphasis", "difficulty"];
+
 export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis[]; difficulty: Difficulty[]}
 
 interface ExercisesState {
