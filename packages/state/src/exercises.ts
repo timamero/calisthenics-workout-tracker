@@ -1,30 +1,36 @@
 import { create } from 'zustand';
 import { Exercise, Muscles, Equipment, Emphasis, Difficulty } from '@cwt/schema/exerciseSchema';
 
+import { Selection } from '@cwt/schema/exerciseSchema';
+export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis[]; difficulty: Difficulty[]}
 type FilterKey = keyof Filter;
 export const filterKeys: FilterKey[] = ["muscle", "equipment", "emphasis", "difficulty"];
-
-export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis[]; difficulty: Difficulty[]}
 
 interface ExercisesState {
   masterExercises: Exercise[];
   displayedExercises: Exercise[];
-  filter: Filter;
+  appliedFilters: Filter;
+  selectedFilters: Filter;
   search: string;
   setExercises: (exercises: Exercise[]) => void;
   resetDisplayedExercises: () => void;
-  filterDisplayedExercises: (filter: Filter) => void;
+  applyFilters: (filter: Filter) => void;
+  updateSelectedFilters: ({key, selection}: {key: FilterKey; selection: Selection;}) => void;
+  resetSelectedFilters: () => void;
+  clearFilters: () => void;
   searchDisplayedExercises: (search: string) => void;
-  setFilter: (filter: Partial<Filter>) => void;
   setSearch: (search: string) => void;
 }
+
+const clearedFilters = {muscle: [], equipment: [], emphasis: [], difficulty: []}
 
 export const useExercisesStore = create<ExercisesState>((set) => ({
   masterExercises: [],
   displayedExercises: [],
-  filter: {muscle: [], equipment: [], emphasis: [], difficulty: []},
+  appliedFilters: clearedFilters,
+  selectedFilters: clearedFilters,
   search: "",
-  setExercises: (exercises) => set((state) => {
+  setExercises: (exercises) => set(() => {
     const sortedExercises = exercises.sort((a, b) => a.name.localeCompare(b.name))
     return {
       masterExercises: sortedExercises,
@@ -34,7 +40,7 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
   resetDisplayedExercises: () => set((state) => ({
     displayedExercises: state.masterExercises
   })),
-  filterDisplayedExercises: (filter) => set((state) => {
+  applyFilters: (filter) => set((state) => {
     const exercises = state.masterExercises
 
     if (Object.values(filter).every((f) => f.length == 0)) {
@@ -66,6 +72,19 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
       displayedExercises: filteredExercises
     }
   }),
+  updateSelectedFilters: ({key, selection}) => set((state) => {
+    const updatedFilter = {...state.selectedFilters, [key]: state.selectedFilters[key].push(selection)}
+    return {
+      selectedFilters: updatedFilter
+    }
+  }),
+  resetSelectedFilters: () => set((state) => ({
+    displayedExercises: state.masterExercises
+  })),
+  clearFilters: () => set((state) => ({
+    appliedFilters: clearedFilters,
+    selectedFilters: clearedFilters
+  })),
   searchDisplayedExercises: (search) => set((state) => {
     const exercises = state.displayedExercises
 
@@ -75,8 +94,8 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
       displayedExercises: matchedExercises
     }
   }),
-  setFilter: (partial) => set((state) => ({
-    filter: { ...state.filter, ...partial}
-  })),
+  // setFilter: (partial) => set((state) => ({
+  //   filter: { ...state.filter, ...partial}
+  // })),
   setSearch: (search) => set({ search })
 }));
