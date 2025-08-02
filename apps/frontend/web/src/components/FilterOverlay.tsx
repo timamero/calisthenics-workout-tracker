@@ -16,7 +16,7 @@ import {
   difficultyEnum,
 } from '@cwt/schema/exerciseSchema';
 import { filterKeys, type FilterKey } from '@cwt/state/exercises';
-import { useExercisesStore } from '@cwt/state/exercises';
+import { useExercisesStore, type ActionStrings } from '@cwt/state/exercises';
 import { type Selection } from '@cwt/schema/exerciseSchema';
 // import type { Filter } from '@cwt/state/exercises';
 
@@ -37,9 +37,11 @@ interface FilterCheckboxProps {
   handleFilterUpdate: ({
     key,
     selection,
+    action,
   }: {
     key: FilterKey;
     selection: Selection;
+    action: ActionStrings;
   }) => void;
   children: string;
 }
@@ -59,13 +61,25 @@ function FilterCheckbox({
     finalValue: false,
     onChange,
   });
-  const selectedFilters = useExercisesStore((state) => state.selectedFilters);
+  // const selectedFilters = useExercisesStore((state) => state.selectedFilters);
 
   const handleClick = () => {
     handleChange(!isSelected);
-    handleFilterUpdate({ key: filterGroup, selection: children });
+    if (isSelected) {
+      handleFilterUpdate({
+        key: filterGroup,
+        selection: children,
+        action: 'Add',
+      });
+    } else {
+      handleFilterUpdate({
+        key: filterGroup,
+        selection: children,
+        action: 'Remove',
+      });
+    }
 
-    console.log('State of selectedFilters: ', selectedFilters);
+    // console.log('State of selectedFilters: ', selectedFilters);
   };
 
   return (
