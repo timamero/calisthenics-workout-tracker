@@ -71,11 +71,11 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
       }
       if (filter.emphasis.length > 0) {
         console.log('in emphasis if')
-        conditions.push(filter.emphasis.some((emp) => ex.emphasis == emp))
+        conditions.push(filter.emphasis.some((emp) => ex.emphasis.includes(emp.toLowerCase())))
       } 
       if (filter.difficulty.length > 0) {
         console.log('in difficulty if')
-        conditions.push(filter.difficulty.some((dif) => ex.difficulty == dif))
+        conditions.push(filter.difficulty.some((dif) => ex.difficulty.includes(dif.toLowerCase())))
       } 
 
       console.log('conditions', conditions)
