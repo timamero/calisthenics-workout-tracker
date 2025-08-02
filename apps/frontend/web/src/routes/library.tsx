@@ -29,6 +29,9 @@ function LibraryView() {
   const search = useExercisesStore((state) => state.search);
   const setSearch = useExercisesStore((state) => state.setSearch);
 
+  // const selectedFilters = useExercisesStore((state) => state.selectedFilters);
+  // console.log('selectedFilters', selectedFilters);
+
   const [filterOpened, filterHandler] = useDisclosure(false);
   const combobox = useCombobox();
 

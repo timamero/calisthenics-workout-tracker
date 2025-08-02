@@ -67,13 +67,13 @@ function FilterCheckbox({
     if (!isSelected) {
       handleFilterUpdate({
         key: filterGroup,
-        selection: children,
+        selection: children.toLowerCase(),
         action: 'Add',
       });
     } else {
       handleFilterUpdate({
         key: filterGroup,
-        selection: children,
+        selection: children.toLowerCase(),
         action: 'Remove',
       });
     }
@@ -123,6 +123,8 @@ function FilterSelections() {
   const updatedSelectedFilters = useExercisesStore(
     (state) => state.updateSelectedFilters,
   );
+  const selectedFilters = useExercisesStore((state) => state.selectedFilters);
+  console.log('selectedFilter: ', selectedFilters);
   const filterSelections = filterSelectionItemsGrouped.map((fs, i) => {
     return (
       <Stack gap="sm" key={i}>
@@ -133,15 +135,30 @@ function FilterSelections() {
           {fs.filterGroup}
         </Text>
         <Group gap={4}>
-          {fs.selections.map((s, i) => (
-            <FilterCheckbox
-              filterGroup={fs.filterGroup}
-              handleFilterUpdate={updatedSelectedFilters}
-              key={i}
-            >
-              {s.toUpperCase()}
-            </FilterCheckbox>
-          ))}
+          {fs.selections.map((s, i) => {
+            let isDefaultSelectedFlag: boolean = false;
+            if (selectedFilters[fs.filterGroup].includes(s)) {
+              isDefaultSelectedFlag = true;
+            }
+
+            console.log(
+              'filter - isDefaultSelectedFlag',
+              fs.filterGroup,
+              s,
+              isDefaultSelectedFlag,
+            );
+
+            return (
+              <FilterCheckbox
+                filterGroup={fs.filterGroup}
+                handleFilterUpdate={updatedSelectedFilters}
+                defaultSelected={isDefaultSelectedFlag}
+                key={i}
+              >
+                {s.toUpperCase()}
+              </FilterCheckbox>
+            );
+          })}
         </Group>
       </Stack>
     );
