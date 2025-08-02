@@ -4,15 +4,18 @@ import { useDisclosure } from '@mantine/hooks';
 import {
   musclesEnum,
   equipmentEnum,
+  emphasisEnum,
   difficultyEnum,
 } from '@cwt/schema/exerciseSchema';
+import { filterKeys } from '@cwt/state/exercises';
 // import type { Filter } from '@cwt/state/exercises';
 
-// const filterSelectionItems = [
-//   {
-//     filterGroup:
-//   }
-// ]
+const filterSelections = [
+  musclesEnum,
+  equipmentEnum,
+  emphasisEnum,
+  difficultyEnum,
+];
 
 const FilterCheckbox = ({ children }: { children: string }) => {
   const active = false;
@@ -30,6 +33,33 @@ const FilterCheckbox = ({ children }: { children: string }) => {
   );
 };
 
+const filterSelectionItemsGrouped = filterKeys.map((key, i) => {
+  return {
+    filterGroup: key,
+    selections: filterSelections[i],
+  };
+});
+
+function FilterSelections() {
+  const filterSelections = filterSelectionItemsGrouped.map((fs) => {
+    return (
+      <Stack gap="sm">
+        <Text
+          tt="uppercase"
+          style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
+        >
+          {fs.filterGroup}
+        </Text>
+        <Group gap={4}>
+          {fs.selections.map((s, i) => (
+            <FilterCheckbox key={i}>{s.toUpperCase()}</FilterCheckbox>
+          ))}
+        </Group>
+      </Stack>
+    );
+  });
+  return <Stack gap="xl">{filterSelections}</Stack>;
+}
 export default function FilterOverlay() {
   const [filterOpened, filterHandler] = useDisclosure(false);
 
@@ -45,55 +75,16 @@ export default function FilterOverlay() {
         },
       }}
     >
-      <Stack gap="xl">
-        <Stack gap="sm">
-          <Text
-            tt="uppercase"
-            style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
-          >
-            Muscle Groups
-          </Text>
-          <Group gap={4}>
-            {musclesEnum.map((muscle, i) => (
-              <FilterCheckbox key={i}>{muscle.toUpperCase()}</FilterCheckbox>
-            ))}
-          </Group>
-        </Stack>
-        <Stack gap="sm">
-          <Text
-            tt="uppercase"
-            style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
-          >
-            Equipment
-          </Text>
-          <Group gap={4}>
-            {equipmentEnum.map((equipment, i) => (
-              <FilterCheckbox key={i}>{equipment.toUpperCase()}</FilterCheckbox>
-            ))}
-          </Group>
-        </Stack>
-        <Stack gap="sm">
-          <Text
-            tt="uppercase"
-            style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
-          >
-            Difficulty
-          </Text>
-          <Group gap={4}>
-            {difficultyEnum.map((difficulty, i) => (
-              <FilterCheckbox key={i}>
-                {difficulty.toUpperCase()}
-              </FilterCheckbox>
-            ))}
-          </Group>
-          <Group mt="lg" grow>
-            <Button color="gray" variant="outline">
-              Clear All
-            </Button>
-            <Button color="orange">Apply Filters</Button>
-          </Group>
-        </Stack>
-      </Stack>
+      <FilterSelections />
+      {/* <Stack gap="sm"> */}
+      <Group mt="lg" grow>
+        <Button color="gray" variant="outline">
+          Clear All
+        </Button>
+        <Button color="orange">Apply Filters</Button>
+      </Group>
+      {/* </Stack> */}
+      {/* </Stack> */}
     </Modal>
   );
 }
