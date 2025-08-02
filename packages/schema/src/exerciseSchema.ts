@@ -19,6 +19,14 @@ export type Emphasis = z.infer<typeof Emphasis>;
 export const Difficulty = z.enum(difficultyEnum as [string, ...string[]]);
 export type Difficulty = z.infer<typeof Difficulty>;
 
+export const SelectionSchema = z.union([
+  z.enum(musclesEnum as [string, ...string[]]),
+  z.enum(equipmentEnum as [string, ...string[]]),
+  z.enum(emphasisEnum as [string, ...string[]]),
+  z.enum(difficultyEnum as [string, ...string[]]),
+])
+export type Selection = z.infer<typeof SelectionSchema>;
+
 export const Exercise = z.object({
   id: z.number(),
   name: z.string(),
