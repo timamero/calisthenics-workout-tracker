@@ -64,8 +64,7 @@ function FilterCheckbox({
   // const selectedFilters = useExercisesStore((state) => state.selectedFilters);
 
   const handleClick = () => {
-    handleChange(!isSelected);
-    if (isSelected) {
+    if (!isSelected) {
       handleFilterUpdate({
         key: filterGroup,
         selection: children,
@@ -78,6 +77,7 @@ function FilterCheckbox({
         action: 'Remove',
       });
     }
+    handleChange(!isSelected);
 
     // console.log('State of selectedFilters: ', selectedFilters);
   };
