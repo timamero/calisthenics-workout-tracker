@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import {
   Title,
@@ -10,33 +9,15 @@ import {
   CloseButton,
   Group,
   ActionIcon,
-  Modal,
-  Text,
-  Button,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import { IoSearchOutline } from 'react-icons/io5';
 import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import { useExercisesStore } from '@cwt/state/exercises';
-// import type { Filter } from '@cwt/state/exercises';
 
 import ExerciseCard from '../components/ExerciseCard';
-import {
-  musclesEnum,
-  equipmentEnum,
-  difficultyEnum,
-} from '@cwt/schema/exerciseSchema';
-
-// const FilterGroup = {
-//   muscle: 'muscle',
-//   equipment: 'equipment',
-//   emphasis: 'emphasis',
-//   difficulty: 'difficulty',
-// } as const;
-
-// type FilterGroup = (typeof FilterGroup)[keyof typeof FilterGroup];
+import FilterOverlay from '../components/FilterOverlay';
 
 export const Route = createFileRoute('/library')({
   component: LibraryView,
@@ -45,12 +26,9 @@ export const Route = createFileRoute('/library')({
 function LibraryView() {
   const exercises = useExercisesStore((state) => state.displayedExercises);
   const search = useExercisesStore((state) => state.search);
-  // const filter = useExercisesStore((state) => state.filter);
   const setSearch = useExercisesStore((state) => state.setSearch);
 
   const combobox = useCombobox();
-  const [filterOpened, filterHandler] = useDisclosure(false);
-  // const [selectedFilters, setSelectedFilters] = useState<Filter>(filter);
 
   const shouldFilterOptions = !exercises.some(
     (exercise) => exercise.name === search,
@@ -73,26 +51,10 @@ function LibraryView() {
     setSearch('');
   };
 
-  const handleClickFilter = () => {
-    console.log('clicked filter btn');
-    filterHandler.open();
-  };
-
-  const FilterCheckbox = ({ children }: { children: string }) => {
-    const active = false;
-
-    return (
-      <Button
-        m={4}
-        size="xs"
-        variant={active ? 'filled' : 'outline'}
-        color={active ? 'orange' : 'gray'}
-        radius="xl"
-      >
-        {children}
-      </Button>
-    );
-  };
+  // const handleClickFilter = () => {
+  //   console.log('clicked filter btn');
+  //   filterHandler.open();
+  // };
 
   return (
     <Stack gap="xl">
@@ -136,7 +98,7 @@ function LibraryView() {
           variant="outline"
           color="gray.5"
           aria-label="Exercise filter"
-          onClick={handleClickFilter}
+          // onClick={handleClickFilter}
         >
           <IoFilterOutline />
         </ActionIcon>
@@ -146,72 +108,13 @@ function LibraryView() {
           cols={{ base: 1, md: 2, lg: 3 }}
           spacing={{ base: 'lg' }}
           verticalSpacing={{ base: 'lg' }}
-          // w="max-content"
         >
           {exercises.map((exercise, i) => (
             <ExerciseCard key={i} exercise={exercise} />
           ))}
         </SimpleGrid>
       </Stack>
-      <Modal
-        opened={filterOpened}
-        onClose={() => filterHandler.close()}
-        title="Filter Exercises"
-        styles={{
-          title: {
-            fontFamily: 'var(--mantine-font-family-headings)',
-            fontWeight: 700,
-          },
-        }}
-      >
-        <Stack gap="xl">
-          <Stack gap="sm">
-            <Text
-              tt="uppercase"
-              style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
-            >
-              Muscle Groups
-            </Text>
-            <Group gap={4}>
-              {musclesEnum.map((muscle, i) => (
-                <FilterCheckbox key={i}>{muscle.toUpperCase()}</FilterCheckbox>
-              ))}
-            </Group>
-          </Stack>
-          <Stack gap="sm">
-            <Text
-              tt="uppercase"
-              style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
-            >
-              Equipment
-            </Text>
-            <Group gap={4}>
-              {equipmentEnum.map((equipment, i) => (
-                <FilterCheckbox key={i}>{equipment.toUpperCase()}</FilterCheckbox>
-              ))}
-            </Group>
-          </Stack>
-          <Stack gap="sm">
-            <Text
-              tt="uppercase"
-              style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
-            >
-              Difficulty
-            </Text>
-            <Group gap={4}>
-              {difficultyEnum.map((difficulty, i) => (
-                <FilterCheckbox key={i}>{difficulty.toUpperCase()}</FilterCheckbox>
-              ))}
-            </Group>
-            <Group mt="lg" grow>
-              <Button color="gray" variant="outline">
-                Clear All
-              </Button>
-              <Button color="orange">Apply Filters</Button>
-            </Group>
-          </Stack>
-        </Stack>
-      </Modal>
+      <FilterOverlay />
     </Stack>
   );
 }
