@@ -154,6 +154,13 @@ interface FilterOverlayProps {
 }
 
 export default function FilterOverlay({ opened, handler }: FilterOverlayProps) {
+  const selectedFilters = useExercisesStore((state) => state.selectedFilters);
+  const applyFilters = useExercisesStore((state) => state.applyFilters);
+  const handleApplyFiltersClick = () => {
+    console.log('clicked on apply filters');
+    applyFilters(selectedFilters);
+    handler.close();
+  };
   return (
     <Modal
       opened={opened}
@@ -171,7 +178,9 @@ export default function FilterOverlay({ opened, handler }: FilterOverlayProps) {
         <Button color="gray" variant="outline">
           Clear All
         </Button>
-        <Button color="orange">Apply Filters</Button>
+        <Button color="orange" onClick={() => handleApplyFiltersClick()}>
+          Apply Filters
+        </Button>
       </Group>
     </Modal>
   );

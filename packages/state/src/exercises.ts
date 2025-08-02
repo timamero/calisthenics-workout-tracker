@@ -54,24 +54,32 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
         displayedExercises: exercises
       }
     }
+    console.log('applyFilters - filter: ', filter)
+
+    // const filteredExercises: Exercise[] = []
 
     const filteredExercises = exercises.filter((ex) => {
       const conditions: boolean[] = []
 
       if (filter.muscle.length > 0) {
-        conditions.push(filter.muscle.some((mus) => ex.target_muscles.includes(mus)))
+        console.log('in muscle if')
+        conditions.push(filter.muscle.some((mus) => ex.target_muscles.includes(mus.toLowerCase())))
       } 
       if (filter.equipment.length > 0 && ex.required_equipment != null) {
-        conditions.push(filter.equipment.some((eq) => ex.required_equipment?.includes(eq)))
+        console.log('in equipment if')
+        conditions.push(filter.equipment.some((eq) => ex.required_equipment?.includes(eq.toLocaleLowerCase())))
       }
       if (filter.emphasis.length > 0) {
+        console.log('in emphasis if')
         conditions.push(filter.emphasis.some((emp) => ex.emphasis == emp))
       } 
       if (filter.difficulty.length > 0) {
+        console.log('in difficulty if')
         conditions.push(filter.difficulty.some((dif) => ex.difficulty == dif))
       } 
 
-      return conditions.some((con) => con)
+      console.log('conditions', conditions)
+      return conditions.every((con) => con)
     })
 
     return {
