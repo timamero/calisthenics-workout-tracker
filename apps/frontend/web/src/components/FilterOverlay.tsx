@@ -33,7 +33,14 @@ interface FilterCheckboxProps {
   selected?: boolean;
   defaultSelected?: boolean;
   onChange?: (checked: boolean) => void;
-  handleFilterUpdate: ({ key, selection }: { key: FilterKey; selection: Selection }) => void;
+  filterGroup: FilterKey;
+  handleFilterUpdate: ({
+    key,
+    selection,
+  }: {
+    key: FilterKey;
+    selection: Selection;
+  }) => void;
   children: string;
 }
 
@@ -41,6 +48,7 @@ function FilterCheckbox({
   selected,
   defaultSelected,
   onChange,
+  filterGroup,
   handleFilterUpdate,
   children,
 }: FilterCheckboxProps &
@@ -51,10 +59,13 @@ function FilterCheckbox({
     finalValue: false,
     onChange,
   });
+  const selectedFilters = useExercisesStore((state) => state.selectedFilters);
 
   const handleClick = () => {
     handleChange(!isSelected);
-    handleFilterUpdate({ key: 'muscle', selection: 'chest' });
+    handleFilterUpdate({ key: filterGroup, selection: children });
+
+    console.log('State of selectedFilters: ', selectedFilters);
   };
 
   return (
@@ -109,7 +120,11 @@ function FilterSelections() {
         </Text>
         <Group gap={4}>
           {fs.selections.map((s, i) => (
-            <FilterCheckbox handleFilterUpdate={updatedSelectedFilters} key={i}>
+            <FilterCheckbox
+              filterGroup={fs.filterGroup}
+              handleFilterUpdate={updatedSelectedFilters}
+              key={i}
+            >
               {s.toUpperCase()}
             </FilterCheckbox>
           ))}
