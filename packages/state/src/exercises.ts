@@ -54,31 +54,25 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
         displayedExercises: exercises
       }
     }
-    console.log('applyFilters - filter: ', filter)
-
-    // const filteredExercises: Exercise[] = []
 
     const filteredExercises = exercises.filter((ex) => {
       const conditions: boolean[] = []
-
       if (filter.muscle.length > 0) {
-        console.log('in muscle if')
         conditions.push(filter.muscle.some((mus) => ex.target_muscles.includes(mus.toLowerCase())))
       } 
       if (filter.equipment.length > 0 && ex.required_equipment != null) {
-        console.log('in equipment if')
-        conditions.push(filter.equipment.some((eq) => ex.required_equipment?.includes(eq.toLocaleLowerCase())))
+        if (filter.equipment.includes("NONE") && ex.required_equipment.length === 0) {
+          conditions.push(true)
+        } else {
+          conditions.push(filter.equipment.some((eq) => ex.required_equipment?.includes(eq.toLocaleLowerCase())))
+        }
       }
       if (filter.emphasis.length > 0) {
-        console.log('in emphasis if')
         conditions.push(filter.emphasis.some((emp) => ex.emphasis.includes(emp.toLowerCase())))
       } 
       if (filter.difficulty.length > 0) {
-        console.log('in difficulty if')
         conditions.push(filter.difficulty.some((dif) => ex.difficulty.includes(dif.toLowerCase())))
       } 
-
-      console.log('conditions', conditions)
       return conditions.every((con) => con)
     })
 
@@ -87,19 +81,15 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
     }
   }),
   updateSelectedFilters: ({key, selection, action}) => set((state) => {
-    console.log("---key: ", key)
-    console.log("---selection: ", selection)
     const actionEnum = Action[action as keyof typeof Action];
     let updatedFilter;
     if (actionEnum === Action.Add) {
       updatedFilter = { ...state.selectedFilters, [key]: [...state.selectedFilters[key], selection] };
-      console.log('---updatedFilter Add: ', updatedFilter);
     } else if (actionEnum === Action.Remove) {
       updatedFilter = { 
         ...state.selectedFilters, 
         [key]: state.selectedFilters[key].filter((item: Selection) => item !== selection) 
       };
-      console.log('---updatedFilter Remove: ', updatedFilter);
     } else {
       updatedFilter = state.selectedFilters;
     }
@@ -123,8 +113,5 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
       displayedExercises: matchedExercises
     }
   }),
-  // setFilter: (partial) => set((state) => ({
-  //   filter: { ...state.filter, ...partial}
-  // })),
   setSearch: (search) => set({ search })
 }));
