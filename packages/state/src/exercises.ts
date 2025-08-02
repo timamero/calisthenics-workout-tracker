@@ -73,7 +73,10 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
     }
   }),
   updateSelectedFilters: ({key, selection}) => set((state) => {
-    const updatedFilter = {...state.selectedFilters, [key]: state.selectedFilters[key].push(selection)}
+    console.log("---key: ", key)
+    console.log("---selection: ", selection)
+    const updatedFilter = {...state.selectedFilters, [key]: [...state.selectedFilters[key], selection]}
+    console.log('---updatedFilter: ', updatedFilter)
     return {
       selectedFilters: updatedFilter
     }
