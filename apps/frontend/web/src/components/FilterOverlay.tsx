@@ -15,7 +15,9 @@ import {
   emphasisEnum,
   difficultyEnum,
 } from '@cwt/schema/exerciseSchema';
-import { filterKeys } from '@cwt/state/exercises';
+import { filterKeys, type FilterKey } from '@cwt/state/exercises';
+import { useExercisesStore } from '@cwt/state/exercises';
+import { type Selection } from '@cwt/schema/exerciseSchema';
 // import type { Filter } from '@cwt/state/exercises';
 
 import classes from './FilterCheckbox.module.css';
@@ -31,6 +33,7 @@ interface FilterCheckboxProps {
   selected?: boolean;
   defaultSelected?: boolean;
   onChange?: (checked: boolean) => void;
+  handleFilterUpdate: ({ key, selection }: { key: FilterKey; selection: Selection }) => void;
   children: string;
 }
 
@@ -38,6 +41,7 @@ function FilterCheckbox({
   selected,
   defaultSelected,
   onChange,
+  handleFilterUpdate,
   children,
 }: FilterCheckboxProps &
   Omit<React.ComponentPropsWithoutRef<'button'>, keyof FilterCheckboxProps>) {
@@ -48,11 +52,16 @@ function FilterCheckbox({
     onChange,
   });
 
+  const handleClick = () => {
+    handleChange(!isSelected);
+    handleFilterUpdate({ key: 'muscle', selection: 'chest' });
+  };
+
   return (
     <UnstyledButton
       m={4}
       size="xs"
-      onClick={() => handleChange(!isSelected)}
+      onClick={() => handleClick()}
       variant={isSelected ? 'filled' : 'outline'}
       color={isSelected ? 'orange' : 'gray'}
       data-checked={isSelected || undefined}
@@ -86,6 +95,9 @@ const filterSelectionItemsGrouped = filterKeys.map((key, i) => {
 });
 
 function FilterSelections() {
+  const updatedSelectedFilters = useExercisesStore(
+    (state) => state.updateSelectedFilters,
+  );
   const filterSelections = filterSelectionItemsGrouped.map((fs, i) => {
     return (
       <Stack gap="sm" key={i}>
@@ -97,7 +109,9 @@ function FilterSelections() {
         </Text>
         <Group gap={4}>
           {fs.selections.map((s, i) => (
-            <FilterCheckbox key={i}>{s.toUpperCase()}</FilterCheckbox>
+            <FilterCheckbox handleFilterUpdate={updatedSelectedFilters} key={i}>
+              {s.toUpperCase()}
+            </FilterCheckbox>
           ))}
         </Group>
       </Stack>
