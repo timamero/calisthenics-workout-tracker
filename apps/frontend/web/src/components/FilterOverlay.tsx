@@ -1,4 +1,13 @@
-import { Stack, Group, Modal, Text, Button } from '@mantine/core';
+import {
+  Stack,
+  Group,
+  Modal,
+  Text,
+  Button,
+  UnstyledButton,
+  Checkbox,
+} from '@mantine/core';
+import { useUncontrolled } from '@mantine/hooks';
 
 import {
   musclesEnum,
@@ -9,6 +18,8 @@ import {
 import { filterKeys } from '@cwt/state/exercises';
 // import type { Filter } from '@cwt/state/exercises';
 
+import classes from './FilterCheckbox.module.css';
+
 const filterSelections = [
   musclesEnum,
   equipmentEnum,
@@ -16,21 +27,56 @@ const filterSelections = [
   difficultyEnum,
 ];
 
-const FilterCheckbox = ({ children }: { children: string }) => {
-  const active = false;
+interface FilterCheckboxProps {
+  selected?: boolean;
+  defaultSelected?: boolean;
+  onChange?: (checked: boolean) => void;
+  children: string;
+}
+
+function FilterCheckbox({
+  selected,
+  defaultSelected,
+  onChange,
+  children,
+}: FilterCheckboxProps &
+  Omit<React.ComponentPropsWithoutRef<'button'>, keyof FilterCheckboxProps>) {
+  const [isSelected, handleChange] = useUncontrolled({
+    value: selected,
+    defaultValue: defaultSelected,
+    finalValue: false,
+    onChange,
+  });
 
   return (
-    <Button
+    <UnstyledButton
       m={4}
       size="xs"
-      variant={active ? 'filled' : 'outline'}
-      color={active ? 'orange' : 'gray'}
-      radius="xl"
+      onClick={() => handleChange(!isSelected)}
+      variant={isSelected ? 'filled' : 'outline'}
+      color={isSelected ? 'orange' : 'gray'}
+      data-checked={isSelected || undefined}
+      className={classes.button}
+      style={{ minWidth: 100 }}
     >
-      {children}
-    </Button>
+      <div className={classes.body}>
+        <Text fw={500} size="xs" lh={1.2}>
+          {children}
+        </Text>
+      </div>
+
+      <Checkbox
+        checked={isSelected}
+        onChange={() => {}}
+        tabIndex={-1}
+        color="orange"
+        size="xs"
+        mr="xs"
+        styles={{ input: { cursor: 'pointer' } }}
+      />
+    </UnstyledButton>
   );
-};
+}
 
 const filterSelectionItemsGrouped = filterKeys.map((key, i) => {
   return {
@@ -65,7 +111,6 @@ interface FilterOverlayProps {
 }
 
 export default function FilterOverlay({ opened, handler }: FilterOverlayProps) {
-
   return (
     <Modal
       opened={opened}
