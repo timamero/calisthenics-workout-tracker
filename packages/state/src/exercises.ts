@@ -6,6 +6,12 @@ export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis
 export type FilterKey = keyof Filter;
 export const filterKeys: FilterKey[] = ["muscle", "equipment", "emphasis", "difficulty"];
 
+enum Action {
+  Add,
+  Remove
+}
+export type ActionStrings = keyof typeof Action
+
 interface ExercisesState {
   masterExercises: Exercise[];
   displayedExercises: Exercise[];
@@ -15,7 +21,7 @@ interface ExercisesState {
   setExercises: (exercises: Exercise[]) => void;
   resetDisplayedExercises: () => void;
   applyFilters: (filter: Filter) => void;
-  updateSelectedFilters: ({key, selection}: {key: FilterKey; selection: Selection;}) => void;
+  updateSelectedFilters: ({key, selection, action}: {key: FilterKey; selection: Selection; action: ActionStrings}) => void;
   resetSelectedFilters: () => void;
   clearFilters: () => void;
   searchDisplayedExercises: (search: string) => void;
@@ -72,11 +78,23 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
       displayedExercises: filteredExercises
     }
   }),
-  updateSelectedFilters: ({key, selection}) => set((state) => {
+  updateSelectedFilters: ({key, selection, action}) => set((state) => {
     console.log("---key: ", key)
     console.log("---selection: ", selection)
-    const updatedFilter = {...state.selectedFilters, [key]: [...state.selectedFilters[key], selection]}
-    console.log('---updatedFilter: ', updatedFilter)
+    const actionEnum = Action[action as keyof typeof Action];
+    let updatedFilter;
+    if (actionEnum === Action.Add) {
+      updatedFilter = { ...state.selectedFilters, [key]: [...state.selectedFilters[key], selection] };
+      console.log('---updatedFilter Add: ', updatedFilter);
+    } else if (actionEnum === Action.Remove) {
+      updatedFilter = { 
+        ...state.selectedFilters, 
+        [key]: state.selectedFilters[key].filter((item: Selection) => item !== selection) 
+      };
+      console.log('---updatedFilter Remove: ', updatedFilter);
+    } else {
+      updatedFilter = state.selectedFilters;
+    }
     return {
       selectedFilters: updatedFilter
     }
