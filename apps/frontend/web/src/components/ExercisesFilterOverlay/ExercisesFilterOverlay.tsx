@@ -1,4 +1,4 @@
-import { Group, Modal, Button } from '@mantine/core';
+import { Group, Modal, Button, Stack } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
 
@@ -38,7 +38,9 @@ export default function ExercisesFilterOverlay({
         },
       }}
     >
-      <FilterSelections />
+      <Stack gap="lg">
+        <FilterSelections />
+      </Stack>
       <Group mt="lg" grow>
         <Button
           color="gray"
