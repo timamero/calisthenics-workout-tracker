@@ -1,3 +1,5 @@
+import { memo } from 'react';
+import { useShallow } from 'zustand/shallow';
 import { Text, UnstyledButton, Checkbox } from '@mantine/core';
 
 import { type Selection } from '@cwt/schema/exerciseSchema';
@@ -8,43 +10,49 @@ import classes from './FilterCheckbox.module.css';
 
 interface FilterCheckboxProps {
   group: FilterGroup;
-  value: boolean;
   selection: Selection;
 }
 
-export default function FilterCheckbox({
+const FilterCheckbox = memo(function FilterCheckbox({
   group,
-  value,
   selection,
 }: FilterCheckboxProps &
   Omit<React.ComponentPropsWithoutRef<'button'>, keyof FilterCheckboxProps>) {
+  const isSelected = useStore(
+    useShallow(
+      (state) =>
+        state.filterCheckboxSelections.find(
+          (obj) => obj.group === group && obj.selection === selection,
+        )?.value,
+    ),
+  );
   const toggleFilterSelection = useStore(
     (state) => state.toggleFilterSelection,
   );
+  // console.log('render checkbox');
 
   const handleClick = () => {
-    console.log('clicked selection: ');
-    toggleFilterSelection({ group, selection, value });
+    toggleFilterSelection({ group, selection });
   };
   return (
     <UnstyledButton
       m={4}
       size="xs"
       onClick={() => handleClick()}
-      variant={value ? 'filled' : 'outline'}
-      color={value ? 'orange' : 'gray'}
-      data-checked={value || undefined}
+      variant={isSelected ? 'filled' : 'outline'}
+      color={isSelected ? 'orange' : 'gray'}
+      data-checked={isSelected || undefined}
       className={classes.button}
       style={{ minWidth: 100 }}
     >
       <div className={classes.body}>
-        <Text fw={500} size="xs" lh={1.2}>
+        <Text fw={500} size="xs" lh={1.2} tt="uppercase">
           {selection}
         </Text>
       </div>
 
       <Checkbox
-        checked={value}
+        checked={isSelected}
         onChange={() => {}}
         tabIndex={-1}
         color="orange"
@@ -54,4 +62,6 @@ export default function FilterCheckbox({
       />
     </UnstyledButton>
   );
-}
+});
+
+export default FilterCheckbox;

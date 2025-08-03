@@ -4,8 +4,8 @@
   /* width: 100%; */
   width: min-content;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease;
+    background-color 200ms ease,
+    border-color 200ms ease;
   border-radius: var(--mantine-radius-xl);
   /* padding: var(--mantine-spacing-xs); */
   padding: 8px 2px;
