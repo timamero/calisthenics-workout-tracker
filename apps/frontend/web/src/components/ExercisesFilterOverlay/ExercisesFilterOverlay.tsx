@@ -16,14 +16,26 @@ export default function ExercisesFilterOverlay({
   const clearFilterCheckboxSelections = useStore(
     (state) => state.clearFilterCheckboxSelections,
   );
+  const setAppliedFilterSelections = useStore(
+    (state) => state.setAppliedFilterSelections,
+  );
+  const filterDisplayedExercises = useStore(
+    (state) => state.filterDisplayedExercises,
+  );
+  const isFilterApplied = useStore((state) => state.isFilterApplied);
 
   const handleApplyFiltersClick = () => {
     console.log('clicked on apply filters');
+    setAppliedFilterSelections();
+    filterDisplayedExercises();
   };
 
   const onFilterOverlayClose = () => {
+    console.log('onFilterOverlayClose called');
     handler.close();
-    clearFilterCheckboxSelections();
+    if (!isFilterApplied) {
+      clearFilterCheckboxSelections();
+    }
   };
 
   return (
