@@ -16,7 +16,8 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import ExercisesList from '../components/ExercisesList';
-import FilterOverlay from '../components/FilterOverlay';
+// import FilterOverlay from '../components/FilterOverlay';
+import ExercisesFilterOverlay from '../components/ExercisesFilterOverlay'
 
 export const Route = createFileRoute('/library')({
   component: LibraryView,
@@ -114,7 +115,7 @@ function LibraryView() {
       <Stack align="center">
         <ExercisesList />
       </Stack>
-      <FilterOverlay opened={filterOpened} handler={filterHandler} />
+      <ExercisesFilterOverlay opened={filterOpened} handler={filterHandler} />
     </Stack>
   );
 }
