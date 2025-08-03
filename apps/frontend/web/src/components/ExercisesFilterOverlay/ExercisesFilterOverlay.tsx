@@ -1,4 +1,5 @@
 import { Group, Modal, Button } from '@mantine/core';
+import FilterSelections from './FilterSelections';
 
 interface ExercisesFilterOverlayProps {
   opened: boolean;
@@ -24,7 +25,7 @@ export default function ExercisesFilterOverlay({
         },
       }}
     >
-      <p>Filter selections go here</p>
+      <FilterSelections />
       <Group mt="lg" grow>
         <Button color="gray" variant="outline">
           Clear All
