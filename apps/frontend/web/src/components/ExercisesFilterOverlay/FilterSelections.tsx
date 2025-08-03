@@ -8,7 +8,6 @@ export default function FilterSelections() {
   const filterCheckboxSelections = useStore(
     (state) => state.filterCheckboxSelections,
   );
-  console.log('filterCheckboxSelections', filterCheckboxSelections);
 
   const filterGroupNames = filterCheckboxSelections.map((obj) => obj.group);
   const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
@@ -43,9 +42,5 @@ export default function FilterSelections() {
       );
     });
 
-  return (
-    <>
-      <FilterGroups />
-    </>
-  );
+  return <FilterGroups />;
 }
