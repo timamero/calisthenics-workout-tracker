@@ -17,7 +17,7 @@ interface ExercisesSlice {
 export const createExercisesSlice: StateCreator<ExercisesSlice, [], [], ExercisesSlice> = (set) => ({
   masterExercises: [],
   displayedExercises: [],
-  setExercises: (exercises) => set((state) => ({
+  setExercises: (exercises) => set(() => ({
     masterExercises: exercises,
     displayedExercises: exercises
   })),
