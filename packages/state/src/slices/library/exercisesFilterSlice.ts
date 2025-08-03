@@ -17,6 +17,7 @@ const initialFilterCheckboxSelections: FilterCheckbox[] = [...muscleSelections, 
 export interface ExercisesFilterSlice {
   filterCheckboxSelections: FilterCheckbox[];
   toggleFilterSelection: (filterCheckbox: FilterCheckbox) => void;
+  clearFilterCheckboxSelections: () => void;
 }
 
 export const createExercisesFilterSlice: StateCreator<ExercisesFilterSlice, [], [], ExercisesFilterSlice> = (set) => ({
@@ -36,4 +37,20 @@ export const createExercisesFilterSlice: StateCreator<ExercisesFilterSlice, [], 
       filterCheckboxSelections: updatedSelections,
     }
   }),
+  clearFilterCheckboxSelections: () => set((state) => {
+    const clearedSelections = state.filterCheckboxSelections.map((obj) => {
+      if (obj.value === true) {
+        return {
+          ...obj,
+          value: false
+        }
+      }
+
+      return obj
+    })
+
+    return {
+      filterCheckboxSelections: clearedSelections
+    }
+  })
 })
