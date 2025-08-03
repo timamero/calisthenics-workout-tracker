@@ -1,13 +1,11 @@
 .button {
   display: flex;
   align-items: center;
-  /* width: 100%; */
   width: min-content;
   transition:
     background-color 200ms ease,
     border-color 200ms ease;
   border-radius: var(--mantine-radius-xl);
-  /* padding: var(--mantine-spacing-xs); */
   padding: 8px 2px;
   border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-8));
   background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
