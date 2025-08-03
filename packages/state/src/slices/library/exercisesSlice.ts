@@ -5,7 +5,7 @@ import { Exercise, Muscles, Equipment, Emphasis, Difficulty } from '@cwt/schema/
 
 export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis[]; difficulty: Difficulty[]}
 
-interface ExercisesSlice {
+export interface ExercisesSlice {
   masterExercises: Exercise[]
   displayedExercises: Exercise[]
   setExercises: (exercises: Exercise[]) => void
