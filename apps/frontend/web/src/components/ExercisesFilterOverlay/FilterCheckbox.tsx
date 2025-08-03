@@ -26,7 +26,7 @@ const FilterCheckbox = memo(function FilterCheckbox({
   const toggleFilterSelection = useStore(
     (state) => state.toggleFilterSelection,
   );
-  console.log('render checkbox');
+  // console.log('render checkbox');
 
   const handleClick = () => {
     toggleFilterSelection({ group, selection });
