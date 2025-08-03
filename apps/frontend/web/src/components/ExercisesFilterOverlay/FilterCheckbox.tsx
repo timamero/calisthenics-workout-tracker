@@ -43,7 +43,7 @@ const FilterCheckbox = memo(function FilterCheckbox({
       style={{ minWidth: 100 }}
     >
       <div className={classes.body}>
-        <Text fw={500} size="xs" lh={1.2} tt="uppercase">
+        <Text fw={isSelected ? 700 : 500} size="xs" lh={1.2} tt="uppercase">
           {selection}
         </Text>
       </div>
