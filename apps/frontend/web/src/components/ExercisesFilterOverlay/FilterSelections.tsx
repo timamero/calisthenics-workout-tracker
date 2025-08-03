@@ -1,6 +1,7 @@
 import { Stack, Text, Group } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
+import { type FilterGroup } from '@cwt/state/types';
 
 import FilterCheckbox from './FilterCheckbox';
 
@@ -12,12 +13,13 @@ export default function FilterSelections() {
   const filterGroupNames = filterCheckboxSelections.map((obj) => obj.group);
   const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
 
-  const FilterSelections = ({ group }: { group: string }) =>
+  const FilterSelections = ({ group }: { group: FilterGroup }) =>
     filterCheckboxSelections
       .filter((obj) => obj.group === group)
       .map((selectionObj, i) => {
         return (
           <FilterCheckbox
+            group={group}
             value={selectionObj.value}
             selection={selectionObj.selection}
             key={i}
