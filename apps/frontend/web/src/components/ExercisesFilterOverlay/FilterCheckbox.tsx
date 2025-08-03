@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { useShallow } from 'zustand/shallow';
 import { Text, UnstyledButton, Checkbox } from '@mantine/core';
 
 import { type Selection } from '@cwt/schema/exerciseSchema';
@@ -19,17 +18,15 @@ const FilterCheckbox = memo(function FilterCheckbox({
 }: FilterCheckboxProps &
   Omit<React.ComponentPropsWithoutRef<'button'>, keyof FilterCheckboxProps>) {
   const isSelected = useStore(
-    useShallow(
-      (state) =>
-        state.filterCheckboxSelections.find(
-          (obj) => obj.group === group && obj.selection === selection,
-        )?.value,
-    ),
+    (state) =>
+      state.filterCheckboxSelections.find(
+        (obj) => obj.group === group && obj.selection === selection,
+      )?.value,
   );
   const toggleFilterSelection = useStore(
     (state) => state.toggleFilterSelection,
   );
-  // console.log('render checkbox');
+  console.log('render checkbox');
 
   const handleClick = () => {
     toggleFilterSelection({ group, selection });
