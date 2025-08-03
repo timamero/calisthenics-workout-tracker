@@ -40,7 +40,11 @@ export default function ExercisesFilterOverlay({
     >
       <FilterSelections />
       <Group mt="lg" grow>
-        <Button color="gray" variant="outline">
+        <Button
+          color="gray"
+          variant="outline"
+          onClick={clearFilterCheckboxSelections}
+        >
           Clear All
         </Button>
         <Button color="orange" onClick={() => handleApplyFiltersClick()}>
