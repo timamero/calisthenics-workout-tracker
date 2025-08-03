@@ -1,4 +1,4 @@
-// import { memo } from 'react';
+import { memo } from 'react';
 import { Stack, Text, Group } from '@mantine/core';
 import { useShallow } from 'zustand/shallow';
 
@@ -8,7 +8,7 @@ import type { Selection } from '@cwt/schema/exerciseSchema';
 
 import FilterCheckbox from './FilterCheckbox';
 
-function Selections({
+const Selections = memo(function Selections({
   group,
   selections,
 }: {
@@ -25,7 +25,8 @@ function Selections({
       })}
     </>
   );
-}
+});
+
 export default function FilterSelections() {
   const filterCheckboxSelections = useStore(
     useShallow((state) => state.filterCheckboxSelections),
@@ -49,9 +50,9 @@ export default function FilterSelections() {
             <Group gap={4}>
               <Selections
                 group={group}
-                selections={filterCheckboxSelections.map(
-                  (obj) => obj.selection,
-                )}
+                selections={filterCheckboxSelections
+                  .filter((obj) => obj.group === group)
+                  .map((obj) => obj.selection)}
               />
             </Group>
           </Stack>
