@@ -17,10 +17,13 @@ export interface ExercisesSlice {
 export const createExercisesSlice: StateCreator<ExercisesSlice, [], [], ExercisesSlice> = (set) => ({
   masterExercises: [],
   displayedExercises: [],
-  setExercises: (exercises) => set(() => ({
-    masterExercises: exercises,
-    displayedExercises: exercises
-  })),
+  setExercises: (exercises) => set(() => {
+    const sortedExercises = exercises.sort((a, b) => a.name.localeCompare(b.name))
+    return {
+      masterExercises: sortedExercises,
+      displayedExercises: sortedExercises,
+    }
+  }),
   filterDisplayedExercises: (filter) => set((state) => {
     // code to filter exercises
     return {
