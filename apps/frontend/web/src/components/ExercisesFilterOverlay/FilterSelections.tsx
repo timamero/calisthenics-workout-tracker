@@ -10,11 +10,11 @@ export default function FilterSelections() {
   );
   console.log('filterCheckboxSelections', filterCheckboxSelections);
 
-  const filterGroups = filterCheckboxSelections.map((obj) => obj.group);
-  const uniqueFilterGroups = [...new Set(filterGroups)];
+  const filterGroupNames = filterCheckboxSelections.map((obj) => obj.group);
+  const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
 
   const FilterGroups = () =>
-    uniqueFilterGroups.map((group, i) => {
+    uniqueFilterGroupNames.map((group, i) => {
       return (
         <Stack gap="sm" key={i}>
           <Text
