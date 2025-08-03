@@ -9,7 +9,8 @@ import { supabase } from '../supabaseClient';
 import type { Subscription } from '@supabase/auth-js';
 
 import { useAuthStore } from '@cwt/state/auth';
-import { useExercisesStore } from '@cwt/state/exercises';
+// import { useExercisesStore } from '@cwt/state/exercises';
+import { useStore } from '@cwt/state/store'
 import { Exercise } from '@cwt/schema/exerciseSchema';
 
 const sampleExercises: Exercise[] = [
@@ -337,7 +338,8 @@ export const Route = createRootRoute({
 function RootComponent() {
   const [opened, { toggle }] = useDisclosure();
 
-  const setExercises = useExercisesStore((state) => state.setExercises);
+  const setExercises = useStore((state) => state.setExercises);
+  // const setExercises = useExercisesStore((state) => state.setExercises);
 
   const supabaseSession = useAuthStore((state) => state.session);
   const setSession = useAuthStore((state) => state.setSession);
