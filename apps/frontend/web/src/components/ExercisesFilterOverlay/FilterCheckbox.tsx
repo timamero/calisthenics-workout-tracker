@@ -1,21 +1,30 @@
 import { Text, UnstyledButton, Checkbox } from '@mantine/core';
 
 import { type Selection } from '@cwt/schema/exerciseSchema';
+import { useStore } from '@cwt/state/store';
+import { type FilterGroup } from '@cwt/state/types';
 
 import classes from './FilterCheckbox.module.css';
 
 interface FilterCheckboxProps {
+  group: FilterGroup;
   value: boolean;
   selection: Selection;
 }
 
 export default function FilterCheckbox({
+  group,
   value,
   selection,
 }: FilterCheckboxProps &
   Omit<React.ComponentPropsWithoutRef<'button'>, keyof FilterCheckboxProps>) {
+  const toggleFilterSelection = useStore(
+    (state) => state.toggleFilterSelection,
+  );
+
   const handleClick = () => {
     console.log('clicked selection: ');
+    toggleFilterSelection({ group, selection, value });
   };
   return (
     <UnstyledButton
