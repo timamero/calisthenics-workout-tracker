@@ -24,6 +24,10 @@
       "types": "./src/store.ts",
       "default": "./dist/store.js"
     },
+    "./types": {
+      "types": "./src/types.ts",
+      "default": "./dist/types.js"
+    },
     "./slices/library": {
       "types": "./src/slices/library/*.ts",
       "default": "./dist/slices/library/*.js"

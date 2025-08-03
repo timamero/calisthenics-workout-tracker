@@ -1,14 +1,11 @@
 import { StateCreator } from 'zustand';
 
-import { Muscles, Equipment, Emphasis, Difficulty, Selection, musclesEnum,
+import { musclesEnum,
   equipmentEnum,
   emphasisEnum,
   difficultyEnum, } from '@cwt/schema/exerciseSchema';
 
-export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis[]; difficulty: Difficulty[]}
-export type FilterGroup = keyof Filter;
-export const filterKeys: FilterGroup[] = ["muscle", "equipment", "emphasis", "difficulty"];
-type FilterCheckbox = { group: FilterGroup, selection: Selection,  value: boolean }
+import { FilterCheckbox } from '../../types';
 
 
 const muscleSelections: FilterCheckbox[] = musclesEnum.map((a) => ({group: "muscle", selection: a, value: false}))
