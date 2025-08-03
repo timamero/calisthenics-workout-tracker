@@ -18,9 +18,25 @@ const difficultySelections: FilterCheckbox[] = difficultyEnum.map((a) => ({group
 const initialFilterCheckboxSelections: FilterCheckbox[] = [...muscleSelections, ...equipmentSelections, ...emphasisSelections, ...difficultySelections]
 
 export interface ExercisesFilterSlice {
-  filterCheckboxSelections: FilterCheckbox[]
+  filterCheckboxSelections: FilterCheckbox[];
+  toggleFilterSelection: (filterCheckbox: FilterCheckbox) => void;
 }
 
 export const createExercisesFilterSlice: StateCreator<ExercisesFilterSlice, [], [], ExercisesFilterSlice> = (set) => ({
   filterCheckboxSelections: initialFilterCheckboxSelections,
+  toggleFilterSelection: (filterCheckbox) => set((state) => {
+    const updatedSelections = state.filterCheckboxSelections.map((obj) => {
+      if (obj.group === filterCheckbox.group && obj.selection === filterCheckbox.selection) {
+        return {
+          ...obj,
+          value: !obj.value
+        }
+      }
+
+      return obj
+    })
+    return {
+      filterCheckboxSelections: updatedSelections,
+    }
+  }),
 })
