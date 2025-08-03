@@ -1,4 +1,7 @@
 import { Group, Modal, Button } from '@mantine/core';
+
+import { useStore } from '@cwt/state/store';
+
 import FilterSelections from './FilterSelections';
 
 interface ExercisesFilterOverlayProps {
@@ -10,13 +13,23 @@ export default function ExercisesFilterOverlay({
   opened,
   handler,
 }: ExercisesFilterOverlayProps) {
+  const clearFilterCheckboxSelections = useStore(
+    (state) => state.clearFilterCheckboxSelections,
+  );
+
   const handleApplyFiltersClick = () => {
     console.log('clicked on apply filters');
   };
+
+  const onFilterOverlayClose = () => {
+    handler.close();
+    clearFilterCheckboxSelections();
+  };
+
   return (
     <Modal
       opened={opened}
-      onClose={() => handler.close()}
+      onClose={onFilterOverlayClose}
       title="Filter Exercises"
       styles={{
         title: {
