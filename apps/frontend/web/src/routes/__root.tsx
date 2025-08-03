@@ -10,7 +10,7 @@ import type { Subscription } from '@supabase/auth-js';
 
 import { useAuthStore } from '@cwt/state/auth';
 // import { useExercisesStore } from '@cwt/state/exercises';
-import { useStore } from '@cwt/state/store'
+import { useStore } from '@cwt/state/store';
 import { Exercise } from '@cwt/schema/exerciseSchema';
 
 const sampleExercises: Exercise[] = [
