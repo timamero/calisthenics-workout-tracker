@@ -2,7 +2,7 @@ import { Stack, Text, Group } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
 
-// import FilterCheckbox from './FilterCheckbox';
+import FilterCheckbox from './FilterCheckbox';
 
 export default function FilterSelections() {
   const filterCheckboxSelections = useStore(
@@ -12,6 +12,19 @@ export default function FilterSelections() {
 
   const filterGroupNames = filterCheckboxSelections.map((obj) => obj.group);
   const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
+
+  const FilterSelections = ({ group }: { group: string }) =>
+    filterCheckboxSelections
+      .filter((obj) => obj.group === group)
+      .map((selectionObj, i) => {
+        return (
+          <FilterCheckbox
+            value={selectionObj.value}
+            selection={selectionObj.selection}
+            key={i}
+          />
+        );
+      });
 
   const FilterGroups = () =>
     uniqueFilterGroupNames.map((group, i) => {
@@ -24,7 +37,7 @@ export default function FilterSelections() {
             {group}
           </Text>
           <Group gap={4}>
-            <p>placeholder</p>
+            <FilterSelections group={group} />
           </Group>
         </Stack>
       );
