@@ -19,6 +19,14 @@
     "./auth": {
       "types": "./src/auth.ts",
       "default": "./dist/auth.js"
+    },
+    "./store": {
+      "types": "./src/store.ts",
+      "default": "./dist/store.js"
+    },
+    "./slices/library": {
+      "types": "./src/slices/library/*.ts",
+      "default": "./dist/slices/library/*.js"
     }
   },
   "dependencies": {
