@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import {
   Title,
   Stack,
-  SimpleGrid,
+  // SimpleGrid,
   TextInput,
   Combobox,
   useCombobox,
@@ -15,9 +15,7 @@ import { IoSearchOutline } from 'react-icons/io5';
 // import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
-import { useStore } from '@cwt/state/store';
-
-import ExerciseCard from '../components/ExerciseCard';
+import ExercisesList from '../components/ExercisesList';
 import FilterOverlay from '../components/FilterOverlay';
 
 export const Route = createFileRoute('/library')({
@@ -25,7 +23,6 @@ export const Route = createFileRoute('/library')({
 });
 
 function LibraryView() {
-  const exercises = useStore((state) => state.displayedExercises);
   // const search = useExercisesStore((state) => state.search);
   // const setSearch = useExercisesStore((state) => state.setSearch);
 
@@ -115,15 +112,7 @@ function LibraryView() {
         </ActionIcon>
       </Group>
       <Stack align="center">
-        <SimpleGrid
-          cols={{ base: 1, md: 2, lg: 3 }}
-          spacing={{ base: 'lg' }}
-          verticalSpacing={{ base: 'lg' }}
-        >
-          {exercises.map((exercise, i) => (
-            <ExerciseCard key={i} exercise={exercise} />
-          ))}
-        </SimpleGrid>
+        <ExercisesList />
       </Stack>
       <FilterOverlay opened={filterOpened} handler={filterHandler} />
     </Stack>
