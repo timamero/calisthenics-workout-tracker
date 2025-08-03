@@ -2,7 +2,6 @@ import { createFileRoute } from '@tanstack/react-router';
 import {
   Title,
   Stack,
-  // SimpleGrid,
   TextInput,
   Combobox,
   useCombobox,
@@ -16,8 +15,7 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import ExercisesList from '../components/ExercisesList';
-// import FilterOverlay from '../components/FilterOverlay';
-import ExercisesFilterOverlay from '../components/ExercisesFilterOverlay'
+import ExercisesFilterOverlay from '../components/ExercisesFilterOverlay';
 
 export const Route = createFileRoute('/library')({
   component: LibraryView,
@@ -26,9 +24,6 @@ export const Route = createFileRoute('/library')({
 function LibraryView() {
   // const search = useExercisesStore((state) => state.search);
   // const setSearch = useExercisesStore((state) => state.setSearch);
-
-  // const selectedFilters = useExercisesStore((state) => state.selectedFilters);
-  // console.log('selectedFilters', selectedFilters);
 
   const [filterOpened, filterHandler] = useDisclosure(false);
   const combobox = useCombobox();
