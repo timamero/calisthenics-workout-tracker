@@ -1,5 +1,6 @@
 import { create } from 'zustand';
+import { createExercisesSlice, ExercisesSlice } from './slices/library/exercisesSlice';
 
-export const useStore = create((...a) => ({
-  // Add slices here
+export const useStore = create<ExercisesSlice>((...a) => ({
+  ...createExercisesSlice(...a),
 }))
