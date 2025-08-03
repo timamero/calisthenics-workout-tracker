@@ -2,22 +2,22 @@ import { createFileRoute } from '@tanstack/react-router';
 import {
   Title,
   Stack,
-  SimpleGrid,
+  // SimpleGrid,
   TextInput,
   Combobox,
   useCombobox,
-  CloseButton,
+  // CloseButton,
   Group,
   ActionIcon,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IoSearchOutline } from 'react-icons/io5';
-import { IoCloseOutline } from 'react-icons/io5';
+// import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
-import { useExercisesStore } from '@cwt/state/exercises';
+// import { useExercisesStore } from '@cwt/state/exercises';
 
-import ExerciseCard from '../components/ExerciseCard';
+// import ExerciseCard from '../components/ExerciseCard';
 import FilterOverlay from '../components/FilterOverlay';
 
 export const Route = createFileRoute('/library')({
@@ -25,9 +25,9 @@ export const Route = createFileRoute('/library')({
 });
 
 function LibraryView() {
-  const exercises = useExercisesStore((state) => state.displayedExercises);
-  const search = useExercisesStore((state) => state.search);
-  const setSearch = useExercisesStore((state) => state.setSearch);
+  // const exercises = useExercisesStore((state) => state.displayedExercises);
+  // const search = useExercisesStore((state) => state.search);
+  // const setSearch = useExercisesStore((state) => state.setSearch);
 
   // const selectedFilters = useExercisesStore((state) => state.selectedFilters);
   // console.log('selectedFilters', selectedFilters);
@@ -35,26 +35,28 @@ function LibraryView() {
   const [filterOpened, filterHandler] = useDisclosure(false);
   const combobox = useCombobox();
 
-  const shouldFilterOptions = !exercises.some(
-    (exercise) => exercise.name === search,
-  );
-  const filteredOptions = shouldFilterOptions
-    ? exercises
-        .filter((exercise) =>
-          exercise.name.toLowerCase().includes(search.toLowerCase().trim()),
-        )
-        .map((ex) => ex.name)
-    : exercises.map((ex) => ex.name);
+  // const shouldFilterOptions = !exercises.some(
+  //   (exercise) => exercise.name === search,
+  // );
+  // const filteredOptions = shouldFilterOptions
+  //   ? exercises
+  //       .filter((exercise) =>
+  //         exercise.name.toLowerCase().includes(search.toLowerCase().trim()),
+  //       )
+  //       .map((ex) => ex.name)
+  //   : exercises.map((ex) => ex.name);
 
-  const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
-    </Combobox.Option>
-  ));
+  // Options displayed on search, enable later
+  // const options = filteredOptions.map((item) => (
+  //   <Combobox.Option value={item} key={item}>
+  //     {item}
+  //   </Combobox.Option>
+  // ));
 
-  const handleClearSearch = () => {
-    setSearch('');
-  };
+  // Enable later
+  // const handleClearSearch = () => {
+  //   setSearch('');
+  // };
 
   const handleClickFilter = () => {
     console.log('clicked filter btn');
@@ -66,38 +68,42 @@ function LibraryView() {
       <Title size="h6">Exercise Library</Title>
       <Group>
         <Combobox
-          onOptionSubmit={(optionValue) => {
-            setSearch(optionValue);
-            combobox.closeDropdown();
-          }}
+          // Enable later
+          // onOptionSubmit={(optionValue) => {
+          //   setSearch(optionValue);
+          //   combobox.closeDropdown();
+          // }}
           store={combobox}
         >
           <Combobox.Target>
             <TextInput
               style={{ flex: 1 }}
               leftSection={<IoSearchOutline />}
-              rightSection={
-                search && (
-                  <CloseButton
-                    onClick={handleClearSearch}
-                    icon={<IoCloseOutline />}
-                  />
-                )
-              }
+              // Enable later
+              // rightSection={
+              //   search && (
+              //     <CloseButton
+              //       onClick={handleClearSearch}
+              //       icon={<IoCloseOutline />}
+              //     />
+              //   )
+              // }
               placeholder="Search exercises"
-              value={search}
-              onChange={(event) => {
-                setSearch(event.currentTarget.value);
-                combobox.openDropdown();
-              }}
+              // Enable later
+              // value={search}
+              // onChange={(event) => {
+              //   setSearch(event.currentTarget.value);
+              //   combobox.openDropdown();
+              // }}
               onClick={() => combobox.openDropdown()}
               onFocus={() => combobox.openDropdown()}
               onBlur={() => combobox.closeDropdown()}
             />
           </Combobox.Target>
-          <Combobox.Dropdown hidden={options.length === 0}>
+          {/* Enable later */}
+          {/* <Combobox.Dropdown hidden={options.length === 0}>
             <Combobox.Options>{options}</Combobox.Options>
-          </Combobox.Dropdown>
+          </Combobox.Dropdown> */}
         </Combobox>
         <ActionIcon
           variant="outline"
@@ -109,7 +115,8 @@ function LibraryView() {
         </ActionIcon>
       </Group>
       <Stack align="center">
-        <SimpleGrid
+        {/* Replace exercises with updated list */}
+        {/* <SimpleGrid
           cols={{ base: 1, md: 2, lg: 3 }}
           spacing={{ base: 'lg' }}
           verticalSpacing={{ base: 'lg' }}
@@ -117,7 +124,7 @@ function LibraryView() {
           {exercises.map((exercise, i) => (
             <ExerciseCard key={i} exercise={exercise} />
           ))}
-        </SimpleGrid>
+        </SimpleGrid> */}
       </Stack>
       <FilterOverlay opened={filterOpened} handler={filterHandler} />
     </Stack>
