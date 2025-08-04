@@ -15,7 +15,6 @@ const Selections = memo(function Selections({
   group: FilterGroup;
   selections: Selection[];
 }) {
-  // console.log('render FilterSelection');
   return (
     <>
       {selections.map((selection) => {
@@ -38,7 +37,6 @@ export default function FilterSelections() {
   return (
     <>
       {uniqueFilterGroupNames.map((group) => {
-        // console.log('render FilterGroup');
         return (
           <Stack gap="sm" key={group}>
             <Text
