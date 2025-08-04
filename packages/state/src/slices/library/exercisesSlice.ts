@@ -86,7 +86,8 @@ export const createExercisesSlice: StateCreator<StoreState, [], [], ExercisesSli
     if (!state.isFilterApplied) {
       return {
         displayedExercises: state.masterExercises,
-        isFilterBySearchApplied: false
+        isFilterBySearchApplied: false,
+        exerciseSearch: '',
       }
     }
     state.filterDisplayedExercises()
