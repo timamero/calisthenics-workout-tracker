@@ -51,8 +51,8 @@ function LibraryView() {
   //   setSearch('');
   // };
 
+  // Opens the filter overlay
   const handleClickFilter = () => {
-    console.log('clicked filter btn');
     filterHandler.open();
   };
 
