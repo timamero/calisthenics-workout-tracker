@@ -25,8 +25,11 @@ export const Route = createFileRoute('/library')({
 
 function LibraryView() {
   const search = useStore((state) => state.exerciseSearch);
+  const isFilterBySearchApplied = useStore(
+    (state) => state.isFilterBySearchApplied,
+  );
   const setSearch = useStore((state) => state.setExerciseSearch);
-  const exercises = useStore((state) => state.displayedExercises);
+  const exercises = useStore((state) => state.masterExercises);
   const filterDisplayedExercisesBySearch = useStore(
     (state) => state.filterDisplayedExercisesBySearch,
   );
@@ -98,6 +101,7 @@ function LibraryView() {
               }
               placeholder="Search exercises"
               value={search}
+              disabled={isFilterBySearchApplied}
               onChange={(event) => {
                 setSearch(event.currentTarget.value);
                 combobox.openDropdown();
