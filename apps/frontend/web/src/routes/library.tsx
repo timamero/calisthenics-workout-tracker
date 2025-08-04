@@ -29,12 +29,16 @@ function LibraryView() {
   const isFilterBySearchApplied = useStore(
     (state) => state.isFilterBySearchApplied,
   );
+  const isFilterApplied = useStore((state) => state.isFilterApplied);
   const setSearch = useStore((state) => state.setExerciseSearch);
   const resetDisplayedExerciseBySearch = useStore(
     (state) => state.resetDisplayedExerciseBySearch,
   );
   const filterDisplayedExercisesBySearch = useStore(
     (state) => state.filterDisplayedExercisesBySearch,
+  );
+  const filterDisplayedExercise = useStore(
+    (state) => state.filterDisplayedExercises,
   );
 
   const [filterOpened, filterHandler] = useDisclosure(false);
@@ -60,6 +64,10 @@ function LibraryView() {
 
   const handleClearSearch = () => {
     resetDisplayedExerciseBySearch();
+
+    if (isFilterApplied) {
+      filterDisplayedExercise();
+    }
   };
 
   type HandleKeyDownEvent = React.KeyboardEvent<HTMLInputElement>;
