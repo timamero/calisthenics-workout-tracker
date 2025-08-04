@@ -86,11 +86,12 @@ export const createExercisesSlice: StateCreator<StoreState, [], [], ExercisesSli
     if (!state.isFilterApplied) {
       return {
         displayedExercises: state.masterExercises,
+        isFilterBySearchApplied: false
       }
     }
     state.filterDisplayedExercises()
 
-    return { ...state}
+    return { isFilterBySearchApplied: false, exerciseSearch: ''}
   }),
   resetDisplayedExercises: () => set((state) => ({
     displayedExercises: state.masterExercises,
