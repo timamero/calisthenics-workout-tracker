@@ -11,9 +11,11 @@ export interface ExercisesSlice {
   masterExercises: Exercise[]
   displayedExercises: Exercise[]
   isFilterApplied: boolean;
+  exerciseSearch: string;
   setExercises: (exercises: Exercise[]) => void
   filterDisplayedExercises: () => void
-  filterDisplayedExercisesBySearch: (search: string) => void
+  setExerciseSearch: (search: string) => void
+  filterDisplayedExercisesBySearch: () => void
   resetDisplayedExercises: () => void
 }
 
@@ -21,6 +23,7 @@ export const createExercisesSlice: StateCreator<StoreState, [], [], ExercisesSli
   masterExercises: [],
   displayedExercises: [],
   isFilterApplied: false,
+  exerciseSearch: "",
   setExercises: (exercises) => set(() => {
     const sortedExercises = exercises.sort((a, b) => a.name.localeCompare(b.name))
     return {
@@ -68,10 +71,11 @@ export const createExercisesSlice: StateCreator<StoreState, [], [], ExercisesSli
       displayedExercises: filteredExercises
     }
   }),
-  filterDisplayedExercisesBySearch: (search) => set((state) => {
-    // code to filter exercises by search
+  setExerciseSearch: (search) => set(() => ({exerciseSearch: search})),
+  filterDisplayedExercisesBySearch: () => set((state) => {
+    const filteredExercises = state.displayedExercises.filter((obj) => obj.name.toLowerCase().includes(state.exerciseSearch.toLowerCase()))
     return {
-      displayedExercises: state.displayedExercises
+      displayedExercises: filteredExercises
     }
   }),
   resetDisplayedExercises: () => set((state) => ({
