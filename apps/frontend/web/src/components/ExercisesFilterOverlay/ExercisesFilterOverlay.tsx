@@ -25,16 +25,21 @@ export default function ExercisesFilterOverlay({
   const isFilterApplied = useStore((state) => state.isFilterApplied);
 
   const handleApplyFiltersClick = () => {
-    console.log('clicked on apply filters');
     setAppliedFilterSelections();
     filterDisplayedExercises();
     handler.close();
   };
 
+  const handleClearFiltersClick = () => {
+    clearFilterCheckboxSelections();
+    handler.close();
+  };
+
   const onFilterOverlayClose = () => {
-    console.log('onFilterOverlayClose called');
     handler.close();
     if (!isFilterApplied) {
+      console.log('clearing filters');
+      // Do not clear the filter selection if there are currently filters applied
       clearFilterCheckboxSelections();
     }
   };
@@ -58,7 +63,7 @@ export default function ExercisesFilterOverlay({
         <Button
           color="gray"
           variant="outline"
-          onClick={clearFilterCheckboxSelections}
+          onClick={() => handleClearFiltersClick()}
         >
           Clear All
         </Button>
