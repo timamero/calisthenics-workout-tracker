@@ -61,6 +61,7 @@ function LibraryView() {
   const handleKeyDown = (e: HandleKeyDownEvent): void => {
     if (e.code === 'Enter') {
       console.log('clicked Enter');
+      combobox.closeDropdown();
     }
   };
 
