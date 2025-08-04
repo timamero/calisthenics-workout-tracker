@@ -39,12 +39,15 @@ export default function ExercisesFilterOverlay({
     handler.close();
   };
 
+  // Called when overlay closes from clicking outside of modal
+  // or clicking the close button
   const onFilterOverlayClose = () => {
     handler.close();
     if (!isFilterApplied) {
-      console.log('clearing filters');
       // Do not clear the filter selection if there are currently filters applied
       clearFilterCheckboxSelections();
+    } else {
+      // Filters are applied, need to set selectedFilter back to same state as applied
     }
   };
 
