@@ -56,6 +56,14 @@ function LibraryView() {
     setSearch('');
   };
 
+  type HandleKeyDownEvent = React.KeyboardEvent<HTMLInputElement>;
+
+  const handleKeyDown = (e: HandleKeyDownEvent): void => {
+    if (e.code === 'Enter') {
+      console.log('clicked Enter');
+    }
+  };
+
   // Opens the filter overlay
   const handleClickFilter = () => {
     filterHandler.open();
@@ -92,6 +100,7 @@ function LibraryView() {
                 setSearch(event.currentTarget.value);
                 combobox.openDropdown();
               }}
+              onKeyDown={handleKeyDown}
               onClick={() => combobox.openDropdown()}
               onFocus={() => combobox.openDropdown()}
               onBlur={() => combobox.closeDropdown()}
