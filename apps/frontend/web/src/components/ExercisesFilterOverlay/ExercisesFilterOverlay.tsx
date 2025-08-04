@@ -13,16 +13,19 @@ export default function ExercisesFilterOverlay({
   opened,
   handler,
 }: ExercisesFilterOverlayProps) {
+  const isFilterApplied = useStore((state) => state.isFilterApplied);
   const clearFilterCheckboxSelections = useStore(
     (state) => state.clearFilterCheckboxSelections,
   );
   const setAppliedFilterSelections = useStore(
     (state) => state.setAppliedFilterSelections,
   );
+  const revertFilterCheckboxSelections = useStore(
+    (state) => state.revertFilterCheckboxSelections,
+  );
   const filterDisplayedExercises = useStore(
     (state) => state.filterDisplayedExercises,
   );
-  const isFilterApplied = useStore((state) => state.isFilterApplied);
   const resetDisplayedExercises = useStore(
     (state) => state.resetDisplayedExercises,
   );
@@ -47,7 +50,8 @@ export default function ExercisesFilterOverlay({
       // Do not clear the filter selection if there are currently filters applied
       clearFilterCheckboxSelections();
     } else {
-      // Filters are applied, need to set selectedFilter back to same state as applied
+      // Revert the state of filterCheckboxSelections when changes are cancelled
+      revertFilterCheckboxSelections();
     }
   };
 
