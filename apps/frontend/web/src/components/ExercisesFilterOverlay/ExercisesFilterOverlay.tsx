@@ -14,6 +14,9 @@ export default function ExercisesFilterOverlay({
   handler,
 }: ExercisesFilterOverlayProps) {
   const isFilterApplied = useStore((state) => state.isFilterApplied);
+  const isFilterBySearchApplied = useStore(
+    (state) => state.isFilterBySearchApplied,
+  );
   const clearFilterCheckboxSelections = useStore(
     (state) => state.clearFilterCheckboxSelections,
   );
@@ -25,6 +28,9 @@ export default function ExercisesFilterOverlay({
   );
   const filterDisplayedExercises = useStore(
     (state) => state.filterDisplayedExercises,
+  );
+  const filterDisplayedExercisesBySearch = useStore(
+    (state) => state.filterDisplayedExercisesBySearch,
   );
   const resetDisplayedExercises = useStore(
     (state) => state.resetDisplayedExercises,
@@ -39,6 +45,9 @@ export default function ExercisesFilterOverlay({
   const handleClearFiltersClick = () => {
     clearFilterCheckboxSelections();
     resetDisplayedExercises();
+    if (isFilterBySearchApplied) {
+      filterDisplayedExercisesBySearch();
+    }
     handler.close();
   };
 
@@ -85,3 +94,27 @@ export default function ExercisesFilterOverlay({
     </Modal>
   );
 }
+
+// OK
+// filter beginner;
+// search "squat;"
+// filter biceps;
+// clear filters;
+
+// ok
+// search up; 9 exercises
+// filter advanced; 
+// clear filters; 
+// filter abs;
+// clear search;
+// apply new filters: chest bar;
+// apply new filter: bar;
+
+// ok
+// filter bar
+// search squat
+// cancel search 
+
+//
+// search squat
+// filter
