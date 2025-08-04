@@ -64,7 +64,23 @@ export const createExercisesFilterSlice: StateCreator<StoreState, [], [], Exerci
       filterCheckboxSelections: clearedSelections
     }
   }),
-  revertFilterCheckboxSelections: () => set((state) => ({
-    filterCheckboxSelections: state.appliedFilterSelections
-  }))
+  revertFilterCheckboxSelections: () => set((state) => {
+    const appliedSelections = state.appliedFilterSelections.map((obj) => obj.selection)
+    const revertedFilterSelections = state.filterCheckboxSelections.map((obj) => {
+      if (appliedSelections.includes(obj.selection)) {
+        return {
+          ...obj,
+          value: true
+        }
+      }
+
+      return {
+        ...obj,
+        value: false
+      }
+    })
+    return {
+      filterCheckboxSelections: revertedFilterSelections
+    }
+  })
 })
