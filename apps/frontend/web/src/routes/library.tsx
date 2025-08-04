@@ -24,7 +24,7 @@ export const Route = createFileRoute('/library')({
 });
 
 function LibraryView() {
-  const exercises = useStore((state) => state.masterExercises);
+  const exercises = useStore((state) => state.displayedExercises);
   const search = useStore((state) => state.exerciseSearch);
   const isFilterBySearchApplied = useStore(
     (state) => state.isFilterBySearchApplied,
