@@ -92,7 +92,6 @@ export const createExercisesSlice: StateCreator<StoreState, [], [], ExercisesSli
         exerciseSearch: '',
       }
     }
-    state.filterDisplayedExercises()
 
     return { isFilterBySearchApplied: false, exerciseSearch: ''}
   }),
