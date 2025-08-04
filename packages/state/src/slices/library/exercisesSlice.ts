@@ -75,6 +75,7 @@ export const createExercisesSlice: StateCreator<StoreState, [], [], ExercisesSli
     }
   }),
   resetDisplayedExercises: () => set((state) => ({
-    displayedExercises: state.masterExercises
+    displayedExercises: state.masterExercises,
+    isFilterApplied: false
   }))
 })
