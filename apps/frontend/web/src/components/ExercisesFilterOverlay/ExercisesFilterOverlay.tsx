@@ -28,6 +28,7 @@ export default function ExercisesFilterOverlay({
     console.log('clicked on apply filters');
     setAppliedFilterSelections();
     filterDisplayedExercises();
+    handler.close();
   };
 
   const onFilterOverlayClose = () => {
