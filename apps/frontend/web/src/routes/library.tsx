@@ -15,7 +15,6 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import { useStore } from '@cwt/state/store';
-import { useExercisesStore } from '@cwt/state/exercises';
 
 import ExercisesList from '../components/ExercisesList';
 import ExercisesFilterOverlay from '../components/ExercisesFilterOverlay';
@@ -25,9 +24,12 @@ export const Route = createFileRoute('/library')({
 });
 
 function LibraryView() {
-  const search = useExercisesStore((state) => state.search);
-  const setSearch = useExercisesStore((state) => state.setSearch);
+  const search = useStore((state) => state.exerciseSearch);
+  const setSearch = useStore((state) => state.setExerciseSearch);
   const exercises = useStore((state) => state.displayedExercises);
+  const filterDisplayedExercisesBySearch = useStore(
+    (state) => state.filterDisplayedExercisesBySearch,
+  );
 
   const [filterOpened, filterHandler] = useDisclosure(false);
   const combobox = useCombobox();
@@ -65,7 +67,9 @@ function LibraryView() {
       <Group>
         <Combobox
           onOptionSubmit={(optionValue) => {
+            console.log('onOptionSubmit');
             setSearch(optionValue);
+            filterDisplayedExercisesBySearch();
             combobox.closeDropdown();
           }}
           store={combobox}
