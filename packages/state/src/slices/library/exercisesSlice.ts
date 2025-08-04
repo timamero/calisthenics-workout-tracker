@@ -41,10 +41,12 @@ export const createExercisesSlice: StateCreator<StoreState, [], [], ExercisesSli
       isFilterApplied: false
     }
 
+    const exercisesToFilter = state.isFilterBySearchApplied ? state.displayedExercises : state.masterExercises
+
     const appliedFilterGroupNames = appliedFilters.map((obj) => obj.group);
     const uniqueAppliedFilterGroupNames = Array.from(new Set(appliedFilterGroupNames));
     const appliedFilterSelections: Selection[] = appliedFilters.map((obj) => obj.selection)
-    const filteredExercises = state.masterExercises.filter((obj) => {
+    const filteredExercises = exercisesToFilter.filter((obj) => {
       const conditionals: boolean[] = []
       uniqueAppliedFilterGroupNames.forEach((group) => {
         if (typeof obj[group] === "string") {
