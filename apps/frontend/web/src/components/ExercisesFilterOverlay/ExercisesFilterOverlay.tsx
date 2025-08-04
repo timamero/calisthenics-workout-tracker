@@ -94,27 +94,3 @@ export default function ExercisesFilterOverlay({
     </Modal>
   );
 }
-
-// OK
-// filter beginner;
-// search "squat;"
-// filter biceps;
-// clear filters;
-
-// ok
-// search up; 9 exercises
-// filter advanced; 
-// clear filters; 
-// filter abs;
-// clear search;
-// apply new filters: chest bar;
-// apply new filter: bar;
-
-// ok
-// filter bar
-// search squat
-// cancel search 
-
-//
-// search squat
-// filter
