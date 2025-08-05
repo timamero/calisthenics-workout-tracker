@@ -1,7 +1,9 @@
-import { Card, Text, useTheme } from 'react-native-paper';
+import { Card, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
 import { CustomTheme } from '../theme';
+import { Text } from '../customText';
+
 import Pill, { sizeTypes } from './Pill';
 // use colors from mantine to match web
 // set up theme, the earlier i set it up the better in the long run
