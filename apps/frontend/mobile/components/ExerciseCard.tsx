@@ -4,14 +4,13 @@ import { Card, Text } from 'react-native-paper';
 export default function ExerciseCard() {
   return (
     <Card>
-      <Card.Title
-        title="Card Title"
-        subtitle="Card Subtitle"
-        // left={LeftContent}
-      />
+      <Card.Title title="Push Ups" right={() => <Text>Beginner</Text>} />
       <Card.Content>
-        <Text variant="titleLarge">Card title</Text>
-        <Text variant="bodyMedium">Card content</Text>
+        <Text variant="bodyMedium">Muscle</Text>
+        <Text variant="bodySmall">Chest</Text>
+        <Text variant="bodySmall">Triceps</Text>
+        <Text variant="bodyMedium">Equipment</Text>
+        <Text variant="bodySmall">None</Text>
       </Card.Content>
     </Card>
   );
