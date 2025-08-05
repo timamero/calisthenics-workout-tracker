@@ -14,16 +14,10 @@ export default function LibraryScreen() {
     <View
       style={{
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text>Library Screen</Text>
-      <Text>
-        This page will be the hub for exercises, progressions and progression
-        exercises.
-      </Text>
+      <Text>Exercise Library</Text>
       <ExerciseCard />
     </View>
   );
