@@ -10,6 +10,7 @@ import { Subscription } from '@supabase/supabase-js';
 
 import { useAuthStore } from '@cwt/state/auth';
 import { Exercise } from '@cwt/schema/exerciseSchema';
+import { useStore } from '@cwt/state/store';
 
 import { supabase } from './services/supabaseClient';
 import Navigation from './navigation';
@@ -343,9 +344,18 @@ const sampleExercises: Exercise[] = [
 ];
 
 export default function App() {
-  const setSession = useAuthStore((state) => state.setSession);
   const loading = useAuthStore((state) => state.loading);
+  const supabaseSession = useAuthStore((state) => state.session);
+
+  const setSession = useAuthStore((state) => state.setSession);
   const setLoading = useAuthStore((state) => state.setLoading);
+  const setExercises = useStore((state) => state.setExercises);
+
+  React.useEffect(() => {
+    if (supabaseSession) {
+      setExercises(sampleExercises);
+    }
+  }, [setExercises, supabaseSession]);
 
   React.useEffect(() => {
     let authListener: {
