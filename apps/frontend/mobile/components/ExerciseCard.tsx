@@ -1,17 +1,46 @@
-import * as React from 'react';
 import { Card, Text } from 'react-native-paper';
+import { View } from 'react-native';
+
+import Pill, { sizeTypes } from './Pill';
 
 export default function ExerciseCard() {
   return (
     <Card>
-      <Card.Title title="Push Ups" right={() => <Text>Beginner</Text>} />
+      <Card.Title
+        title="Push Ups"
+        right={() => <Pill size={sizeTypes.lg}>Beginner</Pill>}
+      />
       <Card.Content>
-        <Text variant="bodyMedium">Muscle</Text>
-        <Text variant="bodySmall">Chest</Text>
-        <Text variant="bodySmall">Triceps</Text>
-        <Text variant="bodyMedium">Equipment</Text>
-        <Text variant="bodySmall">None</Text>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+        >
+          <Text variant="bodyMedium">Muscle:</Text>
+          <View style={{ display: 'flex', flexDirection: 'row' }}>
+            <Pill>Bicep</Pill>
+            <Pill>Triceps</Pill>
+          </View>
+        </View>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+        >
+          <Text variant="bodyMedium">Equipment</Text>
+          <View style={{ display: 'flex', flexDirection: 'row' }}>
+            <Pill>None</Pill>
+          </View>
+        </View>
       </Card.Content>
     </Card>
   );
 }
+
+// styles = StyleSheet.create({
+
+// })
