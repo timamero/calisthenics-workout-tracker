@@ -5,7 +5,7 @@ import Pill, { sizeTypes } from './Pill';
 
 export default function ExerciseCard() {
   return (
-    <Card>
+    <Card style={{ marginBlock: 12, marginInline: 16 }}>
       <Card.Title
         title="Push Ups"
         right={() => <Pill size={sizeTypes.lg}>Beginner</Pill>}
@@ -40,7 +40,3 @@ export default function ExerciseCard() {
     </Card>
   );
 }
-
-// styles = StyleSheet.create({
-
-// })
