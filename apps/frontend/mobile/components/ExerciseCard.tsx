@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 
-import Pill, { sizeTypes } from './Pill';
+import Pill from './Pill';
 // use colors from mantine to match web
 // set up theme, the earlier i set it up the better in the long run
 export default function ExerciseCard() {
@@ -21,25 +21,6 @@ export default function ExerciseCard() {
         padding: 16,
       }}
     >
-      {/* <Card.Content style={{ paddingTop: 0, paddingHorizontal: 0 }}>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Pill size={sizeTypes.lg}>Beginner</Pill>
-        </View>
-      </Card.Content> */}
-      {/* <Card.Title
-        title="Push Ups"
-        style={{
-          paddingLeft: 0,
-          minHeight: 'auto',
-          marginBottom: 12,
-        }}
-      /> */}
       <Card.Content style={{ paddingHorizontal: 0, paddingVertical: 0 }}>
         <View style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <View
@@ -49,7 +30,7 @@ export default function ExerciseCard() {
               justifyContent: 'flex-end',
             }}
           >
-            <Pill size={sizeTypes.lg}>Beginner</Pill>
+            <Pill>Beginner</Pill>
           </View>
           <View
             style={{
@@ -59,7 +40,7 @@ export default function ExerciseCard() {
               marginBottom: 12,
             }}
           >
-            <Text style={{ fontSize: 16 }}>Pull Ups</Text>
+            <Text style={{ fontSize: 16, fontWeight: 700 }}>Pull Ups</Text>
           </View>
           <View
             style={{
@@ -69,7 +50,10 @@ export default function ExerciseCard() {
               gap: 12,
             }}
           >
-            <Text variant="bodyMedium" style={{ textTransform: 'uppercase' }}>
+            <Text
+              variant="bodySmall"
+              style={{ textTransform: 'uppercase', color: colors.grey }}
+            >
               Muscle:
             </Text>
             <View style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
@@ -85,8 +69,11 @@ export default function ExerciseCard() {
               gap: 12,
             }}
           >
-            <Text variant="bodyMedium" style={{ textTransform: 'uppercase' }}>
-              Equipment
+            <Text
+              variant="bodySmall"
+              style={{ textTransform: 'uppercase', color: colors.grey }}
+            >
+              Equipment:
             </Text>
             <View style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
               <Pill>None</Pill>
