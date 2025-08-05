@@ -23,5 +23,11 @@
 		"husky": "^9.1.7",
 		"turbo": "^2.5.3"
 	},
+  "pnpm": {
+    "overrides": {
+			"react": "19.0.0",
+      "@types/react": "18.2.76"
+    }
+  },
 	"packageManager": "pnpm@10.12.4"
 }
