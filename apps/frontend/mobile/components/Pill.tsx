@@ -1,7 +1,7 @@
 import { Text, useTheme } from 'react-native-paper';
 // import { View } from 'react-native';
 
-import { CustomTheme } from '../App';
+import { CustomTheme } from '../theme';
 
 export enum sizeTypes {
   sm = 'sm',
