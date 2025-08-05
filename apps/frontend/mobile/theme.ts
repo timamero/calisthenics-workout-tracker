@@ -1,4 +1,8 @@
-import { MD3LightTheme as DefaultTheme } from 'react-native-paper';
+import {
+  MD3LightTheme as DefaultTheme,
+  configureFonts,
+} from 'react-native-paper';
+import { Platform } from 'react-native';
 
 export type CustomTheme = typeof DefaultTheme & {
   colors: typeof DefaultTheme.colors & {
@@ -6,8 +10,24 @@ export type CustomTheme = typeof DefaultTheme & {
   };
 };
 
+const fontConfig = {
+  default: {
+    fontFamily: Platform.select({
+      web: 'Courier New, Courier, monospace',
+      ios: 'Courier',
+      android: 'monospace',
+      default: 'monospace',
+    }),
+    fontWeight: '400',
+    letterSpacing: 0,
+    fontSize: 16,
+    lineHeight: 24,
+  },
+} as const;
+
 const theme: CustomTheme = {
   ...DefaultTheme,
+  fonts: configureFonts({ config: fontConfig }),
   colors: {
     ...DefaultTheme.colors,
     primary: 'rbg(255, 99, 71)', // tomato

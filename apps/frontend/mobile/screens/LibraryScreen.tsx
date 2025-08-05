@@ -1,5 +1,7 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+
+import { Text } from '../customText';
 
 import ExerciseList from '../components/ExerciseList';
 
