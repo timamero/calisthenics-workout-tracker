@@ -2,7 +2,8 @@ import { Card, Text } from 'react-native-paper';
 import { View } from 'react-native';
 
 import Pill, { sizeTypes } from './Pill';
-
+// use colors from mantine to match web
+// set up theme, the earlier i set it up the better in the long run
 export default function ExerciseCard() {
   return (
     <Card style={{ marginBlock: 12, marginInline: 16 }}>

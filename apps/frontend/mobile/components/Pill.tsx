@@ -1,5 +1,7 @@
-import { Text } from 'react-native-paper';
+import { Text, useTheme } from 'react-native-paper';
 // import { View } from 'react-native';
+
+import { CustomTheme } from '../App';
 
 export enum sizeTypes {
   sm = 'sm',
@@ -12,20 +14,21 @@ interface PillProps {
 }
 
 export default function Pill({ size = sizeTypes.sm, children }: PillProps) {
+  const { colors } = useTheme() as CustomTheme;
+
   const textSize = size === sizeTypes.sm ? 12 : 14;
   return (
-    // <View style={{ width: 'auto' }}>
     <Text
       style={{
         paddingInline: 12,
         paddingBlock: 4,
-        backgroundColor: '#ADD8E6',
+        backgroundColor: colors.blue,
         borderRadius: 12,
         fontSize: textSize,
+        color: 'white',
       }}
     >
       {children}
     </Text>
-    // </View>
   );
 }
