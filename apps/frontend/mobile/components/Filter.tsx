@@ -2,7 +2,11 @@ import * as React from 'react';
 import { IconButton } from 'react-native-paper';
 import { View } from 'react-native';
 
-const Filter = () => (
+interface FilterProps {
+  handleShowModal: () => void;
+}
+
+const Filter = ({ handleShowModal }: FilterProps) => (
   <View
     style={{
       display: 'flex',
@@ -17,7 +21,7 @@ const Filter = () => (
       icon="filter-variant"
       iconColor="rgb(46, 46, 46)"
       size={20}
-      onPress={() => console.log('Pressed')}
+      onPress={handleShowModal}
       style={{
         borderColor: 'rgb(46, 46, 46)',
         borderWidth: 2,
