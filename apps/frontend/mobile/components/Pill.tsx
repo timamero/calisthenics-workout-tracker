@@ -4,28 +4,34 @@ import { StyleSheet } from 'react-native';
 import { CustomTheme } from '../theme';
 
 interface PillProps {
+  textColor: string;
   children: string;
 }
 
-export default function Pill({ children }: PillProps) {
+export default function Pill({ textColor, children }: PillProps) {
   const theme = useTheme() as CustomTheme;
-  const styles = getStyles(theme);
+  const baseStyles = getBaseStyles(theme);
+
+  const colorStyle = { color: textColor };
+  const combinedStyles = { ...colorStyle, ...baseStyles };
+
+  const pillStyles = StyleSheet.create({
+    pill: combinedStyles,
+  });
 
   return (
-    <Text variant="bodySmall" style={styles.pill}>
+    <Text variant="bodySmall" style={pillStyles.pill}>
       {children}
     </Text>
   );
 }
 
-const getStyles = (theme: CustomTheme) =>
-  StyleSheet.create({
-    pill: {
-      paddingInline: 12,
-      paddingBlock: 4,
-      backgroundColor: theme.colors.blue,
-      borderRadius: 12,
-      color: 'white',
-      textTransform: 'uppercase',
-    },
-  });
+const getBaseStyles = (theme: CustomTheme) => {
+  return {
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    backgroundColor: theme.colors.blue,
+    borderRadius: 12,
+    textTransform: 'uppercase' as 'uppercase',
+  };
+};

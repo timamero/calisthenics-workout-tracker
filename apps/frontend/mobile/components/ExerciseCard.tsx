@@ -20,7 +20,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
     <Card style={styles.card}>
       <Card.Content style={styles.cardContent}>
         <View style={styles.difficultyContainer}>
-          <Pill>{exercise.difficulty}</Pill>
+          <Pill textColor="white">{exercise.difficulty}</Pill>
         </View>
         <View style={styles.titleContainer}>
           <Text variant="headlineMedium">{exercise.name}</Text>
@@ -31,7 +31,11 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           </Text>
           <View style={styles.metadataPillsContainer}>
             {exercise.target_muscles.map((muscle, i) => {
-              return <Pill key={i}>{muscle}</Pill>;
+              return (
+                <Pill textColor="rgb(190, 75, 219)" key={i}>
+                  {muscle}
+                </Pill>
+              );
             })}
           </View>
         </View>
@@ -42,10 +46,12 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           <View style={styles.metadataPillsContainer}>
             {exercise.required_equipment == null ||
             exercise.required_equipment.length === 0 ? (
-              <Pill>---</Pill>
+              <Pill textColor="rgb(46, 46, 46)">---</Pill>
             ) : (
               exercise.required_equipment.map((equipment, i) => (
-                <Pill key={i}>{equipment}</Pill>
+                <Pill textColor="rgb(46, 46, 46)" key={i}>
+                  {equipment}
+                </Pill>
               ))
             )}
           </View>
