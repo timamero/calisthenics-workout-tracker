@@ -27,14 +27,11 @@ export default function Pill({
     : {};
   const combinedPillStyles = {
     ...colorStyle,
-    // ...backgroundColorStyle,
-    // ...borderStyle,
     ...basePillStyles,
   };
   const combinedContainerStyles = {
     ...borderStyle,
     ...backgroundColorStyle,
-    // ...borderStyle,
     ...baseContainerStyles,
   };
 
@@ -54,10 +51,8 @@ export default function Pill({
 
 const getPillBaseStyles = (theme: CustomTheme) => {
   return {
-    // paddingHorizontal: 12,
-    // paddingVertical: 4,
-    // // backgroundColor: theme.colors.blue,
-    // borderRadius: 12,
+    fontSize: 11,
+    fontWeight: 700,
     textTransform: 'uppercase' as 'uppercase',
   };
 };
@@ -66,8 +61,6 @@ const getContainerBaseStyles = (theme: CustomTheme) => {
   return {
     paddingHorizontal: 12,
     paddingVertical: 4,
-    // backgroundColor: theme.colors.blue,
     borderRadius: 20,
-    // textTransform: 'uppercase' as 'uppercase',
   };
 };
