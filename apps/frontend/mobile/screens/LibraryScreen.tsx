@@ -4,6 +4,7 @@ import { useTheme } from 'react-native-paper';
 import { Text } from '../customText';
 
 import ExerciseList from '../components/ExerciseList';
+import SearchBar from '../components/SearchBar';
 
 export default function LibraryScreen() {
   const theme = useTheme();
@@ -16,6 +17,7 @@ export default function LibraryScreen() {
       }}
     >
       <Text>Exercise Library</Text>
+      <SearchBar />
       <ExerciseList />
     </View>
   );
