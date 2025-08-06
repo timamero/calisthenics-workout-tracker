@@ -1,24 +1,29 @@
 import { Card, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
+import { Exercise } from '@cwt/schema/exerciseSchema';
+
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 
 import Pill from './Pill';
 
-export default function ExerciseCard() {
+interface ExerciseCardProps {
+  exercise: Exercise;
+}
+
+export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
   return (
     <Card style={styles.card}>
       <Card.Content style={styles.cardContent}>
-        {/* <View style={{ display: 'flex', flexDirection: 'column', gap: 12 }}> */}
         <View style={styles.difficultyContainer}>
           <Pill>Beginner</Pill>
         </View>
         <View style={styles.titleContainer}>
-          <Text variant="headlineMedium">Pull Ups</Text>
+          <Text variant="headlineMedium">{exercise.name}</Text>
         </View>
         <View style={styles.exerciseMetadataContainer}>
           <Text variant="bodySmall" style={styles.exerciseMetadataTitle}>
