@@ -23,7 +23,7 @@ export default function Pill({
   const colorStyle = { color: textColor };
   const backgroundColorStyle = { backgroundColor: backgroundColor };
   const borderStyle = borderColor
-    ? { borderColor: borderColor, borderWidth: 2 }
+    ? { borderColor: borderColor, borderWidth: 1 }
     : {};
   const combinedPillStyles = {
     ...colorStyle,
