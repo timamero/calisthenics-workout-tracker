@@ -52,7 +52,7 @@ export default function Pill({
 const getPillBaseStyles = (theme: CustomTheme) => {
   return {
     fontSize: 11,
-    fontWeight: 700,
+    fontWeight: '700' as '700',
     textTransform: 'uppercase' as 'uppercase',
   };
 };
