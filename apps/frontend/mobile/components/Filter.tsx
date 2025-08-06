@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IconButton } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { View } from 'react-native';
 
 interface FilterProps {
@@ -17,17 +17,20 @@ const Filter = ({ handleShowModal }: FilterProps) => (
     }}
   >
     {/* <Text></Text> Add filter results later */}
-    <IconButton
+    <Button
       icon="filter-variant"
-      iconColor="rgb(46, 46, 46)"
-      size={20}
-      onPress={handleShowModal}
+      mode="outlined"
+      textColor="rgb(46, 46, 46)"
+      contentStyle={{
+        flexDirection: 'row-reverse',
+      }}
       style={{
         borderColor: 'rgb(46, 46, 46)',
-        borderWidth: 2,
-        borderRadius: 4,
       }}
-    />
+      onPress={handleShowModal}
+    >
+      Filter
+    </Button>
   </View>
 );
 
