@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ScrollView, View } from 'react-native';
-import { useTheme, Modal, Portal, Button } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 import { Text } from '../customText';
 
