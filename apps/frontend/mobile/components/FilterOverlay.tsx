@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Modal, Portal } from 'react-native-paper';
+import { Modal, Portal, Checkbox } from 'react-native-paper';
+import { View } from 'react-native';
 
 import { Text } from '../customText';
 
@@ -12,6 +13,8 @@ export default function FilterOverlay({
   visible,
   handleHideModal,
 }: FilterOverlayProps) {
+  const [checked, setChecked] = React.useState(false);
+
   const containerStyle = { backgroundColor: 'white', padding: 20 };
 
   return (
@@ -21,7 +24,22 @@ export default function FilterOverlay({
         onDismiss={handleHideModal}
         contentContainerStyle={containerStyle}
       >
-        <Text>Example Modal. Click outside this area to dismiss.</Text>
+        <Text variant="headlineMedium">Filter Overlay</Text>
+        <Text
+          style={{ textTransform: 'uppercase', fontWeight: 400 }}
+          variant="headlineMedium"
+        >
+          Muscles
+        </Text>
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <Checkbox.Item
+            label="Chest"
+            status={checked ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setChecked(!checked);
+            }}
+          />
+        </View>
       </Modal>
     </Portal>
   );
