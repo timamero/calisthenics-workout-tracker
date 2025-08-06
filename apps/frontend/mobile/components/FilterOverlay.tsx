@@ -31,14 +31,43 @@ export default function FilterOverlay({
         >
           Muscles
         </Text>
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
-          <Checkbox.Item
-            label="Chest"
-            status={checked ? 'checked' : 'unchecked'}
-            onPress={() => {
-              setChecked(!checked);
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <View
+            style={{
+              borderWidth: 1,
+              borderRadius: 40,
+              borderColor: 'rgb(222, 226, 230)',
             }}
-          />
+          >
+            <Checkbox.Item
+              label="Chest"
+              labelVariant="bodySmall"
+              uncheckedColor="rgb(222, 226, 230)"
+              labelStyle={{
+                textTransform: 'uppercase',
+                color: 'rgb(46, 46, 46)',
+              }}
+              status={checked ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+              background={{
+                color: 'rgba(255, 99, 71, 0.3)',
+                radius: 40,
+                borderless: true,
+              }}
+              style={{
+                paddingVertical: 2,
+                paddingHorizontal: 8,
+                paddingLeft: 12,
+              }}
+            />
+          </View>
         </View>
       </Modal>
     </Portal>
