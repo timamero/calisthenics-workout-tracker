@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Modal, Portal } from 'react-native-paper';
-import { View } from 'react-native';
 
 import { Text } from '../../customText';
 
-import FilterCheckbox from './FilterCheckbox';
+import FilterSelections from './FilterSelections';
 
 export type FilterOverlayProps = {
   visible: boolean;
@@ -25,20 +24,7 @@ export default function FilterOverlay({
         contentContainerStyle={containerStyle}
       >
         <Text variant="headlineMedium">Filter Overlay</Text>
-        <Text
-          style={{ textTransform: 'uppercase', fontWeight: 400 }}
-          variant="headlineMedium"
-        >
-          Muscles
-        </Text>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-          }}
-        >
-          <FilterCheckbox />
-        </View>
+        <FilterSelections />
       </Modal>
     </Portal>
   );
