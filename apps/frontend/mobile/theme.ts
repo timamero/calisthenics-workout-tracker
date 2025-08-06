@@ -67,7 +67,7 @@ const theme: CustomTheme = {
   fonts: configureFonts({ config: fontConfig }),
   colors: {
     ...DefaultTheme.colors,
-    primary: 'tomato', // tomato, 'rbg(255, 99, 71)'
+    primary: 'rgb(255, 99, 71)', // tomato,
     secondary: 'rgb(219, 100, 50)',
     background: 'rgb(255, 255, 255)',
     blue: 'rgb(34, 139, 230)',
