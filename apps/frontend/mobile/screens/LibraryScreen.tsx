@@ -7,6 +7,7 @@ import { Text } from '../customText';
 import ExerciseList from '../components/ExerciseList';
 import SearchBar from '../components/SearchBar';
 import Filter from '../components/Filter';
+import FilterOverlay from '../components/FilterOverlay';
 
 export default function LibraryScreen() {
   const theme = useTheme();
@@ -15,7 +16,6 @@ export default function LibraryScreen() {
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const containerStyle = { backgroundColor: 'white', padding: 20 };
 
   return (
     <View
@@ -30,15 +30,7 @@ export default function LibraryScreen() {
         <Filter handleShowModal={showModal} />
         <ExerciseList />
       </ScrollView>
-      <Portal>
-        <Modal
-          visible={visible}
-          onDismiss={hideModal}
-          contentContainerStyle={containerStyle}
-        >
-          <Text>Example Modal. Click outside this area to dismiss.</Text>
-        </Modal>
-      </Portal>
+      <FilterOverlay visible={visible} handleHideModal={hideModal} />
     </View>
   );
 }
