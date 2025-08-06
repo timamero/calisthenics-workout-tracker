@@ -67,6 +67,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
                 <Pill
                   backgroundColor="white"
                   textColor="rgb(46, 46, 46)"
+                  borderColor="rgb(46, 46, 46)"
                   key={i}
                 >
                   {equipment}
