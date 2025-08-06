@@ -16,11 +16,20 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
+  const difficultyColor =
+    exercise.difficulty === 'beginner'
+      ? '#228be6'
+      : exercise.difficulty === 'intermediate'
+        ? '#fab005'
+        : '#fa5252';
+
   return (
     <Card style={styles.card}>
       <Card.Content style={styles.cardContent}>
         <View style={styles.difficultyContainer}>
-          <Pill textColor="white">{exercise.difficulty}</Pill>
+          <Pill backgroundColor={difficultyColor} textColor="white">
+            {exercise.difficulty}
+          </Pill>
         </View>
         <View style={styles.titleContainer}>
           <Text variant="headlineMedium">{exercise.name}</Text>
@@ -32,7 +41,11 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           <View style={styles.metadataPillsContainer}>
             {exercise.target_muscles.map((muscle, i) => {
               return (
-                <Pill textColor="rgb(190, 75, 219)" key={i}>
+                <Pill
+                  backgroundColor="rgba(190, 75, 219, .1)"
+                  textColor="rgb(190, 75, 219)"
+                  key={i}
+                >
                   {muscle}
                 </Pill>
               );
@@ -46,10 +59,16 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           <View style={styles.metadataPillsContainer}>
             {exercise.required_equipment == null ||
             exercise.required_equipment.length === 0 ? (
-              <Pill textColor="rgb(46, 46, 46)">---</Pill>
+              <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
+                ---
+              </Pill>
             ) : (
               exercise.required_equipment.map((equipment, i) => (
-                <Pill textColor="rgb(46, 46, 46)" key={i}>
+                <Pill
+                  backgroundColor="white"
+                  textColor="rgb(46, 46, 46)"
+                  key={i}
+                >
                   {equipment}
                 </Pill>
               ))
