@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Modal, Portal, Checkbox, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
-import { Text } from '../customText';
-import theme from '../theme';
+import { Text } from '../../customText';
+// import theme from '../../theme';
 
 export type FilterOverlayProps = {
   visible: boolean;
@@ -14,7 +14,7 @@ export default function FilterOverlay({
   visible,
   handleHideModal,
 }: FilterOverlayProps) {
-  // const theme = useTheme()
+  const theme = useTheme();
   const [checked, setChecked] = React.useState(false);
 
   const containerStyle = { backgroundColor: 'white', padding: 20 };
