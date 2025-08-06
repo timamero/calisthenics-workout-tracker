@@ -1,10 +1,11 @@
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { Text } from '../customText';
 
 import ExerciseList from '../components/ExerciseList';
 import SearchBar from '../components/SearchBar';
+import Filter from '../components/Filter';
 
 export default function LibraryScreen() {
   const theme = useTheme();
@@ -17,8 +18,11 @@ export default function LibraryScreen() {
       }}
     >
       <Text>Exercise Library</Text>
-      <SearchBar />
-      <ExerciseList />
+      <ScrollView>
+        <SearchBar />
+        <Filter />
+        <ExerciseList />
+      </ScrollView>
     </View>
   );
 }
