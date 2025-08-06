@@ -24,7 +24,7 @@ export default function ExerciseCard() {
           <Text variant="bodySmall" style={styles.exerciseMetadataTitle}>
             Muscle:
           </Text>
-          <View style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+          <View style={styles.metadataPillsContainer}>
             <Pill>Bicep</Pill>
             <Pill>Triceps</Pill>
           </View>
@@ -33,7 +33,7 @@ export default function ExerciseCard() {
           <Text variant="bodySmall" style={styles.exerciseMetadataTitle}>
             Equipment:
           </Text>
-          <View style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+          <View style={styles.metadataPillsContainer}>
             <Pill>None</Pill>
           </View>
         </View>
@@ -81,4 +81,5 @@ const getStyles = (theme: CustomTheme) =>
       textTransform: 'uppercase',
       color: theme.colors.grey,
     },
+    metadataPillsContainer: { display: 'flex', flexDirection: 'row', gap: 8 },
   });
