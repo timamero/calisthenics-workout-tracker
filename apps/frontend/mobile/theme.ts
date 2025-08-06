@@ -24,6 +24,18 @@ const fontConfig = {
     fontSize: 16,
     lineHeight: 24,
   },
+  headlineMedium: {
+    fontFamily: Platform.select({
+      web: 'Courier New, Courier, monospace',
+      ios: 'Courier',
+      android: 'monospace',
+      default: 'monospace',
+    }),
+    fontSize: 16,
+    fontWeight: '700',
+    letterSpacing: 0,
+    lineHeight: 36,
+  },
   bodyLarge: {
     fontFamily: Platform.select({
       web: 'Courier New, Courier, monospace',

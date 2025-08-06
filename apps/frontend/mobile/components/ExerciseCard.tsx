@@ -18,7 +18,7 @@ export default function ExerciseCard() {
           <Pill>Beginner</Pill>
         </View>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Pull Ups</Text>
+          <Text variant="headlineMedium">Pull Ups</Text>
         </View>
         <View style={styles.exerciseMetadataContainer}>
           <Text variant="bodySmall" style={styles.exerciseMetadataTitle}>
@@ -71,7 +71,6 @@ const getStyles = (theme: CustomTheme) =>
       justifyContent: 'flex-start',
       marginBottom: 12,
     },
-    title: { fontSize: 16, fontWeight: 700 },
     exerciseMetadataContainer: {
       display: 'flex',
       flexDirection: 'row',
