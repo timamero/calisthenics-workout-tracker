@@ -41,7 +41,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           </Text>
           <View style={styles.metadataPillsContainer}>
             {exercise.required_equipment == null ||
-            exercise.required_equipment.length == 0 ? (
+            exercise.required_equipment.length === 0 ? (
               <Pill>---</Pill>
             ) : (
               exercise.required_equipment.map((equipment, i) => (
@@ -50,7 +50,6 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             )}
           </View>
         </View>
-        {/* </View> */}
       </Card.Content>
     </Card>
   );
