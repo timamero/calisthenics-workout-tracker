@@ -20,7 +20,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
     <Card style={styles.card}>
       <Card.Content style={styles.cardContent}>
         <View style={styles.difficultyContainer}>
-          <Pill>Beginner</Pill>
+          <Pill>{exercise.difficulty}</Pill>
         </View>
         <View style={styles.titleContainer}>
           <Text variant="headlineMedium">{exercise.name}</Text>
@@ -30,8 +30,9 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             Muscle:
           </Text>
           <View style={styles.metadataPillsContainer}>
-            <Pill>Bicep</Pill>
-            <Pill>Triceps</Pill>
+            {exercise.target_muscles.map((muscle, i) => {
+              return <Pill key={i}>{muscle}</Pill>;
+            })}
           </View>
         </View>
         <View style={styles.exerciseMetadataContainer}>
@@ -39,7 +40,14 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             Equipment:
           </Text>
           <View style={styles.metadataPillsContainer}>
-            <Pill>None</Pill>
+            {exercise.required_equipment == null ||
+            exercise.required_equipment.length == 0 ? (
+              <Pill>---</Pill>
+            ) : (
+              exercise.required_equipment.map((equipment, i) => (
+                <Pill key={i}>{equipment}</Pill>
+              ))
+            )}
           </View>
         </View>
         {/* </View> */}
