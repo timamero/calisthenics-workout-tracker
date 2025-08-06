@@ -15,7 +15,7 @@ export default function ExerciseList() {
       }}
     >
       {exercises.map((exercise) => (
-        <ExerciseCard key={exercise.id} />
+        <ExerciseCard exercise={exercise} key={exercise.id} />
       ))}
     </ScrollView>
   );
