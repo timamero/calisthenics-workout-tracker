@@ -13,10 +13,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@cwt/api": "workspace:*",
     "@cwt/auth": "workspace:*",
     "@cwt/schema": "workspace:*",
     "@cwt/state": "workspace:*",
-    "@cwt/api": "workspace:*",
     "@expo/vector-icons": "^14.1.0",
     "@react-native-async-storage/async-storage": "2.1.2",
     "@react-navigation/bottom-tabs": "^7.4.2",
@@ -30,7 +30,8 @@
     "react-native": "0.79.5",
     "react-native-paper": "^5.14.5",
     "react-native-safe-area-context": "~5.4.0",
-    "react-native-screens": "~4.11.1"
+    "react-native-screens": "~4.11.1",
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
