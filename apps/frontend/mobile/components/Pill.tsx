@@ -1,47 +1,73 @@
 import { Text, useTheme } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import { CustomTheme } from '../theme';
 
 interface PillProps {
   textColor: string;
   backgroundColor: string;
+  borderColor?: string;
   children: string;
 }
 
 export default function Pill({
   textColor,
   backgroundColor,
+  borderColor,
   children,
 }: PillProps) {
   const theme = useTheme() as CustomTheme;
-  const baseStyles = getBaseStyles(theme);
+  const basePillStyles = getPillBaseStyles(theme);
+  const baseContainerStyles = getContainerBaseStyles(theme);
 
   const colorStyle = { color: textColor };
   const backgroundColorStyle = { backgroundColor: backgroundColor };
-  const combinedStyles = {
+  const borderStyle = borderColor
+    ? { borderColor: borderColor, borderWidth: 2 }
+    : {};
+  const combinedPillStyles = {
     ...colorStyle,
+    // ...backgroundColorStyle,
+    // ...borderStyle,
+    ...basePillStyles,
+  };
+  const combinedContainerStyles = {
+    ...borderStyle,
     ...backgroundColorStyle,
-    ...baseStyles,
+    // ...borderStyle,
+    ...baseContainerStyles,
   };
 
-  const pillStyles = StyleSheet.create({
-    pill: combinedStyles,
+  const styles = StyleSheet.create({
+    pill: combinedPillStyles,
+    container: combinedContainerStyles,
   });
 
   return (
-    <Text variant="bodySmall" style={pillStyles.pill}>
-      {children}
-    </Text>
+    <View style={styles.container}>
+      <Text variant="bodySmall" style={styles.pill}>
+        {children}
+      </Text>
+    </View>
   );
 }
 
-const getBaseStyles = (theme: CustomTheme) => {
+const getPillBaseStyles = (theme: CustomTheme) => {
+  return {
+    // paddingHorizontal: 12,
+    // paddingVertical: 4,
+    // // backgroundColor: theme.colors.blue,
+    // borderRadius: 12,
+    textTransform: 'uppercase' as 'uppercase',
+  };
+};
+
+const getContainerBaseStyles = (theme: CustomTheme) => {
   return {
     paddingHorizontal: 12,
     paddingVertical: 4,
     // backgroundColor: theme.colors.blue,
-    borderRadius: 12,
-    textTransform: 'uppercase' as 'uppercase',
+    borderRadius: 20,
+    // textTransform: 'uppercase' as 'uppercase',
   };
 };
