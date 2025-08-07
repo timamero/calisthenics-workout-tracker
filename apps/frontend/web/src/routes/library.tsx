@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import {
   Title,
@@ -15,13 +16,25 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import { useStore } from '@cwt/state/store';
+import { Exercise } from '@cwt/schema/exerciseSchema';
 
+import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import ExercisesList from '../components/ExercisesList';
 import ExercisesFilterOverlay from '../components/ExercisesFilterOverlay';
+import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
+// import { useState } from 'react';
 
 export const Route = createFileRoute('/library')({
   component: LibraryView,
 });
+
+// interface ExerciseDetailContextType {
+//   detailExercise: Exercise;
+//   setDetailExercise: React.Dispatch<React.SetStateAction<Exercise>>;
+// }
+
+// export const ExerciseDetailContext =
+//   createContext<ExerciseDetailContextType | null>(null);
 
 function LibraryView() {
   const exercises = useStore((state) => state.displayedExercises);
@@ -42,6 +55,17 @@ function LibraryView() {
   );
 
   const [filterOpened, filterHandler] = useDisclosure(false);
+  // const [detailOpened, detailHandler] = useDisclosure(false);
+  const [detailExercise, setDetailExercise] = useState<Exercise>({
+    id: 1,
+    name: '',
+    target_muscles: [],
+    emphasis: '',
+    difficulty: '',
+    tags: [],
+    instructions: [],
+    required_equipment: null,
+  });
   const combobox = useCombobox();
 
   const shouldFilterOptions = !exercises.some(
@@ -86,60 +110,65 @@ function LibraryView() {
   };
 
   return (
-    <Stack gap="xl">
-      <Title size="h6">Exercise Library</Title>
-      <Group>
-        <Combobox
-          onOptionSubmit={(optionValue) => {
-            console.log('onOptionSubmit');
-            setSearch(optionValue);
-            filterDisplayedExercisesBySearch();
-            combobox.closeDropdown();
-          }}
-          store={combobox}
-        >
-          <Combobox.Target>
-            <TextInput
-              style={{ flex: 1 }}
-              leftSection={<IoSearchOutline />}
-              rightSection={
-                search && (
-                  <CloseButton
-                    onClick={handleClearSearch}
-                    icon={<IoCloseOutline />}
-                  />
-                )
-              }
-              placeholder="Search exercises"
-              value={search}
-              disabled={isFilterBySearchApplied}
-              onChange={(event) => {
-                setSearch(event.currentTarget.value);
-                combobox.openDropdown();
-              }}
-              onKeyDown={handleKeyDown}
-              onClick={() => combobox.openDropdown()}
-              onFocus={() => combobox.openDropdown()}
-              onBlur={() => combobox.closeDropdown()}
-            />
-          </Combobox.Target>
-          <Combobox.Dropdown hidden={options.length === 0}>
-            <Combobox.Options>{options}</Combobox.Options>
-          </Combobox.Dropdown>
-        </Combobox>
-        <ActionIcon
-          variant="outline"
-          color="gray.5"
-          aria-label="Exercise filter"
-          onClick={handleClickFilter}
-        >
-          <IoFilterOutline />
-        </ActionIcon>
-      </Group>
-      <Stack align="center">
-        <ExercisesList />
+    <ExerciseDetailContext.Provider
+      value={{ detailExercise, setDetailExercise }}
+    >
+      <Stack gap="xl">
+        <Title size="h6">Exercise Library</Title>
+        <Group>
+          <Combobox
+            onOptionSubmit={(optionValue) => {
+              console.log('onOptionSubmit');
+              setSearch(optionValue);
+              filterDisplayedExercisesBySearch();
+              combobox.closeDropdown();
+            }}
+            store={combobox}
+          >
+            <Combobox.Target>
+              <TextInput
+                style={{ flex: 1 }}
+                leftSection={<IoSearchOutline />}
+                rightSection={
+                  search && (
+                    <CloseButton
+                      onClick={handleClearSearch}
+                      icon={<IoCloseOutline />}
+                    />
+                  )
+                }
+                placeholder="Search exercises"
+                value={search}
+                disabled={isFilterBySearchApplied}
+                onChange={(event) => {
+                  setSearch(event.currentTarget.value);
+                  combobox.openDropdown();
+                }}
+                onKeyDown={handleKeyDown}
+                onClick={() => combobox.openDropdown()}
+                onFocus={() => combobox.openDropdown()}
+                onBlur={() => combobox.closeDropdown()}
+              />
+            </Combobox.Target>
+            <Combobox.Dropdown hidden={options.length === 0}>
+              <Combobox.Options>{options}</Combobox.Options>
+            </Combobox.Dropdown>
+          </Combobox>
+          <ActionIcon
+            variant="outline"
+            color="gray.5"
+            aria-label="Exercise filter"
+            onClick={handleClickFilter}
+          >
+            <IoFilterOutline />
+          </ActionIcon>
+        </Group>
+        <Stack align="center">
+          <ExercisesList />
+        </Stack>
+        <ExercisesFilterOverlay opened={filterOpened} handler={filterHandler} />
+        <ExerciseDetailOverlay />
       </Stack>
-      <ExercisesFilterOverlay opened={filterOpened} handler={filterHandler} />
-    </Stack>
+    </ExerciseDetailContext.Provider>
   );
 }
