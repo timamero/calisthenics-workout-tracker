@@ -2,6 +2,8 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
+import { useStore } from '@cwt/state/store';
+
 import { Text } from '../../customText';
 
 import FilterSelections from './FilterSelections';
@@ -16,18 +18,51 @@ export default function FilterOverlay({
   handleHideModal,
 }: FilterOverlayProps) {
   const theme = useTheme();
-  console.log('primaryContainer', theme.colors.primaryContainer);
   const containerStyle = {
     backgroundColor: theme.colors.background,
     paddingBlock: 20,
     marginInline: 16,
   };
 
+  const isFilterApplied = useStore((state) => state.isFilterApplied);
+  const isFilterBySearchApplied = useStore(
+    (state) => state.isFilterBySearchApplied,
+  );
+  const clearFilterCheckboxSelections = useStore(
+    (state) => state.clearFilterCheckboxSelections,
+  );
+  const setAppliedFilterSelections = useStore(
+    (state) => state.setAppliedFilterSelections,
+  );
+  const revertFilterCheckboxSelections = useStore(
+    (state) => state.revertFilterCheckboxSelections,
+  );
+  const filterDisplayedExercises = useStore(
+    (state) => state.filterDisplayedExercises,
+  );
+  const filterDisplayedExercisesBySearch = useStore(
+    (state) => state.filterDisplayedExercisesBySearch,
+  );
+  const resetDisplayedExercises = useStore(
+    (state) => state.resetDisplayedExercises,
+  );
+
+  const onModalClose = () => {
+    handleHideModal();
+    if (!isFilterApplied) {
+      // Do not clear the filter selection if there are currently filters applied
+      clearFilterCheckboxSelections();
+    } else {
+      // Revert the state of filterCheckboxSelections when changes are cancelled
+      revertFilterCheckboxSelections();
+    }
+  };
+
   return (
     <Portal>
       <Modal
         visible={visible}
-        onDismiss={handleHideModal}
+        onDismiss={onModalClose}
         contentContainerStyle={containerStyle}
       >
         <View style={{ paddingLeft: 20 }}>
