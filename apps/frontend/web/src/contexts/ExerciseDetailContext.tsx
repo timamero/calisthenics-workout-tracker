@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Exercise } from '@cwt/schema/exerciseSchema';
 
 interface ExerciseDetailContextType {
-  detailExercise: Exercise;
+  exercise: Exercise;
   setDetailExercise: React.Dispatch<React.SetStateAction<Exercise>>;
 }
 
