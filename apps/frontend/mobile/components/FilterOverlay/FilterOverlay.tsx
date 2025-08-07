@@ -47,7 +47,13 @@ export default function FilterOverlay({
     (state) => state.resetDisplayedExercises,
   );
 
-  const handleClearFiltersClick = () => {
+  const handleApplyFiltersPress = () => {
+    setAppliedFilterSelections();
+    filterDisplayedExercises();
+    handleHideModal();
+  };
+
+  const handleClearFiltersPress = () => {
     clearFilterCheckboxSelections();
     resetDisplayedExercises();
     if (isFilterBySearchApplied) {
@@ -89,7 +95,7 @@ export default function FilterOverlay({
           <Button
             mode="outlined"
             textColor="rgb(134, 142, 150)"
-            onPress={handleClearFiltersClick}
+            onPress={handleClearFiltersPress}
             style={{
               borderColor: 'rgb(134, 142, 150)',
               borderRadius: 4,
@@ -99,6 +105,7 @@ export default function FilterOverlay({
           </Button>
           <Button
             mode="contained"
+            onPress={handleApplyFiltersPress}
             style={{
               borderRadius: 4,
             }}
