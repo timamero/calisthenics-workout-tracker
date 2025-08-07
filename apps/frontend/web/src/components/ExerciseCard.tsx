@@ -9,20 +9,29 @@ import {
 } from '@mantine/core';
 import { Exercise } from '@cwt/schema/exerciseSchema';
 
+// import ExerciseDetailOverlay from './ExerciseDetailOverlay';
+
 interface ExerciseCardProps {
   exercise: Exercise;
-  handler: { open: () => void };
 }
 
-export default function ExerciseCard({ exercise, handler }: ExerciseCardProps) {
+export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   const difficultyColor =
     exercise.difficulty == 'beginner'
       ? 'blue'
       : exercise.difficulty == 'intermediate'
         ? 'yellow'
         : 'red';
+
+  const handleExerciseClick = () => {
+    if (exercise) {
+      console.log('opened exercise')
+      // setDetailExercise(exercise);
+      // handler.open();
+    }
+  };
   return (
-    <UnstyledButton onClick={() => handler.open()}>
+    <UnstyledButton onClick={handleExerciseClick}>
       <Paper shadow="lg" p="md" radius="lg" miw={300} maw={460} withBorder>
         <Stack
           bg="var(--mantine-color-body)"
