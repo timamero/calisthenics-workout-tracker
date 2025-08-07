@@ -18,7 +18,6 @@ import {
 import { filterKeys, type FilterKey } from '@cwt/state/exercises';
 import { useExercisesStore, type ActionStrings } from '@cwt/state/exercises';
 import { type Selection } from '@cwt/schema/exerciseSchema';
-// import type { Filter } from '@cwt/state/exercises';
 
 import classes from './FilterCheckbox.module.css';
 
@@ -61,7 +60,6 @@ function FilterCheckbox({
     finalValue: false,
     onChange,
   });
-  // const selectedFilters = useExercisesStore((state) => state.selectedFilters);
 
   const handleClick = () => {
     if (!isSelected) {
@@ -78,8 +76,6 @@ function FilterCheckbox({
       });
     }
     handleChange(!isSelected);
-
-    // console.log('State of selectedFilters: ', selectedFilters);
   };
 
   return (

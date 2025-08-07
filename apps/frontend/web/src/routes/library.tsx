@@ -22,19 +22,10 @@ import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import ExercisesList from '../components/ExercisesList';
 import ExercisesFilterOverlay from '../components/ExercisesFilterOverlay';
 import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
-// import { useState } from 'react';
 
 export const Route = createFileRoute('/library')({
   component: LibraryView,
 });
-
-// interface ExerciseDetailContextType {
-//   detailExercise: Exercise;
-//   setDetailExercise: React.Dispatch<React.SetStateAction<Exercise>>;
-// }
-
-// export const ExerciseDetailContext =
-//   createContext<ExerciseDetailContextType | null>(null);
 
 function LibraryView() {
   const exercises = useStore((state) => state.displayedExercises);
@@ -79,7 +70,6 @@ function LibraryView() {
         .map((ex) => ex.name)
     : exercises.map((ex) => ex.name);
 
-  // Options displayed on search, enable later
   const options = filteredOptions.map((item) => (
     <Combobox.Option value={item} key={item}>
       {item}
