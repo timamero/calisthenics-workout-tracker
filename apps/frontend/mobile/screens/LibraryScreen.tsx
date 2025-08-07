@@ -24,7 +24,6 @@ export default function LibraryScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text>Exercise Library</Text>
       <ScrollView>
         <SearchBar />
         <Filter handleShowModal={showModal} />
