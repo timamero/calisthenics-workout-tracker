@@ -111,7 +111,7 @@ function LibraryView() {
 
   return (
     <ExerciseDetailContext.Provider
-      value={{ detailExercise, setDetailExercise }}
+      value={{ exercise: detailExercise, setDetailExercise }}
     >
       <Stack gap="xl">
         <Title size="h6">Exercise Library</Title>
