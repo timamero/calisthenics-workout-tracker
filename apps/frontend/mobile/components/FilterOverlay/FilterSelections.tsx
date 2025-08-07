@@ -1,11 +1,32 @@
+import * as React from 'react';
 import { View, ScrollView } from 'react-native';
 import { useShallow } from 'zustand/shallow';
 
 import { useStore } from '@cwt/state/store';
+import { FilterGroup } from '@cwt/state/types';
+import type { Selection } from '@cwt/schema/exerciseSchema';
 
 import { Text } from '../../customText';
 
 import FilterCheckbox from './FilterCheckbox';
+
+const Selections = React.memo(function Selections({
+  group,
+  selections,
+}: {
+  group: FilterGroup;
+  selections: Selection[];
+}) {
+  return (
+    <>
+      {selections.map((selection) => {
+        return (
+          <FilterCheckbox group={group} selection={selection} key={selection} />
+        );
+      })}
+    </>
+  );
+});
 
 export default function FilterSelections() {
   const filterCheckboxSelections = useStore(
@@ -38,14 +59,12 @@ export default function FilterSelections() {
                 marginBottom: 20,
               }}
             >
-              <FilterCheckbox />
-              <FilterCheckbox />
-              <FilterCheckbox />
-              <FilterCheckbox />
-              <FilterCheckbox />
-              <FilterCheckbox />
-              <FilterCheckbox />
-              <FilterCheckbox />
+              <Selections
+                group={group}
+                selections={filterCheckboxSelections
+                  .filter((obj) => obj.group === group)
+                  .map((obj) => obj.selection)}
+              />
             </View>
           </>
         );
