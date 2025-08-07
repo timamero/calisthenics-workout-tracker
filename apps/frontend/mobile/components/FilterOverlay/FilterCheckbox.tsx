@@ -2,9 +2,21 @@ import * as React from 'react';
 import { Checkbox, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
-export default function FilterCheckbox() {
+import { type Selection } from '@cwt/schema/exerciseSchema';
+import { type FilterGroup } from '@cwt/state/types';
+
+interface FilterCheckboxProps {
+  group: FilterGroup;
+  selection: Selection;
+}
+
+export default function FilterCheckbox({
+  group,
+  selection,
+}: FilterCheckboxProps) {
   const theme = useTheme();
   const [checked, setChecked] = React.useState(false);
+  console.log('group', group);
 
   const checkboxBgColor = checked
     ? 'rgba(255, 99, 71, 0.1)'
@@ -23,7 +35,7 @@ export default function FilterCheckbox() {
       }}
     >
       <Checkbox.Item
-        label="Chest"
+        label={selection}
         labelVariant="bodySmall"
         uncheckedColor="rgb(222, 226, 230)"
         labelStyle={{
