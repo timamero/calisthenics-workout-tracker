@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, ScrollView } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { useShallow } from 'zustand/shallow';
 
 import { useStore } from '@cwt/state/store';
@@ -19,9 +20,13 @@ const Selections = React.memo(function Selections({
 }) {
   return (
     <>
-      {selections.map((selection) => {
+      {selections.map((selection, i) => {
         return (
-          <FilterCheckbox group={group} selection={selection} key={selection} />
+          <FilterCheckbox
+            group={group}
+            selection={selection}
+            key={selection + i}
+          />
         );
       })}
     </>
@@ -29,6 +34,8 @@ const Selections = React.memo(function Selections({
 });
 
 export default function FilterSelections() {
+  const theme = useTheme();
+
   const filterCheckboxSelections = useStore(
     useShallow((state) => state.filterCheckboxSelections),
   );
@@ -37,10 +44,16 @@ export default function FilterSelections() {
   const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
 
   return (
-    <ScrollView style={{ height: 460 }}>
+    <ScrollView
+      style={{
+        height: 460,
+        backgroundColor: theme.colors.background,
+        paddingInline: 20,
+      }}
+    >
       {uniqueFilterGroupNames.map((group, i) => {
         return (
-          <>
+          <View key={group + i}>
             <Text
               style={{ textTransform: 'uppercase', fontWeight: 400 }}
               variant="headlineMedium"
@@ -66,7 +79,7 @@ export default function FilterSelections() {
                   .map((obj) => obj.selection)}
               />
             </View>
-          </>
+          </View>
         );
       })}
     </ScrollView>
