@@ -28,6 +28,14 @@ const MyTabs = createBottomTabNavigator({
         iconName = focused
           ? 'information-circle'
           : 'information-circle-outline';
+      } else if (route.name === 'Library') {
+        iconName = focused ? 'library' : 'library-outline';
+      } else if (route.name === 'Workout') {
+        iconName = focused ? 'fitness' : 'fitness-outline';
+      } else if (route.name === 'History') {
+        iconName = focused ? 'file-tray-full' : 'file-tray-outline';
+      } else if (route.name === 'Settings') {
+        iconName = focused ? 'settings' : 'settings-outline';
       } else {
         iconName = 'brush';
       }
