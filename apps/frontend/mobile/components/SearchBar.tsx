@@ -2,17 +2,51 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 
-const SearchBar = () => {
-  const [searchQuery, setSearchQuery] = React.useState('');
+import { useStore } from '@cwt/state/store';
 
+const SearchBar = () => {
   const styles = getStyles();
+
+  const search = useStore((state) => state.exerciseSearch);
+  const isFilterApplied = useStore((state) => state.isFilterApplied);
+  const setSearch = useStore((state) => state.setExerciseSearch);
+  const resetDisplayedExerciseBySearch = useStore(
+    (state) => state.resetDisplayedExerciseBySearch,
+  );
+  const filterDisplayedExercisesBySearch = useStore(
+    (state) => state.filterDisplayedExercisesBySearch,
+  );
+  const filterDisplayedExercise = useStore(
+    (state) => state.filterDisplayedExercises,
+  );
+
+  const handleClearSearch = () => {
+    resetDisplayedExerciseBySearch();
+
+    if (isFilterApplied) {
+      filterDisplayedExercise();
+    }
+  };
+
+  const onChange = (text: string) => {
+    if (text.length < search.length) {
+      handleClearSearch();
+    }
+    setSearch(text);
+    filterDisplayedExercisesBySearch();
+
+    if (text === '') {
+      handleClearSearch();
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Searchbar
         placeholder="Search"
-        onChangeText={setSearchQuery}
-        value={searchQuery}
+        onChangeText={onChange}
+        value={search}
+        onClearIconPress={handleClearSearch}
       />
     </View>
   );
