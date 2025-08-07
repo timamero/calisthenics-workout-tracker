@@ -14,7 +14,11 @@ export default function FilterOverlay({
   visible,
   handleHideModal,
 }: FilterOverlayProps) {
-  const containerStyle = { backgroundColor: 'white', padding: 20 };
+  const containerStyle = {
+    backgroundColor: 'white',
+    padding: 20,
+    marginInline: 16,
+  };
 
   return (
     <Portal>
@@ -23,7 +27,7 @@ export default function FilterOverlay({
         onDismiss={handleHideModal}
         contentContainerStyle={containerStyle}
       >
-        <Text variant="headlineMedium">Filter Overlay</Text>
+        <Text variant="headlineMedium">Filter Exercises</Text>
         <FilterSelections />
       </Modal>
     </Portal>
