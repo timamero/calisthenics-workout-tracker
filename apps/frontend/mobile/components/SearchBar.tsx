@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, useTheme } from 'react-native-paper';
 
 import { useStore } from '@cwt/state/store';
 
 const SearchBar = () => {
+  const theme = useTheme();
   const styles = getStyles();
 
   const search = useStore((state) => state.exerciseSearch);
@@ -47,6 +48,11 @@ const SearchBar = () => {
         onChangeText={onChange}
         value={search}
         onClearIconPress={handleClearSearch}
+        style={{
+          backgroundColor: theme.colors.background,
+          borderWidth: 1,
+          borderColor: 'rgb(46, 46, 46)',
+        }}
       />
     </View>
   );
