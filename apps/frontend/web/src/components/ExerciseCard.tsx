@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import {
   Title,
   Text,
@@ -9,6 +11,8 @@ import {
 } from '@mantine/core';
 import { Exercise } from '@cwt/schema/exerciseSchema';
 
+import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
+
 // import ExerciseDetailOverlay from './ExerciseDetailOverlay';
 
 interface ExerciseCardProps {
@@ -16,6 +20,10 @@ interface ExerciseCardProps {
 }
 
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {
+  const setDetailExercise = useContext(
+    ExerciseDetailContext,
+  )?.setDetailExercise;
+
   const difficultyColor =
     exercise.difficulty == 'beginner'
       ? 'blue'
@@ -24,9 +32,9 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
         : 'red';
 
   const handleExerciseClick = () => {
-    if (exercise) {
-      console.log('opened exercise')
-      // setDetailExercise(exercise);
+    if (exercise && setDetailExercise) {
+      console.log('opened exercise');
+      setDetailExercise(exercise);
       // handler.open();
     }
   };
