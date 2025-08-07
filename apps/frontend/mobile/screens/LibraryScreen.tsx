@@ -2,8 +2,6 @@ import * as React from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { Text } from '../customText';
-
 import ExerciseList from '../components/ExerciseList';
 import SearchBar from '../components/SearchBar';
 import Filter from '../components/Filter';
