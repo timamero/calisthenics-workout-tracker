@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {
-  type UseDisclosureHandlers,
-  // type UseDisclosureOptions,
-} from '@mantine/hooks';
+import { type UseDisclosureHandlers } from '@mantine/hooks';
 
 import { Exercise } from '@cwt/schema/exerciseSchema';
 

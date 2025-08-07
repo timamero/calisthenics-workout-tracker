@@ -1,12 +1,10 @@
 import { SimpleGrid } from '@mantine/core';
-// import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
 
 import ExerciseCard from './ExerciseCard';
 
 export default function ExercisesList() {
-  // const [detailOpened, detailHandler] = useDisclosure(false);
   const exercises = useStore((state) => state.displayedExercises);
   return (
     <SimpleGrid

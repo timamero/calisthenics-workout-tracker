@@ -13,8 +13,6 @@ import { Exercise } from '@cwt/schema/exerciseSchema';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
-// import ExerciseDetailOverlay from './ExerciseDetailOverlay';
-
 interface ExerciseCardProps {
   exercise: Exercise;
 }
