@@ -20,9 +20,8 @@ interface ExerciseCardProps {
 }
 
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {
-  const setDetailExercise = useContext(
-    ExerciseDetailContext,
-  )?.setDetailExercise;
+  const setDetailExercise = useContext(ExerciseDetailContext)?.setExercise;
+  const detailHandlers = useContext(ExerciseDetailContext)?.handlers;
 
   const difficultyColor =
     exercise.difficulty == 'beginner'
@@ -32,10 +31,10 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
         : 'red';
 
   const handleExerciseClick = () => {
-    if (exercise && setDetailExercise) {
+    if (exercise && setDetailExercise && detailHandlers) {
       console.log('opened exercise');
       setDetailExercise(exercise);
-      // handler.open();
+      detailHandlers.open();
     }
   };
   return (
