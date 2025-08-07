@@ -41,7 +41,16 @@ const MyTabs = createBottomTabNavigator({
   }),
   screens: {
     Home: HomeScreen,
-    Library: LibraryScreen,
+    Library: {
+      screen: LibraryScreen,
+      options: {
+        title: 'Exercise Library',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontFamily: 'monospace',
+        },
+      },
+    },
     Workout: StartWorkoutScreen,
     History: HistoryScreen,
     Settings: SettingsScreen,
