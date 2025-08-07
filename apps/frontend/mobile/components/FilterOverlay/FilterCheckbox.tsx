@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Checkbox, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
+import { useStore } from '@cwt/state/store';
 import { type Selection } from '@cwt/schema/exerciseSchema';
 import { type FilterGroup } from '@cwt/state/types';
 
@@ -15,16 +16,28 @@ export default function FilterCheckbox({
   selection,
 }: FilterCheckboxProps) {
   const theme = useTheme();
-  const [checked, setChecked] = React.useState(false);
-  console.log('group', group);
 
-  const checkboxBgColor = checked
+  const isSelected = useStore(
+    (state) =>
+      state.filterCheckboxSelections.find(
+        (obj) => obj.group === group && obj.selection === selection,
+      )?.value,
+  );
+  const toggleFilterSelection = useStore(
+    (state) => state.toggleFilterSelection,
+  );
+
+  const handlePress = () => {
+    toggleFilterSelection({ group, selection });
+  };
+
+  const checkboxBgColor = isSelected
     ? 'rgba(255, 99, 71, 0.1)'
     : theme.colors.background;
-  const checkboxBorderColor = checked
+  const checkboxBorderColor = isSelected
     ? theme.colors.primary
     : 'rgb(222, 226, 230)';
-  const labelFontWeight = checked ? '700' : '400';
+  const labelFontWeight = isSelected ? '700' : '400';
   return (
     <View
       style={{
@@ -43,10 +56,8 @@ export default function FilterCheckbox({
           color: 'rgb(46, 46, 46)',
           fontWeight: labelFontWeight,
         }}
-        status={checked ? 'checked' : 'unchecked'}
-        onPress={() => {
-          setChecked(!checked);
-        }}
+        status={isSelected ? 'checked' : 'unchecked'}
+        onPress={handlePress}
         background={{
           color: 'rgba(255, 99, 71, 0.3)',
           radius: 40,
