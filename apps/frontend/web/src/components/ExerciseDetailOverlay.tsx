@@ -6,16 +6,24 @@ import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 // import { Exercise } from '@cwt/schema/exerciseSchema';
 
 export default function ExerciseDetailOverlay() {
-  const exerciseDetail = useContext(ExerciseDetailContext);
+  const exerciseDetail = useContext(ExerciseDetailContext)?.exercise;
+  const detailHandlers = useContext(ExerciseDetailContext)?.handlers;
+  const detailOpened = useContext(ExerciseDetailContext)?.opened;
+
+  const handleCloseModal = () => {
+    if (detailHandlers) {
+      detailHandlers.close();
+    }
+  };
   return (
     <Modal
       // opened={opened}
       // onClose={() => handler.close()}
       // title={exercise?.name}
-      opened={false}
-      onClose={() => console.log('close')}
-      title={exerciseDetail?.exercise.name}
-      fullScreen
+      opened={detailOpened || false}
+      onClose={handleCloseModal}
+      title={exerciseDetail?.name}
+      // fullScreen
       styles={{
         title: {
           fontFamily: 'var(--mantine-font-family-headings)',

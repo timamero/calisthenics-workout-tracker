@@ -55,7 +55,7 @@ function LibraryView() {
   );
 
   const [filterOpened, filterHandler] = useDisclosure(false);
-  // const [detailOpened, detailHandler] = useDisclosure(false);
+  const [detailOpened, detailHandlers] = useDisclosure(false);
   const [detailExercise, setDetailExercise] = useState<Exercise>({
     id: 1,
     name: '',
@@ -111,7 +111,12 @@ function LibraryView() {
 
   return (
     <ExerciseDetailContext.Provider
-      value={{ exercise: detailExercise, setDetailExercise }}
+      value={{
+        exercise: detailExercise,
+        setExercise: setDetailExercise,
+        opened: detailOpened,
+        handlers: detailHandlers,
+      }}
     >
       <Stack gap="xl">
         <Title size="h6">Exercise Library</Title>
