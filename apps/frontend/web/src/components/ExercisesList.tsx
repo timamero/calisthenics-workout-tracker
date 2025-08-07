@@ -1,13 +1,12 @@
 import { SimpleGrid } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+// import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
 
 import ExerciseCard from './ExerciseCard';
-import ExerciseDetailOverlay from './ExerciseDetailOverlay';
 
 export default function ExercisesList() {
-  const [detailOpened, detailHandler] = useDisclosure(false);
+  // const [detailOpened, detailHandler] = useDisclosure(false);
   const exercises = useStore((state) => state.displayedExercises);
   return (
     <SimpleGrid
@@ -16,9 +15,8 @@ export default function ExercisesList() {
       verticalSpacing={{ base: 'lg' }}
     >
       {exercises.map((exercise, i) => (
-        <ExerciseCard key={i} exercise={exercise} handler={detailHandler} />
+        <ExerciseCard exercise={exercise} key={i} />
       ))}
-      <ExerciseDetailOverlay opened={detailOpened} handler={detailHandler} />
     </SimpleGrid>
   );
 }

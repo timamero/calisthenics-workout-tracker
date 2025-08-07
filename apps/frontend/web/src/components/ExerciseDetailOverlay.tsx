@@ -1,19 +1,21 @@
+import { useContext } from 'react';
 import { Modal } from '@mantine/core';
 
-interface ExerciseDetailOverlayProps {
-  opened: boolean;
-  handler: { close: () => void };
-}
+import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
-export default function ExerciseDetailOverlay({
-  opened,
-  handler,
-}: ExerciseDetailOverlayProps) {
+// import { Exercise } from '@cwt/schema/exerciseSchema';
+
+export default function ExerciseDetailOverlay() {
+  const exerciseDetail = useContext(ExerciseDetailContext);
   return (
     <Modal
-      opened={opened}
-      onClose={() => handler.close()}
-      title="Exercise name"
+      // opened={opened}
+      // onClose={() => handler.close()}
+      // title={exercise?.name}
+      opened={false}
+      onClose={() => console.log('close')}
+      title={exerciseDetail?.detailExercise.name}
+      fullScreen
       styles={{
         title: {
           fontFamily: 'var(--mantine-font-family-headings)',
