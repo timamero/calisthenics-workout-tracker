@@ -14,7 +14,7 @@ export default function ExerciseDetailOverlay() {
       // title={exercise?.name}
       opened={false}
       onClose={() => console.log('close')}
-      title={exerciseDetail?.detailExercise.name}
+      title={exerciseDetail?.exercise.name}
       fullScreen
       styles={{
         title: {
