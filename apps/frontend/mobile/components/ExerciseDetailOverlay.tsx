@@ -8,6 +8,7 @@ import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 export default function ExerciseDetailOverlay() {
   const hideModal = React.useContext(ExerciseDetailContext)?.hideModal;
   const visible = React.useContext(ExerciseDetailContext)?.visible;
+  const exercise = React.useContext(ExerciseDetailContext)?.exercise;
   const theme = useTheme();
 
   const containerStyle = {
@@ -25,7 +26,7 @@ export default function ExerciseDetailOverlay() {
       >
         <View>
           <Button>Go back to Exercises</Button>
-          <Text>Exercise Detail Mobile Overlay</Text>
+          <Text>{exercise?.name}</Text>
         </View>
       </Modal>
     </Portal>
