@@ -16,6 +16,7 @@ interface ExerciseCardProps {
 
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   const showModal = React.useContext(ExerciseDetailContext)?.showModal;
+  const setExercise = React.useContext(ExerciseDetailContext)?.setExercise;
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
@@ -26,8 +27,15 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
         ? '#fab005'
         : '#fa5252';
 
+  const handleShowModal = () => {
+    if (showModal && setExercise) {
+      setExercise(exercise);
+      showModal();
+    }
+  };
+
   return (
-    <Card style={styles.card} onPress={showModal}>
+    <Card style={styles.card} onPress={handleShowModal}>
       <Card.Content style={styles.cardContent}>
         <View style={styles.difficultyContainer}>
           <Pill backgroundColor={difficultyColor} textColor="white">
