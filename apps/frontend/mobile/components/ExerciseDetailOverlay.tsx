@@ -127,7 +127,7 @@ export default function ExerciseDetailOverlay() {
               <Text variant="bodyLarge" style={styles.metadataTitle}>
                 Required Equipment
               </Text>
-              <View styles={styles.pillsContainer}>
+              <View style={styles.pillsContainer}>
                 {exercise?.required_equipment == null ||
                 exercise.required_equipment.length === 0 ? (
                   <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
