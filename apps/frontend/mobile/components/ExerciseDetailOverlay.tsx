@@ -100,7 +100,11 @@ export default function ExerciseDetailOverlay() {
               marginBottom: 12,
             }}
           >
-            <Button mode="outlined" textColor="rgb(46, 46, 46)">
+            <Button
+              mode="outlined"
+              textColor="rgb(46, 46, 46)"
+              onPress={hideModal}
+            >
               Back to Exercises
             </Button>
           </View>
