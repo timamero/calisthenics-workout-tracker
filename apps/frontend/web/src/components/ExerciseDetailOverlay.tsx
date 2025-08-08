@@ -46,24 +46,32 @@ export default function ExerciseDetailOverlay() {
     },
   );
   const instructions = exerciseDetail?.instructions.map((instruction, i) => {
-    return <Text key={i}>{instruction}</Text>;
+    const regex = /\d\. /g;
+    return (
+      <Group key={i} wrap="nowrap" align="flex-start">
+        <Text
+          size="xl"
+          fw={700}
+          style={{
+            borderBottom: `1px solid var(--mantine-color-dark-6)`,
+            borderRight: `1px solid var(--mantine-color-dark-6)`,
+            paddingInline: 8,
+          }}
+        >
+          {i + 1}
+        </Text>
+        <Text>{instruction.split(regex)[1]}</Text>
+      </Group>
+    );
   });
   return (
     <Modal
       opened={detailOpened || false}
       onClose={handleCloseModal}
       fullScreen
-      // title={exerciseDetail?.name}
       withCloseButton={false}
-      // styles={{
-      //   title: {
-      //     fontFamily: 'var(--mantine-font-family-headings)',
-      //     fontWeight: 700,
-      //     fontSize: 32,
-      //   },
-      // }}
     >
-      <Stack>
+      <Stack mb="lg">
         <Group justify="flex-end">
           <Button variant="outline" color="dark" onClick={handleCloseModal}>
             Back to Execises
@@ -125,10 +133,10 @@ export default function ExerciseDetailOverlay() {
             equipmentMetadata
           )}
         </Flex>
-        <Stack>
-          <Text tt="uppercase" size="md" c="gray.7">
+        <Stack mt="sm">
+          <Title order={3} size="h4" tt="uppercase">
             Instructions
-          </Text>
+          </Title>
           <Stack>{instructions}</Stack>
         </Stack>
       </Stack>
