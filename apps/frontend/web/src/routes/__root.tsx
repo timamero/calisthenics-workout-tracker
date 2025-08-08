@@ -21,12 +21,9 @@ function RootComponent() {
   const [opened, { toggle }] = useDisclosure();
 
   const setExercises = useStore((state) => state.setExercises);
-  // const setExercises = useExercisesStore((state) => state.setExercises);
 
   const supabaseSession = useAuthStore((state) => state.session);
   const setSession = useAuthStore((state) => state.setSession);
-  // const loading = useAuthStore((state) => state.loading);
-  // const setLoading = useAuthStore((state) => state.setLoading);
 
   useEffect(() => {
     const asyncFetchData = async () => {
@@ -39,12 +36,6 @@ function RootComponent() {
     };
     asyncFetchData();
   }, [supabaseSession, setExercises]);
-
-  // useEffect(() => {
-  //   if (supabaseSession) {
-  //     setExercises(sampleExercises);
-  //   }
-  // }, [setExercises, supabaseSession]);
 
   useEffect(() => {
     let authListener: {
@@ -157,7 +148,6 @@ function RootComponent() {
 
       <AppShell.Navbar p="md">
         <NavLink label="Home" component={Link} to="/" onClick={toggle} />
-        {/* <NavLink label="About" component={Link} to="/about" onClick={toggle} /> */}
         <NavLink
           label="Start Workout"
           component={Link}
