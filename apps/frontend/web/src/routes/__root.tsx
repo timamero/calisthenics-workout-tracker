@@ -5,7 +5,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { AppShell, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { NavLink } from '@mantine/core';
-import { supabase } from '../supabaseClient';
+import { supabase } from '../services/supabaseClient';
 import type { Subscription } from '@supabase/auth-js';
 
 import { useAuthStore } from '@cwt/state/auth';
