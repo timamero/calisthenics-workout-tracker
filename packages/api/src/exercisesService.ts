@@ -1,4 +1,6 @@
-export async function getExercises(baseUrl: string, token: string) {
+import { Exercise } from "@cwt/schema/exerciseSchema";
+
+export async function getExercises(baseUrl: string, token: string): Promise<Exercise[] | void> {
   const url = `${baseUrl}/exercises`;
   const headers = {
     'Content-Type': 'application/json',
