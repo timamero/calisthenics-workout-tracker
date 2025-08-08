@@ -21,6 +21,9 @@
       "default": "./dist/protectedData.js"
     }
   },
+  "dependencies": {
+    "@cwt/schema": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "~5.8.3"
   }
