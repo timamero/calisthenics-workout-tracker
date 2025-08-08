@@ -12,12 +12,12 @@ export async function getExercises(baseUrl: string, token: string): Promise<Exer
       headers: headers
     });
     if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
+      throw new Error(`API Package: Response status: ${response.status}`);
     }
 
     const json = await response.json();
-    console.log('Exercises fethed from FastAPI: ', json);
+    console.log('API Package: Exercises fethed from FastAPI: ', json);
   } catch (error) {
-    console.error('Error fetching exercises:', error);
+    console.error('API Package: Error fetching exercises:', error);
   }
 }
