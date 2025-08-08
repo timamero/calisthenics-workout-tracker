@@ -83,7 +83,7 @@ export default function ExerciseDetailOverlay() {
               {exerciseDetail?.name}
             </Title>
           </Group>
-          <Flex direction="row" wrap="wrap" gap="md" justify="space-between">
+          <Flex direction="row" wrap="wrap" gap="xl" justify="flex-start">
             <Stack>
               <Text tt="uppercase" size="md" c="gray.7">
                 Difficulty
