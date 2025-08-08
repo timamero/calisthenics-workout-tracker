@@ -17,6 +17,7 @@ export async function getExercises(baseUrl: string, token: string): Promise<Exer
 
     const json = await response.json();
     console.log('API Package: Exercises fethed from FastAPI: ', json);
+    return json
   } catch (error) {
     console.error('API Package: Error fetching exercises:', error);
   }

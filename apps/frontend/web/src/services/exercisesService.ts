@@ -326,6 +326,7 @@ export async function asyncGetExercises(
 ): Promise<Exercise[] | void> {
   try {
     const exercises = await getExercises(baseUrl, token);
+    console.log('Web Exercises recieved from backend: ', exercises);
     return exercises;
   } catch {
     console.log(
