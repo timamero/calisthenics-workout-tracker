@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
 import { Text } from '../customText';
@@ -12,6 +12,7 @@ export default function ExerciseDetailOverlay() {
   const visible = React.useContext(ExerciseDetailContext)?.visible;
   const exercise = React.useContext(ExerciseDetailContext)?.exercise;
   const theme = useTheme();
+  const styles = getStyles();
 
   const difficultyColor =
     exercise?.difficulty === 'beginner'
@@ -28,14 +29,7 @@ export default function ExerciseDetailOverlay() {
 
   const muscleMetadata = exercise?.target_muscles.map((muscle, i) => {
     return (
-      <View
-        key={i}
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-        }}
-      >
+      <View key={i} style={styles.flexRowStart}>
         <Pill
           backgroundColor="rgba(190, 75, 219, .1)"
           textColor="rgb(190, 75, 219)"
@@ -48,14 +42,7 @@ export default function ExerciseDetailOverlay() {
   const equipmentMetadata = exercise?.required_equipment?.map(
     (equipment, i) => {
       return (
-        <View
-          key={i}
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-          }}
-        >
+        <View key={i} style={styles.flexRowStart}>
           <Pill
             backgroundColor="white"
             textColor="rgb(46, 46, 46)"
@@ -106,46 +93,20 @@ export default function ExerciseDetailOverlay() {
           <Text variant="headlineLarge">{exercise?.name}</Text>
           <View>
             <View>
-              <Text
-                variant="bodyLarge"
-                style={{
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  color: 'rgb(73, 80, 87)',
-                }}
-              >
+              <Text variant="bodyLarge" style={styles.metadataTitle}>
                 Difficulty
               </Text>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'flex-start',
-                }}
-              >
+              <View style={styles.flexRowStart}>
                 <Pill backgroundColor={difficultyColor} textColor="white">
                   {exercise?.difficulty || ''}
                 </Pill>
               </View>
             </View>
             <View>
-              <Text
-                variant="bodyLarge"
-                style={{
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  color: 'rgb(73, 80, 87)',
-                }}
-              >
+              <Text variant="bodyLarge" style={styles.metadataTitle}>
                 Emphasis
               </Text>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'flex-start',
-                }}
-              >
+              <View style={styles.flexRowStart}>
                 <Pill
                   backgroundColor="rgba(73, 80, 87, 0.1)"
                   textColor="rgb(46, 46, 46)"
@@ -155,39 +116,19 @@ export default function ExerciseDetailOverlay() {
               </View>
             </View>
             <View>
-              <Text
-                variant="bodyLarge"
-                style={{
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  color: 'rgb(73, 80, 87)',
-                }}
-              >
+              <Text variant="bodyLarge" style={styles.metadataTitle}>
                 Target Muscles
               </Text>
               <View>{muscleMetadata}</View>
             </View>
             <View>
-              <Text
-                variant="bodyLarge"
-                style={{
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  color: 'rgb(73, 80, 87)',
-                }}
-              >
+              <Text variant="bodyLarge" style={styles.metadataTitle}>
                 Required Equipment
               </Text>
               <View>
                 {exercise?.required_equipment == null ||
                 exercise.required_equipment.length === 0 ? (
-                  <View
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'flex-start',
-                    }}
-                  >
+                  <View style={styles.flexRowStart}>
                     <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
                       ---
                     </Pill>
@@ -207,3 +148,17 @@ export default function ExerciseDetailOverlay() {
     </Portal>
   );
 }
+
+const getStyles = () =>
+  StyleSheet.create({
+    metadataTitle: {
+      fontWeight: 700,
+      textTransform: 'uppercase',
+      color: 'rgb(73, 80, 87)',
+    },
+    flexRowStart: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+    },
+  });
