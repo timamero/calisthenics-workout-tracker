@@ -22,7 +22,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
 
   const difficultyColor =
     exercise.difficulty === 'beginner'
-      ? '#228be6'
+      ? theme.colors.beginnerPillColor
       : exercise.difficulty === 'intermediate'
         ? '#fab005'
         : '#fa5252';
@@ -43,7 +43,9 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           </Pill>
         </View>
         <View style={styles.titleContainer}>
-          <Text variant="headlineMedium">{exercise.name}</Text>
+          <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
+            {exercise.name}
+          </Text>
         </View>
         <View style={styles.exerciseMetadataContainer}>
           <Text variant="bodySmall" style={styles.exerciseMetadataTitle}>
@@ -53,8 +55,8 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             {exercise.target_muscles.map((muscle, i) => {
               return (
                 <Pill
-                  backgroundColor="rgba(190, 75, 219, .1)"
-                  textColor="rgb(190, 75, 219)"
+                  backgroundColor={theme.colors.musclePillBgColor}
+                  textColor={theme.colors.musclePillColor}
                   key={i}
                 >
                   {muscle}
@@ -70,15 +72,18 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           <View style={styles.metadataPillsContainer}>
             {exercise.required_equipment == null ||
             exercise.required_equipment.length === 0 ? (
-              <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
+              <Pill
+                backgroundColor={theme.colors.background}
+                textColor={theme.colors.light}
+              >
                 ---
               </Pill>
             ) : (
               exercise.required_equipment.map((equipment, i) => (
                 <Pill
-                  backgroundColor="white"
-                  textColor="rgb(46, 46, 46)"
-                  borderColor="rgb(46, 46, 46)"
+                  backgroundColor={theme.colors.background}
+                  textColor={theme.colors.light}
+                  borderColor={theme.colors.light}
                   key={i}
                 >
                   {equipment}
@@ -99,8 +104,10 @@ const getStyles = (theme: CustomTheme) =>
       marginInline: 36,
       backgroundColor: theme.colors.background,
       boxShadow:
-        'rgba(0, 0, 0, 0.05) 0px 1px 3px 0px, rgba(0, 0, 0, 0.05) 0px 28px 23px -7px, rgba(0, 0, 0, 0.04) 0px 12px 12px -7px',
+        'rgba(222, 226, 230, 0.05) 0px 1px 3px 0px, rgba(222, 226, 230, 0.05) 0px 28px 23px -7px, rgba(222, 226, 230, 0.04) 0px 12px 12px -7px',
       padding: 16,
+      borderColor: theme.colors.light,
+      borderWidth: 1,
     },
     cardContent: {
       paddingHorizontal: 0,
