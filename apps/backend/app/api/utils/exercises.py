@@ -40,7 +40,7 @@ def get_exercises(access_token: str, filter_query: ExerciseFilterParams):
         if q:
             query.ilike("name", f"%{q}%")
 
-        response = query.range(0, 20).execute()
+        response = query.execute()
         return response.data
     except Exception as e:
         print(f"Error fetching exercises: {e}")
