@@ -17,10 +17,10 @@ export default function ExerciseDetailOverlay() {
 
   const difficultyColor =
     exercise?.difficulty === 'beginner'
-      ? theme.colors.blue
+      ? theme.colors.beginnerPillColor
       : exercise?.difficulty === 'intermediate'
-        ? theme.colors.orange
-        : theme.colors.red;
+        ? theme.colors.intermediatePillColor
+        : theme.colors.advancedPillColor;
 
   const containerStyle = {
     backgroundColor: theme.colors.background,
@@ -31,8 +31,8 @@ export default function ExerciseDetailOverlay() {
     return (
       <View key={i} style={styles.flexRowStart}>
         <Pill
-          backgroundColor={theme.colors.purpleLight}
-          textColor={theme.colors.purple}
+          backgroundColor={theme.colors.musclePillBgColor}
+          textColor={theme.colors.musclePillColor}
         >
           {muscle}
         </Pill>
@@ -45,8 +45,8 @@ export default function ExerciseDetailOverlay() {
         <View key={i} style={styles.flexRowStart}>
           <Pill
             backgroundColor={theme.colors.background}
-            textColor={theme.colors.dark}
-            borderColor={theme.colors.dark}
+            textColor={theme.colors.light}
+            borderColor={theme.colors.light}
           >
             {equipment}
           </Pill>
@@ -68,17 +68,27 @@ export default function ExerciseDetailOverlay() {
             style={{
               display: 'flex',
               justifyContent: 'flex-start',
-              borderColor: theme.colors.dark,
+              borderColor: theme.colors.light,
               borderBottomWidth: 1,
               borderRightWidth: 1,
               paddingInline: 8,
             }}
           >
-            <Text style={{ fontSize: 20, fontWeight: 700 }}>{i + 1}</Text>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: 700,
+                color: theme.colors.light,
+              }}
+            >
+              {i + 1}
+            </Text>
           </View>
         </View>
         <View style={{ flex: 1 }}>
-          <Text>{instruction.split(regex)[1]}</Text>
+          <Text style={{ color: theme.colors.light }}>
+            {instruction.split(regex)[1]}
+          </Text>
         </View>
       </View>
     );
@@ -102,13 +112,15 @@ export default function ExerciseDetailOverlay() {
           >
             <Button
               mode="outlined"
-              textColor={theme.colors.dark}
+              textColor={theme.colors.light}
               onPress={hideModal}
             >
               Back to Exercises
             </Button>
           </View>
-          <Text variant="headlineLarge">{exercise?.name}</Text>
+          <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
+            {exercise?.name}
+          </Text>
           <ScrollView style={{ height: 660 }}>
             <View
               style={{
@@ -137,8 +149,8 @@ export default function ExerciseDetailOverlay() {
                 </Text>
                 <View style={styles.flexRowStart}>
                   <Pill
-                    backgroundColor="rgba(73, 80, 87, 0.1)"
-                    textColor={theme.colors.dark}
+                    backgroundColor={theme.colors.darkGrey}
+                    textColor={theme.colors.light}
                   >
                     {exercise?.emphasis || ''}
                   </Pill>
@@ -159,7 +171,7 @@ export default function ExerciseDetailOverlay() {
                   exercise.required_equipment.length === 0 ? (
                     <Pill
                       backgroundColor={theme.colors.background}
-                      textColor={theme.colors.dark}
+                      textColor={theme.colors.light}
                     >
                       ---
                     </Pill>
@@ -170,7 +182,12 @@ export default function ExerciseDetailOverlay() {
               </View>
             </View>
             <View>
-              <Text variant="headlineMedium">Instructions</Text>
+              <Text
+                variant="headlineMedium"
+                style={{ color: theme.colors.light }}
+              >
+                Instructions
+              </Text>
               <View
                 style={{
                   display: 'flex',
