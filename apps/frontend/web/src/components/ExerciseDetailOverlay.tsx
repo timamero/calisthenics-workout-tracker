@@ -1,5 +1,14 @@
 import { useContext } from 'react';
-import { Modal, Stack, Text, Badge, Flex } from '@mantine/core';
+import {
+  Modal,
+  Stack,
+  Text,
+  Badge,
+  Flex,
+  Group,
+  Button,
+  Title,
+} from '@mantine/core';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
@@ -44,16 +53,27 @@ export default function ExerciseDetailOverlay() {
       opened={detailOpened || false}
       onClose={handleCloseModal}
       fullScreen
-      title={exerciseDetail?.name}
-      styles={{
-        title: {
-          fontFamily: 'var(--mantine-font-family-headings)',
-          fontWeight: 700,
-          fontSize: 40,
-        },
-      }}
+      // title={exerciseDetail?.name}
+      withCloseButton={false}
+      // styles={{
+      //   title: {
+      //     fontFamily: 'var(--mantine-font-family-headings)',
+      //     fontWeight: 700,
+      //     fontSize: 32,
+      //   },
+      // }}
     >
       <Stack>
+        <Group justify="flex-end">
+          <Button variant="outline" color="dark" onClick={handleCloseModal}>
+            Back to Execises
+          </Button>
+        </Group>
+        <Group justify="flex-start" mt="sm">
+          <Title order={2} size="h3">
+            {exerciseDetail?.name}
+          </Title>
+        </Group>
         <Stack>
           <Text tt="uppercase" size="md" c="gray.7">
             Difficulty
