@@ -47,7 +47,7 @@ function LibraryView() {
 
   const [filterOpened, filterHandler] = useDisclosure(false);
   const [detailOpened, detailHandlers] = useDisclosure(false);
-  const [detailExercise, setDetailExercise] = useState<Exercise>({
+  const [exerciseDetail, setExerciseDetail] = useState<Exercise>({
     id: 1,
     name: '',
     target_muscles: [],
@@ -102,8 +102,8 @@ function LibraryView() {
   return (
     <ExerciseDetailContext.Provider
       value={{
-        exercise: detailExercise,
-        setExercise: setDetailExercise,
+        exercise: exerciseDetail,
+        setExercise: setExerciseDetail,
         opened: detailOpened,
         handlers: detailHandlers,
       }}
