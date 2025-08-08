@@ -57,15 +57,29 @@ export default function ExerciseDetailOverlay() {
   const instructions = exercise?.instructions.map((instruction, i) => {
     const regex = /\d\. /g;
     return (
-      <View key={i}>
+      <View key={i} style={{ ...styles.flexRowStart, gap: 16 }}>
         <View
           style={{
-            borderColor: 'rgb(46, 46, 46)',
+            display: 'flex',
+            justifyContent: 'flex-start',
           }}
         >
-          <Text>{i + 1}</Text>
+          <View
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderColor: 'rgb(46, 46, 46)',
+              borderBottomWidth: 1,
+              borderRightWidth: 1,
+              paddingInline: 8,
+            }}
+          >
+            <Text style={{ fontSize: 20, fontWeight: 700 }}>{i + 1}</Text>
+          </View>
         </View>
-        <Text>{instruction.split(regex)[1]}</Text>
+        <View style={{ flex: 1 }}>
+          <Text>{instruction.split(regex)[1]}</Text>
+        </View>
       </View>
     );
   });
@@ -140,8 +154,17 @@ export default function ExerciseDetailOverlay() {
             </View>
           </View>
           <View>
-            <Text>Instructions</Text>
-            <View>{instructions}</View>
+            <Text variant="headlineMedium">Instructions</Text>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 12,
+                marginTop: 12,
+              }}
+            >
+              {instructions}
+            </View>
           </View>
         </View>
       </Modal>
