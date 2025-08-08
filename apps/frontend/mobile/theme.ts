@@ -6,12 +6,13 @@ import { Platform } from 'react-native';
 
 export type CustomTheme = typeof DefaultTheme & {
   colors: typeof DefaultTheme.colors & {
-    blue: string;
-    orange: string;
-    red: string;
-    purple: string;
-    purpleLight: string;
+    beginnerPillColor: string;
+    intermediatePillColor: string;
+    advancedPillColor: string;
+    musclePillColor: string;
+    musclePillBgColor: string;
     grey: string;
+    darkGrey: string;
     dark: string;
     light: string;
   };
@@ -39,7 +40,7 @@ const fontConfig = {
     }),
     fontSize: 26,
     fontWeight: '700',
-    letterSpacing: 0,
+    letterSpaorangecing: 0,
     lineHeight: 40,
   },
   headlineMedium: {
@@ -85,15 +86,17 @@ const theme: CustomTheme = {
   fonts: configureFonts({ config: fontConfig }),
   colors: {
     ...DefaultTheme.colors,
-    primary: 'rgb(255, 99, 71)', // tomato,
+    primary: 'rgb(247 103 7)',
     secondary: 'rgb(219, 100, 50)',
-    background: 'rgb(255, 255, 255)',
-    blue: 'rgb(34, 139, 230)',
-    red: 'rgb(250, 82, 82)',
-    purple: 'rgb(190, 75, 219)',
-    purpleLight: 'rgba(190, 75, 219, 0.1)',
-    orange: 'rgb(250, 176, 5)',
-    grey: 'rgb(73, 80, 87)',
+    background: 'rgb(46, 46, 46)',
+    // Semantic colors
+    beginnerPillColor: 'rgb(34, 139, 230)',
+    intermediatePillColor: 'rgb(250, 176, 5)',
+    advancedPillColor: 'rgb(250, 82, 82)',
+    musclePillColor: 'rgb(190, 75, 219)', // mantine: grape.6
+    musclePillBgColor: 'rgb(248 240 252)', // mantine: grape.0
+    grey: 'rgb(206 212 218)',
+    darkGrey: 'rgb(52 58 64)', // mantine: gray.8
     dark: 'rgb(46, 46, 46)',
     light: '#fff',
   },

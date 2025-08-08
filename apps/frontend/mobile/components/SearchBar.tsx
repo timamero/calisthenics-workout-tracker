@@ -4,8 +4,10 @@ import { Searchbar, useTheme } from 'react-native-paper';
 
 import { useStore } from '@cwt/state/store';
 
+import { CustomTheme } from '../theme';
+
 const SearchBar = () => {
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
   const styles = getStyles();
 
   const search = useStore((state) => state.exerciseSearch);
@@ -48,10 +50,15 @@ const SearchBar = () => {
         onChangeText={onChange}
         value={search}
         onClearIconPress={handleClearSearch}
+        iconColor={theme.colors.light}
+        placeholderTextColor={theme.colors.grey}
+        inputStyle={{
+          color: theme.colors.light,
+        }}
         style={{
           backgroundColor: theme.colors.background,
           borderWidth: 1,
-          borderColor: 'rgb(46, 46, 46)',
+          borderColor: theme.colors.light,
         }}
       />
     </View>
