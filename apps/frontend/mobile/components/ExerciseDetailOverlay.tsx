@@ -6,33 +6,33 @@ import { Text } from '../customText';
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
 import Pill from './Pill';
+import { CustomTheme } from '../theme';
 
 export default function ExerciseDetailOverlay() {
   const hideModal = React.useContext(ExerciseDetailContext)?.hideModal;
   const visible = React.useContext(ExerciseDetailContext)?.visible;
   const exercise = React.useContext(ExerciseDetailContext)?.exercise;
-  const theme = useTheme();
-  const styles = getStyles();
+  const theme = useTheme() as CustomTheme;
+  const styles = getStyles(theme);
 
   const difficultyColor =
     exercise?.difficulty === 'beginner'
-      ? '#228be6'
+      ? theme.colors.blue
       : exercise?.difficulty === 'intermediate'
-        ? '#fab005'
-        : '#fa5252';
+        ? theme.colors.orange
+        : theme.colors.red;
 
   const containerStyle = {
     backgroundColor: theme.colors.background,
     paddingBlock: 20,
     marginInline: 16,
   };
-
   const muscleMetadata = exercise?.target_muscles.map((muscle, i) => {
     return (
       <View key={i} style={styles.flexRowStart}>
         <Pill
-          backgroundColor="rgba(190, 75, 219, .1)"
-          textColor="rgb(190, 75, 219)"
+          backgroundColor={theme.colors.purpleLight}
+          textColor={theme.colors.purple}
         >
           {muscle}
         </Pill>
@@ -44,9 +44,9 @@ export default function ExerciseDetailOverlay() {
       return (
         <View key={i} style={styles.flexRowStart}>
           <Pill
-            backgroundColor="white"
-            textColor="rgb(46, 46, 46)"
-            borderColor="rgb(46, 46, 46)"
+            backgroundColor={theme.colors.background}
+            textColor={theme.colors.dark}
+            borderColor={theme.colors.dark}
           >
             {equipment}
           </Pill>
@@ -68,7 +68,7 @@ export default function ExerciseDetailOverlay() {
             style={{
               display: 'flex',
               justifyContent: 'flex-start',
-              borderColor: 'rgb(46, 46, 46)',
+              borderColor: theme.colors.dark,
               borderBottomWidth: 1,
               borderRightWidth: 1,
               paddingInline: 8,
@@ -102,7 +102,7 @@ export default function ExerciseDetailOverlay() {
           >
             <Button
               mode="outlined"
-              textColor="rgb(46, 46, 46)"
+              textColor={theme.colors.dark}
               onPress={hideModal}
             >
               Back to Exercises
@@ -123,7 +123,10 @@ export default function ExerciseDetailOverlay() {
                   Difficulty
                 </Text>
                 <View style={styles.flexRowStart}>
-                  <Pill backgroundColor={difficultyColor} textColor="white">
+                  <Pill
+                    backgroundColor={difficultyColor}
+                    textColor={theme.colors.light}
+                  >
                     {exercise?.difficulty || ''}
                   </Pill>
                 </View>
@@ -135,7 +138,7 @@ export default function ExerciseDetailOverlay() {
                 <View style={styles.flexRowStart}>
                   <Pill
                     backgroundColor="rgba(73, 80, 87, 0.1)"
-                    textColor="rgb(46, 46, 46)"
+                    textColor={theme.colors.dark}
                   >
                     {exercise?.emphasis || ''}
                   </Pill>
@@ -154,7 +157,10 @@ export default function ExerciseDetailOverlay() {
                 <View style={styles.pillsContainer}>
                   {exercise?.required_equipment == null ||
                   exercise.required_equipment.length === 0 ? (
-                    <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
+                    <Pill
+                      backgroundColor={theme.colors.background}
+                      textColor={theme.colors.dark}
+                    >
                       ---
                     </Pill>
                   ) : (
@@ -183,12 +189,12 @@ export default function ExerciseDetailOverlay() {
   );
 }
 
-const getStyles = () =>
+const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     metadataTitle: {
       fontWeight: 700,
       textTransform: 'uppercase',
-      color: 'rgb(73, 80, 87)',
+      color: theme.colors.grey,
       marginBottom: 4,
     },
     flexRowStart: {

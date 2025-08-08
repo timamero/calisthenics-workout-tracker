@@ -7,7 +7,13 @@ import { Platform } from 'react-native';
 export type CustomTheme = typeof DefaultTheme & {
   colors: typeof DefaultTheme.colors & {
     blue: string;
+    orange: string;
+    red: string;
+    purple: string;
+    purpleLight: string;
     grey: string;
+    dark: string;
+    light: string;
   };
 };
 
@@ -83,7 +89,13 @@ const theme: CustomTheme = {
     secondary: 'rgb(219, 100, 50)',
     background: 'rgb(255, 255, 255)',
     blue: 'rgb(34, 139, 230)',
+    red: 'rgb(250, 82, 82)',
+    purple: 'rgb(190, 75, 219)',
+    purpleLight: 'rgba(190, 75, 219, 0.1)',
+    orange: 'rgb(250, 176, 5)',
     grey: 'rgb(73, 80, 87)',
+    dark: 'rgb(46, 46, 46)',
+    light: '#fff',
   },
 };
 
