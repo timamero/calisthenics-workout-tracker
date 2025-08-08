@@ -329,7 +329,7 @@ export async function asyncGetExercises(
     return exercises;
   } catch {
     console.log(
-      'Error fetching exercises from API. Sample exercises set for development.',
+      'Web: Error fetching exercises from API. Sample exercises set for development.',
     );
     return sampleExercises;
   }
