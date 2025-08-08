@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
 import { Text } from '../customText';
@@ -105,72 +105,74 @@ export default function ExerciseDetailOverlay() {
             </Button>
           </View>
           <Text variant="headlineLarge">{exercise?.name}</Text>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              rowGap: 12,
-              marginBlock: 24,
-            }}
-          >
-            <View>
-              <Text variant="bodyLarge" style={styles.metadataTitle}>
-                Difficulty
-              </Text>
-              <View style={styles.flexRowStart}>
-                <Pill backgroundColor={difficultyColor} textColor="white">
-                  {exercise?.difficulty || ''}
-                </Pill>
-              </View>
-            </View>
-            <View>
-              <Text variant="bodyLarge" style={styles.metadataTitle}>
-                Emphasis
-              </Text>
-              <View style={styles.flexRowStart}>
-                <Pill
-                  backgroundColor="rgba(73, 80, 87, 0.1)"
-                  textColor="rgb(46, 46, 46)"
-                >
-                  {exercise?.emphasis || ''}
-                </Pill>
-              </View>
-            </View>
-            <View>
-              <Text variant="bodyLarge" style={styles.metadataTitle}>
-                Target Muscles
-              </Text>
-              <View style={styles.pillsContainer}>{muscleMetadata}</View>
-            </View>
-            <View>
-              <Text variant="bodyLarge" style={styles.metadataTitle}>
-                Required Equipment
-              </Text>
-              <View style={styles.pillsContainer}>
-                {exercise?.required_equipment == null ||
-                exercise.required_equipment.length === 0 ? (
-                  <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
-                    ---
-                  </Pill>
-                ) : (
-                  equipmentMetadata
-                )}
-              </View>
-            </View>
-          </View>
-          <View>
-            <Text variant="headlineMedium">Instructions</Text>
+          <ScrollView style={{ height: 660 }}>
             <View
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 12,
-                marginTop: 12,
+                rowGap: 12,
+                marginBlock: 24,
               }}
             >
-              {instructions}
+              <View>
+                <Text variant="bodyLarge" style={styles.metadataTitle}>
+                  Difficulty
+                </Text>
+                <View style={styles.flexRowStart}>
+                  <Pill backgroundColor={difficultyColor} textColor="white">
+                    {exercise?.difficulty || ''}
+                  </Pill>
+                </View>
+              </View>
+              <View>
+                <Text variant="bodyLarge" style={styles.metadataTitle}>
+                  Emphasis
+                </Text>
+                <View style={styles.flexRowStart}>
+                  <Pill
+                    backgroundColor="rgba(73, 80, 87, 0.1)"
+                    textColor="rgb(46, 46, 46)"
+                  >
+                    {exercise?.emphasis || ''}
+                  </Pill>
+                </View>
+              </View>
+              <View>
+                <Text variant="bodyLarge" style={styles.metadataTitle}>
+                  Target Muscles
+                </Text>
+                <View style={styles.pillsContainer}>{muscleMetadata}</View>
+              </View>
+              <View>
+                <Text variant="bodyLarge" style={styles.metadataTitle}>
+                  Required Equipment
+                </Text>
+                <View style={styles.pillsContainer}>
+                  {exercise?.required_equipment == null ||
+                  exercise.required_equipment.length === 0 ? (
+                    <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
+                      ---
+                    </Pill>
+                  ) : (
+                    equipmentMetadata
+                  )}
+                </View>
+              </View>
             </View>
-          </View>
+            <View>
+              <Text variant="headlineMedium">Instructions</Text>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 12,
+                  marginTop: 12,
+                }}
+              >
+                {instructions}
+              </View>
+            </View>
+          </ScrollView>
         </View>
       </Modal>
     </Portal>
