@@ -74,9 +74,20 @@ export default function ExerciseDetailOverlay() {
         onDismiss={hideModal}
         contentContainerStyle={containerStyle}
       >
-        <View>
-          <Button>Go back to Exercises</Button>
-          <Text>{exercise?.name}</Text>
+        <View style={{ paddingInline: 16 }}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              marginBottom: 12,
+            }}
+          >
+            <Button mode="outlined" textColor="rgb(46, 46, 46)">
+              Back to Exercises
+            </Button>
+          </View>
+          <Text variant="headlineLarge">{exercise?.name}</Text>
           <View>
             <View>
               <Text>Difficulty</Text>
