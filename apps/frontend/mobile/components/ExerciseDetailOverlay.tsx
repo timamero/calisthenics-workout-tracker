@@ -3,13 +3,12 @@ import { View } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
 import { Text } from '../customText';
+import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
 export default function ExerciseDetailOverlay() {
+  const hideModal = React.useContext(ExerciseDetailContext)?.hideModal;
+  const visible = React.useContext(ExerciseDetailContext)?.visible;
   const theme = useTheme();
-  const [visible, setVisible] = React.useState(false);
-
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
 
   const containerStyle = {
     backgroundColor: theme.colors.background,
@@ -20,7 +19,7 @@ export default function ExerciseDetailOverlay() {
   return (
     <Portal>
       <Modal
-        visible={visible}
+        visible={visible || false}
         onDismiss={hideModal}
         contentContainerStyle={containerStyle}
       >

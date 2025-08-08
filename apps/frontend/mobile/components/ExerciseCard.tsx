@@ -1,8 +1,10 @@
+import * as React from 'react';
 import { Card, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
 import { Exercise } from '@cwt/schema/exerciseSchema';
 
+import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 
@@ -13,6 +15,7 @@ interface ExerciseCardProps {
 }
 
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {
+  const showModal = React.useContext(ExerciseDetailContext)?.showModal;
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
@@ -24,7 +27,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
         : '#fa5252';
 
   return (
-    <Card style={styles.card}>
+    <Card style={styles.card} onPress={showModal}>
       <Card.Content style={styles.cardContent}>
         <View style={styles.difficultyContainer}>
           <Pill backgroundColor={difficultyColor} textColor="white">
