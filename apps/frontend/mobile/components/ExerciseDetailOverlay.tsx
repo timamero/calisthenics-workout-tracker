@@ -91,7 +91,9 @@ export default function ExerciseDetailOverlay() {
             </Button>
           </View>
           <Text variant="headlineLarge">{exercise?.name}</Text>
-          <View>
+          <View
+            style={{ display: 'flex', flexDirection: 'column', rowGap: 12 }}
+          >
             <View>
               <Text variant="bodyLarge" style={styles.metadataTitle}>
                 Difficulty
@@ -119,20 +121,18 @@ export default function ExerciseDetailOverlay() {
               <Text variant="bodyLarge" style={styles.metadataTitle}>
                 Target Muscles
               </Text>
-              <View>{muscleMetadata}</View>
+              <View style={styles.pillsContainer}>{muscleMetadata}</View>
             </View>
             <View>
               <Text variant="bodyLarge" style={styles.metadataTitle}>
                 Required Equipment
               </Text>
-              <View>
+              <View styles={styles.pillsContainer}>
                 {exercise?.required_equipment == null ||
                 exercise.required_equipment.length === 0 ? (
-                  <View style={styles.flexRowStart}>
-                    <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
-                      ---
-                    </Pill>
-                  </View>
+                  <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
+                    ---
+                  </Pill>
                 ) : (
                   equipmentMetadata
                 )}
@@ -155,10 +155,17 @@ const getStyles = () =>
       fontWeight: 700,
       textTransform: 'uppercase',
       color: 'rgb(73, 80, 87)',
+      marginBottom: 4,
     },
     flexRowStart: {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'flex-start',
+    },
+    pillsContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 8,
     },
   });
