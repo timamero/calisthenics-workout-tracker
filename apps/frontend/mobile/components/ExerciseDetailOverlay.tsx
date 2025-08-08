@@ -28,26 +28,42 @@ export default function ExerciseDetailOverlay() {
 
   const muscleMetadata = exercise?.target_muscles.map((muscle, i) => {
     return (
-      <Pill
+      <View
         key={i}
-        backgroundColor="rgba(190, 75, 219, .1)"
-        textColor="rgb(190, 75, 219)"
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+        }}
       >
-        {muscle}
-      </Pill>
+        <Pill
+          backgroundColor="rgba(190, 75, 219, .1)"
+          textColor="rgb(190, 75, 219)"
+        >
+          {muscle}
+        </Pill>
+      </View>
     );
   });
   const equipmentMetadata = exercise?.required_equipment?.map(
     (equipment, i) => {
       return (
-        <Pill
+        <View
           key={i}
-          backgroundColor="white"
-          textColor="rgb(46, 46, 46)"
-          borderColor="rgb(46, 46, 46)"
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+          }}
         >
-          {equipment}
-        </Pill>
+          <Pill
+            backgroundColor="white"
+            textColor="rgb(46, 46, 46)"
+            borderColor="rgb(46, 46, 46)"
+          >
+            {equipment}
+          </Pill>
+        </View>
       );
     },
   );
@@ -90,32 +106,92 @@ export default function ExerciseDetailOverlay() {
           <Text variant="headlineLarge">{exercise?.name}</Text>
           <View>
             <View>
-              <Text>Difficulty</Text>
-              <Pill backgroundColor={difficultyColor} textColor="white">
-                {exercise?.difficulty || ''}
-              </Pill>
-            </View>
-            <View>
-              <Text>Emphasis</Text>
-              <Pill
-                backgroundColor="rgba(73, 80, 87, 0.1)"
-                textColor="rgb(46, 46, 46)"
+              <Text
+                variant="bodyLarge"
+                style={{
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  color: 'rgb(73, 80, 87)',
+                }}
               >
-                {exercise?.emphasis || ''}
-              </Pill>
+                Difficulty
+              </Text>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <Pill backgroundColor={difficultyColor} textColor="white">
+                  {exercise?.difficulty || ''}
+                </Pill>
+              </View>
             </View>
             <View>
-              <Text>Target Muscles</Text>
+              <Text
+                variant="bodyLarge"
+                style={{
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  color: 'rgb(73, 80, 87)',
+                }}
+              >
+                Emphasis
+              </Text>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <Pill
+                  backgroundColor="rgba(73, 80, 87, 0.1)"
+                  textColor="rgb(46, 46, 46)"
+                >
+                  {exercise?.emphasis || ''}
+                </Pill>
+              </View>
+            </View>
+            <View>
+              <Text
+                variant="bodyLarge"
+                style={{
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  color: 'rgb(73, 80, 87)',
+                }}
+              >
+                Target Muscles
+              </Text>
               <View>{muscleMetadata}</View>
             </View>
             <View>
-              <Text>Required Equipment</Text>
+              <Text
+                variant="bodyLarge"
+                style={{
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  color: 'rgb(73, 80, 87)',
+                }}
+              >
+                Required Equipment
+              </Text>
               <View>
                 {exercise?.required_equipment == null ||
                 exercise.required_equipment.length === 0 ? (
-                  <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
-                    ---
-                  </Pill>
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'flex-start',
+                    }}
+                  >
+                    <Pill backgroundColor="white" textColor="rgb(46, 46, 46)">
+                      ---
+                    </Pill>
+                  </View>
                 ) : (
                   equipmentMetadata
                 )}
