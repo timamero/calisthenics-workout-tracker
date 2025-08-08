@@ -68,78 +68,86 @@ export default function ExerciseDetailOverlay() {
     <Modal
       opened={detailOpened || false}
       onClose={handleCloseModal}
-      fullScreen
+      size="xl"
       withCloseButton={false}
     >
-      <Stack mb="lg">
-        <Group justify="flex-end">
-          <Button variant="outline" color="dark" onClick={handleCloseModal}>
-            Back to Execises
-          </Button>
-        </Group>
-        <Group justify="flex-start" mt="sm">
-          <Title order={2} size="h3">
-            {exerciseDetail?.name}
-          </Title>
-        </Group>
-        <Stack>
-          <Text tt="uppercase" size="md" c="gray.7">
-            Difficulty
-          </Text>
-          <Badge size="lg" color={difficultyColor}>
-            {exerciseDetail?.difficulty}
-          </Badge>
+      <Group justify="center">
+        <Stack mb="lg" maw={580}>
+          <Group justify="flex-end">
+            <Button variant="outline" color="dark" onClick={handleCloseModal}>
+              Back to Execises
+            </Button>
+          </Group>
+          <Group justify="flex-start" mt="sm">
+            <Title order={2} size="h2">
+              {exerciseDetail?.name}
+            </Title>
+          </Group>
+          <Flex direction="row" wrap="wrap" gap="md" justify="space-between">
+            <Stack>
+              <Text tt="uppercase" size="md" c="gray.7">
+                Difficulty
+              </Text>
+              <Badge size="lg" color={difficultyColor}>
+                {exerciseDetail?.difficulty}
+              </Badge>
+            </Stack>
+            <Stack>
+              <Text tt="uppercase" size="md" c="gray.7">
+                Emphasis
+              </Text>
+              <Badge size="lg" color="dark" variant="outline" bg="gray.1">
+                {exerciseDetail?.emphasis}
+              </Badge>
+            </Stack>
+            <Stack>
+              <Text tt="uppercase" size="md" c="gray.7">
+                Target Muscles
+              </Text>
+              <Flex
+                // mih={50}
+                // bg="rgba(0, 0, 0, .3)"
+                gap="md"
+                justify="flex-start"
+                align="flex-start"
+                direction="row"
+                wrap="wrap"
+              >
+                {muscleMetadata}
+              </Flex>
+            </Stack>
+            <Stack>
+              <Text tt="uppercase" size="md" c="gray.7">
+                Required Equipment
+              </Text>
+              <Flex
+                // mih={50}
+                // bg="rgba(0, 0, 0, .3)"
+                gap="md"
+                justify="flex-start"
+                align="flex-start"
+                direction="row"
+                wrap="wrap"
+              >
+                {exerciseDetail?.required_equipment == null ||
+                exerciseDetail.required_equipment.length == 0 ? (
+                  <Badge color="dark" variant="transparent">
+                    ---
+                  </Badge>
+                ) : (
+                  equipmentMetadata
+                )}
+              </Flex>
+            </Stack>
+          </Flex>
+          <Stack mt="sm">
+            <Title order={3} size="h4" tt="uppercase">
+              Instructions
+            </Title>
+            <Stack>{instructions}</Stack>
+          </Stack>
         </Stack>
-        <Stack>
-          <Text tt="uppercase" size="md" c="gray.7">
-            Emphasis
-          </Text>
-          <Badge size="lg" color="dark" variant="outline" bg="orange.1">
-            {exerciseDetail?.emphasis}
-          </Badge>
-        </Stack>
-        <Text tt="uppercase" size="md" c="gray.7">
-          Target Muscles
-        </Text>
-        <Flex
-          // mih={50}
-          // bg="rgba(0, 0, 0, .3)"
-          gap="md"
-          justify="flex-start"
-          align="flex-start"
-          direction="row"
-          wrap="wrap"
-        >
-          {muscleMetadata}
-        </Flex>
-        <Text tt="uppercase" size="md" c="gray.7">
-          Required Equipment
-        </Text>
-        <Flex
-          // mih={50}
-          // bg="rgba(0, 0, 0, .3)"
-          gap="md"
-          justify="flex-start"
-          align="flex-start"
-          direction="row"
-          wrap="wrap"
-        >
-          {exerciseDetail?.required_equipment == null ||
-          exerciseDetail.required_equipment.length == 0 ? (
-            <Badge color="dark" variant="transparent">
-              ---
-            </Badge>
-          ) : (
-            equipmentMetadata
-          )}
-        </Flex>
-        <Stack mt="sm">
-          <Title order={3} size="h4" tt="uppercase">
-            Instructions
-          </Title>
-          <Stack>{instructions}</Stack>
-        </Stack>
-      </Stack>
+      </Group>
     </Modal>
   );
 }
