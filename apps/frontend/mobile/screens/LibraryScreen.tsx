@@ -6,6 +6,7 @@ import ExerciseList from '../components/ExerciseList';
 import SearchBar from '../components/SearchBar';
 import Filter from '../components/Filter';
 import FilterOverlay from '../components/FilterOverlay';
+import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
 
 export default function LibraryScreen() {
   const theme = useTheme();
@@ -28,6 +29,7 @@ export default function LibraryScreen() {
         <ExerciseList />
       </ScrollView>
       <FilterOverlay visible={visible} handleHideModal={hideModal} />
+      <ExerciseDetailOverlay />
     </View>
   );
 }
