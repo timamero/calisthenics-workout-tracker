@@ -106,7 +106,12 @@ export default function ExerciseDetailOverlay() {
           </View>
           <Text variant="headlineLarge">{exercise?.name}</Text>
           <View
-            style={{ display: 'flex', flexDirection: 'column', rowGap: 12 }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              rowGap: 12,
+              marginBlock: 24,
+            }}
           >
             <View>
               <Text variant="bodyLarge" style={styles.metadataTitle}>
