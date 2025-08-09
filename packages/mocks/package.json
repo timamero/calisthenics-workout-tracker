@@ -1,0 +1,19 @@
+{
+  "name": "@cwt/mocks",
+  "version": "0.1.0",
+  "description": "CWT Mocks for development and testing",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./exerciseSchema": {
+      "types": "./src/sampleExercises.ts",
+      "default": "./src/sampleExercises.ts"
+    }
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3"
+  }
+}
