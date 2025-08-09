@@ -4,6 +4,7 @@ import { SupabaseClient, Session } from '@supabase/supabase-js';
 export function useSupabaseAuth(client: SupabaseClient, setSession: (session: Session | null) => void, setLoading: (loading: boolean) => void) {
 
   React.useEffect(() => {
+    // Use mounted flag to prevent state updates after unmount
     let mounted = true;
 
     const getSession = async () => {
