@@ -10,7 +10,7 @@ import { useStore } from '@cwt/state/store';
 import theme from './theme';
 import { supabase } from './services/supabaseClient';
 import Navigation from './navigation';
-import { asyncGetExercises } from './services/exerciseService';
+import { getExercises } from './services/exerciseService';
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
@@ -23,7 +23,7 @@ export default function App() {
   React.useEffect(() => {
     const asyncFetchData = async () => {
       if (supabaseSession) {
-        const exercises = await asyncGetExercises(supabaseSession.access_token);
+        const exercises = await getExercises(supabaseSession.access_token);
         if (exercises) {
           setExercises(exercises);
         }
