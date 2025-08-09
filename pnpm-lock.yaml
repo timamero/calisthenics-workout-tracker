@@ -29,6 +29,9 @@ importers:
       '@cwt/auth':
         specifier: workspace:*
         version: link:../../../packages/auth
+      '@cwt/hooks':
+        specifier: workspace:*
+        version: link:../../../packages/hooks
       '@cwt/mocks':
         specifier: workspace:*
         version: link:../../../packages/mocks
@@ -132,6 +135,9 @@ importers:
       '@cwt/auth':
         specifier: workspace:*
         version: link:../../../packages/auth
+      '@cwt/hooks':
+        specifier: workspace:*
+        version: link:../../../packages/hooks
       '@cwt/mocks':
         specifier: workspace:*
         version: link:../../../packages/mocks
@@ -260,6 +266,16 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.51.0
         version: 2.53.0
+    devDependencies:
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
+  packages/hooks:
+    dependencies:
+      '@cwt/state':
+        specifier: workspace:*
+        version: link:../state
     devDependencies:
       typescript:
         specifier: ~5.8.3
