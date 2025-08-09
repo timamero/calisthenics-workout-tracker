@@ -18,6 +18,7 @@
     "@cwt/auth": "workspace:*",
     "@cwt/schema": "workspace:*",
     "@cwt/state": "workspace:*",
+    "@cwt/mocks": "workspace:*",
     "@mantine/core": "^8.2.1",
     "@mantine/dates": "^8.2.1",
     "@mantine/form": "^8.2.1",

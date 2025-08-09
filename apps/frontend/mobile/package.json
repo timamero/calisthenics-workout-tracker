@@ -7,7 +7,7 @@
     "web": "expo start --web",
     "dev-build": "eas build --platform android --profile development",
     "preview-build": "eas build --platform android --profile preview",
-    "postinstall": "cd ../../.. && pnpm install --filter=@cwt/state && pnpm install --filter=@cwt/schema && pnpm install --filter=@cwt/auth && pnpm install --filter=@cwt/api && pnpm build:state && pnpm build:schema && pnpm build:auth && pnpm build:api",
+    "postinstall": "cd ../../.. && pnpm install --filter=@cwt/state && pnpm install --filter=@cwt/schema && pnpm install --filter=@cwt/auth && pnpm install --filter=@cwt/api && pnpm install --filter=@cwt/mocks && pnpm build:state && pnpm build:schema && pnpm build:auth && pnpm build:api && pnpm build:mocks",
     "check-types": "tsc --noEmit",
     "lint": "expo lint",
     "test": "jest"
@@ -17,6 +17,7 @@
     "@cwt/auth": "workspace:*",
     "@cwt/schema": "workspace:*",
     "@cwt/state": "workspace:*",
+    "@cwt/mocks": "workspace:*",
     "@expo/vector-icons": "^14.1.0",
     "@react-native-async-storage/async-storage": "2.1.2",
     "@react-navigation/bottom-tabs": "^7.4.2",
