@@ -8,6 +8,10 @@
     "build": "tsc"
   },
   "exports": {
+    "./httpClient": {
+      "types": "./src/httpClient.ts",
+      "default": "./dist/httpClient.js"
+    },
     "./exercisesService": {
       "types": "./src/exercisesService.ts",
       "default": "./dist/exercisesService.js"
