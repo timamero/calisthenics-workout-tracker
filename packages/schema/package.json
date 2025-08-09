@@ -10,7 +10,7 @@
   "exports": {
     "./exerciseSchema": {
       "types": "./src/exerciseSchema.ts",
-      "default": "./src/exerciseSchema.ts"
+      "default": "./dist/exerciseSchema.ts"
     },
     "./sampleSchema": {
       "types": "./src/sampleSchema.ts",
