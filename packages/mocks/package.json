@@ -13,6 +13,9 @@
       "default": "./src/sampleExercises.ts"
     }
   },
+  "dependencies": {
+    "@cwt/schema": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "~5.8.3"
   }
