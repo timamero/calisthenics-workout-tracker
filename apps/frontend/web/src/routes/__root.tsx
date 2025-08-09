@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
-import { AppShell, Burger } from '@mantine/core';
+import { AppShell, Burger, Loader, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { NavLink } from '@mantine/core';
 import { supabase } from '../services/supabaseClient';
@@ -21,9 +21,10 @@ function RootComponent() {
   const [opened, { toggle }] = useDisclosure();
 
   const setExercises = useStore((state) => state.setExercises);
-
+  const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
   const setSession = useAuthStore((state) => state.setSession);
+  const setLoading = useAuthStore((state) => state.setLoading);
 
   const navLinks = [
     { label: 'Home', to: '/' },
@@ -34,7 +35,7 @@ function RootComponent() {
     { label: 'Settings', to: '/settings' },
   ];
 
-  useSupabaseAuth(supabase, setSession);
+  useSupabaseAuth(supabase, setSession, setLoading);
 
   useEffect(() => {
     const asyncFetchData = async () => {
@@ -45,6 +46,14 @@ function RootComponent() {
     };
     asyncFetchData();
   }, [supabaseSession, setExercises]);
+
+  if (loading) {
+    return (
+      <Stack h="100vh" w="100vw" display="flex" justify="center" align="center">
+        <Loader color="blue" />
+      </Stack>
+    );
+  }
 
   if (!supabaseSession) {
     return (
