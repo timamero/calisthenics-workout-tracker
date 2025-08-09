@@ -14,7 +14,8 @@
     }
   },
   "dependencies": {
-    "@cwt/state": "workspace:*"
+    "@cwt/state": "workspace:*",
+    "@supabase/supabase-js": "^2.51.0"
   },
   "devDependencies": {
     "typescript": "~5.8.3"

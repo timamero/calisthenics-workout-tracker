@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Button } from '@mantine/core';
 import { signOut } from '@cwt/auth/signOut';
-import { supabase } from '../supabaseClient';
+import { supabase } from '../services/supabaseClient';
 
 import { useAuthStore } from '@cwt/state/auth';
 import { getProtectedData } from '@cwt/api/protectedData';
