@@ -29,6 +29,9 @@ importers:
       '@cwt/auth':
         specifier: workspace:*
         version: link:../../../packages/auth
+      '@cwt/mocks':
+        specifier: workspace:*
+        version: link:../../../packages/mocks
       '@cwt/schema':
         specifier: workspace:*
         version: link:../../../packages/schema
@@ -129,6 +132,9 @@ importers:
       '@cwt/auth':
         specifier: workspace:*
         version: link:../../../packages/auth
+      '@cwt/mocks':
+        specifier: workspace:*
+        version: link:../../../packages/mocks
       '@cwt/schema':
         specifier: workspace:*
         version: link:../../../packages/schema
