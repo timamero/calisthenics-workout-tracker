@@ -8,6 +8,7 @@
 		"build:auth": "turbo run build --filter=@cwt/auth",
 		"build:api": "turbo run build --filter=@cwt/api",
 		"build:mocks": "turbo run build --filter=@cwt/mocks",
+		"build:hooks": "turbo run build --filter=@cwt/hooks",
 		"lint": "turbo run lint",
 		"dev": "turbo run dev",
 		"dev:backend": "turbo run dev --filter=backend",

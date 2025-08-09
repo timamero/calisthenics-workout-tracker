@@ -14,6 +14,7 @@ const monorepoPackages = {
   '@cwt/schema': path.resolve(monorepoRoot, 'packages/schema'),
   '@cwt/auth': path.resolve(monorepoRoot, 'packages/auth'),
   '@cwt/api': path.resolve(monorepoRoot, 'packages/api'),
+  '@cwt/hooks': path.resolve(monorepoRoot, 'packages/hooks'),
   '@cwt/mocks': path.resolve(monorepoRoot, 'packages/mocks'),
 };
 

@@ -1,7 +1,7 @@
 {
-  "name": "@cwt/mocks",
+  "name": "@cwt/hooks",
   "version": "0.1.0",
-  "description": "CWT Mocks for development and testing",
+  "description": "Hooks for CWT",
   "type": "module",
   "scripts": {
     "dev": "tsc --watch",
@@ -9,12 +9,12 @@
   },
   "exports": {
     "./sampleExercises": {
-      "types": "./src/sampleExercises.ts",
-      "default": "./src/sampleExercises.js"
+      "types": "./src/useSupabaseAuth.ts",
+      "default": "./src/useSupabaseAuth.js"
     }
   },
   "dependencies": {
-    "@cwt/schema": "workspace:*"
+    "@cwt/state": "workspace:*"
   },
   "devDependencies": {
     "typescript": "~5.8.3"
