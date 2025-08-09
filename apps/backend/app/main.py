@@ -20,11 +20,16 @@ app = FastAPI(
 )
 
 origins = [
-    "http://localhost:5173",
-    "http://REDACTED_IP:5173",
-    "http://localhost:8081",
-    "http://REDACTED_IP:8081",
+    "http://localhost:5173",  # Local web server
+    "http://REDACTED_IP:5173",  # Local web server
+    "http://localhost:8081",  # Local mobile server
+    "http://REDACTED_IP:8081",  # Local mobile server
 ]
+
+if config.settings.environment == "staging":
+    origins.append(config.settings.staging_web_origin)
+    origins.append(config.settings.staging_mobile_origin)
+
 
 app.add_middleware(
     CORSMiddleware,
