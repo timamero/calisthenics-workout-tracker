@@ -8,7 +8,7 @@ import {
   Title,
 } from '@mantine/core';
 import { signIn } from '@cwt/auth/signIn';
-import { supabase } from '../supabaseClient';
+import { supabase } from '../services/supabaseClient';
 
 export const Route = createFileRoute('/login')({
   component: LoginView,
