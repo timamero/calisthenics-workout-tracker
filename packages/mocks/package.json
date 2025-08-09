@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "exports": {
-    "./exerciseSchema": {
+    "./sampleExercises": {
       "types": "./src/sampleExercises.ts",
       "default": "./src/sampleExercises.ts"
     }
