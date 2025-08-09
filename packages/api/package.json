@@ -15,14 +15,6 @@
     "./exercisesService": {
       "types": "./src/exercisesService.ts",
       "default": "./dist/exercisesService.js"
-    },
-    "./projectData": {
-      "types": "./src/projectData.ts",
-      "default": "./dist/projectData.js"
-    },
-    "./protectedData": {
-      "types": "./src/protectedData.ts",
-      "default": "./dist/protectedData.js"
     }
   },
   "dependencies": {
