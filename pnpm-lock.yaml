@@ -276,6 +276,9 @@ importers:
       '@cwt/state':
         specifier: workspace:*
         version: link:../state
+      '@supabase/supabase-js':
+        specifier: ^2.51.0
+        version: 2.53.0
       react:
         specifier: 19.0.0
         version: 19.0.0
