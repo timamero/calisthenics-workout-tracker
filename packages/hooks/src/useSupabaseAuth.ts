@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { SupabaseClient, Session } from '@supabase/supabase-js';
 
-export function useSupabaseAuth(client: SupabaseClient, setSession: (session: Session | null) => void) {
+export function useSupabaseAuth(client: SupabaseClient, setSession: (session: Session | null) => void, setLoading: (loading: boolean) => void) {
 
   React.useEffect(() => {
     (async () => {
+      setLoading(true);
+
       const {data: { session }} = await client.auth.getSession();
       setSession(session);
 
       const {data: listener} = client.auth.onAuthStateChange((_event, session) => {
+        setLoading(true);
         switch (_event) {
           case 'SIGNED_IN':
           case 'USER_UPDATED':
@@ -28,8 +31,10 @@ export function useSupabaseAuth(client: SupabaseClient, setSession: (session: Se
             console.log(`Unhandled auth event: ${_event}`);
             break;
           }
+          setLoading(false);
       });
 
+      setLoading(false);
       return () => listener.subscription.unsubscribe();
     })();
   }, [setSession])
