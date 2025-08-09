@@ -2,7 +2,7 @@ import { getExercises as apiGetExercises } from '@cwt/api/exercisesService';
 import { Exercise } from '@cwt/schema/exerciseSchema';
 import { sampleExercises } from '@cwt/mocks/sampleExercises';
 
-const baseUrl = 'http://127.0.0.1:8000';
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export async function getExercises(token: string): Promise<Exercise[]> {
   try {
