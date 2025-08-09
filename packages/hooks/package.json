@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "exports": {
-    "./sampleExercises": {
+    "./useSupabaseAuth": {
       "types": "./src/useSupabaseAuth.ts",
       "default": "./src/useSupabaseAuth.js"
     }
