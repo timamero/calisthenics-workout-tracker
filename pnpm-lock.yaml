@@ -276,6 +276,9 @@ importers:
       '@cwt/state':
         specifier: workspace:*
         version: link:../state
+      react:
+        specifier: 19.0.0
+        version: 19.0.0
     devDependencies:
       typescript:
         specifier: ~5.8.3
