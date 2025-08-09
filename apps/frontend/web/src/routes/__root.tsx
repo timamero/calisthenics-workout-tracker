@@ -11,7 +11,7 @@ import type { Subscription } from '@supabase/auth-js';
 import { useAuthStore } from '@cwt/state/auth';
 import { useStore } from '@cwt/state/store';
 
-import { asyncGetExercises } from '../services/exercisesService';
+import { getExercises } from '../services/exercisesService';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -28,7 +28,7 @@ function RootComponent() {
   useEffect(() => {
     const asyncFetchData = async () => {
       if (supabaseSession) {
-        const exercises = await asyncGetExercises(supabaseSession.access_token);
+        const exercises = await getExercises(supabaseSession.access_token);
         if (exercises) {
           setExercises(exercises);
         }
