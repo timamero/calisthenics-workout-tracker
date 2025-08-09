@@ -10,7 +10,7 @@
   "exports": {
     "./useSupabaseAuth": {
       "types": "./src/useSupabaseAuth.ts",
-      "default": "./src/useSupabaseAuth.js"
+      "default": "./dist/useSupabaseAuth.js"
     }
   },
   "dependencies": {

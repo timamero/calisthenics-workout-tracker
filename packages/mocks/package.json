@@ -10,7 +10,7 @@
   "exports": {
     "./sampleExercises": {
       "types": "./src/sampleExercises.ts",
-      "default": "./src/sampleExercises.js"
+      "default": "./dist/sampleExercises.js"
     }
   },
   "dependencies": {
