@@ -259,6 +259,16 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
+  packages/mocks:
+    dependencies:
+      '@cwt/schema':
+        specifier: workspace:*
+        version: link:../schema
+    devDependencies:
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
   packages/schema:
     dependencies:
       zod:
