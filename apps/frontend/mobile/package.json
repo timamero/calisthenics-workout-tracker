@@ -7,7 +7,7 @@
     "web": "expo start --web",
     "dev-build": "eas build --platform android --profile development",
     "preview-build": "eas build --platform android --profile preview",
-    "postinstall": "cd ../../.. && pnpm install --filter=@cwt/state && pnpm install --filter=@cwt/schema && pnpm install --filter=@cwt/auth && pnpm install --filter=@cwt/api && pnpm install --filter=@cwt/mocks && pnpm build:state && pnpm build:schema && pnpm build:auth && pnpm build:api && pnpm build:mocks",
+    "postinstall": "cd ../../.. && pnpm install --filter=@cwt/state && pnpm install --filter=@cwt/schema && pnpm install --filter=@cwt/auth && pnpm install --filter=@cwt/api && pnpm install --filter=@cwt/mocks && pnpm install --filter=@cwt/hooks && pnpm build:state && pnpm build:schema && pnpm build:auth && pnpm build:api && pnpm build:mocks && pnpm build:hooks",
     "check-types": "tsc --noEmit",
     "lint": "expo lint",
     "test": "jest"
