@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     supabase_jwt_key_id: str = Field(default="", validation_alias="SUPABASE_JWT_KEY_ID")
     supabase_jwtk_url: str = Field(default="", validation_alias="SUPABASE_JWTK_URL")
 
+    staging_origin: str = Field(default="", validation_alias="STAGING_ORIGIN")
     staging_web_origin: str = Field(default="", validation_alias="STAGING_WEB_ORIGIN")
     staging_mobile_origin: str = Field(
         default="", validation_alias="STAGING_MOBILE_ORIGIN"
