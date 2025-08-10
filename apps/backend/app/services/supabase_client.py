@@ -7,12 +7,10 @@ key: str = settings.supabase_anon_key
 
 
 def get_supabase_client(access_token: str | None = None) -> Client:
-    options: ClientOptions = {
-        "global": {"headers": {"Authorization": f"Bearer {access_token}"}}
-    }
+    options = ClientOptions(headers={"Authorization": f"Bearer {access_token}"})
 
     if access_token:
-        client: Client = create_client(url, key, options)
+        client: Client = create_client(url, key, options)  # Solved!!!!
     else:
         client: Client = create_client(url, key)
 
