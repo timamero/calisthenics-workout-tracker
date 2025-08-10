@@ -5,9 +5,11 @@ export async function apiFetch<T>(baseUrl: string, endpoint: string, method?: Me
   if (!method) {
     method = 'GET'
   }
-  
+
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': baseUrl,
+
   }
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
