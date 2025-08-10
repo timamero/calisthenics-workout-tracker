@@ -137,6 +137,7 @@ def get_current_user_id(authorization: Annotated[str, Header()]) -> str:
         )
 
 
+# May use the following code for testing
 # def generate_supabase_test_jwt(
 #     user_id: str = settings.test_uid,
 #     email: str = settings.test_email,

@@ -19,6 +19,7 @@ app = FastAPI(
     version=get_settings().version,
 )
 
+# Add condition to set origins for local environment
 origins = [
     "http://localhost:5173",  # Local web server
     "http://REDACTED_IP:5173",  # Local web server

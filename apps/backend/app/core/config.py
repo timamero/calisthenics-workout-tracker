@@ -22,6 +22,7 @@ class Settings(BaseSettings):
         default="", validation_alias="STAGING_MOBILE_ORIGIN"
     )
 
+    # Might use test_email and test_uid later for tests
     test_email: str = Field(default="", validation_alias="TEST_EMAIL")
     test_uid: str = Field(default="", validation_alias="TEST_UID")
 
