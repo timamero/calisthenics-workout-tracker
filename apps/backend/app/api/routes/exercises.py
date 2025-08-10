@@ -7,27 +7,6 @@ from app.api.utils.exercises import get_exercises, get_exercise_by_id
 
 router = APIRouter(prefix="/exercises")
 
-sample_exercises = [
-    {
-        "id": 1,
-        "name": "Standard Push-Up",
-        "target_muscles": ["chest", "triceps", "shoulders"],
-        "required_equipment": [],
-        "emphasis": "strength",
-        "difficulty": "beginner",
-        "tags": ["push", "upper"],
-    },
-    {
-        "id": 10,
-        "name": "Lunge",
-        "target_muscles": ["quadriceps", "glutes", "hamstrings"],
-        "required_equipment": [],
-        "emphasis": "strength",
-        "difficulty": "beginner",
-        "tags": ["leg day", "lower"],
-    },
-]
-
 
 @router.get("/", response_model=List[ExerciseSchema])
 def read_filtered_exercises(
@@ -41,7 +20,6 @@ def read_filtered_exercises(
         raise HTTPException(status_code=401, detail="Authentication required")
 
     access_token = auth_header.split(" ")[1]
-    # access_token = None
 
     exercises = get_exercises(access_token=access_token, filter_query=filter_query)
     return exercises
@@ -56,7 +34,6 @@ def read_exercise_item(exercise_id: str, request: Request):
     if not auth_header or not auth_header.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Authentication required")
 
-    # access_token = None
     access_token = auth_header.split(" ")[1]
 
     exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=access_token)
