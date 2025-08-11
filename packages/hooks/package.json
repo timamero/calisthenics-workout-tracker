@@ -1,6 +1,7 @@
 {
   "name": "@cwt/hooks",
   "version": "0.1.0-alpha.1",
+  "private": true,
   "description": "Hooks for CWT",
   "type": "module",
   "scripts": {
