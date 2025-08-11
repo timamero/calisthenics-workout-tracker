@@ -1,5 +1,5 @@
 [project]
-name = "cwt-api"
+name = "backend"
 version = "0.1.0-alpha.1"
 description = ""
 authors = [
