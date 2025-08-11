@@ -1,6 +1,7 @@
 {
   "name": "@cwt/api",
   "version": "0.1.0-alpha.1",
+  "private": true,
   "description": "API for CWT",
   "type": "module",
   "scripts": {
