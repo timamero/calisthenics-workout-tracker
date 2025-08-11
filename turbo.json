@@ -17,6 +17,9 @@
       "cache": false,
       "persistent": true
     },
+    "install": {
+      "cache": false
+    },
     "lint": {
       "outputs": []
     },
