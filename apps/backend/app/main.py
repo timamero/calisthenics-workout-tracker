@@ -22,9 +22,7 @@ app = FastAPI(
 # Add condition to set origins for local environment
 origins = [
     "http://localhost:5173",  # Local web server
-    "http://192.168.1.12:5173",  # Local web server
     "http://localhost:8081",  # Local mobile server
-    "http://192.168.1.12:8081",  # Local mobile server
     "http://127.0.0.1:8000",  # Origin for the local FastAPI server
 ]
 
@@ -37,7 +35,6 @@ if config.settings.environment == "staging":
     origins.append(config.settings.staging_origin)
     origins.append(config.settings.staging_web_origin)
     origins.append(config.settings.staging_mobile_origin)
-print(f"origins: {origins}")
 
 app.add_middleware(
     CORSMiddleware,
