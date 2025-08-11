@@ -27,6 +27,7 @@ origins = [
 ]
 
 if config.settings.environment == "local":
+    origins.append(config.settings.local_origin)
     origins.append(config.settings.local_web_origin)
     origins.append(config.settings.local_mobile_exp_origin)
     origins.append(config.settings.local_mobile_origin)
