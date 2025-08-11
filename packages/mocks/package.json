@@ -1,6 +1,7 @@
 {
   "name": "@cwt/mocks",
   "version": "0.1.0-alpha.1",
+  "private": true,
   "description": "CWT Mocks for development and testing",
   "type": "module",
   "scripts": {

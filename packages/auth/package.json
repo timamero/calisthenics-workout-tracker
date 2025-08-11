@@ -1,6 +1,7 @@
 {
   "name": "@cwt/auth",
   "version": "0.1.0-alpha.1",
+  "private": true,
   "description": "Authentication for CWT",
   "type": "module",
   "scripts": {

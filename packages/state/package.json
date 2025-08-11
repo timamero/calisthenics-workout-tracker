@@ -1,6 +1,7 @@
 {
   "name": "@cwt/state",
   "version": "0.1.0-alpha.1",
+  "private": true,
   "description": "State management for CWT",
   "type": "module",
   "scripts": {
