@@ -37,3 +37,7 @@ Backend Setup
 In backend app root folder, create .venv directory
 Then update poetry config to create the environment in the project folder: `poetry config virtualenvs.in-project true`
 Run `poetry install --no-root` to create new environment and install packages
+
+Installation notes:
+After creating .venv and changing poetry config, you don't need to run `poetry install --no-root` because when you run `pnpm install` from root, it will also run install in the backend
+Also note that you don't have to run `pnpm build:packages` because of the postinstall script in the mobile package that runs all the builds
