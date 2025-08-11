@@ -5,6 +5,7 @@ v0.1.0
 ## About this monorepo
 
 ### Applications
+
 - FastAPI backend
 - Vite + React web application
 - Expo + React Navive mobile application
@@ -22,12 +23,17 @@ v0.1.0
 
 1. Install dependencies: `pnpm install`
 2. Build docker images
-2. Create mobile development build: `pnpm expo:dev-build`
+3. Create mobile development build: `pnpm expo:dev-build`
 
 ### Mobile
 
 1. Run mobile docker image: `pnpm docker:mobile:run`
 
-
 ### Debugging resources
+
 https://github.com/expo/eas-cli/issues/2789
+
+Backend Setup
+In backend app root folder, create .venv directory
+Then update poetry config to create the environment in the project folder: `poetry config virtualenvs.in-project true`
+Run `poetry install --no-root` to create new environment and install packages
