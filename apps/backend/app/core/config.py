@@ -7,7 +7,6 @@ class Settings(BaseSettings):
         default="Calisthenics Workout Tracker", validation_alias="APP_NAME"
     )
     version: str = Field(default="0.1.0", validation_alias="VERSION")
-    secret_key: str = Field(default="dummy-key", validation_alias="SECRET_KEY")
     debug: bool = Field(default=False, validation_alias="DEBUG")
     environment: str = Field(default="development", validation_alias="ENVIRONMENT")
 
