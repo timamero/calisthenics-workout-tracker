@@ -20,7 +20,8 @@
 		"test": "turbo run test",
 		"test:watch": "turbo run test:watch",
 		"test:web": "vitest",
-		"prepare": "husky"
+		"prepare": "husky",
+		"install:backend": "turbo run install --filter=@cwt/backend"
 	},
 	"devDependencies": {
 		"husky": "^9.1.7",
