@@ -31,6 +31,7 @@ class WorkoutDataSchema(BaseModel):
 class BaseWorkoutSchema(BaseModel):
     id: int
     created_at: datetime
+    updated_at: Optional[datetime]
     user_id: UUID
     title: Optional[str] = None
     description: Optional[str] = None
