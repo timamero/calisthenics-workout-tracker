@@ -28,29 +28,24 @@ class WorkoutDataSchema(BaseModel):
     exercises: List[WorkoutExerciseSchema]
 
 
-class WorkoutBuildSchema(BaseModel):
+class BaseWorkoutSchema(BaseModel):
     id: int
     created_at: datetime
     user_id: UUID
     title: Optional[str] = None
     description: Optional[str] = None
-    goal: Literal["function", "endurance", "hypertrophy", "strength", "power"]
     duration: timedelta
     workout_data: WorkoutDataSchema
-    source: Literal["manual", "ai", "default"]
     status: Literal["draft", "finalized", "archived"]
 
 
-class WorkoutLogSchema(BaseModel):
-    id: int
-    created_at: datetime
-    user_id: UUID
+class WorkoutBuildSchema(BaseWorkoutSchema):
+    goal: Literal["function", "endurance", "hypertrophy", "strength", "power"]
+    source: Literal["manual", "ai", "default"]
+
+
+class WorkoutLogSchema(BaseWorkoutSchema):
     workout_build_id: int
     date: date
-    title: Optional[str] = None
-    description: Optional[str] = None
-    duration: timedelta
-    workout_data: WorkoutDataSchema
     notes: Optional[str] = None
     rpe: Optional[int] = None
-    status: Literal["draft", "finalized", "archived"]
