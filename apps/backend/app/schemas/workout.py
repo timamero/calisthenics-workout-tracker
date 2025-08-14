@@ -20,7 +20,7 @@ class SetSchema(BaseModel):
 
 class WorkoutExerciseSchema(BaseModel):
     exercise_id: int
-    tracked: List[str]
+    tracked: List[Literal["reps", "duration", "weight", "rep"]]
     sets: List[SetSchema]
 
 
