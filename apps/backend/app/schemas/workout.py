@@ -34,13 +34,13 @@ class BaseWorkoutSchema(BaseModel):
     updated_at: Optional[datetime]
     title: Optional[str] = None
     description: Optional[str] = None
-    duration: timedelta
     workout_data: WorkoutDataSchema
     status: Literal["draft", "finalized", "archived"]
 
 
 class WorkoutBuildSchema(BaseWorkoutSchema):
     user_id: Optional[UUID]
+    duration: Optional[timedelta]
     goal: Literal["function", "endurance", "hypertrophy", "strength", "power"]
     source: Literal["manual", "ai", "default"]
 
@@ -49,5 +49,6 @@ class WorkoutLogSchema(BaseWorkoutSchema):
     user_id: UUID
     workout_build_id: int
     date: date
+    duration: timedelta
     notes: Optional[str] = None
     rpe: Optional[int] = None
