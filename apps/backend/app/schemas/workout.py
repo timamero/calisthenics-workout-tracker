@@ -7,9 +7,9 @@ from pydantic import BaseModel
 
 class SetFieldsSchema(BaseModel):
     reps: Optional[int] = None
-    duration: Optional[int] = None
+    duration: Optional[timedelta] = None
     weight: Optional[int] = None
-    rest: Optional[int] = None
+    rest: Optional[timedelta] = None
 
 
 class SetSchema(BaseModel):
