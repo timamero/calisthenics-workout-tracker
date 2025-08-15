@@ -35,12 +35,12 @@ class BaseWorkoutSchema(BaseModel):
     description: Optional[str] = None
     workout_data: WorkoutDataSchema
     status: Literal["draft", "finalized", "archived"]
+    goal: Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
 
 
 class WorkoutBuildSchema(BaseWorkoutSchema):
     user_id: Optional[UUID]
     duration: Optional[timedelta]
-    goal: Literal["function", "endurance", "hypertrophy", "strength", "power"]
     source: Literal["manual", "ai", "default"]
 
 
