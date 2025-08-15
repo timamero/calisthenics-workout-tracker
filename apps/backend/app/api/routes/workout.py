@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-
+from app.api.utils.workout import insert_workout_build, get_workout_builds
 from app.schemas.workout import WorkoutBuildSchema
 
 router = APIRouter(prefix="/workout")
@@ -20,3 +20,12 @@ def save_build(build: WorkoutBuildSchema):
     #     raise HTTPException(status_code=400, detail="Invalid request")
 
     return build
+
+
+@router.get("/builds")
+def read_workout_builds():
+    """
+    Retrieve list of workout builds
+    """
+    builds = get_workout_builds()
+    return builds
