@@ -42,7 +42,6 @@ def get_workout_logs(access_token: str | None = None):
             auth_user_id = supabase.auth.get_user(jwt=access_token).user.id
             response = select_query.eq("user_id", auth_user_id).execute()
         else:
-            print("access token not present")
             response = select_query.execute()
         return response.data
     except Exception as e:
@@ -52,7 +51,12 @@ def get_workout_logs(access_token: str | None = None):
 def get_workout_builds(access_token: str | None = None):
     supabase = get_supabase_client(access_token)
     try:
-        response = supabase.table("workout_builds").select("*").execute()
+        select_query = supabase.table("workout_builds").select("*")
+        if access_token:
+            auth_user_id = supabase.auth.get_user(jwt=access_token).user.id
+            response = select_query.eq("user_id", auth_user_id).execute()
+        else:
+            response = select_query.execute()
         return response.data
     except Exception as e:
         print(f"Error fetching workout_builds: {e}")
