@@ -2,13 +2,13 @@ from typing import List, Optional, Literal
 from datetime import datetime, timedelta, date
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class SetFieldsSchema(BaseModel):
-    reps: Optional[int] = None
+    reps: Optional[int] = Field(None, max_digits=4)
     duration: Optional[timedelta] = None
-    weight: Optional[int] = None
+    weight: Optional[int] = Field(None, max_digits=4)
     rest: Optional[timedelta] = None
 
 
@@ -31,12 +31,12 @@ class WorkoutDataSchema(BaseModel):
 class BaseWorkoutSchema(BaseModel):
     id: int
     updated_at: Optional[datetime]
-    title: Optional[str] = None
-    description: Optional[str] = None
+    title: Optional[str] = Field(None, max_length=70)
+    description: Optional[str] = Field(None, max_length=500)
     workout_data: WorkoutDataSchema
     status: Literal["draft", "finalized", "archived"]
     goal: Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
-    notes: Optional[str] = None
+    notes: Optional[str] = Field(None, max_length=750)
 
 
 class WorkoutBuildSchema(BaseWorkoutSchema):
@@ -50,4 +50,4 @@ class WorkoutLogSchema(BaseWorkoutSchema):
     workout_build_id: int
     date: date
     duration: timedelta
-    rpe: Optional[int] = None
+    rpe: Optional[int] = Field(None, le=10)
