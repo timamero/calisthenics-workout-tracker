@@ -48,7 +48,7 @@ def get_workout_builds(access_token: str | None = None):
 #               "reps": 10,
 #               "duration": "00:01:00",
 #               "weight": 60,
-#               "rest": 30
+#               "rest": "00:00:30"
 #             },
 #             "completed": true,
 #             "completed_at": "2025-08-15T03:40:37.995Z"
