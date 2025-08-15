@@ -3,6 +3,7 @@ from app.api.utils.workout import (
     insert_workout_build,
     get_workout_builds,
     insert_workout_log,
+    get_workout_logs,
 )
 from app.schemas.workout import WorkoutBuildSchema, WorkoutLogSchema
 
@@ -41,6 +42,15 @@ def save_log(log: WorkoutLogSchema):
         raise HTTPException(status_code=400, detail="Invalid request")
 
     return workout_log
+
+
+@router.get("/logs")
+def read_workout_logs():
+    """
+    Retrieve list of workout logs
+    """
+    logs = get_workout_logs()
+    return logs
 
 
 @router.get("/builds")

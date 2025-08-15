@@ -34,6 +34,15 @@ def insert_workout_log(workout_log: WorkoutLogSchema, access_token: str | None =
         print(f"Error saving workout with ID {workout_log.id}: {e}")
 
 
+def get_workout_logs(access_token: str | None = None):
+    supabase = get_supabase_client(access_token)
+    try:
+        response = supabase.table("workout_logs").select("*").execute()
+        return response.data
+    except Exception as e:
+        print(f"Error fetching workout_logs: {e}")
+
+
 def get_workout_builds(access_token: str | None = None):
     supabase = get_supabase_client(access_token)
     try:
