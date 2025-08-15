@@ -1,10 +1,8 @@
 import * as z from "zod";
 
-import { musclesEnum, equipmentEnum, emphasisEnum, difficultyEnum } from "../constants";
+import { MuscleSchema, EquipmentSchema, EmphasisSchema, DifficultySchema } from "./enums.schema";
 
-export const SelectionSchema = z.union([
-  z.enum(musclesEnum as [string, ...string[]]),
-  z.enum(equipmentEnum as [string, ...string[]]),
-  z.enum(emphasisEnum as [string, ...string[]]),
-  z.enum(difficultyEnum as [string, ...string[]]),
+// Previously SelectionSchema
+export const ExerciseAttributesSchema = z.union([
+  MuscleSchema, EquipmentSchema, EmphasisSchema, DifficultySchema
 ])
