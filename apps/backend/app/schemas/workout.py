@@ -36,6 +36,7 @@ class BaseWorkoutSchema(BaseModel):
     workout_data: WorkoutDataSchema
     status: Literal["draft", "finalized", "archived"]
     goal: Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
+    notes: Optional[str] = None
 
 
 class WorkoutBuildSchema(BaseWorkoutSchema):
@@ -49,5 +50,4 @@ class WorkoutLogSchema(BaseWorkoutSchema):
     workout_build_id: int
     date: date
     duration: timedelta
-    notes: Optional[str] = None
     rpe: Optional[int] = None
