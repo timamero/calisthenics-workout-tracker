@@ -6,9 +6,9 @@ from pydantic import BaseModel, Field
 
 
 class SetFieldsSchema(BaseModel):
-    reps: Optional[int] = Field(None, max_digits=4)
+    reps: Optional[int] = None
     duration: Optional[timedelta] = None
-    weight: Optional[int] = Field(None, max_digits=4)
+    weight: Optional[int] = None
     rest: Optional[timedelta] = None
 
 
