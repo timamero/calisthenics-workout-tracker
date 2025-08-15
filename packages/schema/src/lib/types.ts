@@ -1,13 +1,17 @@
 import * as z from "zod";
 
-import { Muscles, Equipment, Emphasis, Difficulty } from "./constants";
-import { SelectionSchema, Exercise } from "./schemas";
+import {
+  ExerciseAttributesSchema,
+  Exercise,
+  MuscleSchema,
+  EquipmentSchema,
+  EmphasisSchema,
+  DifficultySchema
+} from "./schemas";
 
-export type Muscles = z.infer<typeof Muscles>;
-export type Equipment = z.infer<typeof Equipment>;
-export type Emphasis = z.infer<typeof Emphasis>;
-export type Difficulty = z.infer<typeof Difficulty>;
-
-export type Selection = z.infer<typeof SelectionSchema>;
-
+export type Muscle = z.infer<typeof MuscleSchema>;
+export type Equipment= z.infer<typeof EquipmentSchema>;
+export type Emphasis = z.infer<typeof EmphasisSchema>;
+export type Dificulty = z.infer<typeof DifficultySchema>;
+export type ExerciseAttributes = z.infer<typeof ExerciseAttributesSchema>;  // Prevously Selection
 export type Exercise = z.infer<typeof Exercise>;
