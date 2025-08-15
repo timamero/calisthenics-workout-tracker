@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.api.utils.workout import insert_workout_build, get_workout_builds
 from app.schemas.workout import WorkoutBuildSchema
 
@@ -15,11 +15,11 @@ def save_build(build: WorkoutBuildSchema):
     #     raise HTTPException(status_code=401, detail="Authentication required")
 
     # access_token = auth_header.split(" ")[1]
-    insert_workout_build(build)
-    # if not insert_workout_build(build):
-    #     raise HTTPException(status_code=400, detail="Invalid request")
+    workout_build = insert_workout_build(build)
+    if not workout_build:
+        raise HTTPException(status_code=400, detail="Invalid request")
 
-    return build
+    return workout_build
 
 
 @router.get("/builds")
