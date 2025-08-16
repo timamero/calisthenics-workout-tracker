@@ -9,7 +9,6 @@ import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 
 import Pill from './Pill';
-import { Equipment } from '../../../../packages/schema/dist/exerciseSchema';
 
 interface ExerciseCardProps {
   exercise: Exercise;
