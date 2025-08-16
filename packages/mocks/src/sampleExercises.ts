@@ -1,4 +1,4 @@
-import { Exercise } from '@cwt/schema/exerciseSchema'
+import { Exercise } from '@cwt/schema/exercises'
 
 export const sampleExercises: Exercise[] = [
   {
