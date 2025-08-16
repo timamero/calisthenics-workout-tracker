@@ -11,6 +11,7 @@ import {
 } from '@mantine/core';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
+import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
 export default function ExerciseDetailOverlay() {
   const exerciseDetail = useContext(ExerciseDetailContext)?.exercise;
@@ -29,15 +30,17 @@ export default function ExerciseDetailOverlay() {
       detailHandlers.close();
     }
   };
-  const muscleMetadata = exerciseDetail?.target_muscles.map((muscle, i) => {
-    return (
-      <Badge size="lg" variant="light" color="grape" key={i}>
-        {muscle}
-      </Badge>
-    );
-  });
+  const muscleMetadata = exerciseDetail?.target_muscles.map(
+    (muscle: Muscle, i: number) => {
+      return (
+        <Badge size="lg" variant="light" color="grape" key={i}>
+          {muscle}
+        </Badge>
+      );
+    },
+  );
   const equipmentMetadata = exerciseDetail?.required_equipment?.map(
-    (equipment, i) => {
+    (equipment: Equipment, i: number) => {
       return (
         <Badge size="lg" color="dark" variant="outline" key={i}>
           {equipment}
@@ -45,25 +48,27 @@ export default function ExerciseDetailOverlay() {
       );
     },
   );
-  const instructions = exerciseDetail?.instructions.map((instruction, i) => {
-    const regex = /\d\. /g;
-    return (
-      <Group key={i} wrap="nowrap" align="flex-start">
-        <Text
-          size="xl"
-          fw={700}
-          style={{
-            borderBottom: `1px solid var(--mantine-color-dark-6)`,
-            borderRight: `1px solid var(--mantine-color-dark-6)`,
-            paddingInline: 8,
-          }}
-        >
-          {i + 1}
-        </Text>
-        <Text>{instruction.split(regex)[1]}</Text>
-      </Group>
-    );
-  });
+  const instructions = exerciseDetail?.instructions.map(
+    (instruction: string, i: number) => {
+      const regex = /\d\. /g;
+      return (
+        <Group key={i} wrap="nowrap" align="flex-start">
+          <Text
+            size="xl"
+            fw={700}
+            style={{
+              borderBottom: `1px solid var(--mantine-color-dark-6)`,
+              borderRight: `1px solid var(--mantine-color-dark-6)`,
+              paddingInline: 8,
+            }}
+          >
+            {i + 1}
+          </Text>
+          <Text>{instruction.split(regex)[1]}</Text>
+        </Group>
+      );
+    },
+  );
   return (
     <Modal
       opened={detailOpened || false}
@@ -105,8 +110,6 @@ export default function ExerciseDetailOverlay() {
                 Target Muscles
               </Text>
               <Flex
-                // mih={50}
-                // bg="rgba(0, 0, 0, .3)"
                 gap="md"
                 justify="flex-start"
                 align="flex-start"
@@ -121,8 +124,6 @@ export default function ExerciseDetailOverlay() {
                 Required Equipment
               </Text>
               <Flex
-                // mih={50}
-                // bg="rgba(0, 0, 0, .3)"
                 gap="md"
                 justify="flex-start"
                 align="flex-start"

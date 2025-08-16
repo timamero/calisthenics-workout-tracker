@@ -1,16 +1,35 @@
-import { create } from 'zustand';
-import { Exercise, Muscles, Equipment, Emphasis, Difficulty } from '@cwt/schema/exerciseSchema';
+import { create } from "zustand";
+// import { Exercise, Muscles, Equipment, Emphasis, Difficulty } from '@cwt/schema/exerciseSchema';
 
-import { Selection } from '@cwt/schema/exerciseSchema';
-export type Filter = { muscle: Muscles; equipment: Equipment; emphasis: Emphasis[]; difficulty: Difficulty[]}
+// import { Selection } from '@cwt/schema/exerciseSchema';
+import {
+  Muscle,
+  Equipment,
+  Emphasis,
+  Difficulty,
+  Exercise,
+  ExerciseAttributes,
+} from "@cwt/schema/exercises";
+
+export type Filter = {
+  muscle: Muscle[];
+  equipment: Equipment[];
+  emphasis: Emphasis[];
+  difficulty: Difficulty[];
+};
 export type FilterKey = keyof Filter;
-export const filterKeys: FilterKey[] = ["muscle", "equipment", "emphasis", "difficulty"];
+export const filterKeys: FilterKey[] = [
+  "muscle",
+  "equipment",
+  "emphasis",
+  "difficulty",
+];
 
 enum Action {
   Add,
-  Remove
+  Remove,
 }
-export type ActionStrings = keyof typeof Action
+export type ActionStrings = keyof typeof Action;
 
 interface ExercisesState {
   masterExercises: Exercise[];
@@ -21,14 +40,27 @@ interface ExercisesState {
   setExercises: (exercises: Exercise[]) => void;
   resetDisplayedExercises: () => void;
   applyFilters: (filter: Filter) => void;
-  updateSelectedFilters: ({key, selection, action}: {key: FilterKey; selection: Selection; action: ActionStrings}) => void;
+  updateSelectedFilters: ({
+    key,
+    selection,
+    action,
+  }: {
+    key: FilterKey;
+    selection: ExerciseAttributes;
+    action: ActionStrings;
+  }) => void;
   resetSelectedFilters: () => void;
   clearFilters: () => void;
   searchDisplayedExercises: (search: string) => void;
   setSearch: (search: string) => void;
 }
 
-const clearedFilters = {muscle: [], equipment: [], emphasis: [], difficulty: []}
+const clearedFilters = {
+  muscle: [],
+  equipment: [],
+  emphasis: [],
+  difficulty: [],
+};
 
 export const useExercisesStore = create<ExercisesState>((set) => ({
   masterExercises: [],
@@ -36,82 +68,113 @@ export const useExercisesStore = create<ExercisesState>((set) => ({
   appliedFilters: clearedFilters,
   selectedFilters: clearedFilters,
   search: "",
-  setExercises: (exercises) => set(() => {
-    const sortedExercises = exercises.sort((a, b) => a.name.localeCompare(b.name))
-    return {
-      masterExercises: sortedExercises,
-      displayedExercises: sortedExercises,
-    }
-  }),
-  resetDisplayedExercises: () => set((state) => ({
-    displayedExercises: state.masterExercises
-  })),
-  applyFilters: (filter) => set((state) => {
-    const exercises = state.masterExercises
-
-    if (Object.values(filter).every((f) => f.length == 0)) {
+  setExercises: (exercises) =>
+    set(() => {
+      const sortedExercises = exercises.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
       return {
-        displayedExercises: exercises
-      }
-    }
-
-    const filteredExercises = exercises.filter((ex) => {
-      const conditions: boolean[] = []
-      if (filter.muscle.length > 0) {
-        conditions.push(filter.muscle.some((mus) => ex.target_muscles.includes(mus.toLowerCase())))
-      } 
-      if (filter.equipment.length > 0 && ex.required_equipment != null) {
-        if (filter.equipment.includes("none") && ex.required_equipment.length === 0) {
-          conditions.push(true)
-        } else {
-          conditions.push(filter.equipment.some((eq) => ex.required_equipment?.includes(eq.toLocaleLowerCase())))
-        }
-      }
-      if (filter.emphasis.length > 0) {
-        conditions.push(filter.emphasis.some((emp) => ex.emphasis.includes(emp.toLowerCase())))
-      } 
-      if (filter.difficulty.length > 0) {
-        conditions.push(filter.difficulty.some((dif) => ex.difficulty.includes(dif.toLowerCase())))
-      } 
-      return conditions.every((con) => con)
-    })
-
-    return {
-      displayedExercises: filteredExercises
-    }
-  }),
-  updateSelectedFilters: ({key, selection, action}) => set((state) => {
-    const actionEnum = Action[action as keyof typeof Action];
-    let updatedFilter;
-    if (actionEnum === Action.Add) {
-      updatedFilter = { ...state.selectedFilters, [key]: [...state.selectedFilters[key], selection] };
-    } else if (actionEnum === Action.Remove) {
-      updatedFilter = { 
-        ...state.selectedFilters, 
-        [key]: state.selectedFilters[key].filter((item: Selection) => item !== selection) 
+        masterExercises: sortedExercises,
+        displayedExercises: sortedExercises,
       };
-    } else {
-      updatedFilter = state.selectedFilters;
-    }
-    return {
-      selectedFilters: updatedFilter
-    }
-  }),
-  resetSelectedFilters: () => set((state) => ({
-    displayedExercises: state.masterExercises
-  })),
-  clearFilters: () => set((state) => ({
-    appliedFilters: clearedFilters,
-    selectedFilters: clearedFilters
-  })),
-  searchDisplayedExercises: (search) => set((state) => {
-    const exercises = state.displayedExercises
+    }),
+  resetDisplayedExercises: () =>
+    set((state) => ({
+      displayedExercises: state.masterExercises,
+    })),
+  applyFilters: (filter) =>
+    set((state) => {
+      const exercises = state.masterExercises;
 
-    const matchedExercises = exercises.filter((ex) => ex.name.toLowerCase().includes(search))
+      if (Object.values(filter).every((f) => f.length == 0)) {
+        return {
+          displayedExercises: exercises,
+        };
+      }
 
-    return {
-      displayedExercises: matchedExercises
-    }
-  }),
-  setSearch: (search) => set({ search })
+      const filteredExercises = exercises.filter((ex) => {
+        const conditions: boolean[] = [];
+        if (filter.muscle.length > 0) {
+          conditions.push(
+            filter.muscle.some((mus) => ex.target_muscles.includes(mus))
+          );
+        }
+        if (filter.equipment.length > 0 && ex.required_equipment != null) {
+          if (
+            filter.equipment.includes("none") &&
+            ex.required_equipment.length === 0
+          ) {
+            conditions.push(true);
+          } else {
+            conditions.push(
+              filter.equipment.some((eq) => ex.required_equipment?.includes(eq))
+            );
+          }
+        }
+        if (filter.emphasis.length > 0) {
+          conditions.push(
+            filter.emphasis.some((emp) =>
+              ex.emphasis.includes(emp.toLowerCase())
+            )
+          );
+        }
+        if (filter.difficulty.length > 0) {
+          conditions.push(
+            filter.difficulty.some((dif) =>
+              ex.difficulty.includes(dif.toLowerCase())
+            )
+          );
+        }
+        return conditions.every((con) => con);
+      });
+
+      return {
+        displayedExercises: filteredExercises,
+      };
+    }),
+  updateSelectedFilters: ({ key, selection, action }) =>
+    set((state) => {
+      const actionEnum = Action[action as keyof typeof Action];
+      let updatedFilter;
+      if (actionEnum === Action.Add) {
+        updatedFilter = {
+          ...state.selectedFilters,
+          [key]: [...state.selectedFilters[key], selection],
+        };
+      } else if (actionEnum === Action.Remove) {
+        updatedFilter = {
+          ...state.selectedFilters,
+          [key]: state.selectedFilters[key].filter(
+            (item: ExerciseAttributes) => item !== selection
+          ),
+        };
+      } else {
+        updatedFilter = state.selectedFilters;
+      }
+      return {
+        selectedFilters: updatedFilter,
+      };
+    }),
+  resetSelectedFilters: () =>
+    set((state) => ({
+      displayedExercises: state.masterExercises,
+    })),
+  clearFilters: () =>
+    set((state) => ({
+      appliedFilters: clearedFilters,
+      selectedFilters: clearedFilters,
+    })),
+  searchDisplayedExercises: (search) =>
+    set((state) => {
+      const exercises = state.displayedExercises;
+
+      const matchedExercises = exercises.filter((ex) =>
+        ex.name.toLowerCase().includes(search)
+      );
+
+      return {
+        displayedExercises: matchedExercises,
+      };
+    }),
+  setSearch: (search) => set({ search }),
 }));
