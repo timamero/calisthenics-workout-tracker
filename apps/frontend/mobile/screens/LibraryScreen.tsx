@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { Exercise } from '@cwt/schema/exerciseSchema';
+import { Exercise } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
@@ -19,16 +19,9 @@ export default function LibraryScreen() {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
-  const [exerciseDetail, setExerciseDetail] = React.useState<Exercise>({
-    id: 1,
-    name: '',
-    target_muscles: [],
-    emphasis: '',
-    difficulty: '',
-    tags: [],
-    instructions: [],
-    required_equipment: null,
-  });
+  const [exerciseDetail, setExerciseDetail] = React.useState<Exercise | null>(
+    null,
+  );
   const [visibleExerciseDetail, setVisibleExerciseDetail] =
     React.useState(false);
   const showExerciseDetailModal = () => setVisibleExerciseDetail(true);

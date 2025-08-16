@@ -5,7 +5,7 @@ import { useShallow } from 'zustand/shallow';
 
 import { useStore } from '@cwt/state/store';
 import { FilterGroup } from '@cwt/state/types';
-import type { Selection } from '@cwt/schema/exerciseSchema';
+import type { ExerciseAttributes } from '@cwt/schema/exercises';
 
 import { Text } from '../../customText';
 
@@ -16,7 +16,7 @@ const Selections = React.memo(function Selections({
   selections,
 }: {
   group: FilterGroup;
-  selections: Selection[];
+  selections: ExerciseAttributes[];
 }) {
   return (
     <>

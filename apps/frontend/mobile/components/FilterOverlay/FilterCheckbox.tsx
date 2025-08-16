@@ -3,12 +3,12 @@ import { Checkbox, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
 import { useStore } from '@cwt/state/store';
-import { type Selection } from '@cwt/schema/exerciseSchema';
+import { type ExerciseAttributes } from '@cwt/schema/exercises';
 import { type FilterGroup } from '@cwt/state/types';
 
 interface FilterCheckboxProps {
   group: FilterGroup;
-  selection: Selection;
+  selection: ExerciseAttributes;
 }
 
 export default function FilterCheckbox({

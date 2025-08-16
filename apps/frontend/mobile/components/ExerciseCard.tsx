@@ -2,13 +2,14 @@ import * as React from 'react';
 import { Card, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
-import { Exercise } from '@cwt/schema/exerciseSchema';
+import { Exercise, ExerciseAttributes } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 
 import Pill from './Pill';
+import { Equipment } from '../../../../packages/schema/dist/exerciseSchema';
 
 interface ExerciseCardProps {
   exercise: Exercise;
@@ -70,13 +71,33 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             Equipment:
           </Text>
           <View style={styles.metadataPillsContainer}>
+            {/* {exercise.required_equipment.map((equipment, i) => {
+              return (
+                <Pill
+                  backgroundColor={theme.colors.background}
+                  textColor={theme.colors.light}
+                  key={i}
+                >
+                  {equipment as ExerciseAttributes | }
+                </Pill>
+              );
+            })} */}
+            {/* {(exercise.required_equipment == null ||
+            exercise.required_equipment.length === 0) && (
+              <Pill
+                backgroundColor={theme.colors.background}
+                textColor={theme.colors.light}
+              >
+                {'---'}
+              </Pill>
+            )} */}
             {exercise.required_equipment == null ||
             exercise.required_equipment.length === 0 ? (
               <Pill
                 backgroundColor={theme.colors.background}
                 textColor={theme.colors.light}
               >
-                ---
+                {`---` as '---'}
               </Pill>
             ) : (
               exercise.required_equipment.map((equipment, i) => (
@@ -86,7 +107,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
                   borderColor={theme.colors.light}
                   key={i}
                 >
-                  {equipment}
+                  {equipment as ExerciseAttributes}
                 </Pill>
               ))
             )}
