@@ -21,7 +21,9 @@
 		"test:watch": "turbo run test:watch",
 		"test:web": "vitest",
 		"prepare": "husky",
-		"install:backend": "turbo run install --filter=@cwt/backend"
+		"install:backend": "turbo run install --filter=@cwt/backend",
+		"supabase-login": "supabase login",
+		"generate-schema-types": "supabase gen types --project-id ocdfgrsizsxyltygfpje --schema public > packages/schema/src/lib/common/database.types.ts"
 	},
 	"devDependencies": {
 		"husky": "^9.1.7",
