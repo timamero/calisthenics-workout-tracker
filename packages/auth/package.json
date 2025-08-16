@@ -10,27 +10,27 @@
   },
   "exports": {
     "./supabase": {
-      "types": "./src/supabase.ts",
+      "types": "./dist/supabase.d.ts",
       "default": "./dist/supabase.js"
     },
     "./createUser": {
-      "types": "./src/createUser.ts",
+      "types": "./dist/createUser.d.ts",
       "default": "./dist/createUser.js"
     },
     "./session": {
-      "types": "./src/session.ts",
+      "types": "./dist/session.d.ts",
       "default": "./dist/session.js"
     },
     "./signIn": {
-      "types": "./src/signIn.ts",
+      "types": "./dist/signIn.d.ts",
       "default": "./dist/signIn.js"
     },
     "./signOut": {
-      "types": "./src/signOut.ts",
+      "types": "./dist/signOut.d.ts",
       "default": "./dist/signOut.js"
     },
     "./user": {
-      "types": "./src/user.ts",
+      "types": "./dist/user.d.ts",
       "default": "./dist/user.js"
     }
   },
