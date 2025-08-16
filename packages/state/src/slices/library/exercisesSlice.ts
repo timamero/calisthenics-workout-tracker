@@ -70,7 +70,7 @@ export const createExercisesSlice: StateCreator<
           } else if (Array.isArray(obj[group])) {
             const arrayConditionals: boolean[] = [];
             obj[group].forEach((item) => {
-              if (appliedFilterSelections.includes(item)) {
+              if (appliedFilterSelections.includes(item as ExerciseAttributes)) {
                 arrayConditionals.push(true);
               } else {
                 arrayConditionals.push(false);
