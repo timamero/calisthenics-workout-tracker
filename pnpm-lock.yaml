@@ -306,6 +306,9 @@ importers:
         specifier: ^4.0.17
         version: 4.0.17
     devDependencies:
+      prettier:
+        specifier: 3.6.2
+        version: 3.6.2
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
@@ -7821,7 +7824,7 @@ snapshots:
       '@tanstack/router-core': 1.131.2
       '@tanstack/router-utils': 1.131.2
       '@tanstack/virtual-file-routes': 1.131.2
-      prettier: 3.5.3
+      prettier: 3.6.2
       recast: 0.23.11
       source-map: 0.7.6
       tsx: 4.20.3

@@ -1,6 +1,6 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { GoalSchema, StatusSchema } from "./enums.schema";
+import { GoalSchema, StatusSchema } from './enums.schema';
 
 export const WorkoutBase = z.object({
   id: z.number(),
@@ -10,5 +10,5 @@ export const WorkoutBase = z.object({
   // workout data here
   status: StatusSchema,
   goal: z.optional(GoalSchema),
-  notes: z.optional(z.string().max(750))
+  notes: z.optional(z.string().max(750)),
 });

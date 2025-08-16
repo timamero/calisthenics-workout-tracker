@@ -1,8 +1,16 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { MuscleSchema, EquipmentSchema, EmphasisSchema, DifficultySchema } from "./enums.schema";
+import {
+  MuscleSchema,
+  EquipmentSchema,
+  EmphasisSchema,
+  DifficultySchema,
+} from './enums.schema';
 
 // Previously SelectionSchema
 export const ExerciseAttributesSchema = z.union([
-  MuscleSchema, EquipmentSchema, EmphasisSchema, DifficultySchema
-])
+  MuscleSchema,
+  EquipmentSchema,
+  EmphasisSchema,
+  DifficultySchema,
+]);
