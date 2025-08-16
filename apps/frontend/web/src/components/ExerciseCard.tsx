@@ -9,7 +9,7 @@ import {
   Stack,
   UnstyledButton,
 } from '@mantine/core';
-import { Exercise } from '@cwt/schema/exerciseSchema';
+import { type Exercise } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 

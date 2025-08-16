@@ -16,7 +16,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import { useStore } from '@cwt/state/store';
-import { Exercise } from '@cwt/schema/exerciseSchema';
+import type { Exercise } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import ExercisesList from '../components/ExercisesList';
@@ -47,16 +47,17 @@ function LibraryView() {
 
   const [filterOpened, filterHandler] = useDisclosure(false);
   const [detailOpened, detailHandlers] = useDisclosure(false);
-  const [exerciseDetail, setExerciseDetail] = useState<Exercise>({
-    id: 1,
-    name: '',
-    target_muscles: [],
-    emphasis: '',
-    difficulty: '',
-    tags: [],
-    instructions: [],
-    required_equipment: null,
-  });
+  const [exerciseDetail, setExerciseDetail] = useState<Exercise | null>(null);
+  // const [exerciseDetail, setExerciseDetail] = useState<Exercise >({
+  //   id: 1,
+  //   name: '',
+  //   target_muscles: [],
+  //   emphasis: '',
+  //   difficulty: '',
+  //   tags: [],
+  //   instructions: [],
+  //   required_equipment: null,
+  // });
   const combobox = useCombobox();
 
   const shouldFilterOptions = !exercises.some(
