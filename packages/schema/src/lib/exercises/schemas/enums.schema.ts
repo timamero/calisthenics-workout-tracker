@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { Constants } from "../common/database.types";
+import { Constants } from "../../common/database.types";
 
 const constants = Constants.public.Enums
 
