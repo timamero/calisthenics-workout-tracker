@@ -1,6 +1,11 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { MusclesSchema, EquipmentsSchema, EmphasisSchema, DifficultySchema } from "./enums.schema";
+import {
+  MusclesSchema,
+  EquipmentsSchema,
+  EmphasisSchema,
+  DifficultySchema,
+} from './enums.schema';
 
 export const Exercise = z.object({
   id: z.number(),
