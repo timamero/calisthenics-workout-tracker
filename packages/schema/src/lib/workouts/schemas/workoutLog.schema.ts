@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { WorkoutBase } from "./workoutBase.schema";
-import { SourceSchema } from "./enums.schema";
-import { DurationSchema } from "../../common/schemas/duration.schema";
+import { WorkoutBase } from './workoutBase.schema';
+import { SourceSchema } from './enums.schema';
+import { DurationSchema } from '../../common/schemas/duration.schema';
 
 export const WorkoutLogSchema = z.object({
   ...WorkoutBase.shape,
@@ -10,5 +10,5 @@ export const WorkoutLogSchema = z.object({
   workout_build_id: z.int(),
   date: z.date(),
   duration: DurationSchema,
-  rpe: z.optional(z.number().lte(10))
+  rpe: z.optional(z.number().lte(10)),
 });
