@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Text, UnstyledButton, Checkbox } from '@mantine/core';
 
-import { type Selection } from '@cwt/schema/exerciseSchema';
+import { type ExerciseAttributes } from '@cwt/schema/exercises';
 import { useStore } from '@cwt/state/store';
 import { type FilterGroup } from '@cwt/state/types';
 
@@ -9,7 +9,7 @@ import classes from './FilterCheckbox.module.css';
 
 interface FilterCheckboxProps {
   group: FilterGroup;
-  selection: Selection;
+  selection: ExerciseAttributes;
 }
 
 const FilterCheckbox = memo(function FilterCheckbox({
