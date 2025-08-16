@@ -10,11 +10,11 @@
   },
   "exports": {
     "./httpClient": {
-      "types": "./src/httpClient.ts",
+      "types": "./dist/httpClient.d.ts",
       "default": "./dist/httpClient.js"
     },
     "./exercisesService": {
-      "types": "./src/exercisesService.ts",
+      "types": "./dist/exercisesService.d.ts",
       "default": "./dist/exercisesService.js"
     }
   },

@@ -10,27 +10,27 @@
   },
   "exports": {
     "./counter": {
-      "types": "./src/counter.ts",
+      "types": "./dist/counter.d.ts",
       "default": "./dist/counter.js"
     },
     "./exercises": {
-      "types": "./src/exercises.ts",
+      "types": "./dist/exercises.d.ts",
       "default": "./dist/exercises.js"
     },
     "./auth": {
-      "types": "./src/auth.ts",
+      "types": "./dist/auth.d.ts",
       "default": "./dist/auth.js"
     },
     "./store": {
-      "types": "./src/store.ts",
+      "types": "./dist/store.d.ts",
       "default": "./dist/store.js"
     },
     "./types": {
-      "types": "./src/types.ts",
+      "types": "./dist/types.d.ts",
       "default": "./dist/types.js"
     },
     "./slices/library": {
-      "types": "./src/slices/library/*.ts",
+      "types": "./dist/slices/library/*.d.ts",
       "default": "./dist/slices/library/*.js"
     }
   },
