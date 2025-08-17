@@ -1,7 +1,9 @@
 import { StateCreator } from "zustand";
 
 import { Constants } from "@cwt/schema/common";
-import { FilterCheckbox } from "../../types";
+import { ExerciseFilterCheckbox } from "@cwt/schema/exercises";
+// import { FilterCheckbox } from "../../types";
+
 import { StoreState } from "../../store";
 
 const muscle_list = Constants.public.Enums.muscles;
@@ -9,27 +11,27 @@ const equipment_list = Constants.public.Enums.equipment;
 const emphasis_list = Constants.public.Enums.emphasis_type;
 const difficulty_list = Constants.public.Enums.difficulty_type;
 
-const muscleSelections: FilterCheckbox[] = muscle_list.map((a) => ({
-  group: "target_muscles",
+const muscleSelections: ExerciseFilterCheckbox[] = muscle_list.map((a) => ({
+  key: "target_muscles",
   selection: a,
   value: false,
 }));
-const equipmentSelections: FilterCheckbox[] = equipment_list.map((a) => ({
-  group: "required_equipment",
+const equipmentSelections: ExerciseFilterCheckbox[] = equipment_list.map((a) => ({
+  key: "required_equipment",
   selection: a,
   value: false,
 }));
-const emphasisSelections: FilterCheckbox[] = emphasis_list.map((a) => ({
-  group: "emphasis",
+const emphasisSelections: ExerciseFilterCheckbox[] = emphasis_list.map((a) => ({
+  key: "emphasis",
   selection: a,
   value: false,
 }));
-const difficultySelections: FilterCheckbox[] = difficulty_list.map((a) => ({
-  group: "difficulty",
+const difficultySelections: ExerciseFilterCheckbox[] = difficulty_list.map((a) => ({
+  key: "difficulty",
   selection: a,
   value: false,
 }));
-const initialFilterCheckboxSelections: FilterCheckbox[] = [
+const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] = [
   ...muscleSelections,
   ...equipmentSelections,
   ...emphasisSelections,
@@ -37,9 +39,9 @@ const initialFilterCheckboxSelections: FilterCheckbox[] = [
 ];
 
 export interface ExercisesFilterSlice {
-  filterCheckboxSelections: FilterCheckbox[];
-  appliedFilterSelections: FilterCheckbox[];
-  toggleFilterSelection: (filterCheckbox: FilterCheckbox) => void;
+  filterCheckboxSelections: ExerciseFilterCheckbox[];
+  appliedFilterSelections: ExerciseFilterCheckbox[];
+  toggleFilterSelection: (filterCheckbox: ExerciseFilterCheckbox) => void;
   setAppliedFilterSelections: () => void;
   clearFilterCheckboxSelections: () => void;
   revertFilterCheckboxSelections: () => void;
@@ -57,7 +59,7 @@ export const createExercisesFilterSlice: StateCreator<
     set((state) => {
       const updatedSelections = state.filterCheckboxSelections.map((obj) => {
         if (
-          obj.group === filterCheckbox.group &&
+          obj.key === filterCheckbox.key &&
           obj.selection === filterCheckbox.selection
         ) {
           return {
