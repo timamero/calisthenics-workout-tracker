@@ -1,4 +1,4 @@
-import { create, StateCreator } from "zustand";
+import { StateCreator } from "zustand";
 
 import { Exercise, ExerciseAttributes } from "@cwt/schema/exercises";
 import { StoreState } from "../../store";
@@ -51,7 +51,7 @@ export const createExercisesSlice: StateCreator<
         ? state.displayedExercises
         : state.masterExercises;
 
-      const appliedFilterGroupNames = appliedFilters.map((obj) => obj.group);
+      const appliedFilterGroupNames = appliedFilters.map((obj) => obj.key);
       const uniqueAppliedFilterGroupNames = Array.from(
         new Set(appliedFilterGroupNames)
       );
@@ -60,16 +60,17 @@ export const createExercisesSlice: StateCreator<
       );
       const filteredExercises = exercisesToFilter.filter((obj) => {
         const conditionals: boolean[] = [];
-        uniqueAppliedFilterGroupNames.forEach((group) => {
-          if (typeof obj[group] === "string") {
-            if (appliedFilterSelections.includes(obj[group])) {
+        uniqueAppliedFilterGroupNames.forEach((key) => {
+          if (typeof obj[key] === "string") {
+          // if (obj[key] in ExerciseFilterKeySchema.enum as ExerciseFilterKey) {
+            if (appliedFilterSelections.includes(obj[key])) {
               conditionals.push(true);
             } else {
               conditionals.push(false);
             }
-          } else if (Array.isArray(obj[group])) {
+          } else if (Array.isArray(obj[key])) {
             const arrayConditionals: boolean[] = [];
-            obj[group].forEach((item) => {
+            obj[key].forEach((item) => {
               if (appliedFilterSelections.includes(item as ExerciseAttributes)) {
                 arrayConditionals.push(true);
               } else {
