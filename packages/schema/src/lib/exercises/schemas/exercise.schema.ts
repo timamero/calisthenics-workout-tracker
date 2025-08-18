@@ -17,5 +17,3 @@ export const ExerciseSchema = z.object({
   tags: z.array(z.string()),
   instructions: z.array(z.string()),
 });
-
-export const ExerciseKeySchema = ExerciseSchema.keyof();
