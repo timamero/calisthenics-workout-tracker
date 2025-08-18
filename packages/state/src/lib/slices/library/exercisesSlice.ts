@@ -62,7 +62,6 @@ export const createExercisesSlice: StateCreator<
         const conditionals: boolean[] = [];
         uniqueAppliedFilterGroupNames.forEach((key) => {
           if (typeof obj[key] === "string") {
-          // if (obj[key] in ExerciseFilterKeySchema.enum as ExerciseFilterKey) {
             if (appliedFilterSelections.includes(obj[key])) {
               conditionals.push(true);
             } else {
@@ -71,7 +70,9 @@ export const createExercisesSlice: StateCreator<
           } else if (Array.isArray(obj[key])) {
             const arrayConditionals: boolean[] = [];
             obj[key].forEach((item) => {
-              if (appliedFilterSelections.includes(item as ExerciseAttributes)) {
+              if (
+                appliedFilterSelections.includes(item as ExerciseAttributes)
+              ) {
                 arrayConditionals.push(true);
               } else {
                 arrayConditionals.push(false);
