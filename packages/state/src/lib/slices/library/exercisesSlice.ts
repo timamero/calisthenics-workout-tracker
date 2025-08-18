@@ -1,7 +1,9 @@
 import { StateCreator } from "zustand";
 
 import { Exercise, ExerciseAttributes } from "@cwt/schema/exercises";
+
 import { StoreState } from "../../store";
+import { filterExercises } from "./exercisesActions";
 
 export interface ExercisesSlice {
   masterExercises: Exercise[];
@@ -51,40 +53,11 @@ export const createExercisesSlice: StateCreator<
         ? state.displayedExercises
         : state.masterExercises;
 
-      const appliedFilterGroupNames = appliedFilters.map((obj) => obj.key);
-      const uniqueAppliedFilterGroupNames = Array.from(
-        new Set(appliedFilterGroupNames)
+      const filteredExercises = filterExercises(
+        exercisesToFilter,
+        appliedFilters
       );
-      const appliedFilterSelections: ExerciseAttributes[] = appliedFilters.map(
-        (obj) => obj.selection
-      );
-      const filteredExercises = exercisesToFilter.filter((obj) => {
-        const conditionals: boolean[] = [];
-        uniqueAppliedFilterGroupNames.forEach((key) => {
-          if (typeof obj[key] === "string") {
-            if (appliedFilterSelections.includes(obj[key])) {
-              conditionals.push(true);
-            } else {
-              conditionals.push(false);
-            }
-          } else if (Array.isArray(obj[key])) {
-            const arrayConditionals: boolean[] = [];
-            obj[key].forEach((item) => {
-              if (
-                appliedFilterSelections.includes(item as ExerciseAttributes)
-              ) {
-                arrayConditionals.push(true);
-              } else {
-                arrayConditionals.push(false);
-              }
-            });
 
-            conditionals.push(arrayConditionals.some((con) => con));
-          }
-        });
-
-        return conditionals.every((con) => con);
-      });
       return {
         isFilterApplied: true,
         displayedExercises: filteredExercises,
