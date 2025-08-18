@@ -48,3 +48,9 @@ export function filterExercises(
 export function sortExercises(exercises: Exercise[]) {
   return exercises.sort((a, b) => a.name.localeCompare(b.name));
 }
+
+export function filterExercisesBySearch(exercises: Exercise[], search: string) {
+  return exercises.filter((obj) =>
+    obj.name.toLowerCase().includes(search.toLowerCase())
+  );
+}
