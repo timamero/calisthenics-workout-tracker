@@ -12,8 +12,10 @@ import {
 export interface ExercisesSlice {
   masterExercises: Exercise[];
   displayedExercises: Exercise[];
-  isFilterApplied: boolean;
-  isFilterBySearchApplied: boolean;
+  hasFilters: boolean;
+  hasSearch: boolean;
+  // isFilterApplied: boolean;
+  // isFilterBySearchApplied: boolean;
   exerciseSearch: string;
   setExercises: (exercises: Exercise[]) => void;
   filterDisplayedExercises: () => void;
@@ -31,8 +33,10 @@ export const createExercisesSlice: StateCreator<
 > = (set, get) => ({
   masterExercises: [],
   displayedExercises: [],
-  isFilterApplied: false,
-  isFilterBySearchApplied: false,
+  hasFilters: get().appliedFilterSelections.length > 0,
+  hasSearch: Boolean(get().exerciseSearch),
+  // isFilterApplied: false,
+  // isFilterBySearchApplied: false,
   exerciseSearch: "",
   setExercises: (exercises) =>
     set(() => {
@@ -46,12 +50,13 @@ export const createExercisesSlice: StateCreator<
     set((state) => {
       const appliedFilters = get().appliedFilterSelections;
 
-      if (appliedFilters.length === 0)
-        return {
-          isFilterApplied: false,
-        };
+      // if (appliedFilters.length === 0)
+      //   return {
+      //     isFilterApplied: false,
+      //   };
 
-      const exercisesToFilter = state.isFilterBySearchApplied
+      // const exercisesToFilter = state.isFilterBySearchApplied
+      const exercisesToFilter = state.hasSearch
         ? state.displayedExercises
         : state.masterExercises;
 
@@ -61,7 +66,7 @@ export const createExercisesSlice: StateCreator<
       );
 
       return {
-        isFilterApplied: true,
+        // isFilterApplied: true,
         displayedExercises: filteredExercises,
       };
     }),
@@ -74,33 +79,35 @@ export const createExercisesSlice: StateCreator<
       );
       return {
         displayedExercises: filteredExercises,
-        isFilterBySearchApplied: true,
+        // isFilterBySearchApplied: true,
       };
     }),
   resetDisplayedExerciseBySearch: () =>
     set((state) => {
-      if (!state.isFilterApplied) {
+      // if (!state.isFilterApplied) {
+      if (!state.hasFilters) {
         return {
           displayedExercises: state.masterExercises,
-          isFilterBySearchApplied: false,
+          // isFilterBySearchApplied: false,
           exerciseSearch: "",
         };
       }
 
-      return { isFilterBySearchApplied: false, exerciseSearch: "" };
+      // return { isFilterBySearchApplied: false, exerciseSearch: "" };
+      return { exerciseSearch: "" };
     }),
   resetDisplayedExercises: () =>
     set((state) => {
       const appliedFilters = get().appliedFilterSelections;
 
-      if (appliedFilters.length === 0)
-        return {
-          isFilterApplied: false,
-        };
+      // if (appliedFilters.length === 0)
+      //   return {
+      //     isFilterApplied: false,
+      //   };
 
       return {
         displayedExercises: state.masterExercises,
-        isFilterApplied: false,
+        // isFilterApplied: false,
       };
     }),
 });
