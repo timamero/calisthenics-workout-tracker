@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
 
-import { Exercise, ExerciseAttributes } from "@cwt/schema/exercises";
+import { Exercise } from "@cwt/schema/exercises";
 
 import { StoreState } from "../../store";
 import {
