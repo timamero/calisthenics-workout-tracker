@@ -3,7 +3,11 @@ import { StateCreator } from "zustand";
 import { Exercise, ExerciseAttributes } from "@cwt/schema/exercises";
 
 import { StoreState } from "../../store";
-import { filterExercises, sortExercises } from "./exercisesActions";
+import {
+  filterExercises,
+  filterExercisesBySearch,
+  sortExercises,
+} from "./exercisesActions";
 
 export interface ExercisesSlice {
   masterExercises: Exercise[];
@@ -64,8 +68,9 @@ export const createExercisesSlice: StateCreator<
   setExerciseSearch: (search) => set(() => ({ exerciseSearch: search })),
   filterDisplayedExercisesBySearch: () =>
     set((state) => {
-      const filteredExercises = state.displayedExercises.filter((obj) =>
-        obj.name.toLowerCase().includes(state.exerciseSearch.toLowerCase())
+      const filteredExercises = filterExercisesBySearch(
+        state.displayedExercises,
+        state.exerciseSearch
       );
       return {
         displayedExercises: filteredExercises,
