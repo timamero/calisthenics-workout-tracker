@@ -18,6 +18,10 @@
       "types": "./dist/lib/exercises/types.d.ts",
       "default": "./dist/lib/exercises/types.js"
     },
+    "./exercises/schemas": {
+      "types": "./dist/lib/exercises/schemas.index.d.ts",
+      "default": "./dist/lib/exercises/schemas/index.js"
+    },
     "./workouts": {
       "types": "./dist/lib/workouts/types.d.ts",
       "default": "./dist/lib/workouts/types.js"

@@ -7,14 +7,15 @@ import {
   DifficultySchema,
 } from './enums.schema';
 
-export const Exercise = z.object({
+export const ExerciseSchema = z.object({
   id: z.number(),
   name: z.string(),
   target_muscles: z.array(MuscleSchema),
-  // target_muscles: MusclesSchema,
   required_equipment: z.array(z.optional(EquipmentSchema)),
   emphasis: EmphasisSchema,
   difficulty: DifficultySchema,
   tags: z.array(z.string()),
   instructions: z.array(z.string()),
 });
+
+export const ExerciseKeySchema = ExerciseSchema.keyof();
