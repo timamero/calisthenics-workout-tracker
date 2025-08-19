@@ -18,7 +18,6 @@ const FilterCheckbox = memo(function FilterCheckbox({
   selection,
 }: FilterCheckboxProps &
   Omit<React.ComponentPropsWithoutRef<'button'>, keyof FilterCheckboxProps>) {
-  console.log('FilterCheckbox component');
 
   const isSelected = useStore(
     (state) =>
@@ -34,7 +33,6 @@ const FilterCheckbox = memo(function FilterCheckbox({
   const handleClick = () => {
     toggleFilterSelection({ keyName, selection });
   };
-  console.log('FilteCheckbox component return');
   return (
     <UnstyledButton
       m={4}
