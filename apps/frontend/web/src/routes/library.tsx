@@ -16,7 +16,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import { useStore } from '@cwt/state/store';
-import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
+// import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 // import { selectHasSearch } from '@cwt/state/library';
 import type { Exercise } from '@cwt/schema/exercises';
 
@@ -42,7 +42,9 @@ function LibraryView() {
     (state) => state.refreshDisplayedExercises,
   );
   // const hasSearch = useStore((state) => selectHasSearch(state));
-  const { hasSearch } = useFiltersAndSearchStatus();
+  const isSearchApplied = useStore((state) => state.isSearchApplied);
+  const applySearchStatus = useStore((state) => state.applySearchStatus);
+  // const { hasSearch } = useFiltersAndSearchStatus();
   // const resetDisplayedExerciseBySearch = useStore(
   //   (state) => state.resetDisplayedExerciseBySearch,
   // );
@@ -86,6 +88,7 @@ function LibraryView() {
   ));
 
   const handleClearSearch = () => {
+    applySearchStatus(false);
     refreshDisplayedExercises();
     // resetDisplayedExerciseBySearch();
 
@@ -98,11 +101,21 @@ function LibraryView() {
 
   const handleKeyDown = (e: HandleKeyDownEvent): void => {
     if (e.code === 'Enter') {
+      console.log('handleKeyDown, search', search);
       setSearch(search.trim());
+      applySearchStatus(true);
       // filterDisplayedExercisesBySearch();
       refreshDisplayedExercises();
       combobox.closeDropdown();
     }
+  };
+
+  const handleSearchOnChange = (event: {
+    currentTarget: { value: string };
+  }) => {
+    console.log('handleSearchOnChange');
+    setSearch(event.currentTarget.value);
+    combobox.openDropdown();
   };
 
   // Opens the filter overlay
@@ -124,9 +137,10 @@ function LibraryView() {
         <Title size="h6">Exercise Library</Title>
         <Group>
           <Combobox
-            onOptionSubmit={(optionValue) => {
+            onOptionSubmit={() => {
               console.log('onOptionSubmit');
-              setSearch(optionValue);
+              // setSearch(optionValue);
+              applySearchStatus(true);
               refreshDisplayedExercises();
               // filterDisplayedExercisesBySearch();
               combobox.closeDropdown();
@@ -147,11 +161,9 @@ function LibraryView() {
                 }
                 placeholder="Search exercises"
                 value={search}
-                disabled={hasSearch}
-                onChange={(event) => {
-                  setSearch(event.currentTarget.value);
-                  combobox.openDropdown();
-                }}
+                disabled={isSearchApplied}
+                // disabled={hasSearch}
+                onChange={handleSearchOnChange}
                 onKeyDown={handleKeyDown}
                 onClick={() => combobox.openDropdown()}
                 onFocus={() => combobox.openDropdown()}
