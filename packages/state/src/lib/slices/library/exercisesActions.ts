@@ -8,9 +8,9 @@ export function filterExercises(
   exercisesToFilter: Exercise[],
   appliedFilters: ExerciseFilterCheckbox[]
 ) {
-  const appliedFilterSelections: ExerciseAttributes[] = appliedFilters.map(
+  const appliedFilterSelections = new Set(appliedFilters.map(
     (f) => f.selection
-  );
+  ));
 
   return exercisesToFilter.filter((exercise) => 
     appliedFilters.every(({ key }) => {
@@ -18,10 +18,10 @@ export function filterExercises(
 
       // Some exercise attributes are type string or list
       if (typeof value === "string") {
-        return appliedFilterSelections.includes(value)
+        return appliedFilterSelections.has(value)
       }
       if (Array.isArray(value)) {
-        return value.some((v) => appliedFilterSelections.includes(v as ExerciseAttributes))
+        return value.some((v) => appliedFilterSelections.has(v as ExerciseAttributes))
       }
       return false
     })
