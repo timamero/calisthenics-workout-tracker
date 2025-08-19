@@ -16,8 +16,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import { useStore } from '@cwt/state/store';
-// import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
-// import { selectHasSearch } from '@cwt/state/library';
+import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 import type { Exercise } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
@@ -30,44 +29,20 @@ export const Route = createFileRoute('/library')({
 });
 
 function LibraryView() {
-  console.log('Library view component');
   const exercises = useStore((state) => state.displayedExercises);
   const search = useStore((state) => state.exerciseSearch);
-  // const isFilterBySearchApplied = useStore(
-  //   (state) => state.isFilterBySearchApplied,
-  // );
-  // const isFilterApplied = useStore((state) => state.isFilterApplied);
   const setSearch = useStore((state) => state.setExerciseSearch);
   const refreshDisplayedExercises = useStore(
     (state) => state.refreshDisplayedExercises,
   );
-  // const hasSearch = useStore((state) => selectHasSearch(state));
-  const isSearchApplied = useStore((state) => state.isSearchApplied);
-  const applySearchStatus = useStore((state) => state.applySearchStatus);
-  // const { hasSearch } = useFiltersAndSearchStatus();
-  // const resetDisplayedExerciseBySearch = useStore(
-  //   (state) => state.resetDisplayedExerciseBySearch,
-  // );
-  // const filterDisplayedExercisesBySearch = useStore(
-  //   (state) => state.filterDisplayedExercisesBySearch,
-  // );
-  // const filterDisplayedExercise = useStore(
-  //   (state) => state.filterDisplayedExercises,
-  // );
+  const setAppliedExerciseSearch = useStore((state) => state.setAppliedExerciseSearch)
+
+  const { hasSearch } = useFiltersAndSearchStatus();
+
+  const [exerciseDetail, setExerciseDetail] = useState<Exercise | null>(null);
 
   const [filterOpened, filterHandler] = useDisclosure(false);
   const [detailOpened, detailHandlers] = useDisclosure(false);
-  const [exerciseDetail, setExerciseDetail] = useState<Exercise | null>(null);
-  // const [exerciseDetail, setExerciseDetail] = useState<Exercise >({
-  //   id: 1,
-  //   name: '',
-  //   target_muscles: [],
-  //   emphasis: '',
-  //   difficulty: '',
-  //   tags: [],
-  //   instructions: [],
-  //   required_equipment: null,
-  // });
   const combobox = useCombobox();
 
   const shouldFilterOptions = !exercises.some(
@@ -88,23 +63,15 @@ function LibraryView() {
   ));
 
   const handleClearSearch = () => {
-    applySearchStatus(false);
+    setAppliedExerciseSearch("");
     refreshDisplayedExercises();
-    // resetDisplayedExerciseBySearch();
-
-    // if (isFilterApplied) {
-    //   filterDisplayedExercise();
-    // }
   };
 
   type HandleKeyDownEvent = React.KeyboardEvent<HTMLInputElement>;
 
   const handleKeyDown = (e: HandleKeyDownEvent): void => {
     if (e.code === 'Enter') {
-      console.log('handleKeyDown, search', search);
-      setSearch(search.trim());
-      applySearchStatus(true);
-      // filterDisplayedExercisesBySearch();
+      setAppliedExerciseSearch(search.trim())
       refreshDisplayedExercises();
       combobox.closeDropdown();
     }
@@ -113,17 +80,14 @@ function LibraryView() {
   const handleSearchOnChange = (event: {
     currentTarget: { value: string };
   }) => {
-    console.log('handleSearchOnChange');
     setSearch(event.currentTarget.value);
     combobox.openDropdown();
   };
 
-  // Opens the filter overlay
   const handleClickFilter = () => {
     filterHandler.open();
   };
 
-  console.log('Library view component return');
   return (
     <ExerciseDetailContext.Provider
       value={{
@@ -138,11 +102,10 @@ function LibraryView() {
         <Group>
           <Combobox
             onOptionSubmit={() => {
-              console.log('onOptionSubmit');
-              // setSearch(optionValue);
-              applySearchStatus(true);
+              console.log(`onOptionSubmit: setAppliedExerciseSearch(${search})`);
+              // TODO: When option is selected, set appliedExercise to that value
+              setAppliedExerciseSearch(search);
               refreshDisplayedExercises();
-              // filterDisplayedExercisesBySearch();
               combobox.closeDropdown();
             }}
             store={combobox}
@@ -161,8 +124,7 @@ function LibraryView() {
                 }
                 placeholder="Search exercises"
                 value={search}
-                disabled={isSearchApplied}
-                // disabled={hasSearch}
+                disabled={hasSearch}
                 onChange={handleSearchOnChange}
                 onKeyDown={handleKeyDown}
                 onClick={() => combobox.openDropdown()}

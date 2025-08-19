@@ -13,10 +13,10 @@ export interface ExercisesSlice {
   masterExercises: Exercise[];
   displayedExercises: Exercise[];
   exerciseSearch: string;
-  isSearchApplied: boolean;
+  appliedExerciseSearch: string;
   setExercises: (exercises: Exercise[]) => void;
   setExerciseSearch: (search: string) => void;
-  applySearchStatus: (status: boolean) => void;
+  setAppliedExerciseSearch: (search: string) => void;
   refreshDisplayedExercises: () => void;
 }
 
@@ -29,7 +29,7 @@ export const createExercisesSlice: StateCreator<
   masterExercises: [],
   displayedExercises: [],
   exerciseSearch: "",
-  isSearchApplied: false,
+  appliedExerciseSearch: "",
   setExercises: (exercises) =>
     set(() => {
       const sortedExercises = sortExercises(exercises);
@@ -39,7 +39,7 @@ export const createExercisesSlice: StateCreator<
       };
     }),
   setExerciseSearch: (search) => set(() => ({ exerciseSearch: search })),
-  applySearchStatus: (status) => set(() => ({ isSearchApplied: status })),
+  setAppliedExerciseSearch: (search) => set(() => ({ appliedExerciseSearch: search })),
   refreshDisplayedExercises: () =>
     set((state) => {
       let result = state.masterExercises;
@@ -48,17 +48,13 @@ export const createExercisesSlice: StateCreator<
         result = filterExercises(result, state.appliedFilterSelections);
       }
 
-      if (state.isSearchApplied) {
+      if (state.appliedExerciseSearch) {
         result = filterExercisesBySearch(result, state.exerciseSearch);
       }
 
       return {
         displayedExercises: result,
-        exerciseSearch: state.isSearchApplied ? state.exerciseSearch : "",
-        // exerciseSearch:
-        //   !state.appliedFilterSelections.length && !state.exerciseSearch
-        //     ? ""
-        //     : state.exerciseSearch,
+        exerciseSearch: state.appliedExerciseSearch ? state.appliedExerciseSearch : "",
       };
     }),
 });
@@ -67,4 +63,4 @@ export const selectHasFilters = (state: StoreState): boolean =>
   state.appliedFilterSelections.length > 0;
 
 export const selectHasSearch = (state: StoreState): boolean =>
-  Boolean(state.exerciseSearch);
+  Boolean(state.appliedExerciseSearch);
