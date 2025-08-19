@@ -15,26 +15,26 @@ import {
 
 const exerciseAttributes = [
   {
-    key: ExerciseFilterKeySchema.enum.target_muscles,
+    keyName: ExerciseFilterKeySchema.enum.target_muscles,
     attributes: Constants.public.Enums.muscles,
   },
   {
-    key: ExerciseFilterKeySchema.enum.required_equipment,
+    keyName: ExerciseFilterKeySchema.enum.required_equipment,
     attributes: Constants.public.Enums.equipment,
   },
   {
-    key: ExerciseFilterKeySchema.enum.emphasis,
+    keyName: ExerciseFilterKeySchema.enum.emphasis,
     attributes: Constants.public.Enums.emphasis_type,
   },
   {
-    key: ExerciseFilterKeySchema.enum.difficulty,
+    keyName: ExerciseFilterKeySchema.enum.difficulty,
     attributes: Constants.public.Enums.difficulty_type,
   },
 ];
 const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] =
   exerciseAttributes.flatMap((category) =>
     category.attributes.map((attribute) => ({
-      key: category.key,
+      keyName: category.keyName,
       selection: attribute,
       value: false,
     }))

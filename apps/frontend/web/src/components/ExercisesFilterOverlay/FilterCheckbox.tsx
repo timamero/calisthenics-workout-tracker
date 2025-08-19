@@ -3,24 +3,27 @@ import { Text, UnstyledButton, Checkbox } from '@mantine/core';
 
 import { type ExerciseAttributes } from '@cwt/schema/exercises';
 import { useStore } from '@cwt/state/store';
-import { type FilterGroup } from '@cwt/state/types';
+import type { ExerciseFilterKey } from '@cwt/schema/exercises';
+// import { type FilterGroup } from '@cwt/state/types';
 
 import classes from './FilterCheckbox.module.css';
 
 interface FilterCheckboxProps {
-  group: FilterGroup;
+  keyName: ExerciseFilterKey;
   selection: ExerciseAttributes;
 }
 
 const FilterCheckbox = memo(function FilterCheckbox({
-  group,
+  keyName,
   selection,
 }: FilterCheckboxProps &
   Omit<React.ComponentPropsWithoutRef<'button'>, keyof FilterCheckboxProps>) {
+  console.log('FilterCheckbox component');
+
   const isSelected = useStore(
     (state) =>
       state.filterCheckboxSelections.find(
-        (obj) => obj.group === group && obj.selection === selection,
+        (s) => s.keyName === keyName && s.selection === selection,
       )?.value,
   );
   const toggleFilterSelection = useStore(
@@ -29,8 +32,9 @@ const FilterCheckbox = memo(function FilterCheckbox({
   // console.log('render checkbox');
 
   const handleClick = () => {
-    toggleFilterSelection({ group, selection });
+    toggleFilterSelection({ keyName, selection });
   };
+  console.log('FilteCheckbox component return');
   return (
     <UnstyledButton
       m={4}

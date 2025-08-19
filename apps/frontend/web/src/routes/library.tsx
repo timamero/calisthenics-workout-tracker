@@ -16,7 +16,8 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import { useStore } from '@cwt/state/store';
-import { selectHasSearch } from '@cwt/state/library';
+import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
+// import { selectHasSearch } from '@cwt/state/library';
 import type { Exercise } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
@@ -29,6 +30,7 @@ export const Route = createFileRoute('/library')({
 });
 
 function LibraryView() {
+  console.log('Library view component');
   const exercises = useStore((state) => state.displayedExercises);
   const search = useStore((state) => state.exerciseSearch);
   // const isFilterBySearchApplied = useStore(
@@ -39,7 +41,8 @@ function LibraryView() {
   const refreshDisplayedExercises = useStore(
     (state) => state.refreshDisplayedExercises,
   );
-  const hasSearch = useStore((state) => selectHasSearch(state));
+  // const hasSearch = useStore((state) => selectHasSearch(state));
+  const { hasSearch } = useFiltersAndSearchStatus();
   // const resetDisplayedExerciseBySearch = useStore(
   //   (state) => state.resetDisplayedExerciseBySearch,
   // );
@@ -107,6 +110,7 @@ function LibraryView() {
     filterHandler.open();
   };
 
+  console.log('Library view component return');
   return (
     <ExerciseDetailContext.Provider
       value={{
