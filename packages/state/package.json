@@ -22,16 +22,12 @@
       "default": "./dist/auth.js"
     },
     "./store": {
-      "types": "./dist/store.d.ts",
-      "default": "./dist/store.js"
+      "types": "./dist/lib/store.d.ts",
+      "default": "./dist/lib/store.js"
     },
-    "./types": {
-      "types": "./dist/types.d.ts",
-      "default": "./dist/types.js"
-    },
-    "./slices/library": {
-      "types": "./dist/slices/library/*.d.ts",
-      "default": "./dist/slices/library/*.js"
+    "./library": {
+      "types": "./dist/lib/slices/library/index.d.ts",
+      "default": "./dist/lib/slices/library/index.js"
     }
   },
   "dependencies": {
