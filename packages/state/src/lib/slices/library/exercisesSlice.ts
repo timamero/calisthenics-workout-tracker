@@ -12,8 +12,6 @@ import {
 export interface ExercisesSlice {
   masterExercises: Exercise[];
   displayedExercises: Exercise[];
-  hasFilters: boolean;
-  hasSearch: boolean;
   exerciseSearch: string;
   setExercises: (exercises: Exercise[]) => void;
   filterDisplayedExercises: () => void;
@@ -30,8 +28,6 @@ export const createExercisesSlice: StateCreator<
 > = (set, get) => ({
   masterExercises: [],
   displayedExercises: [],
-  hasFilters: get().appliedFilterSelections.length > 0,
-  hasSearch: Boolean(get().exerciseSearch),
   exerciseSearch: "",
   setExercises: (exercises) =>
     set(() => {
@@ -43,7 +39,7 @@ export const createExercisesSlice: StateCreator<
     }),
   filterDisplayedExercises: () =>
     set((state) => {
-      const exercisesToFilter = state.hasSearch
+      const exercisesToFilter = state.exerciseSearch
         ? state.displayedExercises
         : state.masterExercises;
 
@@ -69,13 +65,13 @@ export const createExercisesSlice: StateCreator<
     }),
   resetDisplayedExercises: () =>
     set((state) => {
-      if (!state.hasFilters && !state.hasSearch) {
+      if (!(state.appliedFilterSelections.length > 0) && !state.exerciseSearch) {
         return {
           displayedExercises: state.masterExercises,
           exerciseSearch: "",
         };
       }
-      if (state.hasFilters) {
+      if (state.appliedFilterSelections.length > 0) {
         const filteredExercises = filterExercises(
         state.masterExercises,
         state.appliedFilterSelections
@@ -89,3 +85,9 @@ export const createExercisesSlice: StateCreator<
       }};
     }),
 });
+
+export const selectHasFilters = (state: StoreState): boolean => 
+  state.appliedFilterSelections.length > 0;
+
+export const selectHasSearch = (state: StoreState): boolean =>
+  Boolean(state.exerciseSearch);
