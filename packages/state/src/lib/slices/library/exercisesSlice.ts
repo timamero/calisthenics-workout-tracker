@@ -16,7 +16,7 @@ export interface ExercisesSlice {
   setExercises: (exercises: Exercise[]) => void;
   setExerciseSearch: (search: string) => void;
   applyFiltersAndSearch: () => void;
-  resetDisplayedExercises: () => void;
+  refreshDisplayedExercises: () => void;
 }
 
 export const createExercisesSlice: StateCreator<
@@ -53,7 +53,7 @@ export const createExercisesSlice: StateCreator<
       }
     }),
   setExerciseSearch: (search) => set(() => ({ exerciseSearch: search })),
-  resetDisplayedExercises: () =>
+  refreshDisplayedExercises: () =>
     set((state) => {
       if (!state.appliedFilterSelections.length && !state.exerciseSearch) {
         return {
