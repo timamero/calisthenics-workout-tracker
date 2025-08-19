@@ -7,6 +7,7 @@ import { ExerciseFilterCheckbox } from "@cwt/schema/exercises";
 import { StoreState } from "../../store";
 
 import {
+  clearSelections,
   updateAppliedSelections,
   updateSelections,
 } from "./exerciseFilterActions";
@@ -85,17 +86,7 @@ export const createExercisesFilterSlice: StateCreator<
     }),
   clearFilterCheckboxSelections: () =>
     set((state) => {
-      const clearedSelections = state.filterCheckboxSelections.map((obj) => {
-        if (obj.value === true) {
-          return {
-            ...obj,
-            value: false,
-          };
-        }
-
-        return obj;
-      });
-
+      const clearedSelections = clearSelections(state.filterCheckboxSelections);
       return {
         filterCheckboxSelections: clearedSelections,
       };
