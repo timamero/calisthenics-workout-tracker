@@ -30,19 +30,9 @@ export default function ExercisesFilterOverlay({
   const refreshDisplayedExercises = useStore(
     (state) => state.refreshDisplayedExercises,
   );
-  // const filterDisplayedExercises = useStore(
-  //   (state) => state.filterDisplayedExercises,
-  // );
-  // const filterDisplayedExercisesBySearch = useStore(
-  //   (state) => state.filterDisplayedExercisesBySearch,
-  // );
-  // const resetDisplayedExercises = useStore(
-  //   (state) => state.resetDisplayedExercises,
-  // );
 
   const handleApplyFiltersClick = () => {
     setAppliedFilterSelections();
-    // filterDisplayedExercises();
     refreshDisplayedExercises();
     handler.close();
   };
@@ -50,10 +40,6 @@ export default function ExercisesFilterOverlay({
   const handleClearFiltersClick = () => {
     clearFilterCheckboxSelections();
     clearAppliedFilterCheckboxSelections();
-    // resetDisplayedExercises();
-    // if (isFilterBySearchApplied) {
-    //   filterDisplayedExercisesBySearch();
-    // }
     refreshDisplayedExercises();
     handler.close();
   };

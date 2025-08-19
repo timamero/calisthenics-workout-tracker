@@ -1,5 +1,4 @@
 import {
-  Exercise,
   ExerciseFilterCheckbox,
   ExerciseAttributes,
 } from "@cwt/schema/exercises";

@@ -35,7 +35,9 @@ function LibraryView() {
   const refreshDisplayedExercises = useStore(
     (state) => state.refreshDisplayedExercises,
   );
-  const setAppliedExerciseSearch = useStore((state) => state.setAppliedExerciseSearch)
+  const setAppliedExerciseSearch = useStore(
+    (state) => state.setAppliedExerciseSearch,
+  );
 
   const { hasSearch } = useFiltersAndSearchStatus();
 
@@ -63,7 +65,7 @@ function LibraryView() {
   ));
 
   const handleClearSearch = () => {
-    setAppliedExerciseSearch("");
+    setAppliedExerciseSearch('');
     refreshDisplayedExercises();
   };
 
@@ -71,7 +73,7 @@ function LibraryView() {
 
   const handleKeyDown = (e: HandleKeyDownEvent): void => {
     if (e.code === 'Enter') {
-      setAppliedExerciseSearch(search.trim())
+      setAppliedExerciseSearch(search.trim());
       refreshDisplayedExercises();
       combobox.closeDropdown();
     }
@@ -102,7 +104,9 @@ function LibraryView() {
         <Group>
           <Combobox
             onOptionSubmit={() => {
-              console.log(`onOptionSubmit: setAppliedExerciseSearch(${search})`);
+              console.log(
+                `onOptionSubmit: setAppliedExerciseSearch(${search})`,
+              );
               // TODO: When option is selected, set appliedExercise to that value
               setAppliedExerciseSearch(search);
               refreshDisplayedExercises();
