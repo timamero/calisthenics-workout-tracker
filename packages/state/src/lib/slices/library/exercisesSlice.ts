@@ -35,44 +35,35 @@ export const createExercisesSlice: StateCreator<
         masterExercises: sortedExercises,
         displayedExercises: sortedExercises,
       };
+  }),
+  applyFiltersAndSearch: () =>
+    set((state) => {
+      let result = state.masterExercises;
+
+      if (state.appliedFilterSelections.length > 0) {
+        result = filterExercises(result, state.appliedFilterSelections);
+      }
+
+      if (state.exerciseSearch) {
+        result = filterExercisesBySearch(result, state.exerciseSearch);
+      }
+
+      return {
+        displayedExercises: result
+      }
     }),
-    applyFiltersAndSearch: () =>
-      set((state) => {
-        let result = state.masterExercises;
-
-        if (state.appliedFilterSelections.length > 0) {
-          result = filterExercises(result, state.appliedFilterSelections);
-        }
-
-        if (state.exerciseSearch) {
-          result = filterExercisesBySearch(result, state.exerciseSearch);
-        }
-
-        return {
-          displayedExercises: result
-        }
-      }),
   setExerciseSearch: (search) => set(() => ({ exerciseSearch: search })),
   resetDisplayedExercises: () =>
     set((state) => {
-      if (!(state.appliedFilterSelections.length > 0) && !state.exerciseSearch) {
+      if (!state.appliedFilterSelections.length && !state.exerciseSearch) {
         return {
           displayedExercises: state.masterExercises,
           exerciseSearch: "",
         };
       }
-      if (state.appliedFilterSelections.length > 0) {
-        const filteredExercises = filterExercises(
-        state.masterExercises,
-        state.appliedFilterSelections
-      );
-        return {
-          displayedExercises: state.exerciseSearch ? filterExercisesBySearch(filteredExercises, state.exerciseSearch) : filteredExercises
-        }
-      } else {
-       return {
-        displayedExercises: state.masterExercises,
-      }};
+      
+      get().applyFiltersAndSearch();
+      return {}
     }),
 });
 
