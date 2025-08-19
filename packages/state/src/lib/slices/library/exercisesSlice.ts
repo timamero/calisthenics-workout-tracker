@@ -39,7 +39,8 @@ export const createExercisesSlice: StateCreator<
       };
     }),
   setExerciseSearch: (search) => set(() => ({ exerciseSearch: search })),
-  setAppliedExerciseSearch: (search) => set(() => ({ appliedExerciseSearch: search })),
+  setAppliedExerciseSearch: (search) =>
+    set(() => ({ appliedExerciseSearch: search })),
   refreshDisplayedExercises: () =>
     set((state) => {
       let result = state.masterExercises;
@@ -54,7 +55,9 @@ export const createExercisesSlice: StateCreator<
 
       return {
         displayedExercises: result,
-        exerciseSearch: state.appliedExerciseSearch ? state.appliedExerciseSearch : "",
+        exerciseSearch: state.appliedExerciseSearch
+          ? state.appliedExerciseSearch
+          : "",
       };
     }),
 });
