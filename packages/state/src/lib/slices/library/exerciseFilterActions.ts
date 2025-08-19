@@ -1,1 +1,17 @@
-// Move code that modifies state here
+import { ExerciseFilterCheckbox } from "@cwt/schema/exercises";
+
+export function updateSelections(
+  selections: ExerciseFilterCheckbox[],
+  checkbox: ExerciseFilterCheckbox
+) {
+  return selections.map((s) => {
+    if (s.key === checkbox.key && s.selection === checkbox.selection) {
+      return {
+        ...s,
+        value: !s.value,
+      };
+    }
+
+    return s;
+  });
+}
