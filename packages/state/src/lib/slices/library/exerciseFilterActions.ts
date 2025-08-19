@@ -1,4 +1,4 @@
-import { ExerciseFilterCheckbox } from "@cwt/schema/exercises";
+import { Exercise, ExerciseFilterCheckbox } from "@cwt/schema/exercises";
 
 export function updateSelections(
   selections: ExerciseFilterCheckbox[],
@@ -18,4 +18,17 @@ export function updateSelections(
 
 export function updateAppliedSelections(selections: ExerciseFilterCheckbox[]) {
   return selections.filter((obj) => obj.value === true);
+}
+
+export function clearSelections(selections: ExerciseFilterCheckbox[]) {
+  return selections.map((s) => {
+    if (s.value === true) {
+      return {
+        ...s,
+        value: false,
+      };
+    }
+
+    return s;
+  });
 }
