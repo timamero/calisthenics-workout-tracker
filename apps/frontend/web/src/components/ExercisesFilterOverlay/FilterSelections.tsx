@@ -16,7 +16,6 @@ const Selections = memo(function Selections({
   keyName: ExerciseFilterKey;
   selections: ExerciseAttributes[];
 }) {
-  console.log('Selections component');
   return (
     <>
       {selections.map((selection) => {
@@ -33,7 +32,6 @@ const Selections = memo(function Selections({
 });
 
 export default function FilterSelections() {
-  console.log('FilterSelctions component');
   const filterCheckboxSelections = useStore(
     useShallow((state) => state.filterCheckboxSelections),
   );
@@ -41,7 +39,6 @@ export default function FilterSelections() {
   const filterGroupNames = filterCheckboxSelections.map((s) => s.keyName);
   const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
 
-  console.log('FilterSelections component returns');
   return (
     <>
       {uniqueFilterGroupNames.map((keyName) => {
