@@ -6,7 +6,10 @@ import { ExerciseFilterCheckbox } from "@cwt/schema/exercises";
 
 import { StoreState } from "../../store";
 
-import { updateSelections } from "./exerciseFilterActions";
+import {
+  updateAppliedSelections,
+  updateSelections,
+} from "./exerciseFilterActions";
 
 const muscle_list = Constants.public.Enums.muscles;
 const equipment_list = Constants.public.Enums.equipment;
@@ -45,8 +48,8 @@ const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] = [
 ];
 
 export interface ExercisesFilterSlice {
-  filterCheckboxSelections: ExerciseFilterCheckbox[];
-  appliedFilterSelections: ExerciseFilterCheckbox[];
+  filterCheckboxSelections: ExerciseFilterCheckbox[]; // List of all filters (doesn't change)
+  appliedFilterSelections: ExerciseFilterCheckbox[]; // List of the filters that are applied and actively filtering the exercises
   toggleFilterSelection: (filterCheckbox: ExerciseFilterCheckbox) => void;
   setAppliedFilterSelections: () => void;
   clearFilterCheckboxSelections: () => void;
@@ -73,10 +76,11 @@ export const createExercisesFilterSlice: StateCreator<
     }),
   setAppliedFilterSelections: () =>
     set((state) => {
-      const updatedAppliedFilterSelections =
-        state.filterCheckboxSelections.filter((obj) => obj.value === true);
+      const updatedAppliedSelections = updateAppliedSelections(
+        state.filterCheckboxSelections
+      );
       return {
-        appliedFilterSelections: updatedAppliedFilterSelections,
+        appliedFilterSelections: updatedAppliedSelections,
       };
     }),
   clearFilterCheckboxSelections: () =>
