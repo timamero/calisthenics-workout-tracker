@@ -8,6 +8,7 @@ import { StoreState } from "../../store";
 
 import {
   clearSelections,
+  revertFilterSelections,
   updateAppliedSelections,
   updateSelections,
 } from "./exerciseFilterActions";
@@ -49,7 +50,7 @@ const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] = [
 ];
 
 export interface ExercisesFilterSlice {
-  filterCheckboxSelections: ExerciseFilterCheckbox[]; // List of all filters (doesn't change)
+  filterCheckboxSelections: ExerciseFilterCheckbox[]; // List of all filters, this state changes when user toggles filter
   appliedFilterSelections: ExerciseFilterCheckbox[]; // List of the filters that are applied and actively filtering the exercises
   toggleFilterSelection: (filterCheckbox: ExerciseFilterCheckbox) => void;
   setAppliedFilterSelections: () => void;
@@ -92,24 +93,14 @@ export const createExercisesFilterSlice: StateCreator<
       };
     }),
   revertFilterCheckboxSelections: () =>
+    // When user updates filters, but then cancels the update, revert back to the last state when filters where applied
     set((state) => {
-      const appliedSelections = state.appliedFilterSelections.map(
+      const appliedSelectionAttributes = state.appliedFilterSelections.map(
         (obj) => obj.selection
       );
-      const revertedFilterSelections = state.filterCheckboxSelections.map(
-        (obj) => {
-          if (appliedSelections.includes(obj.selection)) {
-            return {
-              ...obj,
-              value: true,
-            };
-          }
-
-          return {
-            ...obj,
-            value: false,
-          };
-        }
+      const revertedFilterSelections = revertFilterSelections(
+        state.filterCheckboxSelections,
+        appliedSelectionAttributes
       );
       return {
         filterCheckboxSelections: revertedFilterSelections,
