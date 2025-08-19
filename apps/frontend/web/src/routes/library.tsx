@@ -16,6 +16,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import { useStore } from '@cwt/state/store';
+import { selectHasSearch } from '@cwt/state/library';
 import type { Exercise } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
@@ -30,20 +31,24 @@ export const Route = createFileRoute('/library')({
 function LibraryView() {
   const exercises = useStore((state) => state.displayedExercises);
   const search = useStore((state) => state.exerciseSearch);
-  const isFilterBySearchApplied = useStore(
-    (state) => state.isFilterBySearchApplied,
-  );
-  const isFilterApplied = useStore((state) => state.isFilterApplied);
+  // const isFilterBySearchApplied = useStore(
+  //   (state) => state.isFilterBySearchApplied,
+  // );
+  // const isFilterApplied = useStore((state) => state.isFilterApplied);
   const setSearch = useStore((state) => state.setExerciseSearch);
-  const resetDisplayedExerciseBySearch = useStore(
-    (state) => state.resetDisplayedExerciseBySearch,
+  const refreshDisplayedExercises = useStore(
+    (state) => state.refreshDisplayedExercises,
   );
-  const filterDisplayedExercisesBySearch = useStore(
-    (state) => state.filterDisplayedExercisesBySearch,
-  );
-  const filterDisplayedExercise = useStore(
-    (state) => state.filterDisplayedExercises,
-  );
+  const hasSearch = useStore((state) => selectHasSearch(state));
+  // const resetDisplayedExerciseBySearch = useStore(
+  //   (state) => state.resetDisplayedExerciseBySearch,
+  // );
+  // const filterDisplayedExercisesBySearch = useStore(
+  //   (state) => state.filterDisplayedExercisesBySearch,
+  // );
+  // const filterDisplayedExercise = useStore(
+  //   (state) => state.filterDisplayedExercises,
+  // );
 
   const [filterOpened, filterHandler] = useDisclosure(false);
   const [detailOpened, detailHandlers] = useDisclosure(false);
@@ -78,11 +83,12 @@ function LibraryView() {
   ));
 
   const handleClearSearch = () => {
-    resetDisplayedExerciseBySearch();
+    refreshDisplayedExercises();
+    // resetDisplayedExerciseBySearch();
 
-    if (isFilterApplied) {
-      filterDisplayedExercise();
-    }
+    // if (isFilterApplied) {
+    //   filterDisplayedExercise();
+    // }
   };
 
   type HandleKeyDownEvent = React.KeyboardEvent<HTMLInputElement>;
@@ -90,7 +96,8 @@ function LibraryView() {
   const handleKeyDown = (e: HandleKeyDownEvent): void => {
     if (e.code === 'Enter') {
       setSearch(search.trim());
-      filterDisplayedExercisesBySearch();
+      // filterDisplayedExercisesBySearch();
+      refreshDisplayedExercises();
       combobox.closeDropdown();
     }
   };
@@ -116,7 +123,8 @@ function LibraryView() {
             onOptionSubmit={(optionValue) => {
               console.log('onOptionSubmit');
               setSearch(optionValue);
-              filterDisplayedExercisesBySearch();
+              refreshDisplayedExercises();
+              // filterDisplayedExercisesBySearch();
               combobox.closeDropdown();
             }}
             store={combobox}
@@ -135,7 +143,7 @@ function LibraryView() {
                 }
                 placeholder="Search exercises"
                 value={search}
-                disabled={isFilterBySearchApplied}
+                disabled={hasSearch}
                 onChange={(event) => {
                   setSearch(event.currentTarget.value);
                   combobox.openDropdown();
