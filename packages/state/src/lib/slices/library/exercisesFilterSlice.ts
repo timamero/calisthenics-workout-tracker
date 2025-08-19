@@ -2,7 +2,7 @@ import { StateCreator } from "zustand";
 
 import { Constants } from "@cwt/schema/common";
 import { ExerciseFilterCheckbox } from "@cwt/schema/exercises";
-// import { FilterCheckbox } from "../../types";
+import { ExerciseFilterKeySchema } from "@cwt/schema/exercises/schemas";
 
 import { StoreState } from "../../store";
 
@@ -13,41 +13,32 @@ import {
   updateSelections,
 } from "./exerciseFilterActions";
 
-const muscle_list = Constants.public.Enums.muscles;
-const equipment_list = Constants.public.Enums.equipment;
-const emphasis_list = Constants.public.Enums.emphasis_type;
-const difficulty_list = Constants.public.Enums.difficulty_type;
-
-const muscleSelections: ExerciseFilterCheckbox[] = muscle_list.map((a) => ({
-  key: "target_muscles",
-  selection: a,
-  value: false,
-}));
-const equipmentSelections: ExerciseFilterCheckbox[] = equipment_list.map(
-  (a) => ({
-    key: "required_equipment",
-    selection: a,
-    value: false,
-  })
-);
-const emphasisSelections: ExerciseFilterCheckbox[] = emphasis_list.map((a) => ({
-  key: "emphasis",
-  selection: a,
-  value: false,
-}));
-const difficultySelections: ExerciseFilterCheckbox[] = difficulty_list.map(
-  (a) => ({
-    key: "difficulty",
-    selection: a,
-    value: false,
-  })
-);
-const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] = [
-  ...muscleSelections,
-  ...equipmentSelections,
-  ...emphasisSelections,
-  ...difficultySelections,
+const exerciseAttributes = [
+  {
+    key: ExerciseFilterKeySchema.enum.target_muscles,
+    attributes: Constants.public.Enums.muscles,
+  },
+  {
+    key: ExerciseFilterKeySchema.enum.required_equipment,
+    attributes: Constants.public.Enums.equipment,
+  },
+  {
+    key: ExerciseFilterKeySchema.enum.emphasis,
+    attributes: Constants.public.Enums.emphasis_type,
+  },
+  {
+    key: ExerciseFilterKeySchema.enum.difficulty,
+    attributes: Constants.public.Enums.difficulty_type,
+  },
 ];
+const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] =
+  exerciseAttributes.flatMap((category) =>
+    category.attributes.map((attribute) => ({
+      key: category.key,
+      selection: attribute,
+      value: false,
+    }))
+  );
 
 export interface ExercisesFilterSlice {
   filterCheckboxSelections: ExerciseFilterCheckbox[]; // List of all filters, this state changes when user toggles filter
