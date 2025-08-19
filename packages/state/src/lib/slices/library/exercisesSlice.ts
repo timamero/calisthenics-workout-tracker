@@ -54,7 +54,7 @@ export const createExercisesSlice: StateCreator<
 
       return {
         displayedExercises: result,
-        exerciseSearch: "",
+        exerciseSearch: state.isSearchApplied ? state.exerciseSearch : "",
         // exerciseSearch:
         //   !state.appliedFilterSelections.length && !state.exerciseSearch
         //     ? ""
