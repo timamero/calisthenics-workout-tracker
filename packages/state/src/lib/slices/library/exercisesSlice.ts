@@ -14,9 +14,8 @@ export interface ExercisesSlice {
   displayedExercises: Exercise[];
   exerciseSearch: string;
   setExercises: (exercises: Exercise[]) => void;
-  filterDisplayedExercises: () => void;
   setExerciseSearch: (search: string) => void;
-  filterDisplayedExercisesBySearch: () => void;
+  applyFiltersAndSearch: () => void;
   resetDisplayedExercises: () => void;
 }
 
@@ -37,32 +36,23 @@ export const createExercisesSlice: StateCreator<
         displayedExercises: sortedExercises,
       };
     }),
-  filterDisplayedExercises: () =>
-    set((state) => {
-      const exercisesToFilter = state.exerciseSearch
-        ? state.displayedExercises
-        : state.masterExercises;
+    applyFiltersAndSearch: () =>
+      set((state) => {
+        let result = state.masterExercises;
 
-      const filteredExercises = filterExercises(
-        exercisesToFilter,
-        state.appliedFilterSelections
-      );
+        if (state.appliedFilterSelections.length > 0) {
+          result = filterExercises(result, state.appliedFilterSelections);
+        }
 
-      return {
-        displayedExercises: filteredExercises,
-      };
-    }),
+        if (state.exerciseSearch) {
+          result = filterExercisesBySearch(result, state.exerciseSearch);
+        }
+
+        return {
+          displayedExercises: result
+        }
+      }),
   setExerciseSearch: (search) => set(() => ({ exerciseSearch: search })),
-  filterDisplayedExercisesBySearch: () =>
-    set((state) => {
-      const filteredExercises = filterExercisesBySearch(
-        state.displayedExercises,
-        state.exerciseSearch
-      );
-      return {
-        displayedExercises: filteredExercises,
-      };
-    }),
   resetDisplayedExercises: () =>
     set((state) => {
       if (!(state.appliedFilterSelections.length > 0) && !state.exerciseSearch) {
