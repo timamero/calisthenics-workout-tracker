@@ -14,7 +14,6 @@ export default function ExercisesFilterOverlay({
   opened,
   handler,
 }: ExercisesFilterOverlayProps) {
-  console.log('ExerciseFilterOverlay component');
   const { hasFilters } = useFiltersAndSearchStatus();
   const clearFilterCheckboxSelections = useStore(
     (state) => state.clearFilterCheckboxSelections,
@@ -68,7 +67,6 @@ export default function ExercisesFilterOverlay({
     }
   };
 
-  console.log('ExerciseFilterOverlay component return');
   return (
     <Modal
       opened={opened}
