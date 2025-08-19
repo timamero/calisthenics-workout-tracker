@@ -12,6 +12,10 @@
     "./useSupabaseAuth": {
       "types": "./dist/useSupabaseAuth.d.ts",
       "default": "./dist/useSupabaseAuth.js"
+    },
+    "./useFiltersAndSearchStatus": {
+      "types": "./dist/useFiltersAndSearchStatus.d.ts",
+      "default": "./dist/useFiltersAndSearchStatus.js"
     }
   },
   "dependencies": {
