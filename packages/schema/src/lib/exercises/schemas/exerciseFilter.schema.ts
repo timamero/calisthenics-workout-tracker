@@ -17,7 +17,7 @@ export const ExerciseFilterSchema = z.object({
 export const ExerciseFilterKeySchema = ExerciseFilterSchema.keyof();
 
 export const ExerciseFilterCheckboxSchema = z.object({
-  key: ExerciseFilterKeySchema,
+  keyName: ExerciseFilterKeySchema,
   selection: ExerciseAttributesSchema,
   value: z.optional(z.boolean()),
 });
