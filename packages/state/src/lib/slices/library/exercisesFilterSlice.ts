@@ -46,6 +46,7 @@ export interface ExercisesFilterSlice {
   toggleFilterSelection: (filterCheckbox: ExerciseFilterCheckbox) => void;
   setAppliedFilterSelections: () => void;
   clearFilterCheckboxSelections: () => void;
+  clearAppliedFilterCheckboxSelections: () => void;
   revertFilterCheckboxSelections: () => void;
 }
 
@@ -81,6 +82,12 @@ export const createExercisesFilterSlice: StateCreator<
       const clearedSelections = clearSelections(state.filterCheckboxSelections);
       return {
         filterCheckboxSelections: clearedSelections,
+      };
+    }),
+  clearAppliedFilterCheckboxSelections: () =>
+    set((state) => {
+      return {
+        appliedFilterSelections: [],
       };
     }),
   revertFilterCheckboxSelections: () =>
