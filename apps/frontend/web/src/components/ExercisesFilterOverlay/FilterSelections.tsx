@@ -3,23 +3,29 @@ import { Stack, Text, Group } from '@mantine/core';
 import { useShallow } from 'zustand/shallow';
 
 import { useStore } from '@cwt/state/store';
-import { type FilterGroup } from '@cwt/state/types';
-import { type ExerciseAttributes } from '@cwt/schema/exercises';
+// import { type FilterGroup } from '@cwt/state/types';
+import type { ExerciseFilterKey } from '@cwt/schema/exercises';
+import type { ExerciseAttributes } from '@cwt/schema/exercises';
 
 import FilterCheckbox from './FilterCheckbox';
 
 const Selections = memo(function Selections({
-  group,
+  keyName,
   selections,
 }: {
-  group: FilterGroup;
+  keyName: ExerciseFilterKey;
   selections: ExerciseAttributes[];
 }) {
+  console.log('Selections component');
   return (
     <>
       {selections.map((selection) => {
         return (
-          <FilterCheckbox group={group} selection={selection} key={selection} />
+          <FilterCheckbox
+            keyName={keyName}
+            selection={selection}
+            key={selection}
+          />
         );
       })}
     </>
@@ -27,29 +33,31 @@ const Selections = memo(function Selections({
 });
 
 export default function FilterSelections() {
+  console.log('FilterSelctions component');
   const filterCheckboxSelections = useStore(
     useShallow((state) => state.filterCheckboxSelections),
   );
 
-  const filterGroupNames = filterCheckboxSelections.map((obj) => obj.group);
+  const filterGroupNames = filterCheckboxSelections.map((s) => s.keyName);
   const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
 
+  console.log('FilterSelections component returns');
   return (
     <>
-      {uniqueFilterGroupNames.map((group) => {
+      {uniqueFilterGroupNames.map((keyName) => {
         return (
-          <Stack gap="sm" key={group}>
+          <Stack gap="sm" key={keyName}>
             <Text
               tt="uppercase"
               style={{ fontFamily: 'var(--mantine-font-family-headings)' }}
             >
-              {group}
+              {keyName}
             </Text>
             <Group gap={4}>
               <Selections
-                group={group}
+                keyName={keyName}
                 selections={filterCheckboxSelections
-                  .filter((obj) => obj.group === group)
+                  .filter((obj) => obj.keyName === keyName)
                   .map((obj) => obj.selection)}
               />
             </Group>
