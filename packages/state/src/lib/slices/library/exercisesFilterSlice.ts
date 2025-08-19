@@ -6,6 +6,8 @@ import { ExerciseFilterCheckbox } from "@cwt/schema/exercises";
 
 import { StoreState } from "../../store";
 
+import { updateSelections } from "./exerciseFilterActions";
+
 const muscle_list = Constants.public.Enums.muscles;
 const equipment_list = Constants.public.Enums.equipment;
 const emphasis_list = Constants.public.Enums.emphasis_type;
@@ -16,21 +18,25 @@ const muscleSelections: ExerciseFilterCheckbox[] = muscle_list.map((a) => ({
   selection: a,
   value: false,
 }));
-const equipmentSelections: ExerciseFilterCheckbox[] = equipment_list.map((a) => ({
-  key: "required_equipment",
-  selection: a,
-  value: false,
-}));
+const equipmentSelections: ExerciseFilterCheckbox[] = equipment_list.map(
+  (a) => ({
+    key: "required_equipment",
+    selection: a,
+    value: false,
+  })
+);
 const emphasisSelections: ExerciseFilterCheckbox[] = emphasis_list.map((a) => ({
   key: "emphasis",
   selection: a,
   value: false,
 }));
-const difficultySelections: ExerciseFilterCheckbox[] = difficulty_list.map((a) => ({
-  key: "difficulty",
-  selection: a,
-  value: false,
-}));
+const difficultySelections: ExerciseFilterCheckbox[] = difficulty_list.map(
+  (a) => ({
+    key: "difficulty",
+    selection: a,
+    value: false,
+  })
+);
 const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] = [
   ...muscleSelections,
   ...equipmentSelections,
@@ -57,19 +63,10 @@ export const createExercisesFilterSlice: StateCreator<
   appliedFilterSelections: [],
   toggleFilterSelection: (filterCheckbox) =>
     set((state) => {
-      const updatedSelections = state.filterCheckboxSelections.map((obj) => {
-        if (
-          obj.key === filterCheckbox.key &&
-          obj.selection === filterCheckbox.selection
-        ) {
-          return {
-            ...obj,
-            value: !obj.value,
-          };
-        }
-
-        return obj;
-      });
+      const updatedSelections = updateSelections(
+        state.filterCheckboxSelections,
+        filterCheckbox
+      );
       return {
         filterCheckboxSelections: updatedSelections,
       };
