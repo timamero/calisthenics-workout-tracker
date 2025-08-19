@@ -9,7 +9,7 @@ export function updateSelections(
   checkbox: ExerciseFilterCheckbox
 ) {
   return selections.map((s) => {
-    if (s.key === checkbox.key && s.selection === checkbox.selection) {
+    if (s.keyName === checkbox.keyName && s.selection === checkbox.selection) {
       return {
         ...s,
         value: !s.value,
