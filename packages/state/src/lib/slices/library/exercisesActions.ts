@@ -8,24 +8,26 @@ export function filterExercises(
   exercisesToFilter: Exercise[],
   appliedFilters: ExerciseFilterCheckbox[]
 ) {
-  const appliedFilterSelections = new Set(appliedFilters.map(
-    (f) => f.selection
-  ));
+  const appliedFilterSelections = new Set(
+    appliedFilters.map((f) => f.selection)
+  );
 
-  return exercisesToFilter.filter((exercise) => 
-    appliedFilters.every(({ key }) => {
-      const value = exercise[key];
+  return exercisesToFilter.filter((exercise) =>
+    appliedFilters.every(({ keyName }) => {
+      const value = exercise[keyName];
 
       // Some exercise attributes are type string or list
       if (typeof value === "string") {
-        return appliedFilterSelections.has(value)
+        return appliedFilterSelections.has(value);
       }
       if (Array.isArray(value)) {
-        return value.some((v) => appliedFilterSelections.has(v as ExerciseAttributes))
+        return value.some((v) =>
+          appliedFilterSelections.has(v as ExerciseAttributes)
+        );
       }
-      return false
+      return false;
     })
-  )
+  );
 }
 
 export function sortExercises(exercises: Exercise[]) {
