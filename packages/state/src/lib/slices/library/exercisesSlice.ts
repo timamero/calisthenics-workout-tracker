@@ -15,7 +15,6 @@ export interface ExercisesSlice {
   exerciseSearch: string;
   setExercises: (exercises: Exercise[]) => void;
   setExerciseSearch: (search: string) => void;
-  applyFiltersAndSearch: () => void;
   refreshDisplayedExercises: () => void;
 }
 
@@ -36,7 +35,8 @@ export const createExercisesSlice: StateCreator<
         displayedExercises: sortedExercises,
       };
   }),
-  applyFiltersAndSearch: () =>
+  setExerciseSearch: (search) => set(() => ({ exerciseSearch: search })),
+  refreshDisplayedExercises: () =>
     set((state) => {
       let result = state.masterExercises;
 
@@ -49,22 +49,10 @@ export const createExercisesSlice: StateCreator<
       }
 
       return {
-        displayedExercises: result
+        displayedExercises: result,
+        exerciseSearch: !state.appliedFilterSelections.length && !state.exerciseSearch ? "" : state.exerciseSearch
       }
-    }),
-  setExerciseSearch: (search) => set(() => ({ exerciseSearch: search })),
-  refreshDisplayedExercises: () =>
-    set((state) => {
-      if (!state.appliedFilterSelections.length && !state.exerciseSearch) {
-        return {
-          displayedExercises: state.masterExercises,
-          exerciseSearch: "",
-        };
-      }
-      
-      get().applyFiltersAndSearch();
-      return {}
-    }),
+    })
 });
 
 export const selectHasFilters = (state: StoreState): boolean => 
