@@ -18,6 +18,9 @@ export default function ExercisesFilterOverlay({
   const clearFilterCheckboxSelections = useStore(
     (state) => state.clearFilterCheckboxSelections,
   );
+  const clearAppliedFilterCheckboxSelections = useStore(
+    (state) => state.clearAppliedFilterCheckboxSelections,
+  );
   const setAppliedFilterSelections = useStore(
     (state) => state.setAppliedFilterSelections,
   );
@@ -46,6 +49,7 @@ export default function ExercisesFilterOverlay({
 
   const handleClearFiltersClick = () => {
     clearFilterCheckboxSelections();
+    clearAppliedFilterCheckboxSelections();
     // resetDisplayedExercises();
     // if (isFilterBySearchApplied) {
     //   filterDisplayedExercisesBySearch();
