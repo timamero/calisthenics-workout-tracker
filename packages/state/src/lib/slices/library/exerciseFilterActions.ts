@@ -15,3 +15,7 @@ export function updateSelections(
     return s;
   });
 }
+
+export function updateAppliedSelections(selections: ExerciseFilterCheckbox[]) {
+  return selections.filter((obj) => obj.value === true);
+}
