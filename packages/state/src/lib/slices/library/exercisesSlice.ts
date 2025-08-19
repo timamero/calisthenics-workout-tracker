@@ -19,7 +19,6 @@ export interface ExercisesSlice {
   filterDisplayedExercises: () => void;
   setExerciseSearch: (search: string) => void;
   filterDisplayedExercisesBySearch: () => void;
-  resetDisplayedExerciseBySearch: () => void;
   resetDisplayedExercises: () => void;
 }
 
@@ -44,15 +43,13 @@ export const createExercisesSlice: StateCreator<
     }),
   filterDisplayedExercises: () =>
     set((state) => {
-      const appliedFilters = get().appliedFilterSelections;
-
       const exercisesToFilter = state.hasSearch
         ? state.displayedExercises
         : state.masterExercises;
 
       const filteredExercises = filterExercises(
         exercisesToFilter,
-        appliedFilters
+        state.appliedFilterSelections
       );
 
       return {
@@ -70,21 +67,25 @@ export const createExercisesSlice: StateCreator<
         displayedExercises: filteredExercises,
       };
     }),
-  resetDisplayedExerciseBySearch: () =>
+  resetDisplayedExercises: () =>
     set((state) => {
-      if (!state.hasFilters) {
+      if (!state.hasFilters && !state.hasSearch) {
         return {
           displayedExercises: state.masterExercises,
           exerciseSearch: "",
         };
       }
-
-      return { exerciseSearch: "" };
-    }),
-  resetDisplayedExercises: () =>
-    set((state) => {
-      return {
+      if (state.hasFilters) {
+        const filteredExercises = filterExercises(
+        state.masterExercises,
+        state.appliedFilterSelections
+      );
+        return {
+          displayedExercises: state.exerciseSearch ? filterExercisesBySearch(filteredExercises, state.exerciseSearch) : filteredExercises
+        }
+      } else {
+       return {
         displayedExercises: state.masterExercises,
-      };
+      }};
     }),
 });
