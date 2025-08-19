@@ -8,7 +8,7 @@ export const Route = createFileRoute('/')({
   component: HomeView,
 });
 
-function HomeView() {
+export function HomeView() {
   const bears = useBearStore((state) => state.bears);
   const increase = useBearStore((state) => state.increase);
   const user: User = {

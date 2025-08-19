@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { HomeView } from '../views/HomeView';
+import { HomeView } from '../routes';
 import { MantineProvider } from '@mantine/core';
 
 test('loads and displays greeting', async () => {
