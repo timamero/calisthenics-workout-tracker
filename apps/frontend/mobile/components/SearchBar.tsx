@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Searchbar, useTheme } from 'react-native-paper';
 
 import { useStore } from '@cwt/state/store';
-import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
+// import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 import { CustomTheme } from '../theme';
 
@@ -13,7 +13,7 @@ const SearchBar = () => {
 
   const search = useStore((state) => state.exerciseSearch);
   // const isFilterApplied = useStore((state) => state.isFilterApplied);
-  const setSearch = useStore((state) => state.setExerciseSearch);
+  // const setSearch = useStore((state) => state.setExerciseSearch);
   const refreshDisplayedExercises = useStore(
     (state) => state.refreshDisplayedExercises,
   );
@@ -21,7 +21,7 @@ const SearchBar = () => {
     (state) => state.setAppliedExerciseSearch,
   );
 
-  const { hasSearch } = useFiltersAndSearchStatus();
+  // const { hasSearch } = useFiltersAndSearchStatus();
 
   // const resetDisplayedExerciseBySearch = useStore(
   //   (state) => state.resetDisplayedExerciseBySearch,
@@ -48,7 +48,8 @@ const SearchBar = () => {
     if (text.length < search.length) {
       handleClearSearch();
     }
-    setSearch(text);
+    // setSearch(text);
+    setAppliedExerciseSearch(text);
     refreshDisplayedExercises();
     // filterDisplayedExercisesBySearch();
 
