@@ -1,9 +1,4 @@
-import {
-  TextInput,
-  useCombobox,
-  Combobox,
-  CloseButton,
-} from '@mantine/core';
+import { TextInput, useCombobox, Combobox, CloseButton } from '@mantine/core';
 import { IoSearchOutline } from 'react-icons/io5';
 import { IoCloseOutline } from 'react-icons/io5';
 
@@ -17,7 +12,9 @@ export default function ExerciseSearchBar() {
     (state) => state.refreshDisplayedExercises,
   );
   const setSearch = useStore((state) => state.setExerciseSearch);
-  const setAppliedExerciseSearch = useStore((state) => state.setAppliedExerciseSearch)
+  const setAppliedExerciseSearch = useStore(
+    (state) => state.setAppliedExerciseSearch,
+  );
 
   const { hasSearch } = useFiltersAndSearchStatus();
   const combobox = useCombobox();
@@ -39,8 +36,8 @@ export default function ExerciseSearchBar() {
     </Combobox.Option>
   ));
 
-   const handleClearSearch = () => {
-    setAppliedExerciseSearch("");
+  const handleClearSearch = () => {
+    setAppliedExerciseSearch('');
     refreshDisplayedExercises();
   };
 
@@ -48,7 +45,7 @@ export default function ExerciseSearchBar() {
 
   const handleKeyDown = (e: HandleKeyDownEvent): void => {
     if (e.code === 'Enter') {
-      setAppliedExerciseSearch(search.trim())
+      setAppliedExerciseSearch(search.trim());
       refreshDisplayedExercises();
       combobox.closeDropdown();
     }
@@ -97,5 +94,5 @@ export default function ExerciseSearchBar() {
         <Combobox.Options>{options}</Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
-  )
+  );
 }
