@@ -4,18 +4,21 @@ import { useTheme } from 'react-native-paper';
 import { useShallow } from 'zustand/shallow';
 
 import { useStore } from '@cwt/state/store';
-import { FilterGroup } from '@cwt/state/types';
-import type { ExerciseAttributes } from '@cwt/schema/exercises';
+// import { FilterGroup } from '@cwt/state/types';
+import type {
+  ExerciseAttributes,
+  ExerciseFilterKey,
+} from '@cwt/schema/exercises';
 
 import { Text } from '../../customText';
 
 import FilterCheckbox from './FilterCheckbox';
 
 const Selections = React.memo(function Selections({
-  group,
+  keyName,
   selections,
 }: {
-  group: FilterGroup;
+  keyName: ExerciseFilterKey;
   selections: ExerciseAttributes[];
 }) {
   return (
@@ -23,7 +26,7 @@ const Selections = React.memo(function Selections({
       {selections.map((selection, i) => {
         return (
           <FilterCheckbox
-            group={group}
+            keyName={keyName}
             selection={selection}
             key={selection + i}
           />
@@ -40,8 +43,11 @@ export default function FilterSelections() {
     useShallow((state) => state.filterCheckboxSelections),
   );
 
-  const filterGroupNames = filterCheckboxSelections.map((obj) => obj.group);
-  const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
+  // const filterGroupNames = filterCheckboxSelections.map((s) => s.keyName);
+  // const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
+  const filterKeyNames = new Set(
+    filterCheckboxSelections.map((s) => s.keyName),
+  );
 
   return (
     <ScrollView
@@ -51,15 +57,15 @@ export default function FilterSelections() {
         paddingInline: 20,
       }}
     >
-      {uniqueFilterGroupNames.map((group, i) => {
+      {filterKeyNames.values().map((keyName, i) => {
         return (
-          <View key={group + i}>
+          <View key={keyName + i}>
             <Text
               style={{ textTransform: 'uppercase', fontWeight: 400 }}
               variant="headlineMedium"
               key={i}
             >
-              {group}
+              {keyName}
             </Text>
             <View
               style={{
@@ -73,10 +79,10 @@ export default function FilterSelections() {
               }}
             >
               <Selections
-                group={group}
+                keyName={keyName}
                 selections={filterCheckboxSelections
-                  .filter((obj) => obj.group === group)
-                  .map((obj) => obj.selection)}
+                  .filter((s) => s.keyName === keyName)
+                  .map((s) => s.selection)}
               />
             </View>
           </View>

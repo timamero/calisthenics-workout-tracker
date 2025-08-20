@@ -3,16 +3,19 @@ import { Checkbox, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
 import { useStore } from '@cwt/state/store';
-import { type ExerciseAttributes } from '@cwt/schema/exercises';
-import { type FilterGroup } from '@cwt/state/types';
+import type {
+  ExerciseAttributes,
+  ExerciseFilterKey,
+} from '@cwt/schema/exercises';
+// import { type FilterGroup } from '@cwt/state/types';
 
 interface FilterCheckboxProps {
-  group: FilterGroup;
+  keyName: ExerciseFilterKey;
   selection: ExerciseAttributes;
 }
 
 export default function FilterCheckbox({
-  group,
+  keyName,
   selection,
 }: FilterCheckboxProps) {
   const theme = useTheme();
@@ -20,7 +23,7 @@ export default function FilterCheckbox({
   const isSelected = useStore(
     (state) =>
       state.filterCheckboxSelections.find(
-        (obj) => obj.group === group && obj.selection === selection,
+        (s) => s.keyName === keyName && s.selection === selection,
       )?.value,
   );
   const toggleFilterSelection = useStore(
@@ -28,7 +31,7 @@ export default function FilterCheckbox({
   );
 
   const handlePress = () => {
-    toggleFilterSelection({ group, selection });
+    toggleFilterSelection({ keyName, selection });
   };
 
   const checkboxBgColor = isSelected
