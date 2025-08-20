@@ -11,6 +11,7 @@ import type {
 } from '@cwt/schema/exercises';
 
 import { Text } from '../../customText';
+import { CustomTheme } from '../../theme';
 
 import FilterCheckbox from './FilterCheckbox';
 
@@ -37,7 +38,7 @@ const Selections = React.memo(function Selections({
 });
 
 export default function FilterSelections() {
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
 
   const filterCheckboxSelections = useStore(
     useShallow((state) => state.filterCheckboxSelections),
@@ -55,13 +56,18 @@ export default function FilterSelections() {
         height: 460,
         backgroundColor: theme.colors.background,
         paddingInline: 20,
+        paddingBlock: 16,
       }}
     >
       {Array.from(filterKeyNames).map((keyName, i) => {
         return (
           <View key={keyName + i}>
             <Text
-              style={{ textTransform: 'uppercase', fontWeight: 400 }}
+              style={{
+                textTransform: 'uppercase',
+                fontWeight: 400,
+                color: theme.colors.light,
+              }}
               variant="headlineMedium"
               key={i}
             >

@@ -7,6 +7,8 @@ import type {
   ExerciseAttributes,
   ExerciseFilterKey,
 } from '@cwt/schema/exercises';
+
+import { CustomTheme } from '../../theme';
 // import { type FilterGroup } from '@cwt/state/types';
 
 interface FilterCheckboxProps {
@@ -18,7 +20,7 @@ export default function FilterCheckbox({
   keyName,
   selection,
 }: FilterCheckboxProps) {
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
 
   const isSelected = useStore(
     (state) =>
@@ -35,7 +37,7 @@ export default function FilterCheckbox({
   };
 
   const checkboxBgColor = isSelected
-    ? 'rgba(255, 99, 71, 0.1)'
+    ? 'rgba(255, 99, 71, 0.08)'
     : theme.colors.background;
   const checkboxBorderColor = isSelected
     ? theme.colors.primary
@@ -56,13 +58,12 @@ export default function FilterCheckbox({
         uncheckedColor="rgb(222, 226, 230)"
         labelStyle={{
           textTransform: 'uppercase',
-          color: 'rgb(46, 46, 46)',
+          color: theme.colors.light,
           fontWeight: labelFontWeight,
         }}
         status={isSelected ? 'checked' : 'unchecked'}
         onPress={handlePress}
         background={{
-          color: 'rgba(255, 99, 71, 0.3)',
           radius: 40,
           borderless: true,
         }}
