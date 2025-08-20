@@ -20,7 +20,6 @@ const Filter = ({ handleShowModal }: FilterProps) => {
         paddingInline: 36,
       }}
     >
-      {/* <Text></Text> Add filter results later */}
       <Button
         icon="filter-variant"
         mode="outlined"

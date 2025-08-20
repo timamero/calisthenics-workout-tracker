@@ -4,7 +4,6 @@ import { useTheme } from 'react-native-paper';
 import { useShallow } from 'zustand/shallow';
 
 import { useStore } from '@cwt/state/store';
-// import { FilterGroup } from '@cwt/state/types';
 import type {
   ExerciseAttributes,
   ExerciseFilterKey,
@@ -44,8 +43,6 @@ export default function FilterSelections() {
     useShallow((state) => state.filterCheckboxSelections),
   );
 
-  // const filterGroupNames = filterCheckboxSelections.map((s) => s.keyName);
-  // const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
   const filterKeyNames = new Set(
     filterCheckboxSelections.map((s) => s.keyName),
   );
