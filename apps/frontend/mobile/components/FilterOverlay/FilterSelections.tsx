@@ -57,7 +57,7 @@ export default function FilterSelections() {
         paddingInline: 20,
       }}
     >
-      {filterKeyNames.values().map((keyName, i) => {
+      {Array.from(filterKeyNames).map((keyName, i) => {
         return (
           <View key={keyName + i}>
             <Text
