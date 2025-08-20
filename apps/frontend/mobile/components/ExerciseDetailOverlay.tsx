@@ -2,6 +2,8 @@ import * as React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
+import { Equipment, Difficulty, Emphasis } from '@cwt/schema/exercises';
+
 import { Text } from '../customText';
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
@@ -48,7 +50,7 @@ export default function ExerciseDetailOverlay() {
             textColor={theme.colors.light}
             borderColor={theme.colors.light}
           >
-            {equipment}
+            {equipment as Equipment}
           </Pill>
         </View>
       );
@@ -139,7 +141,7 @@ export default function ExerciseDetailOverlay() {
                     backgroundColor={difficultyColor}
                     textColor={theme.colors.light}
                   >
-                    {exercise?.difficulty || ''}
+                    {(exercise?.difficulty as Difficulty) || ''}
                   </Pill>
                 </View>
               </View>
@@ -152,7 +154,7 @@ export default function ExerciseDetailOverlay() {
                     backgroundColor={theme.colors.darkGrey}
                     textColor={theme.colors.light}
                   >
-                    {exercise?.emphasis || ''}
+                    {(exercise?.emphasis as Emphasis) || ''}
                   </Pill>
                 </View>
               </View>
@@ -173,7 +175,7 @@ export default function ExerciseDetailOverlay() {
                       backgroundColor={theme.colors.background}
                       textColor={theme.colors.light}
                     >
-                      ---
+                      {'---' as '---'}
                     </Pill>
                   ) : (
                     equipmentMetadata

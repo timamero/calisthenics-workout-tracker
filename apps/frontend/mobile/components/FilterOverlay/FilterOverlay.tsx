@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
 import { useStore } from '@cwt/state/store';
+import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 import { Text } from '../../customText';
 
@@ -24,12 +25,16 @@ export default function FilterOverlay({
     marginInline: 16,
   };
 
-  const isFilterApplied = useStore((state) => state.isFilterApplied);
-  const isFilterBySearchApplied = useStore(
-    (state) => state.isFilterBySearchApplied,
-  );
+  const { hasFilters } = useFiltersAndSearchStatus();
+  // const isFilterApplied = useStore((state) => state.isFilterApplied);
+  // const isFilterBySearchApplied = useStore(
+  //   (state) => state.isFilterBySearchApplied,
+  // );
   const clearFilterCheckboxSelections = useStore(
     (state) => state.clearFilterCheckboxSelections,
+  );
+  const clearAppliedFilterCheckboxSelections = useStore(
+    (state) => state.clearAppliedFilterCheckboxSelections,
   );
   const setAppliedFilterSelections = useStore(
     (state) => state.setAppliedFilterSelections,
@@ -37,34 +42,40 @@ export default function FilterOverlay({
   const revertFilterCheckboxSelections = useStore(
     (state) => state.revertFilterCheckboxSelections,
   );
-  const filterDisplayedExercises = useStore(
-    (state) => state.filterDisplayedExercises,
+  const refreshDisplayedExercises = useStore(
+    (state) => state.refreshDisplayedExercises,
   );
-  const filterDisplayedExercisesBySearch = useStore(
-    (state) => state.filterDisplayedExercisesBySearch,
-  );
-  const resetDisplayedExercises = useStore(
-    (state) => state.resetDisplayedExercises,
-  );
+  // const filterDisplayedExercises = useStore(
+  //   (state) => state.filterDisplayedExercises,
+  // );
+  // const filterDisplayedExercisesBySearch = useStore(
+  //   (state) => state.filterDisplayedExercisesBySearch,
+  // );
+  // const resetDisplayedExercises = useStore(
+  //   (state) => state.resetDisplayedExercises,
+  // );
 
   const handleApplyFiltersPress = () => {
     setAppliedFilterSelections();
-    filterDisplayedExercises();
+    refreshDisplayedExercises();
+    // filterDisplayedExercises();
     handleHideModal();
   };
 
   const handleClearFiltersPress = () => {
     clearFilterCheckboxSelections();
-    resetDisplayedExercises();
-    if (isFilterBySearchApplied) {
-      filterDisplayedExercisesBySearch();
-    }
+    clearAppliedFilterCheckboxSelections();
+    refreshDisplayedExercises();
+    // resetDisplayedExercises();
+    // if (isFilterBySearchApplied) {
+    //   filterDisplayedExercisesBySearch();
+    // }
     handleHideModal();
   };
 
   const onModalClose = () => {
     handleHideModal();
-    if (!isFilterApplied) {
+    if (!hasFilters) {
       // Do not clear the filter selection if there are currently filters applied
       clearFilterCheckboxSelections();
     } else {

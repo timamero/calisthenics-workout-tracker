@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Searchbar, useTheme } from 'react-native-paper';
 
 import { useStore } from '@cwt/state/store';
+import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 import { CustomTheme } from '../theme';
 
@@ -11,24 +12,36 @@ const SearchBar = () => {
   const styles = getStyles();
 
   const search = useStore((state) => state.exerciseSearch);
-  const isFilterApplied = useStore((state) => state.isFilterApplied);
+  // const isFilterApplied = useStore((state) => state.isFilterApplied);
   const setSearch = useStore((state) => state.setExerciseSearch);
-  const resetDisplayedExerciseBySearch = useStore(
-    (state) => state.resetDisplayedExerciseBySearch,
+  const refreshDisplayedExercises = useStore(
+    (state) => state.refreshDisplayedExercises,
   );
-  const filterDisplayedExercisesBySearch = useStore(
-    (state) => state.filterDisplayedExercisesBySearch,
+  const setAppliedExerciseSearch = useStore(
+    (state) => state.setAppliedExerciseSearch,
   );
-  const filterDisplayedExercise = useStore(
-    (state) => state.filterDisplayedExercises,
-  );
+
+  const { hasSearch } = useFiltersAndSearchStatus();
+
+  // const resetDisplayedExerciseBySearch = useStore(
+  //   (state) => state.resetDisplayedExerciseBySearch,
+  // );
+  // const filterDisplayedExercisesBySearch = useStore(
+  //   (state) => state.filterDisplayedExercisesBySearch,
+  // );
+  // const filterDisplayedExercise = useStore(
+  //   (state) => state.filterDisplayedExercises,
+  // );
 
   const handleClearSearch = () => {
-    resetDisplayedExerciseBySearch();
+    setAppliedExerciseSearch('');
+    refreshDisplayedExercises();
 
-    if (isFilterApplied) {
-      filterDisplayedExercise();
-    }
+    // resetDisplayedExerciseBySearch();
+
+    // if (isFilterApplied) {
+    //   filterDisplayedExercise();
+    // }
   };
 
   const onChange = (text: string) => {
@@ -36,7 +49,8 @@ const SearchBar = () => {
       handleClearSearch();
     }
     setSearch(text);
-    filterDisplayedExercisesBySearch();
+    refreshDisplayedExercises();
+    // filterDisplayedExercisesBySearch();
 
     if (text === '') {
       handleClearSearch();
