@@ -21,7 +21,6 @@ export default function FilterOverlay({
 }: FilterOverlayProps) {
   const theme = useTheme() as CustomTheme;
   const containerStyle = {
-    // backgroundColor: theme.colors.dark8,
     backgroundColor: theme.colors.background,
     paddingBlock: 20,
     marginInline: 16,
@@ -30,10 +29,7 @@ export default function FilterOverlay({
   };
 
   const { hasFilters } = useFiltersAndSearchStatus();
-  // const isFilterApplied = useStore((state) => state.isFilterApplied);
-  // const isFilterBySearchApplied = useStore(
-  //   (state) => state.isFilterBySearchApplied,
-  // );
+
   const clearFilterCheckboxSelections = useStore(
     (state) => state.clearFilterCheckboxSelections,
   );
@@ -49,20 +45,11 @@ export default function FilterOverlay({
   const refreshDisplayedExercises = useStore(
     (state) => state.refreshDisplayedExercises,
   );
-  // const filterDisplayedExercises = useStore(
-  //   (state) => state.filterDisplayedExercises,
-  // );
-  // const filterDisplayedExercisesBySearch = useStore(
-  //   (state) => state.filterDisplayedExercisesBySearch,
-  // );
-  // const resetDisplayedExercises = useStore(
-  //   (state) => state.resetDisplayedExercises,
-  // );
 
   const handleApplyFiltersPress = () => {
     setAppliedFilterSelections();
     refreshDisplayedExercises();
-    // filterDisplayedExercises();
+
     handleHideModal();
   };
 
@@ -70,10 +57,7 @@ export default function FilterOverlay({
     clearFilterCheckboxSelections();
     clearAppliedFilterCheckboxSelections();
     refreshDisplayedExercises();
-    // resetDisplayedExercises();
-    // if (isFilterBySearchApplied) {
-    //   filterDisplayedExercisesBySearch();
-    // }
+
     handleHideModal();
   };
 
