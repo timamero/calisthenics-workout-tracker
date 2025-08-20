@@ -4,5 +4,6 @@
 // Initial status of workout is draft
 // When user selects and exercise and clicks "Add Exercise" button, the exercise is added to workout state and initialized with one set (the first set cannot be deleted)
 // For each exercise, user can add sets, delete sets (over set 1), update tracking field value, and delete an exercise
+// For now, the tracking field available is only the default. In future release, will allow users to customize tracking fields
 // When the user is done building the workout, they can save the workout. Workout is added to workout builds list and sent to database.
-// Ensure the build status is changed to finalized.
+// Ensure the build status is changed to finalized before sending to database.
