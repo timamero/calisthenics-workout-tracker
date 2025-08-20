@@ -5,10 +5,10 @@ import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 import { Equipment, Difficulty, Emphasis } from '@cwt/schema/exercises';
 
 import { Text } from '../customText';
+import { CustomTheme } from '../theme';
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
 import Pill from './Pill';
-import { CustomTheme } from '../theme';
 
 export default function ExerciseDetailOverlay() {
   const hideModal = React.useContext(ExerciseDetailContext)?.hideModal;

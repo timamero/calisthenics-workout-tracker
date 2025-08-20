@@ -9,7 +9,6 @@ import type {
 } from '@cwt/schema/exercises';
 
 import { CustomTheme } from '../../theme';
-// import { type FilterGroup } from '@cwt/state/types';
 
 interface FilterCheckboxProps {
   keyName: ExerciseFilterKey;

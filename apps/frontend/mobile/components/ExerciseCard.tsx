@@ -70,26 +70,6 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             Equipment:
           </Text>
           <View style={styles.metadataPillsContainer}>
-            {/* {exercise.required_equipment.map((equipment, i) => {
-              return (
-                <Pill
-                  backgroundColor={theme.colors.background}
-                  textColor={theme.colors.light}
-                  key={i}
-                >
-                  {equipment as ExerciseAttributes | }
-                </Pill>
-              );
-            })} */}
-            {/* {(exercise.required_equipment == null ||
-            exercise.required_equipment.length === 0) && (
-              <Pill
-                backgroundColor={theme.colors.background}
-                textColor={theme.colors.light}
-              >
-                {'---'}
-              </Pill>
-            )} */}
             {exercise.required_equipment == null ||
             exercise.required_equipment.length === 0 ? (
               <Pill

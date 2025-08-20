@@ -10,7 +10,6 @@ interface PillProps {
   backgroundColor: string;
   borderColor?: string;
   children: ExerciseAttributes | '---';
-  // children: Muscle | Equipment | Emphasis | Difficulty;
 }
 
 export default function Pill({
