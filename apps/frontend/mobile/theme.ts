@@ -13,7 +13,9 @@ export type CustomTheme = typeof DefaultTheme & {
     musclePillBgColor: string;
     grey: string;
     darkGrey: string;
-    dark: string;
+    dark8: string;
+    dark9: string;
+    orange1: string;
     light: string;
   };
 };
@@ -88,7 +90,7 @@ const theme: CustomTheme = {
     ...DefaultTheme.colors,
     primary: 'rgb(247 103 7)',
     secondary: 'rgb(219, 100, 50)',
-    background: 'rgb(46, 46, 46)',
+    background: 'rgb(20 20 20)',
     // Semantic colors
     beginnerPillColor: 'rgb(34, 139, 230)',
     intermediatePillColor: 'rgb(250, 176, 5)',
@@ -96,9 +98,11 @@ const theme: CustomTheme = {
     musclePillColor: 'rgb(190, 75, 219)', // mantine: grape.6
     musclePillBgColor: 'rgb(248 240 252)', // mantine: grape.0
     grey: 'rgb(206 212 218)',
-    darkGrey: 'rgb(52 58 64)', // mantine: gray.8
-    dark: 'rgb(46, 46, 46)',
-    light: '#fff',
+    darkGrey: 'rgb(33 37 41)', // mantine: gray.9
+    dark8: 'rgb(31 31 31)', // mantin: dark.8
+    dark9: 'rgb(20 20 20)', // mantine: dark.9
+    orange1: 'rgb(255 232 204)', // mantine: orange.1
+    light: 'rgb(255 244 230)', // mantine: orange.0
   },
 };
 

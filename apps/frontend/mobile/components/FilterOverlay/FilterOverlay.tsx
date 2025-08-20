@@ -6,6 +6,7 @@ import { useStore } from '@cwt/state/store';
 import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 import { Text } from '../../customText';
+import { CustomTheme } from '../../theme';
 
 import FilterSelections from './FilterSelections';
 
@@ -18,11 +19,14 @@ export default function FilterOverlay({
   visible,
   handleHideModal,
 }: FilterOverlayProps) {
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
   const containerStyle = {
+    // backgroundColor: theme.colors.dark8,
     backgroundColor: theme.colors.background,
     paddingBlock: 20,
     marginInline: 16,
+    borderWidth: 2,
+    borderColor: theme.colors.orange1,
   };
 
   const { hasFilters } = useFiltersAndSearchStatus();
@@ -91,8 +95,20 @@ export default function FilterOverlay({
         onDismiss={onModalClose}
         contentContainerStyle={containerStyle}
       >
-        <View style={{ paddingLeft: 20 }}>
-          <Text variant="headlineMedium">Filter Exercises</Text>
+        <View
+          style={{
+            paddingLeft: 20,
+            paddingBottom: 16,
+            borderBottomWidth: 2,
+            borderBottomColor: theme.colors.orange1,
+          }}
+        >
+          <Text
+            variant="headlineMedium"
+            style={{ color: theme.colors.light, opacity: 0.9 }}
+          >
+            Filter Exercises
+          </Text>
         </View>
         <FilterSelections />
         <View
@@ -101,6 +117,8 @@ export default function FilterOverlay({
             flexDirection: 'row',
             justifyContent: 'space-evenly',
             paddingTop: 20,
+            borderTopWidth: 2,
+            borderTopColor: theme.colors.orange1,
           }}
         >
           <Button
