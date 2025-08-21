@@ -8,29 +8,29 @@
 // When the user is done building the workout, they can save the workout. Workout is added to workout builds list and sent to database.
 // Ensure the build status is changed to finalized before sending to database.
 
-import { StateCreator } from "zustand";
+// import { StateCreator } from "zustand";
 
-import type { WorkoutBuild } from "@cwt/schema/workouts";
+// import type { WorkoutBuild } from "@cwt/schema/workouts";
 
-import { StoreState } from "../../store";
+// import { StoreState } from "../../store";
 
-const INITIALIZED_WORKOUT_BUILD: Partial<WorkoutBuild> = {
-  title: "New workout template",
-  workout_data: {exercises: []},
-  status: "draft",
-  source: "manual"
-}
-export interface WorkoutBuildSlice {
-  workoutBuild: Partial<WorkoutBuild> | null;
-  initializeWorkoutBuild: () => void;
-}
+// const INITIALIZED_WORKOUT_BUILD: Partial<WorkoutBuild> = {
+//   title: "New workout template",
+//   workout_data: {exercises: []},
+//   status: "draft",
+//   source: "manual"
+// }
+// export interface WorkoutBuildSlice {
+//   workoutBuild: Partial<WorkoutBuild> | null;
+//   initializeWorkoutBuild: () => void;
+// }
 
-export const createWorkoutBuildSlice: StateCreator<
-  StoreState,
-  [],
-  [],
-  WorkoutBuildSlice
-> = (set, get) => ({
-  workoutBuild: null,
-  initializeWorkoutBuild: () => set(() => ({workoutBuild: INITIALIZED_WORKOUT_BUILD}))
-})
+// export const createWorkoutBuildSlice: StateCreator<
+//   StoreState,
+//   [],
+//   [],
+//   WorkoutBuildSlice
+// > = (set, get) => ({
+//   workoutBuild: null,
+//   initializeWorkoutBuild: () => set(() => ({workoutBuild: INITIALIZED_WORKOUT_BUILD}))
+// })
