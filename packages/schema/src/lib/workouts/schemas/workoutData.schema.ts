@@ -17,7 +17,7 @@ const SetSchema = z.object({
 });
 
 const WorkoutExerciseSchema = z.object({
-  Exercise_id: z.int(),
+  exercise_id: z.int(),
   tracked: z.array(TrackingTypeSchema),
   sets: z.array(SetSchema)
 })
