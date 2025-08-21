@@ -31,6 +31,7 @@ export interface WorkoutBuildAndLogSlice {
   initializeWorkout: (mode: Mode) => void;
   updateWorkout: (action: Action, exerciseIndex: number, setIndex: number, fields?: Partial<SetFieldsSchema>) => void;
   completeAndSaveWorkOut: () => void;
+  cancelWorkout: () => void;
 }
 
 const INITIALIZED_WORKOUT_LOG: WorkoutLogDraft = {
@@ -77,6 +78,12 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
   }),
   completeAndSaveWorkOut: () => set((state) => {
     // add functionality to save workout to log or build list
+    return {
+      ...state
+    }
+  }),
+  cancelWorkout: () => set((state) => {
+    // reset state here
     return {
       ...state
     }
