@@ -8,7 +8,7 @@ import type { WorkoutBuild, WorkoutLog, SetFieldsSchema } from "@cwt/schema/work
 
 import { StoreState } from "../../store";
 
-enum Mode {
+export enum Mode {
   Build = 'BUILD',
   Log = 'LOG',
   Edit = 'EDIT'
@@ -30,8 +30,7 @@ export interface WorkoutBuildAndLogSlice {
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
   initializeWorkout: (mode: Mode) => void;
   updateWorkout: (action: Action, exerciseIndex: number, setIndex: number, fields?: Partial<SetFieldsSchema>) => void;
-  completeAndSaveWorkOut: () => void;
-  cancelWorkout: () => void;
+  resetWorkout: () => void;
 }
 
 const INITIALIZED_WORKOUT_LOG: WorkoutLogDraft = {
@@ -76,13 +75,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
       ...state
     }
   }),
-  completeAndSaveWorkOut: () => set((state) => {
-    // add functionality to save workout to log or build list
-    return {
-      ...state
-    }
-  }),
-  cancelWorkout: () => set((state) => {
+  resetWorkout: () => set((state) => {
     // reset state here
     return {
       ...state
