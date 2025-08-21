@@ -70,7 +70,24 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
     }
   }),
   updateWorkout: (action, exerciceIndex, setIndex, fields) => set((state) => {
-    // add functionality to update workout
+    switch (action) {
+      case Action.AddExercise:
+        // add exercise
+        break;
+      case Action.DeleteExercise:
+        // delete exercise
+        break;
+      case Action.AddSet:
+        // add set
+        break;
+      case Action.DeleteSet:
+        // delete set
+        break;
+      case Action.UpdateField:
+        // update field
+        break;
+    }
+
     return {
       ...state
     }
