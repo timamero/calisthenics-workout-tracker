@@ -29,7 +29,7 @@ export interface WorkoutBuildAndLogSlice {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
   initializeWorkout: (mode: Mode) => void;
-  updateWorkout: (action: Action, exerciseIndex: number, setIndex: number, fields?: Partial<SetFieldsSchema>) => void;
+  updateWorkout: (action: Action, exerciseID?: number, exerciseIndex?: number, setIndex?: number, fields?: Partial<SetFieldsSchema>) => void;
   resetWorkout: () => void;
 }
 
@@ -69,10 +69,22 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
       mode: mode,
     }
   }),
-  updateWorkout: (action, exerciceIndex, setIndex, fields) => set((state) => {
+  updateWorkout: (action, exerciseID, exerciceIndex, setIndex, fields) => set((state) => {
+    const workoutDataExercises = state.workout?.workout_data.exercises
+    let updatedWorkoutDataExercises
+
+    
+
     switch (action) {
       case Action.AddExercise:
-        // add exercise
+        const exercise = get().masterExercises.find((ex) => ex.id === exerciseID)
+        const INITIALIZED_EXERCISE = {
+          exercise_id: exerciseID,
+          tracked: "reps", // TODO: Get default tracking field from exercise object
+          sets: [{fields: {reps: 0, rest:0}}] // See structure in supabase
+        }
+
+        updatedWorkoutDataExercises = {...workoutDataExercises, INITIALIZED_EXERCISE}
         break;
       case Action.DeleteExercise:
         // delete exercise
