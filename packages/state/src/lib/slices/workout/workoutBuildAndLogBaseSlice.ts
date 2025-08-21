@@ -5,5 +5,6 @@ import { StateCreator } from "zustand";
 import type { WorkoutBuild, WorkoutLog } from "@cwt/schema/workouts";
 
 export interface WorkoutBuildAndLogBaseSlice {
-  mode: string;
+  mode: 'build' | 'log' | 'edit';
+  initializeWorkoutCreation: (mode: string) => void;
 }
