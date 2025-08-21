@@ -12,7 +12,7 @@ export interface WorkoutsSlice {
   masterWorkoutLogs: WorkoutLog[];
   masterWorkoutBuilds: WorkoutBuild[];
   setWorkouts: (logs: WorkoutLog[], builds: WorkoutBuild[]) => void;
-  addWorkout: (mode: Mode, workout: WorkoutLog | WorkoutBuild) => void;
+  addAndResetWorkout: (mode: Mode, workout: WorkoutLog | WorkoutBuild) => void;
 }
 
 export const createWorkoutsSlice: StateCreator<StoreState, [], [], WorkoutsSlice> = ( set, get) => ({
@@ -20,7 +20,11 @@ export const createWorkoutsSlice: StateCreator<StoreState, [], [], WorkoutsSlice
   masterWorkoutBuilds: [],
   // TODO: Create action function to sort logs by date and builds by creation date
   setWorkouts: (logs, builds) => set(() => ({masterWorkoutLogs: logs, masterWorkoutBuilds: builds})),
-  addWorkout: (mode, workout) => set((state) => {
+  addAndResetWorkout: (mode, workout) => set((state) => {
+    // The workout object will be the object returned from the database, not from workout state
+
+    get().resetWorkout()
+
     if (mode === Mode.Build) {
       return {
         masterWorkoutBuilds: [...state.masterWorkoutBuilds, workout as WorkoutBuild]
