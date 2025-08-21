@@ -53,7 +53,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
   [],
   [],
   WorkoutBuildAndLogSlice
-> = (set, get) => ({
+> = (set, get, store) => ({
   mode: null,
   workout: null,
   initializeWorkout: (mode) => set(() => {
@@ -75,10 +75,5 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
       ...state
     }
   }),
-  resetWorkout: () => set((state) => {
-    // reset state here
-    return {
-      ...state
-    }
-  })
+  resetWorkout: () => set(store.getInitialState())
 })
