@@ -59,12 +59,14 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
   initializeWorkout: (mode) => set(() => {
     if (mode === Mode.Build) {
       return {
-        workout: INITIALIZED_WORKOUT_BUILD
+        workout: INITIALIZED_WORKOUT_BUILD,
+        mode: mode,
       }
     }
 
     return {
-      workout: INITIALIZED_WORKOUT_BUILD
+      workout: INITIALIZED_WORKOUT_LOG,
+      mode: mode,
     }
   }),
   updateWorkout: (action, exerciceIndex, setIndex, fields) => set((state) => {
