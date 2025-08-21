@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 import { WorkoutBase } from './workoutBase.schema';
-import { SourceSchema } from './enums.schema';
 import { DurationSchema } from '../../common/schemas/duration.schema';
 
 export const WorkoutLogSchema = z.object({
