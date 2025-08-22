@@ -156,7 +156,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
               workout_data: {
                 exercises: [
                   ...(state.workout?.workout_data.exercises.map((ex, ind) => {
-                    if (ind === exerciseID) {
+                    if (ind === exerciseIndex) {
                       return updatedExercise;
                     }
                     return ex;
@@ -181,7 +181,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
               workout_data: {
                 exercises: [
                   ...(state.workout?.workout_data.exercises.map((ex, ind) => {
-                    if (ind === exerciseID) {
+                    if (ind === exerciseIndex) {
                       return updatedExercise;
                     }
                     return ex;
@@ -211,7 +211,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
               workout_data: {
                 exercises: [
                   ...(state.workout?.workout_data.exercises.map((ex, ind) => {
-                    if (ind === exerciseID) {
+                    if (ind === exerciseIndex) {
                       return updatedExercise;
                     }
                     return ex;
