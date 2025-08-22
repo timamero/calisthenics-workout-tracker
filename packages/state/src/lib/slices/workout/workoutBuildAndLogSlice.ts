@@ -7,6 +7,7 @@ import { StateCreator } from "zustand";
 import type {
   WorkoutBuild,
   WorkoutLog,
+  Set,
   SetFields,
   WorkoutExercise,
 } from "@cwt/schema/workouts";
@@ -187,7 +188,44 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
           } as WorkoutBuildDraft | WorkoutLogDraft;
           break;
         case Action.UpdateField:
-          // update field
+          if (fields && setIndex && exercise) {
+            const set: Set = exercise.sets[setIndex];
+            const fieldsSet = new Set(Object.keys(fields));
+            let updatedSet: Set;
+
+            if (fieldsSet.has("reps")) {
+              updatedSet = {
+                ...set,
+                fields: { ...set.fields, reps: fields.reps },
+              };
+            }
+
+            updatedExercise = {
+              ...exercise,
+              sets: [
+                ...exercise.sets.map((set, ind) => {
+                  if (ind === setIndex) {
+                    return updatedSet;
+                  }
+                  return set;
+                }),
+              ],
+            };
+          }
+
+          updatedWorkout = {
+            ...state.workout,
+            workout_data: {
+              exercises: [
+                ...(state.workout?.workout_data.exercises.map((ex, ind) => {
+                  if (ind === exerciseID) {
+                    return { ...ex };
+                  }
+                  return ex;
+                }) as WorkoutExercise[]),
+              ],
+            },
+          } as WorkoutBuildDraft | WorkoutLogDraft;
           break;
       }
 
