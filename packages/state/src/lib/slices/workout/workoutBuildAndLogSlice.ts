@@ -87,9 +87,16 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
         mode: mode,
       };
     }),
-  updateWorkout: (action, exerciseID, exerciceIndex, setIndex, fields) =>
+  updateWorkout: (action, exerciseID, exerciseIndex, setIndex, fields) =>
     set((state) => {
       let updatedWorkout: WorkoutBuildDraft | WorkoutLogDraft | null = null;
+      let exercise: WorkoutExercise | null = null;
+
+      if (exerciseIndex) {
+        exercise = state.workout?.workout_data.exercises[
+          exerciseIndex
+        ] as WorkoutExercise;
+      }
 
       switch (action) {
         case Action.AddExercise:
@@ -113,14 +120,46 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
                 INITIALIZED_EXERCISE,
               ],
             },
-          } as WorkoutBuildDraft;
-          // updatedWorkout = {...state.workout, workout_data: { exercises: updatedWorkoutDataExercises}}
+          } as WorkoutBuildDraft | WorkoutLogDraft;
           break;
         case Action.DeleteExercise:
-          // delete exercise
+          updatedWorkout = {
+            ...state.workout,
+            workout_data: {
+              exercises: [
+                ...(state.workout?.workout_data.exercises.filter(
+                  (ex, ind) => ind !== exerciseIndex
+                ) as WorkoutExercise[]),
+              ],
+            },
+          } as WorkoutBuildDraft | WorkoutLogDraft;
           break;
         case Action.AddSet:
-          // add set
+          const INITIALIZED_SET = {
+            fields: { reps: 0, rest: "30S" },
+            completed: false,
+            completed_at: null,
+          };
+
+          const updatedExercise = {
+            ...exercise,
+            sets: [...(exercise?.sets as SetFields[]), INITIALIZED_SET],
+          };
+
+          updatedWorkout = {
+            ...state.workout,
+            workout_data: {
+              exercises: [
+                ...(state.workout?.workout_data.exercises.map((ex, ind) => {
+                  if (ind === exerciseID) {
+                    return updatedExercise;
+                  }
+                  return ex;
+                }) as WorkoutExercise[]),
+              ],
+            },
+          } as WorkoutBuildDraft | WorkoutLogDraft;
+
           break;
         case Action.DeleteSet:
           // delete set
