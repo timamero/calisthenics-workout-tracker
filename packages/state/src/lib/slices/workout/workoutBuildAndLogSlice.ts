@@ -199,6 +199,24 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
                 fields: { ...set.fields, reps: fields.reps },
               };
             }
+            if (fieldsSet.has("weight")) {
+              updatedSet = {
+                ...set,
+                fields: { ...set.fields, weight: fields.weight },
+              };
+            }
+            if (fieldsSet.has("duration")) {
+              updatedSet = {
+                ...set,
+                fields: { ...set.fields, duration: fields.duration },
+              };
+            }
+            if (fieldsSet.has("rest")) {
+              updatedSet = {
+                ...set,
+                fields: { ...set.fields, rest: fields.rest },
+              };
+            }
 
             updatedExercise = {
               ...exercise,
