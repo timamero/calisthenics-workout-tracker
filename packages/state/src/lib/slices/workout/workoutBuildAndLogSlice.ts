@@ -25,7 +25,7 @@ enum Action {
   DeleteExercise = "DELETE_EXERCISE",
   AddSet = "ADD_SET",
   DeleteSet = "DELETE_SET",
-  UpdateField = "UPDATE_FIELD",
+  UpdateSet = "UPDATE_SET",
 }
 
 type WorkoutBuildDraft = Pick<
@@ -46,7 +46,7 @@ export interface WorkoutBuildAndLogSlice {
     exerciseID?: number,
     exerciseIndex?: number,
     setIndex?: number,
-    fields?: Partial<SetFields>
+    updatedSet?: Set
   ) => void;
   resetWorkout: () => void;
 }
@@ -88,7 +88,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
         mode: mode,
       };
     }),
-  updateWorkout: (action, exerciseID, exerciseIndex, setIndex, fields) =>
+  updateWorkout: (action, exerciseID, exerciseIndex, setIndex, updatedSet) =>
     set((state) => {
       let updatedWorkout: WorkoutBuildDraft | WorkoutLogDraft | null = null;
       let exercise: WorkoutExercise | null = null;
@@ -187,57 +187,29 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
             },
           } as WorkoutBuildDraft | WorkoutLogDraft;
           break;
-        case Action.UpdateField:
-          if (fields && setIndex && exercise) {
-            const set: Set = exercise.sets[setIndex];
-            const fieldsSet = new Set(Object.keys(fields));
-            let updatedSet: Set;
-
-            if (fieldsSet.has("reps")) {
-              updatedSet = {
-                ...set,
-                fields: { ...set.fields, reps: fields.reps },
-              };
-            }
-            if (fieldsSet.has("weight")) {
-              updatedSet = {
-                ...set,
-                fields: { ...set.fields, weight: fields.weight },
-              };
-            }
-            if (fieldsSet.has("duration")) {
-              updatedSet = {
-                ...set,
-                fields: { ...set.fields, duration: fields.duration },
-              };
-            }
-            if (fieldsSet.has("rest")) {
-              updatedSet = {
-                ...set,
-                fields: { ...set.fields, rest: fields.rest },
-              };
-            }
-
-            updatedExercise = {
-              ...exercise,
-              sets: [
-                ...exercise.sets.map((set, ind) => {
+        case Action.UpdateSet:
+          updatedExercise = {
+            ...exercise,
+            sets: [
+              ...(exercise?.sets.map(
+                (set, ind) => {
                   if (ind === setIndex) {
-                    return updatedSet;
+                    return updatedSet
                   }
-                  return set;
-                }),
-              ],
-            };
-          }
+                  return set
+                }
+              ) as SetFields[]),
+            ],
+          } as WorkoutExercise;
 
-          updatedWorkout = {
+
+         updatedWorkout = {
             ...state.workout,
             workout_data: {
               exercises: [
                 ...(state.workout?.workout_data.exercises.map((ex, ind) => {
                   if (ind === exerciseID) {
-                    return { ...ex };
+                    return updatedExercise;
                   }
                   return ex;
                 }) as WorkoutExercise[]),
