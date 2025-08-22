@@ -91,6 +91,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
     set((state) => {
       let updatedWorkout: WorkoutBuildDraft | WorkoutLogDraft | null = null;
       let exercise: WorkoutExercise | null = null;
+      let updatedExercise: WorkoutExercise;
 
       if (exerciseIndex) {
         exercise = state.workout?.workout_data.exercises[
@@ -141,10 +142,10 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
             completed_at: null,
           };
 
-          const updatedExercise = {
+          updatedExercise = {
             ...exercise,
             sets: [...(exercise?.sets as SetFields[]), INITIALIZED_SET],
-          };
+          } as WorkoutExercise;
 
           updatedWorkout = {
             ...state.workout,
@@ -162,7 +163,28 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 
           break;
         case Action.DeleteSet:
-          // delete set
+          updatedExercise = {
+            ...exercise,
+            sets: [
+              ...(exercise?.sets.filter(
+                (set, ind) => ind !== setIndex
+              ) as SetFields[]),
+            ],
+          } as WorkoutExercise;
+
+          updatedWorkout = {
+            ...state.workout,
+            workout_data: {
+              exercises: [
+                ...(state.workout?.workout_data.exercises.map((ex, ind) => {
+                  if (ind === exerciseID) {
+                    return updatedExercise;
+                  }
+                  return ex;
+                }) as WorkoutExercise[]),
+              ],
+            },
+          } as WorkoutBuildDraft | WorkoutLogDraft;
           break;
         case Action.UpdateField:
           // update field
