@@ -40,6 +40,7 @@ type WorkoutLogDraft = Pick<
 export interface WorkoutBuildAndLogSlice {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
+  setMode: (mode: Mode.Edit | Mode.Log) => void;
   initializeWorkout: (mode: Mode) => void;
   updateWorkout: (
     action: Action,
@@ -73,6 +74,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 > = (set, get, store) => ({
   mode: null,
   workout: null,
+  setMode: (mode) => set(() => ({ mode: mode})),
   initializeWorkout: (mode) =>
     set(() => {
       if (mode === Mode.Build) {
@@ -89,138 +91,144 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
     }),
   updateWorkout: (action, exerciseID, exerciseIndex, setIndex, updatedSet) =>
     set((state) => {
-      let updatedWorkout: WorkoutBuildDraft | WorkoutLogDraft | null = null;
-      let exercise: WorkoutExercise | null = null;
-      let updatedExercise: WorkoutExercise;
+      if (state.mode === Mode.Edit || state.mode === Mode.Build) {
 
-      if (exerciseIndex) {
-        exercise = state.workout?.workout_data.exercises[
-          exerciseIndex
-        ] as WorkoutExercise;
-      }
-
-      switch (action) {
-        case Action.AddExercise:
-          const INITIALIZED_EXERCISE: WorkoutExercise = {
-            exercise_id: exerciseID as number,
-            tracked: ["reps"], // TODO: Get default tracking field from exercise object
-            sets: [
-              {
-                fields: { reps: 0, rest: "30S" },
-                completed: false,
-                completed_at: null,
+        let updatedWorkout: WorkoutBuildDraft | WorkoutLogDraft | null = null;
+        let exercise: WorkoutExercise | null = null;
+        let updatedExercise: WorkoutExercise;
+  
+        if (exerciseIndex) {
+          exercise = state.workout?.workout_data.exercises[
+            exerciseIndex
+          ] as WorkoutExercise;
+        }
+  
+        switch (action) {
+          case Action.AddExercise:
+            const INITIALIZED_EXERCISE: WorkoutExercise = {
+              exercise_id: exerciseID as number,
+              tracked: ["reps"], // TODO: Get default tracking field from exercise object
+              sets: [
+                {
+                  fields: { reps: 0, rest: "30S" },
+                  completed: false,
+                  completed_at: null,
+                },
+              ],
+            };
+  
+            updatedWorkout = {
+              ...state.workout,
+              workout_data: {
+                exercises: [
+                  ...(state.workout?.workout_data.exercises as WorkoutExercise[]),
+                  INITIALIZED_EXERCISE,
+                ],
               },
-            ],
-          };
-
-          updatedWorkout = {
-            ...state.workout,
-            workout_data: {
-              exercises: [
-                ...(state.workout?.workout_data.exercises as WorkoutExercise[]),
-                INITIALIZED_EXERCISE,
+            } as WorkoutBuildDraft | WorkoutLogDraft;
+            break;
+          case Action.DeleteExercise:
+            updatedWorkout = {
+              ...state.workout,
+              workout_data: {
+                exercises: [
+                  ...(state.workout?.workout_data.exercises.filter(
+                    (ex, ind) => ind !== exerciseIndex
+                  ) as WorkoutExercise[]),
+                ],
+              },
+            } as WorkoutBuildDraft | WorkoutLogDraft;
+            break;
+          case Action.AddSet:
+            const INITIALIZED_SET = {
+              fields: { reps: 0, rest: "30S" },
+              completed: false,
+              completed_at: null,
+            };
+  
+            updatedExercise = {
+              ...exercise,
+              sets: [...(exercise?.sets as SetFields[]), INITIALIZED_SET],
+            } as WorkoutExercise;
+  
+            updatedWorkout = {
+              ...state.workout,
+              workout_data: {
+                exercises: [
+                  ...(state.workout?.workout_data.exercises.map((ex, ind) => {
+                    if (ind === exerciseID) {
+                      return updatedExercise;
+                    }
+                    return ex;
+                  }) as WorkoutExercise[]),
+                ],
+              },
+            } as WorkoutBuildDraft | WorkoutLogDraft;
+  
+            break;
+          case Action.DeleteSet:
+            updatedExercise = {
+              ...exercise,
+              sets: [
+                ...(exercise?.sets.filter(
+                  (set, ind) => ind !== setIndex
+                ) as SetFields[]),
               ],
-            },
-          } as WorkoutBuildDraft | WorkoutLogDraft;
-          break;
-        case Action.DeleteExercise:
-          updatedWorkout = {
-            ...state.workout,
-            workout_data: {
-              exercises: [
-                ...(state.workout?.workout_data.exercises.filter(
-                  (ex, ind) => ind !== exerciseIndex
-                ) as WorkoutExercise[]),
-              ],
-            },
-          } as WorkoutBuildDraft | WorkoutLogDraft;
-          break;
-        case Action.AddSet:
-          const INITIALIZED_SET = {
-            fields: { reps: 0, rest: "30S" },
-            completed: false,
-            completed_at: null,
-          };
-
-          updatedExercise = {
-            ...exercise,
-            sets: [...(exercise?.sets as SetFields[]), INITIALIZED_SET],
-          } as WorkoutExercise;
-
-          updatedWorkout = {
-            ...state.workout,
-            workout_data: {
-              exercises: [
-                ...(state.workout?.workout_data.exercises.map((ex, ind) => {
-                  if (ind === exerciseID) {
-                    return updatedExercise;
+            } as WorkoutExercise;
+  
+            updatedWorkout = {
+              ...state.workout,
+              workout_data: {
+                exercises: [
+                  ...(state.workout?.workout_data.exercises.map((ex, ind) => {
+                    if (ind === exerciseID) {
+                      return updatedExercise;
+                    }
+                    return ex;
+                  }) as WorkoutExercise[]),
+                ],
+              },
+            } as WorkoutBuildDraft | WorkoutLogDraft;
+            break;
+          case Action.UpdateSet:
+            updatedExercise = {
+              ...exercise,
+              sets: [
+                ...(exercise?.sets.map(
+                  (set, ind) => {
+                    if (ind === setIndex) {
+                      return updatedSet
+                    }
+                    return set
                   }
-                  return ex;
-                }) as WorkoutExercise[]),
+                ) as SetFields[]),
               ],
-            },
-          } as WorkoutBuildDraft | WorkoutLogDraft;
-
-          break;
-        case Action.DeleteSet:
-          updatedExercise = {
-            ...exercise,
-            sets: [
-              ...(exercise?.sets.filter(
-                (set, ind) => ind !== setIndex
-              ) as SetFields[]),
-            ],
-          } as WorkoutExercise;
-
-          updatedWorkout = {
-            ...state.workout,
-            workout_data: {
-              exercises: [
-                ...(state.workout?.workout_data.exercises.map((ex, ind) => {
-                  if (ind === exerciseID) {
-                    return updatedExercise;
-                  }
-                  return ex;
-                }) as WorkoutExercise[]),
-              ],
-            },
-          } as WorkoutBuildDraft | WorkoutLogDraft;
-          break;
-        case Action.UpdateSet:
-          updatedExercise = {
-            ...exercise,
-            sets: [
-              ...(exercise?.sets.map(
-                (set, ind) => {
-                  if (ind === setIndex) {
-                    return updatedSet
-                  }
-                  return set
-                }
-              ) as SetFields[]),
-            ],
-          } as WorkoutExercise;
-
-
-         updatedWorkout = {
-            ...state.workout,
-            workout_data: {
-              exercises: [
-                ...(state.workout?.workout_data.exercises.map((ex, ind) => {
-                  if (ind === exerciseID) {
-                    return updatedExercise;
-                  }
-                  return ex;
-                }) as WorkoutExercise[]),
-              ],
-            },
-          } as WorkoutBuildDraft | WorkoutLogDraft;
-          break;
+            } as WorkoutExercise;
+  
+  
+           updatedWorkout = {
+              ...state.workout,
+              workout_data: {
+                exercises: [
+                  ...(state.workout?.workout_data.exercises.map((ex, ind) => {
+                    if (ind === exerciseID) {
+                      return updatedExercise;
+                    }
+                    return ex;
+                  }) as WorkoutExercise[]),
+                ],
+              },
+            } as WorkoutBuildDraft | WorkoutLogDraft;
+            break;
+        }
+  
+        return {
+          workout: updatedWorkout,
+        };
       }
-
       return {
-        workout: updatedWorkout,
-      };
+        ...state
+      }
     }),
   resetWorkout: () => set(store.getInitialState()),
 });
