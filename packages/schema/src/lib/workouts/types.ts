@@ -4,6 +4,7 @@ import {
   WorkoutBuildSchema,
   WorkoutLogSchema,
   WorkoutDataSchema,
+  WorkoutExerciseSchema,
   SetFieldsSchema,
   GoalSchema,
   SourceSchema,
@@ -13,9 +14,10 @@ import {
 
 export type WorkoutBuild = z.infer<typeof WorkoutBuildSchema>;
 export type WorkoutLog = z.infer<typeof WorkoutLogSchema>;
-export type WorkoutDataSchema = z.infer<typeof WorkoutDataSchema>;
-export type SetFieldsSchema = z.infer<typeof SetFieldsSchema>;
+export type WorkoutData = z.infer<typeof WorkoutDataSchema>;
+export type WorkoutExercise = z.infer<typeof WorkoutExerciseSchema>;
+export type SetFields = z.infer<typeof SetFieldsSchema>;
 export type Goal = z.infer<typeof GoalSchema>;
 export type Source = z.infer<typeof SourceSchema>;
 export type Status = z.infer<typeof StatusSchema>;
-export type TrackingTypeSchema = z.infer<typeof TrackingTypeSchema>;
+export type TrackingType = z.infer<typeof TrackingTypeSchema>;

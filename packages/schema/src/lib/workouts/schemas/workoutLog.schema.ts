@@ -8,6 +8,6 @@ export const WorkoutLogSchema = z.object({
   user_id: z.uuid(),
   workout_build_id: z.int(),
   date: z.date(),
-  duration: DurationSchema,
+  duration: z.nullable(z.iso.time()),
   rpe: z.optional(z.number().lte(10)),
 });
