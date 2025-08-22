@@ -4,49 +4,66 @@
 // Will put all the functionality of workout building and logging state here to prevent duplication
 import { StateCreator } from "zustand";
 
-import type { WorkoutBuild, WorkoutLog, SetFieldsSchema } from "@cwt/schema/workouts";
+import type {
+  WorkoutBuild,
+  WorkoutLog,
+  SetFields,
+  WorkoutExercise,
+} from "@cwt/schema/workouts";
 
 import { StoreState } from "../../store";
 
 export enum Mode {
-  Build = 'BUILD',
-  Log = 'LOG',
-  Edit = 'EDIT'
+  Build = "BUILD",
+  Log = "LOG",
+  Edit = "EDIT",
 }
 
 enum Action {
-  AddExercise = 'ADD_EXERCISE',
-  DeleteExercise = 'DELETE_EXERCISE',
-  AddSet = 'ADD_SET',
-  DeleteSet = 'DELETE_SET',
-  UpdateField = 'UPDATE_FIELD'
+  AddExercise = "ADD_EXERCISE",
+  DeleteExercise = "DELETE_EXERCISE",
+  AddSet = "ADD_SET",
+  DeleteSet = "DELETE_SET",
+  UpdateField = "UPDATE_FIELD",
 }
 
-type WorkoutBuildDraft = Pick<WorkoutBuild, "title" | "workout_data" | "status" | "source">
-type WorkoutLogDraft = Pick<WorkoutLog, "title"| "workout_data" | "status" | "date" | "duration">
+type WorkoutBuildDraft = Pick<
+  WorkoutBuild,
+  "title" | "workout_data" | "status" | "source"
+>;
+type WorkoutLogDraft = Pick<
+  WorkoutLog,
+  "title" | "workout_data" | "status" | "date" | "duration"
+>;
 
 export interface WorkoutBuildAndLogSlice {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
   initializeWorkout: (mode: Mode) => void;
-  updateWorkout: (action: Action, exerciseID?: number, exerciseIndex?: number, setIndex?: number, fields?: Partial<SetFieldsSchema>) => void;
+  updateWorkout: (
+    action: Action,
+    exerciseID?: number,
+    exerciseIndex?: number,
+    setIndex?: number,
+    fields?: Partial<SetFields>
+  ) => void;
   resetWorkout: () => void;
 }
 
 const INITIALIZED_WORKOUT_LOG: WorkoutLogDraft = {
   title: "New workout log",
-  workout_data: {exercises: []},
+  workout_data: { exercises: [] },
   status: "draft",
   date: new Date(),
   duration: null,
-}
+};
 
 const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {
   title: "New workout template",
-  workout_data: {exercises: []},
+  workout_data: { exercises: [] },
   status: "draft",
-  source: "manual"
-}
+  source: "manual",
+};
 
 export const createWorkoutBuildAndLogSlice: StateCreator<
   StoreState,
@@ -56,53 +73,76 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 > = (set, get, store) => ({
   mode: null,
   workout: null,
-  initializeWorkout: (mode) => set(() => {
-    if (mode === Mode.Build) {
-      return {
-        workout: INITIALIZED_WORKOUT_BUILD,
-        mode: mode,
+  initializeWorkout: (mode) =>
+    set(() => {
+      if (mode === Mode.Build) {
+        return {
+          workout: INITIALIZED_WORKOUT_BUILD,
+          mode: mode,
+        };
       }
-    }
 
-    return {
-      workout: INITIALIZED_WORKOUT_LOG,
-      mode: mode,
-    }
-  }),
-  updateWorkout: (action, exerciseID, exerciceIndex, setIndex, fields) => set((state) => {
-    const workoutDataExercises = state.workout?.workout_data.exercises
-    let updatedWorkoutDataExercises
+      return {
+        workout: INITIALIZED_WORKOUT_LOG,
+        mode: mode,
+      };
+    }),
+  updateWorkout: (action, exerciseID, exerciceIndex, setIndex, fields) =>
+    set((state) => {
+      // const workoutDataExercises = state.workout?.workout_data.exercises
+      let updatedWorkoutDataExercises;
+      let updatedWorkout: WorkoutBuildDraft | WorkoutLogDraft | null = null;
 
-    
+      switch (action) {
+        case Action.AddExercise:
+          const exercise = get().masterExercises.find(
+            (ex) => ex.id === exerciseID
+          );
+          const INITIALIZED_EXERCISE: WorkoutExercise = {
+            exercise_id: exerciseID as number,
+            tracked: ["reps"], // TODO: Get default tracking field from exercise object
+            sets: [
+              {
+                fields: { reps: 0, rest: "30S" },
+                completed: false,
+                completed_at: null,
+              },
+            ], // See structure in supabase
+          };
 
-    switch (action) {
-      case Action.AddExercise:
-        const exercise = get().masterExercises.find((ex) => ex.id === exerciseID)
-        const INITIALIZED_EXERCISE = {
-          exercise_id: exerciseID,
-          tracked: "reps", // TODO: Get default tracking field from exercise object
-          sets: [{fields: {reps: 0, rest:0}}] // See structure in supabase
-        }
+          // updatedWorkoutDataExercises = [
+          //   ...(state.workout?.workout_data.exercises as WorkoutExercise[]),
+          //   INITIALIZED_EXERCISE,
+          // ];
 
-        updatedWorkoutDataExercises = {...workoutDataExercises, INITIALIZED_EXERCISE}
-        break;
-      case Action.DeleteExercise:
-        // delete exercise
-        break;
-      case Action.AddSet:
-        // add set
-        break;
-      case Action.DeleteSet:
-        // delete set
-        break;
-      case Action.UpdateField:
-        // update field
-        break;
-    }
+          updatedWorkout = {
+            ...state.workout,
+            workout_data: {
+              exercises: [
+                ...(state.workout?.workout_data.exercises as WorkoutExercise[]),
+                INITIALIZED_EXERCISE,
+              ],
+            },
+          } as WorkoutBuildDraft;
+          // updatedWorkout = {...state.workout, workout_data: { exercises: updatedWorkoutDataExercises}}
+          break;
+        case Action.DeleteExercise:
+          // delete exercise
+          break;
+        case Action.AddSet:
+          // add set
+          break;
+        case Action.DeleteSet:
+          // delete set
+          break;
+        case Action.UpdateField:
+          // update field
+          break;
+      }
 
-    return {
-      ...state
-    }
-  }),
-  resetWorkout: () => set(store.getInitialState())
-})
+      return {
+        workout: updatedWorkout,
+      };
+    }),
+  resetWorkout: () => set(store.getInitialState()),
+});
