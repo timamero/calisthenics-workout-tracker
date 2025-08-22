@@ -89,15 +89,10 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
     }),
   updateWorkout: (action, exerciseID, exerciceIndex, setIndex, fields) =>
     set((state) => {
-      // const workoutDataExercises = state.workout?.workout_data.exercises
-      let updatedWorkoutDataExercises;
       let updatedWorkout: WorkoutBuildDraft | WorkoutLogDraft | null = null;
 
       switch (action) {
         case Action.AddExercise:
-          const exercise = get().masterExercises.find(
-            (ex) => ex.id === exerciseID
-          );
           const INITIALIZED_EXERCISE: WorkoutExercise = {
             exercise_id: exerciseID as number,
             tracked: ["reps"], // TODO: Get default tracking field from exercise object
@@ -107,13 +102,8 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
                 completed: false,
                 completed_at: null,
               },
-            ], // See structure in supabase
+            ],
           };
-
-          // updatedWorkoutDataExercises = [
-          //   ...(state.workout?.workout_data.exercises as WorkoutExercise[]),
-          //   INITIALIZED_EXERCISE,
-          // ];
 
           updatedWorkout = {
             ...state.workout,
