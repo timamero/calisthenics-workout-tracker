@@ -34,7 +34,7 @@ type WorkoutBuildDraft = Pick<
 >;
 type WorkoutLogDraft = Pick<
   WorkoutLog,
-  "title" | "workout_data" | "status" | "date" | "duration"
+  "title" | "workout_data" | "status" | "date"
 >;
 
 export interface WorkoutBuildAndLogSlice {
@@ -56,7 +56,6 @@ const INITIALIZED_WORKOUT_LOG: WorkoutLogDraft = {
   workout_data: { exercises: [] },
   status: "draft",
   date: new Date(),
-  duration: null,
 };
 
 const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {
