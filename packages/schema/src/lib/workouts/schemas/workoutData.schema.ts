@@ -6,22 +6,22 @@ import { TrackingTypeSchema } from './enums.schema';
 export const SetFieldsSchema = z.object({
   reps: z.optional(z.number()),
   weight: z.optional(z.number()),
-  duration: z.optional(DurationSchema),
-  rest: z.optional(DurationSchema),
+  duration: z.optional(z.iso.time()),
+  rest: z.optional(z.iso.time()),
 });
 
 const SetSchema = z.object({
   fields: SetFieldsSchema,
   completed: z.boolean(),
-  completed_at: z.date()
+  completed_at: z.nullable(z.date()),
 });
 
-const WorkoutExerciseSchema = z.object({
+export const WorkoutExerciseSchema = z.object({
   exercise_id: z.int(),
   tracked: z.array(TrackingTypeSchema),
-  sets: z.array(SetSchema)
-})
+  sets: z.array(SetSchema),
+});
 
 export const WorkoutDataSchema = z.object({
-  exercises: z.array(WorkoutExerciseSchema)
-})
+  exercises: z.array(WorkoutExerciseSchema),
+});
