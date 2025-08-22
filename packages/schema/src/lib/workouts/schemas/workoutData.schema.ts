@@ -10,7 +10,7 @@ export const SetFieldsSchema = z.object({
   rest: z.optional(z.iso.time()),
 });
 
-const SetSchema = z.object({
+export const SetSchema = z.object({
   fields: SetFieldsSchema,
   completed: z.boolean(),
   completed_at: z.nullable(z.date()),
