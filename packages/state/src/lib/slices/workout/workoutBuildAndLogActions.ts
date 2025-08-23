@@ -47,8 +47,8 @@ export function addSetToExercise(
 }
 
 export function deleteSetInExercise(
-  index: number,
-  exerciseToUpdate: WorkoutExercise
+  exerciseToUpdate: WorkoutExercise,
+  index: number
 ): WorkoutExercise {
   return {
     ...exerciseToUpdate,
@@ -94,6 +94,20 @@ export function removeExerciseAtIndex(
   workout: WorkoutBuildDraft | WorkoutLogDraft
 ): WorkoutExercise[] {
   return [...workout.workout_data.exercises.filter((ex, ind) => ind !== index)];
+}
+
+export function updateExercise(
+  exercise: WorkoutExercise,
+  setIndex: number | null,
+  exerciseUpdater: (
+    exercise: WorkoutExercise,
+    setIndex?: number
+  ) => WorkoutExercise
+): WorkoutExercise {
+  if (setIndex) {
+    return exerciseUpdater(exercise, setIndex);
+  }
+  return exerciseUpdater(exercise);
 }
 
 export function updateWorkoutAtExerciseIndex(
