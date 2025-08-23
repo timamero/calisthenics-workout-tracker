@@ -8,11 +8,11 @@ import type {
   WorkoutBuild,
   WorkoutLog,
   Set,
-  SetFields,
   WorkoutExercise,
 } from "@cwt/schema/workouts";
 
 import { StoreState } from "../../store";
+import { exerciseAtIndex } from "./workoutBuildAndLogActions";
 
 export enum Mode {
   Build = "BUILD",
@@ -28,11 +28,11 @@ enum Action {
   UpdateSet = "UPDATE_SET",
 }
 
-type WorkoutBuildDraft = Pick<
+export type WorkoutBuildDraft = Pick<
   WorkoutBuild,
   "title" | "workout_data" | "status" | "source"
 >;
-type WorkoutLogDraft = Pick<
+export type WorkoutLogDraft = Pick<
   WorkoutLog,
   "title" | "workout_data" | "status" | "date"
 >;
@@ -74,7 +74,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 > = (set, get, store) => ({
   mode: null,
   workout: null,
-  setMode: (mode) => set(() => ({ mode: mode})),
+  setMode: (mode) => set(() => ({ mode: mode })),
   initializeWorkout: (mode) =>
     set(() => {
       if (mode === Mode.Build) {
@@ -92,17 +92,9 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
   updateWorkout: (action, exerciseID, exerciseIndex, setIndex, updatedSet) =>
     set((state) => {
       if (state.mode === Mode.Edit || state.mode === Mode.Build) {
-
         let updatedWorkout: WorkoutBuildDraft | WorkoutLogDraft | null = null;
-        let exercise: WorkoutExercise | null = null;
         let updatedExercise: WorkoutExercise;
-  
-        if (exerciseIndex) {
-          exercise = state.workout?.workout_data.exercises[
-            exerciseIndex
-          ] as WorkoutExercise;
-        }
-  
+
         switch (action) {
           case Action.AddExercise:
             const INITIALIZED_EXERCISE: WorkoutExercise = {
@@ -116,12 +108,13 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
                 },
               ],
             };
-  
+
             updatedWorkout = {
               ...state.workout,
               workout_data: {
                 exercises: [
-                  ...(state.workout?.workout_data.exercises as WorkoutExercise[]),
+                  ...(state.workout?.workout_data
+                    .exercises as WorkoutExercise[]),
                   INITIALIZED_EXERCISE,
                 ],
               },
@@ -140,95 +133,98 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
             } as WorkoutBuildDraft | WorkoutLogDraft;
             break;
           case Action.AddSet:
-            const INITIALIZED_SET = {
+            const INITIALIZED_SET: Set = {
               fields: { reps: 0, rest: "30S" },
               completed: false,
               completed_at: null,
             };
-  
-            updatedExercise = {
-              ...exercise,
-              sets: [...(exercise?.sets as SetFields[]), INITIALIZED_SET],
-            } as WorkoutExercise;
-  
-            updatedWorkout = {
-              ...state.workout,
-              workout_data: {
-                exercises: [
-                  ...(state.workout?.workout_data.exercises.map((ex, ind) => {
-                    if (ind === exerciseIndex) {
-                      return updatedExercise;
-                    }
-                    return ex;
-                  }) as WorkoutExercise[]),
-                ],
-              },
-            } as WorkoutBuildDraft | WorkoutLogDraft;
-  
+            if (exerciseIndex && state.workout) {
+              const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+
+              updatedExercise = {
+                ...exercise,
+                sets: [...exercise.sets, INITIALIZED_SET],
+              } as WorkoutExercise;
+
+              updatedWorkout = {
+                ...state.workout,
+                workout_data: {
+                  exercises: [
+                    ...state.workout.workout_data.exercises.map((ex, ind) => {
+                      if (ind === exerciseIndex) {
+                        return updatedExercise;
+                      }
+                      return ex;
+                    }),
+                  ],
+                },
+              } as WorkoutBuildDraft | WorkoutLogDraft;
+            }
+
             break;
           case Action.DeleteSet:
-            updatedExercise = {
-              ...exercise,
-              sets: [
-                ...(exercise?.sets.filter(
-                  (set, ind) => ind !== setIndex
-                ) as SetFields[]),
-              ],
-            } as WorkoutExercise;
-  
-            updatedWorkout = {
-              ...state.workout,
-              workout_data: {
-                exercises: [
-                  ...(state.workout?.workout_data.exercises.map((ex, ind) => {
-                    if (ind === exerciseIndex) {
-                      return updatedExercise;
-                    }
-                    return ex;
-                  }) as WorkoutExercise[]),
-                ],
-              },
-            } as WorkoutBuildDraft | WorkoutLogDraft;
+            if (exerciseIndex && state.workout) {
+              const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+              updatedExercise = {
+                ...exercise,
+                sets: [...exercise.sets.filter((set, ind) => ind !== setIndex)],
+              } as WorkoutExercise;
+
+              updatedWorkout = {
+                ...state.workout,
+                workout_data: {
+                  exercises: [
+                    ...state.workout.workout_data.exercises.map((ex, ind) => {
+                      if (ind === exerciseIndex) {
+                        return updatedExercise;
+                      }
+                      return ex;
+                    }),
+                  ],
+                },
+              } as WorkoutBuildDraft | WorkoutLogDraft;
+            }
+
             break;
           case Action.UpdateSet:
-            updatedExercise = {
-              ...exercise,
-              sets: [
-                ...(exercise?.sets.map(
-                  (set, ind) => {
+            if (exerciseIndex && state.workout) {
+              const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+              updatedExercise = {
+                ...exercise,
+                sets: [
+                  ...exercise.sets.map((set, ind) => {
                     if (ind === setIndex) {
-                      return updatedSet
+                      return updatedSet;
                     }
-                    return set
-                  }
-                ) as SetFields[]),
-              ],
-            } as WorkoutExercise;
-  
-  
-           updatedWorkout = {
-              ...state.workout,
-              workout_data: {
-                exercises: [
-                  ...(state.workout?.workout_data.exercises.map((ex, ind) => {
-                    if (ind === exerciseIndex) {
-                      return updatedExercise;
-                    }
-                    return ex;
-                  }) as WorkoutExercise[]),
+                    return set;
+                  }),
                 ],
-              },
-            } as WorkoutBuildDraft | WorkoutLogDraft;
+              } as WorkoutExercise;
+
+              updatedWorkout = {
+                ...state.workout,
+                workout_data: {
+                  exercises: [
+                    ...state.workout.workout_data.exercises.map((ex, ind) => {
+                      if (ind === exerciseIndex) {
+                        return updatedExercise;
+                      }
+                      return ex;
+                    }),
+                  ],
+                },
+              } as WorkoutBuildDraft | WorkoutLogDraft;
+            }
             break;
         }
-  
+
         return {
           workout: updatedWorkout,
         };
       }
       return {
-        ...state
-      }
+        ...state,
+      };
     }),
   resetWorkout: () => set(store.getInitialState()),
 });
