@@ -130,8 +130,6 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
           case Action.AddSet:
             if (exerciseIndex && state.workout) {
               const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-
-              // updatedExercise = addSetToExercise(exercise);
               updatedExercise = updateExercise(
                 exercise,
                 null,
@@ -150,7 +148,6 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
           case Action.DeleteSet:
             if (exerciseIndex && setIndex && state.workout) {
               const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-              // updatedExercise = deleteSetInExercise(exercise, setIndex);
               updatedExercise = updateExercise(
                 exercise,
                 setIndex,
