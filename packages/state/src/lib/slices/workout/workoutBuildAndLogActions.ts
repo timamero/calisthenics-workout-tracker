@@ -22,20 +22,6 @@ export function addSetToExercise(exerciseToUpdate: WorkoutExercise) {
   };
 }
 
-// export function updateExercisesAtIndex(
-//   index: number,
-//   workout: WorkoutBuildDraft | WorkoutLogDraft,
-//   updatedExercise: WorkoutExercise
-// ): WorkoutExercise[] {
-//   return [
-//     ...workout.workout_data.exercises.map((ex, ind) => {
-//       if (ind === index) {
-//         return updatedExercise;
-//       }
-//       return ex;
-//     }),
-//   ];
-// }
 export function updateExercisesAtIndex(
   index: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft,
@@ -49,6 +35,13 @@ export function updateExercisesAtIndex(
       return ex;
     }),
   ];
+}
+
+export function removeExerciseAtIndex(
+  index: number,
+  workout: WorkoutBuildDraft | WorkoutLogDraft
+): WorkoutExercise[] {
+  return [...workout.workout_data.exercises.filter((ex, ind) => ind !== index)];
 }
 
 export function updateWorkoutAtExerciseIndex(
