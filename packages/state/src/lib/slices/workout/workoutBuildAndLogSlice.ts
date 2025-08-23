@@ -128,15 +128,12 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
             break;
           case Action.DeleteExercise:
             if (exerciseIndex && state.workout) {
-              updatedWorkout = {
-                ...state.workout,
-                workout_data: {
-                  exercises: removeExerciseAtIndex(
-                    exerciseIndex,
-                    state.workout
-                  ),
-                },
-              } as WorkoutBuildDraft | WorkoutLogDraft;
+              updatedWorkout = updateWorkoutAtExerciseIndex(
+                exerciseIndex,
+                state.workout,
+                null,
+                removeExerciseAtIndex
+              );
             }
             break;
           case Action.AddSet:

@@ -21,11 +21,10 @@ export function addSetToExercise(exerciseToUpdate: WorkoutExercise) {
     sets: [...exerciseToUpdate.sets, INITIALIZED_SET],
   };
 }
-
 export function updateExercisesAtIndex(
   index: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft,
-  updatedExercise: WorkoutExercise
+  updatedExercise?: WorkoutExercise
 ): WorkoutExercise[] {
   return [
     ...workout.workout_data.exercises.map((ex, ind) => {
@@ -34,7 +33,7 @@ export function updateExercisesAtIndex(
       }
       return ex;
     }),
-  ];
+  ] as WorkoutExercise[];
 }
 
 export function removeExerciseAtIndex(
@@ -47,18 +46,25 @@ export function removeExerciseAtIndex(
 export function updateWorkoutAtExerciseIndex(
   index: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft,
-  updatedExercise: WorkoutExercise,
+  updatedExercise: WorkoutExercise | null,
   exercisesUpdater: (
     index: number,
     workout: WorkoutBuildDraft | WorkoutLogDraft,
-    updatedExercise: WorkoutExercise
+    updatedExercise?: WorkoutExercise
   ) => WorkoutExercise[]
 ): WorkoutBuildDraft | WorkoutLogDraft {
+  if (updatedExercise) {
+    return {
+      ...workout,
+      workout_data: {
+        exercises: exercisesUpdater(index, workout, updatedExercise),
+      },
+    };
+  }
   return {
     ...workout,
     workout_data: {
-      exercises: exercisesUpdater(index, workout, updatedExercise),
+      exercises: exercisesUpdater(index, workout),
     },
   };
-  // } as WorkoutBuildDraft | WorkoutLogDraft;
 }
