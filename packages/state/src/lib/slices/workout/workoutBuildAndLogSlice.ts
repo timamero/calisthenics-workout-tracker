@@ -19,6 +19,7 @@ import {
   exerciseAtIndex,
   removeExerciseAtIndex,
   updateExercisesAtIndex,
+  updateSetInExercise,
   updateWorkoutAtExerciseIndex,
 } from "./workoutBuildAndLogActions";
 
@@ -155,33 +156,20 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 
             break;
           case Action.UpdateSet:
-            if (exerciseIndex && state.workout) {
+            if (exerciseIndex && setIndex && state.workout && updatedSet) {
               const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-              updatedExercise = {
-                ...exercise,
-                sets: [
-                  ...exercise.sets.map((set, ind) => {
-                    if (ind === setIndex) {
-                      return updatedSet;
-                    }
-                    return set;
-                  }),
-                ],
-              } as WorkoutExercise;
+              updatedExercise = updateSetInExercise(
+                setIndex,
+                exercise,
+                updatedSet
+              );
 
-              updatedWorkout = {
-                ...state.workout,
-                workout_data: {
-                  exercises: [
-                    ...state.workout.workout_data.exercises.map((ex, ind) => {
-                      if (ind === exerciseIndex) {
-                        return updatedExercise;
-                      }
-                      return ex;
-                    }),
-                  ],
-                },
-              } as WorkoutBuildDraft | WorkoutLogDraft;
+              updatedWorkout = updateWorkoutAtExerciseIndex(
+                exerciseIndex,
+                state.workout,
+                updatedExercise,
+                updateExercisesAtIndex
+              );
             }
             break;
         }
