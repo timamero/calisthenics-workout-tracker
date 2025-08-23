@@ -48,7 +48,7 @@ export function addSetToExercise(
 
 export function deleteSetInExercise(
   exerciseToUpdate: WorkoutExercise,
-  index: number
+  index: number | undefined
 ): WorkoutExercise {
   return {
     ...exerciseToUpdate,
@@ -57,21 +57,24 @@ export function deleteSetInExercise(
 }
 
 export function updateSetInExercise(
-  index: number,
   exerciseToUpdate: WorkoutExercise,
-  updatedSet: Set
+  index: number | undefined,
+  updatedSet?: Set | undefined
 ) {
-  return {
-    ...exerciseToUpdate,
-    sets: [
-      ...exerciseToUpdate.sets.map((set, ind) => {
-        if (ind === index) {
-          return updatedSet;
-        }
-        return set;
-      }),
-    ],
-  };
+  if (updatedSet) {
+    return {
+      ...exerciseToUpdate,
+      sets: [
+        ...exerciseToUpdate.sets.map((set, ind) => {
+          if (ind === index) {
+            return updatedSet;
+          }
+          return set;
+        }),
+      ],
+    };
+  }
+  return { ...exerciseToUpdate };
 }
 
 export function updateExercisesAtIndex(
@@ -101,9 +104,14 @@ export function updateExercise(
   setIndex: number | null,
   exerciseUpdater: (
     exercise: WorkoutExercise,
-    setIndex?: number
-  ) => WorkoutExercise
+    setIndex?: number,
+    updatedSet?: Set
+  ) => WorkoutExercise,
+  updatedSet?: Set
 ): WorkoutExercise {
+  if (updatedSet && setIndex) {
+    return exerciseUpdater(exercise, setIndex, updatedSet);
+  }
   if (setIndex) {
     return exerciseUpdater(exercise, setIndex);
   }
