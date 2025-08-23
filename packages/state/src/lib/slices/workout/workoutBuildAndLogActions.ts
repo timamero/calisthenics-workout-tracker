@@ -56,6 +56,24 @@ export function deleteSetInExercise(
   };
 }
 
+export function updateSetInExercise(
+  index: number,
+  exerciseToUpdate: WorkoutExercise,
+  updatedSet: Set
+) {
+  return {
+    ...exerciseToUpdate,
+    sets: [
+      ...exerciseToUpdate.sets.map((set, ind) => {
+        if (ind === index) {
+          return updatedSet;
+        }
+        return set;
+      }),
+    ],
+  };
+}
+
 export function updateExercisesAtIndex(
   index: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft,
