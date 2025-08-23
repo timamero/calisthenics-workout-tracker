@@ -16,6 +16,7 @@ import {
   addSetToExercise,
   exerciseAtIndex,
   updateExercisesAtIndex,
+  updateWorkoutAtExerciseIndex,
 } from "./workoutBuildAndLogActions";
 
 export enum Mode {
@@ -142,16 +143,12 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 
               updatedExercise = addSetToExercise(exercise);
 
-              updatedWorkout = {
-                ...state.workout,
-                workout_data: {
-                  exercises: updateExercisesAtIndex(
-                    exerciseIndex,
-                    state.workout,
-                    updatedExercise
-                  ),
-                },
-              } as WorkoutBuildDraft | WorkoutLogDraft;
+              updatedWorkout = updateWorkoutAtExerciseIndex(
+                exerciseIndex,
+                state.workout,
+                updatedExercise,
+                updateExercisesAtIndex
+              );
             }
 
             break;
