@@ -31,7 +31,9 @@ export function addExercise(
   ];
 }
 
-export function addSetToExercise(exerciseToUpdate: WorkoutExercise) {
+export function addSetToExercise(
+  exerciseToUpdate: WorkoutExercise
+): WorkoutExercise {
   const INITIALIZED_SET: Set = {
     fields: { reps: 0, rest: "30S" },
     completed: false,
@@ -43,6 +45,17 @@ export function addSetToExercise(exerciseToUpdate: WorkoutExercise) {
     sets: [...exerciseToUpdate.sets, INITIALIZED_SET],
   };
 }
+
+export function deleteSetInExercise(
+  index: number,
+  exerciseToUpdate: WorkoutExercise
+): WorkoutExercise {
+  return {
+    ...exerciseToUpdate,
+    sets: [...exerciseToUpdate.sets.filter((set, ind) => ind !== index)],
+  };
+}
+
 export function updateExercisesAtIndex(
   index: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft,
