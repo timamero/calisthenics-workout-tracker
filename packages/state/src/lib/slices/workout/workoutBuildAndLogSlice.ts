@@ -12,7 +12,11 @@ import type {
 } from "@cwt/schema/workouts";
 
 import { StoreState } from "../../store";
-import { exerciseAtIndex } from "./workoutBuildAndLogActions";
+import {
+  addSetToExercise,
+  exerciseAtIndex,
+  updateExercisesAtIndex,
+} from "./workoutBuildAndLogActions";
 
 export enum Mode {
   Build = "BUILD",
@@ -133,30 +137,19 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
             } as WorkoutBuildDraft | WorkoutLogDraft;
             break;
           case Action.AddSet:
-            const INITIALIZED_SET: Set = {
-              fields: { reps: 0, rest: "30S" },
-              completed: false,
-              completed_at: null,
-            };
             if (exerciseIndex && state.workout) {
               const exercise = exerciseAtIndex(exerciseIndex, state.workout);
 
-              updatedExercise = {
-                ...exercise,
-                sets: [...exercise.sets, INITIALIZED_SET],
-              } as WorkoutExercise;
+              updatedExercise = addSetToExercise(exercise);
 
               updatedWorkout = {
                 ...state.workout,
                 workout_data: {
-                  exercises: [
-                    ...state.workout.workout_data.exercises.map((ex, ind) => {
-                      if (ind === exerciseIndex) {
-                        return updatedExercise;
-                      }
-                      return ex;
-                    }),
-                  ],
+                  exercises: updateExercisesAtIndex(
+                    exerciseIndex,
+                    state.workout,
+                    updatedExercise
+                  ),
                 },
               } as WorkoutBuildDraft | WorkoutLogDraft;
             }
