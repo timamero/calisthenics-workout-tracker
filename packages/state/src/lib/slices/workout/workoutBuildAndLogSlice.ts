@@ -15,6 +15,7 @@ import { StoreState } from "../../store";
 import {
   addExercise,
   addSetToExercise,
+  deleteSetInExercise,
   exerciseAtIndex,
   removeExerciseAtIndex,
   updateExercisesAtIndex,
@@ -140,26 +141,16 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 
             break;
           case Action.DeleteSet:
-            if (exerciseIndex && state.workout) {
+            if (exerciseIndex && setIndex && state.workout) {
               const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-              updatedExercise = {
-                ...exercise,
-                sets: [...exercise.sets.filter((set, ind) => ind !== setIndex)],
-              } as WorkoutExercise;
+              updatedExercise = deleteSetInExercise(setIndex, exercise);
 
-              updatedWorkout = {
-                ...state.workout,
-                workout_data: {
-                  exercises: [
-                    ...state.workout.workout_data.exercises.map((ex, ind) => {
-                      if (ind === exerciseIndex) {
-                        return updatedExercise;
-                      }
-                      return ex;
-                    }),
-                  ],
-                },
-              } as WorkoutBuildDraft | WorkoutLogDraft;
+              updatedWorkout = updateWorkoutAtExerciseIndex(
+                exerciseIndex,
+                state.workout,
+                updatedExercise,
+                updateExercisesAtIndex
+              );
             }
 
             break;
