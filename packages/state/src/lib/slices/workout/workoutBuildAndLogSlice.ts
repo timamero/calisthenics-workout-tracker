@@ -13,6 +13,7 @@ import type {
 
 import { StoreState } from "../../store";
 import {
+  addExercise,
   addSetToExercise,
   exerciseAtIndex,
   removeExerciseAtIndex,
@@ -103,28 +104,15 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 
         switch (action) {
           case Action.AddExercise:
-            const INITIALIZED_EXERCISE: WorkoutExercise = {
-              exercise_id: exerciseID as number,
-              tracked: ["reps"], // TODO: Get default tracking field from exercise object
-              sets: [
-                {
-                  fields: { reps: 0, rest: "30S" },
-                  completed: false,
-                  completed_at: null,
-                },
-              ],
-            };
-
-            updatedWorkout = {
-              ...state.workout,
-              workout_data: {
-                exercises: [
-                  ...(state.workout?.workout_data
-                    .exercises as WorkoutExercise[]),
-                  INITIALIZED_EXERCISE,
-                ],
-              },
-            } as WorkoutBuildDraft | WorkoutLogDraft;
+            if (state.workout) {
+              updatedWorkout = updateWorkoutAtExerciseIndex(
+                null,
+                state.workout,
+                null,
+                addExercise,
+                exerciseID
+              );
+            }
             break;
           case Action.DeleteExercise:
             if (exerciseIndex && state.workout) {

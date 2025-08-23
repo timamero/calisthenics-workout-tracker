@@ -9,6 +9,28 @@ export function exerciseAtIndex(
   return workout.workout_data.exercises[index];
 }
 
+export function addExercise(
+  id: number,
+  workout: WorkoutBuildDraft | WorkoutLogDraft
+) {
+  const INITIALIZED_EXERCISE: WorkoutExercise = {
+    exercise_id: id,
+    tracked: ["reps"], // TODO: Get default tracking field from exercise object
+    sets: [
+      {
+        fields: { reps: 0, rest: "30S" },
+        completed: false,
+        completed_at: null,
+      },
+    ],
+  };
+
+  return [
+    ...(workout.workout_data.exercises as WorkoutExercise[]),
+    INITIALIZED_EXERCISE,
+  ];
+}
+
 export function addSetToExercise(exerciseToUpdate: WorkoutExercise) {
   const INITIALIZED_SET: Set = {
     fields: { reps: 0, rest: "30S" },
@@ -44,16 +66,17 @@ export function removeExerciseAtIndex(
 }
 
 export function updateWorkoutAtExerciseIndex(
-  index: number,
+  index: number | null,
   workout: WorkoutBuildDraft | WorkoutLogDraft,
   updatedExercise: WorkoutExercise | null,
   exercisesUpdater: (
     index: number,
     workout: WorkoutBuildDraft | WorkoutLogDraft,
     updatedExercise?: WorkoutExercise
-  ) => WorkoutExercise[]
+  ) => WorkoutExercise[],
+  exerciseID?: number
 ): WorkoutBuildDraft | WorkoutLogDraft {
-  if (updatedExercise) {
+  if (updatedExercise && index) {
     return {
       ...workout,
       workout_data: {
@@ -61,10 +84,23 @@ export function updateWorkoutAtExerciseIndex(
       },
     };
   }
+  if (index) {
+    return {
+      ...workout,
+      workout_data: {
+        exercises: exercisesUpdater(index, workout),
+      },
+    };
+  }
+  if (exerciseID) {
+    return {
+      ...workout,
+      workout_data: {
+        exercises: exercisesUpdater(exerciseID, workout),
+      },
+    };
+  }
   return {
     ...workout,
-    workout_data: {
-      exercises: exercisesUpdater(index, workout),
-    },
   };
 }
