@@ -11,6 +11,7 @@ class ExerciseSchema(BaseModel):
     difficulty: Literal["beginner", "intermediate", "advanced"]
     tags: List[str]
     instructions: List[str]
+    default_tracking_type: List[Literal["reps", "weight", "duration", "rpe"]]
 
 
 class ExerciseFilterParams(BaseModel):
