@@ -5,6 +5,7 @@ import {
   EquipmentSchema,
   EmphasisSchema,
   DifficultySchema,
+  TrackingSchema,
 } from './enums.schema';
 
 export const ExerciseSchema = z.object({
@@ -16,4 +17,5 @@ export const ExerciseSchema = z.object({
   difficulty: DifficultySchema,
   tags: z.array(z.string()),
   instructions: z.array(z.string()),
+  default_tracking_type: z.array(TrackingSchema),
 });
