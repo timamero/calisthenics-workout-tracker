@@ -8,9 +8,9 @@ import {
   ExercisesFilterSlice,
 } from "./slices/library/exercisesFilterSlice";
 import {
-  createWorkoutsSlice,
-  WorkoutsSlice,
-} from "./slices/workout/workoutsSlice";
+  createWorkoutLibrarySlice,
+  WorkoutLibrarySlice,
+} from "./slices/workout/workoutLibrarySlice";
 import {
   createWorkoutDraftSlice,
   WorkoutDraftSlice,
@@ -22,13 +22,13 @@ import {
 
 export type StoreState = ExercisesSlice &
   ExercisesFilterSlice &
-  WorkoutsSlice &
+  WorkoutLibrarySlice &
   WorkoutDraftSlice &
   StopwatchSlice;
 export const useStore = create<StoreState>((...a) => ({
   ...createExercisesSlice(...a),
   ...createExercisesFilterSlice(...a),
-  ...createWorkoutsSlice(...a),
+  ...createWorkoutLibrarySlice(...a),
   ...createWorkoutDraftSlice(...a),
   ...createStopwatchSlice(...a),
 }));

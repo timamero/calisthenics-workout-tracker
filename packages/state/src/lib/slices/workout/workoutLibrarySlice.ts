@@ -5,7 +5,7 @@ import type { WorkoutLog, WorkoutBuild } from "@cwt/schema/workouts";
 import { StoreState } from "../../store";
 import { Mode } from "./workoutDraftSlice";
 
-export interface WorkoutsSlice {
+export interface WorkoutLibrarySlice {
   masterWorkoutLogs: WorkoutLog[];
   masterWorkoutBuilds: WorkoutBuild[];
   setWorkouts: (logs: WorkoutLog[], builds: WorkoutBuild[]) => void;
@@ -13,11 +13,11 @@ export interface WorkoutsSlice {
   completeWorkout: (mode: Mode, workout: WorkoutLog | WorkoutBuild) => void;
 }
 
-export const createWorkoutsSlice: StateCreator<
+export const createWorkoutLibrarySlice: StateCreator<
   StoreState,
   [],
   [],
-  WorkoutsSlice
+  WorkoutLibrarySlice
 > = (set, get) => ({
   masterWorkoutLogs: [], // TODO: Check that the max number returned is 20
   masterWorkoutBuilds: [], // TODO: Check that the max number returned is 10
