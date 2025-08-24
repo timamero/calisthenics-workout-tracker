@@ -12,9 +12,9 @@ import {
   WorkoutsSlice,
 } from "./slices/workout/workoutsSlice";
 import {
-  createWorkoutBuildAndLogSlice,
-  WorkoutBuildAndLogSlice,
-} from "./slices/workout/workoutBuildAndLogSlice";
+  createWorkoutDraftSlice,
+  WorkoutDraftSlice,
+} from "./slices/workout/workoutDraftSlice";
 import {
   createWorkoutsAndBuildLogSlice,
   WorkoutsAndBuildLogSlice,
@@ -27,14 +27,14 @@ import {
 export type StoreState = ExercisesSlice &
   ExercisesFilterSlice &
   WorkoutsSlice &
-  WorkoutBuildAndLogSlice &
+  WorkoutDraftSlice &
   WorkoutsAndBuildLogSlice &
   StopwatchSlice;
 export const useStore = create<StoreState>((...a) => ({
   ...createExercisesSlice(...a),
   ...createExercisesFilterSlice(...a),
   ...createWorkoutsSlice(...a),
-  ...createWorkoutBuildAndLogSlice(...a),
+  ...createWorkoutDraftSlice(...a),
   ...createWorkoutsAndBuildLogSlice(...a),
   ...createStopwatchSlice(...a),
 }));
