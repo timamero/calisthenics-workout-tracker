@@ -9,7 +9,7 @@ import type {
 
 import { StoreState } from "../../store";
 import {
-  addExercise,
+  // addExercise,
   addSetToExercise,
   deleteSetInExercise,
   exerciseAtIndex,
@@ -20,6 +20,7 @@ import {
   addExerciseToWorkout,
   applyExerciseUpdateAtIndex,
 } from "./workoutDraftActions";
+import { Tracking } from "@cwt/schema/exercises";
 
 export enum Mode {
   Build = "BUILD",
@@ -97,11 +98,13 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       if (state.mode === Mode.Edit || state.mode === Mode.Build) {
         let updatedWorkout = {};
+        const tracking: Tracking[] =
+          get().getExerciseByID(exerciseID).default_tracking_type;
         if (exerciseID && state.workout) {
           updatedWorkout = addExerciseToWorkout(
             state.workout,
             exerciseID,
-            addExercise
+            tracking
           );
         }
         return {
