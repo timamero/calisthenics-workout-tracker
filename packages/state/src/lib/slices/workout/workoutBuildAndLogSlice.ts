@@ -89,7 +89,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
     set(() => {
       if (mode === Mode.Build) {
         return {
-          workout: INITIALIZED_WORKOUT_BUILD,
+          workout: { ...INITIALIZED_WORKOUT_BUILD, date: new Date() },
           mode: mode,
         };
       }
