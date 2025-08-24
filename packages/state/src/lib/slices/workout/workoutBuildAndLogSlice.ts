@@ -51,6 +51,7 @@ export interface WorkoutBuildAndLogSlice {
   setMode: (mode: Mode.Edit | Mode.Log) => void;
   initializeWorkout: (mode: Mode) => void;
   addExercise: (exerciseID: number) => void;
+  removeExercise: (exerciseIndex: number) => void;
   updateWorkout: (
     action: Action,
     exerciseID?: number,
@@ -116,6 +117,26 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
         ...state,
       };
     }),
+  removeExercise: (exerciseIndex) =>
+    set((state) => {
+      if (state.mode === Mode.Edit || state.mode === Mode.Build) {
+        let updatedWorkout = {};
+        if (exerciseIndex !== undefined && state.workout) {
+          updatedWorkout = applyExerciseUpdateAtIndex(
+            exerciseIndex,
+            state.workout,
+            null,
+            removeExerciseAtIndex
+          );
+        }
+        return {
+          workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
+        };
+      }
+      return {
+        ...state,
+      };
+    }),
   updateWorkout: (action, exerciseID, exerciseIndex, setIndex, updatedSet) =>
     set((state) => {
       if (state.mode === Mode.Edit || state.mode === Mode.Build) {
@@ -132,16 +153,16 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
           //     );
           //   }
           //   break;
-          case Action.DeleteExercise:
-            if (exerciseIndex !== undefined && state.workout) {
-              updatedWorkout = applyExerciseUpdateAtIndex(
-                exerciseIndex,
-                state.workout,
-                null,
-                removeExerciseAtIndex
-              );
-            }
-            break;
+          // case Action.DeleteExercise:
+          //   if (exerciseIndex !== undefined && state.workout) {
+          //     updatedWorkout = applyExerciseUpdateAtIndex(
+          //       exerciseIndex,
+          //       state.workout,
+          //       null,
+          //       removeExerciseAtIndex
+          //     );
+          //   }
+          //   break;
           case Action.AddSet:
             if (exerciseIndex !== undefined && state.workout) {
               const exercise = exerciseAtIndex(exerciseIndex, state.workout);
