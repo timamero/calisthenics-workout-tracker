@@ -18,6 +18,7 @@ export interface ExercisesSlice {
   setExerciseSearch: (search: string) => void;
   setAppliedExerciseSearch: (search: string) => void;
   refreshDisplayedExercises: () => void;
+  getExerciseByID: (id: number) => Exercise;
 }
 
 export const createExercisesSlice: StateCreator<
@@ -60,6 +61,11 @@ export const createExercisesSlice: StateCreator<
           : "",
       };
     }),
+  getExerciseByID: (id) => {
+    return get().masterExercises.find(
+      (exercise) => exercise.id === id
+    ) as Exercise;
+  },
 });
 
 export const selectHasFilters = (state: StoreState): boolean =>
