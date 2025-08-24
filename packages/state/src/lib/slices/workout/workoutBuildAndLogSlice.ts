@@ -62,11 +62,11 @@ export interface WorkoutBuildAndLogSlice {
   resetWorkout: () => void;
 }
 
-const INITIALIZED_WORKOUT_LOG: WorkoutLogDraft = {
+const INITIALIZED_WORKOUT_LOG: Omit<WorkoutLogDraft, "date"> = {
   title: "New workout log",
   workout_data: { exercises: [] },
   status: "draft",
-  date: new Date(),
+  // date: new Date(),
 };
 
 const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {
@@ -89,13 +89,13 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
     set(() => {
       if (mode === Mode.Build) {
         return {
-          workout: { ...INITIALIZED_WORKOUT_BUILD, date: new Date() },
+          workout: INITIALIZED_WORKOUT_BUILD,
           mode: mode,
         };
       }
 
       return {
-        workout: INITIALIZED_WORKOUT_LOG,
+        workout: { ...INITIALIZED_WORKOUT_LOG, date: new Date() },
         mode: mode,
       };
     }),
