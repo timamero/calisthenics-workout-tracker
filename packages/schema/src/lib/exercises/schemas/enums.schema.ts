@@ -8,3 +8,4 @@ export const MuscleSchema = z.enum(constants.muscles);
 export const EquipmentSchema = z.enum(constants.equipment);
 export const EmphasisSchema = z.enum(constants.emphasis_type);
 export const DifficultySchema = z.enum(constants.difficulty_type);
+export const TrackingSchema = z.enum(constants.tracking_type);
