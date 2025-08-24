@@ -111,10 +111,6 @@ export function addExerciseToWorkout(
   workout: WorkoutBuildDraft | WorkoutLogDraft,
   exerciseID: number,
   default_tracking: Tracking[]
-  // exercisesUpdater: (
-  //   exercise_id: number,
-  //   workout: WorkoutBuildDraft | WorkoutLogDraft
-  // ) => WorkoutExercise[]
 ): WorkoutBuildDraft | WorkoutLogDraft {
   return {
     ...workout,
