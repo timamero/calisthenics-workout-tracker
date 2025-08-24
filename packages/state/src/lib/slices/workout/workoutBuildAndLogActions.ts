@@ -9,7 +9,6 @@ const INITIALIZED_SET: Set = {
 };
 
 const INITIALIZED_EXERCISE: Omit<WorkoutExercise, "exercise_id"> = {
-  // exercise_id: null,
   tracked: ["reps"], // TODO: Get default tracking field from exercise object
   sets: [
     {

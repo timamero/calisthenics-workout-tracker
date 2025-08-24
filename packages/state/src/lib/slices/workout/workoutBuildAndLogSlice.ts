@@ -1,7 +1,3 @@
-// This slice will contain shared functionality between workout builds and logs
-// Create combined action to set mode and initialize workout log/build
-
-// Will put all the functionality of workout building and logging state here to prevent duplication
 import { StateCreator } from "zustand";
 
 import type {
@@ -66,7 +62,6 @@ const INITIALIZED_WORKOUT_LOG: Omit<WorkoutLogDraft, "date"> = {
   title: "New workout log",
   workout_data: { exercises: [] },
   status: "draft",
-  // date: new Date(),
 };
 
 const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {

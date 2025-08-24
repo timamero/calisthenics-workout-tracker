@@ -1,6 +1,3 @@
-// ****** Workout builds and logs list
-// When user first loads the app, the app will fetch the latest 20 workout logs and all the workout builds (users will have a limit of 10 builds)
-// The workout logs and builds are saved to their respective list variables
 import { StateCreator } from "zustand";
 
 import type { WorkoutLog, WorkoutBuild } from "@cwt/schema/workouts";
@@ -21,8 +18,8 @@ export const createWorkoutsSlice: StateCreator<
   [],
   WorkoutsSlice
 > = (set, get) => ({
-  masterWorkoutLogs: [],
-  masterWorkoutBuilds: [],
+  masterWorkoutLogs: [], // TODO: Check that the max number returned is 20
+  masterWorkoutBuilds: [], // TODO: Check that the max number returned is 10
   // TODO: Create action function to sort logs by date and builds by creation date
   setWorkouts: (logs, builds) =>
     set(() => ({ masterWorkoutLogs: logs, masterWorkoutBuilds: builds })),
