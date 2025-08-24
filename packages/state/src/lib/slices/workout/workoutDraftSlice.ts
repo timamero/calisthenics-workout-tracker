@@ -19,7 +19,7 @@ import {
   updateSetInExercise,
   addExerciseToWorkout,
   applyExerciseUpdateAtIndex,
-} from "./workoutBuildAndLogActions";
+} from "./workoutDraftActions";
 
 export enum Mode {
   Build = "BUILD",
