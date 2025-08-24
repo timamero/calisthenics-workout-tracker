@@ -1,21 +1,7 @@
 import { Set, WorkoutExercise } from "@cwt/schema/workouts";
 
 import { WorkoutBuildDraft, WorkoutLogDraft } from "./workoutDraftSlice";
-
-const INITIALIZED_SET: Set = {
-  fields: { reps: 0, rest: "30S" }, // TODO: Set default fields depeneding on the tracked values
-  completed: false,
-  completed_at: null,
-};
-
-const INITIALIZED_EXERCISE: Omit<WorkoutExercise, "exercise_id"> = {
-  tracked: ["reps"], // TODO: Get default tracking field from exercise object
-  sets: [
-    {
-      ...INITIALIZED_SET,
-    },
-  ],
-};
+import { INITIALIZED_EXERCISE, INITIALIZED_SET } from "./workoutDefaults";
 
 export function exerciseAtIndex(
   index: number,
