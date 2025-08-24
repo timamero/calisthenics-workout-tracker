@@ -17,7 +17,9 @@ import {
   updateExercise,
   updateExercisesAtIndex,
   updateSetInExercise,
-  updateWorkoutAtExerciseIndex,
+  // updateWorkoutAtExerciseIndex,
+  addExerciseToWorkout,
+  applyExerciseUpdateAtIndex,
 } from "./workoutBuildAndLogActions";
 
 export enum Mode {
@@ -97,25 +99,22 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
   updateWorkout: (action, exerciseID, exerciseIndex, setIndex, updatedSet) =>
     set((state) => {
       if (state.mode === Mode.Edit || state.mode === Mode.Build) {
-        // let updatedWorkout: Draft | null = null;
         let updatedWorkout = {};
         let updatedExercise: WorkoutExercise;
 
         switch (action) {
           case Action.AddExercise:
-            if (state.workout) {
-              updatedWorkout = updateWorkoutAtExerciseIndex(
-                null,
+            if (exerciseID && state.workout) {
+              updatedWorkout = addExerciseToWorkout(
                 state.workout,
-                null,
-                addExercise,
-                exerciseID
+                exerciseID,
+                addExercise
               );
             }
             break;
           case Action.DeleteExercise:
             if (exerciseIndex !== undefined && state.workout) {
-              updatedWorkout = updateWorkoutAtExerciseIndex(
+              updatedWorkout = applyExerciseUpdateAtIndex(
                 exerciseIndex,
                 state.workout,
                 null,
@@ -132,7 +131,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
                 addSetToExercise
               );
 
-              updatedWorkout = updateWorkoutAtExerciseIndex(
+              updatedWorkout = applyExerciseUpdateAtIndex(
                 exerciseIndex,
                 state.workout,
                 updatedExercise,
@@ -154,7 +153,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
                 deleteSetInExercise
               );
 
-              updatedWorkout = updateWorkoutAtExerciseIndex(
+              updatedWorkout = applyExerciseUpdateAtIndex(
                 exerciseIndex,
                 state.workout,
                 updatedExercise,
@@ -177,7 +176,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
                 updatedSet
               );
 
-              updatedWorkout = updateWorkoutAtExerciseIndex(
+              updatedWorkout = applyExerciseUpdateAtIndex(
                 exerciseIndex,
                 state.workout,
                 updatedExercise,
