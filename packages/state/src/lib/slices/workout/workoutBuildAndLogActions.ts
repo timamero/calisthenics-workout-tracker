@@ -20,14 +20,14 @@ const INITIALIZED_EXERCISE: Omit<WorkoutExercise, "exercise_id"> = {
 export function exerciseAtIndex(
   index: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft
-) {
+): WorkoutExercise {
   return workout.workout_data.exercises[index];
 }
 
 export function addExercise(
   id: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft
-) {
+): WorkoutExercise[] {
   return [
     ...(workout.workout_data.exercises as WorkoutExercise[]),
     { ...INITIALIZED_EXERCISE, exercise_id: id },
@@ -57,7 +57,7 @@ export function updateSetInExercise(
   exerciseToUpdate: WorkoutExercise,
   index: number | undefined,
   updatedSet?: Set | undefined
-) {
+): WorkoutExercise {
   if (updatedSet) {
     return {
       ...exerciseToUpdate,
