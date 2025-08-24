@@ -44,7 +44,7 @@ export type WorkoutLogDraft = Pick<
   "title" | "workout_data" | "status" | "date"
 >;
 
-export interface WorkoutBuildAndLogSlice {
+export interface WorkoutDraftSlice {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
   setMode: (mode: Mode.Edit | Mode.Log) => void;
@@ -70,11 +70,11 @@ const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {
   source: "manual",
 };
 
-export const createWorkoutBuildAndLogSlice: StateCreator<
+export const createWorkoutDraftSlice: StateCreator<
   StoreState,
   [],
   [],
-  WorkoutBuildAndLogSlice
+  WorkoutDraftSlice
 > = (set, get) => ({
   mode: null,
   workout: null,
