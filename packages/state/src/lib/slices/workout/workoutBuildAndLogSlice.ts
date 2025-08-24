@@ -52,6 +52,7 @@ export interface WorkoutBuildAndLogSlice {
   initializeWorkout: (mode: Mode) => void;
   addExercise: (exerciseID: number) => void;
   removeExercise: (exerciseIndex: number) => void;
+  addSet: (exerciseIndex: number) => void;
   updateWorkout: (
     action: Action,
     exerciseID?: number,
@@ -127,6 +128,30 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
             state.workout,
             null,
             removeExerciseAtIndex
+          );
+        }
+        return {
+          workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
+        };
+      }
+      return {
+        ...state,
+      };
+    }),
+  addSet: (exerciseIndex) =>
+    set((state) => {
+      if (state.mode === Mode.Edit || state.mode === Mode.Build) {
+        let updatedWorkout = {};
+        let updatedExercise: WorkoutExercise;
+        if (exerciseIndex !== undefined && state.workout) {
+          const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+          updatedExercise = updateExercise(exercise, null, addSetToExercise);
+
+          updatedWorkout = applyExerciseUpdateAtIndex(
+            exerciseIndex,
+            state.workout,
+            updatedExercise,
+            updateExercisesAtIndex
           );
         }
         return {
