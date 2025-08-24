@@ -84,20 +84,21 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
     set(() => {
       if (mode === Mode.Build) {
         return {
-          workout: INITIALIZED_WORKOUT_BUILD,
+          workout: INITIALIZED_WORKOUT_BUILD as WorkoutBuild,
           mode: mode,
         };
       }
 
       return {
-        workout: { ...INITIALIZED_WORKOUT_LOG, date: new Date() },
+        workout: { ...INITIALIZED_WORKOUT_LOG, date: new Date() } as WorkoutLog,
         mode: mode,
       };
     }),
   updateWorkout: (action, exerciseID, exerciseIndex, setIndex, updatedSet) =>
     set((state) => {
       if (state.mode === Mode.Edit || state.mode === Mode.Build) {
-        let updatedWorkout: WorkoutBuildDraft | WorkoutLogDraft | null = null;
+        // let updatedWorkout: Draft | null = null;
+        let updatedWorkout = {};
         let updatedExercise: WorkoutExercise;
 
         switch (action) {
@@ -179,7 +180,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
         }
 
         return {
-          workout: updatedWorkout,
+          workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
         };
       }
       return {
