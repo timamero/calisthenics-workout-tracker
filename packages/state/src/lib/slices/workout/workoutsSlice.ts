@@ -10,6 +10,7 @@ export interface WorkoutsSlice {
   masterWorkoutBuilds: WorkoutBuild[];
   setWorkouts: (logs: WorkoutLog[], builds: WorkoutBuild[]) => void;
   addWorkout: (mode: Mode, workout: WorkoutLog | WorkoutBuild) => void;
+  completeWorkout: (mode: Mode, workout: WorkoutLog | WorkoutBuild) => void;
 }
 
 export const createWorkoutsSlice: StateCreator<
@@ -40,4 +41,8 @@ export const createWorkoutsSlice: StateCreator<
         masterWorkoutLogs: [...state.masterWorkoutLogs, workout as WorkoutLog],
       };
     }),
+  completeWorkout: (mode, workout) => {
+    get().addWorkout(mode, workout);
+    get().resetWorkout();
+  },
 });
