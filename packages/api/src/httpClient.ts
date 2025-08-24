@@ -5,7 +5,8 @@ export async function apiFetch<T>(
   baseUrl: string,
   endpoint: string,
   method?: Method,
-  token?: string
+  token?: string,
+  body?: BodyInit
 ): Promise<T> {
   if (!method) {
     method = "GET";
@@ -16,7 +17,7 @@ export async function apiFetch<T>(
   };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const res = await fetch(`${baseUrl}${endpoint}`, { method, headers });
+  const res = await fetch(`${baseUrl}${endpoint}`, { method, headers, body });
   if (!res.ok) {
     throw new Error(
       `API Error at endpoint ${endpoint}: ${res.status} ${res.statusText}`
