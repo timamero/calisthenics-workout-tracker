@@ -53,6 +53,7 @@ export interface WorkoutBuildAndLogSlice {
   addExercise: (exerciseID: number) => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
+  deleteSet: (exerciseIndex: number, setIndex: number) => void;
   updateWorkout: (
     action: Action,
     exerciseID?: number,
@@ -162,6 +163,38 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
         ...state,
       };
     }),
+  deleteSet: (exerciseIndex, setIndex) =>
+    set((state) => {
+      if (state.mode === Mode.Edit || state.mode === Mode.Build) {
+        let updatedWorkout = {};
+        let updatedExercise: WorkoutExercise;
+        if (
+          exerciseIndex !== undefined &&
+          setIndex !== undefined &&
+          state.workout
+        ) {
+          const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+          updatedExercise = updateExercise(
+            exercise,
+            setIndex,
+            deleteSetInExercise
+          );
+
+          updatedWorkout = applyExerciseUpdateAtIndex(
+            exerciseIndex,
+            state.workout,
+            updatedExercise,
+            updateExercisesAtIndex
+          );
+        }
+        return {
+          workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
+        };
+      }
+      return {
+        ...state,
+      };
+    }),
   updateWorkout: (action, exerciseID, exerciseIndex, setIndex, updatedSet) =>
     set((state) => {
       if (state.mode === Mode.Edit || state.mode === Mode.Build) {
@@ -188,46 +221,46 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
           //     );
           //   }
           //   break;
-          case Action.AddSet:
-            if (exerciseIndex !== undefined && state.workout) {
-              const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-              updatedExercise = updateExercise(
-                exercise,
-                null,
-                addSetToExercise
-              );
+          // case Action.AddSet:
+          //   if (exerciseIndex !== undefined && state.workout) {
+          //     const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+          //     updatedExercise = updateExercise(
+          //       exercise,
+          //       null,
+          //       addSetToExercise
+          //     );
 
-              updatedWorkout = applyExerciseUpdateAtIndex(
-                exerciseIndex,
-                state.workout,
-                updatedExercise,
-                updateExercisesAtIndex
-              );
-            }
+          //     updatedWorkout = applyExerciseUpdateAtIndex(
+          //       exerciseIndex,
+          //       state.workout,
+          //       updatedExercise,
+          //       updateExercisesAtIndex
+          //     );
+          //   }
 
-            break;
-          case Action.DeleteSet:
-            if (
-              exerciseIndex !== undefined &&
-              setIndex !== undefined &&
-              state.workout
-            ) {
-              const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-              updatedExercise = updateExercise(
-                exercise,
-                setIndex,
-                deleteSetInExercise
-              );
+          //   break;
+          // case Action.DeleteSet:
+          //   if (
+          //     exerciseIndex !== undefined &&
+          //     setIndex !== undefined &&
+          //     state.workout
+          //   ) {
+          //     const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+          //     updatedExercise = updateExercise(
+          //       exercise,
+          //       setIndex,
+          //       deleteSetInExercise
+          //     );
 
-              updatedWorkout = applyExerciseUpdateAtIndex(
-                exerciseIndex,
-                state.workout,
-                updatedExercise,
-                updateExercisesAtIndex
-              );
-            }
+          //     updatedWorkout = applyExerciseUpdateAtIndex(
+          //       exerciseIndex,
+          //       state.workout,
+          //       updatedExercise,
+          //       updateExercisesAtIndex
+          //     );
+          //   }
 
-            break;
+          //   break;
           case Action.UpdateSet:
             if (
               exerciseIndex !== undefined &&
