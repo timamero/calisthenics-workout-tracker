@@ -1,6 +1,6 @@
 import { Set, WorkoutExercise } from "@cwt/schema/workouts";
 
-import { WorkoutBuildDraft, WorkoutLogDraft } from "./workoutBuildAndLogSlice";
+import { WorkoutBuildDraft, WorkoutLogDraft } from "./workoutDraftSlice";
 
 const INITIALIZED_SET: Set = {
   fields: { reps: 0, rest: "30S" }, // TODO: Set default fields depeneding on the tracked values

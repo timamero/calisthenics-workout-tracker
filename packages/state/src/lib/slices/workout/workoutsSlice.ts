@@ -3,7 +3,7 @@ import { StateCreator } from "zustand";
 import type { WorkoutLog, WorkoutBuild } from "@cwt/schema/workouts";
 
 import { StoreState } from "../../store";
-import { Mode } from "./workoutBuildAndLogSlice";
+import { Mode } from "./workoutDraftSlice";
 
 export interface WorkoutsSlice {
   masterWorkoutLogs: WorkoutLog[];
