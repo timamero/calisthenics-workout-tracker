@@ -114,7 +114,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
             }
             break;
           case Action.DeleteExercise:
-            if (exerciseIndex && state.workout) {
+            if (exerciseIndex !== undefined && state.workout) {
               updatedWorkout = updateWorkoutAtExerciseIndex(
                 exerciseIndex,
                 state.workout,
@@ -124,7 +124,7 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
             }
             break;
           case Action.AddSet:
-            if (exerciseIndex && state.workout) {
+            if (exerciseIndex !== undefined && state.workout) {
               const exercise = exerciseAtIndex(exerciseIndex, state.workout);
               updatedExercise = updateExercise(
                 exercise,
@@ -142,7 +142,11 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 
             break;
           case Action.DeleteSet:
-            if (exerciseIndex && setIndex && state.workout) {
+            if (
+              exerciseIndex !== undefined &&
+              setIndex !== undefined &&
+              state.workout
+            ) {
               const exercise = exerciseAtIndex(exerciseIndex, state.workout);
               updatedExercise = updateExercise(
                 exercise,
@@ -160,7 +164,11 @@ export const createWorkoutBuildAndLogSlice: StateCreator<
 
             break;
           case Action.UpdateSet:
-            if (exerciseIndex && setIndex && state.workout) {
+            if (
+              exerciseIndex !== undefined &&
+              setIndex !== undefined &&
+              state.workout
+            ) {
               const exercise = exerciseAtIndex(exerciseIndex, state.workout);
               updatedExercise = updateExercise(
                 exercise,
