@@ -25,12 +25,12 @@ export function exerciseAtIndex(
 }
 
 export function addExercise(
-  id: number,
+  exercise_id: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft
 ): WorkoutExercise[] {
   return [
     ...(workout.workout_data.exercises as WorkoutExercise[]),
-    { ...INITIALIZED_EXERCISE, exercise_id: id },
+    { ...INITIALIZED_EXERCISE, exercise_id: exercise_id },
   ];
 }
 
@@ -115,7 +115,23 @@ export function updateExercise(
   return exerciseUpdater(exercise);
 }
 
-export function updateWorkoutAtExerciseIndex(
+export function addExerciseToWorkout(
+  workout: WorkoutBuildDraft | WorkoutLogDraft,
+  exerciseID: number,
+  exercisesUpdater: (
+    exercise_id: number,
+    workout: WorkoutBuildDraft | WorkoutLogDraft
+  ) => WorkoutExercise[]
+): WorkoutBuildDraft | WorkoutLogDraft {
+  return {
+    ...workout,
+    workout_data: {
+      exercises: exercisesUpdater(exerciseID, workout),
+    },
+  };
+}
+
+export function applyExerciseUpdateAtIndex(
   index: number | null,
   workout: WorkoutBuildDraft | WorkoutLogDraft,
   updatedExercise: WorkoutExercise | null,
@@ -123,8 +139,7 @@ export function updateWorkoutAtExerciseIndex(
     index: number,
     workout: WorkoutBuildDraft | WorkoutLogDraft,
     updatedExercise?: WorkoutExercise
-  ) => WorkoutExercise[],
-  exerciseID?: number
+  ) => WorkoutExercise[]
 ): WorkoutBuildDraft | WorkoutLogDraft {
   if (updatedExercise && index) {
     return {
@@ -139,14 +154,6 @@ export function updateWorkoutAtExerciseIndex(
       ...workout,
       workout_data: {
         exercises: exercisesUpdater(index, workout),
-      },
-    };
-  }
-  if (exerciseID) {
-    return {
-      ...workout,
-      workout_data: {
-        exercises: exercisesUpdater(exerciseID, workout),
       },
     };
   }
