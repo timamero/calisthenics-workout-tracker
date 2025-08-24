@@ -1,8 +1,12 @@
-import { Set, WorkoutExercise } from "@cwt/schema/workouts";
+import { Set, WorkoutExercise, SetFields } from "@cwt/schema/workouts";
 import { Tracking } from "@cwt/schema/exercises";
 
 import { WorkoutBuildDraft, WorkoutLogDraft } from "./workoutDraftSlice";
-import { INITIALIZED_EXERCISE, INITIALIZED_SET } from "./workoutDefaults";
+import {
+  INITIALIZED_SET,
+  DEFAULT_DURATION_SET,
+  DEFAULT_REP_SET,
+} from "./workoutDefaults";
 
 export function exerciseAtIndex(
   index: number,
@@ -16,10 +20,16 @@ export function addExercise(
   default_tracking: Tracking[],
   workout: WorkoutBuildDraft | WorkoutLogDraft
 ): WorkoutExercise[] {
+  let fields: SetFields = {};
+  if (default_tracking.includes("reps")) {
+    fields = DEFAULT_REP_SET;
+  } else if (default_tracking.includes("duration")) {
+    fields = DEFAULT_DURATION_SET;
+  }
   return [
     ...(workout.workout_data.exercises as WorkoutExercise[]),
     {
-      ...INITIALIZED_EXERCISE,
+      sets: [{ ...INITIALIZED_SET, fields: fields }],
       exercise_id: exercise_id,
       tracked: default_tracking,
     },
@@ -29,9 +39,15 @@ export function addExercise(
 export function addSetToExercise(
   exerciseToUpdate: WorkoutExercise
 ): WorkoutExercise {
+  let fields: SetFields = {};
+  if (exerciseToUpdate.tracked.includes("reps")) {
+    fields = DEFAULT_REP_SET;
+  } else if (exerciseToUpdate.tracked.includes("duration")) {
+    fields = DEFAULT_DURATION_SET;
+  }
   return {
     ...exerciseToUpdate,
-    sets: [...exerciseToUpdate.sets, INITIALIZED_SET],
+    sets: [...exerciseToUpdate.sets, { ...INITIALIZED_SET, fields: fields }],
   };
 }
 
