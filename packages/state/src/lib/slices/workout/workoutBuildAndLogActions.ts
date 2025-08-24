@@ -2,6 +2,22 @@ import { Set, WorkoutExercise } from "@cwt/schema/workouts";
 
 import { WorkoutBuildDraft, WorkoutLogDraft } from "./workoutBuildAndLogSlice";
 
+const INITIALIZED_SET: Set = {
+  fields: { reps: 0, rest: "30S" }, // TODO: Set default fields depeneding on the tracked values
+  completed: false,
+  completed_at: null,
+};
+
+const INITIALIZED_EXERCISE: Omit<WorkoutExercise, "exercise_id"> = {
+  // exercise_id: null,
+  tracked: ["reps"], // TODO: Get default tracking field from exercise object
+  sets: [
+    {
+      ...INITIALIZED_SET,
+    },
+  ],
+};
+
 export function exerciseAtIndex(
   index: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft
@@ -13,33 +29,15 @@ export function addExercise(
   id: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft
 ) {
-  const INITIALIZED_EXERCISE: WorkoutExercise = {
-    exercise_id: id,
-    tracked: ["reps"], // TODO: Get default tracking field from exercise object
-    sets: [
-      {
-        fields: { reps: 0, rest: "30S" },
-        completed: false,
-        completed_at: null,
-      },
-    ],
-  };
-
   return [
     ...(workout.workout_data.exercises as WorkoutExercise[]),
-    INITIALIZED_EXERCISE,
+    { ...INITIALIZED_EXERCISE, exercise_id: id },
   ];
 }
 
 export function addSetToExercise(
   exerciseToUpdate: WorkoutExercise
 ): WorkoutExercise {
-  const INITIALIZED_SET: Set = {
-    fields: { reps: 0, rest: "30S" },
-    completed: false,
-    completed_at: null,
-  };
-
   return {
     ...exerciseToUpdate,
     sets: [...exerciseToUpdate.sets, INITIALIZED_SET],
