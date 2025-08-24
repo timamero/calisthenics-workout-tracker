@@ -318,6 +318,9 @@ importers:
       '@cwt/schema':
         specifier: workspace:*
         version: link:../schema
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       react:
         specifier: 19.0.0
         version: 19.0.0
