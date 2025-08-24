@@ -6,8 +6,8 @@ export const INITIALIZED_SET: Set = {
   completed_at: null,
 };
 
-export const INITIALIZED_EXERCISE: Omit<WorkoutExercise, "exercise_id"> = {
-  tracked: ["reps"], // TODO: Get default tracking field from exercise object
+export const INITIALIZED_EXERCISE: Pick<WorkoutExercise, "sets"> = {
+  // tracked: ["reps"], // TODO: Get default tracking field from exercise object
   sets: [
     {
       ...INITIALIZED_SET,

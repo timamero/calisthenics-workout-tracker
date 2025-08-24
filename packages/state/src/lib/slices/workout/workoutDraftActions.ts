@@ -1,4 +1,5 @@
 import { Set, WorkoutExercise } from "@cwt/schema/workouts";
+import { Tracking } from "@cwt/schema/exercises";
 
 import { WorkoutBuildDraft, WorkoutLogDraft } from "./workoutDraftSlice";
 import { INITIALIZED_EXERCISE, INITIALIZED_SET } from "./workoutDefaults";
@@ -12,11 +13,16 @@ export function exerciseAtIndex(
 
 export function addExercise(
   exercise_id: number,
+  default_tracking: Tracking[],
   workout: WorkoutBuildDraft | WorkoutLogDraft
 ): WorkoutExercise[] {
   return [
     ...(workout.workout_data.exercises as WorkoutExercise[]),
-    { ...INITIALIZED_EXERCISE, exercise_id: exercise_id },
+    {
+      ...INITIALIZED_EXERCISE,
+      exercise_id: exercise_id,
+      tracked: default_tracking,
+    },
   ];
 }
 
@@ -104,15 +110,16 @@ export function updateExercise(
 export function addExerciseToWorkout(
   workout: WorkoutBuildDraft | WorkoutLogDraft,
   exerciseID: number,
-  exercisesUpdater: (
-    exercise_id: number,
-    workout: WorkoutBuildDraft | WorkoutLogDraft
-  ) => WorkoutExercise[]
+  default_tracking: Tracking[]
+  // exercisesUpdater: (
+  //   exercise_id: number,
+  //   workout: WorkoutBuildDraft | WorkoutLogDraft
+  // ) => WorkoutExercise[]
 ): WorkoutBuildDraft | WorkoutLogDraft {
   return {
     ...workout,
     workout_data: {
-      exercises: exercisesUpdater(exerciseID, workout),
+      exercises: addExercise(exerciseID, default_tracking, workout),
     },
   };
 }
