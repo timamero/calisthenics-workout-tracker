@@ -16,6 +16,10 @@
     "./exercisesService": {
       "types": "./dist/exercisesService.d.ts",
       "default": "./dist/exercisesService.js"
+    },
+    "./workoutsService": {
+      "types": "./dist/workoutsService.d.ts",
+      "default": "./dist/workoutsService.js"
     }
   },
   "dependencies": {
