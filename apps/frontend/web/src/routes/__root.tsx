@@ -12,6 +12,8 @@ import { useAuthStore } from '@cwt/state/auth';
 import { useStore } from '@cwt/state/store';
 
 import { getExercises } from '../services/exercisesService';
+import { getWorkoutBuilds } from '../services/workoutsService';
+
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -41,6 +43,8 @@ function RootComponent() {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token) {
         const exercises = await getExercises(supabaseSession.access_token);
+        const workoutBuilds = await getWorkoutBuilds(supabaseSession.access_token);
+        console.log('workoutBuilds', workoutBuilds)
         setExercises(exercises);
       }
     };
