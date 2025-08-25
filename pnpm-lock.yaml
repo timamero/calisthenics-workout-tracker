@@ -259,10 +259,10 @@ importers:
       '@cwt/schema':
         specifier: workspace:*
         version: link:../schema
+    devDependencies:
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
-    devDependencies:
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
