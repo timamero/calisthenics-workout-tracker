@@ -1,9 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title, Stack, Group, ScrollArea } from '@mantine/core';
+import { Title, Stack, Group, ScrollArea, Text } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
 
 import CardButton from '../components/common/CardButton';
+import LargeButton from '../components/common/LargeButton';
 
 
 export const Route = createFileRoute('/startWorkout')({
@@ -25,6 +26,7 @@ function StartWorkoutView() {
   return (
      <Stack gap="xl">
         <Title size="h6">Start Workout</Title>
+          <LargeButton><Text>Build Workout Template</Text></LargeButton>
           <ScrollArea>
             <Group wrap="nowrap">
               {workoutBuildCards}
