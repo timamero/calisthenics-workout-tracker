@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title, Stack, Group } from '@mantine/core';
+import { Title, Stack, Group, ScrollArea } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
 
@@ -18,16 +18,18 @@ function StartWorkoutView() {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`
     return (
       <CardButton key={i}>
-        <Title>{workoutTitle}</Title>
+        <Title  order={3} size="h5">{workoutTitle}</Title>
       </CardButton>
     )
   })
   return (
      <Stack gap="xl">
         <Title size="h6">Start Workout</Title>
-        <Group>
-          {workoutBuildCards}
-        </Group>
+          <ScrollArea>
+            <Group wrap="nowrap">
+              {workoutBuildCards}
+            </Group>
+          </ScrollArea>
       </Stack>
   );
 }
