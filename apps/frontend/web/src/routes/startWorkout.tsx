@@ -1,7 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title } from '@mantine/core';
+import { Title, Stack, Group } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
+
+import CardButton from '../components/common/CardButton';
+
 
 export const Route = createFileRoute('/startWorkout')({
   component: StartWorkoutView,
@@ -10,13 +13,21 @@ export const Route = createFileRoute('/startWorkout')({
 function StartWorkoutView() {
   const workoutBuilds = useStore((state) => state.masterWorkoutBuilds)
   console.log('workout builds in workout page', workoutBuilds)
+
+  const workoutBuildCards = workoutBuilds.map((wo, i) => {
+    const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`
+    return (
+      <CardButton key={i}>
+        <Title>{workoutTitle}</Title>
+      </CardButton>
+    )
+  })
   return (
-    <div>
-      <Title>Start Workout Page</Title>
-      <p>
-        This page is the starting point for a workout. The user will be able to
-        start from a blank slate or start a workout from a template.
-      </p>
-    </div>
+     <Stack gap="xl">
+        <Title size="h6">Start Workout</Title>
+        <Group>
+          {workoutBuildCards}
+        </Group>
+      </Stack>
   );
 }
