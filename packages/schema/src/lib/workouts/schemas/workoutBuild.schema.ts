@@ -7,6 +7,6 @@ import { DurationSchema } from '../../common/schemas/duration.schema';
 export const WorkoutBuildSchema = z.object({
   ...WorkoutBase.shape,
   user_id: z.optional(z.uuid()),
-  duration: z.optional(z.iso.time()),
+  duration: z.nullable(z.iso.time()),
   source: SourceSchema,
 });
