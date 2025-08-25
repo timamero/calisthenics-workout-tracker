@@ -30,6 +30,7 @@ class WorkoutDataSchema(BaseModel):
 
 class BaseWorkoutSchema(BaseModel):
     id: int
+    created_at: datetime
     updated_at: Optional[datetime]
     title: Optional[str] = Field(None, max_length=70)
     description: Optional[str] = Field(None, max_length=500)
