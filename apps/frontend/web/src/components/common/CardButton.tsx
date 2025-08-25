@@ -1,6 +1,11 @@
 import { Paper, Stack, UnstyledButton } from '@mantine/core';
+import type { ReactNode } from 'react';
 
-export default function CardButton() {
+interface CardButtonProps {
+  children: ReactNode
+}
+
+export default function CardButton({ children }: CardButtonProps) {
   const handleClick = () => {
     console.log('clicked item');
   };
@@ -13,7 +18,7 @@ export default function CardButton() {
           justify="center"
           gap="sm"
         >
-          Item content here
+          {children}
         </Stack>
       </Paper>
     </UnstyledButton>
