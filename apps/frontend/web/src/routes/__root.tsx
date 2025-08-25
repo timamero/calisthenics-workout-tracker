@@ -20,13 +20,16 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  const [opened, { toggle }] = useDisclosure();
-
   const setExercises = useStore((state) => state.setExercises);
+  const setWorkouts = useStore((state) => state.setWorkouts)
+
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
   const setSession = useAuthStore((state) => state.setSession);
   const setLoading = useAuthStore((state) => state.setLoading);
+
+  // Manage state to open and close menu
+  const [opened, { toggle }] = useDisclosure();
 
   const navLinks = [
     { label: 'Home', to: '/' },
@@ -44,8 +47,9 @@ function RootComponent() {
       if (supabaseSession?.access_token) {
         const exercises = await getExercises(supabaseSession.access_token);
         const workoutBuilds = await getWorkoutBuilds(supabaseSession.access_token);
-        console.log('workoutBuilds', workoutBuilds)
+        // console.log('workoutBuilds', workoutBuilds)
         setExercises(exercises);
+        setWorkouts([], workoutBuilds)
       }
     };
     asyncFetchData();
