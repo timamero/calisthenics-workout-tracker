@@ -1,6 +1,6 @@
 import { Paper, Stack, UnstyledButton } from '@mantine/core';
 
-export default function ListItemActionCard() {
+export default function CardButton() {
   const handleClick = () => {
     console.log('clicked item');
   };
