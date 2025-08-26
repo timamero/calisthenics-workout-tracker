@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkoutDashboardRouteImport } from './routes/workoutDashboard'
+import { Route as WorkoutRouteImport } from './routes/workout'
 import { Route as UserRouteImport } from './routes/user'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SettingsRouteImport } from './routes/settings'
@@ -21,11 +22,15 @@ import { Route as LandingRouteImport } from './routes/landing'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as WorkoutModeRouteImport } from './routes/workout.$mode.'
 
 const WorkoutDashboardRoute = WorkoutDashboardRouteImport.update({
   id: '/workoutDashboard',
   path: '/workoutDashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkoutRoute = WorkoutRouteImport.update({
+  id: '/workout',
+  path: '/workout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UserRoute = UserRouteImport.update({
@@ -83,11 +88,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WorkoutModeRoute = WorkoutModeRouteImport.update({
-  id: '/workout/$mode/',
-  path: '/workout/$mode/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -101,8 +101,8 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/user': typeof UserRoute
+  '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
-  '/workout/$mode': typeof WorkoutModeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -116,8 +116,8 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/user': typeof UserRoute
+  '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
-  '/workout/$mode': typeof WorkoutModeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -132,8 +132,8 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/user': typeof UserRoute
+  '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
-  '/workout/$mode/': typeof WorkoutModeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -149,8 +149,8 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/user'
+    | '/workout'
     | '/workoutDashboard'
-    | '/workout/$mode'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -164,8 +164,8 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/user'
+    | '/workout'
     | '/workoutDashboard'
-    | '/workout/$mode'
   id:
     | '__root__'
     | '/'
@@ -179,8 +179,8 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/user'
+    | '/workout'
     | '/workoutDashboard'
-    | '/workout/$mode/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -195,8 +195,8 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   UserRoute: typeof UserRoute
+  WorkoutRoute: typeof WorkoutRoute
   WorkoutDashboardRoute: typeof WorkoutDashboardRoute
-  WorkoutModeRoute: typeof WorkoutModeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -206,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/workoutDashboard'
       fullPath: '/workoutDashboard'
       preLoaderRoute: typeof WorkoutDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/workout': {
+      id: '/workout'
+      path: '/workout'
+      fullPath: '/workout'
+      preLoaderRoute: typeof WorkoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/user': {
@@ -285,13 +292,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/workout/$mode/': {
-      id: '/workout/$mode/'
-      path: '/workout/$mode'
-      fullPath: '/workout/$mode'
-      preLoaderRoute: typeof WorkoutModeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -307,8 +307,8 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   UserRoute: UserRoute,
+  WorkoutRoute: WorkoutRoute,
   WorkoutDashboardRoute: WorkoutDashboardRoute,
-  WorkoutModeRoute: WorkoutModeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

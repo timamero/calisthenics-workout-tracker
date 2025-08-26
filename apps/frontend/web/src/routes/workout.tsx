@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { useStore } from '@cwt/state/store';
 
-export const Route = createFileRoute('/workout/$mode/')({
+export const Route = createFileRoute('/workout')({
   component: WorkoutView,
 });
 
