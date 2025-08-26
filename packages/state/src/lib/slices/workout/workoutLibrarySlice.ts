@@ -28,7 +28,7 @@ export const createWorkoutLibrarySlice: StateCreator<
     set((state) => {
       // The workout object will be the object returned from the database, not from workout state
 
-      if (mode === Mode.Build) {
+      if (mode === 'build') {
         return {
           masterWorkoutBuilds: [
             ...state.masterWorkoutBuilds,

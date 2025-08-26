@@ -22,13 +22,7 @@ import {
 } from './workoutDraftActions';
 import { Tracking } from '@cwt/schema/exercises';
 
-enum Action {
-  AddExercise = 'ADD_EXERCISE',
-  DeleteExercise = 'DELETE_EXERCISE',
-  AddSet = 'ADD_SET',
-  DeleteSet = 'DELETE_SET',
-  UpdateSet = 'UPDATE_SET',
-}
+export type Mode = 'build' | 'edit' | 'log'
 
 export type WorkoutBuildDraft = Pick<
   WorkoutBuild,
@@ -40,10 +34,10 @@ export type WorkoutLogDraft = Pick<
 >;
 
 export interface WorkoutDraftSlice {
-  mode: 'build' | 'log' | 'edit' | null;
+  mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
-  setMode: (mode: 'build' | 'log' | 'edit') => void;
-  initializeWorkout: (mode: 'build' | 'log' | 'edit') => void;
+  setMode: (mode: Mode) => void;
+  initializeWorkout: (mode: Mode) => void;
   addExercise: (exerciseID: number) => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
