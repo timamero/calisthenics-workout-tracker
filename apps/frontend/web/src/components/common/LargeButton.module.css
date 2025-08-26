@@ -1,0 +1,13 @@
+.button {
+  background-color: var(--mantine-color-orange-0);
+  border-radius: var(--mantine-radius-xs);
+  border: 1px solid var(--mantine-color-default-border);
+
+  @media (min-width: $mantine-breakpoint-md) {
+    max-width: 50%;
+  }
+}
+
+.button:hover {
+  background-color: var(--mantine-color-orange-2);
+}
