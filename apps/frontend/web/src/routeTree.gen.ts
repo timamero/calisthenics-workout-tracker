@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkoutDashboardRouteImport } from './routes/workoutDashboard'
+import { Route as WorkoutRouteImport } from './routes/workout'
 import { Route as UserRouteImport } from './routes/user'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SettingsRouteImport } from './routes/settings'
@@ -25,6 +26,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const WorkoutDashboardRoute = WorkoutDashboardRouteImport.update({
   id: '/workoutDashboard',
   path: '/workoutDashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkoutRoute = WorkoutRouteImport.update({
+  id: '/workout',
+  path: '/workout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UserRoute = UserRouteImport.update({
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/user': typeof UserRoute
+  '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
 }
 export interface FileRoutesByTo {
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/user': typeof UserRoute
+  '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
 }
 export interface FileRoutesById {
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/user': typeof UserRoute
+  '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/user'
+    | '/workout'
     | '/workoutDashboard'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/user'
+    | '/workout'
     | '/workoutDashboard'
   id:
     | '__root__'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/signup'
     | '/user'
+    | '/workout'
     | '/workoutDashboard'
   fileRoutesById: FileRoutesById
 }
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   UserRoute: typeof UserRoute
+  WorkoutRoute: typeof WorkoutRoute
   WorkoutDashboardRoute: typeof WorkoutDashboardRoute
 }
 
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/workoutDashboard'
       fullPath: '/workoutDashboard'
       preLoaderRoute: typeof WorkoutDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/workout': {
+      id: '/workout'
+      path: '/workout'
+      fullPath: '/workout'
+      preLoaderRoute: typeof WorkoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/user': {
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   UserRoute: UserRoute,
+  WorkoutRoute: WorkoutRoute,
   WorkoutDashboardRoute: WorkoutDashboardRoute,
 }
 export const routeTree = rootRouteImport
