@@ -5,17 +5,19 @@ import type { ReactNode } from 'react';
 import classes from './LargeButton.module.css';
 
 interface LargeButtonProps {
+  onButtonClick: () => void;
   to: string;
   children: ReactNode;
 }
 
-export default function LargeButton({ to, children }: LargeButtonProps) {
-  const handleClick = () => {
-    console.log('clicked item');
-  };
+export default function LargeButton({
+  onButtonClick,
+  to,
+  children,
+}: LargeButtonProps) {
   return (
     <UnstyledButton
-      onClick={handleClick}
+      onClick={onButtonClick}
       className={classes.button}
       component={Link}
       to={to}

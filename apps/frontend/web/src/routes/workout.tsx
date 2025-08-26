@@ -8,10 +8,10 @@ export const Route = createFileRoute('/workout')({
 
 function WorkoutView() {
   const mode = useStore((state) => state.mode);
-  const setMode = useStore((state) => state.setMode);
-
-  if (mode === null) {
-    setMode('build');
-  }
+  // const setMode = useStore((state) => state.setMode);
+  console.log('mode set to: ', mode);
+  // if (mode === null) {
+  //   setMode('build');
+  // }
   return <div>Hello "/workout"!</div>;
 }
