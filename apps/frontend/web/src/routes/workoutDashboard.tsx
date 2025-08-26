@@ -7,11 +7,11 @@ import CardButton from '../components/common/CardButton';
 import LargeButton from '../components/common/LargeButton';
 
 
-export const Route = createFileRoute('/startWorkout')({
-  component: StartWorkoutView,
+export const Route = createFileRoute('/workoutDashboard')({
+  component: WorkoutDashboardView,
 });
 
-function StartWorkoutView() {
+function WorkoutDashboardView() {
   const workoutBuilds = useStore((state) => state.masterWorkoutBuilds)
   console.log('workout builds in workout page', workoutBuilds)
 
