@@ -29,6 +29,8 @@ function WorkoutDashboardView() {
   console.log('workout builds in workout page', workoutBuilds);
 
   const setMode = useStore((state) => state.setMode);
+  const mode = useStore((state) => state.mode);
+  console.log('in workout Dashboard, mode is: ', mode);
 
   const handleCreateWorkoutBuildClick = () => {
     setMode('build');
