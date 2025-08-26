@@ -13,12 +13,12 @@ import { useStore } from '@cwt/state/store';
 
 import { getExercises } from '../services/exercisesService';
 
-
 export const Route = createRootRoute({
   component: RootComponent,
 });
 
 function RootComponent() {
+  const mode = useStore((state) => state.mode);
   const setExercises = useStore((state) => state.setExercises);
 
   const loading = useAuthStore((state) => state.loading);
@@ -66,6 +66,19 @@ function RootComponent() {
       </div>
     );
   }
+
+  // TODO: Update implementation of hiding navigation during workout
+  if (mode) {
+    return (
+      <Stack align="center">
+        <Stack m="lg" miw="600px">
+          <Outlet />
+          <TanStackRouterDevtools />
+        </Stack>
+      </Stack>
+    );
+  }
+
   return (
     <AppShell
       header={{ height: 60 }}
