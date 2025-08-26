@@ -1,24 +1,24 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 import {
   createExercisesSlice,
   ExercisesSlice,
-} from "./slices/library/exercisesSlice";
+} from './slices/library/exercisesSlice';
 import {
   createExercisesFilterSlice,
   ExercisesFilterSlice,
-} from "./slices/library/exercisesFilterSlice";
+} from './slices/library/exercisesFilterSlice';
 import {
   createWorkoutLibrarySlice,
   WorkoutLibrarySlice,
-} from "./slices/workout/workoutLibrarySlice";
+} from './slices/workout/workoutLibrarySlice';
 import {
   createWorkoutDraftSlice,
   WorkoutDraftSlice,
-} from "./slices/workout/workoutDraftSlice";
+} from './slices/workout/workoutDraftSlice';
 import {
   createStopwatchSlice,
   StopwatchSlice,
-} from "./slices/workout/stopwatchSlice";
+} from './slices/workout/stopwatchSlice';
 
 export type StoreState = ExercisesSlice &
   ExercisesFilterSlice &
