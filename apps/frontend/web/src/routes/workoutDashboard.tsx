@@ -41,7 +41,7 @@ function WorkoutDashboardView() {
   return (
     <Stack gap="xl">
       <Title size="h6">Start Workout</Title>
-      <LargeButton href="/workout">
+      <LargeButton to="/workout/$mode">
         <Text>Build Workout Template</Text>
       </LargeButton>
       <ScrollArea>
