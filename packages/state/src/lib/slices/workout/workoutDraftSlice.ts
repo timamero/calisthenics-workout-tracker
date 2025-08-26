@@ -1,13 +1,13 @@
-import { StateCreator } from "zustand";
+import { StateCreator } from 'zustand';
 
 import type {
   WorkoutBuild,
   WorkoutLog,
   Set,
   WorkoutExercise,
-} from "@cwt/schema/workouts";
+} from '@cwt/schema/workouts';
 
-import { StoreState } from "../../store";
+import { StoreState } from '../../store';
 import {
   // addExercise,
   addSetToExercise,
@@ -19,37 +19,31 @@ import {
   updateSetInExercise,
   addExerciseToWorkout,
   applyExerciseUpdateAtIndex,
-} from "./workoutDraftActions";
-import { Tracking } from "@cwt/schema/exercises";
-
-export enum Mode {
-  Build = "BUILD",
-  Log = "LOG",
-  Edit = "EDIT",
-}
+} from './workoutDraftActions';
+import { Tracking } from '@cwt/schema/exercises';
 
 enum Action {
-  AddExercise = "ADD_EXERCISE",
-  DeleteExercise = "DELETE_EXERCISE",
-  AddSet = "ADD_SET",
-  DeleteSet = "DELETE_SET",
-  UpdateSet = "UPDATE_SET",
+  AddExercise = 'ADD_EXERCISE',
+  DeleteExercise = 'DELETE_EXERCISE',
+  AddSet = 'ADD_SET',
+  DeleteSet = 'DELETE_SET',
+  UpdateSet = 'UPDATE_SET',
 }
 
 export type WorkoutBuildDraft = Pick<
   WorkoutBuild,
-  "title" | "workout_data" | "status" | "source"
+  'title' | 'workout_data' | 'status' | 'source'
 >;
 export type WorkoutLogDraft = Pick<
   WorkoutLog,
-  "title" | "workout_data" | "status" | "date"
+  'title' | 'workout_data' | 'status' | 'date'
 >;
 
 export interface WorkoutDraftSlice {
-  mode: Mode | null;
+  mode: 'build' | 'log' | 'edit' | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
-  setMode: (mode: Mode.Edit | Mode.Log) => void;
-  initializeWorkout: (mode: Mode) => void;
+  setMode: (mode: 'build' | 'log' | 'edit') => void;
+  initializeWorkout: (mode: 'build' | 'log' | 'edit') => void;
   addExercise: (exerciseID: number) => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
@@ -58,17 +52,17 @@ export interface WorkoutDraftSlice {
   resetWorkout: () => void;
 }
 
-const INITIALIZED_WORKOUT_LOG: Omit<WorkoutLogDraft, "date"> = {
-  title: "New workout log",
+const INITIALIZED_WORKOUT_LOG: Omit<WorkoutLogDraft, 'date'> = {
+  title: 'New workout log',
   workout_data: { exercises: [] },
-  status: "draft",
+  status: 'draft',
 };
 
 const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {
-  title: "New workout template",
+  title: 'New workout template',
   workout_data: { exercises: [] },
-  status: "draft",
-  source: "manual",
+  status: 'draft',
+  source: 'manual',
 };
 
 export const createWorkoutDraftSlice: StateCreator<
@@ -82,7 +76,7 @@ export const createWorkoutDraftSlice: StateCreator<
   setMode: (mode) => set(() => ({ mode: mode })),
   initializeWorkout: (mode) =>
     set(() => {
-      if (mode === Mode.Build) {
+      if (mode === 'build') {
         return {
           workout: INITIALIZED_WORKOUT_BUILD as WorkoutBuild,
           mode: mode,
@@ -96,7 +90,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   addExercise: (exerciseID) =>
     set((state) => {
-      if (state.mode === Mode.Edit || state.mode === Mode.Build) {
+      if (state.mode === 'edit' || state.mode === 'build') {
         let updatedWorkout = {};
         const tracking: Tracking[] =
           get().getExerciseByID(exerciseID).default_tracking_type;
@@ -104,7 +98,7 @@ export const createWorkoutDraftSlice: StateCreator<
           updatedWorkout = addExerciseToWorkout(
             state.workout,
             exerciseID,
-            tracking
+            tracking,
           );
         }
         return {
@@ -117,14 +111,14 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   removeExercise: (exerciseIndex) =>
     set((state) => {
-      if (state.mode === Mode.Edit || state.mode === Mode.Build) {
+      if (state.mode === 'edit' || state.mode === 'build') {
         let updatedWorkout = {};
         if (exerciseIndex !== undefined && state.workout) {
           updatedWorkout = applyExerciseUpdateAtIndex(
             exerciseIndex,
             state.workout,
             null,
-            removeExerciseAtIndex
+            removeExerciseAtIndex,
           );
         }
         return {
@@ -137,7 +131,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   addSet: (exerciseIndex) =>
     set((state) => {
-      if (state.mode === Mode.Edit || state.mode === Mode.Build) {
+      if (state.mode === 'edit' || state.mode === 'build') {
         let updatedWorkout = {};
         let updatedExercise: WorkoutExercise;
         if (exerciseIndex !== undefined && state.workout) {
@@ -148,7 +142,7 @@ export const createWorkoutDraftSlice: StateCreator<
             exerciseIndex,
             state.workout,
             updatedExercise,
-            updateExercisesAtIndex
+            updateExercisesAtIndex,
           );
         }
         return {
@@ -161,7 +155,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   deleteSet: (exerciseIndex, setIndex) =>
     set((state) => {
-      if (state.mode === Mode.Edit || state.mode === Mode.Build) {
+      if (state.mode === 'edit' || state.mode === 'build') {
         let updatedWorkout = {};
         let updatedExercise: WorkoutExercise;
         if (
@@ -173,14 +167,14 @@ export const createWorkoutDraftSlice: StateCreator<
           updatedExercise = updateExercise(
             exercise,
             setIndex,
-            deleteSetInExercise
+            deleteSetInExercise,
           );
 
           updatedWorkout = applyExerciseUpdateAtIndex(
             exerciseIndex,
             state.workout,
             updatedExercise,
-            updateExercisesAtIndex
+            updateExercisesAtIndex,
           );
         }
         return {
@@ -193,7 +187,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   updateSet: (exerciseIndex, setIndex, updatedSet) =>
     set((state) => {
-      if (state.mode === Mode.Edit || state.mode === Mode.Build) {
+      if (state.mode === 'edit' || state.mode === 'build') {
         let updatedWorkout = {};
         let updatedExercise: WorkoutExercise;
         if (
@@ -206,14 +200,14 @@ export const createWorkoutDraftSlice: StateCreator<
             exercise,
             setIndex,
             updateSetInExercise,
-            updatedSet
+            updatedSet,
           );
 
           updatedWorkout = applyExerciseUpdateAtIndex(
             exerciseIndex,
             state.workout,
             updatedExercise,
-            updateExercisesAtIndex
+            updateExercisesAtIndex,
           );
         }
         return {
