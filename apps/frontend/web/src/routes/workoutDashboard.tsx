@@ -28,6 +28,12 @@ function WorkoutDashboardView() {
   const workoutBuilds = Route.useLoaderData();
   console.log('workout builds in workout page', workoutBuilds);
 
+  const setMode = useStore((state) => state.setMode);
+
+  const handleCreateWorkoutBuildClick = () => {
+    setMode('build');
+  };
+
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
     return (
@@ -41,7 +47,7 @@ function WorkoutDashboardView() {
   return (
     <Stack gap="xl">
       <Title size="h6">Start Workout</Title>
-      <LargeButton to="/workout/$mode">
+      <LargeButton to="/workout" onButtonClick={handleCreateWorkoutBuildClick}>
         <Text>Build Workout Template</Text>
       </LargeButton>
       <ScrollArea>
