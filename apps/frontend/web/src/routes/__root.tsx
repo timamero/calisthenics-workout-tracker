@@ -12,7 +12,6 @@ import { useAuthStore } from '@cwt/state/auth';
 import { useStore } from '@cwt/state/store';
 
 import { getExercises } from '../services/exercisesService';
-import { getWorkoutBuilds } from '../services/workoutsService';
 
 
 export const Route = createRootRoute({
@@ -21,7 +20,6 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   const setExercises = useStore((state) => state.setExercises);
-  const setWorkouts = useStore((state) => state.setWorkouts)
 
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
@@ -33,7 +31,7 @@ function RootComponent() {
 
   const navLinks = [
     { label: 'Home', to: '/' },
-    { label: 'Start Workout', to: '/startWorkout' },
+    { label: 'Workout', to: '/workoutDashboard' },
     { label: 'Library', to: '/library' },
     { label: 'Past Workouts', to: '/history' },
     { label: 'Profile', to: '/user' },
@@ -46,10 +44,7 @@ function RootComponent() {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token) {
         const exercises = await getExercises(supabaseSession.access_token);
-        const workoutBuilds = await getWorkoutBuilds(supabaseSession.access_token);
-        // console.log('workoutBuilds', workoutBuilds)
         setExercises(exercises);
-        setWorkouts([], workoutBuilds)
       }
     };
     asyncFetchData();
