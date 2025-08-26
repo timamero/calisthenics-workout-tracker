@@ -9,8 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkoutDashboardRouteImport } from './routes/workoutDashboard'
 import { Route as UserRouteImport } from './routes/user'
-import { Route as StartWorkoutRouteImport } from './routes/startWorkout'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as OnboardingCompleteRouteImport } from './routes/onboardingComplete'
@@ -22,14 +22,14 @@ import { Route as HistoryRouteImport } from './routes/history'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WorkoutDashboardRoute = WorkoutDashboardRouteImport.update({
+  id: '/workoutDashboard',
+  path: '/workoutDashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UserRoute = UserRouteImport.update({
   id: '/user',
   path: '/user',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StartWorkoutRoute = StartWorkoutRouteImport.update({
-  id: '/startWorkout',
-  path: '/startWorkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -94,8 +94,8 @@ export interface FileRoutesByFullPath {
   '/onboardingComplete': typeof OnboardingCompleteRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
+  '/workoutDashboard': typeof WorkoutDashboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -108,8 +108,8 @@ export interface FileRoutesByTo {
   '/onboardingComplete': typeof OnboardingCompleteRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
+  '/workoutDashboard': typeof WorkoutDashboardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -123,8 +123,8 @@ export interface FileRoutesById {
   '/onboardingComplete': typeof OnboardingCompleteRoute
   '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/startWorkout': typeof StartWorkoutRoute
   '/user': typeof UserRoute
+  '/workoutDashboard': typeof WorkoutDashboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -139,8 +139,8 @@ export interface FileRouteTypes {
     | '/onboardingComplete'
     | '/settings'
     | '/signup'
-    | '/startWorkout'
     | '/user'
+    | '/workoutDashboard'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -153,8 +153,8 @@ export interface FileRouteTypes {
     | '/onboardingComplete'
     | '/settings'
     | '/signup'
-    | '/startWorkout'
     | '/user'
+    | '/workoutDashboard'
   id:
     | '__root__'
     | '/'
@@ -167,8 +167,8 @@ export interface FileRouteTypes {
     | '/onboardingComplete'
     | '/settings'
     | '/signup'
-    | '/startWorkout'
     | '/user'
+    | '/workoutDashboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -182,24 +182,24 @@ export interface RootRouteChildren {
   OnboardingCompleteRoute: typeof OnboardingCompleteRoute
   SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
-  StartWorkoutRoute: typeof StartWorkoutRoute
   UserRoute: typeof UserRoute
+  WorkoutDashboardRoute: typeof WorkoutDashboardRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/workoutDashboard': {
+      id: '/workoutDashboard'
+      path: '/workoutDashboard'
+      fullPath: '/workoutDashboard'
+      preLoaderRoute: typeof WorkoutDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/user': {
       id: '/user'
       path: '/user'
       fullPath: '/user'
       preLoaderRoute: typeof UserRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/startWorkout': {
-      id: '/startWorkout'
-      path: '/startWorkout'
-      fullPath: '/startWorkout'
-      preLoaderRoute: typeof StartWorkoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -286,8 +286,8 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingCompleteRoute: OnboardingCompleteRoute,
   SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
-  StartWorkoutRoute: StartWorkoutRoute,
   UserRoute: UserRoute,
+  WorkoutDashboardRoute: WorkoutDashboardRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
