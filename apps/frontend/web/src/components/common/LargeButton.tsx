@@ -4,21 +4,23 @@ import type { ReactNode } from 'react';
 import classes from './LargeButton.module.css';
 
 interface LargeButtonProps {
-  children: ReactNode
+  href?: string;
+  children: ReactNode;
 }
 
-export default function LargeButton({ children }: LargeButtonProps) {
+export default function LargeButton({ href, children }: LargeButtonProps) {
   const handleClick = () => {
     console.log('clicked item');
   };
   return (
-    <UnstyledButton onClick={handleClick} className={classes.button}>
+    <UnstyledButton
+      onClick={handleClick}
+      className={classes.button}
+      component="a"
+      href={href}
+    >
       <Paper p="md" radius="sm" bg="none">
-        <Stack
-          align="center"
-          justify="center"
-          gap="sm"
-        >
+        <Stack align="center" justify="center" gap="sm">
           {children}
         </Stack>
       </Paper>
