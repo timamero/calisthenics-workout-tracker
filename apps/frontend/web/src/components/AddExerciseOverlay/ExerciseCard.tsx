@@ -26,15 +26,13 @@ export default function ExerciseCard({
     <UnstyledButton
       onClick={(e) => onExerciseClick(e)}
       data-exercise-id={exercise.id}
+      miw={300}
+      maw={460}
     >
       <Paper
         data-is-selected={isSelected}
-        // shadow="xs"
         p="sm"
         radius="lg"
-        miw={300}
-        maw={460}
-        // withBorder
         className={classes.card}
       >
         <Stack align="stretch" justify="center" gap="sm">
