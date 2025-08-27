@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { Title, Stack, Button, Text } from '@mantine/core';
+import { Title, Stack, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
@@ -31,24 +31,10 @@ function WorkoutView() {
     resetWorkout();
   };
 
-  const EmptyWorkoutPlaceholder = () => {
-    if (workout!.workout_data.exercises.length === 0) {
-      return (
-        <Stack align="center" bd="2px dashed gray.6" w="max-content" p="lg">
-          <Text size="lg" fw={800}>
-            Ready to start building your workout?
-          </Text>
-          <Text c="gray.8">Add your first exercise to begin</Text>
-        </Stack>
-      );
-    }
-  };
-
   return (
     <Stack gap="xl">
       <Title size="h6">{workout!.title}</Title>
       <Stack gap="xl" align="center">
-        <EmptyWorkoutPlaceholder />
         <Workout />
         <Stack justify="center">
           <Button
