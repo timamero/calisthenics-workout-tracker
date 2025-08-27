@@ -22,6 +22,7 @@ export default function AddExerciseOverlay({
 
   const handleAddExerciseClick = () => {
     addExercise(Number(selectedExerciseID));
+    setSelectedExerciseID(null);
     handler.close();
   };
 
