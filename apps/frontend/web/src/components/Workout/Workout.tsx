@@ -20,7 +20,7 @@ export default function Workout() {
   };
 
   const workoutExercises = workout!.workout_data.exercises.map((ex, i) => {
-    return <WorkoutExercise key={i} workoutExercise={ex} />;
+    return <WorkoutExercise key={i} workoutExercise={ex} exerciseIndex={i} />;
   });
   return (
     <Stack gap="xl" align="center">
