@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { Title, Stack, Button, Group, Text } from '@mantine/core';
+import { Title, Stack, Button, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
@@ -38,7 +38,6 @@ function WorkoutView() {
         </Stack>
       );
     }
-    // return <div></div>;
   };
 
   return (
@@ -46,15 +45,22 @@ function WorkoutView() {
       <Title size="h6">{workout!.title}</Title>
       <Stack gap="xl" align="center">
         <EmptyWorkoutPlaceholder />
-        <Group justify="center">
+        <Stack justify="center">
+          <Button
+            variant="filled"
+            color="orange"
+            onClick={() => cancelOverlayHandler.open()}
+          >
+            Add Exercise
+          </Button>
           <Button
             variant="subtle"
             color="gray"
             onClick={() => cancelOverlayHandler.open()}
           >
-            Cancel workout building
+            Cancel Workout Building
           </Button>
-        </Group>
+        </Stack>
       </Stack>
       <ConfirmationOverlay
         title="Cancel Workout Building"
