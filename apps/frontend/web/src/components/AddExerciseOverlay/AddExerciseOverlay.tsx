@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Group, Modal, Button, Stack, ScrollArea } from '@mantine/core';
 import ExercisesList from './ExercisesList';
 
@@ -10,6 +11,10 @@ export default function AddExerciseOverlay({
   opened,
   handler,
 }: AddExerciseOverlayProps) {
+  const [selectedExerciseID, setSelectedExerciseID] = useState<string | null>(
+    null,
+  );
+
   const handleAddExerciseClick = () => {
     // Logic to add exercise here
     handler.close();
@@ -30,7 +35,10 @@ export default function AddExerciseOverlay({
     >
       <ScrollArea h="80vh">
         <Stack gap="lg">
-          <ExercisesList />
+          <ExercisesList
+            selected={selectedExerciseID}
+            setSelected={setSelectedExerciseID}
+          />
         </Stack>
       </ScrollArea>
       <Group mt="lg">
