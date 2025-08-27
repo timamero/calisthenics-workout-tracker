@@ -9,6 +9,8 @@ import {
 } from '@mantine/core';
 import { type Exercise } from '@cwt/schema/exercises';
 
+import classes from './ExerciseCard.module.css';
+
 interface ExerciseCardProps {
   exercise: Exercise;
 }
@@ -26,9 +28,17 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   };
   return (
     <UnstyledButton onClick={handleExerciseClick}>
-      <Paper shadow="xs" p="sm" radius="lg" miw={300} maw={460} withBorder>
+      <Paper
+        shadow="xs"
+        p="sm"
+        radius="lg"
+        miw={300}
+        maw={460}
+        withBorder
+        className={classes.card}
+      >
         <Stack
-          bg="var(--mantine-color-body)"
+          // bg="var(--mantine-color-body)"
           align="stretch"
           justify="center"
           gap="sm"
