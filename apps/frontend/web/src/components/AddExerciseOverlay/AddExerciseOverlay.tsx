@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Group, Modal, Button, Stack, ScrollArea } from '@mantine/core';
+
+import { useStore } from '@cwt/state/store';
+
 import ExercisesList from './ExercisesList';
 
 interface AddExerciseOverlayProps {
@@ -15,8 +18,10 @@ export default function AddExerciseOverlay({
     null,
   );
 
+  const addExercise = useStore((state) => state.addExercise);
+
   const handleAddExerciseClick = () => {
-    // Logic to add exercise here
+    addExercise(Number(selectedExerciseID));
     handler.close();
   };
 
