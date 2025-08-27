@@ -36,7 +36,6 @@ function WorkoutDashboardView() {
   const handleCreateWorkoutBuildClick = () => {
     setMode('build');
     initializeWorkout();
-    // useStore.getState().initializeWorkout();
   };
 
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
