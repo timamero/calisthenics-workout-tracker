@@ -45,7 +45,11 @@ export default function AddExerciseOverlay({
         <Button color="gray" variant="outline" onClick={() => handler.close()}>
           Cancel
         </Button>
-        <Button color="orange" onClick={() => handleAddExerciseClick()}>
+        <Button
+          color="orange"
+          onClick={() => handleAddExerciseClick()}
+          data-disabled={selectedExerciseID === null}
+        >
           Add Exercise
         </Button>
       </Group>
