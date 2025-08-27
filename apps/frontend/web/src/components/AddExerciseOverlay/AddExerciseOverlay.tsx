@@ -1,4 +1,4 @@
-import { Group, Modal, Button, Stack } from '@mantine/core';
+import { Group, Modal, Button, Stack, ScrollArea } from '@mantine/core';
 import ExercisesList from './ExercisesList';
 
 interface AddExerciseOverlayProps {
@@ -28,9 +28,11 @@ export default function AddExerciseOverlay({
         },
       }}
     >
-      <Stack gap="lg">
-        <ExercisesList />
-      </Stack>
+      <ScrollArea h="80vh">
+        <Stack gap="lg">
+          <ExercisesList />
+        </Stack>
+      </ScrollArea>
       <Group mt="lg">
         <Button color="gray" variant="outline" onClick={() => handler.close()}>
           Cancel

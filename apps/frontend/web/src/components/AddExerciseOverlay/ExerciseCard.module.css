@@ -1,0 +1,7 @@
+.card {
+  background-color: transparent;
+}
+
+.card:hover {
+  background-color: var(--mantine-color-orange-0);
+}
