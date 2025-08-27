@@ -13,36 +13,31 @@ import classes from './ExerciseCard.module.css';
 
 interface ExerciseCardProps {
   exercise: Exercise;
+  isSelected: 'true' | 'false';
+  onExerciseClick: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-export default function ExerciseCard({ exercise }: ExerciseCardProps) {
-  // const difficultyColor =
-  //   exercise.difficulty == 'beginner'
-  //     ? 'blue'
-  //     : exercise.difficulty == 'intermediate'
-  //       ? 'yellow'
-  //       : 'red';
-
-  const handleExerciseClick = () => {
-    console.log('clicked exercise');
-  };
+export default function ExerciseCard({
+  exercise,
+  isSelected,
+  onExerciseClick,
+}: ExerciseCardProps) {
   return (
-    <UnstyledButton onClick={handleExerciseClick}>
+    <UnstyledButton
+      onClick={(e) => onExerciseClick(e)}
+      data-exercise-id={exercise.id}
+    >
       <Paper
-        shadow="xs"
+        data-is-selected={isSelected}
+        // shadow="xs"
         p="sm"
         radius="lg"
         miw={300}
         maw={460}
-        withBorder
+        // withBorder
         className={classes.card}
       >
-        <Stack
-          // bg="var(--mantine-color-body)"
-          align="stretch"
-          justify="center"
-          gap="sm"
-        >
+        <Stack align="stretch" justify="center" gap="sm">
           <Group justify="center" mb="sm">
             <Title order={2} size="h5">
               {exercise.name}
