@@ -1,5 +1,5 @@
 import { Group, Modal, Button, Stack } from '@mantine/core';
-import ExercisesList from '../ExercisesList';
+import ExercisesList from './ExercisesList';
 
 interface AddExerciseOverlayProps {
   opened: boolean;

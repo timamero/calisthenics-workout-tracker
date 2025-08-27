@@ -1,11 +1,11 @@
 import {
   Title,
-  Text,
   Paper,
   Group,
-  Badge,
   Stack,
   UnstyledButton,
+  Text,
+  Badge,
 } from '@mantine/core';
 import { type Exercise } from '@cwt/schema/exercises';
 
@@ -14,29 +14,26 @@ interface ExerciseCardProps {
 }
 
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {
-  const difficultyColor =
-    exercise.difficulty == 'beginner'
-      ? 'blue'
-      : exercise.difficulty == 'intermediate'
-        ? 'yellow'
-        : 'red';
+  // const difficultyColor =
+  //   exercise.difficulty == 'beginner'
+  //     ? 'blue'
+  //     : exercise.difficulty == 'intermediate'
+  //       ? 'yellow'
+  //       : 'red';
 
   const handleExerciseClick = () => {
     console.log('clicked exercise');
   };
   return (
     <UnstyledButton onClick={handleExerciseClick}>
-      <Paper shadow="lg" p="md" radius="lg" miw={300} maw={460} withBorder>
+      <Paper shadow="xs" p="sm" radius="lg" miw={300} maw={460} withBorder>
         <Stack
           bg="var(--mantine-color-body)"
           align="stretch"
           justify="center"
           gap="sm"
         >
-          <Group justify="flex-end">
-            <Badge color={difficultyColor}>{exercise.difficulty}</Badge>
-          </Group>
-          <Group justify="space-between" mb="sm">
+          <Group justify="center" mb="sm">
             <Title order={2} size="h5">
               {exercise.name}
             </Title>
