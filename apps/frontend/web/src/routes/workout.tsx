@@ -5,6 +5,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { useStore } from '@cwt/state/store';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
+import AddExerciseOverlay from '../components/AddExerciseOverlay';
 
 export const Route = createFileRoute('/workout')({
   component: WorkoutView,
@@ -13,6 +14,8 @@ export const Route = createFileRoute('/workout')({
 function WorkoutView() {
   const navigate = useNavigate();
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
+  const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
+    useDisclosure(false);
 
   const mode = useStore((state) => state.mode);
   const workout = useStore((state) => state.workout);
@@ -49,7 +52,7 @@ function WorkoutView() {
           <Button
             variant="filled"
             color="orange"
-            onClick={() => cancelOverlayHandler.open()}
+            onClick={() => addExerciseOverlayHandler.open()}
           >
             Add Exercise
           </Button>
@@ -62,6 +65,10 @@ function WorkoutView() {
           </Button>
         </Stack>
       </Stack>
+      <AddExerciseOverlay
+        opened={addExerciseOverlayOpened}
+        handler={addExerciseOverlayHandler}
+      />
       <ConfirmationOverlay
         title="Cancel Workout Building"
         message="Confirm cancelling workout building. This will discard the current workout."
