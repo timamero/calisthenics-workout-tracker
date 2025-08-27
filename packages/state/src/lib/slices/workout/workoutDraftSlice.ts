@@ -22,7 +22,7 @@ import {
 } from './workoutDraftActions';
 import { Tracking } from '@cwt/schema/exercises';
 
-export type Mode = 'build' | 'edit' | 'log'
+export type Mode = 'build' | 'edit' | 'log';
 
 export type WorkoutBuildDraft = Pick<
   WorkoutBuild,
@@ -37,7 +37,7 @@ export interface WorkoutDraftSlice {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
   setMode: (mode: Mode) => void;
-  initializeWorkout: (mode: Mode) => void;
+  initializeWorkout: () => void;
   addExercise: (exerciseID: number) => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
@@ -68,8 +68,9 @@ export const createWorkoutDraftSlice: StateCreator<
   mode: null,
   workout: null,
   setMode: (mode) => set(() => ({ mode: mode })),
-  initializeWorkout: (mode) =>
+  initializeWorkout: () =>
     set(() => {
+      const mode = get().mode;
       if (mode === 'build') {
         return {
           workout: INITIALIZED_WORKOUT_BUILD as WorkoutBuild,
