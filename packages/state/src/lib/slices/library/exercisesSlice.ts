@@ -1,13 +1,13 @@
-import { StateCreator } from "zustand";
+import { StateCreator } from 'zustand';
 
-import { Exercise } from "@cwt/schema/exercises";
+import { Exercise } from '@cwt/schema/exercises';
 
-import { StoreState } from "../../store";
+import { StoreState } from '../../store';
 import {
   filterExercises,
   filterExercisesBySearch,
   sortExercises,
-} from "./exercisesActions";
+} from './exercisesActions';
 
 export interface ExercisesSlice {
   masterExercises: Exercise[];
@@ -19,6 +19,7 @@ export interface ExercisesSlice {
   setAppliedExerciseSearch: (search: string) => void;
   refreshDisplayedExercises: () => void;
   getExerciseByID: (id: number) => Exercise;
+  getExerciseNameByID: (id: number) => string;
 }
 
 export const createExercisesSlice: StateCreator<
@@ -29,8 +30,8 @@ export const createExercisesSlice: StateCreator<
 > = (set, get) => ({
   masterExercises: [],
   displayedExercises: [],
-  exerciseSearch: "",
-  appliedExerciseSearch: "",
+  exerciseSearch: '',
+  appliedExerciseSearch: '',
   setExercises: (exercises) =>
     set(() => {
       const sortedExercises = sortExercises(exercises);
@@ -58,13 +59,17 @@ export const createExercisesSlice: StateCreator<
         displayedExercises: result,
         exerciseSearch: state.appliedExerciseSearch
           ? state.appliedExerciseSearch
-          : "",
+          : '',
       };
     }),
   getExerciseByID: (id) => {
     return get().masterExercises.find(
-      (exercise) => exercise.id === id
+      (exercise) => exercise.id === id,
     ) as Exercise;
+  },
+  getExerciseNameByID: (id) => {
+    return get().masterExercises.find((exercise) => exercise.id === id)
+      ?.name as string;
   },
 });
 
