@@ -1,4 +1,5 @@
 import { Group, Modal, Button, Stack } from '@mantine/core';
+import ExercisesList from '../ExercisesList';
 
 interface AddExerciseOverlayProps {
   opened: boolean;
@@ -18,7 +19,7 @@ export default function AddExerciseOverlay({
     <Modal
       opened={opened}
       onClose={() => handler.close()}
-      title="Filter Exercises"
+      title="Add Exercise"
       fullScreen
       styles={{
         title: {
@@ -27,7 +28,9 @@ export default function AddExerciseOverlay({
         },
       }}
     >
-      <Stack gap="lg">List of exercises here</Stack>
+      <Stack gap="lg">
+        <ExercisesList />
+      </Stack>
       <Group mt="lg">
         <Button color="gray" variant="outline" onClick={() => handler.close()}>
           Cancel
