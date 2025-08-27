@@ -4,7 +4,7 @@ import { useStore } from '@cwt/state/store';
 
 import ExerciseCard from './ExerciseCard';
 
-export default function ExercisesList() {
+export default function AddExercisesList() {
   const exercises = useStore((state) => state.displayedExercises);
   return (
     <SimpleGrid
