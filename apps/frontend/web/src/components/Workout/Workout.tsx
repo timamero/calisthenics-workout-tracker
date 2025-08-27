@@ -1,6 +1,7 @@
 import { Stack, Text } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
+import WorkoutExercise from './WorkoutExercise';
 
 export default function Workout() {
   const workout = useStore((state) => state.workout);
@@ -17,9 +18,14 @@ export default function Workout() {
       );
     }
   };
+
+  const workoutExercises = workout!.workout_data.exercises.map((ex, i) => {
+    return <WorkoutExercise key={i} workoutExercise={ex} />;
+  });
   return (
     <Stack gap="xl" align="center">
       <EmptyWorkoutPlaceholder />
+      {workoutExercises}
     </Stack>
   );
 }
