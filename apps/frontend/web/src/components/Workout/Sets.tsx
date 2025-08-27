@@ -20,7 +20,7 @@ export default function Sets({
       return <></>;
     });
     return (
-      <Stack>
+      <Stack bg="gray.1">
         <Text>{`Set ${i + 1}`}</Text>
         {fields}
       </Stack>
