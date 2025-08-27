@@ -6,6 +6,7 @@ import { useStore } from '@cwt/state/store';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
+import Workout from '../components/Workout';
 
 export const Route = createFileRoute('/workout')({
   component: WorkoutView,
@@ -48,6 +49,7 @@ function WorkoutView() {
       <Title size="h6">{workout!.title}</Title>
       <Stack gap="xl" align="center">
         <EmptyWorkoutPlaceholder />
+        <Workout />
         <Stack justify="center">
           <Button
             variant="filled"
