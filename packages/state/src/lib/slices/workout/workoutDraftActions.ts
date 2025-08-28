@@ -1,16 +1,16 @@
-import { Set, WorkoutExercise, SetFields } from "@cwt/schema/workouts";
-import { Tracking } from "@cwt/schema/exercises";
+import { Set, WorkoutExercise, SetFields } from '@cwt/schema/workouts';
+import { Tracking } from '@cwt/schema/exercises';
 
-import { WorkoutBuildDraft, WorkoutLogDraft } from "./workoutDraftSlice";
+import { WorkoutBuildDraft, WorkoutLogDraft } from './workoutDraftSlice';
 import {
   INITIALIZED_SET,
   DEFAULT_DURATION_SET,
   DEFAULT_REP_SET,
-} from "./workoutDefaults";
+} from './workoutDefaults';
 
 export function exerciseAtIndex(
   index: number,
-  workout: WorkoutBuildDraft | WorkoutLogDraft
+  workout: WorkoutBuildDraft | WorkoutLogDraft,
 ): WorkoutExercise {
   return workout.workout_data.exercises[index];
 }
@@ -18,12 +18,12 @@ export function exerciseAtIndex(
 export function addExercise(
   exercise_id: number,
   default_tracking: Tracking[],
-  workout: WorkoutBuildDraft | WorkoutLogDraft
+  workout: WorkoutBuildDraft | WorkoutLogDraft,
 ): WorkoutExercise[] {
   let fields: SetFields = {};
-  if (default_tracking.includes("reps")) {
+  if (default_tracking.includes('reps')) {
     fields = DEFAULT_REP_SET;
-  } else if (default_tracking.includes("duration")) {
+  } else if (default_tracking.includes('duration')) {
     fields = DEFAULT_DURATION_SET;
   }
   return [
@@ -37,12 +37,12 @@ export function addExercise(
 }
 
 export function addSetToExercise(
-  exerciseToUpdate: WorkoutExercise
+  exerciseToUpdate: WorkoutExercise,
 ): WorkoutExercise {
   let fields: SetFields = {};
-  if (exerciseToUpdate.tracked.includes("reps")) {
+  if (exerciseToUpdate.tracked.includes('reps')) {
     fields = DEFAULT_REP_SET;
-  } else if (exerciseToUpdate.tracked.includes("duration")) {
+  } else if (exerciseToUpdate.tracked.includes('duration')) {
     fields = DEFAULT_DURATION_SET;
   }
   return {
@@ -53,7 +53,7 @@ export function addSetToExercise(
 
 export function deleteSetInExercise(
   exerciseToUpdate: WorkoutExercise,
-  index: number | undefined
+  index: number | undefined,
 ): WorkoutExercise {
   return {
     ...exerciseToUpdate,
@@ -64,7 +64,7 @@ export function deleteSetInExercise(
 export function updateSetInExercise(
   exerciseToUpdate: WorkoutExercise,
   index: number | undefined,
-  updatedSet?: Set | undefined
+  updatedSet?: Set | undefined,
 ): WorkoutExercise {
   if (updatedSet) {
     return {
@@ -82,14 +82,20 @@ export function updateSetInExercise(
   return { ...exerciseToUpdate };
 }
 
+// Looks like this function is not called when it's suppose to
 export function updateExercisesAtIndex(
   index: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft,
-  updatedExercise?: WorkoutExercise
+  updatedExercise?: WorkoutExercise,
 ): WorkoutExercise[] {
+  console.log('updateExercisesAtIndex called');
+  console.log('---index:', index);
   return [
     ...workout.workout_data.exercises.map((ex, ind) => {
+      console.log('---inside map, current ind: ', ind);
+      console.log('ind === index : ', ind === index);
       if (ind === index) {
+        console.log('returned updated exercise');
         return updatedExercise;
       }
       return ex;
@@ -99,7 +105,7 @@ export function updateExercisesAtIndex(
 
 export function removeExerciseAtIndex(
   index: number,
-  workout: WorkoutBuildDraft | WorkoutLogDraft
+  workout: WorkoutBuildDraft | WorkoutLogDraft,
 ): WorkoutExercise[] {
   return [...workout.workout_data.exercises.filter((ex, ind) => ind !== index)];
 }
@@ -110,9 +116,9 @@ export function updateExercise(
   exerciseUpdater: (
     exercise: WorkoutExercise,
     setIndex?: number,
-    updatedSet?: Set
+    updatedSet?: Set,
   ) => WorkoutExercise,
-  updatedSet?: Set
+  updatedSet?: Set,
 ): WorkoutExercise {
   if (updatedSet && setIndex) {
     return exerciseUpdater(exercise, setIndex, updatedSet);
@@ -126,7 +132,7 @@ export function updateExercise(
 export function addExerciseToWorkout(
   workout: WorkoutBuildDraft | WorkoutLogDraft,
   exerciseID: number,
-  default_tracking: Tracking[]
+  default_tracking: Tracking[],
 ): WorkoutBuildDraft | WorkoutLogDraft {
   return {
     ...workout,
@@ -143,10 +149,14 @@ export function applyExerciseUpdateAtIndex(
   exercisesUpdater: (
     index: number,
     workout: WorkoutBuildDraft | WorkoutLogDraft,
-    updatedExercise?: WorkoutExercise
-  ) => WorkoutExercise[]
+    updatedExercise?: WorkoutExercise,
+  ) => WorkoutExercise[],
 ): WorkoutBuildDraft | WorkoutLogDraft {
-  if (updatedExercise && index) {
+  console.log('applyExerciseUpdateAtIndex called');
+  (console.log('===index: ', index),
+    console.log('===updatedExercise', updatedExercise));
+  if (updatedExercise && index !== null) {
+    console.log('===in first branch');
     return {
       ...workout,
       workout_data: {
@@ -155,6 +165,7 @@ export function applyExerciseUpdateAtIndex(
     };
   }
   if (index) {
+    console.log('===in second branch');
     return {
       ...workout,
       workout_data: {
@@ -162,6 +173,7 @@ export function applyExerciseUpdateAtIndex(
       },
     };
   }
+  console.log('===returning workout with no change');
   return {
     ...workout,
   };
