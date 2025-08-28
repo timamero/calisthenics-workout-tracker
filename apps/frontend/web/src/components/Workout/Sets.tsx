@@ -12,15 +12,15 @@ export default function Sets({
   const workoutSets = sets.map((set, i) => {
     const fields = tracked.map((field) => {
       if (field === 'reps') {
-        return <RepField value={set.fields.reps!} />;
+        return <RepField key={field} value={set.fields.reps!} />;
       }
       if (field === 'duration') {
-        return <TimeField />;
+        return <TimeField key={field} />;
       }
       return <></>;
     });
     return (
-      <Stack bg="gray.1">
+      <Stack key={i} bg="gray.1">
         <Text>{`Set ${i + 1}`}</Text>
         {fields}
       </Stack>
