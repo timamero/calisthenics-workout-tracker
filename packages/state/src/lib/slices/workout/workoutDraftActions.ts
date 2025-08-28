@@ -82,20 +82,14 @@ export function updateSetInExercise(
   return { ...exerciseToUpdate };
 }
 
-// Looks like this function is not called when it's suppose to
 export function updateExercisesAtIndex(
   index: number,
   workout: WorkoutBuildDraft | WorkoutLogDraft,
   updatedExercise?: WorkoutExercise,
 ): WorkoutExercise[] {
-  console.log('updateExercisesAtIndex called');
-  console.log('---index:', index);
   return [
     ...workout.workout_data.exercises.map((ex, ind) => {
-      console.log('---inside map, current ind: ', ind);
-      console.log('ind === index : ', ind === index);
       if (ind === index) {
-        console.log('returned updated exercise');
         return updatedExercise;
       }
       return ex;
@@ -152,11 +146,7 @@ export function applyExerciseUpdateAtIndex(
     updatedExercise?: WorkoutExercise,
   ) => WorkoutExercise[],
 ): WorkoutBuildDraft | WorkoutLogDraft {
-  console.log('applyExerciseUpdateAtIndex called');
-  (console.log('===index: ', index),
-    console.log('===updatedExercise', updatedExercise));
   if (updatedExercise && index !== null) {
-    console.log('===in first branch');
     return {
       ...workout,
       workout_data: {
@@ -165,7 +155,6 @@ export function applyExerciseUpdateAtIndex(
     };
   }
   if (index) {
-    console.log('===in second branch');
     return {
       ...workout,
       workout_data: {
@@ -173,7 +162,6 @@ export function applyExerciseUpdateAtIndex(
       },
     };
   }
-  console.log('===returning workout with no change');
   return {
     ...workout,
   };
