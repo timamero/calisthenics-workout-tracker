@@ -127,17 +127,32 @@ export const createWorkoutDraftSlice: StateCreator<
   addSet: (exerciseIndex) =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
+        console.log(
+          'invoked addSet, starting workout state is: ',
+          state.workout,
+        );
         let updatedWorkout = {};
         let updatedExercise: WorkoutExercise;
         if (exerciseIndex !== undefined && state.workout) {
           const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+          console.log('exercise (exercise at index', exercise);
           updatedExercise = updateExercise(exercise, null, addSetToExercise);
+          // Looks like updated exercise has the new set added
+          console.log(
+            'updatedExercise (exercise after adding set)',
+            updatedExercise,
+          );
 
           updatedWorkout = applyExerciseUpdateAtIndex(
             exerciseIndex,
             state.workout,
             updatedExercise,
             updateExercisesAtIndex,
+          );
+          // Something is wrong with the function applyExerciseUpdateAtIndex, updatedWorkout does not include the exercise with added set
+          console.log(
+            'updatedWorkout (workout after adding in the updatedExercise',
+            updatedWorkout,
           );
         }
         return {
