@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import DurationInput from '../common/DurationInput';
 
 export default function RestField() {
-  return <DurationInput label="Rest" />;
+  const [sec, setSec] = useState<number | string>(0);
+  return <DurationInput label="Rest" sec={sec} setSec={setSec} />;
 }
