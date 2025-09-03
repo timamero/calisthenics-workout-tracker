@@ -1,4 +1,4 @@
-import { Stack, Text, Button } from '@mantine/core';
+import { Stack, Text, Button, Group } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
 import type { WorkoutExercise } from '@cwt/schema/workouts';
@@ -22,7 +22,16 @@ export default function WorkoutExercise({
 
   return (
     <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
-      <Text>{name}</Text>
+      <Group>
+        <Text>{name}</Text>
+        <Button
+          color="red"
+          variant="white"
+          onClick={() => console.log('clicked delete exercise')}
+        >
+          Delete
+        </Button>
+      </Group>
       <Sets tracked={workoutExercise.tracked} sets={workoutExercise.sets} />
       <Button
         variant="outline"
