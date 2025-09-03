@@ -4,6 +4,7 @@ import type { WorkoutExercise } from '@cwt/schema/workouts';
 
 import RepField from './RepField';
 import TimeField from './TimeField';
+import RestField from './RestField';
 
 export default function Sets({
   tracked,
@@ -12,10 +13,20 @@ export default function Sets({
   const workoutSets = sets.map((set, i) => {
     const fields = tracked.map((field) => {
       if (field === 'reps') {
-        return <RepField key={field} value={set.fields.reps!} />;
+        return (
+          <Stack key={field}>
+            <RepField value={set.fields.reps!} />
+            <RestField />
+          </Stack>
+        );
       }
       if (field === 'duration') {
-        return <TimeField key={field} />;
+        return (
+          <Stack key={field}>
+            <TimeField />
+            <RestField />
+          </Stack>
+        );
       }
       return <></>;
     });
