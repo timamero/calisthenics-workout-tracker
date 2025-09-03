@@ -39,10 +39,17 @@ function WorkoutView() {
         <Stack justify="center">
           <Button
             variant="filled"
-            color="orange"
+            color="orange.9"
             onClick={() => addExerciseOverlayHandler.open()}
           >
             Add Exercise
+          </Button>
+          <Button
+            variant="filled"
+            color="orange"
+            onClick={() => console.log('clicked save workout build')}
+          >
+            Save Workout
           </Button>
           <Button
             variant="subtle"
