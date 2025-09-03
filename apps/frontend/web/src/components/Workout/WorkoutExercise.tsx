@@ -1,4 +1,5 @@
 import { Stack, Text, Button, Group } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
 import type { WorkoutExercise } from '@cwt/schema/workouts';
@@ -6,6 +7,7 @@ import type { WorkoutExercise } from '@cwt/schema/workouts';
 // import RepField from './RepField';
 // import TimeField from './TimeField';
 import Sets from './Sets';
+import ConfirmationOverlay from '../common/ConfirmationOverlay';
 
 interface WorkoutExerciseProps {
   exerciseIndex: number;
@@ -17,8 +19,11 @@ export default function WorkoutExercise({
   workoutExercise,
 }: WorkoutExerciseProps) {
   const addSet = useStore((state) => state.addSet);
+  const deleteExercise = useStore((state) => state.removeExercise);
   const getExerciseNameById = useStore((state) => state.getExerciseNameByID);
   const name = getExerciseNameById(workoutExercise.exercise_id);
+
+  const [deleteExOverlayOpened, deleteExOverlayHandler] = useDisclosure(false);
 
   return (
     <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
@@ -27,7 +32,7 @@ export default function WorkoutExercise({
         <Button
           color="red"
           variant="white"
-          onClick={() => console.log('clicked delete exercise')}
+          onClick={() => deleteExOverlayHandler.open()}
         >
           Delete
         </Button>
@@ -40,6 +45,13 @@ export default function WorkoutExercise({
       >
         Add Set
       </Button>
+      <ConfirmationOverlay
+        title="Delete Exercise"
+        message="Delete exercise from this workout?"
+        opened={deleteExOverlayOpened}
+        handler={deleteExOverlayHandler}
+        onConfirmationClick={() => deleteExercise(exerciseIndex)}
+      />
     </Stack>
   );
 }
