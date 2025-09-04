@@ -162,7 +162,6 @@ export function applyExerciseUpdateAtIndex(
       },
     };
   }
-  console.log('returning workout without changes');
   return {
     ...workout,
   };
