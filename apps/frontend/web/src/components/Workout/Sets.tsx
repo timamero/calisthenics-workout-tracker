@@ -3,6 +3,7 @@ import { Stack, Text, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import type { WorkoutExercise } from '@cwt/schema/workouts';
+import { useStore } from '@cwt/state/store';
 
 import RepField from './RepField';
 import TimeField from './TimeField';
@@ -14,6 +15,9 @@ export default function Sets({
   sets,
 }: Pick<WorkoutExercise, 'sets' | 'tracked'>) {
   const [selectedSetIndex, setSelectedSetIndex] = useState<number | null>(null);
+
+  const deleteSet = useStore((state) => state.deleteSet);
+
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);
 
@@ -67,9 +71,7 @@ export default function Sets({
         confirmButtonLabel="Delete"
         opened={deleteSetOverlayOpened}
         handler={deleteSetOverlayHandler}
-        onConfirmationClick={() =>
-          console.log(`Delete set ${selectedSetIndex}`)
-        }
+        onConfirmationClick={() => deleteSet(0, selectedSetIndex!)}
       />
     </Stack>
   );
