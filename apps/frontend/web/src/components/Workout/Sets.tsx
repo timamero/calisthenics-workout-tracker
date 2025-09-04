@@ -1,15 +1,20 @@
 import { Stack, Text, Group, Button } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 
 import type { WorkoutExercise } from '@cwt/schema/workouts';
 
 import RepField from './RepField';
 import TimeField from './TimeField';
 import RestField from './RestField';
+import ConfirmationOverlay from '../common/ConfirmationOverlay';
 
 export default function Sets({
   tracked,
   sets,
 }: Pick<WorkoutExercise, 'sets' | 'tracked'>) {
+  const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
+    useDisclosure(false);
+
   const workoutSets = sets.map((set, i) => {
     const fields = tracked.map((field) => {
       if (field === 'reps') {
@@ -37,7 +42,7 @@ export default function Sets({
           <Button
             color="red"
             variant="white"
-            onClick={() => console.log(`delete set ${i + 1}`)} // TODO: implement delete set
+            onClick={() => deleteSetOverlayHandler.open()} // TODO: implement delete set
           >
             Delete
           </Button>
@@ -46,5 +51,17 @@ export default function Sets({
       </Stack>
     );
   });
-  return <Stack>{workoutSets}</Stack>;
+  return (
+    <Stack>
+      {workoutSets}
+      <ConfirmationOverlay
+        title="Delete Set"
+        message="Delete set from this exercise?"
+        confirmButtonLabel="Delete"
+        opened={deleteSetOverlayOpened}
+        handler={deleteSetOverlayHandler}
+        onConfirmationClick={() => console.log('delete set')}
+      />
+    </Stack>
+  );
 }
