@@ -48,6 +48,7 @@ export default function WorkoutExercise({
       <ConfirmationOverlay
         title="Delete Exercise"
         message="Delete exercise from this workout?"
+        confirmButtonLabel="Delete exercise"
         opened={deleteExOverlayOpened}
         handler={deleteExOverlayHandler}
         onConfirmationClick={() => deleteExercise(exerciseIndex)}
