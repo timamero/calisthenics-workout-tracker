@@ -13,10 +13,13 @@ import ConfirmationOverlay from '../common/ConfirmationOverlay';
 export default function Sets({
   tracked,
   sets,
-}: Pick<WorkoutExercise, 'sets' | 'tracked'>) {
+  exerciseIndex,
+}: Pick<WorkoutExercise, 'sets' | 'tracked'> & { exerciseIndex: number }) {
   const [selectedSetIndex, setSelectedSetIndex] = useState<number | null>(null);
 
+  const workout = useStore((state) => state.workout);
   const deleteSet = useStore((state) => state.deleteSet);
+  console.log(`workout state: ${JSON.stringify(workout)}`);
 
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);
@@ -71,7 +74,7 @@ export default function Sets({
         confirmButtonLabel="Delete"
         opened={deleteSetOverlayOpened}
         handler={deleteSetOverlayHandler}
-        onConfirmationClick={() => deleteSet(0, selectedSetIndex!)}
+        onConfirmationClick={() => deleteSet(exerciseIndex, selectedSetIndex!)}
       />
     </Stack>
   );
