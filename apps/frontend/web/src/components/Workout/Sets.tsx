@@ -18,6 +18,8 @@ export default function Sets({
   const [selectedSetIndex, setSelectedSetIndex] = useState<number | null>(null);
 
   const workout = useStore((state) => state.workout);
+  // save sets to variable, pass on set data to Set component
+  // call updateSet here on any field change
   const deleteSet = useStore((state) => state.deleteSet);
   console.log(`workout state: ${JSON.stringify(workout)}`);
 
