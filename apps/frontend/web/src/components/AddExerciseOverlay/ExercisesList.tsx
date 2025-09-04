@@ -15,10 +15,6 @@ export default function ExercisesList({
 }: ExercisesListProps) {
   const exercises = useStore((state) => state.displayedExercises);
   const handleExerciseClick = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(
-      'clicked exercise, e: ',
-      e.currentTarget.getAttribute('data-exercise-id'),
-    );
     setSelected(e.currentTarget.getAttribute('data-exercise-id'));
   };
   return (
