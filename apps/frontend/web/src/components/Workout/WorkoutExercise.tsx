@@ -4,8 +4,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { useStore } from '@cwt/state/store';
 import type { WorkoutExercise } from '@cwt/schema/workouts';
 
-// import RepField from './RepField';
-// import TimeField from './TimeField';
 import Sets from './Sets';
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
 
@@ -37,11 +35,15 @@ export default function WorkoutExercise({
           Delete
         </Button>
       </Group>
-      <Sets tracked={workoutExercise.tracked} sets={workoutExercise.sets} />
+      <Sets
+        tracked={workoutExercise.tracked}
+        sets={workoutExercise.sets}
+        exerciseIndex={exerciseIndex}
+      />
       <Button
         variant="outline"
         color="dark"
-        onClick={() => addSet(exerciseIndex)} // TODO: fix, set is not added
+        onClick={() => addSet(exerciseIndex)}
       >
         Add Set
       </Button>
