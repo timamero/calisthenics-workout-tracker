@@ -114,10 +114,10 @@ export function updateExercise(
   ) => WorkoutExercise,
   updatedSet?: Set,
 ): WorkoutExercise {
-  if (updatedSet && setIndex) {
+  if (updatedSet && setIndex !== null) {
     return exerciseUpdater(exercise, setIndex, updatedSet);
   }
-  if (setIndex) {
+  if (setIndex !== null) {
     return exerciseUpdater(exercise, setIndex);
   }
   return exerciseUpdater(exercise);
