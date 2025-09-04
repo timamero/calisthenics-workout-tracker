@@ -18,11 +18,8 @@ function WorkoutView() {
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
-  // const mode = useStore((state) => state.mode);
   const workout = useStore((state) => state.workout);
   const resetWorkout = useStore((state) => state.resetWorkout);
-  // console.log('mode set to: ', mode);
-  // console.log('workout state: ', workout);
 
   const onCancelWorkoutClick = () => {
     navigate({
