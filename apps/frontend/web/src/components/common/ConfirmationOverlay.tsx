@@ -5,6 +5,7 @@ interface ConfirmationOverlayProps {
   handler: { close: () => void };
   title: string;
   message: string;
+  confirmButtonLabel: string;
   onConfirmationClick: () => void;
 }
 
@@ -13,6 +14,7 @@ export default function ConfirmationOverlay({
   handler,
   title,
   message,
+  confirmButtonLabel,
   onConfirmationClick,
 }: ConfirmationOverlayProps) {
   const handleConfirmClick = () => {
@@ -40,7 +42,7 @@ export default function ConfirmationOverlay({
           Cancel
         </Button>
         <Button color="orange" onClick={() => handleConfirmClick()}>
-          Discard this workout
+          {confirmButtonLabel}
         </Button>
       </Group>
     </Modal>
