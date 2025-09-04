@@ -154,7 +154,7 @@ export function applyExerciseUpdateAtIndex(
       },
     };
   }
-  if (index) {
+  if (index !== null && index >= 0) {
     return {
       ...workout,
       workout_data: {
@@ -162,6 +162,7 @@ export function applyExerciseUpdateAtIndex(
       },
     };
   }
+  console.log('returning workout without changes');
   return {
     ...workout,
   };
