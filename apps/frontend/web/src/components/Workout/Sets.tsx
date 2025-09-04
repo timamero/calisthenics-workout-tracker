@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Stack, Text, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
@@ -12,6 +13,7 @@ export default function Sets({
   tracked,
   sets,
 }: Pick<WorkoutExercise, 'sets' | 'tracked'>) {
+  const [selectedSetIndex, setSelectedSetIndex] = useState<number | null>(null);
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);
 
@@ -35,6 +37,11 @@ export default function Sets({
       }
       return <></>;
     });
+
+    const handleDeleteSetOpen = (i: number) => {
+      setSelectedSetIndex(i);
+      deleteSetOverlayHandler.open();
+    };
     return (
       <Stack key={i} bg="gray.1">
         <Group>
@@ -42,7 +49,7 @@ export default function Sets({
           <Button
             color="red"
             variant="white"
-            onClick={() => deleteSetOverlayHandler.open()} // TODO: implement delete set
+            onClick={() => handleDeleteSetOpen(i)}
           >
             Delete
           </Button>
@@ -60,7 +67,9 @@ export default function Sets({
         confirmButtonLabel="Delete"
         opened={deleteSetOverlayOpened}
         handler={deleteSetOverlayHandler}
-        onConfirmationClick={() => console.log('delete set')}
+        onConfirmationClick={() =>
+          console.log(`Delete set ${selectedSetIndex}`)
+        }
       />
     </Stack>
   );
