@@ -1,4 +1,4 @@
-import { Stack, Text } from '@mantine/core';
+import { Stack, Text, Group, Button } from '@mantine/core';
 
 import type { WorkoutExercise } from '@cwt/schema/workouts';
 
@@ -32,7 +32,16 @@ export default function Sets({
     });
     return (
       <Stack key={i} bg="gray.1">
-        <Text>{`Set ${i + 1}`}</Text>
+        <Group>
+          <Text>{`Set ${i + 1}`}</Text>
+          <Button
+            color="red"
+            variant="white"
+            onClick={() => console.log(`delete set ${i + 1}`)} // TODO: implement delete set
+          >
+            Delete
+          </Button>
+        </Group>
         {fields}
       </Stack>
     );
