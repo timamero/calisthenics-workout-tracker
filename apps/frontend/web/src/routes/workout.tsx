@@ -64,6 +64,7 @@ function WorkoutView() {
       <ConfirmationOverlay
         title="Cancel Workout Building"
         message="Confirm cancelling workout building. This will discard the current workout."
+        confirmButtonLabel="Discard this workout"
         opened={cancelOverlayOpened}
         handler={cancelOverlayHandler}
         onConfirmationClick={onCancelWorkoutClick}
