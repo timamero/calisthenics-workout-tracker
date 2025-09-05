@@ -28,6 +28,10 @@ export default function RestField({
     // Allow empty string for controlled input
     if (value === '') {
       setSec('');
+      const updatedField: Pick<Set, 'fields'> = {
+        fields: { rest: '' },
+      };
+      handleSetFieldChange(set, index, updatedField);
       return;
     }
     // Validate: only numbers, no leading zeros except for '0'
@@ -35,14 +39,18 @@ export default function RestField({
       const num = Number(value);
       if (num >= 0 && num <= 300) {
         setSec(num.toString());
+        const updatedField: Pick<Set, 'fields'> = {
+          fields: { rest: event.currentTarget.value + 'S' },
+        };
+        handleSetFieldChange(set, index, updatedField);
       }
     }
     // Otherwise, do not update
 
-    const updatedField: Pick<Set, 'fields'> = {
-      fields: { rest: event.currentTarget.value + 'S' },
-    };
-    handleSetFieldChange(set, index, updatedField);
+    // const updatedField: Pick<Set, 'fields'> = {
+    //   fields: { rest: event.currentTarget.value + 'S' },
+    // };
+    // handleSetFieldChange(set, index, updatedField);
   };
   return (
     <DurationInput
