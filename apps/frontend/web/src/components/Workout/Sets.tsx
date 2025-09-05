@@ -54,7 +54,12 @@ export default function Sets({
               value={set.fields.reps!}
               handleSetFieldChange={handleSetFieldChange}
             />
-            <RestField />
+            <RestField
+              set={set}
+              index={i}
+              value={set.fields.rest!}
+              handleSetFieldChange={handleSetFieldChange}
+            />
           </Stack>
         );
       }
@@ -62,7 +67,12 @@ export default function Sets({
         return (
           <Stack key={field}>
             <TimeField />
-            <RestField />
+            <RestField
+              set={set}
+              index={i}
+              value={set.fields.rest!}
+              handleSetFieldChange={handleSetFieldChange}
+            />
           </Stack>
         );
       }
