@@ -7,8 +7,9 @@ import type { Set } from '@cwt/schema/workouts';
 import { useStore } from '@cwt/state/store';
 
 import RepField from './RepField';
-import TimeField from './TimeField';
-import RestField from './RestField';
+// import TimeField from './TimeField';
+// import RestField from './RestField';
+import DurationField from './DurationField';
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
 
 export default function Sets({
@@ -52,11 +53,13 @@ export default function Sets({
               value={set.fields.reps!}
               handleSetFieldChange={handleSetFieldChange}
             />
-            <RestField
+            <DurationField
               set={set}
               index={i}
               value={set.fields.rest!}
+              fieldName="rest"
               handleSetFieldChange={handleSetFieldChange}
+              label="Rest"
             />
           </Stack>
         );
@@ -64,17 +67,21 @@ export default function Sets({
       if (field === 'time') {
         return (
           <Stack key={field}>
-            <TimeField
+            <DurationField
               set={set}
               index={i}
-              value={set.fields.rest!}
+              value={set.fields.time!}
+              fieldName="time"
               handleSetFieldChange={handleSetFieldChange}
+              label="Time"
             />
-            <RestField
+            <DurationField
               set={set}
               index={i}
               value={set.fields.rest!}
+              fieldName="rest"
               handleSetFieldChange={handleSetFieldChange}
+              label="Rest"
             />
           </Stack>
         );
