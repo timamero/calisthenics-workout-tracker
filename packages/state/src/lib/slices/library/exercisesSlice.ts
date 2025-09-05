@@ -24,7 +24,7 @@ export interface ExercisesSlice {
 
 export const createExercisesSlice: StateCreator<
   StoreState,
-  [],
+  [['zustand/immer', never]],
   [],
   ExercisesSlice
 > = (set, get) => ({

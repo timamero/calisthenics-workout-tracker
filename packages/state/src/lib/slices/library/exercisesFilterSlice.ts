@@ -1,17 +1,17 @@
-import { StateCreator } from "zustand";
+import { StateCreator } from 'zustand';
 
-import { Constants } from "@cwt/schema/common";
-import { ExerciseFilterCheckbox } from "@cwt/schema/exercises";
-import { ExerciseFilterKeySchema } from "@cwt/schema/exercises/schemas";
+import { Constants } from '@cwt/schema/common';
+import { ExerciseFilterCheckbox } from '@cwt/schema/exercises';
+import { ExerciseFilterKeySchema } from '@cwt/schema/exercises/schemas';
 
-import { StoreState } from "../../store";
+import { StoreState } from '../../store';
 
 import {
   clearSelections,
   revertFilterSelections,
   updateAppliedSelections,
   updateSelections,
-} from "./exerciseFilterActions";
+} from './exerciseFilterActions';
 
 const exerciseAttributes = [
   {
@@ -37,7 +37,7 @@ const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] =
       keyName: category.keyName,
       selection: attribute,
       value: false,
-    }))
+    })),
   );
 
 export interface ExercisesFilterSlice {
@@ -52,7 +52,7 @@ export interface ExercisesFilterSlice {
 
 export const createExercisesFilterSlice: StateCreator<
   StoreState,
-  [],
+  [['zustand/immer', never]],
   [],
   ExercisesFilterSlice
 > = (set) => ({
@@ -62,7 +62,7 @@ export const createExercisesFilterSlice: StateCreator<
     set((state) => {
       const updatedSelections = updateSelections(
         state.filterCheckboxSelections,
-        filterCheckbox
+        filterCheckbox,
       );
       return {
         filterCheckboxSelections: updatedSelections,
@@ -71,7 +71,7 @@ export const createExercisesFilterSlice: StateCreator<
   setAppliedFilterSelections: () =>
     set((state) => {
       const updatedAppliedSelections = updateAppliedSelections(
-        state.filterCheckboxSelections
+        state.filterCheckboxSelections,
       );
       return {
         appliedFilterSelections: updatedAppliedSelections,
@@ -94,11 +94,11 @@ export const createExercisesFilterSlice: StateCreator<
     // When user updates filters, but then cancels the update, revert back to the last state when filters where applied
     set((state) => {
       const appliedSelectionAttributes = state.appliedFilterSelections.map(
-        (obj) => obj.selection
+        (obj) => obj.selection,
       );
       const revertedFilterSelections = revertFilterSelections(
         state.filterCheckboxSelections,
-        appliedSelectionAttributes
+        appliedSelectionAttributes,
       );
       return {
         filterCheckboxSelections: revertedFilterSelections,
