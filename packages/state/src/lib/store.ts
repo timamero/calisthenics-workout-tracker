@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
+
 import {
   createExercisesSlice,
   ExercisesSlice,
@@ -25,10 +27,12 @@ export type StoreState = ExercisesSlice &
   WorkoutLibrarySlice &
   WorkoutDraftSlice &
   StopwatchSlice;
-export const useStore = create<StoreState>((...a) => ({
-  ...createExercisesSlice(...a),
-  ...createExercisesFilterSlice(...a),
-  ...createWorkoutLibrarySlice(...a),
-  ...createWorkoutDraftSlice(...a),
-  ...createStopwatchSlice(...a),
-}));
+export const useStore = create<StoreState>()(
+  immer((...a) => ({
+    ...createExercisesSlice(...a),
+    ...createExercisesFilterSlice(...a),
+    ...createWorkoutLibrarySlice(...a),
+    ...createWorkoutDraftSlice(...a),
+    ...createStopwatchSlice(...a),
+  })),
+);

@@ -15,7 +15,7 @@ export interface StopwatchSlice {
 
 export const createStopwatchSlice: StateCreator<
   StoreState,
-  [],
+  [['zustand/immer', never]],
   [],
   StopwatchSlice
 > = (set, get) => ({

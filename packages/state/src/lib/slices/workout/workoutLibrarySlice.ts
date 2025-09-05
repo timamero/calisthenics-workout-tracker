@@ -1,9 +1,9 @@
-import { StateCreator } from "zustand";
+import { StateCreator } from 'zustand';
 
-import type { WorkoutLog, WorkoutBuild } from "@cwt/schema/workouts";
+import type { WorkoutLog, WorkoutBuild } from '@cwt/schema/workouts';
 
-import { StoreState } from "../../store";
-import { Mode } from "./workoutDraftSlice";
+import { StoreState } from '../../store';
+import { Mode } from './workoutDraftSlice';
 
 export interface WorkoutLibrarySlice {
   masterWorkoutLogs: WorkoutLog[];
@@ -15,7 +15,7 @@ export interface WorkoutLibrarySlice {
 
 export const createWorkoutLibrarySlice: StateCreator<
   StoreState,
-  [],
+  [['zustand/immer', never]],
   [],
   WorkoutLibrarySlice
 > = (set, get) => ({
