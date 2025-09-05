@@ -29,7 +29,7 @@ export default function TimeField({
     if (value === '') {
       setSec('');
       const updatedField: Pick<Set, 'fields'> = {
-        fields: { duration: '' },
+        fields: { time: '' },
       };
       handleSetFieldChange(set, index, updatedField);
       return;
@@ -40,7 +40,7 @@ export default function TimeField({
       if (num >= 0 && num <= 300) {
         setSec(num.toString());
         const updatedField: Pick<Set, 'fields'> = {
-          fields: { duration: event.currentTarget.value + 'S' },
+          fields: { time: event.currentTarget.value + 'S' },
         };
         handleSetFieldChange(set, index, updatedField);
       }

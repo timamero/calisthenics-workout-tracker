@@ -255,7 +255,7 @@ export const sampleExercises: Exercise[] = [
       "3. Avoid sagging hips or arching your back, maintaining a neutral spine.",
       "4. Breathe steadily and hold strong for the desired duration.",
     ],
-    default_tracking_type: ["duration"],
+    default_tracking_type: ["time"],
   },
   {
     id: 17,
@@ -271,7 +271,7 @@ export const sampleExercises: Exercise[] = [
       "3. Engage your obliques to prevent sagging.",
       "4. Keep your neck neutral and hold the position.",
     ],
-    default_tracking_type: ["duration"],
+    default_tracking_type: ["time"],
   },
   {
     id: 18,
