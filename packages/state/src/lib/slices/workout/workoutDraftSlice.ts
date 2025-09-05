@@ -175,6 +175,10 @@ export const createWorkoutDraftSlice: StateCreator<
         ...state,
       };
     }),
+  // Change updateSet to updateSetField so that it can be used in the frontend like:
+  // const updateSetField = useStore((state) => state.updateSetField);
+  // // Usage in component:
+  // updateSetField(exerciseIndex, setIndex, { reps: 10 });
   updateSet: (exerciseIndex, setIndex, updatedSet) =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
