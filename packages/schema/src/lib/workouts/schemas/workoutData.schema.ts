@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
-import { DurationSchema } from '../../common/schemas/duration.schema';
+// import { DurationSchema } from '../../common/schemas/duration.schema';
 import { TrackingTypeSchema } from './enums.schema';
 
 export const SetFieldsSchema = z.object({
   reps: z.optional(z.number()),
   weight: z.optional(z.number()),
-  duration: z.optional(z.iso.time()),
+  time: z.optional(z.iso.time()),
   rest: z.optional(z.iso.time()),
 });
 

@@ -137,7 +137,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
           sets: [
             {
               fields: {
-                duration: "00:00:30",
+                time: "00:00:30",
               },
               completed: false,
               completed_at: null,
@@ -145,13 +145,13 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
             {
               fields: {
                 rest: "00:00:30",
-                duration: "00:00:30",
+                time: "00:00:30",
               },
               completed: false,
               completed_at: null,
             },
           ],
-          tracked: ["duration"],
+          tracked: ["time"],
           exercise_id: 16,
         },
         {
@@ -201,7 +201,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
                 reps: 10,
                 rest: "PT30S",
                 weight: 60,
-                duration: "PT1M",
+                time: "PT1M",
               },
               completed: false,
               completed_at: null,
@@ -234,7 +234,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
                 reps: 10,
                 rest: "PT30S",
                 weight: 60,
-                duration: "PT1M",
+                time: "PT1M",
               },
               completed: false,
               completed_at: null,
