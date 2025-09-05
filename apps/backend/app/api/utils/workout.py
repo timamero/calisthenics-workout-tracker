@@ -79,9 +79,9 @@ def get_workout_builds(access_token: str | None = None):
 #           {
 #             "fields": {
 #               "reps": 10,
-#               "duration": "00:01:00",
-#               "weight": 60,
-#               "rest": "00:00:30"
+#               "time": null,
+#               "weight": null,
+#               "rest": "PT30S"
 #             },
 #             "completed": true,
 #             "completed_at": "2025-08-15T03:40:37.995Z"
@@ -92,7 +92,7 @@ def get_workout_builds(access_token: str | None = None):
 #   },
 #   "status": "draft",
 #   "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
-#   "duration": "00:15:01",
+#   "duration": "PT5M",
 #   "goal": "function",
 #   "source": "default"
 # }

@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 
 class SetFieldsSchema(BaseModel):
     reps: Optional[int] = None
-    duration: Optional[timedelta] = None
+    time: Optional[timedelta] = None
     weight: Optional[int] = None
     rest: Optional[timedelta] = None
 
@@ -20,7 +20,7 @@ class SetSchema(BaseModel):
 
 class WorkoutExerciseSchema(BaseModel):
     exercise_id: int
-    tracked: List[Literal["reps", "duration", "weight", "rep"]]
+    tracked: List[Literal["reps", "time", "weight", "rpe"]]
     sets: List[SetSchema]
 
 
