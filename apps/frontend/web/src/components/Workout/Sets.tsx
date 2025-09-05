@@ -64,7 +64,12 @@ export default function Sets({
       if (field === 'duration') {
         return (
           <Stack key={field}>
-            <TimeField />
+            <TimeField
+              set={set}
+              index={i}
+              value={set.fields.rest!}
+              handleSetFieldChange={handleSetFieldChange}
+            />
             <RestField
               set={set}
               index={i}
