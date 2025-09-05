@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { Set } from '@cwt/schema/workouts';
 
 import DurationInput from '../common/DurationInput';
-import { getSecondsInDuration } from '../../utils/transformations';
+import { getSecondsInDuration } from '../../utils/durationUtils';
 
 interface TimeFieldProps {
   set: Set;
