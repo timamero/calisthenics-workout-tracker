@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { Set } from '@cwt/schema/workouts';
 
 import DurationInput from '../common/DurationInput';
-import { getNumberBeforeS } from '../../utils/transformations';
+import { getSecondsInDuration } from '../../utils/transformations';
 
 interface RestFieldProps {
   set: Set;
@@ -22,7 +22,7 @@ export default function RestField({
   value,
   handleSetFieldChange,
 }: RestFieldProps) {
-  const [sec, setSec] = useState<string>(getNumberBeforeS(value));
+  const [sec, setSec] = useState<string>(getSecondsInDuration(value));
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     // Allow empty string for controlled input
@@ -40,7 +40,7 @@ export default function RestField({
       if (num >= 0 && num <= 300) {
         setSec(num.toString());
         const updatedField: Pick<Set, 'fields'> = {
-          fields: { rest: event.currentTarget.value + 'S' },
+          fields: { rest: 'PT' + event.currentTarget.value + 'S' },
         };
         handleSetFieldChange(set, index, updatedField);
       }
