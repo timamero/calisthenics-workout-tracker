@@ -3,6 +3,7 @@ import { Stack, Text, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import type { WorkoutExercise } from '@cwt/schema/workouts';
+import type { Set } from '@cwt/schema/workouts';
 import { useStore } from '@cwt/state/store';
 
 import RepField from './RepField';
@@ -21,17 +22,38 @@ export default function Sets({
   // save sets to variable, pass on set data to Set component
   // call updateSet here on any field change
   const deleteSet = useStore((state) => state.deleteSet);
+  const updateSet = useStore((state) => state.updateSet);
   console.log(`workout state: ${JSON.stringify(workout)}`);
 
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);
+
+  const handleSetFieldChange = (
+    set: Set,
+    setIndex: number,
+    updatedField: Pick<Set, 'fields'>,
+  ) => {
+    const updatedSet: Set = {
+      ...set,
+      fields: {
+        ...set.fields,
+        ...updatedField.fields,
+      },
+    };
+    updateSet(exerciseIndex, setIndex, updatedSet);
+  };
 
   const workoutSets = sets.map((set, i) => {
     const fields = tracked.map((field) => {
       if (field === 'reps') {
         return (
           <Stack key={field}>
-            <RepField value={set.fields.reps!} />
+            <RepField
+              set={set}
+              index={i}
+              value={set.fields.reps!}
+              handleSetFieldChange={handleSetFieldChange}
+            />
             <RestField />
           </Stack>
         );
