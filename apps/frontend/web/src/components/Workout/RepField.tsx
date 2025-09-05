@@ -20,9 +20,9 @@ export default function RepField({
   value,
   handleSetFieldChange,
 }: RepFieldProps) {
-  const [reps, setReps] = useState<number>(value);
+  const [reps, setReps] = useState<string>(value.toString());
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setReps(Number(event.currentTarget.value));
+    setReps(event.currentTarget.value);
     const updatedField: Pick<Set, 'fields'> = {
       fields: { reps: Number(event.currentTarget.value) },
     };
