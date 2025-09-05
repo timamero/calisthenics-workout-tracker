@@ -113,6 +113,10 @@ export const createWorkoutDraftSlice: StateCreator<
           null,
           removeExerciseAtIndex,
         );
+      } else if (!state.workout) {
+        console.error('No workout to remove exercise from');
+      } else if (state.mode !== 'edit' && state.mode !== 'build') {
+        console.error('Cannot remove exercise in log mode');
       }
     }),
   addSet: (exerciseIndex) =>
