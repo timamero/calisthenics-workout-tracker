@@ -7,8 +7,6 @@ import type { Set } from '@cwt/schema/workouts';
 import { useStore } from '@cwt/state/store';
 
 import RepField from './RepField';
-// import TimeField from './TimeField';
-// import RestField from './RestField';
 import DurationField from './DurationField';
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
 
