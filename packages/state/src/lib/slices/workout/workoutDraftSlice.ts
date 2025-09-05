@@ -61,7 +61,7 @@ const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {
 
 export const createWorkoutDraftSlice: StateCreator<
   StoreState,
-  [],
+  [['zustand/immer', never]],
   [],
   WorkoutDraftSlice
 > = (set, get) => ({
