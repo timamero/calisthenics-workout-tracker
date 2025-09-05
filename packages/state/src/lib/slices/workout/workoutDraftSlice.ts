@@ -106,23 +106,14 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   removeExercise: (exerciseIndex) =>
     set((state) => {
-      if (state.mode === 'edit' || state.mode === 'build') {
-        let updatedWorkout = {};
-        if (exerciseIndex !== undefined && state.workout) {
-          updatedWorkout = applyExerciseUpdateAtIndex(
-            exerciseIndex,
-            state.workout,
-            null,
-            removeExerciseAtIndex,
-          );
-        }
-        return {
-          workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
-        };
+      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
+        state.workout = applyExerciseUpdateAtIndex(
+          exerciseIndex,
+          state.workout,
+          null,
+          removeExerciseAtIndex,
+        );
       }
-      return {
-        ...state,
-      };
     }),
   addSet: (exerciseIndex) =>
     set((state) => {
