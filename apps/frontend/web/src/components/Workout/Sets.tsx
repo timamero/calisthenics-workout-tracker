@@ -61,7 +61,7 @@ export default function Sets({
           </Stack>
         );
       }
-      if (field === 'duration') {
+      if (field === 'time') {
         return (
           <Stack key={field}>
             <TimeField

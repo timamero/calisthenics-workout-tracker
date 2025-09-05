@@ -4,7 +4,7 @@ import { Tracking } from '@cwt/schema/exercises';
 import { WorkoutBuildDraft, WorkoutLogDraft } from './workoutDraftSlice';
 import {
   INITIALIZED_SET,
-  DEFAULT_DURATION_SET,
+  DEFAULT_TIME_SET,
   DEFAULT_REP_SET,
 } from './workoutDefaults';
 
@@ -23,8 +23,8 @@ export function addExercise(
   let fields: SetFields = {};
   if (default_tracking.includes('reps')) {
     fields = DEFAULT_REP_SET;
-  } else if (default_tracking.includes('duration')) {
-    fields = DEFAULT_DURATION_SET;
+  } else if (default_tracking.includes('time')) {
+    fields = DEFAULT_TIME_SET;
   }
   return [
     ...(workout.workout_data.exercises as WorkoutExercise[]),
@@ -42,8 +42,8 @@ export function addSetToExercise(
   let fields: SetFields = {};
   if (exerciseToUpdate.tracked.includes('reps')) {
     fields = DEFAULT_REP_SET;
-  } else if (exerciseToUpdate.tracked.includes('duration')) {
-    fields = DEFAULT_DURATION_SET;
+  } else if (exerciseToUpdate.tracked.includes('time')) {
+    fields = DEFAULT_TIME_SET;
   }
   return {
     ...exerciseToUpdate,
