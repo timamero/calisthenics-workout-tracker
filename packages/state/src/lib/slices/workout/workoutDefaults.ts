@@ -5,5 +5,5 @@ export const INITIALIZED_SET: Omit<Set, 'fields'> = {
   completed_at: null,
 };
 
-export const DEFAULT_REP_SET: SetFields = { reps: 0, rest: '30S' };
-export const DEFAULT_TIME_SET: SetFields = { time: '30S', rest: '30S' };
+export const DEFAULT_REP_SET: SetFields = { reps: 10, rest: 'PT30S' };
+export const DEFAULT_TIME_SET: SetFields = { time: 'PT30S', rest: 'PT30S' };
