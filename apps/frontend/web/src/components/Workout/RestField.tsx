@@ -22,7 +22,6 @@ export default function RestField({
   value,
   handleSetFieldChange,
 }: RestFieldProps) {
-  console.log('value passes to rest field', value);
   const [sec, setSec] = useState<string>(getNumberBeforeS(value));
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -47,11 +46,6 @@ export default function RestField({
       }
     }
     // Otherwise, do not update
-
-    // const updatedField: Pick<Set, 'fields'> = {
-    //   fields: { rest: event.currentTarget.value + 'S' },
-    // };
-    // handleSetFieldChange(set, index, updatedField);
   };
   return (
     <DurationInput
@@ -62,18 +56,3 @@ export default function RestField({
     />
   );
 }
-
-// function getNumberBeforeS(inputString: string): string {
-//   if (typeof inputString !== 'string') {
-//     console.error('Invalid input: Please provide a string.');
-//     return '';
-//   }
-
-//   const regex = /^(\d+)S$/;
-//   const match = inputString.match(regex);
-
-//   if (match) {
-//     return parseInt(match[1], 10).toString();
-//   }
-//   return '';
-// }
