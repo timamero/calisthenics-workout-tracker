@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { Set } from '@cwt/schema/workouts';
 
 import DurationInput from '../common/DurationInput';
+import { getNumberBeforeS } from '../../utils/transformations';
 
 interface RestFieldProps {
   set: Set;
@@ -62,17 +63,17 @@ export default function RestField({
   );
 }
 
-function getNumberBeforeS(inputString: string): string {
-  if (typeof inputString !== 'string') {
-    console.error('Invalid input: Please provide a string.');
-    return '';
-  }
+// function getNumberBeforeS(inputString: string): string {
+//   if (typeof inputString !== 'string') {
+//     console.error('Invalid input: Please provide a string.');
+//     return '';
+//   }
 
-  const regex = /^(\d+)S$/;
-  const match = inputString.match(regex);
+//   const regex = /^(\d+)S$/;
+//   const match = inputString.match(regex);
 
-  if (match) {
-    return parseInt(match[1], 10).toString();
-  }
-  return '';
-}
+//   if (match) {
+//     return parseInt(match[1], 10).toString();
+//   }
+//   return '';
+// }
