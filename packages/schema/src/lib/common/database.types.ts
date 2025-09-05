@@ -369,7 +369,7 @@ export type Database = {
         | "forearms"
       source: "manual" | "ai_generated" | "default"
       status: "draft" | "finalized" | "archived"
-      tracking_type: "reps" | "duration" | "weight" | "rpe"
+      tracking_type: "reps" | "time" | "weight" | "rpe"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -542,7 +542,7 @@ export const Constants = {
       ],
       source: ["manual", "ai_generated", "default"],
       status: ["draft", "finalized", "archived"],
-      tracking_type: ["reps", "duration", "weight", "rpe"],
+      tracking_type: ["reps", "time", "weight", "rpe"],
     },
   },
 } as const
