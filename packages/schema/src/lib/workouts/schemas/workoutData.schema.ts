@@ -11,6 +11,7 @@ export const SetFieldsSchema = z.object({
 });
 
 export const SetSchema = z.object({
+  id: z.optional(z.uuid()),
   fields: SetFieldsSchema,
   completed: z.boolean(),
   completed_at: z.nullable(z.date()),
