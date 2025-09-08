@@ -36,16 +36,18 @@ interface WorkoutDraftState {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
   selectedExerciseIDToAdd: number | null;
+  selectedSetIndexToMod: number | null;
 }
 
 interface WorkoutDraftAction {
   setMode: (mode: Mode) => void;
   initializeWorkout: () => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
+  setSelectedSetIndexToMod: (setIndex: number | null) => void;
   addExercise: () => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
-  deleteSet: (exerciseIndex: number, setIndex: number) => void;
+  deleteSet: (exerciseIndex: number) => void;
   updateSet: (exerciseIndex: number, setIndex: number, updatedSet: Set) => void;
   resetWorkout: () => void;
 }
@@ -74,6 +76,7 @@ export const createWorkoutDraftSlice: StateCreator<
   mode: null,
   workout: null,
   selectedExerciseIDToAdd: null,
+  selectedSetIndexToMod: null,
   setMode: (mode) => set(() => ({ mode: mode })),
   initializeWorkout: () =>
     set((state) => {
@@ -93,6 +96,10 @@ export const createWorkoutDraftSlice: StateCreator<
   setSelectedExerciseIDToAdd: (exerciseID) =>
     set((state) => {
       state.selectedExerciseIDToAdd = exerciseID;
+    }),
+  setSelectedSetIndexToMod: (setIndex) =>
+    set((state) => {
+      state.selectedSetIndexToMod = setIndex;
     }),
   addExercise: () =>
     set((state) => {
@@ -149,14 +156,16 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot add set in log mode');
       }
     }),
-  deleteSet: (exerciseIndex, setIndex) =>
+  deleteSet: (exerciseIndex) =>
     set((state) => {
       if (exerciseIndex === undefined) {
-        console.error('Exercise index not provided');
+        console.error('Invalid exercise index');
         return;
       }
+
+      const setIndex = state.selectedSetIndexToMod;
       if (setIndex === undefined) {
-        console.error('Set index not provided');
+        console.error('Invalid set index');
         return;
       }
       if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
