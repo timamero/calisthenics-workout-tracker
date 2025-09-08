@@ -9,7 +9,6 @@ import type {
 
 import { StoreState } from '../../store';
 import {
-  // addExercise,
   addSetToExercise,
   deleteSetInExercise,
   exerciseAtIndex,
@@ -36,11 +35,13 @@ export type WorkoutLogDraft = Pick<
 export interface WorkoutDraftState {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
+  selectedExerciseIDToAdd: number | null;
 }
 
 export interface WorkoutDraftAction {
   setMode: (mode: Mode) => void;
   initializeWorkout: () => void;
+  setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   addExercise: (exerciseID: number) => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
@@ -70,6 +71,7 @@ export const createWorkoutDraftSlice: StateCreator<
 > = (set, get) => ({
   mode: null,
   workout: null,
+  selectedExerciseIDToAdd: null,
   setMode: (mode) => set(() => ({ mode: mode })),
   initializeWorkout: () =>
     set(() => {
@@ -84,6 +86,12 @@ export const createWorkoutDraftSlice: StateCreator<
       return {
         workout: { ...INITIALIZED_WORKOUT_LOG, date: new Date() } as WorkoutLog,
         mode: mode,
+      };
+    }),
+  setSelectedExerciseIDToAdd: (exerciseID) =>
+    set(() => {
+      return {
+        seletedExerciseID: exerciseID,
       };
     }),
   addExercise: (exerciseID) =>
