@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { Stack, Text, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
@@ -15,18 +14,11 @@ export default function Sets({
   sets,
   exerciseIndex,
 }: Pick<WorkoutExercise, 'sets' | 'tracked'> & { exerciseIndex: number }) {
-  // const [selectedSetIndex, setSelectedSetIndex] = useState<number | null>(null);
-
-  const workout = useStore((state) => state.workout);
-  // const selectedSetIndexToMod = useStore(
-  //   (state) => state.selectedSetIndexToMod,
-  // );
   const setSelectedSetIndexToMod = useStore(
     (state) => state.setSelectedSetIndexToMod,
   );
   const deleteSet = useStore((state) => state.deleteSet);
   const updateSet = useStore((state) => state.updateSet);
-  console.log(`workout state: ${JSON.stringify(workout)}`);
 
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);
@@ -50,7 +42,7 @@ export default function Sets({
     const fields = tracked.map((field) => {
       if (field === 'reps') {
         return (
-          <Stack key={`${field}-${i}`}>
+          <Stack key={set.id}>
             <RepField
               set={set}
               index={i}
@@ -70,7 +62,7 @@ export default function Sets({
       }
       if (field === 'time') {
         return (
-          <Stack key={`${field}-${i}`}>
+          <Stack key={set.id}>
             <DurationField
               set={set}
               index={i}
@@ -113,6 +105,7 @@ export default function Sets({
       </Stack>
     );
   });
+
   return (
     <Stack>
       {workoutSets}
