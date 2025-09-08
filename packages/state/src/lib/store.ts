@@ -15,7 +15,8 @@ import {
 } from './slices/workout/workoutLibrarySlice';
 import {
   createWorkoutDraftSlice,
-  WorkoutDraftSlice,
+  WorkoutDraftState,
+  WorkoutDraftAction,
 } from './slices/workout/workoutDraftSlice';
 import {
   createStopwatchSlice,
@@ -25,7 +26,8 @@ import {
 export type StoreState = ExercisesSlice &
   ExercisesFilterSlice &
   WorkoutLibrarySlice &
-  WorkoutDraftSlice &
+  WorkoutDraftState &
+  WorkoutDraftAction &
   StopwatchSlice;
 export const useStore = create<StoreState>()(
   immer((...a) => ({
