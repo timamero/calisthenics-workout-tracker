@@ -29,7 +29,7 @@ export function addExercise(
   return [
     ...(workout.workout_data.exercises as WorkoutExercise[]),
     {
-      sets: [{ ...INITIALIZED_SET, fields: fields }],
+      sets: [{ ...INITIALIZED_SET, id: crypto.randomUUID(), fields: fields }],
       exercise_id: exercise_id,
       tracked: default_tracking,
     },
@@ -47,7 +47,10 @@ export function addSetToExercise(
   }
   return {
     ...exerciseToUpdate,
-    sets: [...exerciseToUpdate.sets, { ...INITIALIZED_SET, fields: fields }],
+    sets: [
+      ...exerciseToUpdate.sets,
+      { ...INITIALIZED_SET, id: crypto.randomUUID(), fields: fields },
+    ],
   };
 }
 
