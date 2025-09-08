@@ -76,8 +76,8 @@ export const createWorkoutDraftSlice: StateCreator<
   selectedExerciseIDToAdd: null,
   setMode: (mode) => set(() => ({ mode: mode })),
   initializeWorkout: () =>
-    set(() => {
-      const mode = get().mode;
+    set((state) => {
+      const mode = state.mode;
       if (mode === 'build') {
         return {
           workout: INITIALIZED_WORKOUT_BUILD as WorkoutBuild,

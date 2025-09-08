@@ -4,18 +4,19 @@ import { useStore } from '@cwt/state/store';
 
 import ExerciseCard from './ExerciseCard';
 
-interface ExercisesListProps {
-  selected: string | null;
-  setSelected: (id: string | null) => void;
-}
-
-export default function ExercisesList({
-  selected,
-  setSelected,
-}: ExercisesListProps) {
+export default function ExercisesList() {
   const exercises = useStore((state) => state.displayedExercises);
+  const selectedExerciseIDToAdd = useStore(
+    (state) => state.selectedExerciseIDToAdd,
+  );
+  const setSelectedExerciseIDToAdd = useStore(
+    (state) => state.setSelectedExerciseIDToAdd,
+  );
+
   const handleExerciseClick = (e: React.MouseEvent<HTMLElement>) => {
-    setSelected(e.currentTarget.getAttribute('data-exercise-id'));
+    setSelectedExerciseIDToAdd(
+      Number(e.currentTarget.getAttribute('data-exercise-id')),
+    );
   };
   return (
     <SimpleGrid
@@ -27,7 +28,9 @@ export default function ExercisesList({
         <ExerciseCard
           exercise={exercise}
           onExerciseClick={handleExerciseClick}
-          isSelected={exercise.id.toString() === selected ? 'true' : 'false'}
+          isSelected={
+            exercise.id === selectedExerciseIDToAdd ? 'true' : 'false'
+          }
           key={i}
         />
       ))}
