@@ -110,9 +110,9 @@ export const createWorkoutDraftSlice: StateCreator<
           tracking,
         );
       } else if (!state.workout) {
-        console.error('No workout to remove exercise from');
+        console.error('No workout to add exercise to');
       } else if (state.mode !== 'edit' && state.mode !== 'build') {
-        console.error('Cannot remove exercise in log mode');
+        console.error('Cannot add exercise in log mode');
       }
     }),
   removeExercise: (exerciseIndex) =>
@@ -132,27 +132,22 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   addSet: (exerciseIndex) =>
     set((state) => {
-      if (state.mode === 'edit' || state.mode === 'build') {
-        let updatedWorkout = {};
-        let updatedExercise: WorkoutExercise;
-        if (exerciseIndex !== undefined && state.workout) {
-          const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-          updatedExercise = updateExercise(exercise, null, addSetToExercise);
-
-          updatedWorkout = applyExerciseUpdateAtIndex(
-            exerciseIndex,
-            state.workout,
-            updatedExercise,
-            updateExercisesAtIndex,
-          );
-        }
-        return {
-          workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
-        };
+      if (exerciseIndex === undefined) {
+        console.error('Exercise index not provided');
+        return;
       }
-      return {
-        ...state,
-      };
+      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
+        const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+        state.workout.workout_data.exercises[exerciseIndex] = updateExercise(
+          exercise,
+          null,
+          addSetToExercise,
+        );
+      } else if (!state.workout) {
+        console.error('No workout to add set to');
+      } else if (state.mode !== 'edit' && state.mode !== 'build') {
+        console.error('Cannot add set in log mode');
+      }
     }),
   deleteSet: (exerciseIndex, setIndex) =>
     set((state) => {
