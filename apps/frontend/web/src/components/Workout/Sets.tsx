@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Stack, Text, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
@@ -15,9 +15,15 @@ export default function Sets({
   sets,
   exerciseIndex,
 }: Pick<WorkoutExercise, 'sets' | 'tracked'> & { exerciseIndex: number }) {
-  const [selectedSetIndex, setSelectedSetIndex] = useState<number | null>(null);
+  // const [selectedSetIndex, setSelectedSetIndex] = useState<number | null>(null);
 
   const workout = useStore((state) => state.workout);
+  // const selectedSetIndexToMod = useStore(
+  //   (state) => state.selectedSetIndexToMod,
+  // );
+  const setSelectedSetIndexToMod = useStore(
+    (state) => state.setSelectedSetIndexToMod,
+  );
   const deleteSet = useStore((state) => state.deleteSet);
   const updateSet = useStore((state) => state.updateSet);
   console.log(`workout state: ${JSON.stringify(workout)}`);
@@ -88,7 +94,7 @@ export default function Sets({
     });
 
     const handleDeleteSetOpen = (i: number) => {
-      setSelectedSetIndex(i);
+      setSelectedSetIndexToMod(i);
       deleteSetOverlayHandler.open();
     };
     return (
@@ -116,7 +122,7 @@ export default function Sets({
         confirmButtonLabel="Delete"
         opened={deleteSetOverlayOpened}
         handler={deleteSetOverlayHandler}
-        onConfirmationClick={() => deleteSet(exerciseIndex, selectedSetIndex!)}
+        onConfirmationClick={() => deleteSet(exerciseIndex)}
       />
     </Stack>
   );
