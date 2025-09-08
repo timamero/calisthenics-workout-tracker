@@ -94,7 +94,7 @@ export const createExercisesFilterSlice: StateCreator<
     // When user updates filters, but then cancels the update, revert back to the last state when filters where applied
     set((state) => {
       const appliedSelectionAttributes = state.appliedFilterSelections.map(
-        (obj) => obj.selection,
+        (obj: ExerciseFilterCheckbox) => obj.selection,
       );
       const revertedFilterSelections = revertFilterSelections(
         state.filterCheckboxSelections,
