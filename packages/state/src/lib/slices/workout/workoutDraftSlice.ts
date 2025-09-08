@@ -98,12 +98,12 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   addExercise: () =>
     set((state) => {
-      const exerciseID = state.selectedExerciseIDtoAdd;
+      const exerciseID = state.selectedExerciseIDToAdd;
       if (exerciseID == null) {
         console.error('No exerciseID provided');
         return;
       }
-      if (state.mode === 'edit' || (state.mode === 'build' && state.workout)) {
+      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
         const tracking: Tracking[] =
           get().getExerciseByID(exerciseID).default_tracking_type;
         state.workout = addExerciseToWorkout(
