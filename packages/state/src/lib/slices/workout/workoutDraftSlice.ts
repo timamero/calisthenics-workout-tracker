@@ -33,9 +33,12 @@ export type WorkoutLogDraft = Pick<
   'title' | 'workout_data' | 'status' | 'date'
 >;
 
-export interface WorkoutDraftSlice {
+export interface WorkoutDraftState {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
+}
+
+export interface WorkoutDraftAction {
   setMode: (mode: Mode) => void;
   initializeWorkout: () => void;
   addExercise: (exerciseID: number) => void;
@@ -63,7 +66,7 @@ export const createWorkoutDraftSlice: StateCreator<
   StoreState,
   [['zustand/immer', never]],
   [],
-  WorkoutDraftSlice
+  WorkoutDraftState & WorkoutDraftAction
 > = (set, get) => ({
   mode: null,
   workout: null,
