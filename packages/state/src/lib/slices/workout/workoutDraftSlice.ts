@@ -151,35 +151,49 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   deleteSet: (exerciseIndex, setIndex) =>
     set((state) => {
-      if (state.mode === 'edit' || state.mode === 'build') {
-        let updatedWorkout = {};
-        let updatedExercise: WorkoutExercise;
-        if (
-          exerciseIndex !== undefined &&
-          setIndex !== undefined &&
-          state.workout
-        ) {
-          const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-          updatedExercise = updateExercise(
-            exercise,
-            setIndex,
-            deleteSetInExercise,
-          );
-
-          updatedWorkout = applyExerciseUpdateAtIndex(
-            exerciseIndex,
-            state.workout,
-            updatedExercise,
-            updateExercisesAtIndex,
-          );
-        }
-        return {
-          workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
-        };
+      if (exerciseIndex === undefined) {
+        console.error('Exercise index not provided');
+        return;
       }
-      return {
-        ...state,
-      };
+      if (setIndex === undefined) {
+        console.error('Set index not provided');
+        return;
+      }
+      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
+        const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+        state.workout.workout_data.exercises[exerciseIndex] = updateExercise(
+          exercise,
+          setIndex,
+          deleteSetInExercise,
+        );
+        // let updatedWorkout = {};
+        // let updatedExercise: WorkoutExercise;
+        // if (
+        //   exerciseIndex !== undefined &&
+        //   setIndex !== undefined &&
+        //   state.workout
+        // ) {
+        //   const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+        //   updatedExercise = updateExercise(
+        //     exercise,
+        //     setIndex,
+        //     deleteSetInExercise,
+        //   );
+
+        //   updatedWorkout = applyExerciseUpdateAtIndex(
+        //     exerciseIndex,
+        //     state.workout,
+        //     updatedExercise,
+        //     updateExercisesAtIndex,
+        //   );
+        // }
+        // return {
+        //   workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
+        // };
+      }
+      // return {
+      //   ...state,
+      // };
     }),
   // Change updateSet to updateSetField so that it can be used in the frontend like:
   // const updateSetField = useStore((state) => state.updateSetField);
