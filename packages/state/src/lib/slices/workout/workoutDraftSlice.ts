@@ -168,13 +168,19 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Invalid set index');
         return;
       }
+      console.log('deleteSet, setIndex = ', setIndex);
       if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
-        const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-        state.workout.workout_data.exercises[exerciseIndex] = updateExercise(
-          exercise,
-          setIndex,
-          deleteSetInExercise,
-        );
+        const sets = exerciseAtIndex(exerciseIndex, state.workout).sets;
+        state.workout.workout_data.exercises[exerciseIndex].sets = [
+          ...sets.filter((_, ind) => ind !== setIndex),
+        ];
+        // const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+        // state.workout.workout_data.exercises[exerciseIndex] = updateExercise(
+        //   exercise,
+        //   setIndex,
+        //   deleteSetInExercise,
+        // );
+
         // let updatedWorkout = {};
         // let updatedExercise: WorkoutExercise;
         // if (
