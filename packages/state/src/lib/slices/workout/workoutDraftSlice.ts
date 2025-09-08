@@ -42,7 +42,7 @@ export interface WorkoutDraftAction {
   setMode: (mode: Mode) => void;
   initializeWorkout: () => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
-  addExercise: (exerciseID: number) => void;
+  addExercise: () => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number, setIndex: number) => void;
@@ -94,26 +94,26 @@ export const createWorkoutDraftSlice: StateCreator<
         seletedExerciseID: exerciseID,
       };
     }),
-  addExercise: (exerciseID) =>
+  addExercise: () =>
     set((state) => {
-      if (state.mode === 'edit' || state.mode === 'build') {
-        let updatedWorkout = {};
+      const exerciseID = state.selectedExerciseIDtoAdd;
+      if (exerciseID == null) {
+        console.error('No exerciseID provided');
+        return;
+      }
+      if (state.mode === 'edit' || (state.mode === 'build' && state.workout)) {
         const tracking: Tracking[] =
           get().getExerciseByID(exerciseID).default_tracking_type;
-        if (exerciseID && state.workout) {
-          updatedWorkout = addExerciseToWorkout(
-            state.workout,
-            exerciseID,
-            tracking,
-          );
-        }
-        return {
-          workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
-        };
+        state.workout = addExerciseToWorkout(
+          state.workout,
+          exerciseID,
+          tracking,
+        );
+      } else if (!state.workout) {
+        console.error('No workout to remove exercise from');
+      } else if (state.mode !== 'edit' && state.mode !== 'build') {
+        console.error('Cannot remove exercise in log mode');
       }
-      return {
-        ...state,
-      };
     }),
   removeExercise: (exerciseIndex) =>
     set((state) => {
