@@ -91,10 +91,8 @@ export const createWorkoutDraftSlice: StateCreator<
       };
     }),
   setSelectedExerciseIDToAdd: (exerciseID) =>
-    set(() => {
-      return {
-        seletedExerciseID: exerciseID,
-      };
+    set((state) => {
+      state.selectedExerciseIDToAdd = exerciseID;
     }),
   addExercise: () =>
     set((state) => {
