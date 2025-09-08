@@ -50,7 +50,7 @@ export default function Sets({
     const fields = tracked.map((field) => {
       if (field === 'reps') {
         return (
-          <Stack key={field}>
+          <Stack key={`${field}-${i}`}>
             <RepField
               set={set}
               index={i}
@@ -70,7 +70,7 @@ export default function Sets({
       }
       if (field === 'time') {
         return (
-          <Stack key={field}>
+          <Stack key={`${field}-${i}`}>
             <DurationField
               set={set}
               index={i}
@@ -98,7 +98,7 @@ export default function Sets({
       deleteSetOverlayHandler.open();
     };
     return (
-      <Stack key={i} bg="gray.1">
+      <Stack key={`set-${i}`} bg="gray.1">
         <Group>
           <Text>{`Set ${i + 1}`}</Text>
           <Button
