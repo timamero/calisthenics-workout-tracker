@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Group, Modal, Button, Stack, ScrollArea } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
@@ -14,15 +13,17 @@ export default function AddExerciseOverlay({
   opened,
   handler,
 }: AddExerciseOverlayProps) {
-  const [selectedExerciseID, setSelectedExerciseID] = useState<string | null>(
-    null,
+  const selectedExerciseIDToAdd = useStore(
+    (state) => state.selectedExerciseIDToAdd,
   );
-
+  const setSelectedExerciseIDToAdd = useStore(
+    (state) => state.setSelectedExerciseIDToAdd,
+  );
   const addExercise = useStore((state) => state.addExercise);
 
   const handleAddExerciseClick = () => {
-    addExercise(Number(selectedExerciseID));
-    setSelectedExerciseID(null);
+    addExercise();
+    setSelectedExerciseIDToAdd(null);
     handler.close();
   };
 
@@ -41,10 +42,7 @@ export default function AddExerciseOverlay({
     >
       <ScrollArea h="80vh">
         <Stack gap="lg">
-          <ExercisesList
-            selected={selectedExerciseID}
-            setSelected={setSelectedExerciseID}
-          />
+          <ExercisesList />
         </Stack>
       </ScrollArea>
       <Group mt="lg">
@@ -54,7 +52,7 @@ export default function AddExerciseOverlay({
         <Button
           color="orange"
           onClick={() => handleAddExerciseClick()}
-          data-disabled={selectedExerciseID === null}
+          data-disabled={selectedExerciseIDToAdd === null}
         >
           Add Exercise
         </Button>
