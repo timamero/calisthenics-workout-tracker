@@ -2,14 +2,16 @@ import { Set, SetFields } from '@cwt/schema/workouts';
 
 import { WorkoutLogDraft, WorkoutBuildDraft } from './workoutDraftSlice';
 
-export const INITIALIZED_WORKOUT_LOG: Omit<WorkoutLogDraft, 'date'> = {
-  title: 'New workout log',
-  workout_data: { exercises: [] },
-  status: 'draft',
-};
+export const INITIAL_WORKOUT_LOG_TITLE: string = 'New workout log';
+export const INITIAL_WORKOUT_BUILD_TITLE: string = 'New workout template';
 
-export const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {
-  title: 'New workout template',
+export const INITIALIZED_WORKOUT_LOG: Omit<WorkoutLogDraft, 'date' | 'title'> =
+  {
+    workout_data: { exercises: [] },
+    status: 'draft',
+  };
+
+export const INITIALIZED_WORKOUT_BUILD: Omit<WorkoutBuildDraft, 'title'> = {
   workout_data: { exercises: [] },
   status: 'draft',
   source: 'manual',

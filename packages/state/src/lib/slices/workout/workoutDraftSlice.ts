@@ -19,6 +19,8 @@ import { Tracking } from '@cwt/schema/exercises';
 import {
   INITIALIZED_WORKOUT_LOG,
   INITIALIZED_WORKOUT_BUILD,
+  INITIAL_WORKOUT_LOG_TITLE,
+  INITIAL_WORKOUT_BUILD_TITLE,
 } from './workoutDefaults';
 
 export type Mode = 'build' | 'edit' | 'log';
@@ -64,19 +66,6 @@ interface WorkoutDraftAction {
 
 export type WorkoutDraftSlice = WorkoutDraftState & WorkoutDraftAction;
 
-// const INITIALIZED_WORKOUT_LOG: Omit<WorkoutLogDraft, 'date'> = {
-//   title: 'New workout log',
-//   workout_data: { exercises: [] },
-//   status: 'draft',
-// };
-
-// const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {
-//   title: 'New workout template',
-//   workout_data: { exercises: [] },
-//   status: 'draft',
-//   source: 'manual',
-// };
-
 export const createWorkoutDraftSlice: StateCreator<
   StoreState,
   [['zustand/immer', never]],
@@ -85,7 +74,10 @@ export const createWorkoutDraftSlice: StateCreator<
 > = (set, get) => ({
   mode: null,
   workout: null,
-  workoutTitle: null,
+  workoutTitle:
+    get().mode == 'build'
+      ? INITIAL_WORKOUT_BUILD_TITLE
+      : INITIAL_WORKOUT_LOG_TITLE,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
   setMode: (mode) => set(() => ({ mode: mode })),
