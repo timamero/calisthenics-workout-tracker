@@ -48,7 +48,7 @@ interface WorkoutDraftAction {
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number) => void;
-  updateSet: (
+  updateField: (
     exerciseIndex: number,
     updatedField: {
       reps?: number | undefined;
@@ -191,7 +191,7 @@ export const createWorkoutDraftSlice: StateCreator<
   // const updateSetField = useStore((state) => state.updateSetField);
   // // Usage in component:
   // updateSetField(exerciseIndex, setIndex, { reps: 10 });
-  updateSet: (exerciseIndex, updatedField) =>
+  updateField: (exerciseIndex, updatedField) =>
     set((state) => {
       if (exerciseIndex === undefined) {
         console.error('Invalid exercise index');
@@ -204,7 +204,6 @@ export const createWorkoutDraftSlice: StateCreator<
         return;
       }
       if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
-        console.log('updateSet called with updateField: ', updatedField);
         const set = exerciseAtIndex(exerciseIndex, state.workout).sets[
           setIndex
         ];
