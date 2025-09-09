@@ -5,6 +5,7 @@ import WorkoutExercise from './WorkoutExercise';
 
 export default function Workout() {
   const workout = useStore((state) => state.workout);
+  console.log('!! Workout - workout state: ', JSON.stringify(workout));
 
   const EmptyWorkoutPlaceholder = () => {
     if (workout!.workout_data.exercises.length === 0) {
