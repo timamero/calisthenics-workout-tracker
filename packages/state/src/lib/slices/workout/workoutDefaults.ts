@@ -1,5 +1,20 @@
 import { Set, SetFields } from '@cwt/schema/workouts';
 
+import { WorkoutLogDraft, WorkoutBuildDraft } from './workoutDraftSlice';
+
+export const INITIALIZED_WORKOUT_LOG: Omit<WorkoutLogDraft, 'date'> = {
+  title: 'New workout log',
+  workout_data: { exercises: [] },
+  status: 'draft',
+};
+
+export const INITIALIZED_WORKOUT_BUILD: WorkoutBuildDraft = {
+  title: 'New workout template',
+  workout_data: { exercises: [] },
+  status: 'draft',
+  source: 'manual',
+};
+
 export const INITIALIZED_SET: Omit<Set, 'fields'> = {
   completed: false,
   completed_at: null,
