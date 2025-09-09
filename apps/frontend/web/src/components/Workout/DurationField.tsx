@@ -1,17 +1,11 @@
-// import { useState } from 'react';
-
-// import type { Set } from '@cwt/schema/workouts';
-
 import DurationInput from '../common/DurationInput';
 import { getSecondsInDuration } from '../../utils/durationUtils';
 
 interface DurationFieldProps {
-  // set: Set;
   index: number;
   value: string;
   fieldName: 'rest' | 'time';
   handleSetFieldChange: (
-    // set: Set,
     setIndex: number,
     updatedField: {
       reps?: number | undefined;
@@ -24,19 +18,16 @@ interface DurationFieldProps {
 }
 
 export default function DurationField({
-  // set,
   index,
   value,
   fieldName,
   handleSetFieldChange,
   label,
 }: DurationFieldProps) {
-  // const [sec, setSec] = useState<string>(getSecondsInDuration(value));
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     // Allow empty string for controlled input
     if (value === '') {
-      // setSec('');
       const updatedField: {
         reps?: number | undefined;
         weight?: number | undefined;
@@ -52,7 +43,6 @@ export default function DurationField({
     if (/^(0|[1-9][0-9]{0,2})$/.test(value)) {
       const num = Number(value);
       if (num >= 0 && num <= 300) {
-        // setSec(num.toString());
         const updatedField: {
           reps?: number | undefined;
           weight?: number | undefined;
@@ -70,7 +60,6 @@ export default function DurationField({
     <DurationInput
       label={label || (fieldName === 'rest' ? 'Rest' : 'Time')}
       sec={getSecondsInDuration(value)}
-      // setSec={setSec}
       handleChange={handleChange}
     />
   );
