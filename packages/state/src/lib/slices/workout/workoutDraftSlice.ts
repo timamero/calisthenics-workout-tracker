@@ -48,7 +48,15 @@ interface WorkoutDraftAction {
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number) => void;
-  updateSet: (exerciseIndex: number, setIndex: number, updatedSet: Set) => void;
+  updateSet: (
+    exerciseIndex: number,
+    updatedField: {
+      reps?: number | undefined;
+      weight?: number | undefined;
+      time?: string | undefined;
+      rest?: string | undefined;
+    },
+  ) => void;
   resetWorkout: () => void;
 }
 
@@ -183,38 +191,56 @@ export const createWorkoutDraftSlice: StateCreator<
   // const updateSetField = useStore((state) => state.updateSetField);
   // // Usage in component:
   // updateSetField(exerciseIndex, setIndex, { reps: 10 });
-  updateSet: (exerciseIndex, setIndex, updatedSet) =>
+  updateSet: (exerciseIndex, updatedField) =>
     set((state) => {
-      if (state.mode === 'edit' || state.mode === 'build') {
-        let updatedWorkout = {};
-        let updatedExercise: WorkoutExercise;
-        if (
-          exerciseIndex !== undefined &&
-          setIndex !== undefined &&
-          state.workout
-        ) {
-          const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-          updatedExercise = updateExercise(
-            exercise,
-            setIndex,
-            updateSetInExercise,
-            updatedSet,
-          );
-
-          updatedWorkout = applyExerciseUpdateAtIndex(
-            exerciseIndex,
-            state.workout,
-            updatedExercise,
-            updateExercisesAtIndex,
-          );
-        }
-        return {
-          workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
-        };
+      if (exerciseIndex === undefined) {
+        console.error('Invalid exercise index');
+        return;
       }
-      return {
-        ...state,
-      };
+
+      const setIndex = get().selectedSetIndexToMod;
+      if (setIndex === undefined || setIndex == null) {
+        console.error('Invalid set index');
+        return;
+      }
+      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
+        console.log('updateSet called with updateField: ', updatedField);
+        const set = exerciseAtIndex(exerciseIndex, state.workout).sets[
+          setIndex
+        ];
+        state.workout.workout_data.exercises[exerciseIndex].sets[setIndex] = {
+          ...set,
+          fields: { ...set.fields, ...updatedField },
+        };
+        // let updatedWorkout = {};
+        // let updatedExercise: WorkoutExercise;
+        // if (
+        //   exerciseIndex !== undefined &&
+        //   setIndex !== undefined &&
+        //   state.workout
+        // ) {
+        //   const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+        //   updatedExercise = updateExercise(
+        //     exercise,
+        //     setIndex,
+        //     updateSetInExercise,
+        //     updatedSet,
+        //   );
+
+        //   updatedWorkout = applyExerciseUpdateAtIndex(
+        //     exerciseIndex,
+        //     state.workout,
+        //     updatedExercise,
+        //     updateExercisesAtIndex,
+        //   );
+        // }
+        // return {
+        //   workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
+        // };
+      }
+      // return {
+      //   ...state,
+      // };
     }),
   resetWorkout: () => set(() => ({ workout: null, mode: null })),
 });

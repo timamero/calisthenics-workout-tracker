@@ -2,7 +2,7 @@ import { Stack, Text, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import type { WorkoutExercise } from '@cwt/schema/workouts';
-import type { Set } from '@cwt/schema/workouts';
+// import type { Set } from '@cwt/schema/workouts';
 import { useStore } from '@cwt/state/store';
 
 import RepField from './RepField';
@@ -24,18 +24,24 @@ export default function Sets({
     useDisclosure(false);
 
   const handleSetFieldChange = (
-    set: Set,
+    // set: Set,
     setIndex: number,
-    updatedField: Pick<Set, 'fields'>,
+    updatedField: {
+      reps?: number | undefined;
+      weight?: number | undefined;
+      time?: string | undefined;
+      rest?: string | undefined;
+    },
   ) => {
-    const updatedSet: Set = {
-      ...set,
-      fields: {
-        ...set.fields,
-        ...updatedField.fields,
-      },
-    };
-    updateSet(exerciseIndex, setIndex, updatedSet);
+    // const updatedSet: Set = {
+    //   ...set,
+    //   fields: {
+    //     ...set.fields,
+    //     ...updatedField.fields,
+    //   },
+    // };
+    setSelectedSetIndexToMod(setIndex);
+    updateSet(exerciseIndex, updatedField);
   };
 
   const workoutSets = sets.map((set, i) => {
@@ -44,13 +50,13 @@ export default function Sets({
         return (
           <Stack key={set.id}>
             <RepField
-              set={set}
+              // set={set}
               index={i}
               value={set.fields.reps!}
               handleSetFieldChange={handleSetFieldChange}
             />
             <DurationField
-              set={set}
+              // set={set}
               index={i}
               value={set.fields.rest!}
               fieldName="rest"
@@ -64,7 +70,7 @@ export default function Sets({
         return (
           <Stack key={set.id}>
             <DurationField
-              set={set}
+              // set={set}
               index={i}
               value={set.fields.time!}
               fieldName="time"
@@ -72,7 +78,7 @@ export default function Sets({
               label="Time"
             />
             <DurationField
-              set={set}
+              // set={set}
               index={i}
               value={set.fields.rest!}
               fieldName="rest"
