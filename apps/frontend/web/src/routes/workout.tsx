@@ -18,7 +18,7 @@ function WorkoutView() {
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
-  const workout = useStore((state) => state.workout);
+  const workoutTitle = useStore((state) => state.workoutTitle);
   const resetWorkout = useStore((state) => state.resetWorkout);
 
   const onCancelWorkoutClick = () => {
@@ -30,7 +30,7 @@ function WorkoutView() {
 
   return (
     <Stack gap="xl">
-      <Title size="h6">{workout!.title}</Title>
+      <Title size="h6">{workoutTitle}</Title>
       <Stack gap="xl" align="center">
         <Workout />
         <Stack justify="center">
