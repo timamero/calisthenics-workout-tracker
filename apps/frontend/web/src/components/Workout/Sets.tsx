@@ -17,7 +17,7 @@ export default function Sets({
     (state) => state.setSelectedSetIndexToMod,
   );
   const deleteSet = useStore((state) => state.deleteSet);
-  const updateSet = useStore((state) => state.updateSet);
+  const updateField = useStore((state) => state.updateField);
 
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);
@@ -32,7 +32,7 @@ export default function Sets({
     },
   ) => {
     setSelectedSetIndexToMod(setIndex);
-    updateSet(exerciseIndex, updatedField);
+    updateField(exerciseIndex, updatedField);
   };
 
   const workoutSets = sets.map((set, i) => {
