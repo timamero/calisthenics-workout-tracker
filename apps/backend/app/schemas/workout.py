@@ -30,6 +30,34 @@ class WorkoutDataSchema(BaseModel):
     exercises: List[WorkoutExerciseSchema]
 
 
+class WorkoutBuildRequestSchema(BaseModel):
+    title: Optional[str] = Field(None, max_length=70)
+    user_id: Optional[UUID]
+    description: Optional[str] = Field(None, max_length=500)
+    workout_data: WorkoutDataSchema
+    status: Literal["draft", "finalized", "archived"]
+    goal: Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
+    notes: Optional[str] = Field(None, max_length=750)
+    estimated_duration: Optional[timedelta]
+    source: Literal["manual", "ai_generated", "default"]
+    updated_at: Optional[datetime]
+
+
+class WorkoutBuildResponseSchema(BaseModel):
+    id: int
+    created_at: datetime
+    title: Optional[str] = Field(None, max_length=70)
+    user_id: Optional[UUID]
+    description: Optional[str] = Field(None, max_length=500)
+    workout_data: WorkoutDataSchema
+    status: Literal["draft", "finalized", "archived"]
+    goal: Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
+    notes: Optional[str] = Field(None, max_length=750)
+    estimated_duration: Optional[timedelta]
+    source: Literal["manual", "ai_generated", "default"]
+    updated_at: Optional[datetime]
+
+
 class BaseWorkoutSchema(BaseModel):
     id: int
     created_at: datetime
@@ -40,12 +68,6 @@ class BaseWorkoutSchema(BaseModel):
     status: Literal["draft", "finalized", "archived"]
     goal: Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
     notes: Optional[str] = Field(None, max_length=750)
-
-
-class WorkoutBuildSchema(BaseWorkoutSchema):
-    user_id: Optional[UUID]
-    duration: Optional[timedelta]
-    source: Literal["manual", "ai_generated", "default"]
 
 
 class WorkoutLogSchema(BaseWorkoutSchema):
