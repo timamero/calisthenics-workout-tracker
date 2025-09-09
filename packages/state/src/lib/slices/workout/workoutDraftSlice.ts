@@ -85,11 +85,11 @@ export const createWorkoutDraftSlice: StateCreator<
         mode === 'build'
           ? INITIAL_WORKOUT_BUILD_TITLE
           : INITIAL_WORKOUT_LOG_TITLE;
+      get().setWorkoutTitle(title);
       if (mode === 'build') {
         return {
           workout: {
             ...INITIALIZED_WORKOUT_BUILD,
-            title: title,
           } as WorkoutBuild,
           mode: mode,
         };
@@ -98,7 +98,6 @@ export const createWorkoutDraftSlice: StateCreator<
       return {
         workout: {
           ...INITIALIZED_WORKOUT_LOG,
-          title: title,
           date: new Date(),
         } as WorkoutLog,
         mode: mode,
