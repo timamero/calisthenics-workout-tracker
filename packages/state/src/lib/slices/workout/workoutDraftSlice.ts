@@ -1,21 +1,16 @@
 import { StateCreator } from 'zustand';
 
-import type {
-  WorkoutBuild,
-  WorkoutLog,
-  Set,
-  WorkoutExercise,
-} from '@cwt/schema/workouts';
+import type { WorkoutBuild, WorkoutLog } from '@cwt/schema/workouts';
 
 import { StoreState } from '../../store';
 import {
   addSetToExercise,
-  deleteSetInExercise,
+  deleteSetInExercise, // TODO: Update this action
   exerciseAtIndex,
   removeExerciseAtIndex,
   updateExercise,
-  updateExercisesAtIndex,
-  updateSetInExercise,
+  updateExercisesAtIndex, // TODO: Update this action
+  updateSetInExercise, // TODO: Update this action
   addExerciseToWorkout,
   applyExerciseUpdateAtIndex,
 } from './workoutDraftActions';
