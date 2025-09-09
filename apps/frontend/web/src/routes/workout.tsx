@@ -19,8 +19,6 @@ function WorkoutView() {
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
-  // const workoutTitle = useStore((state) => state.workoutTitle);
-  // const setWorkoutTitle = useStore((state) => state.setWorkoutTitle);
   const resetWorkout = useStore((state) => state.resetWorkout);
 
   const onCancelWorkoutClick = () => {
@@ -33,11 +31,6 @@ function WorkoutView() {
   return (
     <Stack gap="xl">
       <WorkoutTitle />
-      {/* <Title size="h6">{workoutTitle}</Title>
-      <TextInput
-        value={workoutTitle!}
-        onChange={(event) => setWorkoutTitle(event.currentTarget.value)}
-      /> */}
       <Stack gap="xl" align="center">
         <Workout />
         <Stack justify="center">
