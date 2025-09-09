@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { Title, Stack, Button } from '@mantine/core';
+import { Title, Stack, Button, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
@@ -19,6 +19,7 @@ function WorkoutView() {
     useDisclosure(false);
 
   const workoutTitle = useStore((state) => state.workoutTitle);
+  const setWorkoutTitle = useStore((state) => state.setWorkoutTitle);
   const resetWorkout = useStore((state) => state.resetWorkout);
 
   const onCancelWorkoutClick = () => {
@@ -31,6 +32,10 @@ function WorkoutView() {
   return (
     <Stack gap="xl">
       <Title size="h6">{workoutTitle}</Title>
+      <TextInput
+        value={workoutTitle!}
+        onChange={(event) => setWorkoutTitle(event.currentTarget.value)}
+      />
       <Stack gap="xl" align="center">
         <Workout />
         <Stack justify="center">
