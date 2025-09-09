@@ -15,11 +15,20 @@ export const Route = createFileRoute('/workout')({
 
 function WorkoutView() {
   const navigate = useNavigate();
+  const [saveOverlayOpened, saveOverlayHandler] = useDisclosure(false);
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
   const resetWorkout = useStore((state) => state.resetWorkout);
+  const completeWorkout = useStore((state) => state.completeWorkout);
+
+  const onSaveWorkoutClick = () => {
+    navigate({
+      to: '/workoutDashboard',
+    });
+    completeWorkout();
+  };
 
   const onCancelWorkoutClick = () => {
     navigate({
@@ -44,7 +53,7 @@ function WorkoutView() {
           <Button
             variant="filled"
             color="orange"
-            onClick={() => console.log('clicked save workout build')}
+            onClick={() => saveOverlayHandler.open()}
           >
             Save Workout
           </Button>
@@ -60,6 +69,14 @@ function WorkoutView() {
       <AddExerciseOverlay
         opened={addExerciseOverlayOpened}
         handler={addExerciseOverlayHandler}
+      />
+      <ConfirmationOverlay
+        title="Save Workout Template"
+        message="Complete workout building and save this template."
+        confirmButtonLabel="Save Workout Template"
+        opened={saveOverlayOpened}
+        handler={saveOverlayHandler}
+        onConfirmationClick={onSaveWorkoutClick}
       />
       <ConfirmationOverlay
         title="Cancel Workout Building"

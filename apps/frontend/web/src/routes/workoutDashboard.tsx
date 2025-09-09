@@ -11,6 +11,10 @@ import LargeButton from '../components/common/LargeButton';
 
 export const Route = createFileRoute('/workoutDashboard')({
   loader: async () => {
+    const displayedWorkoutBuilds = useStore.getState().displayedWorkoutBuilds;
+    if (displayedWorkoutBuilds && displayedWorkoutBuilds.length > 0) {
+      return displayedWorkoutBuilds;
+    }
     const supabaseSession = useAuthStore.getState().session;
     if (supabaseSession?.access_token) {
       const workoutBuilds = await getWorkoutBuilds(

@@ -6,6 +6,10 @@ import WorkoutExercise from './WorkoutExercise';
 export default function Workout() {
   const workout = useStore((state) => state.workout);
 
+  if (!workout) {
+    return <Text>Loading</Text>;
+  }
+
   const EmptyWorkoutPlaceholder = () => {
     if (workout!.workout_data.exercises.length === 0) {
       return (
