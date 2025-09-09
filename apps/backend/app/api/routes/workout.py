@@ -1,17 +1,23 @@
+from typing import List
 from fastapi import APIRouter, HTTPException
+
 from app.api.utils.workout import (
     insert_workout_build,
     get_workout_builds,
     insert_workout_log,
     get_workout_logs,
 )
-from app.schemas.workout import WorkoutBuildSchema, WorkoutLogSchema
+from app.schemas.workout import (
+    WorkoutBuildRequestSchema,
+    WorkoutBuildResponseSchema,
+    WorkoutLogSchema,
+)
 
 router = APIRouter(prefix="/workout")
 
 
 @router.post("/build")
-def save_build(build: WorkoutBuildSchema):
+def save_build(build: WorkoutBuildRequestSchema):
     """
     Insert workout build.
     """
@@ -20,10 +26,12 @@ def save_build(build: WorkoutBuildSchema):
     #     raise HTTPException(status_code=401, detail="Authentication required")
 
     # access_token = auth_header.split(" ")[1]
+    print("before setting workout_build")
     workout_build = insert_workout_build(build)
+    print("set workout_build")
     if not workout_build:
         raise HTTPException(status_code=400, detail="Invalid request")
-
+    print("returning workout build")
     return workout_build
 
 
@@ -54,7 +62,7 @@ def read_workout_logs():
 
 
 @router.get("/builds")
-def read_workout_builds():
+def read_workout_builds() -> List[WorkoutBuildResponseSchema]:
     """
     Retrieve list of workout builds
     """
