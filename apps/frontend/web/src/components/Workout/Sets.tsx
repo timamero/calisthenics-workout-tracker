@@ -2,7 +2,6 @@ import { Stack, Text, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import type { WorkoutExercise } from '@cwt/schema/workouts';
-// import type { Set } from '@cwt/schema/workouts';
 import { useStore } from '@cwt/state/store';
 
 import RepField from './RepField';
@@ -24,7 +23,6 @@ export default function Sets({
     useDisclosure(false);
 
   const handleSetFieldChange = (
-    // set: Set,
     setIndex: number,
     updatedField: {
       reps?: number | undefined;
@@ -33,14 +31,6 @@ export default function Sets({
       rest?: string | undefined;
     },
   ) => {
-    // const updatedSet: Set = {
-    //   ...set,
-    //   fields: {
-    //     ...set.fields,
-    //     ...updatedField.fields,
-    //   },
-    // };
-    console.log('updatedField: ', updatedField);
     setSelectedSetIndexToMod(setIndex);
     updateSet(exerciseIndex, updatedField);
   };
@@ -51,13 +41,11 @@ export default function Sets({
         return (
           <Stack key={set.id}>
             <RepField
-              // set={set}
               index={i}
               value={set.fields.reps!}
               handleSetFieldChange={handleSetFieldChange}
             />
             <DurationField
-              // set={set}
               index={i}
               value={set.fields.rest!}
               fieldName="rest"
@@ -71,7 +59,6 @@ export default function Sets({
         return (
           <Stack key={set.id}>
             <DurationField
-              // set={set}
               index={i}
               value={set.fields.time!}
               fieldName="time"
@@ -79,7 +66,6 @@ export default function Sets({
               label="Time"
             />
             <DurationField
-              // set={set}
               index={i}
               value={set.fields.rest!}
               fieldName="rest"

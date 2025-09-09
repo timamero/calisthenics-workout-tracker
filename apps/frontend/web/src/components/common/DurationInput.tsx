@@ -1,10 +1,8 @@
 import { Stack, Group, TextInput } from '@mantine/core';
-// import type { Dispatch, SetStateAction } from 'react';
 
 interface DurationInputProps {
   label: string;
   sec: string;
-  // setSec: Dispatch<SetStateAction<string>>;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
