@@ -40,6 +40,7 @@ export default function Sets({
     //     ...updatedField.fields,
     //   },
     // };
+    console.log('updatedField: ', updatedField);
     setSelectedSetIndexToMod(setIndex);
     updateSet(exerciseIndex, updatedField);
   };

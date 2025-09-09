@@ -28,21 +28,37 @@ export default function RepField({
   // const [reps, setReps] = useState<string>(value.toString());
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // setReps(event.currentTarget.value);
-    const updatedField: {
-      reps?: number | undefined;
-      weight?: number | undefined;
-      time?: string | undefined;
-      rest?: string | undefined;
-    } = {
-      reps: Number(event.currentTarget.value),
-    };
-    handleSetFieldChange(index, updatedField);
+    console.log(
+      'event.currentTarget.value for reps: ',
+      event.currentTarget.value,
+    );
+    if (event.currentTarget.value == '') {
+      const updatedField: {
+        reps?: number | undefined;
+        weight?: number | undefined;
+        time?: string | undefined;
+        rest?: string | undefined;
+      } = {
+        reps: undefined,
+      };
+      handleSetFieldChange(index, updatedField);
+    } else {
+      const updatedField: {
+        reps?: number | undefined;
+        weight?: number | undefined;
+        time?: string | undefined;
+        rest?: string | undefined;
+      } = {
+        reps: Number(event.currentTarget.value),
+      };
+      handleSetFieldChange(index, updatedField);
+    }
   };
   return (
     <TextInput
       label="Reps"
-      placeholder={value.toString()}
-      value={value}
+      placeholder={'0'}
+      value={value === undefined ? '' : value.toString()}
       onChange={handleChange}
     />
   );
