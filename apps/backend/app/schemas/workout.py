@@ -13,12 +13,14 @@ class SetFieldsSchema(BaseModel):
 
 
 class SetSchema(BaseModel):
+    id: UUID
     fields: SetFieldsSchema
     completed: bool
     completed_at: Optional[datetime] = None
 
 
 class WorkoutExerciseSchema(BaseModel):
+    id: UUID
     exercise_id: int
     tracked: List[Literal["reps", "time", "weight", "rpe"]]
     sets: List[SetSchema]
