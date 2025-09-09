@@ -30,6 +30,7 @@ export type WorkoutLogDraft = Pick<
 interface WorkoutDraftState {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
+  workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
 }
@@ -37,6 +38,7 @@ interface WorkoutDraftState {
 interface WorkoutDraftAction {
   setMode: (mode: Mode) => void;
   initializeWorkout: () => void;
+  setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSelectedSetIndexToMod: (setIndex: number | null) => void;
   addExercise: () => void;
@@ -78,6 +80,7 @@ export const createWorkoutDraftSlice: StateCreator<
 > = (set, get) => ({
   mode: null,
   workout: null,
+  workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
   setMode: (mode) => set(() => ({ mode: mode })),
@@ -95,6 +98,10 @@ export const createWorkoutDraftSlice: StateCreator<
         workout: { ...INITIALIZED_WORKOUT_LOG, date: new Date() } as WorkoutLog,
         mode: mode,
       };
+    }),
+  setWorkoutTitle: (title) =>
+    set((state) => {
+      state.workoutTitle = title;
     }),
   setSelectedExerciseIDToAdd: (exerciseID) =>
     set((state) => {
