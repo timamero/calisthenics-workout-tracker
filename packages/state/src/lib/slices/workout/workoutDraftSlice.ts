@@ -187,10 +187,6 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot add set in log mode');
       }
     }),
-  // Change updateSet to updateSetField so that it can be used in the frontend like:
-  // const updateSetField = useStore((state) => state.updateSetField);
-  // // Usage in component:
-  // updateSetField(exerciseIndex, setIndex, { reps: 10 });
   updateField: (exerciseIndex, updatedField) =>
     set((state) => {
       if (exerciseIndex === undefined) {
@@ -211,35 +207,11 @@ export const createWorkoutDraftSlice: StateCreator<
           ...set,
           fields: { ...set.fields, ...updatedField },
         };
-        // let updatedWorkout = {};
-        // let updatedExercise: WorkoutExercise;
-        // if (
-        //   exerciseIndex !== undefined &&
-        //   setIndex !== undefined &&
-        //   state.workout
-        // ) {
-        //   const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-        //   updatedExercise = updateExercise(
-        //     exercise,
-        //     setIndex,
-        //     updateSetInExercise,
-        //     updatedSet,
-        //   );
-
-        //   updatedWorkout = applyExerciseUpdateAtIndex(
-        //     exerciseIndex,
-        //     state.workout,
-        //     updatedExercise,
-        //     updateExercisesAtIndex,
-        //   );
-        // }
-        // return {
-        //   workout: updatedWorkout as WorkoutBuildDraft | WorkoutLogDraft,
-        // };
+      } else if (!state.workout) {
+        console.error('No workout to add set to');
+      } else if (state.mode !== 'edit' && state.mode !== 'build') {
+        console.error('Cannot add set in log mode');
       }
-      // return {
-      //   ...state,
-      // };
     }),
   resetWorkout: () => set(() => ({ workout: null, mode: null })),
 });
