@@ -45,7 +45,7 @@ class BaseWorkoutSchema(BaseModel):
 class WorkoutBuildSchema(BaseWorkoutSchema):
     user_id: Optional[UUID]
     duration: Optional[timedelta]
-    source: Literal["manual", "ai", "default"]
+    source: Literal["manual", "ai_generated", "default"]
 
 
 class WorkoutLogSchema(BaseWorkoutSchema):
