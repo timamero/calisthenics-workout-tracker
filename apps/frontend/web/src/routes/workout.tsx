@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { Title, Stack, Button, TextInput } from '@mantine/core';
+import { Stack, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
@@ -7,6 +7,7 @@ import { useStore } from '@cwt/state/store';
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
 import Workout from '../components/Workout';
+import WorkoutTitle from '../components/Workout/WorkoutTitle';
 
 export const Route = createFileRoute('/workout')({
   component: WorkoutView,
@@ -18,8 +19,8 @@ function WorkoutView() {
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
-  const workoutTitle = useStore((state) => state.workoutTitle);
-  const setWorkoutTitle = useStore((state) => state.setWorkoutTitle);
+  // const workoutTitle = useStore((state) => state.workoutTitle);
+  // const setWorkoutTitle = useStore((state) => state.setWorkoutTitle);
   const resetWorkout = useStore((state) => state.resetWorkout);
 
   const onCancelWorkoutClick = () => {
@@ -31,11 +32,12 @@ function WorkoutView() {
 
   return (
     <Stack gap="xl">
-      <Title size="h6">{workoutTitle}</Title>
+      <WorkoutTitle />
+      {/* <Title size="h6">{workoutTitle}</Title>
       <TextInput
         value={workoutTitle!}
         onChange={(event) => setWorkoutTitle(event.currentTarget.value)}
-      />
+      /> */}
       <Stack gap="xl" align="center">
         <Workout />
         <Stack justify="center">
