@@ -1,19 +1,27 @@
+from typing import List
+
 from app.services.supabase_client import get_supabase_client
-from app.schemas.workout import WorkoutBuildSchema, WorkoutLogSchema
+from app.schemas.workout import (
+    WorkoutBuildRequestSchema,
+    WorkoutBuildResponseSchema,
+    WorkoutLogSchema,
+)
 
 
 def insert_workout_build(
-    workout_build: WorkoutBuildSchema, access_token: str | None = None
+    workout_build: WorkoutBuildRequestSchema, access_token: str | None = None
 ):
     supabase = get_supabase_client(access_token)
+    print("set supabase client")
     try:
         workout_build_dict = workout_build.model_dump(mode="json")
-
+        print("dict sent in reponse: ", workout_build_dict)
         response = (
             supabase.table("workout_builds")
             .insert(json=workout_build_dict, returning="representation")
             .execute()
         )
+        print("returning response.data", response.data)
         return response.data
     except Exception as e:
         print(f"Error saving workout with ID {workout_build.id}: {e}")
@@ -48,7 +56,9 @@ def get_workout_logs(access_token: str | None = None):
         print(f"Error fetching workout_logs: {e}")
 
 
-def get_workout_builds(access_token: str | None = None):
+def get_workout_builds(
+    access_token: str | None = None,
+) -> List[WorkoutBuildResponseSchema]:
     supabase = get_supabase_client(access_token)
     try:
         select_query = supabase.table("workout_builds").select("*")
@@ -95,4 +105,33 @@ def get_workout_builds(access_token: str | None = None):
 #   "duration": "PT5M",
 #   "goal": "function",
 #   "source": "default"
+# }
+
+# {
+#     "title": "example post request from fast api",
+#     "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
+#     "description": "string",
+#     "workout_data": {
+#         "exercises": [
+#             {
+#                 "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+#                 "exercise_id": 0,
+#                 "tracked": ["reps"],
+#                 "sets": [
+#                     {
+#                         "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+#                         "fields": {"reps": 10, "rest": "PT30S"},
+#                         "completed": false,
+#                         "completed_at": null,
+#                     }
+#                 ],
+#             }
+#         ]
+#     },
+#     "status": "draft",
+#     "goal": "function",
+#     "notes": "string",
+#     "estimated_duration": "P3D",
+#     "source": "manual",
+#     "updated_at": "2025-09-09T20:01:05.148Z",
 # }
