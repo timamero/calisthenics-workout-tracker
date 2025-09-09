@@ -74,25 +74,33 @@ export const createWorkoutDraftSlice: StateCreator<
 > = (set, get) => ({
   mode: null,
   workout: null,
-  workoutTitle:
-    get().mode == 'build'
-      ? INITIAL_WORKOUT_BUILD_TITLE
-      : INITIAL_WORKOUT_LOG_TITLE,
+  workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
   setMode: (mode) => set(() => ({ mode: mode })),
   initializeWorkout: () =>
     set((state) => {
       const mode = state.mode;
+      const title =
+        mode === 'build'
+          ? INITIAL_WORKOUT_BUILD_TITLE
+          : INITIAL_WORKOUT_LOG_TITLE;
       if (mode === 'build') {
         return {
-          workout: INITIALIZED_WORKOUT_BUILD as WorkoutBuild,
+          workout: {
+            ...INITIALIZED_WORKOUT_BUILD,
+            title: title,
+          } as WorkoutBuild,
           mode: mode,
         };
       }
 
       return {
-        workout: { ...INITIALIZED_WORKOUT_LOG, date: new Date() } as WorkoutLog,
+        workout: {
+          ...INITIALIZED_WORKOUT_LOG,
+          title: title,
+          date: new Date(),
+        } as WorkoutLog,
         mode: mode,
       };
     }),
