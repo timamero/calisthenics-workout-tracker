@@ -208,9 +208,9 @@ export const createWorkoutDraftSlice: StateCreator<
           fields: { ...set.fields, ...updatedField },
         };
       } else if (!state.workout) {
-        console.error('No workout to add set to');
+        console.error('No workout to update field for');
       } else if (state.mode !== 'edit' && state.mode !== 'build') {
-        console.error('Cannot add set in log mode');
+        console.error('Cannot update field in log mode');
       }
     }),
   resetWorkout: () => set(() => ({ workout: null, mode: null })),
