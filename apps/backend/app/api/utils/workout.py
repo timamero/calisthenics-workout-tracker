@@ -10,19 +10,16 @@ from app.schemas.workout import (
 
 def insert_workout_build(
     workout_build: WorkoutBuildRequestSchema, access_token: str | None = None
-):
+) -> WorkoutBuildResponseSchema:
     supabase = get_supabase_client(access_token)
-    print("set supabase client")
     try:
         workout_build_dict = workout_build.model_dump(mode="json")
-        print("dict sent in reponse: ", workout_build_dict)
         response = (
             supabase.table("workout_builds")
             .insert(json=workout_build_dict, returning="representation")
             .execute()
         )
-        print("returning response.data", response.data)
-        return response.data
+        return response.data[0]
     except Exception as e:
         print(f"Error saving workout with ID {workout_build.id}: {e}")
 
