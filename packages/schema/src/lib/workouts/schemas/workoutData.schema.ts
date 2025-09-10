@@ -10,13 +10,14 @@ export const SetFieldsSchema = z.object({
 });
 
 export const SetSchema = z.object({
-  id: z.optional(z.uuid()),
+  id: z.uuid(),
   fields: SetFieldsSchema,
   completed: z.boolean(),
   completed_at: z.nullable(z.date()),
 });
 
 export const WorkoutExerciseSchema = z.object({
+  id: z.uuid(),
   exercise_id: z.int(),
   tracked: z.array(TrackingTypeSchema),
   sets: z.array(SetSchema),
