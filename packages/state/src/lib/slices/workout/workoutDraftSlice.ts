@@ -255,17 +255,24 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Invalid set index');
         return;
       }
-      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
-        const set = exerciseAtIndex(exerciseIndex, state.workout).sets[
-          setIndex
-        ];
-        state.workout.workout_data.exercises[exerciseIndex].sets[setIndex] = {
+      // if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        const set = state.workoutData.exercises[exerciseIndex].sets[setIndex];
+        state.workoutData.exercises[exerciseIndex].sets[setIndex] = {
           ...set,
           fields: { ...set.fields, ...updatedField },
         };
-      } else if (!state.workout) {
-        console.error('No workout to update field for');
-      } else if (state.mode !== 'edit' && state.mode !== 'build') {
+        //   const set = exerciseAtIndex(exerciseIndex, state.workout).sets[
+        //     setIndex
+        //   ];
+        //   state.workout.workout_data.exercises[exerciseIndex].sets[setIndex] = {
+        //     ...set,
+        //     fields: { ...set.fields, ...updatedField },
+        //   };
+        // } else if (!state.workout) {
+        //   console.error('No workout to update field for');
+        // } else if (state.mode !== 'edit' && state.mode !== 'build') {
+      } else {
         console.error('Cannot update field in log mode');
       }
     }),
