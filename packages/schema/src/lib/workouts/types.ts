@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
 import {
+  WorkoutBuildRequestSchema,
+  WorkoutBuildResponseSchema,
   WorkoutBuildSchema,
   WorkoutLogSchema,
   WorkoutDataSchema,
@@ -14,6 +16,8 @@ import {
 } from './schemas';
 
 export type WorkoutBuild = z.infer<typeof WorkoutBuildSchema>;
+export type WorkoutBuildResponse = z.infer<typeof WorkoutBuildResponseSchema>;
+export type WorkoutBuildRequest = z.infer<typeof WorkoutBuildRequestSchema>;
 export type WorkoutLog = z.infer<typeof WorkoutLogSchema>;
 export type WorkoutData = z.infer<typeof WorkoutDataSchema>;
 export type WorkoutExercise = z.infer<typeof WorkoutExerciseSchema>;
