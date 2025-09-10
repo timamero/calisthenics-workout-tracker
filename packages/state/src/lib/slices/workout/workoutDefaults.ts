@@ -17,7 +17,7 @@ export const INITIALIZED_WORKOUT_BUILD: Omit<WorkoutBuildDraft, 'title'> = {
   source: 'manual',
 };
 
-export const INITIALIZED_SET: Omit<Set, 'fields'> = {
+export const INITIALIZED_SET: Omit<Set, 'fields' | 'id'> = {
   completed: false,
   completed_at: null,
 };
