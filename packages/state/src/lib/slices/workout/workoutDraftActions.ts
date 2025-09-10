@@ -34,6 +34,7 @@ export function addExercise(
   return [
     ...(workout.workout_data.exercises as WorkoutExercise[]),
     {
+      id: crypto.randomUUID(),
       sets: [{ ...INITIALIZED_SET, id: crypto.randomUUID(), fields: fields }],
       exercise_id: exercise_id,
       tracked: default_tracking,
