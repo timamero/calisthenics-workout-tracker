@@ -1,6 +1,10 @@
 import { StateCreator } from 'zustand';
 
-import type { WorkoutBuild, WorkoutLog } from '@cwt/schema/workouts';
+import type {
+  WorkoutBuild,
+  WorkoutData,
+  WorkoutLog,
+} from '@cwt/schema/workouts';
 
 import { StoreState } from '../../store';
 import {
@@ -37,6 +41,7 @@ export type WorkoutLogDraft = Pick<
 interface WorkoutDraftState {
   mode: Mode | null;
   workout: WorkoutBuildDraft | WorkoutLogDraft | null;
+  workoutData: WorkoutData | null;
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
@@ -74,6 +79,7 @@ export const createWorkoutDraftSlice: StateCreator<
 > = (set, get) => ({
   mode: null,
   workout: null,
+  workoutData: null,
   workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
