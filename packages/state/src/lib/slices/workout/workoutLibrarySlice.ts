@@ -3,13 +3,11 @@ import { produce } from 'immer';
 
 import type {
   WorkoutLog,
-  WorkoutBuild,
   WorkoutBuildRequest,
   WorkoutBuildResponse,
 } from '@cwt/schema/workouts';
 
 import { StoreState } from '../../store';
-import { Mode } from './workoutDraftSlice';
 
 export interface WorkoutLibrarySlice {
   masterWorkoutLogs: WorkoutLog[];
@@ -19,7 +17,6 @@ export interface WorkoutLibrarySlice {
     logs: WorkoutLog[],
     builds: WorkoutBuildRequest[] | WorkoutBuildResponse[],
   ) => void;
-  // addWorkout: (mode: Mode, workout: WorkoutLog | WorkoutBuildRequest) => void;
   addWorkout: () => void;
   completeWorkout: () => void;
 }
@@ -40,7 +37,6 @@ export const createWorkoutLibrarySlice: StateCreator<
       masterWorkoutBuilds: builds,
       displayedWorkoutBuilds: builds,
     })),
-  // addWorkout: (mode, workout) =>
   addWorkout: () =>
     set(
       produce((state) => {
@@ -69,12 +65,7 @@ export const createWorkoutLibrarySlice: StateCreator<
       }),
     ),
   completeWorkout: () => {
-    // const mode = get().mode;
-    // const workoutData = get().workoutData;
-    // const title = get().workoutTitle;
-    // if (mode) {
     get().addWorkout();
     get().resetWorkout();
-    //   }
   },
 });

@@ -1,30 +1,14 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
 
-import type {
-  // WorkoutBuild,
-  WorkoutData,
-  // WorkoutLog,
-} from '@cwt/schema/workouts';
+import type { WorkoutData } from '@cwt/schema/workouts';
 
 import { StoreState } from '../../store';
-// import {
-//   addSetToExercise,
-//   deleteSetInExercise, // TODO: Update this action
-//   exerciseAtIndex,
-//   removeExerciseAtIndex,
-//   updateExercise,
-//   updateExercisesAtIndex, // TODO: Update this action
-//   updateSetInExercise, // TODO: Update this action
-//   addExerciseToWorkout,
-//   applyExerciseUpdateAtIndex,
-// } from './workoutDraftActions';
+
 import type { SetFields } from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
 
 import {
-  // INITIALIZED_WORKOUT_LOG,
-  // INITIALIZED_WORKOUT_BUILD,
   INITIAL_WORKOUT_LOG_TITLE,
   INITIAL_WORKOUT_BUILD_TITLE,
   INITIALIZED_SET,
@@ -34,18 +18,8 @@ import {
 
 export type Mode = 'build' | 'edit' | 'log';
 
-// export type WorkoutBuildDraft = Pick<
-//   WorkoutBuild,
-//   'title' | 'workout_data' | 'status' | 'source'
-// >;
-// export type WorkoutLogDraft = Pick<
-//   WorkoutLog,
-//   'title' | 'workout_data' | 'status' | 'date'
-// >;
-
 interface WorkoutDraftState {
   mode: Mode | null;
-  // workout: WorkoutBuildDraft | WorkoutLogDraft | null;
   workoutData: WorkoutData;
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
@@ -53,7 +27,6 @@ interface WorkoutDraftState {
 }
 
 interface WorkoutDraftAction {
-  // setMode: (mode: Mode) => void;
   initializeWorkout: (mode: Mode) => void;
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
@@ -83,19 +56,11 @@ export const createWorkoutDraftSlice: StateCreator<
   WorkoutDraftSlice
 > = (set, get) => ({
   mode: null,
-  // workout: null,
   workoutData: { exercises: [] },
   workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
-  // setMode: (mode) =>
-  //   set((state) => {
-  //     state.mode = mode;
-  //     state.workoutTitle =
-  //       mode === 'build'
-  //         ? INITIAL_WORKOUT_BUILD_TITLE
-  //         : INITIAL_WORKOUT_LOG_TITLE;
-  //   }),
+
   initializeWorkout: (mode) =>
     set((state) => {
       state.mode = mode;
@@ -104,31 +69,6 @@ export const createWorkoutDraftSlice: StateCreator<
           ? INITIAL_WORKOUT_BUILD_TITLE
           : INITIAL_WORKOUT_LOG_TITLE;
     }),
-  // initializeWorkout: () =>
-  //   set((state) => {
-  //     const mode = state.mode;
-  //     const title =
-  //       mode === 'build'
-  //         ? INITIAL_WORKOUT_BUILD_TITLE
-  //         : INITIAL_WORKOUT_LOG_TITLE;
-  //     get().setWorkoutTitle(title);
-  //     if (mode === 'build') {
-  //       return {
-  //         workout: {
-  //           ...INITIALIZED_WORKOUT_BUILD,
-  //         } as WorkoutBuild,
-  //         mode: mode,
-  //       };
-  //     }
-
-  //     return {
-  //       workout: {
-  //         ...INITIALIZED_WORKOUT_LOG,
-  //         date: new Date(),
-  //       } as WorkoutLog,
-  //       mode: mode,
-  //     };
-  //   }),
   setWorkoutTitle: (title) =>
     set((state) => {
       state.workoutTitle = title;
@@ -167,15 +107,6 @@ export const createWorkoutDraftSlice: StateCreator<
             tracked: tracking,
             id: crypto.randomUUID(),
           });
-
-          //   state.workout = addExerciseToWorkout(
-          //     state.workout,
-          //     exerciseID,
-          //     tracking,
-          //   );
-          // } else if (!state.workout) {
-          //   console.error('No workout to add exercise to');
-          // } else if (state.mode !== 'edit' && state.mode !== 'build') {
         } else {
           console.error('Cannot add exercise in log mode');
         }
@@ -183,18 +114,8 @@ export const createWorkoutDraftSlice: StateCreator<
     ),
   removeExercise: (exerciseIndex) =>
     set((state) => {
-      // if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
       if (state.mode === 'edit' || state.mode === 'build') {
         state.workoutData.exercises.splice(exerciseIndex, 1);
-        // state.workout = applyExerciseUpdateAtIndex(
-        //   exerciseIndex,
-        //   state.workout,
-        //   null,
-        //   removeExerciseAtIndex,
-        // );
-        // } else if (!state.workout) {
-        //   console.error('No workout to remove exercise from');
-        // } else if (state.mode !== 'edit' && state.mode !== 'build') {
       } else {
         console.error('Cannot remove exercise in log mode');
       }
@@ -205,7 +126,6 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Exercise index not provided');
         return;
       }
-      // if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
       if (state.mode === 'edit' || state.mode === 'build') {
         const tracking = state.workoutData.exercises[exerciseIndex].tracked;
         let fields: SetFields = {};
@@ -219,15 +139,6 @@ export const createWorkoutDraftSlice: StateCreator<
           id: crypto.randomUUID(),
           fields: fields,
         });
-        //   const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-        //   state.workout.workout_data.exercises[exerciseIndex] = updateExercise(
-        //     exercise,
-        //     null,
-        //     addSetToExercise,
-        //   );
-        // } else if (!state.workout) {
-        //   console.error('No workout to add set to');
-        // } else if (state.mode !== 'edit' && state.mode !== 'build') {
       } else {
         console.error('Cannot add set in log mode');
       }
@@ -244,16 +155,8 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Invalid set index');
         return;
       }
-      // if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
       if (state.mode === 'edit' || state.mode === 'build') {
         state.workoutData.exercises[exerciseIndex].sets.splice(setIndex, 1);
-        //   const sets = exerciseAtIndex(exerciseIndex, state.workout).sets;
-        //   state.workout.workout_data.exercises[exerciseIndex].sets = [
-        //     ...sets.filter((_, ind) => ind !== setIndex),
-        //   ]; // TODO: Look into using splice
-        // } else if (!state.workout) {
-        //   console.error('No workout to add set to');
-        // } else if (state.mode !== 'edit' && state.mode !== 'build') {
       } else {
         console.error('Cannot add set in log mode');
       }
@@ -270,23 +173,12 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Invalid set index');
         return;
       }
-      // if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
       if (state.mode === 'edit' || state.mode === 'build') {
         const set = state.workoutData.exercises[exerciseIndex].sets[setIndex];
         state.workoutData.exercises[exerciseIndex].sets[setIndex] = {
           ...set,
           fields: { ...set.fields, ...updatedField },
         };
-        //   const set = exerciseAtIndex(exerciseIndex, state.workout).sets[
-        //     setIndex
-        //   ];
-        //   state.workout.workout_data.exercises[exerciseIndex].sets[setIndex] = {
-        //     ...set,
-        //     fields: { ...set.fields, ...updatedField },
-        //   };
-        // } else if (!state.workout) {
-        //   console.error('No workout to update field for');
-        // } else if (state.mode !== 'edit' && state.mode !== 'build') {
       } else {
         console.error('Cannot update field in log mode');
       }
