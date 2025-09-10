@@ -31,12 +31,12 @@ export const Route = createFileRoute('/workoutDashboard')({
 function WorkoutDashboardView() {
   const workoutBuilds = Route.useLoaderData();
 
-  const setMode = useStore((state) => state.setMode);
-  // const initializeWorkout = useStore((state) => state.initializeWorkout);
+  // const setMode = useStore((state) => state.setMode);
+  const initializeWorkout = useStore((state) => state.initializeWorkout);
 
   const handleCreateWorkoutBuildClick = () => {
-    setMode('build');
-    // initializeWorkout();
+    // setMode('build');
+    initializeWorkout('build');
   };
 
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
