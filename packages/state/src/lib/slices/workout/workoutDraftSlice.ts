@@ -2,31 +2,31 @@ import { StateCreator } from 'zustand';
 import { produce } from 'immer';
 
 import type {
-  WorkoutBuild,
+  // WorkoutBuild,
   WorkoutData,
-  WorkoutLog,
+  // WorkoutLog,
 } from '@cwt/schema/workouts';
 
 import { StoreState } from '../../store';
-import {
-  addSetToExercise,
-  deleteSetInExercise, // TODO: Update this action
-  exerciseAtIndex,
-  removeExerciseAtIndex,
-  updateExercise,
-  updateExercisesAtIndex, // TODO: Update this action
-  updateSetInExercise, // TODO: Update this action
-  addExerciseToWorkout,
-  applyExerciseUpdateAtIndex,
-} from './workoutDraftActions';
+// import {
+//   addSetToExercise,
+//   deleteSetInExercise, // TODO: Update this action
+//   exerciseAtIndex,
+//   removeExerciseAtIndex,
+//   updateExercise,
+//   updateExercisesAtIndex, // TODO: Update this action
+//   updateSetInExercise, // TODO: Update this action
+//   addExerciseToWorkout,
+//   applyExerciseUpdateAtIndex,
+// } from './workoutDraftActions';
 import type { SetFields } from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
 
 import {
-  INITIALIZED_WORKOUT_LOG,
-  INITIALIZED_WORKOUT_BUILD,
-  INITIAL_WORKOUT_LOG_TITLE,
-  INITIAL_WORKOUT_BUILD_TITLE,
+  // INITIALIZED_WORKOUT_LOG,
+  // INITIALIZED_WORKOUT_BUILD,
+  // INITIAL_WORKOUT_LOG_TITLE,
+  // INITIAL_WORKOUT_BUILD_TITLE,
   INITIALIZED_SET,
   DEFAULT_REP_SET,
   DEFAULT_TIME_SET,
@@ -34,18 +34,18 @@ import {
 
 export type Mode = 'build' | 'edit' | 'log';
 
-export type WorkoutBuildDraft = Pick<
-  WorkoutBuild,
-  'title' | 'workout_data' | 'status' | 'source'
->;
-export type WorkoutLogDraft = Pick<
-  WorkoutLog,
-  'title' | 'workout_data' | 'status' | 'date'
->;
+// export type WorkoutBuildDraft = Pick<
+//   WorkoutBuild,
+//   'title' | 'workout_data' | 'status' | 'source'
+// >;
+// export type WorkoutLogDraft = Pick<
+//   WorkoutLog,
+//   'title' | 'workout_data' | 'status' | 'date'
+// >;
 
 interface WorkoutDraftState {
   mode: Mode | null;
-  workout: WorkoutBuildDraft | WorkoutLogDraft | null;
+  // workout: WorkoutBuildDraft | WorkoutLogDraft | null;
   workoutData: WorkoutData;
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
@@ -54,7 +54,7 @@ interface WorkoutDraftState {
 
 interface WorkoutDraftAction {
   setMode: (mode: Mode) => void;
-  initializeWorkout: () => void;
+  // initializeWorkout: () => void;
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSelectedSetIndexToMod: (setIndex: number | null) => void;
@@ -83,37 +83,37 @@ export const createWorkoutDraftSlice: StateCreator<
   WorkoutDraftSlice
 > = (set, get) => ({
   mode: null,
-  workout: null,
+  // workout: null,
   workoutData: { exercises: [] },
   workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
   setMode: (mode) => set(() => ({ mode: mode })),
-  initializeWorkout: () =>
-    set((state) => {
-      const mode = state.mode;
-      const title =
-        mode === 'build'
-          ? INITIAL_WORKOUT_BUILD_TITLE
-          : INITIAL_WORKOUT_LOG_TITLE;
-      get().setWorkoutTitle(title);
-      if (mode === 'build') {
-        return {
-          workout: {
-            ...INITIALIZED_WORKOUT_BUILD,
-          } as WorkoutBuild,
-          mode: mode,
-        };
-      }
+  // initializeWorkout: () =>
+  //   set((state) => {
+  //     const mode = state.mode;
+  //     const title =
+  //       mode === 'build'
+  //         ? INITIAL_WORKOUT_BUILD_TITLE
+  //         : INITIAL_WORKOUT_LOG_TITLE;
+  //     get().setWorkoutTitle(title);
+  //     if (mode === 'build') {
+  //       return {
+  //         workout: {
+  //           ...INITIALIZED_WORKOUT_BUILD,
+  //         } as WorkoutBuild,
+  //         mode: mode,
+  //       };
+  //     }
 
-      return {
-        workout: {
-          ...INITIALIZED_WORKOUT_LOG,
-          date: new Date(),
-        } as WorkoutLog,
-        mode: mode,
-      };
-    }),
+  //     return {
+  //       workout: {
+  //         ...INITIALIZED_WORKOUT_LOG,
+  //         date: new Date(),
+  //       } as WorkoutLog,
+  //       mode: mode,
+  //     };
+  //   }),
   setWorkoutTitle: (title) =>
     set((state) => {
       state.workoutTitle = title;
