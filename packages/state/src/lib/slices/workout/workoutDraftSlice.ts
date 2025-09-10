@@ -225,18 +225,21 @@ export const createWorkoutDraftSlice: StateCreator<
       }
 
       const setIndex = state.selectedSetIndexToMod;
-      if (setIndex === undefined) {
+      if (setIndex === undefined || setIndex == null) {
         console.error('Invalid set index');
         return;
       }
-      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
-        const sets = exerciseAtIndex(exerciseIndex, state.workout).sets;
-        state.workout.workout_data.exercises[exerciseIndex].sets = [
-          ...sets.filter((_, ind) => ind !== setIndex),
-        ]; // TODO: Look into using splice
-      } else if (!state.workout) {
-        console.error('No workout to add set to');
-      } else if (state.mode !== 'edit' && state.mode !== 'build') {
+      // if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        state.workoutData.exercises[exerciseIndex].sets.splice(setIndex, 1);
+        //   const sets = exerciseAtIndex(exerciseIndex, state.workout).sets;
+        //   state.workout.workout_data.exercises[exerciseIndex].sets = [
+        //     ...sets.filter((_, ind) => ind !== setIndex),
+        //   ]; // TODO: Look into using splice
+        // } else if (!state.workout) {
+        //   console.error('No workout to add set to');
+        // } else if (state.mode !== 'edit' && state.mode !== 'build') {
+      } else {
         console.error('Cannot add set in log mode');
       }
     }),
