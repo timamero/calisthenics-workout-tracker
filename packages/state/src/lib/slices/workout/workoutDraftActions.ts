@@ -1,4 +1,9 @@
-import { Set, WorkoutExercise, SetFields } from '@cwt/schema/workouts';
+import {
+  Set,
+  WorkoutExercise,
+  SetFields,
+  WorkoutData,
+} from '@cwt/schema/workouts';
 import { Tracking } from '@cwt/schema/exercises';
 
 import { WorkoutBuildDraft, WorkoutLogDraft } from './workoutDraftSlice';
@@ -34,6 +39,24 @@ export function addExercise(
       tracked: default_tracking,
     },
   ];
+}
+
+export function addSetToExerciseSuperseded(
+  exerciseToUpdate: WorkoutExercise,
+): WorkoutExercise {
+  let fields: SetFields = {};
+  if (exerciseToUpdate.tracked.includes('reps')) {
+    fields = DEFAULT_REP_SET;
+  } else if (exerciseToUpdate.tracked.includes('time')) {
+    fields = DEFAULT_TIME_SET;
+  }
+  return {
+    ...exerciseToUpdate,
+    sets: [
+      ...exerciseToUpdate.sets,
+      { ...INITIALIZED_SET, id: crypto.randomUUID(), fields: fields },
+    ],
+  };
 }
 
 export function addSetToExercise(
