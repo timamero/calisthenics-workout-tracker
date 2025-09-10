@@ -4,14 +4,16 @@ import { useStore } from '@cwt/state/store';
 import WorkoutExercise from './WorkoutExercise';
 
 export default function Workout() {
-  const workout = useStore((state) => state.workout);
+  // const workout = useStore((state) => state.workout);
+  const workoutData = useStore((state) => state.workoutData);
 
-  if (!workout) {
+  if (!workoutData) {
     return <Text>Loading</Text>;
   }
 
   const EmptyWorkoutPlaceholder = () => {
-    if (workout!.workout_data.exercises.length === 0) {
+    // if (workout!.workout_data.exercises.length === 0) {
+    if (workoutData.exercises.length === 0) {
       return (
         <Stack align="center" bd="2px dashed gray.6" w="max-content" p="lg">
           <Text size="lg" fw={800}>
@@ -23,7 +25,8 @@ export default function Workout() {
     }
   };
 
-  const workoutExercises = workout!.workout_data.exercises.map((ex, i) => {
+  // const workoutExercises = workout!.workout_data.exercises.map((ex, i) => {
+  const workoutExercises = workoutData.exercises.map((ex, i) => {
     return <WorkoutExercise key={i} workoutExercise={ex} exerciseIndex={i} />;
   });
   return (
