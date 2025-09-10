@@ -25,8 +25,8 @@ import type { Tracking } from '@cwt/schema/exercises';
 import {
   // INITIALIZED_WORKOUT_LOG,
   // INITIALIZED_WORKOUT_BUILD,
-  // INITIAL_WORKOUT_LOG_TITLE,
-  // INITIAL_WORKOUT_BUILD_TITLE,
+  INITIAL_WORKOUT_LOG_TITLE,
+  INITIAL_WORKOUT_BUILD_TITLE,
   INITIALIZED_SET,
   DEFAULT_REP_SET,
   DEFAULT_TIME_SET,
@@ -88,7 +88,14 @@ export const createWorkoutDraftSlice: StateCreator<
   workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
-  setMode: (mode) => set(() => ({ mode: mode })),
+  setMode: (mode) =>
+    set((state) => {
+      state.mode = mode;
+      state.workoutTitle =
+        mode === 'build'
+          ? INITIAL_WORKOUT_BUILD_TITLE
+          : INITIAL_WORKOUT_LOG_TITLE;
+    }),
   // initializeWorkout: () =>
   //   set((state) => {
   //     const mode = state.mode;
