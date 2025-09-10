@@ -150,6 +150,7 @@ export const createWorkoutDraftSlice: StateCreator<
             ],
             exercise_id: exerciseID,
             tracked: tracking,
+            id: crypto.randomUUID(),
           });
 
           //   state.workout = addExerciseToWorkout(
