@@ -291,5 +291,6 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot update field in log mode');
       }
     }),
-  resetWorkout: () => set(() => ({ workoutData: null, mode: null })),
+  resetWorkout: () =>
+    set(() => ({ workoutData: { exercises: [] }, mode: null })),
 });
