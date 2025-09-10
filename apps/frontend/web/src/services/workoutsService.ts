@@ -1,4 +1,7 @@
-import { getWorkoutBuilds as apiGetWorkoutBuilds } from '@cwt/api/workoutsService';
+import {
+  getWorkoutBuilds as apiGetWorkoutBuilds,
+  postWorkoutBuild as apiPostWorkoutBuild,
+} from '@cwt/api/workoutsService';
 import type { WorkoutBuildResponse } from '@cwt/schema/workouts';
 import { sampleWorkoutBuilds } from '@cwt/mocks/sampleWorkoutBuilds';
 
@@ -14,5 +17,17 @@ export async function getWorkoutBuilds(
       'Web: API not available, return sample workoutbuilds for development.',
     );
     return sampleWorkoutBuilds;
+  }
+}
+
+export async function postWorkoutBuild(
+  token: string,
+  body: BodyInit,
+): Promise<WorkoutBuildResponse | null> {
+  try {
+    return await apiPostWorkoutBuild(baseUrl, token, body);
+  } catch {
+    console.log('Web: API not available. Workout build not saved.');
+    return null;
   }
 }
