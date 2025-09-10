@@ -14,6 +14,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
         {
           sets: [
             {
+              id: "868d87df-22ef-460d-9ea3-9e09e04cd4f6",
               fields: {
                 reps: 5,
               },
@@ -21,6 +22,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
             {
+              id: "f6595387-1249-450a-9af1-bbd29e790de9",
               fields: {
                 reps: 5,
                 rest: "00:00:30",
@@ -29,12 +31,14 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
           ],
+          id: "4cfd8976-4e08-4305-886a-a282918ee549",
           tracked: ["reps"],
           exercise_id: 1,
         },
         {
           sets: [
             {
+              id: "1cfd8976-4e08-4305-886a-a282918ee549",
               fields: {
                 reps: 10,
                 weight: 20,
@@ -43,6 +47,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
             {
+              id: "4cfd8976-4e08-4305-88b6a-a282918ee549",
               fields: {
                 reps: 10,
                 rest: "00:00:30",
@@ -52,6 +57,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
           ],
+          id: "4cfd8976-4e08-4325-886a-a282918ee549",
           tracked: ["reps", "weight"],
           exercise_id: 9,
         },
@@ -75,6 +81,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
         {
           sets: [
             {
+              id: "34e6073a-8e96-4365-b038-62702a186dae",
               fields: {
                 reps: 5,
               },
@@ -82,6 +89,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
             {
+              id: "34e6023a-8e96-4365-b038-62702a186dae",
               fields: {
                 reps: 5,
                 rest: "00:00:30",
@@ -90,12 +98,14 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
           ],
+          id: "34e6023a-8e96-4365-b038-62702a186dae",
           tracked: ["reps"],
           exercise_id: 1,
         },
         {
           sets: [
             {
+              id: "b4e6073a-8e96-4365-b038-62702a186dae",
               fields: {
                 reps: 10,
                 weight: 20,
@@ -104,6 +114,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
             {
+              id: "34e6073a-8e96-4365-b038-62702ab86dae",
               fields: {
                 reps: 10,
                 rest: "00:00:30",
@@ -113,6 +124,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
           ],
+          id: "94e6073a-8e96-4365-b038-62702a186dae",
           tracked: ["reps", "weight"],
           exercise_id: 9,
         },
@@ -136,6 +148,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
         {
           sets: [
             {
+              id: "d4e6073a-8e96-4315-b038-62702a186dae",
               fields: {
                 time: "00:00:30",
               },
@@ -143,6 +156,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
             {
+              id: "d4e6073a-8e96-4365-b038-62b02a186dae",
               fields: {
                 rest: "00:00:30",
                 time: "00:00:30",
@@ -151,12 +165,14 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
           ],
+          id: "d4e6573a-8e96-4365-b038-62702a186dae",
           tracked: ["time"],
           exercise_id: 16,
         },
         {
           sets: [
             {
+              id: "d4e4073a-8e96-4365-b038-62702a186dae",
               fields: {
                 reps: 10,
                 weight: 20,
@@ -165,6 +181,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
             {
+              id: "34e6073a-8e96-4365-b038-62702a18adae",
               fields: {
                 reps: 10,
                 rest: "00:00:30",
@@ -174,6 +191,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
           ],
+          id: "34e6a73a-8e96-4365-b038-62702a186dae",
           tracked: ["reps", "weight"],
           exercise_id: 9,
         },
@@ -197,6 +215,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
         {
           sets: [
             {
+              id: "4cfd8976-4e08-4305-886a-a282918ee549",
               fields: {
                 reps: 10,
                 rest: "PT30S",
@@ -207,6 +226,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
           ],
+          id: "4cfd8976-4e08-4305-886a-a282928ee549",
           tracked: ["reps"],
           exercise_id: 0,
         },
@@ -230,6 +250,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
         {
           sets: [
             {
+              id: "4cfd8976-4e08-4305-886a-a222918ee549",
               fields: {
                 reps: 10,
                 rest: "PT30S",
@@ -240,6 +261,7 @@ export const sampleWorkoutBuilds: WorkoutBuild[] = [
               completed_at: null,
             },
           ],
+          id: "4cfd4976-4e08-4305-886a-a282928ee549",
           tracked: ["reps"],
           exercise_id: 0,
         },
