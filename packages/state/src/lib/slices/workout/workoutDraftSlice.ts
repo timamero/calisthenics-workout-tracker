@@ -190,16 +190,30 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Exercise index not provided');
         return;
       }
-      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
-        const exercise = exerciseAtIndex(exerciseIndex, state.workout);
-        state.workout.workout_data.exercises[exerciseIndex] = updateExercise(
-          exercise,
-          null,
-          addSetToExercise,
-        );
-      } else if (!state.workout) {
-        console.error('No workout to add set to');
-      } else if (state.mode !== 'edit' && state.mode !== 'build') {
+      // if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        const tracking = state.workoutData.exercises[exerciseIndex].tracked;
+        let fields: SetFields = {};
+        if (tracking.includes('reps')) {
+          fields = DEFAULT_REP_SET;
+        } else if (tracking.includes('time')) {
+          fields = DEFAULT_TIME_SET;
+        }
+        state.workoutData.exercises[exerciseIndex].sets.push({
+          ...INITIALIZED_SET,
+          id: crypto.randomUUID(),
+          fields: fields,
+        });
+        //   const exercise = exerciseAtIndex(exerciseIndex, state.workout);
+        //   state.workout.workout_data.exercises[exerciseIndex] = updateExercise(
+        //     exercise,
+        //     null,
+        //     addSetToExercise,
+        //   );
+        // } else if (!state.workout) {
+        //   console.error('No workout to add set to');
+        // } else if (state.mode !== 'edit' && state.mode !== 'build') {
+      } else {
         console.error('Cannot add set in log mode');
       }
     }),
