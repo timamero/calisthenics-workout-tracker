@@ -3,11 +3,13 @@ import { Stack, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
+import { useAuthStore } from '@cwt/state/auth';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
 import Workout from '../components/Workout';
 import WorkoutTitle from '../components/Workout/WorkoutTitle';
+import { postWorkoutBuild } from '../services/workoutsService';
 
 export const Route = createFileRoute('/workout')({
   component: WorkoutView,
@@ -22,12 +24,23 @@ function WorkoutView() {
 
   const resetWorkout = useStore((state) => state.resetWorkout);
   const completeWorkout = useStore((state) => state.completeWorkout);
+  const workoutToSave = useStore((state) => state.workoutToSave);
+  const supabaseSession = useAuthStore((state) => state.session);
 
-  const onSaveWorkoutClick = () => {
-    navigate({
-      to: '/workoutDashboard',
-    });
-    completeWorkout();
+  const onSaveWorkoutClick = async () => {
+    if (!supabaseSession.access_token || !workoutToSave) {
+      console.error('Session not found or workout data invalid');
+      return;
+    }
+
+    const body = JSON.stringify(workoutToSave);
+    const result = await postWorkoutBuild(supabaseSession.access_token, body);
+    if (result) {
+      completeWorkout();
+      navigate({
+        to: '/workoutDashboard',
+      });
+    }
   };
 
   const onCancelWorkoutClick = () => {
