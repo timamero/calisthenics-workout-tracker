@@ -15,7 +15,10 @@ export interface WorkoutLibrarySlice {
   masterWorkoutLogs: WorkoutLog[];
   masterWorkoutBuilds: WorkoutBuildRequest[] | WorkoutBuildResponse[];
   displayedWorkoutBuilds: WorkoutBuildRequest[] | WorkoutBuildResponse[];
-  setWorkouts: (logs: WorkoutLog[], builds: WorkoutBuild[]) => void;
+  setWorkouts: (
+    logs: WorkoutLog[],
+    builds: WorkoutBuildRequest[] | WorkoutBuildResponse[],
+  ) => void;
   // addWorkout: (mode: Mode, workout: WorkoutLog | WorkoutBuildRequest) => void;
   addWorkout: () => void;
   completeWorkout: () => void;
