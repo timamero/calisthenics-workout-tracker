@@ -168,16 +168,19 @@ export const createWorkoutDraftSlice: StateCreator<
     ),
   removeExercise: (exerciseIndex) =>
     set((state) => {
-      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
-        state.workout = applyExerciseUpdateAtIndex(
-          exerciseIndex,
-          state.workout,
-          null,
-          removeExerciseAtIndex,
-        );
-      } else if (!state.workout) {
-        console.error('No workout to remove exercise from');
-      } else if (state.mode !== 'edit' && state.mode !== 'build') {
+      // if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        state.workoutData.exercises.splice(exerciseIndex, 1);
+        // state.workout = applyExerciseUpdateAtIndex(
+        //   exerciseIndex,
+        //   state.workout,
+        //   null,
+        //   removeExerciseAtIndex,
+        // );
+        // } else if (!state.workout) {
+        //   console.error('No workout to remove exercise from');
+        // } else if (state.mode !== 'edit' && state.mode !== 'build') {
+      } else {
         console.error('Cannot remove exercise in log mode');
       }
     }),
