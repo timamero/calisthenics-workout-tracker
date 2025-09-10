@@ -1,4 +1,5 @@
 import { StateCreator } from 'zustand';
+import { produce } from 'immer';
 
 import type {
   WorkoutBuild,
@@ -18,13 +19,17 @@ import {
   addExerciseToWorkout,
   applyExerciseUpdateAtIndex,
 } from './workoutDraftActions';
-import { Tracking } from '@cwt/schema/exercises';
+import type { SetFields } from '@cwt/schema/workouts';
+import type { Tracking } from '@cwt/schema/exercises';
 
 import {
   INITIALIZED_WORKOUT_LOG,
   INITIALIZED_WORKOUT_BUILD,
   INITIAL_WORKOUT_LOG_TITLE,
   INITIAL_WORKOUT_BUILD_TITLE,
+  INITIALIZED_SET,
+  DEFAULT_REP_SET,
+  DEFAULT_TIME_SET,
 } from './workoutDefaults';
 
 export type Mode = 'build' | 'edit' | 'log';
@@ -122,26 +127,44 @@ export const createWorkoutDraftSlice: StateCreator<
       state.selectedSetIndexToMod = setIndex;
     }),
   addExercise: () =>
-    set((state) => {
-      const exerciseID = state.selectedExerciseIDToAdd;
-      if (exerciseID == null) {
-        console.error('No exerciseID provided');
-        return;
-      }
-      if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
-        const tracking: Tracking[] =
-          get().getExerciseByID(exerciseID).default_tracking_type;
-        state.workout = addExerciseToWorkout(
-          state.workout,
-          exerciseID,
-          tracking,
-        );
-      } else if (!state.workout) {
-        console.error('No workout to add exercise to');
-      } else if (state.mode !== 'edit' && state.mode !== 'build') {
-        console.error('Cannot add exercise in log mode');
-      }
-    }),
+    set(
+      produce((state) => {
+        const exerciseID = state.selectedExerciseIDToAdd;
+        if (exerciseID == null) {
+          console.error('No exerciseID provided');
+          return;
+        }
+        if (state.mode === 'edit' || state.mode === 'build') {
+          const tracking: Tracking[] =
+            get().getExerciseByID(exerciseID).default_tracking_type;
+          let fields: SetFields = {};
+          if (tracking.includes('reps')) {
+            fields = DEFAULT_REP_SET;
+          } else if (tracking.includes('time')) {
+            fields = DEFAULT_TIME_SET;
+          }
+
+          state.workoutData.exercises.push({
+            sets: [
+              { ...INITIALIZED_SET, id: crypto.randomUUID(), fields: fields },
+            ],
+            exercise_id: exerciseID,
+            tracked: tracking,
+          });
+
+          //   state.workout = addExerciseToWorkout(
+          //     state.workout,
+          //     exerciseID,
+          //     tracking,
+          //   );
+          // } else if (!state.workout) {
+          //   console.error('No workout to add exercise to');
+          // } else if (state.mode !== 'edit' && state.mode !== 'build') {
+        } else {
+          console.error('Cannot add exercise in log mode');
+        }
+      }),
+    ),
   removeExercise: (exerciseIndex) =>
     set((state) => {
       if ((state.mode === 'edit' || state.mode === 'build') && state.workout) {
