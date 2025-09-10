@@ -17,7 +17,7 @@ router = APIRouter(prefix="/workout")
 
 
 @router.post("/build")
-def save_build(build: WorkoutBuildRequestSchema):
+def save_build(build: WorkoutBuildRequestSchema) -> WorkoutBuildResponseSchema:
     """
     Insert workout build.
     """
@@ -26,12 +26,9 @@ def save_build(build: WorkoutBuildRequestSchema):
     #     raise HTTPException(status_code=401, detail="Authentication required")
 
     # access_token = auth_header.split(" ")[1]
-    print("before setting workout_build")
     workout_build = insert_workout_build(build)
-    print("set workout_build")
     if not workout_build:
         raise HTTPException(status_code=400, detail="Invalid request")
-    print("returning workout build")
     return workout_build
 
 
