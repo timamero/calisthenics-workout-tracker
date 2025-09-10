@@ -1,17 +1,23 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
 
-import type { WorkoutLog, WorkoutBuild } from '@cwt/schema/workouts';
+import type {
+  WorkoutLog,
+  WorkoutBuild,
+  WorkoutBuildRequest,
+  WorkoutBuildResponse,
+} from '@cwt/schema/workouts';
 
 import { StoreState } from '../../store';
 import { Mode } from './workoutDraftSlice';
 
 export interface WorkoutLibrarySlice {
   masterWorkoutLogs: WorkoutLog[];
-  masterWorkoutBuilds: WorkoutBuild[];
-  displayedWorkoutBuilds: WorkoutBuild[];
+  masterWorkoutBuilds: WorkoutBuildRequest[] | WorkoutBuildResponse[];
+  displayedWorkoutBuilds: WorkoutBuildRequest[] | WorkoutBuildResponse[];
   setWorkouts: (logs: WorkoutLog[], builds: WorkoutBuild[]) => void;
-  addWorkout: (mode: Mode, workout: WorkoutLog | WorkoutBuild) => void;
+  // addWorkout: (mode: Mode, workout: WorkoutLog | WorkoutBuildRequest) => void;
+  addWorkout: () => void;
   completeWorkout: () => void;
 }
 
@@ -31,29 +37,41 @@ export const createWorkoutLibrarySlice: StateCreator<
       masterWorkoutBuilds: builds,
       displayedWorkoutBuilds: builds,
     })),
-  addWorkout: (mode, workout) =>
+  // addWorkout: (mode, workout) =>
+  addWorkout: () =>
     set(
       produce((state) => {
         // TODO: only add workout if successfully saved to database
-        if (mode === 'build') {
+        if (state.mode === 'build') {
           state.displayedWorkoutBuilds = [
             ...state.displayedWorkoutBuilds,
-            workout,
+            {
+              workout_data: state.workoutData,
+              title: state.workoutTitle || 'Untitled workout',
+              status: 'draft',
+              source: 'manual',
+            },
           ];
         } else {
-          state.masterWorkoutLogs = [...state.masterWorkoutLogs, workout];
+          state.masterWorkoutLogs = [
+            ...state.masterWorkoutLogs,
+            {
+              workout_data: state.workoutData,
+              title: state.workoutTitle || 'Untitled workout',
+              status: 'draft',
+              source: 'manual',
+            },
+          ];
         }
       }),
     ),
   completeWorkout: () => {
-    const mode = get().mode;
-    const workout = get().workout;
-    const title = get().workoutTitle;
-    if (mode && workout) {
-      get().addWorkout(mode, { ...workout, title: title } as
-        | WorkoutLog
-        | WorkoutBuild);
-      get().resetWorkout();
-    }
+    // const mode = get().mode;
+    // const workoutData = get().workoutData;
+    // const title = get().workoutTitle;
+    // if (mode) {
+    get().addWorkout();
+    get().resetWorkout();
+    //   }
   },
 });
