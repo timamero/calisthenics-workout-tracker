@@ -1,0 +1,107 @@
+[
+  {
+    "id": 10,
+    "created_at": "2025-09-09T20:20:08.805795Z",
+    "title": "example post request from fast api",
+    "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    "description": "a workout template",
+    "workout_data": {
+      "exercises": [
+        {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "exercise_id": 0,
+          "tracked": ["reps"],
+          "sets": [
+            {
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "fields": {
+                "reps": 0,
+                "time": null,
+                "weight": null,
+                "rest": "PT30S"
+              },
+              "completed": false,
+              "completed_at": null
+            }
+          ]
+        }
+      ]
+    },
+    "status": "finalized",
+    "goal": "function",
+    "notes": "string",
+    "estimated_duration": "PT15M",
+    "source": "manual",
+    "updated_at": "2025-09-09T20:13:51.828000Z"
+  },
+  {
+    "id": 11,
+    "created_at": "2025-09-10T04:07:03.064307Z",
+    "title": "sanity request",
+    "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    "description": "a workout template",
+    "workout_data": {
+      "exercises": [
+        {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "exercise_id": 0,
+          "tracked": ["reps"],
+          "sets": [
+            {
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "fields": {
+                "reps": 10,
+                "time": null,
+                "weight": null,
+                "rest": "PT30S"
+              },
+              "completed": false,
+              "completed_at": null
+            }
+          ]
+        }
+      ]
+    },
+    "status": "finalized",
+    "goal": "function",
+    "notes": "string",
+    "estimated_duration": "PT15M",
+    "source": "manual",
+    "updated_at": "2025-09-09T20:13:51.828000Z"
+  },
+  {
+    "id": 12,
+    "created_at": "2025-09-10T04:08:55.842826Z",
+    "title": "sanity request with repsonse type",
+    "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    "description": "a workout template",
+    "workout_data": {
+      "exercises": [
+        {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "exercise_id": 0,
+          "tracked": ["reps"],
+          "sets": [
+            {
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "fields": {
+                "reps": 10,
+                "time": null,
+                "weight": null,
+                "rest": "PT30S"
+              },
+              "completed": false,
+              "completed_at": null
+            }
+          ]
+        }
+      ]
+    },
+    "status": "finalized",
+    "goal": "function",
+    "notes": "string",
+    "estimated_duration": "PT15M",
+    "source": "manual",
+    "updated_at": "2025-09-09T20:13:51.828000Z"
+  }
+]
