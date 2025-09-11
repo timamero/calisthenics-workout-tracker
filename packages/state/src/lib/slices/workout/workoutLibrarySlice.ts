@@ -7,6 +7,7 @@ import type {
   WorkoutBuildResponse,
 } from '@cwt/schema/workouts';
 
+import type { Mode } from './workoutDraftSlice';
 // import { StoreState } from '../../store';\
 
 export interface WorkoutLibrarySlice {
@@ -17,8 +18,8 @@ export interface WorkoutLibrarySlice {
     logs: WorkoutLog[],
     builds: WorkoutBuildRequest[] | WorkoutBuildResponse[],
   ) => void;
-  addWorkout: (workout: WorkoutBuildRequest) => void;
-  completeWorkout: (workout: WorkoutBuildRequest) => void;
+  addWorkout: (workout: WorkoutBuildRequest, mode: Mode) => void;
+  completeWorkout: (workout: WorkoutBuildRequest, mode: Mode) => void;
 }
 
 export const createWorkoutLibrarySlice: StateCreator<
@@ -37,10 +38,12 @@ export const createWorkoutLibrarySlice: StateCreator<
       masterWorkoutBuilds: builds,
       displayedWorkoutBuilds: builds,
     })),
-  addWorkout: (workout) =>
+  addWorkout: (workout, mode) =>
     set(
       produce((state) => {
-        if (state.mode === 'build') {
+        console.log('addWorkout called');
+        if (mode === 'build') {
+          console.log('adding workout to displayedWorkoutBuilds');
           state.displayedWorkoutBuilds = [
             ...state.displayedWorkoutBuilds,
             workout,
@@ -56,10 +59,11 @@ export const createWorkoutLibrarySlice: StateCreator<
             },
           ];
         }
+        console.log('build list is ', get().displayedWorkoutBuilds);
       }),
     ),
-  completeWorkout: (workout) => {
-    get().addWorkout(workout);
+  completeWorkout: (workout, mode) => {
+    get().addWorkout(workout, mode);
     // get().resetWorkout();
   },
 });
