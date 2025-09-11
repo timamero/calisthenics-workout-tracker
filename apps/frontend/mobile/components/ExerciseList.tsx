@@ -1,11 +1,14 @@
 import { ScrollView } from 'react-native';
 
 import { useStore } from '@cwt/state/store';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import ExerciseCard from './ExerciseCard';
 
 export default function ExerciseList() {
-  const exercises = useStore((state) => state.displayedExercises);
+  const exercises = useExerciseLibraryStore(
+    (state) => state.displayedExercises,
+  );
 
   return (
     <ScrollView
