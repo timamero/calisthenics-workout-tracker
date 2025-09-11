@@ -199,7 +199,7 @@ export const createWorkoutDraftSlice: StateCreator<
           notes: null,
           estimated_duration: null,
           updated_at: null,
-          user_id: null,
+          user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
           description: null,
           goal: null,
         };
@@ -213,7 +213,7 @@ export const createWorkoutDraftSlice: StateCreator<
           notes: null,
           estimated_duration: null,
           updated_at: null,
-          user_id: null,
+          user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
           description: null,
           goal: null,
         };
