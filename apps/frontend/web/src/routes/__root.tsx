@@ -75,7 +75,8 @@ function RootComponent() {
         navbar={{
           width: 300,
           breakpoint: 'sm',
-          collapsed: { mobile: !opened },
+          // collapsed: { mobile: !opened },
+          collapsed: { mobile: true, desktop: true },
         }}
         padding="md"
       >
