@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Stack, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-// import { useStore } from '@cwt/state/store';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { useAuthStore } from '@cwt/state/auth';
@@ -44,9 +43,7 @@ function WorkoutView() {
 
     const body = JSON.stringify(workoutToSave);
     const result = await postWorkoutBuild(supabaseSession.access_token, body);
-    console.log('result', result);
     if (result) {
-      console.log('completing workout saving workoutToSave: ', workoutToSave);
       completeWorkout(workoutToSave, mode!);
       resetWorkout();
     } else {
