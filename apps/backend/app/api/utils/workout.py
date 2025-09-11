@@ -21,7 +21,7 @@ def insert_workout_build(
         )
         return response.data[0]
     except Exception as e:
-        print(f"Error saving workout with ID {workout_build.id}: {e}")
+        print(f"Error saving workout: {e}")
 
 
 def insert_workout_log(workout_log: WorkoutLogSchema, access_token: str | None = None):
