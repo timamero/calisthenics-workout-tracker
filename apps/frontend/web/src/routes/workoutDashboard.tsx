@@ -3,7 +3,8 @@ import { Title, Stack, Group, ScrollArea, Text } from '@mantine/core';
 
 import { useAuthStore } from '@cwt/state/auth';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useStore } from '@cwt/state/store';
+import { useWorkoutLibraryStore } from '@cwt/state/stores';
+// import { useStore } from '@cwt/state/store';
 
 import { getWorkoutBuilds } from '../services/workoutsService';
 
@@ -12,7 +13,8 @@ import LargeButton from '../components/common/LargeButton';
 
 export const Route = createFileRoute('/workoutDashboard')({
   loader: async () => {
-    const displayedWorkoutBuilds = useStore.getState().displayedWorkoutBuilds;
+    const displayedWorkoutBuilds =
+      useWorkoutLibraryStore.getState().displayedWorkoutBuilds;
     if (displayedWorkoutBuilds && displayedWorkoutBuilds.length > 0) {
       return displayedWorkoutBuilds;
     }
@@ -21,7 +23,7 @@ export const Route = createFileRoute('/workoutDashboard')({
       const workoutBuilds = await getWorkoutBuilds(
         supabaseSession.access_token,
       );
-      useStore.getState().setWorkouts([], workoutBuilds);
+      useWorkoutLibraryStore.getState().setWorkouts([], workoutBuilds);
       return workoutBuilds;
     }
     return [];

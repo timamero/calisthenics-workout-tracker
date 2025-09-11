@@ -49,8 +49,8 @@ export const createWorkoutLibrarySlice: StateCreator<
           state.masterWorkoutLogs = [
             ...state.masterWorkoutLogs,
             {
-              workout_data: state.workoutData,
-              title: state.workoutTitle || 'Untitled workout',
+              workout_data: workout.workout_data,
+              title: workout.title || 'Untitled workout',
               status: 'draft',
               source: 'manual',
             },
