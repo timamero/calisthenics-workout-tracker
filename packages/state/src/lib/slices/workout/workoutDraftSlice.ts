@@ -1,7 +1,7 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
 
-import type { WorkoutData } from '@cwt/schema/workouts';
+import type { WorkoutBuildRequest, WorkoutData } from '@cwt/schema/workouts';
 
 import { StoreState } from '../../store';
 
@@ -24,6 +24,7 @@ interface WorkoutDraftState {
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
+  workoutToSave: WorkoutBuildRequest | null;
 }
 
 interface WorkoutDraftAction {
@@ -44,6 +45,7 @@ interface WorkoutDraftAction {
       rest?: string | undefined;
     },
   ) => void;
+  setWorkoutToSave: () => void;
   resetWorkout: () => void;
 }
 
@@ -60,6 +62,7 @@ export const createWorkoutDraftSlice: StateCreator<
   workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
+  workoutToSave: null,
 
   initializeWorkout: (mode) =>
     set((state) => {
@@ -183,6 +186,35 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot update field in log mode');
       }
     }),
+  setWorkoutToSave: () =>
+    set((state) => {
+      if (state.mode === 'build') {
+        state.workoutToSave = {
+          workout_data: state.workoutData,
+          title: state.workoutTitle || 'Untitled workout',
+          status: 'draft',
+          source: 'manual',
+          notes: null,
+          estimated_duration: null,
+          updated_at: null,
+        };
+      } else {
+        // update later for workout logs
+        state.workoutToSave = {
+          workout_data: state.workoutData,
+          title: state.workoutTitle || 'Untitled workout',
+          status: 'draft',
+          source: 'manual',
+          notes: null,
+          estimated_duration: null,
+          updated_at: null,
+        };
+      }
+    }),
   resetWorkout: () =>
-    set(() => ({ workoutData: { exercises: [] }, mode: null })),
+    set(() => ({
+      workoutData: { exercises: [] },
+      mode: null,
+      workoutToSave: null,
+    })),
 });

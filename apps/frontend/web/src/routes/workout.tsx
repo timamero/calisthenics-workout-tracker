@@ -22,18 +22,24 @@ function WorkoutView() {
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
+  const setWorkoutToSave = useStore((state) => state.setWorkoutToSave);
   const resetWorkout = useStore((state) => state.resetWorkout);
   const completeWorkout = useStore((state) => state.completeWorkout);
-  const workoutToSave = useStore((state) => state.workoutToSave);
+  // const workoutToSave = useStore((state) => state.workoutToSave);
   const supabaseSession = useAuthStore((state) => state.session);
+  // console.log('Session:', supabaseSession);
 
   const onSaveWorkoutClick = async () => {
-    if (!supabaseSession.access_token || !workoutToSave) {
+    setWorkoutToSave();
+    const workoutToSave = useStore.getState().workoutToSave;
+    // console.log('Session on save:', supabaseSession);
+    if (!supabaseSession || !workoutToSave) {
       console.error('Session not found or workout data invalid');
       return;
     }
-
+    // console.log('sending workout in post request', useStore.getState().workoutToSave);
     const body = JSON.stringify(workoutToSave);
+    // console.log('body', body);
     const result = await postWorkoutBuild(supabaseSession.access_token, body);
     if (result) {
       completeWorkout();
