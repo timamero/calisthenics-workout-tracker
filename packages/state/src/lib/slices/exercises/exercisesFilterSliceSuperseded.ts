@@ -4,6 +4,8 @@ import { Constants } from '@cwt/schema/common';
 import { ExerciseFilterCheckbox } from '@cwt/schema/exercises';
 import { ExerciseFilterKeySchema } from '@cwt/schema/exercises/schemas';
 
+import { StoreState } from '../../store';
+
 import {
   clearSelections,
   revertFilterSelections,
@@ -49,7 +51,7 @@ export interface ExercisesFilterSlice {
 }
 
 export const createExercisesFilterSlice: StateCreator<
-  ExercisesFilterSlice,
+  StoreState,
   [['zustand/immer', never]],
   [],
   ExercisesFilterSlice
@@ -103,6 +105,3 @@ export const createExercisesFilterSlice: StateCreator<
       };
     }),
 });
-
-export const selectHasFilters = (state: ExercisesFilterSlice): boolean =>
-  state.appliedFilterSelections.length > 0;
