@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Searchbar, useTheme } from 'react-native-paper';
 
 import { useStore } from '@cwt/state/store';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import { CustomTheme } from '../theme';
 
@@ -10,8 +11,15 @@ const SearchBar = () => {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles();
 
+  const appliedFilterSelections = useStore(
+    (state) => state.appliedFilterSelections,
+  );
+  const appliedExerciseSearch = useStore(
+    (state) => state.appliedExerciseSearch,
+  );
+  const exerciseSearch = useStore((state) => state.exerciseSearch);
   const search = useStore((state) => state.exerciseSearch);
-  const refreshDisplayedExercises = useStore(
+  const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
   );
   const setAppliedExerciseSearch = useStore(
@@ -20,7 +28,11 @@ const SearchBar = () => {
 
   const handleClearSearch = () => {
     setAppliedExerciseSearch('');
-    refreshDisplayedExercises();
+    refreshDisplayedExercises(
+      appliedFilterSelections,
+      appliedExerciseSearch,
+      exerciseSearch,
+    );
   };
 
   const onChange = (text: string) => {
@@ -28,7 +40,11 @@ const SearchBar = () => {
       handleClearSearch();
     }
     setAppliedExerciseSearch(text);
-    refreshDisplayedExercises();
+    refreshDisplayedExercises(
+      appliedFilterSelections,
+      appliedExerciseSearch,
+      exerciseSearch,
+    );
 
     if (text === '') {
       handleClearSearch();

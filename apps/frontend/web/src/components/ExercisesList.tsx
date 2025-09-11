@@ -1,11 +1,14 @@
 import { SimpleGrid } from '@mantine/core';
 
-import { useStore } from '@cwt/state/store';
+// import { useStore } from '@cwt/state/store';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import ExerciseCard from './ExerciseCard';
 
 export default function ExercisesList() {
-  const exercises = useStore((state) => state.displayedExercises);
+  const exercises = useExerciseLibraryStore(
+    (state) => state.displayedExercises,
+  );
   return (
     <SimpleGrid
       cols={{ base: 1, md: 2, lg: 3 }}

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
 import { useStore } from '@cwt/state/store';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 import { Text } from '../../customText';
@@ -30,6 +31,13 @@ export default function FilterOverlay({
 
   const { hasFilters } = useFiltersAndSearchStatus();
 
+  const appliedFilterSelections = useStore(
+    (state) => state.appliedFilterSelections,
+  );
+  const appliedExerciseSearch = useStore(
+    (state) => state.appliedExerciseSearch,
+  );
+  const exerciseSearch = useStore((state) => state.exerciseSearch);
   const clearFilterCheckboxSelections = useStore(
     (state) => state.clearFilterCheckboxSelections,
   );
@@ -42,13 +50,17 @@ export default function FilterOverlay({
   const revertFilterCheckboxSelections = useStore(
     (state) => state.revertFilterCheckboxSelections,
   );
-  const refreshDisplayedExercises = useStore(
+  const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
   );
 
   const handleApplyFiltersPress = () => {
     setAppliedFilterSelections();
-    refreshDisplayedExercises();
+    refreshDisplayedExercises(
+      appliedFilterSelections,
+      appliedExerciseSearch,
+      exerciseSearch,
+    );
 
     handleHideModal();
   };
@@ -56,7 +68,11 @@ export default function FilterOverlay({
   const handleClearFiltersPress = () => {
     clearFilterCheckboxSelections();
     clearAppliedFilterCheckboxSelections();
-    refreshDisplayedExercises();
+    refreshDisplayedExercises(
+      appliedFilterSelections,
+      appliedExerciseSearch,
+      exerciseSearch,
+    );
 
     handleHideModal();
   };

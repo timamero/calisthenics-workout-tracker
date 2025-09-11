@@ -1,6 +1,7 @@
 import { Group, Modal, Button, Stack } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 import FilterSelections from './FilterSelections';
@@ -27,20 +28,35 @@ export default function ExercisesFilterOverlay({
   const revertFilterCheckboxSelections = useStore(
     (state) => state.revertFilterCheckboxSelections,
   );
-  const refreshDisplayedExercises = useStore(
+  const appliedFilterSelections = useStore(
+    (state) => state.appliedFilterSelections,
+  );
+  const appliedExerciseSearch = useStore(
+    (state) => state.appliedExerciseSearch,
+  );
+  const exerciseSearch = useStore((state) => state.exerciseSearch);
+  const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
   );
 
   const handleApplyFiltersClick = () => {
     setAppliedFilterSelections();
-    refreshDisplayedExercises();
+    refreshDisplayedExercises(
+      appliedFilterSelections,
+      appliedExerciseSearch,
+      exerciseSearch,
+    );
     handler.close();
   };
 
   const handleClearFiltersClick = () => {
     clearFilterCheckboxSelections();
     clearAppliedFilterCheckboxSelections();
-    refreshDisplayedExercises();
+    refreshDisplayedExercises(
+      appliedFilterSelections,
+      appliedExerciseSearch,
+      exerciseSearch,
+    );
     handler.close();
   };
 
