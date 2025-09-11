@@ -13,7 +13,6 @@ export default function Workout() {
   const EmptyWorkoutPlaceholder = () => {
     if (workoutData.exercises.length === 0) {
       return (
-        // <Stack align="center" bd="2px dashed gray.6" w="max-content" p="lg">
         <Stack align="center" bd="2px dashed gray.6" p="lg">
           <Text size="lg" fw={800}>
             Ready to start building your workout?
