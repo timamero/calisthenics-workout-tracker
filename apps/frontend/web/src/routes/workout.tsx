@@ -37,16 +37,20 @@ function WorkoutView() {
       console.error('Session not found or workout data invalid');
       return;
     }
-    // console.log('sending workout in post request', useStore.getState().workoutToSave);
+
     const body = JSON.stringify(workoutToSave);
-    console.log('body', body);
     const result = await postWorkoutBuild(supabaseSession.access_token, body);
     if (result) {
       completeWorkout();
-      navigate({
-        to: '/workoutDashboard',
-      });
+      resetWorkout();
+    } else {
+      resetWorkout();
+      console.error('Workout build post request failed');
     }
+
+    navigate({
+      to: '/workoutDashboard',
+    });
   };
 
   const onCancelWorkoutClick = () => {
