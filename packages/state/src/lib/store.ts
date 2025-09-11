@@ -4,15 +4,15 @@ import { immer } from 'zustand/middleware/immer';
 import {
   createExercisesSlice,
   ExercisesSlice,
-} from './slices/library/exercisesSlice';
+} from './slices/exercises/exercisesSlice';
 import {
   createExercisesFilterSlice,
   ExercisesFilterSlice,
-} from './slices/library/exercisesFilterSlice';
+} from './slices/exercises/exercisesFilterSlice';
 import {
   createStopwatchSlice,
   StopwatchSlice,
-} from './slices/workout/stopwatchSlice';
+} from './slices/workouts/stopwatchSlice';
 
 export type StoreState = ExercisesSlice & ExercisesFilterSlice & StopwatchSlice;
 export const useStore = create<StoreState>()(
