@@ -1,15 +1,16 @@
 import { SimpleGrid } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import ExerciseCard from './ExerciseCard';
 
 export default function ExercisesList() {
   const exercises = useStore((state) => state.displayedExercises);
-  const selectedExerciseIDToAdd = useStore(
+  const selectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.selectedExerciseIDToAdd,
   );
-  const setSelectedExerciseIDToAdd = useStore(
+  const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIDToAdd,
   );
 

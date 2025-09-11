@@ -9,6 +9,7 @@ import { supabase } from '../services/supabaseClient';
 
 import { useSupabaseAuth } from '@cwt/hooks/useSupabaseAuth';
 import { useAuthStore } from '@cwt/state/auth';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useStore } from '@cwt/state/store';
 
 import { getExercises } from '../services/exercisesService';
@@ -18,8 +19,10 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  const mode = useStore((state) => state.mode);
-  const isWorkoutSavePending = useStore((state) => state.isWorkoutSavePending);
+  const mode = useWorkoutDraftStore((state) => state.mode);
+  const isWorkoutSavePending = useWorkoutDraftStore(
+    (state) => state.isWorkoutSavePending,
+  );
   const setExercises = useStore((state) => state.setExercises);
 
   const loading = useAuthStore((state) => state.loading);

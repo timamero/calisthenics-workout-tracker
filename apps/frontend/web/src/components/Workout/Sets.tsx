@@ -2,7 +2,8 @@ import { Stack, Text, Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import type { WorkoutExercise } from '@cwt/schema/workouts';
-import { useStore } from '@cwt/state/store';
+// import { useStore } from '@cwt/state/store';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import RepField from './RepField';
 import DurationField from './DurationField';
@@ -13,11 +14,11 @@ export default function Sets({
   sets,
   exerciseIndex,
 }: Pick<WorkoutExercise, 'sets' | 'tracked'> & { exerciseIndex: number }) {
-  const setSelectedSetIndexToMod = useStore(
+  const setSelectedSetIndexToMod = useWorkoutDraftStore(
     (state) => state.setSelectedSetIndexToMod,
   );
-  const deleteSet = useStore((state) => state.deleteSet);
-  const updateField = useStore((state) => state.updateField);
+  const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
+  const updateField = useWorkoutDraftStore((state) => state.updateField);
 
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);

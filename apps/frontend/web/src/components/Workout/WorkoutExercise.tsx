@@ -2,6 +2,7 @@ import { Stack, Text, Button, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { WorkoutExercise } from '@cwt/schema/workouts';
 
 import Sets from './Sets';
@@ -16,8 +17,8 @@ export default function WorkoutExercise({
   exerciseIndex,
   workoutExercise,
 }: WorkoutExerciseProps) {
-  const addSet = useStore((state) => state.addSet);
-  const deleteExercise = useStore((state) => state.removeExercise);
+  const addSet = useWorkoutDraftStore((state) => state.addSet);
+  const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
   const getExerciseNameById = useStore((state) => state.getExerciseNameByID);
   const name = getExerciseNameById(workoutExercise.exercise_id);
 

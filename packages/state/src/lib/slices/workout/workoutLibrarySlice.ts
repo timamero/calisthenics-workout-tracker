@@ -60,6 +60,6 @@ export const createWorkoutLibrarySlice: StateCreator<
     ),
   completeWorkout: () => {
     get().addWorkout();
-    get().resetWorkout();
+    // get().resetWorkout();
   },
 });
