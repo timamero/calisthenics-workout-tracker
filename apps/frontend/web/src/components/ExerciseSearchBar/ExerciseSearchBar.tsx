@@ -3,12 +3,22 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { IoCloseOutline } from 'react-icons/io5';
 
 import { useStore } from '@cwt/state/store';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 export default function ExerciseSearchBar() {
-  const exercises = useStore((state) => state.displayedExercises);
+  const exercises = useExerciseLibraryStore(
+    (state) => state.displayedExercises,
+  );
+  const appliedFilterSelections = useStore(
+    (state) => state.appliedFilterSelections,
+  );
+  const appliedExerciseSearch = useStore(
+    (state) => state.appliedExerciseSearch,
+  );
+  const exerciseSearch = useStore((state) => state.exerciseSearch);
   const search = useStore((state) => state.exerciseSearch);
-  const refreshDisplayedExercises = useStore(
+  const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
   );
   const setSearch = useStore((state) => state.setExerciseSearch);
@@ -38,7 +48,11 @@ export default function ExerciseSearchBar() {
 
   const handleClearSearch = () => {
     setAppliedExerciseSearch('');
-    refreshDisplayedExercises();
+    refreshDisplayedExercises(
+      appliedFilterSelections,
+      appliedExerciseSearch,
+      exerciseSearch,
+    );
   };
 
   type HandleKeyDownEvent = React.KeyboardEvent<HTMLInputElement>;
@@ -46,7 +60,11 @@ export default function ExerciseSearchBar() {
   const handleKeyDown = (e: HandleKeyDownEvent): void => {
     if (e.code === 'Enter') {
       setAppliedExerciseSearch(search.trim());
-      refreshDisplayedExercises();
+      refreshDisplayedExercises(
+        appliedFilterSelections,
+        appliedExerciseSearch,
+        exerciseSearch,
+      );
       combobox.closeDropdown();
     }
   };
@@ -63,7 +81,11 @@ export default function ExerciseSearchBar() {
         console.log(`onOptionSubmit: setAppliedExerciseSearch(${search})`);
         // TODO: When option is selected, set appliedExercise to that value
         setAppliedExerciseSearch(search);
-        refreshDisplayedExercises();
+        refreshDisplayedExercises(
+          appliedFilterSelections,
+          appliedExerciseSearch,
+          exerciseSearch,
+        );
         combobox.closeDropdown();
       }}
       store={combobox}
