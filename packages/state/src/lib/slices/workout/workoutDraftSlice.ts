@@ -24,6 +24,7 @@ interface WorkoutDraftState {
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
+  isWorkoutSavePending: boolean;
   workoutToSave: WorkoutBuildRequest | null;
 }
 
@@ -62,6 +63,7 @@ export const createWorkoutDraftSlice: StateCreator<
   workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
+  isWorkoutSavePending: false,
   workoutToSave: null,
 
   initializeWorkout: (mode) =>
@@ -216,11 +218,14 @@ export const createWorkoutDraftSlice: StateCreator<
           goal: null,
         };
       }
+
+      state.isWorkoutSavePending = true;
     }),
   resetWorkout: () =>
     set(() => ({
       workoutData: { exercises: [] },
       mode: null,
       workoutToSave: null,
+      isWorkoutSavePending: false,
     })),
 });
