@@ -197,6 +197,9 @@ export const createWorkoutDraftSlice: StateCreator<
           notes: null,
           estimated_duration: null,
           updated_at: null,
+          user_id: null,
+          description: null,
+          goal: null,
         };
       } else {
         // update later for workout logs
@@ -208,6 +211,9 @@ export const createWorkoutDraftSlice: StateCreator<
           notes: null,
           estimated_duration: null,
           updated_at: null,
+          user_id: null,
+          description: null,
+          goal: null,
         };
       }
     }),
