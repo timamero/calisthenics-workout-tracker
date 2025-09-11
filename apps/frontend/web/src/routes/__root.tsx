@@ -70,12 +70,23 @@ function RootComponent() {
   // TODO: Update implementation of hiding navigation during workout
   if (mode) {
     return (
-      <Stack align="center">
-        <Stack m="lg" miw="600px">
+      <AppShell
+        header={{ height: 60 }}
+        navbar={{
+          width: 300,
+          breakpoint: 'sm',
+          collapsed: { mobile: !opened },
+        }}
+        padding="md"
+      >
+        <AppShell.Header>
+          <div>Logo</div>
+        </AppShell.Header>
+        <AppShell.Main>
           <Outlet />
           <TanStackRouterDevtools />
-        </Stack>
-      </Stack>
+        </AppShell.Main>
+      </AppShell>
     );
   }
 
