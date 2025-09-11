@@ -3,6 +3,7 @@ import { Checkbox, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
 import { useStore } from '@cwt/state/store';
+import { useExercisesFilterStore } from '@cwt/state/stores';
 import type {
   ExerciseAttributes,
   ExerciseFilterKey,
@@ -21,7 +22,7 @@ export default function FilterCheckbox({
 }: FilterCheckboxProps) {
   const theme = useTheme() as CustomTheme;
 
-  const isSelected = useStore(
+  const isSelected = useExercisesFilterStore(
     (state) =>
       state.filterCheckboxSelections.find(
         (s) => s.keyName === keyName && s.selection === selection,
