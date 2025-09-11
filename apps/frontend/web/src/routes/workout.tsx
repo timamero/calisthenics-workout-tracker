@@ -2,8 +2,9 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Stack, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { useStore } from '@cwt/state/store';
+// import { useStore } from '@cwt/state/store';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { useAuthStore } from '@cwt/state/auth';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
@@ -29,7 +30,9 @@ function WorkoutView() {
     (state) => state.setWorkoutToSave,
   );
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
-  const completeWorkout = useStore((state) => state.completeWorkout);
+  const completeWorkout = useWorkoutLibraryStore(
+    (state) => state.completeWorkout,
+  );
   const supabaseSession = useAuthStore((state) => state.session);
 
   const onSaveWorkoutClick = async () => {
