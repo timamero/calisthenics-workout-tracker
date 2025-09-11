@@ -14,12 +14,12 @@ export const WorkoutBuildSchema = z.object({
 export const WorkoutBuildRequestSchema = z.object({
   updated_at: z.nullable(z.iso.time()),
   title: z.nullable(z.string().max(70)),
-  description: z.optional(z.string().max(500)),
+  description: z.nullable(z.string().max(500)),
   workout_data: WorkoutDataSchema,
   status: StatusSchema,
-  goal: z.optional(GoalSchema),
+  goal: z.nullable(GoalSchema),
   notes: z.nullable(z.string().max(750)),
-  user_id: z.optional(z.uuid()),
+  user_id: z.nullable(z.uuid()),
   estimated_duration: z.nullable(z.iso.time()),
   source: SourceSchema,
 });

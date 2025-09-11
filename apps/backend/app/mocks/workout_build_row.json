@@ -1,31 +1,81 @@
-{
-  "title": "another sanity request with repsonse type",
-  "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
-  "description": "a workout template",
-  "workout_data": {
-    "exercises": [
-      {
-        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "exercise_id": 0,
-        "tracked": ["reps"],
-        "sets": [
-          {
-            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "fields": {
-              "reps": 10,
-              "rest": "PT30S"
-            },
-            "completed": false,
-            "completed_at": null
-          }
-        ]
-      }
-    ]
+[
+  {
+    "title": "another sanity request with repsonse type",
+    "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    "description": "a workout template",
+    "workout_data": {
+      "exercises": [
+        {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "exercise_id": 0,
+          "tracked": ["reps"],
+          "sets": [
+            {
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "fields": {
+                "reps": 10,
+                "rest": "PT30S"
+              },
+              "completed": false,
+              "completed_at": null
+            }
+          ]
+        }
+      ]
+    },
+    "status": "finalized",
+    "goal": "function",
+    "notes": "string",
+    "estimated_duration": "PT15M",
+    "source": "manual",
+    "updated_at": "2025-09-09T20:13:51.828Z"
   },
-  "status": "finalized",
-  "goal": "function",
-  "notes": "string",
-  "estimated_duration": "PT15M",
-  "source": "manual",
-  "updated_at": "2025-09-09T20:13:51.828Z"
-}
+
+  {
+    "workout_data": {
+      "exercises": [
+        {
+          "sets": [
+            {
+              "completed": false,
+              "completed_at": null,
+              "id": "87e33ebc-df1e-4d8b-9619-5c5faaf2f97b",
+              "fields": {
+                "time": "PT30S",
+                "rest": "PT30S"
+              }
+            }
+          ],
+          "exercise_id": 64,
+          "tracked": ["time"],
+          "id": "edc7f2ca-0e46-4c15-8500-275fdaca4243"
+        },
+        {
+          "sets": [
+            {
+              "completed": false,
+              "completed_at": null,
+              "id": "af4cd09c-0ae3-4ed4-beb3-fd82be22016e",
+              "fields": {
+                "reps": 10,
+                "rest": "PT30S"
+              }
+            }
+          ],
+          "exercise_id": 152,
+          "tracked": ["reps"],
+          "id": "a6e9f6a1-9b86-4a38-a7b7-33d52e709900"
+        }
+      ]
+    },
+    "title": "test",
+    "status": "draft",
+    "source": "manual",
+    "notes": null,
+    "estimated_duration": null,
+    "updated_at": null,
+    "user_id": null,
+    "description": null,
+    "goal": null
+  }
+]
