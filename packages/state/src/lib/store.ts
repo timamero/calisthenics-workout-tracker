@@ -12,7 +12,7 @@ import {
 import {
   createWorkoutLibrarySlice,
   WorkoutLibrarySlice,
-} from './slices/workout/workoutLibrarySlice';
+} from './slices/workout/workoutLibrarySliceSuperseded';
 import {
   createWorkoutDraftSlice,
   WorkoutDraftSlice,

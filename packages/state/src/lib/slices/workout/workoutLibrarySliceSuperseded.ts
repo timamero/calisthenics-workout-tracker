@@ -7,7 +7,7 @@ import type {
   WorkoutBuildResponse,
 } from '@cwt/schema/workouts';
 
-// import { StoreState } from '../../store';\
+import { StoreState } from '../../store';
 
 export interface WorkoutLibrarySlice {
   masterWorkoutLogs: WorkoutLog[];
@@ -22,7 +22,7 @@ export interface WorkoutLibrarySlice {
 }
 
 export const createWorkoutLibrarySlice: StateCreator<
-  WorkoutLibrarySlice,
+  StoreState,
   [['zustand/immer', never]],
   [],
   WorkoutLibrarySlice
