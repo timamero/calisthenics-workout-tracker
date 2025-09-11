@@ -2,7 +2,7 @@ from app.services.supabase_client import get_supabase_client
 from app.schemas.exercise import ExerciseFilterParams
 
 
-def get_exercises(access_token: str, filter_query: ExerciseFilterParams):
+def get_exercises(filter_query: ExerciseFilterParams, access_token: str | None = None):
     supabase = get_supabase_client(access_token)
 
     muscles = filter_query.muscles
@@ -46,7 +46,7 @@ def get_exercises(access_token: str, filter_query: ExerciseFilterParams):
         print(f"Error fetching exercises: {e}")
 
 
-def get_exercise_by_id(exercise_id: str, access_token: str):
+def get_exercise_by_id(exercise_id: str, access_token: str | None = None):
     supabase = get_supabase_client(access_token)
     try:
         response = (
