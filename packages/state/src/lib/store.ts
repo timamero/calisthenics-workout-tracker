@@ -10,29 +10,15 @@ import {
   ExercisesFilterSlice,
 } from './slices/library/exercisesFilterSlice';
 import {
-  createWorkoutLibrarySlice,
-  WorkoutLibrarySlice,
-} from './slices/workout/workoutLibrarySliceSuperseded';
-import {
-  createWorkoutDraftSlice,
-  WorkoutDraftSlice,
-} from './slices/workout/workoutDraftSliceSuperseded';
-import {
   createStopwatchSlice,
   StopwatchSlice,
 } from './slices/workout/stopwatchSlice';
 
-export type StoreState = ExercisesSlice &
-  ExercisesFilterSlice &
-  WorkoutLibrarySlice &
-  WorkoutDraftSlice &
-  StopwatchSlice;
+export type StoreState = ExercisesSlice & ExercisesFilterSlice & StopwatchSlice;
 export const useStore = create<StoreState>()(
   immer((...a) => ({
     ...createExercisesSlice(...a),
     ...createExercisesFilterSlice(...a),
-    ...createWorkoutLibrarySlice(...a),
-    ...createWorkoutDraftSlice(...a),
     ...createStopwatchSlice(...a),
   })),
 );
