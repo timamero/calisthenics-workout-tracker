@@ -43,16 +43,20 @@ def save_build(
 
 
 @router.post("/log")
-def save_log(log: WorkoutLogSchema):
+def save_log(log: WorkoutLogSchema, request: Request):
     """
     Insert workout log.
     """
-    # auth_header = request.headers.get("Authorization")
-    # if not auth_header or not auth_header.startswith("Bearer "):
-    #     raise HTTPException(status_code=401, detail="Authentication required")
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        if environment == "local":
+            workout_log = insert_workout_log(log)
+        else:
+            raise HTTPException(status_code=401, detail="Authentication required")
 
-    # access_token = auth_header.split(" ")[1]
-    workout_log = insert_workout_log(log)
+    else:
+        access_token = auth_header.split(" ")[1]
+        workout_log = insert_workout_log(log, access_token)
     if not workout_log:
         raise HTTPException(status_code=400, detail="Invalid request")
 
@@ -60,11 +64,23 @@ def save_log(log: WorkoutLogSchema):
 
 
 @router.get("/logs")
-def read_workout_logs():
+def read_workout_logs(request: Request):
     """
     Retrieve list of workout logs
     """
-    logs = get_workout_logs()
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        if environment == "local":
+            logs = get_workout_logs()
+        else:
+            raise HTTPException(status_code=401, detail="Authentication required")
+
+    else:
+        access_token = auth_header.split(" ")[1]
+        logs = get_workout_logs(access_token)
+    if not logs:
+        raise HTTPException(status_code=400, detail="Invalid request")
+
     return logs
 
 
@@ -83,4 +99,7 @@ def read_workout_builds(request: Request) -> List[WorkoutBuildResponseSchema]:
     else:
         access_token = auth_header.split(" ")[1]
         builds = get_workout_builds(access_token)
+
+    if not builds:
+        raise HTTPException(status_code=400, detail="Invalid request")
     return builds
