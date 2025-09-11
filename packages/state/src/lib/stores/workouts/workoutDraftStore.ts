@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 import {
   WorkoutDraftSlice,
   createWorkoutDraftSlice,
-} from '../slices/workout/workoutDraftSlice';
+} from '../../slices/workouts/workoutDraftSlice';
 
 export const useWorkoutDraftStore = create<WorkoutDraftSlice>()(
   immer((...a) => ({
