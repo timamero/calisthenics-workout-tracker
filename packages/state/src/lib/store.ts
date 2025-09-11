@@ -8,7 +8,7 @@ import {
 import {
   createExercisesFilterSlice,
   ExercisesFilterSlice,
-} from './slices/exercises/exercisesFilterSlice';
+} from './slices/exercises/exercisesFilterSliceSuperseded';
 import {
   createStopwatchSlice,
   StopwatchSlice,
