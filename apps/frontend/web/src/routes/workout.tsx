@@ -39,7 +39,7 @@ function WorkoutView() {
     }
     // console.log('sending workout in post request', useStore.getState().workoutToSave);
     const body = JSON.stringify(workoutToSave);
-    // console.log('body', body);
+    console.log('body', body);
     const result = await postWorkoutBuild(supabaseSession.access_token, body);
     if (result) {
       completeWorkout();
