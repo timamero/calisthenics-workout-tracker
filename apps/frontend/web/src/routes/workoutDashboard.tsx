@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Group, ScrollArea, Text } from '@mantine/core';
 
 import { useAuthStore } from '@cwt/state/auth';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useStore } from '@cwt/state/store';
 
 import { getWorkoutBuilds } from '../services/workoutsService';
@@ -31,7 +32,9 @@ export const Route = createFileRoute('/workoutDashboard')({
 function WorkoutDashboardView() {
   const workoutBuilds = Route.useLoaderData();
 
-  const initializeWorkout = useStore((state) => state.initializeWorkout);
+  const initializeWorkout = useWorkoutDraftStore(
+    (state) => state.initializeWorkout,
+  );
 
   const handleCreateWorkoutBuildClick = () => {
     initializeWorkout('build');
