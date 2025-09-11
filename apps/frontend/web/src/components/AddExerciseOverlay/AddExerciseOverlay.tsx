@@ -40,23 +40,41 @@ export default function AddExerciseOverlay({
         },
       }}
     >
-      <ScrollArea h="80vh">
-        <Stack gap="lg">
-          <ExercisesList />
-        </Stack>
-      </ScrollArea>
-      <Group mt="lg">
-        <Button color="gray" variant="outline" onClick={() => handler.close()}>
-          Cancel
-        </Button>
-        <Button
-          color="orange"
-          onClick={() => handleAddExerciseClick()}
-          data-disabled={selectedExerciseIDToAdd === null}
+      <div style={{ position: 'relative', minHeight: '90vh' }}>
+        <ScrollArea h="90vh" style={{ paddingBottom: 40 }}>
+          <Stack gap="lg" align="center">
+            <ExercisesList />
+          </Stack>
+        </ScrollArea>
+        <Group
+          mt="lg"
+          justify="center"
+          bg="gray.0"
+          style={{
+            position: 'sticky',
+            bottom: 0,
+            background: 'var(--mantine-color-body)',
+            zIndex: 2,
+            padding: '16px 0',
+            boxShadow: '0 -2px 8px rgba(0,0,0,0.04)',
+          }}
         >
-          Add Exercise
-        </Button>
-      </Group>
+          <Button
+            color="gray"
+            variant="outline"
+            onClick={() => handler.close()}
+          >
+            Cancel
+          </Button>
+          <Button
+            color="orange"
+            onClick={() => handleAddExerciseClick()}
+            data-disabled={selectedExerciseIDToAdd === null}
+          >
+            Add Exercise
+          </Button>
+        </Group>
+      </div>
     </Modal>
   );
 }
