@@ -27,7 +27,9 @@ export async function postWorkoutBuild(
   try {
     return await apiPostWorkoutBuild(baseUrl, token, body);
   } catch {
-    console.log('Web: API not available. Workout build not saved.');
-    return null;
+    console.error(
+      'Web: API not available. Workout build not saved to database.',
+    );
+    return JSON.parse(body as string);
   }
 }
