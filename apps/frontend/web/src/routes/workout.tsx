@@ -24,8 +24,7 @@ function WorkoutView() {
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
-  // const workoutToSave = useWorkoutDraftStore((state) => state.workoutToSave);
-  // console.log('workout to save', workoutToSave);
+  const mode = useWorkoutDraftStore((state) => state.mode);
   const setWorkoutToSave = useWorkoutDraftStore(
     (state) => state.setWorkoutToSave,
   );
@@ -45,10 +44,13 @@ function WorkoutView() {
 
     const body = JSON.stringify(workoutToSave);
     const result = await postWorkoutBuild(supabaseSession.access_token, body);
+    console.log('result', result);
     if (result) {
-      completeWorkout(workoutToSave);
+      console.log('completing workout saving workoutToSave: ', workoutToSave);
+      completeWorkout(workoutToSave, mode!);
       resetWorkout();
     } else {
+      // TODO: Save to state called unsavedBuilds
       resetWorkout();
       console.error('Workout build post request failed');
     }
