@@ -25,7 +25,7 @@ function RootComponent() {
   const supabaseSession = useAuthStore((state) => state.session);
   const setSession = useAuthStore((state) => state.setSession);
   const setLoading = useAuthStore((state) => state.setLoading);
-
+  // console.log('Session:', supabaseSession);
   // Manage state to open and close menu
   const [opened, { toggle }] = useDisclosure();
 
