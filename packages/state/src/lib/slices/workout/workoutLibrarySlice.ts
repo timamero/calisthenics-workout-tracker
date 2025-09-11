@@ -17,8 +17,8 @@ export interface WorkoutLibrarySlice {
     logs: WorkoutLog[],
     builds: WorkoutBuildRequest[] | WorkoutBuildResponse[],
   ) => void;
-  addWorkout: () => void;
-  completeWorkout: () => void;
+  addWorkout: (workout: WorkoutBuildRequest) => void;
+  completeWorkout: (workout: WorkoutBuildRequest) => void;
 }
 
 export const createWorkoutLibrarySlice: StateCreator<
@@ -37,13 +37,13 @@ export const createWorkoutLibrarySlice: StateCreator<
       masterWorkoutBuilds: builds,
       displayedWorkoutBuilds: builds,
     })),
-  addWorkout: () =>
+  addWorkout: (workout) =>
     set(
       produce((state) => {
         if (state.mode === 'build') {
           state.displayedWorkoutBuilds = [
             ...state.displayedWorkoutBuilds,
-            state.workoutToSave,
+            workout,
           ];
         } else {
           state.masterWorkoutLogs = [
@@ -58,8 +58,8 @@ export const createWorkoutLibrarySlice: StateCreator<
         }
       }),
     ),
-  completeWorkout: () => {
-    get().addWorkout();
+  completeWorkout: (workout) => {
+    get().addWorkout(workout);
     // get().resetWorkout();
   },
 });
