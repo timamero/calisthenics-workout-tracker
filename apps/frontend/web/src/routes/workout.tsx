@@ -3,6 +3,7 @@ import { Stack, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useStore } from '@cwt/state/store';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useAuthStore } from '@cwt/state/auth';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
@@ -22,14 +23,16 @@ function WorkoutView() {
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
-  const setWorkoutToSave = useStore((state) => state.setWorkoutToSave);
-  const resetWorkout = useStore((state) => state.resetWorkout);
+  const setWorkoutToSave = useWorkoutDraftStore(
+    (state) => state.setWorkoutToSave,
+  );
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useStore((state) => state.completeWorkout);
   const supabaseSession = useAuthStore((state) => state.session);
 
   const onSaveWorkoutClick = async () => {
     setWorkoutToSave();
-    const workoutToSave = useStore.getState().workoutToSave;
+    const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
     if (!supabaseSession || !workoutToSave) {
       console.error('Session not found or workout data invalid');
       return;
