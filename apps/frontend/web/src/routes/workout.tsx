@@ -57,7 +57,7 @@ function WorkoutView() {
   };
 
   return (
-    <Stack gap="xl">
+    <Stack gap="xl" align="center">
       <WorkoutTitle />
       <Stack gap="xl" align="center">
         <Workout />
