@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 
 from app.api.utils.workout import (
     insert_workout_build,
@@ -13,20 +13,30 @@ from app.schemas.workout import (
     WorkoutLogSchema,
 )
 
+from app.core.config import settings
+
+environment: str = settings.environment
+
 router = APIRouter(prefix="/workout")
 
 
 @router.post("/build")
-def save_build(build: WorkoutBuildRequestSchema) -> WorkoutBuildResponseSchema:
+def save_build(
+    build: WorkoutBuildRequestSchema, request: Request
+) -> WorkoutBuildResponseSchema:
     """
     Insert workout build.
     """
-    # auth_header = request.headers.get("Authorization")
-    # if not auth_header or not auth_header.startswith("Bearer "):
-    #     raise HTTPException(status_code=401, detail="Authentication required")
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        if environment == "local":
+            workout_build = insert_workout_build(build)
+        else:
+            raise HTTPException(status_code=401, detail="Authentication required")
+    else:
+        access_token = auth_header.split(" ")[1]
+        workout_build = insert_workout_build(build, access_token)
 
-    # access_token = auth_header.split(" ")[1]
-    workout_build = insert_workout_build(build)
     if not workout_build:
         raise HTTPException(status_code=400, detail="Invalid request")
     return workout_build
@@ -59,9 +69,18 @@ def read_workout_logs():
 
 
 @router.get("/builds")
-def read_workout_builds() -> List[WorkoutBuildResponseSchema]:
+def read_workout_builds(request: Request) -> List[WorkoutBuildResponseSchema]:
     """
     Retrieve list of workout builds
     """
-    builds = get_workout_builds()
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        if environment == "local":
+            builds = get_workout_builds()
+        else:
+            raise HTTPException(status_code=401, detail="Authentication required")
+
+    else:
+        access_token = auth_header.split(" ")[1]
+        builds = get_workout_builds(access_token)
     return builds
