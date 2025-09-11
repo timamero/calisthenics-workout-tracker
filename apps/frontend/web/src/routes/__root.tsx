@@ -19,6 +19,7 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   const mode = useStore((state) => state.mode);
+  const isWorkoutSavePending = useStore((state) => state.isWorkoutSavePending);
   const setExercises = useStore((state) => state.setExercises);
 
   const loading = useAuthStore((state) => state.loading);
@@ -50,7 +51,7 @@ function RootComponent() {
     asyncFetchData();
   }, [supabaseSession, setExercises]);
 
-  if (loading) {
+  if (loading || isWorkoutSavePending) {
     return (
       <Stack h="100vh" w="100vw" display="flex" justify="center" align="center">
         <Loader color="blue" />
