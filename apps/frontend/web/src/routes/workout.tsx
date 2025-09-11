@@ -23,6 +23,8 @@ function WorkoutView() {
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
+  // const workoutToSave = useWorkoutDraftStore((state) => state.workoutToSave);
+  // console.log('workout to save', workoutToSave);
   const setWorkoutToSave = useWorkoutDraftStore(
     (state) => state.setWorkoutToSave,
   );
@@ -41,7 +43,7 @@ function WorkoutView() {
     const body = JSON.stringify(workoutToSave);
     const result = await postWorkoutBuild(supabaseSession.access_token, body);
     if (result) {
-      completeWorkout();
+      completeWorkout(workoutToSave);
       resetWorkout();
     } else {
       resetWorkout();
