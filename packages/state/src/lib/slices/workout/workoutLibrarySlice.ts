@@ -10,7 +10,6 @@ import type {
 import { StoreState } from '../../store';
 
 export interface WorkoutLibrarySlice {
-  // workoutToSave: WorkoutBuildRequest | null;
   masterWorkoutLogs: WorkoutLog[];
   masterWorkoutBuilds: WorkoutBuildRequest[] | WorkoutBuildResponse[];
   displayedWorkoutBuilds: WorkoutBuildRequest[] | WorkoutBuildResponse[];
@@ -28,7 +27,6 @@ export const createWorkoutLibrarySlice: StateCreator<
   [],
   WorkoutLibrarySlice
 > = (set, get) => ({
-  // workoutToSave: null,
   masterWorkoutLogs: [], // TODO: Check that the max number returned is 20
   masterWorkoutBuilds: [], // TODO: Check that the max number returned is 10
   displayedWorkoutBuilds: [],
@@ -42,19 +40,11 @@ export const createWorkoutLibrarySlice: StateCreator<
   addWorkout: () =>
     set(
       produce((state) => {
-        // TODO: only add workout if successfully saved to database
         if (state.mode === 'build') {
-          // const workout = {
-          //   workout_data: state.workoutData,
-          //   title: state.workoutTitle || 'Untitled workout',
-          //   status: 'draft',
-          //   source: 'manual',
-          // };
           state.displayedWorkoutBuilds = [
             ...state.displayedWorkoutBuilds,
             state.workoutToSave,
           ];
-          // state.workoutToSave = workout;
         } else {
           state.masterWorkoutLogs = [
             ...state.masterWorkoutLogs,
