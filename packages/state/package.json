@@ -25,6 +25,10 @@
       "types": "./dist/lib/store.d.ts",
       "default": "./dist/lib/store.js"
     },
+    "./stores": {
+      "types": "./dist/lib/stores/index.d.ts",
+      "default": "./dist/lib/stores/index.js"
+    },
     "./library": {
       "types": "./dist/lib/slices/library/index.d.ts",
       "default": "./dist/lib/slices/library/index.js"

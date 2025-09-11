@@ -16,7 +16,7 @@ import {
 import {
   createWorkoutDraftSlice,
   WorkoutDraftSlice,
-} from './slices/workout/workoutDraftSlice';
+} from './slices/workout/workoutDraftSliceSuperseded';
 import {
   createStopwatchSlice,
   StopwatchSlice,
