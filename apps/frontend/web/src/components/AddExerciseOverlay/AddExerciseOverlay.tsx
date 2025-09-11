@@ -1,6 +1,7 @@
 import { Group, Modal, Button, Stack, ScrollArea } from '@mantine/core';
 
 import { useStore } from '@cwt/state/store';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import ExercisesList from './ExercisesList';
 
@@ -13,16 +14,19 @@ export default function AddExerciseOverlay({
   opened,
   handler,
 }: AddExerciseOverlayProps) {
-  const selectedExerciseIDToAdd = useStore(
+  const selectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.selectedExerciseIDToAdd,
   );
-  const setSelectedExerciseIDToAdd = useStore(
+  const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIDToAdd,
   );
-  const addExercise = useStore((state) => state.addExercise);
+  const addExercise = useWorkoutDraftStore((state) => state.addExercise);
+  const getExerciseById = useStore((state) => state.getExerciseByID);
 
   const handleAddExerciseClick = () => {
-    addExercise();
+    addExercise(
+      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
+    );
     setSelectedExerciseIDToAdd(null);
     handler.close();
   };

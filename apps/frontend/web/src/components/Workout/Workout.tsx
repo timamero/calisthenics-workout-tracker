@@ -1,10 +1,12 @@
 import { Stack, Text } from '@mantine/core';
 
-import { useStore } from '@cwt/state/store';
+// import { useStore } from '@cwt/state/store';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
+
 import WorkoutExercise from './WorkoutExercise';
 
 export default function Workout() {
-  const workoutData = useStore((state) => state.workoutData);
+  const workoutData = useWorkoutDraftStore((state) => state.workoutData);
 
   if (!workoutData) {
     return <Text>Loading</Text>;
