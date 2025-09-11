@@ -3,7 +3,7 @@ import { produce } from 'immer';
 
 import type { WorkoutBuildRequest, WorkoutData } from '@cwt/schema/workouts';
 
-// import { StoreState } from '../../store';
+import { StoreState } from '../../store';
 
 import type { SetFields } from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
@@ -33,8 +33,7 @@ interface WorkoutDraftAction {
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSelectedSetIndexToMod: (setIndex: number | null) => void;
-  // addExercise: () => void;
-  addExercise: (tracking: Tracking[]) => void;
+  addExercise: () => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number) => void;
@@ -54,7 +53,7 @@ interface WorkoutDraftAction {
 export type WorkoutDraftSlice = WorkoutDraftState & WorkoutDraftAction;
 
 export const createWorkoutDraftSlice: StateCreator<
-  WorkoutDraftSlice,
+  StoreState,
   [['zustand/immer', never]],
   [],
   WorkoutDraftSlice
@@ -87,7 +86,7 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       state.selectedSetIndexToMod = setIndex;
     }),
-  addExercise: (tracking) =>
+  addExercise: () =>
     set(
       produce((state) => {
         const exerciseID = state.selectedExerciseIDToAdd;
@@ -96,8 +95,8 @@ export const createWorkoutDraftSlice: StateCreator<
           return;
         }
         if (state.mode === 'edit' || state.mode === 'build') {
-          // const tracking: Tracking[] =
-          //   get().getExerciseByID(exerciseID).default_tracking_type;
+          const tracking: Tracking[] =
+            get().getExerciseByID(exerciseID).default_tracking_type;
           let fields: SetFields = {};
           if (tracking.includes('reps')) {
             fields = DEFAULT_REP_SET;
