@@ -25,14 +25,11 @@ function WorkoutView() {
   const setWorkoutToSave = useStore((state) => state.setWorkoutToSave);
   const resetWorkout = useStore((state) => state.resetWorkout);
   const completeWorkout = useStore((state) => state.completeWorkout);
-  // const workoutToSave = useStore((state) => state.workoutToSave);
   const supabaseSession = useAuthStore((state) => state.session);
-  // console.log('Session:', supabaseSession);
 
   const onSaveWorkoutClick = async () => {
     setWorkoutToSave();
     const workoutToSave = useStore.getState().workoutToSave;
-    // console.log('Session on save:', supabaseSession);
     if (!supabaseSession || !workoutToSave) {
       console.error('Session not found or workout data invalid');
       return;
