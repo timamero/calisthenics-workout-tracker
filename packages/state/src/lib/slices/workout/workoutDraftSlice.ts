@@ -3,8 +3,6 @@ import { produce } from 'immer';
 
 import type { WorkoutBuildRequest, WorkoutData } from '@cwt/schema/workouts';
 
-// import { StoreState } from '../../store';
-
 import type { SetFields } from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
 

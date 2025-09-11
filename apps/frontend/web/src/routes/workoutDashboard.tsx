@@ -4,7 +4,6 @@ import { Title, Stack, Group, ScrollArea, Text } from '@mantine/core';
 import { useAuthStore } from '@cwt/state/auth';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
-// import { useStore } from '@cwt/state/store';
 
 import { getWorkoutBuilds } from '../services/workoutsService';
 
