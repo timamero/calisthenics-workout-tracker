@@ -28,7 +28,7 @@ export default function FilterCheckbox({
         (s) => s.keyName === keyName && s.selection === selection,
       )?.value,
   );
-  const toggleFilterSelection = useStore(
+  const toggleFilterSelection = useExercisesFilterStore(
     (state) => state.toggleFilterSelection,
   );
 
