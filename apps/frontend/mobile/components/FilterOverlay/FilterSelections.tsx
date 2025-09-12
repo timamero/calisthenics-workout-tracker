@@ -3,7 +3,9 @@ import { View, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useShallow } from 'zustand/shallow';
 
-import { useStore } from '@cwt/state/store';
+// import { useStore } from '@cwt/state/store';
+import { useExercisesFilterStore } from '@cwt/state/stores';
+
 import type {
   ExerciseAttributes,
   ExerciseFilterKey,
@@ -39,7 +41,7 @@ const Selections = React.memo(function Selections({
 export default function FilterSelections() {
   const theme = useTheme() as CustomTheme;
 
-  const filterCheckboxSelections = useStore(
+  const filterCheckboxSelections = useExercisesFilterStore(
     useShallow((state) => state.filterCheckboxSelections),
   );
 
