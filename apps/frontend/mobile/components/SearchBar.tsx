@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Searchbar, useTheme } from 'react-native-paper';
 
-// import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
@@ -13,16 +12,9 @@ const SearchBar = () => {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles();
 
-  const appliedFilterSelections = useExercisesFilterStore(
-    (state) => state.appliedFilterSelections,
-  );
-  const appliedExerciseSearch = useExercisesSearchStore(
-    (state) => state.appliedExerciseSearch,
-  );
   const exerciseSearch = useExercisesSearchStore(
     (state) => state.exerciseSearch,
   );
-  // const search = useExercisesSearchStore((state) => state.exerciseSearch);
   const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
   );
@@ -33,9 +25,9 @@ const SearchBar = () => {
   const handleClearSearch = () => {
     setAppliedExerciseSearch('');
     refreshDisplayedExercises(
-      appliedFilterSelections,
-      appliedExerciseSearch,
-      exerciseSearch,
+      useExercisesFilterStore.getState().appliedFilterSelections,
+      useExercisesSearchStore.getState().appliedExerciseSearch,
+      useExercisesSearchStore.getState().exerciseSearch,
     );
   };
 
@@ -45,9 +37,9 @@ const SearchBar = () => {
     }
     setAppliedExerciseSearch(text);
     refreshDisplayedExercises(
-      appliedFilterSelections,
-      appliedExerciseSearch,
-      exerciseSearch,
+      useExercisesFilterStore.getState().appliedFilterSelections,
+      useExercisesSearchStore.getState().appliedExerciseSearch,
+      useExercisesSearchStore.getState().exerciseSearch,
     );
 
     if (text === '') {
