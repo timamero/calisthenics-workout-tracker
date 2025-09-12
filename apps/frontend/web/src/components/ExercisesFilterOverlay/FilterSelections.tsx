@@ -2,7 +2,8 @@ import { memo } from 'react';
 import { Stack, Text, Group } from '@mantine/core';
 import { useShallow } from 'zustand/shallow';
 
-import { useStore } from '@cwt/state/store';
+// import { useStore } from '@cwt/state/store';
+import { useExercisesFilterStore } from '@cwt/state/stores';
 // import { type FilterGroup } from '@cwt/state/types';
 import type { ExerciseFilterKey } from '@cwt/schema/exercises';
 import type { ExerciseAttributes } from '@cwt/schema/exercises';
@@ -32,7 +33,7 @@ const Selections = memo(function Selections({
 });
 
 export default function FilterSelections() {
-  const filterCheckboxSelections = useStore(
+  const filterCheckboxSelections = useExercisesFilterStore(
     useShallow((state) => state.filterCheckboxSelections),
   );
 
