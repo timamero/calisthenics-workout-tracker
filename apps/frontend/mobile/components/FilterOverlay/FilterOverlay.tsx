@@ -2,8 +2,9 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
-import { useStore } from '@cwt/state/store';
+// import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
+import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
@@ -35,10 +36,12 @@ export default function FilterOverlay({
   const appliedFilterSelections = useExercisesFilterStore(
     (state) => state.appliedFilterSelections,
   );
-  const appliedExerciseSearch = useStore(
+  const appliedExerciseSearch = useExercisesSearchStore(
     (state) => state.appliedExerciseSearch,
   );
-  const exerciseSearch = useStore((state) => state.exerciseSearch);
+  const exerciseSearch = useExercisesSearchStore(
+    (state) => state.exerciseSearch,
+  );
   const clearFilterCheckboxSelections = useExercisesFilterStore(
     (state) => state.clearFilterCheckboxSelections,
   );

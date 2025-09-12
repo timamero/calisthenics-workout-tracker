@@ -2,8 +2,9 @@ import { TextInput, useCombobox, Combobox, CloseButton } from '@mantine/core';
 import { IoSearchOutline } from 'react-icons/io5';
 import { IoCloseOutline } from 'react-icons/io5';
 
-import { useStore } from '@cwt/state/store';
+// import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
+import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
@@ -14,16 +15,18 @@ export default function ExerciseSearchBar() {
   const appliedFilterSelections = useExercisesFilterStore(
     (state) => state.appliedFilterSelections,
   );
-  const appliedExerciseSearch = useStore(
+  const appliedExerciseSearch = useExercisesSearchStore(
     (state) => state.appliedExerciseSearch,
   );
-  const exerciseSearch = useStore((state) => state.exerciseSearch);
-  const search = useStore((state) => state.exerciseSearch);
+  const exerciseSearch = useExercisesSearchStore(
+    (state) => state.exerciseSearch,
+  );
+  // const search = useStore((state) => state.exerciseSearch);
   const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
   );
-  const setSearch = useStore((state) => state.setExerciseSearch);
-  const setAppliedExerciseSearch = useStore(
+  const setSearch = useExercisesSearchStore((state) => state.setExerciseSearch);
+  const setAppliedExerciseSearch = useExercisesSearchStore(
     (state) => state.setAppliedExerciseSearch,
   );
 
@@ -31,12 +34,14 @@ export default function ExerciseSearchBar() {
   const combobox = useCombobox();
 
   const shouldFilterOptions = !exercises.some(
-    (exercise) => exercise.name === search,
+    (exercise) => exercise.name === exerciseSearch,
   );
   const filteredOptions = shouldFilterOptions
     ? exercises
         .filter((exercise) =>
-          exercise.name.toLowerCase().includes(search.toLowerCase().trim()),
+          exercise.name
+            .toLowerCase()
+            .includes(exerciseSearch.toLowerCase().trim()),
         )
         .map((ex) => ex.name)
     : exercises.map((ex) => ex.name);
@@ -60,7 +65,7 @@ export default function ExerciseSearchBar() {
 
   const handleKeyDown = (e: HandleKeyDownEvent): void => {
     if (e.code === 'Enter') {
-      setAppliedExerciseSearch(search.trim());
+      setAppliedExerciseSearch(exerciseSearch.trim());
       refreshDisplayedExercises(
         appliedFilterSelections,
         appliedExerciseSearch,
@@ -79,9 +84,11 @@ export default function ExerciseSearchBar() {
   return (
     <Combobox
       onOptionSubmit={() => {
-        console.log(`onOptionSubmit: setAppliedExerciseSearch(${search})`);
+        console.log(
+          `onOptionSubmit: setAppliedExerciseSearch(${exerciseSearch})`,
+        );
         // TODO: When option is selected, set appliedExercise to that value
-        setAppliedExerciseSearch(search);
+        setAppliedExerciseSearch(exerciseSearch);
         refreshDisplayedExercises(
           appliedFilterSelections,
           appliedExerciseSearch,
@@ -96,7 +103,7 @@ export default function ExerciseSearchBar() {
           style={{ flex: 1 }}
           leftSection={<IoSearchOutline />}
           rightSection={
-            search && (
+            exerciseSearch && (
               <CloseButton
                 onClick={handleClearSearch}
                 icon={<IoCloseOutline />}
@@ -104,7 +111,7 @@ export default function ExerciseSearchBar() {
             )
           }
           placeholder="Search exercises"
-          value={search}
+          value={exerciseSearch}
           disabled={hasSearch}
           onChange={handleSearchOnChange}
           onKeyDown={handleKeyDown}
