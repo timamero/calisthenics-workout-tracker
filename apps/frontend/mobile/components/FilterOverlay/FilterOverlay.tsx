@@ -6,7 +6,7 @@ import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
-import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
+import { useFilterSelectors } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
@@ -31,7 +31,7 @@ export default function FilterOverlay({
     borderColor: theme.colors.orange1,
   };
 
-  const { hasFilters } = useFiltersAndSearchStatus();
+  const { hasFilters } = useFilterSelectors();
 
   const appliedFilterSelections = useExercisesFilterStore(
     (state) => state.appliedFilterSelections,
