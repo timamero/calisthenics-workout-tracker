@@ -2,9 +2,12 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
-import { useExercisesFilterStore } from '@cwt/state/stores';
-import { useExercisesSearchStore } from '@cwt/state/stores';
-import { useExerciseLibraryStore } from '@cwt/state/stores';
+import {
+  useExercisesFilterStore,
+  useExerciseLibraryStore,
+  useExercisesSearchStore,
+} from '@cwt/state/stores';
+
 import { useFilterSelectors } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 import { Text } from '../../customText';
