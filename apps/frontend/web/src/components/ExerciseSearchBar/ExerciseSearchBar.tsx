@@ -3,6 +3,7 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { IoCloseOutline } from 'react-icons/io5';
 
 import { useStore } from '@cwt/state/store';
+import { useExercisesFilterStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
 
@@ -10,7 +11,7 @@ export default function ExerciseSearchBar() {
   const exercises = useExerciseLibraryStore(
     (state) => state.displayedExercises,
   );
-  const appliedFilterSelections = useStore(
+  const appliedFilterSelections = useExercisesFilterStore(
     (state) => state.appliedFilterSelections,
   );
   const appliedExerciseSearch = useStore(
