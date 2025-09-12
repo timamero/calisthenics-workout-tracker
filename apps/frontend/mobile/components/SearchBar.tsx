@@ -23,9 +23,11 @@ const SearchBar = () => {
   const setAppliedExerciseSearch = useExercisesSearchStore(
     (state) => state.setAppliedExerciseSearch,
   );
+  const setSearch = useExercisesSearchStore((state) => state.setExerciseSearch);
 
   const handleClearSearch = () => {
     setAppliedExerciseSearch('');
+    setSearch('');
     refreshDisplayedExercises(
       useExercisesFilterStore.getState().appliedFilterSelections,
       useExercisesSearchStore.getState().appliedExerciseSearch,

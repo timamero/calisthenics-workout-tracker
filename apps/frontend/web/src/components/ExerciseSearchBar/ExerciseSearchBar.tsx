@@ -47,6 +47,7 @@ export default function ExerciseSearchBar() {
   const handleClearSearch = () => {
     console.log('clearing search');
     setAppliedExerciseSearch('');
+    setSearch('');
     refreshDisplayedExercises(
       useExercisesFilterStore.getState().appliedFilterSelections,
       useExercisesSearchStore.getState().appliedExerciseSearch,
