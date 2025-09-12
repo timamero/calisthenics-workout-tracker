@@ -28,7 +28,6 @@ const FilterCheckbox = memo(function FilterCheckbox({
   const toggleFilterSelection = useExercisesFilterStore(
     (state) => state.toggleFilterSelection,
   );
-  // console.log('render checkbox');
 
   const handleClick = () => {
     toggleFilterSelection({ keyName, selection });

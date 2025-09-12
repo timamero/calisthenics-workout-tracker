@@ -2,7 +2,6 @@ import { TextInput, useCombobox, Combobox, CloseButton } from '@mantine/core';
 import { IoSearchOutline } from 'react-icons/io5';
 import { IoCloseOutline } from 'react-icons/io5';
 
-// import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
@@ -12,16 +11,9 @@ export default function ExerciseSearchBar() {
   const exercises = useExerciseLibraryStore(
     (state) => state.displayedExercises,
   );
-  const appliedFilterSelections = useExercisesFilterStore(
-    (state) => state.appliedFilterSelections,
-  );
-  const appliedExerciseSearch = useExercisesSearchStore(
-    (state) => state.appliedExerciseSearch,
-  );
   const exerciseSearch = useExercisesSearchStore(
     (state) => state.exerciseSearch,
   );
-  // const search = useStore((state) => state.exerciseSearch);
   const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
   );
@@ -55,9 +47,9 @@ export default function ExerciseSearchBar() {
   const handleClearSearch = () => {
     setAppliedExerciseSearch('');
     refreshDisplayedExercises(
-      appliedFilterSelections,
-      appliedExerciseSearch,
-      exerciseSearch,
+      useExercisesFilterStore.getState().appliedFilterSelections,
+      useExercisesSearchStore.getState().appliedExerciseSearch,
+      useExercisesSearchStore.getState().exerciseSearch,
     );
   };
 
@@ -67,9 +59,9 @@ export default function ExerciseSearchBar() {
     if (e.code === 'Enter') {
       setAppliedExerciseSearch(exerciseSearch.trim());
       refreshDisplayedExercises(
-        appliedFilterSelections,
-        appliedExerciseSearch,
-        exerciseSearch,
+        useExercisesFilterStore.getState().appliedFilterSelections,
+        useExercisesSearchStore.getState().appliedExerciseSearch,
+        useExercisesSearchStore.getState().exerciseSearch,
       );
       combobox.closeDropdown();
     }
@@ -90,9 +82,9 @@ export default function ExerciseSearchBar() {
         // TODO: When option is selected, set appliedExercise to that value
         setAppliedExerciseSearch(exerciseSearch);
         refreshDisplayedExercises(
-          appliedFilterSelections,
-          appliedExerciseSearch,
-          exerciseSearch,
+          useExercisesFilterStore.getState().appliedFilterSelections,
+          useExercisesSearchStore.getState().appliedExerciseSearch,
+          useExercisesSearchStore.getState().exerciseSearch,
         );
         combobox.closeDropdown();
       }}

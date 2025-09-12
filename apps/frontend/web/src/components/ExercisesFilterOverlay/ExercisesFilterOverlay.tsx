@@ -1,6 +1,5 @@
 import { Group, Modal, Button, Stack } from '@mantine/core';
 
-// import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
@@ -30,15 +29,6 @@ export default function ExercisesFilterOverlay({
   const revertFilterCheckboxSelections = useExercisesFilterStore(
     (state) => state.revertFilterCheckboxSelections,
   );
-  const appliedFilterSelections = useExercisesFilterStore(
-    (state) => state.appliedFilterSelections,
-  );
-  const appliedExerciseSearch = useExercisesSearchStore(
-    (state) => state.appliedExerciseSearch,
-  );
-  const exerciseSearch = useExercisesSearchStore(
-    (state) => state.exerciseSearch,
-  );
   const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
   );
@@ -46,9 +36,9 @@ export default function ExercisesFilterOverlay({
   const handleApplyFiltersClick = () => {
     setAppliedFilterSelections();
     refreshDisplayedExercises(
-      appliedFilterSelections,
-      appliedExerciseSearch,
-      exerciseSearch,
+      useExercisesFilterStore.getState().appliedFilterSelections,
+      useExercisesSearchStore.getState().appliedExerciseSearch,
+      useExercisesSearchStore.getState().exerciseSearch,
     );
     handler.close();
   };
@@ -57,9 +47,9 @@ export default function ExercisesFilterOverlay({
     clearFilterCheckboxSelections();
     clearAppliedFilterCheckboxSelections();
     refreshDisplayedExercises(
-      appliedFilterSelections,
-      appliedExerciseSearch,
-      exerciseSearch,
+      useExercisesFilterStore.getState().appliedFilterSelections,
+      useExercisesSearchStore.getState().appliedExerciseSearch,
+      useExercisesSearchStore.getState().exerciseSearch,
     );
     handler.close();
   };
