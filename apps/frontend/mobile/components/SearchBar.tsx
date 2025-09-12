@@ -2,9 +2,11 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Searchbar, useTheme } from 'react-native-paper';
 
-import { useExercisesFilterStore } from '@cwt/state/stores';
-import { useExercisesSearchStore } from '@cwt/state/stores';
-import { useExerciseLibraryStore } from '@cwt/state/stores';
+import {
+  useExercisesFilterStore,
+  useExercisesSearchStore,
+  useExerciseLibraryStore,
+} from '@cwt/state/stores';
 
 import { CustomTheme } from '../theme';
 

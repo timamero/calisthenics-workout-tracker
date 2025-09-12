@@ -2,7 +2,7 @@ import { Paper, Stack, UnstyledButton } from '@mantine/core';
 import type { ReactNode } from 'react';
 
 interface CardButtonProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export default function CardButton({ children }: CardButtonProps) {
