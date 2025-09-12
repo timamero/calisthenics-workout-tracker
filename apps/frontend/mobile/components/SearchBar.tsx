@@ -2,8 +2,9 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Searchbar, useTheme } from 'react-native-paper';
 
-import { useStore } from '@cwt/state/store';
+// import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
+import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import { CustomTheme } from '../theme';
@@ -15,15 +16,17 @@ const SearchBar = () => {
   const appliedFilterSelections = useExercisesFilterStore(
     (state) => state.appliedFilterSelections,
   );
-  const appliedExerciseSearch = useStore(
+  const appliedExerciseSearch = useExercisesSearchStore(
     (state) => state.appliedExerciseSearch,
   );
-  const exerciseSearch = useStore((state) => state.exerciseSearch);
-  const search = useStore((state) => state.exerciseSearch);
+  const exerciseSearch = useExercisesSearchStore(
+    (state) => state.exerciseSearch,
+  );
+  // const search = useExercisesSearchStore((state) => state.exerciseSearch);
   const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
   );
-  const setAppliedExerciseSearch = useStore(
+  const setAppliedExerciseSearch = useExercisesSearchStore(
     (state) => state.setAppliedExerciseSearch,
   );
 
@@ -37,7 +40,7 @@ const SearchBar = () => {
   };
 
   const onChange = (text: string) => {
-    if (text.length < search.length) {
+    if (text.length < exerciseSearch.length) {
       handleClearSearch();
     }
     setAppliedExerciseSearch(text);
@@ -57,7 +60,7 @@ const SearchBar = () => {
       <Searchbar
         placeholder="Search"
         onChangeText={onChange}
-        value={search}
+        value={exerciseSearch}
         onClearIconPress={handleClearSearch}
         iconColor={theme.colors.light}
         placeholderTextColor={theme.colors.grey}
