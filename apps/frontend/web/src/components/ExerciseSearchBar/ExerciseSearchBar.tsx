@@ -45,6 +45,7 @@ export default function ExerciseSearchBar() {
   ));
 
   const handleClearSearch = () => {
+    console.log('clearing search');
     setAppliedExerciseSearch('');
     refreshDisplayedExercises(
       useExercisesFilterStore.getState().appliedFilterSelections,
@@ -73,6 +74,7 @@ export default function ExerciseSearchBar() {
     setSearch(event.currentTarget.value);
     combobox.openDropdown();
   };
+  console.log('exercisesSearch value: ', exerciseSearch);
   return (
     <Combobox
       onOptionSubmit={() => {
