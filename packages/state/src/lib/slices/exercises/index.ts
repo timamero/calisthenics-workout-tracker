@@ -1,3 +1,4 @@
-import { selectHasFilters, selectHasSearch } from "./exercisesSlice";
+import { selectHasFilters } from './exercisesFilterSlice';
+import { selectHasSearch } from './exercisesSearchSlice';
 
 export { selectHasFilters, selectHasSearch };
