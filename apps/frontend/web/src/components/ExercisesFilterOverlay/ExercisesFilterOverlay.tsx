@@ -4,7 +4,7 @@ import { Group, Modal, Button, Stack } from '@mantine/core';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
-import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
+import { useFilterSelectors } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 import FilterSelections from './FilterSelections';
 
@@ -17,7 +17,7 @@ export default function ExercisesFilterOverlay({
   opened,
   handler,
 }: ExercisesFilterOverlayProps) {
-  const { hasFilters } = useFiltersAndSearchStatus();
+  const { hasFilters } = useFilterSelectors();
   const clearFilterCheckboxSelections = useExercisesFilterStore(
     (state) => state.clearFilterCheckboxSelections,
   );

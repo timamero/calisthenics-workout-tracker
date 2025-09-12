@@ -6,7 +6,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
-import { useFiltersAndSearchStatus } from '@cwt/hooks/useFiltersAndSearchStatus';
+import { useSearchSelectors } from '@cwt/hooks/useFiltersAndSearchStatus';
 
 export default function ExerciseSearchBar() {
   const exercises = useExerciseLibraryStore(
@@ -30,7 +30,7 @@ export default function ExerciseSearchBar() {
     (state) => state.setAppliedExerciseSearch,
   );
 
-  const { hasSearch } = useFiltersAndSearchStatus();
+  const { hasSearch } = useSearchSelectors();
   const combobox = useCombobox();
 
   const shouldFilterOptions = !exercises.some(
