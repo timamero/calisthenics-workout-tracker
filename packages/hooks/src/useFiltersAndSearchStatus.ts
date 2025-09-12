@@ -1,7 +1,7 @@
-import { useShallow } from "zustand/shallow";
+import { useShallow } from 'zustand/shallow';
 
-import { useStore, StoreState } from "@cwt/state/store";
-import { selectHasFilters, selectHasSearch } from "@cwt/state/library";
+import { useStore, StoreState } from '@cwt/state/store';
+import { selectHasFilters, selectHasSearch } from '@cwt/state/exercises';
 
 export const useFiltersAndSearchStatus = () => {
   return useStore(
