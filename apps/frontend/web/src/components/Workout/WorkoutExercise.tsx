@@ -1,7 +1,7 @@
 import { Stack, Text, Button, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { useStore } from '@cwt/state/store';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { WorkoutExercise } from '@cwt/schema/workouts';
 
@@ -19,7 +19,9 @@ export default function WorkoutExercise({
 }: WorkoutExerciseProps) {
   const addSet = useWorkoutDraftStore((state) => state.addSet);
   const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
-  const getExerciseNameById = useStore((state) => state.getExerciseNameByID);
+  const getExerciseNameById = useExerciseLibraryStore(
+    (state) => state.getExerciseNameByID,
+  );
   const name = getExerciseNameById(workoutExercise.exercise_id);
 
   const [deleteExOverlayOpened, deleteExOverlayHandler] = useDisclosure(false);
