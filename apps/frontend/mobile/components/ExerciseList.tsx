@@ -1,6 +1,5 @@
 import { ScrollView } from 'react-native';
 
-import { useStore } from '@cwt/state/store';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import ExerciseCard from './ExerciseCard';

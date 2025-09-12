@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Checkbox, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
-import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import type {
   ExerciseAttributes,
