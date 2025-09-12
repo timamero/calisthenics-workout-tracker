@@ -10,7 +10,7 @@ import { supabase } from '../services/supabaseClient';
 import { useSupabaseAuth } from '@cwt/hooks/useSupabaseAuth';
 import { useAuthStore } from '@cwt/state/auth';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useStore } from '@cwt/state/store';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import { getExercises } from '../services/exercisesService';
 
@@ -23,13 +23,13 @@ function RootComponent() {
   const isWorkoutSavePending = useWorkoutDraftStore(
     (state) => state.isWorkoutSavePending,
   );
-  const setExercises = useStore((state) => state.setExercises);
+  const setExercises = useExerciseLibraryStore((state) => state.setExercises);
 
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
   const setSession = useAuthStore((state) => state.setSession);
   const setLoading = useAuthStore((state) => state.setLoading);
-  // console.log('Session:', supabaseSession);
+
   // Manage state to open and close menu
   const [opened, { toggle }] = useDisclosure();
 
