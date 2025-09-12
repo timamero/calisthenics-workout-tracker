@@ -40,6 +40,15 @@ export const createExerciseLibrarySlice: StateCreator<
     exerciseSearch,
   ) =>
     set((state) => {
+      console.log(
+        'refreshDisplayExercises - appliedFilterSelections: ',
+        appliedFilterSelections,
+      );
+      console.log(
+        'refreshDisplayExercises - appliedExerciseSearch: ',
+        appliedExerciseSearch,
+      );
+      console.log('refreshDisplayExercises - exerciseSearch: ', exerciseSearch);
       let result = state.masterExercises;
 
       if (appliedFilterSelections.length > 0) {
