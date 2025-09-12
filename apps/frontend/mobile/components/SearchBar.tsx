@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Searchbar, useTheme } from 'react-native-paper';
 
 import { useStore } from '@cwt/state/store';
+import { useExercisesFilterStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import { CustomTheme } from '../theme';
@@ -11,7 +12,7 @@ const SearchBar = () => {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles();
 
-  const appliedFilterSelections = useStore(
+  const appliedFilterSelections = useExercisesFilterStore(
     (state) => state.appliedFilterSelections,
   );
   const appliedExerciseSearch = useStore(
