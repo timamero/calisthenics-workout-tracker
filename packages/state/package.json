@@ -13,10 +13,6 @@
       "types": "./dist/counter.d.ts",
       "default": "./dist/counter.js"
     },
-    "./exercises": {
-      "types": "./dist/exercises.d.ts",
-      "default": "./dist/exercises.js"
-    },
     "./auth": {
       "types": "./dist/auth.d.ts",
       "default": "./dist/auth.js"
@@ -29,9 +25,9 @@
       "types": "./dist/lib/stores/index.d.ts",
       "default": "./dist/lib/stores/index.js"
     },
-    "./library": {
-      "types": "./dist/lib/slices/library/index.d.ts",
-      "default": "./dist/lib/slices/library/index.js"
+    "./exercises": {
+      "types": "./dist/lib/slices/exercises/index.d.ts",
+      "default": "./dist/lib/slices/exercises/index.js"
     }
   },
   "dependencies": {
