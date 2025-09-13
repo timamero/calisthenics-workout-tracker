@@ -2,9 +2,13 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Stack, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useWorkoutLibraryStore } from '@cwt/state/stores';
-import { useAuthStore } from '@cwt/state/auth';
+import {
+  useWorkoutDraftStore,
+  useWorkoutLibraryStore,
+  useAuthStore,
+} from '@cwt/state/stores';
+// import { useWorkoutLibraryStore } from '@cwt/state/stores';
+// import { useAuthStore } from '@cwt/state/auth';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
