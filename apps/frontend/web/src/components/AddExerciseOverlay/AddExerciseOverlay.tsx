@@ -1,7 +1,10 @@
 import { Group, Modal, Button, Stack, ScrollArea } from '@mantine/core';
 
-import { useStore } from '@cwt/state/store';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+// import { useStore } from '@cwt/state/store';
+import {
+  useWorkoutDraftStore,
+  useExerciseLibraryStore,
+} from '@cwt/state/stores';
 
 import ExercisesList from './ExercisesList';
 
@@ -21,7 +24,9 @@ export default function AddExerciseOverlay({
     (state) => state.setSelectedExerciseIDToAdd,
   );
   const addExercise = useWorkoutDraftStore((state) => state.addExercise);
-  const getExerciseById = useStore((state) => state.getExerciseByID);
+  const getExerciseById = useExerciseLibraryStore(
+    (state) => state.getExerciseByID,
+  );
 
   const handleAddExerciseClick = () => {
     addExercise(
