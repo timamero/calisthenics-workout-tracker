@@ -14,7 +14,8 @@ import OnboardingScreen from '../screens/OnboardingScreen';
 import OnboardingComplete from '../screens/OnboardingComplete';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { useAuthStore } from '@cwt/state/auth';
+// import { useAuthStore } from '@cwt/state/auth';
+import { useAuthStore } from '@cwt/state/stores';
 
 // App Navigator
 const MyTabs = createBottomTabNavigator({

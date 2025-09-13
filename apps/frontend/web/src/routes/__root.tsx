@@ -8,8 +8,8 @@ import { NavLink } from '@mantine/core';
 import { supabase } from '../services/supabaseClient';
 
 import { useSupabaseAuth } from '@cwt/hooks/useSupabaseAuth';
-import { useAuthStore } from '@cwt/state/auth';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+// import { useAuthStore } from '@cwt/state/auth';
+import { useWorkoutDraftStore, useAuthStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import { getExercises } from '../services/exercisesService';
