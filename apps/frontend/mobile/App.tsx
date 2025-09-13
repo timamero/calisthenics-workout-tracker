@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { PaperProvider, ActivityIndicator, Text } from 'react-native-paper';
-// import { Subscription } from '@supabase/supabase-js';
 
 import { useAuthStore } from '@cwt/state/auth';
-// import { Exercise } from '@cwt/schema/exerciseSchema';
-import { useStore } from '@cwt/state/store';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useSupabaseAuth } from '@cwt/hooks/useSupabaseAuth';
 
 import theme from './theme';
@@ -19,7 +17,7 @@ export default function App() {
 
   const setSession = useAuthStore((state) => state.setSession);
   const setLoading = useAuthStore((state) => state.setLoading);
-  const setExercises = useStore((state) => state.setExercises);
+  const setExercises = useExerciseLibraryStore((state) => state.setExercises);
 
   useSupabaseAuth(supabase, setSession, setLoading);
 
