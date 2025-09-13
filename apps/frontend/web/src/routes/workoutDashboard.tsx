@@ -1,9 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Group, ScrollArea, Text } from '@mantine/core';
 
-import { useAuthStore } from '@cwt/state/auth';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useWorkoutLibraryStore } from '@cwt/state/stores';
+// import { useAuthStore } from '@cwt/state/auth';
+import {
+  useWorkoutDraftStore,
+  useWorkoutLibraryStore,
+  useAuthStore,
+} from '@cwt/state/stores';
+// import { useWorkoutLibraryStore } from '@cwt/state/stores';
 
 import { getWorkoutBuilds } from '../services/workoutsService';
 
