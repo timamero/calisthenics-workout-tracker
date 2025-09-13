@@ -3,6 +3,7 @@ import { useWorkoutLibraryStore } from './workouts/workoutLibraryStore';
 import { useExerciseLibraryStore } from './exercises/exerciseLibraryStore';
 import { useExercisesFilterStore } from './exercises/exercisesFilterStore';
 import { useExercisesSearchStore } from './exercises/exercisesSearchStore';
+import { useAuthStore } from './authStore';
 
 export {
   useWorkoutDraftStore,
@@ -10,4 +11,5 @@ export {
   useExerciseLibraryStore,
   useExercisesFilterStore,
   useExercisesSearchStore,
+  useAuthStore,
 };
