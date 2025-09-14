@@ -1,9 +1,6 @@
 import { StateCreator } from 'zustand';
 
-import {
-  ExerciseResponse,
-  ExerciseFilterCheckbox,
-} from '@cwt/schema/exercises';
+import { ExerciseResponse, FilterCheckbox } from '@cwt/schema/exercises';
 
 import {
   filterExercises,
@@ -16,7 +13,7 @@ export interface ExerciseLibrarySlice {
   displayedExercises: ExerciseResponse[];
   setExercises: (exercises: ExerciseResponse[]) => void;
   refreshDisplayedExercises: (
-    appliedFilterSelections: ExerciseFilterCheckbox[],
+    appliedFilterSelections: FilterCheckbox[],
     appliedExerciseSearch: string,
     exerciseSearch: string,
   ) => void;

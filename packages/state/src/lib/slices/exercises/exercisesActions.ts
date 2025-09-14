@@ -1,12 +1,12 @@
 import {
   ExerciseResponse,
   Attributes,
-  ExerciseFilterCheckbox,
+  FilterCheckbox,
 } from '@cwt/schema/exercises';
 
 export function filterExercises(
   exercisesToFilter: ExerciseResponse[],
-  appliedFilters: ExerciseFilterCheckbox[],
+  appliedFilters: FilterCheckbox[],
 ) {
   const appliedFilterSelections = new Set(
     appliedFilters.map((f) => f.selection),
