@@ -5,10 +5,10 @@ import {
   EquipmentSchema,
   EmphasisSchema,
   DifficultySchema,
-} from './enums.schema';
+} from '../enums.schema';
 
 // Previously SelectionSchema
-export const ExerciseAttributesSchemaSuperseded = z.union([
+export const ExerciseAttributesSchema = z.union([
   MuscleSchema,
   EquipmentSchema,
   EmphasisSchema,
