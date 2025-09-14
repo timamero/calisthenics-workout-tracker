@@ -9,12 +9,12 @@ import {
   Stack,
   UnstyledButton,
 } from '@mantine/core';
-import { type Exercise } from '@cwt/schema/exercises';
+import { type ExerciseResponse } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
 interface ExerciseCardProps {
-  exercise: Exercise;
+  exercise: ExerciseResponse;
 }
 
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {
