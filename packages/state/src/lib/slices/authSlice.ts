@@ -4,14 +4,10 @@ import type { Session, User } from '@cwt/auth/types';
 
 export interface AuthSlice {
   session: Session | null;
-  // session: any;
   user: User | null;
-  // user: any;
   loading: boolean;
   setSession: (session: Session | null) => void;
-  // setSession: (session: any) => void;
   setUser: (user: User) => void;
-  // setUser: (user: any) => void;
   setLoading: (loading: boolean) => void;
 }
 

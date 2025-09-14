@@ -13,7 +13,7 @@ export async function getWorkoutBuilds(
   try {
     return await apiGetWorkoutBuilds(baseUrl, token);
   } catch {
-    console.log(
+    console.error(
       'Web: API not available, return sample workoutbuilds for development.',
     );
     return sampleWorkoutBuilds;

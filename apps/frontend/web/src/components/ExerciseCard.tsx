@@ -30,7 +30,6 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
 
   const handleExerciseClick = () => {
     if (exercise && setDetailExercise && detailHandlers) {
-      console.log('opened exercise');
       setDetailExercise(exercise);
       detailHandlers.open();
     }
