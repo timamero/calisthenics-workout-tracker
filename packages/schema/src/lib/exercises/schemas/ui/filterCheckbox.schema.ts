@@ -5,7 +5,7 @@ import {
   EquipmentSchema,
   MuscleSchema,
 } from '../enums.schema';
-import { ExerciseAttributesSchema } from './attributes.schema';
+import { AttributesSchema } from './attributes.schema';
 
 export const FilterKeyNameSchema = z.object({
   target_muscles: z.array(MuscleSchema),
@@ -18,6 +18,6 @@ export const FilterCheckboxKeySchema = FilterKeyNameSchema.keyof();
 
 export const FilterCheckboxSchema = z.object({
   keyName: FilterCheckboxKeySchema,
-  selection: ExerciseAttributesSchema,
+  selection: AttributesSchema,
   value: z.optional(z.boolean()),
 });
