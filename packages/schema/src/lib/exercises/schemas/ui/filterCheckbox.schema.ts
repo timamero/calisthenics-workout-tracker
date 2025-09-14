@@ -7,7 +7,7 @@ import {
 } from '../enums.schema';
 import { AttributesSchema } from './attributes.schema';
 
-export const FilterKeyNameSchema = z.object({
+const FilterKeyNameSchema = z.object({
   target_muscles: z.array(MuscleSchema),
   required_equipment: z.array(EquipmentSchema),
   emphasis: z.array(EmphasisSchema),
