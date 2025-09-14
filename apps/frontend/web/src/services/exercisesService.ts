@@ -8,7 +8,7 @@ export async function getExercises(token: string): Promise<Exercise[]> {
   try {
     return await apiGetExercises(baseUrl, token);
   } catch {
-    console.log(
+    console.error(
       'Web: API not available, return sample exercises for development.',
     );
     return sampleExercises;
