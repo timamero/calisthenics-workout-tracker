@@ -3,16 +3,13 @@ import { Checkbox, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
 import { useExercisesFilterStore } from '@cwt/state/stores';
-import type {
-  ExerciseAttributes,
-  ExerciseFilterKey,
-} from '@cwt/schema/exercises';
+import type { Attributes, ExerciseFilterKey } from '@cwt/schema/exercises';
 
 import { CustomTheme } from '../../theme';
 
 interface FilterCheckboxProps {
   keyName: ExerciseFilterKey;
-  selection: ExerciseAttributes;
+  selection: Attributes;
 }
 
 export default function FilterCheckbox({

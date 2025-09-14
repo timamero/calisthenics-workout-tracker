@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Card, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
-import { ExerciseResponse, ExerciseAttributes } from '@cwt/schema/exercises';
+import { ExerciseResponse, Attributes } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import { CustomTheme } from '../theme';
@@ -86,7 +86,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
                   borderColor={theme.colors.light}
                   key={i}
                 >
-                  {equipment as ExerciseAttributes}
+                  {equipment as Attributes}
                 </Pill>
               ))
             )}
