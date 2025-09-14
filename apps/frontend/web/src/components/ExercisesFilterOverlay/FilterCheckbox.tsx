@@ -4,13 +4,13 @@ import { Text, UnstyledButton, Checkbox } from '@mantine/core';
 import { type Attributes } from '@cwt/schema/exercises';
 // import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
-import type { ExerciseFilterKey } from '@cwt/schema/exercises';
+import type { FilterCheckboxKey } from '@cwt/schema/exercises';
 // import { type FilterGroup } from '@cwt/state/types';
 
 import classes from './FilterCheckbox.module.css';
 
 interface FilterCheckboxProps {
-  keyName: ExerciseFilterKey;
+  keyName: FilterCheckboxKey;
   selection: Attributes;
 }
 
