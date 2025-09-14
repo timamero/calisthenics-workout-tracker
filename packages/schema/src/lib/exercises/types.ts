@@ -2,7 +2,6 @@ import { z } from 'zod';
 
 import {
   ExerciseAttributesSchema,
-  ExerciseSchema,
   ExerciseResponseSchema,
   MuscleSchema,
   EquipmentSchema,
@@ -20,7 +19,6 @@ export type Emphasis = z.infer<typeof EmphasisSchema>;
 export type Difficulty = z.infer<typeof DifficultySchema>;
 export type Tracking = z.infer<typeof TrackingSchema>;
 export type ExerciseAttributes = z.infer<typeof ExerciseAttributesSchema>; // Prevously Selection
-export type Exercise = z.infer<typeof ExerciseSchema>;
 export type ExerciseResponse = z.infer<typeof ExerciseResponseSchema>;
 export type ExerciseFilter = z.infer<typeof ExerciseFilterSchema>;
 export type ExerciseFilterKey = z.infer<typeof ExerciseFilterKeySchema>;
