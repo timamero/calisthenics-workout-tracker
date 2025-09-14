@@ -1,11 +1,17 @@
 import { StateCreator } from 'zustand';
 
+import type { Session, User } from '@cwt/auth/types';
+
 export interface AuthSlice {
-  session: any; // Replace 'any' with SupabaseSession type if available
-  user: any; // Replace 'any' with SupabaseUser type if available
+  session: Session | null;
+  // session: any;
+  user: User | null;
+  // user: any;
   loading: boolean;
-  setSession: (session: any) => void;
-  setUser: (user: any) => void;
+  setSession: (session: Session | null) => void;
+  // setSession: (session: any) => void;
+  setUser: (user: User) => void;
+  // setUser: (user: any) => void;
   setLoading: (loading: boolean) => void;
 }
 

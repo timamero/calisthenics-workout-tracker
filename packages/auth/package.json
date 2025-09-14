@@ -32,6 +32,10 @@
     "./user": {
       "types": "./dist/user.d.ts",
       "default": "./dist/user.js"
+    },
+    "./types": {
+      "types": "./dist/supabaseTypes.d.ts",
+      "default": "./dist/supabaseTypes.js"
     }
   },
   "devDependencies": {
