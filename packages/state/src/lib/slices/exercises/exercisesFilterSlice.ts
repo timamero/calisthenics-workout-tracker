@@ -1,7 +1,7 @@
 import { StateCreator } from 'zustand';
 
 import { Constants } from '@cwt/schema/common';
-import { ExerciseFilterCheckbox } from '@cwt/schema/exercises';
+import { FilterCheckbox } from '@cwt/schema/exercises';
 import { FilterCheckboxKeySchema } from '@cwt/schema/exercises/schemas';
 
 import {
@@ -29,7 +29,7 @@ const exerciseAttributes = [
     attributes: Constants.public.Enums.difficulty_type,
   },
 ];
-const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] =
+const initialFilterCheckboxSelections: FilterCheckbox[] =
   exerciseAttributes.flatMap((category) =>
     category.attributes.map((attribute) => ({
       keyName: category.keyName,
@@ -39,9 +39,9 @@ const initialFilterCheckboxSelections: ExerciseFilterCheckbox[] =
   );
 
 export interface ExercisesFilterSlice {
-  filterCheckboxSelections: ExerciseFilterCheckbox[]; // List of all filters, this state changes when user toggles filter
-  appliedFilterSelections: ExerciseFilterCheckbox[]; // List of the filters that are applied and actively filtering the exercises
-  toggleFilterSelection: (filterCheckbox: ExerciseFilterCheckbox) => void;
+  filterCheckboxSelections: FilterCheckbox[]; // List of all filters, this state changes when user toggles filter
+  appliedFilterSelections: FilterCheckbox[]; // List of the filters that are applied and actively filtering the exercises
+  toggleFilterSelection: (filterCheckbox: FilterCheckbox) => void;
   setAppliedFilterSelections: () => void;
   clearFilterCheckboxSelections: () => void;
   clearAppliedFilterCheckboxSelections: () => void;
@@ -92,7 +92,7 @@ export const createExercisesFilterSlice: StateCreator<
     // When user updates filters, but then cancels the update, revert back to the last state when filters where applied
     set((state) => {
       const appliedSelectionAttributes = state.appliedFilterSelections.map(
-        (obj: ExerciseFilterCheckbox) => obj.selection,
+        (obj: FilterCheckbox) => obj.selection,
       );
       const revertedFilterSelections = revertFilterSelections(
         state.filterCheckboxSelections,
