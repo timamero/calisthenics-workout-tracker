@@ -8,7 +8,7 @@ import {
 } from '../enums.schema';
 
 // Previously SelectionSchema
-export const ExerciseAttributesSchema = z.union([
+export const AttributesSchema = z.union([
   MuscleSchema,
   EquipmentSchema,
   EmphasisSchema,
