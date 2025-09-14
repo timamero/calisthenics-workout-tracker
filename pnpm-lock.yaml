@@ -318,6 +318,9 @@ importers:
 
   packages/state:
     dependencies:
+      '@cwt/auth':
+        specifier: workspace:*
+        version: link:../auth
       '@cwt/schema':
         specifier: workspace:*
         version: link:../schema
