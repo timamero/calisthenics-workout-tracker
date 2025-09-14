@@ -4,20 +4,20 @@ import {
   EmphasisSchema,
   EquipmentSchema,
   MuscleSchema,
-} from './enums.schema';
-import { ExerciseAttributesSchemaSuperseded as ExerciseAttributesSchema } from './exerciseAttributes.schema';
+} from '../enums.schema';
+import { ExerciseAttributesSchema } from './attributes.schema';
 
-export const ExerciseFilterSchema = z.object({
+export const FilterKeyNameSchema = z.object({
   target_muscles: z.array(MuscleSchema),
   required_equipment: z.array(EquipmentSchema),
   emphasis: z.array(EmphasisSchema),
   difficulty: z.array(DifficultySchema),
 });
 
-export const ExerciseFilterKeySchema = ExerciseFilterSchema.keyof();
+export const FilterCheckboxKeySchema = FilterKeyNameSchema.keyof();
 
-export const ExerciseFilterCheckboxSchema = z.object({
-  keyName: ExerciseFilterKeySchema,
+export const FilterCheckboxSchema = z.object({
+  keyName: FilterCheckboxKeySchema,
   selection: ExerciseAttributesSchema,
   value: z.optional(z.boolean()),
 });
