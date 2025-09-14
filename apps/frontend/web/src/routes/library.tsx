@@ -4,7 +4,7 @@ import { Title, Stack, Group, ActionIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IoFilterOutline } from 'react-icons/io5';
 
-import type { Exercise } from '@cwt/schema/exercises';
+import type { ExerciseResponse } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import ExercisesList from '../components/ExercisesList';
@@ -17,7 +17,9 @@ export const Route = createFileRoute('/library')({
 });
 
 function LibraryView() {
-  const [exerciseDetail, setExerciseDetail] = useState<Exercise | null>(null);
+  const [exerciseDetail, setExerciseDetail] = useState<ExerciseResponse | null>(
+    null,
+  );
 
   const [filterOpened, filterHandler] = useDisclosure(false);
   const [detailOpened, detailHandlers] = useDisclosure(false);

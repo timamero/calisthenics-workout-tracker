@@ -1,6 +1,6 @@
-import { Exercise } from "@cwt/schema/exercises";
+import { ExerciseResponse } from "@cwt/schema/exercises";
 
-export const sampleExercises: Exercise[] = [
+export const sampleExercises: ExerciseResponse[] = [
   {
     id: 1,
     name: "Standard Push-Up",
