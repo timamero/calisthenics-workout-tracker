@@ -13,10 +13,6 @@
       "types": "./dist/counter.d.ts",
       "default": "./dist/counter.js"
     },
-    "./auth": {
-      "types": "./dist/auth.d.ts",
-      "default": "./dist/auth.js"
-    },
     "./stores": {
       "types": "./dist/lib/stores/index.d.ts",
       "default": "./dist/lib/stores/index.js"

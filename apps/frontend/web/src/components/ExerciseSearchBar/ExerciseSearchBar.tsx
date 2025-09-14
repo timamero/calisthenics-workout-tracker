@@ -74,14 +74,9 @@ export default function ExerciseSearchBar() {
     setSearch(event.currentTarget.value);
     combobox.openDropdown();
   };
-  console.log('exercisesSearch value: ', exerciseSearch);
   return (
     <Combobox
       onOptionSubmit={() => {
-        console.log(
-          `onOptionSubmit: setAppliedExerciseSearch(${exerciseSearch})`,
-        );
-        // TODO: When option is selected, set appliedExercise to that value
         setAppliedExerciseSearch(exerciseSearch);
         refreshDisplayedExercises(
           useExercisesFilterStore.getState().appliedFilterSelections,
