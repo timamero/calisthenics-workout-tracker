@@ -7,7 +7,7 @@ import {
 } from './enums.schema';
 import { ExerciseAttributesSchemaSuperseded as ExerciseAttributesSchema } from './exerciseAttributes.schema';
 
-export const ExerciseFilterSchema = z.object({
+const ExerciseFilterSchema = z.object({
   target_muscles: z.array(MuscleSchema),
   required_equipment: z.array(EquipmentSchema),
   emphasis: z.array(EmphasisSchema),
