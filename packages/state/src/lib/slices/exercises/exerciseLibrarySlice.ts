@@ -1,6 +1,9 @@
 import { StateCreator } from 'zustand';
 
-import { Exercise, ExerciseFilterCheckbox } from '@cwt/schema/exercises';
+import {
+  ExerciseResponse,
+  ExerciseFilterCheckbox,
+} from '@cwt/schema/exercises';
 
 import {
   filterExercises,
@@ -9,15 +12,15 @@ import {
 } from './exercisesActions';
 
 export interface ExerciseLibrarySlice {
-  masterExercises: Exercise[];
-  displayedExercises: Exercise[];
-  setExercises: (exercises: Exercise[]) => void;
+  masterExercises: ExerciseResponse[];
+  displayedExercises: ExerciseResponse[];
+  setExercises: (exercises: ExerciseResponse[]) => void;
   refreshDisplayedExercises: (
     appliedFilterSelections: ExerciseFilterCheckbox[],
     appliedExerciseSearch: string,
     exerciseSearch: string,
   ) => void;
-  getExerciseByID: (id: number) => Exercise;
+  getExerciseByID: (id: number) => ExerciseResponse;
   getExerciseNameByID: (id: number) => string;
 }
 
@@ -55,7 +58,7 @@ export const createExerciseLibrarySlice: StateCreator<
   getExerciseByID: (id) => {
     return get().masterExercises.find(
       (exercise) => exercise.id === id,
-    ) as Exercise;
+    ) as ExerciseResponse;
   },
   getExerciseNameByID: (id) => {
     return get().masterExercises.find((exercise) => exercise.id === id)

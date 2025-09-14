@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Card, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
-import { Exercise, ExerciseAttributes } from '@cwt/schema/exercises';
+import { ExerciseResponse, ExerciseAttributes } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import { CustomTheme } from '../theme';
@@ -11,7 +11,7 @@ import { Text } from '../customText';
 import Pill from './Pill';
 
 interface ExerciseCardProps {
-  exercise: Exercise;
+  exercise: ExerciseResponse;
 }
 
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {

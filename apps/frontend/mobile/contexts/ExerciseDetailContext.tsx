@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { Exercise } from '@cwt/schema/exercises';
+import { ExerciseResponse } from '@cwt/schema/exercises';
 
 interface ExerciseDetailContextType {
-  exercise: Exercise | null;
-  setExercise: React.Dispatch<React.SetStateAction<Exercise | null>>;
+  exercise: ExerciseResponse | null;
+  setExercise: React.Dispatch<React.SetStateAction<ExerciseResponse | null>>;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   showModal: () => void;

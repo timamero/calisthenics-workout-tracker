@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { type UseDisclosureHandlers } from '@mantine/hooks';
 
-import type { Exercise } from '@cwt/schema/exercises';
+import type { ExerciseResponse } from '@cwt/schema/exercises';
 
 interface ExerciseDetailContextType {
-  exercise: Exercise | null;
-  setExercise: React.Dispatch<React.SetStateAction<Exercise | null>>;
+  exercise: ExerciseResponse | null;
+  setExercise: React.Dispatch<React.SetStateAction<ExerciseResponse | null>>;
   opened: boolean;
   handlers: UseDisclosureHandlers;
 }

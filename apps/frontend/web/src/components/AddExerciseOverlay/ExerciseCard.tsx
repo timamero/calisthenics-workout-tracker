@@ -7,12 +7,12 @@ import {
   Text,
   Badge,
 } from '@mantine/core';
-import { type Exercise } from '@cwt/schema/exercises';
+import { type ExerciseResponse } from '@cwt/schema/exercises';
 
 import classes from './ExerciseCard.module.css';
 
 interface ExerciseCardProps {
-  exercise: Exercise;
+  exercise: ExerciseResponse;
   isSelected: 'true' | 'false';
   onExerciseClick: (e: React.MouseEvent<HTMLElement>) => void;
 }
