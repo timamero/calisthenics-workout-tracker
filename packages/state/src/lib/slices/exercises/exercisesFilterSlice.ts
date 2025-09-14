@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 
 import { Constants } from '@cwt/schema/common';
 import { ExerciseFilterCheckbox } from '@cwt/schema/exercises';
-import { ExerciseFilterKeySchema } from '@cwt/schema/exercises/schemas';
+import { FilterCheckboxKeySchema } from '@cwt/schema/exercises/schemas';
 
 import {
   clearSelections,
@@ -13,19 +13,19 @@ import {
 
 const exerciseAttributes = [
   {
-    keyName: ExerciseFilterKeySchema.enum.target_muscles,
+    keyName: FilterCheckboxKeySchema.enum.target_muscles,
     attributes: Constants.public.Enums.muscles,
   },
   {
-    keyName: ExerciseFilterKeySchema.enum.required_equipment,
+    keyName: FilterCheckboxKeySchema.enum.required_equipment,
     attributes: Constants.public.Enums.equipment,
   },
   {
-    keyName: ExerciseFilterKeySchema.enum.emphasis,
+    keyName: FilterCheckboxKeySchema.enum.emphasis,
     attributes: Constants.public.Enums.emphasis_type,
   },
   {
-    keyName: ExerciseFilterKeySchema.enum.difficulty,
+    keyName: FilterCheckboxKeySchema.enum.difficulty,
     attributes: Constants.public.Enums.difficulty_type,
   },
 ];

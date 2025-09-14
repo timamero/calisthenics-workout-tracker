@@ -5,7 +5,7 @@ import { useShallow } from 'zustand/shallow';
 // import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 // import { type FilterGroup } from '@cwt/state/types';
-import type { ExerciseFilterKey } from '@cwt/schema/exercises';
+import type { FilterCheckboxKey } from '@cwt/schema/exercises';
 import type { Attributes } from '@cwt/schema/exercises';
 
 import FilterCheckbox from './FilterCheckbox';
@@ -14,7 +14,7 @@ const Selections = memo(function Selections({
   keyName,
   selections,
 }: {
-  keyName: ExerciseFilterKey;
+  keyName: FilterCheckboxKey;
   selections: Attributes[];
 }) {
   return (
