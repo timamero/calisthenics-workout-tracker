@@ -5,10 +5,7 @@ import { useShallow } from 'zustand/shallow';
 
 import { useExercisesFilterStore } from '@cwt/state/stores';
 
-import type {
-  ExerciseAttributes,
-  ExerciseFilterKey,
-} from '@cwt/schema/exercises';
+import type { Attributes, ExerciseFilterKey } from '@cwt/schema/exercises';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
@@ -20,7 +17,7 @@ const Selections = React.memo(function Selections({
   selections,
 }: {
   keyName: ExerciseFilterKey;
-  selections: ExerciseAttributes[];
+  selections: Attributes[];
 }) {
   return (
     <>

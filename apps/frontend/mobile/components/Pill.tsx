@@ -1,7 +1,7 @@
 import { Text, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
-import { ExerciseAttributes } from '@cwt/schema/exercises';
+import { Attributes } from '@cwt/schema/exercises';
 
 import { CustomTheme } from '../theme';
 
@@ -9,7 +9,7 @@ interface PillProps {
   textColor: string;
   backgroundColor: string;
   borderColor?: string;
-  children: ExerciseAttributes | '---';
+  children: Attributes | '---';
 }
 
 export default function Pill({
