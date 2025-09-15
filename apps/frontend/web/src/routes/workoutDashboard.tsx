@@ -1,13 +1,12 @@
+import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Group, ScrollArea, Text } from '@mantine/core';
 
-// import { useAuthStore } from '@cwt/state/auth';
 import {
   useWorkoutDraftStore,
   useWorkoutLibraryStore,
   useAuthStore,
 } from '@cwt/state/stores';
-// import { useWorkoutLibraryStore } from '@cwt/state/stores';
 
 import { getWorkoutBuilds } from '../services/workoutsService';
 
@@ -26,7 +25,6 @@ export const Route = createFileRoute('/workoutDashboard')({
       const workoutBuilds = await getWorkoutBuilds(
         supabaseSession.access_token,
       );
-      useWorkoutLibraryStore.getState().setWorkouts([], workoutBuilds);
       return workoutBuilds;
     }
     return [];
@@ -36,6 +34,13 @@ export const Route = createFileRoute('/workoutDashboard')({
 
 function WorkoutDashboardView() {
   const workoutBuilds = Route.useLoaderData();
+
+  const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
+
+  // On initial load, set the workout builds in the store
+  useEffect(() => {
+    setWorkouts([], workoutBuilds);
+  }, [setWorkouts, workoutBuilds]);
 
   const initializeWorkout = useWorkoutDraftStore(
     (state) => state.initializeWorkout,
