@@ -13,7 +13,7 @@ import {
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
 import Workout from '../components/Workout';
-import WorkoutTitle from '../components/Workout/WorkoutTitle';
+import WorkoutTitleContainer from '../components/Workout/WorkoutTitleContainer';
 import { postWorkoutBuild } from '../services/workoutsService';
 
 export const Route = createFileRoute('/workout')({
@@ -70,7 +70,7 @@ function WorkoutView() {
 
   return (
     <Stack gap="xl" align="center">
-      <WorkoutTitle />
+      <WorkoutTitleContainer />
       <Stack gap="xl" align="center">
         <Workout />
         <Stack justify="center">
