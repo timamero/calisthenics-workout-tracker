@@ -38,12 +38,7 @@ interface WorkoutDraftAction {
   deleteSet: (exerciseIndex: number) => void;
   updateField: (
     exerciseIndex: number,
-    updatedField: {
-      reps?: number | undefined;
-      weight?: number | undefined;
-      time?: string | undefined;
-      rest?: string | undefined;
-    },
+    updatedField: Partial<SetFields>,
   ) => void;
   setWorkoutToSave: () => void;
   resetWorkout: () => void;
