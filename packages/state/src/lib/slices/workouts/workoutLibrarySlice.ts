@@ -11,11 +11,11 @@ import type { Mode } from './workoutDraftSlice';
 
 export interface WorkoutLibrarySlice {
   masterWorkoutLogs: WorkoutLog[];
-  masterWorkoutBuilds: WorkoutBuildRequest[] | WorkoutBuildResponse[];
-  displayedWorkoutBuilds: WorkoutBuildRequest[] | WorkoutBuildResponse[];
+  masterWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
+  displayedWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
   setWorkouts: (
     logs: WorkoutLog[],
-    builds: WorkoutBuildRequest[] | WorkoutBuildResponse[],
+    builds: Array<WorkoutBuildRequest | WorkoutBuildResponse>,
   ) => void;
   addWorkout: (workout: WorkoutBuildRequest, mode: Mode) => void;
   completeWorkout: (workout: WorkoutBuildRequest, mode: Mode) => void;
