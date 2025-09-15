@@ -7,8 +7,7 @@ import {
   useWorkoutLibraryStore,
   useAuthStore,
 } from '@cwt/state/stores';
-// import { useWorkoutLibraryStore } from '@cwt/state/stores';
-// import { useAuthStore } from '@cwt/state/auth';
+import { useWorkoutSave } from '@cwt/hooks';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
@@ -28,17 +27,20 @@ function WorkoutView() {
     useDisclosure(false);
 
   const mode = useWorkoutDraftStore((state) => state.mode);
-  const setWorkoutToSave = useWorkoutDraftStore(
-    (state) => state.setWorkoutToSave,
-  );
+  // const setWorkoutToSave = useWorkoutDraftStore(
+  //   (state) => state.setWorkoutToSave,
+  // );
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
     (state) => state.completeWorkout,
   );
   const supabaseSession = useAuthStore((state) => state.session);
 
+  const { setWorkoutToSaveWithUser } = useWorkoutSave();
+
   const onSaveWorkoutClick = async () => {
-    setWorkoutToSave();
+    // setWorkoutToSave();
+    setWorkoutToSaveWithUser();
     const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
     if (!supabaseSession || !workoutToSave) {
       console.error('Session not found or workout data invalid');
