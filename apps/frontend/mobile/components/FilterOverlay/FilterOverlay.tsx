@@ -8,7 +8,7 @@ import {
   useExercisesSearchStore,
 } from '@cwt/state/stores';
 
-import { useFilterSelectors } from '@cwt/hooks/useFiltersAndSearchStatus';
+import { useFilterSelectors } from '@cwt/hooks';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';

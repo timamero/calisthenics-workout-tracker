@@ -4,7 +4,7 @@ import { PaperProvider, ActivityIndicator, Text } from 'react-native-paper';
 
 // import { useAuthStore } from '@cwt/state/auth';
 import { useExerciseLibraryStore, useAuthStore } from '@cwt/state/stores';
-import { useSupabaseAuth } from '@cwt/hooks/useSupabaseAuth';
+import { useSupabaseAuth } from '@cwt/hooks';
 
 import theme from './theme';
 import { supabase } from './services/supabaseClient';

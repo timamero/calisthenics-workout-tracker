@@ -9,13 +9,9 @@
     "build": "tsc"
   },
   "exports": {
-    "./useSupabaseAuth": {
-      "types": "./dist/useSupabaseAuth.d.ts",
-      "default": "./dist/useSupabaseAuth.js"
-    },
-    "./useFiltersAndSearchStatus": {
-      "types": "./dist/useFiltersAndSearchStatus.d.ts",
-      "default": "./dist/useFiltersAndSearchStatus.js"
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "default": "./dist/lib/index.js"
     }
   },
   "dependencies": {
