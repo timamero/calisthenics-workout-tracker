@@ -3,4 +3,11 @@ import {
   useSearchSelectors,
 } from "./useFiltersAndSearchStatus";
 import { useSupabaseAuth } from "./useSupabaseAuth";
-export { useFilterSelectors, useSearchSelectors, useSupabaseAuth };
+import { useWorkoutSave } from "./useWorkoutSave";
+
+export {
+  useFilterSelectors,
+  useSearchSelectors,
+  useSupabaseAuth,
+  useWorkoutSave,
+};
