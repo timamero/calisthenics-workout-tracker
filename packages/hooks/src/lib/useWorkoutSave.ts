@@ -9,7 +9,7 @@ export function useWorkoutSave() {
 
   // Wrap the original setWorkoutToSave to inject user_id
   const setWorkoutToSaveWithUser = () => {
-    setWorkoutToSave();
+    setWorkoutToSave(); // Create initializeWorkoutToSave and call here
     const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
     if (workoutToSave && user?.id) {
       workoutToSave.user_id = user.id;
