@@ -3,7 +3,7 @@ import { Group, Modal, Button, Stack } from '@mantine/core';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
-import { useFilterSelectors } from '@cwt/hooks/useFiltersAndSearchStatus';
+import { useFilterSelectors } from '@cwt/hooks';
 
 import FilterSelections from './FilterSelections';
 
