@@ -80,7 +80,10 @@ const MyTabs = createBottomTabNavigator({
         },
       },
     },
-    WorkoutDashboard: WorkoutStack,
+    WorkoutDashboard: {
+      screen: WorkoutStack,
+      options: { headerShown: false },
+    },
     // WorkoutDashboard: {
     //   screen: WorkoutStack,
     //   options: {
