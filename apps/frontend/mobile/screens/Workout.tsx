@@ -9,7 +9,10 @@ export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
-  navigation.setOptions({ title: 'Workout Title Here' });
+  navigation.setOptions({
+    title: 'Workout Title Here',
+    headerLeft: () => null,
+  });
   return (
     <View
       style={{
