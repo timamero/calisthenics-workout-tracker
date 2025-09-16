@@ -8,7 +8,7 @@ import { useSupabaseAuth } from '@cwt/hooks';
 import theme from './theme';
 import { supabase } from './services/supabaseClient';
 import Navigation from './navigation';
-import { getExercises } from './services/exerciseService';
+import { getExercises } from './services/exercisesService';
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
