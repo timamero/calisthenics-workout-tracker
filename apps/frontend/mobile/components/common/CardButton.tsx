@@ -3,7 +3,6 @@ import { Card, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
 import { CustomTheme } from '../../theme';
-import { Text } from '../../customText';
 
 interface CardButtonProps {
   children: ReactNode;
@@ -16,11 +15,7 @@ export default function CardButton({ children }: CardButtonProps) {
   return (
     <Card style={styles.card} onPress={() => console.log('clicked on card')}>
       <Card.Content style={styles.cardContent}>
-        <View style={styles.titleContainer}>
-          <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
-            {children}
-          </Text>
-        </View>
+        <View style={styles.titleContainer}>{children}</View>
       </Card.Content>
     </Card>
   );

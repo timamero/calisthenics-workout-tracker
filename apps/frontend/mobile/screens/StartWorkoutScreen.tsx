@@ -18,9 +18,9 @@ export default function StartWorkoutScreen() {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
     return (
       <CardButton key={i}>
-        {/* <Title order={3} size="h5"> */}
-        {workoutTitle}
-        {/* </Title> */}
+        <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
+          {workoutTitle}
+        </Text>
       </CardButton>
     );
   });
