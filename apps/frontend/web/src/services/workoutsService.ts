@@ -15,7 +15,7 @@ export async function getWorkoutBuilds(
     console.log('Web: Local environment, return sample workout builds.');
     return sampleWorkoutBuilds;
   }
-  return await apiGetWorkoutBuilds(baseUrl, token);
+  return apiGetWorkoutBuilds(baseUrl, token);
 }
 
 export async function postWorkoutBuild(
@@ -26,5 +26,5 @@ export async function postWorkoutBuild(
     console.log('Web: Local environment, return workout build body.');
     return JSON.parse(body as string);
   }
-  return await apiPostWorkoutBuild(baseUrl, token, body);
+  return apiPostWorkoutBuild(baseUrl, token, body);
 }
