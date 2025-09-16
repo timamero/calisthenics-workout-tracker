@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -7,12 +8,14 @@ import { Text } from '../customText';
 
 export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;
-  // const navigation = useNavigation<any>();
+  const navigation = useNavigation<any>();
 
-  // navigation.setOptions({
-  //   title: 'Workout Title Here',
-  //   headerLeft: () => null,
-  // });
+  React.useEffect(() => {
+    navigation.setOptions({
+      title: 'Workout Title Here',
+    });
+  }, [navigation]);
+
   return (
     <View
       style={{

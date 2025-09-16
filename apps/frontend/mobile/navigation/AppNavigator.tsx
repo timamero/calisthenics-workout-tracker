@@ -135,6 +135,7 @@ const RootStack = createNativeStackNavigator({
             headerTitleStyle: {
               color: 'rgb(255 244 230)',
             },
+            headerTintColor: 'white',
           },
         },
       },
