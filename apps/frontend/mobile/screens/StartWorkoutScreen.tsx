@@ -6,6 +6,7 @@ import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 import CardButton from '../components/common/CardButton';
+import LargeButton from '../components/common/LargeButton';
 
 export default function StartWorkoutScreen() {
   const theme = useTheme() as CustomTheme;
@@ -37,6 +38,10 @@ export default function StartWorkoutScreen() {
       <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
         Create or Begin A Workout
       </Text>
+
+      <LargeButton onButtonClick={() => console.log('navigate to workout')}>
+        Build New Workout
+      </LargeButton>
 
       <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
         Start from a template
