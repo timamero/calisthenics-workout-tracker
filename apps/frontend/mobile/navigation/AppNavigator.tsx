@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { createStaticNavigation } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  getFocusedRouteNameFromRoute,
+} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -39,35 +42,42 @@ const WorkoutStack = createStackNavigator({
 
 // App Navigator
 const MyTabs = createBottomTabNavigator({
-  screenOptions: ({ route }) => ({
-    tabBarIcon: ({ focused, color, size }) => {
-      let iconName;
+  screenOptions: ({ route }) => {
+    const routeName = getFocusedRouteNameFromRoute(route);
+    const hideBottomTabBar = routeName === 'Workout';
 
-      if (route.name === 'Home') {
-        iconName = focused ? 'home' : 'home-outline';
-      } else if (route.name === 'About') {
-        iconName = focused
-          ? 'information-circle'
-          : 'information-circle-outline';
-      } else if (route.name === 'Library') {
-        iconName = focused ? 'library' : 'library-outline';
-      } else if (route.name === 'WorkoutDashboard') {
-        iconName = focused ? 'fitness' : 'fitness-outline';
-      } else if (route.name === 'History') {
-        iconName = focused ? 'file-tray-full' : 'file-tray-outline';
-      } else if (route.name === 'Settings') {
-        iconName = focused ? 'settings' : 'settings-outline';
-      } else {
-        iconName = 'brush';
-      }
+    return {
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
 
-      // You can return any component that you like here!
-      // @ts-ignore
-      return <Ionicons name={iconName} size={size} color={color} />;
-    },
-    tabBarActiveTintColor: 'tomato',
-    tabBarInactiveTintColor: 'gray',
-  }),
+        if (route.name === 'Home') {
+          iconName = focused ? 'home' : 'home-outline';
+        } else if (route.name === 'About') {
+          iconName = focused
+            ? 'information-circle'
+            : 'information-circle-outline';
+        } else if (route.name === 'Library') {
+          iconName = focused ? 'library' : 'library-outline';
+        } else if (route.name === 'WorkoutDashboard') {
+          iconName = focused ? 'fitness' : 'fitness-outline';
+        } else if (route.name === 'History') {
+          iconName = focused ? 'file-tray-full' : 'file-tray-outline';
+        } else if (route.name === 'Settings') {
+          iconName = focused ? 'settings' : 'settings-outline';
+        } else {
+          iconName = 'brush';
+        }
+
+        // You can return any component that you like here!
+        // @ts-ignore
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+      tabBarActiveTintColor: 'tomato',
+      tabBarInactiveTintColor: 'gray',
+      tabBarStyle: hideBottomTabBar ? { display: 'none' } : {},
+    };
+  },
+
   screens: {
     Home: HomeScreen,
     Library: {
