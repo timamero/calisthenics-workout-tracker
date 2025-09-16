@@ -1,9 +1,11 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
 
-import type { WorkoutBuildRequest, WorkoutData } from '@cwt/schema/workouts';
-
-import type { SetFields } from '@cwt/schema/workouts';
+import type {
+  SetFields,
+  WorkoutBuildRequest,
+  WorkoutData,
+} from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
 
 import {
@@ -40,7 +42,9 @@ interface WorkoutDraftAction {
     exerciseIndex: number,
     updatedField: Partial<SetFields>,
   ) => void;
-  setWorkoutToSave: () => void;
+  initializeWorkoutToSave: () => void;
+  addUserIDToWorkoutToSave: (userID: string) => void;
+  setWorkoutToSave: () => void; // superseded
   resetWorkout: () => void;
 }
 
@@ -180,6 +184,45 @@ export const createWorkoutDraftSlice: StateCreator<
         };
       } else {
         console.error('Cannot update field in log mode');
+      }
+    }),
+  initializeWorkoutToSave: () =>
+    set((state) => {
+      if (state.mode === 'build') {
+        state.workoutToSave = {
+          workout_data: state.workoutData,
+          title: state.workoutTitle || 'Untitled workout',
+          status: 'draft',
+          source: 'manual',
+          notes: null,
+          estimated_duration: null,
+          updated_at: null,
+          user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
+          description: null,
+          goal: null,
+        };
+      } else {
+        // update later for workout logs
+        state.workoutToSave = {
+          workout_data: state.workoutData,
+          title: state.workoutTitle || 'Untitled workout',
+          status: 'draft',
+          source: 'manual',
+          notes: null,
+          estimated_duration: null,
+          updated_at: null,
+          user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
+          description: null,
+          goal: null,
+        };
+      }
+
+      state.isWorkoutSavePending = true;
+    }),
+  addUserIDToWorkoutToSave: (userID) =>
+    set((state) => {
+      if (state.workoutToSave) {
+        state.workoutToSave.user_id = userID;
       }
     }),
   setWorkoutToSave: () =>
