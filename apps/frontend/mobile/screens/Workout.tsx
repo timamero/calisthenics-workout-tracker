@@ -3,12 +3,29 @@ import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
+import { useWorkoutDraftStore } from '@cwt/state/stores';
+
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
+import ConfirmationDialog from '../components/common/ConfirmationDialog';
 
 export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
+
+  const workoutData = useWorkoutDraftStore((state) => state.workoutData); // DELETE THIS LINE LATER
+  console.log('workout - workoutData: ', workoutData); // DELETE THIS LINE LATER
+
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+
+  const [isCancelWorktoutDialogVisible, setIsCancelWorktoutDialogVisible] =
+    React.useState<boolean>(false);
+
+  const onCancelWorkoutPress = () => {
+    setIsCancelWorktoutDialogVisible(false);
+    navigation.navigate('App', { screen: 'WorkoutDashboard' });
+    resetWorkout();
+  };
 
   React.useEffect(() => {
     navigation.setOptions({
@@ -16,7 +33,7 @@ export default function WorkoutScreen() {
       headerLeft: () => (
         <Button
           mode="text"
-          onPress={() => console.log('pressed cancel workout')}
+          onPress={() => setIsCancelWorktoutDialogVisible(true)}
           style={{
             marginRight: 24,
           }}
@@ -37,6 +54,22 @@ export default function WorkoutScreen() {
       <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
         Workout Page
       </Text>
+      <ConfirmationDialog
+        title="Cancel Workout Building"
+        message="Confirm cancelling workout building. This will discard the current workout."
+        confirmButtonLabel="Discard this workout"
+        isVisible={isCancelWorktoutDialogVisible}
+        handleHideDialog={setIsCancelWorktoutDialogVisible}
+        onConfirmationPress={onCancelWorkoutPress}
+      />
+      {/* <ConfirmationOverlay
+        title="Cancel Workout Building"
+        message="Confirm cancelling workout building. This will discard the current workout."
+        confirmButtonLabel="Discard this workout"
+        opened={cancelOverlayOpened}
+        handler={cancelOverlayHandler}
+        onConfirmationClick={onCancelWorkoutClick}
+      /> */}
     </View>
   );
 }
