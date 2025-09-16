@@ -223,6 +223,8 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       if (state.workoutToSave) {
         state.workoutToSave.user_id = userID;
+      } else {
+        console.error('workoutToSave is null, cannot add userID');
       }
     }),
   setWorkoutToSave: () =>
