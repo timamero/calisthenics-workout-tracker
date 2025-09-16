@@ -18,41 +18,16 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import OnboardingComplete from '../screens/OnboardingComplete';
-
-// import { useAuthStore } from '@cwt/state/auth';
-import { useAuthStore } from '@cwt/state/stores';
 import WorkoutScreen from '../screens/Workout';
 
-// const WorkoutStack = createStackNavigator({
-//   screenOptions: {
-//     headerStyle: {
-//       backgroundColor: 'rgb(20 20 20)', // 👈 header background
-//     },
-//     headerTitleStyle: {
-//       color: 'rgb(255 244 230)',
-//     },
-//   },
-//   screens: {
-//     // WorkoutDashboard: {
-//     //   screen: StartWorkoutScreen,
-//     //   options: {
-//     //     title: 'Create or Begin A Workout',
-//     //   },
-//     // },
-//     Workout: WorkoutScreen,
-//   },
-//   initialRouteName: 'Workout',
-// });
+import { useAuthStore } from '@cwt/state/stores';
 
 // App Navigator
 const MyTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => {
-    // const routeName = getFocusedRouteNameFromRoute(route);
-    // const hideBottomTabBar = routeName === 'Workout';
-
     return {
       headerStyle: {
-        backgroundColor: 'rgb(20 20 20)', // 👈 header background
+        backgroundColor: 'rgb(20 20 20)',
       },
       headerTitleStyle: {
         color: 'rgb(255 244 230)',
@@ -78,19 +53,12 @@ const MyTabs = createBottomTabNavigator({
           iconName = 'brush';
         }
 
-        // You can return any component that you like here!
         // @ts-ignore
         return <Ionicons name={iconName} size={size} color={color} />;
       },
-      // tabBarStyle: {
-      //   backgroundColor: 'rgb(20 20 20)', // 👈 tab bar background
-      // },
       tabBarActiveTintColor: 'tomato',
       tabBarInactiveTintColor: 'rgb(255 244 230)',
       tabBarStyle: { backgroundColor: 'rgb(20 20 20)' },
-      // tabBarStyle: hideBottomTabBar
-      //   ? { display: 'none' }
-      //   : { backgroundColor: 'rgb(20 20 20)' },
     };
   },
 
@@ -102,10 +70,6 @@ const MyTabs = createBottomTabNavigator({
         title: 'Exercise Library',
       },
     },
-    // WorkoutDashboard: {
-    //   screen: WorkoutStack,
-    //   options: { headerShown: false },
-    // },
     WorkoutDashboard: {
       screen: StartWorkoutScreen,
       options: {
@@ -158,21 +122,21 @@ const RootStack = createNativeStackNavigator({
     SignedIn: {
       if: useIsSignedIn,
       screens: {
-        // App: {
-        //   if: useIsSignedIn,
-        //   screen: MyTabs,
-        //   options: { headerShown: false },
-        // },
         Home: {
           screen: MyTabs,
           options: { headerShown: false },
         },
-        // WorkoutDashboard: {
-        //   // if: useIsSignedIn,
-        //   screen: WorkoutStack,
-        //   options: { headerShown: false },
-        // },
-        Workout: WorkoutScreen,
+        Workout: {
+          screen: WorkoutScreen,
+          options: {
+            headerStyle: {
+              backgroundColor: 'rgb(20 20 20)', // 👈 header background
+            },
+            headerTitleStyle: {
+              color: 'rgb(255 244 230)',
+            },
+          },
+        },
       },
     },
   },
