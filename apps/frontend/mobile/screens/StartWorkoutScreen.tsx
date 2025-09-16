@@ -1,12 +1,29 @@
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
+import { useWorkoutLibraryStore } from '@cwt/state/stores';
+
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 import CardButton from '../components/common/CardButton';
 
 export default function StartWorkoutScreen() {
   const theme = useTheme() as CustomTheme;
+
+  const workoutBuilds = useWorkoutLibraryStore(
+    (state) => state.displayedWorkoutBuilds,
+  );
+
+  const workoutBuildCards = workoutBuilds.map((wo, i) => {
+    const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
+    return (
+      <CardButton key={i}>
+        {/* <Title order={3} size="h5"> */}
+        {workoutTitle}
+        {/* </Title> */}
+      </CardButton>
+    );
+  });
 
   return (
     <View
@@ -17,10 +34,10 @@ export default function StartWorkoutScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text style={{ color: theme.colors.light }}>
+      <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
         Create or Begin A Workout
       </Text>
-      <CardButton>Example card</CardButton>
+      {workoutBuildCards}
     </View>
   );
 }
