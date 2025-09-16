@@ -31,6 +31,8 @@ const getStyles = (theme: CustomTheme) =>
       padding: 16,
       borderColor: theme.colors.light,
       borderWidth: 1,
+      minWidth: 160,
+      height: 160,
     },
     cardContent: {
       paddingHorizontal: 0,
