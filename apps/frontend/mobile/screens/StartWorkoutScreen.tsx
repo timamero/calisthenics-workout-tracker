@@ -32,15 +32,9 @@ export default function StartWorkoutScreen() {
     <View
       style={{
         flex: 1,
-        // alignItems: 'center',
-        // justifyContent: 'center',
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
-        Create or Begin A Workout
-      </Text>
-
       <LargeButton onButtonClick={() => navigation.navigate('Workout')}>
         Build New Workout
       </LargeButton>
