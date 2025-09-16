@@ -39,7 +39,6 @@ function WorkoutView() {
   const { setWorkoutToSaveWithUser } = useWorkoutSave();
 
   const onSaveWorkoutClick = async () => {
-    // setWorkoutToSave();
     setWorkoutToSaveWithUser();
     const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
     if (!supabaseSession || !workoutToSave) {
