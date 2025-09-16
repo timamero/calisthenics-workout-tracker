@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
+import Workout from '../components/Workout/Workout';
 import { CustomTheme } from '../theme';
-import { Text } from '../customText';
 import ConfirmationDialog from '../components/common/ConfirmationDialog';
 
 export default function WorkoutScreen() {
@@ -51,9 +51,7 @@ export default function WorkoutScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
-        Workout Page
-      </Text>
+      <Workout />
       <ConfirmationDialog
         title="Cancel Workout Building"
         message="Confirm cancelling workout building. This will discard the current workout."
@@ -62,14 +60,6 @@ export default function WorkoutScreen() {
         handleHideDialog={setIsCancelWorktoutDialogVisible}
         onConfirmationPress={onCancelWorkoutPress}
       />
-      {/* <ConfirmationOverlay
-        title="Cancel Workout Building"
-        message="Confirm cancelling workout building. This will discard the current workout."
-        confirmButtonLabel="Discard this workout"
-        opened={cancelOverlayOpened}
-        handler={cancelOverlayHandler}
-        onConfirmationClick={onCancelWorkoutClick}
-      /> */}
     </View>
   );
 }
