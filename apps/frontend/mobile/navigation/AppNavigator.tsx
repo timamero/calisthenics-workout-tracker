@@ -24,15 +24,23 @@ import { useAuthStore } from '@cwt/state/stores';
 import WorkoutScreen from '../screens/Workout';
 
 const WorkoutStack = createStackNavigator({
+  screenOptions: {
+    headerStyle: {
+      backgroundColor: 'rgb(20 20 20)', // 👈 header background
+    },
+    headerTitleStyle: {
+      color: 'rgb(255 244 230)',
+    },
+  },
   screens: {
     WorkoutDashboard: {
       screen: StartWorkoutScreen,
       options: {
         title: 'Create or Begin A Workout',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontFamily: 'monospace',
-        },
+        // headerTitleStyle: {
+        //   fontWeight: 'bold',
+        //   fontFamily: 'monospace',
+        // },
       },
     },
     Workout: WorkoutScreen,
@@ -47,6 +55,12 @@ const MyTabs = createBottomTabNavigator({
     const hideBottomTabBar = routeName === 'Workout';
 
     return {
+      headerStyle: {
+        backgroundColor: 'rgb(20 20 20)', // 👈 header background
+      },
+      headerTitleStyle: {
+        color: 'rgb(255 244 230)',
+      },
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
 
@@ -72,9 +86,14 @@ const MyTabs = createBottomTabNavigator({
         // @ts-ignore
         return <Ionicons name={iconName} size={size} color={color} />;
       },
+      // tabBarStyle: {
+      //   backgroundColor: 'rgb(20 20 20)', // 👈 tab bar background
+      // },
       tabBarActiveTintColor: 'tomato',
-      tabBarInactiveTintColor: 'gray',
-      tabBarStyle: hideBottomTabBar ? { display: 'none' } : {},
+      tabBarInactiveTintColor: 'rgb(255 244 230)',
+      tabBarStyle: hideBottomTabBar
+        ? { display: 'none' }
+        : { backgroundColor: 'rgb(20 20 20)' },
     };
   },
 
@@ -84,10 +103,10 @@ const MyTabs = createBottomTabNavigator({
       screen: LibraryScreen,
       options: {
         title: 'Exercise Library',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontFamily: 'monospace',
-        },
+        // headerTitleStyle: {
+        //   fontWeight: 'bold',
+        //   fontFamily: 'monospace',
+        // },
       },
     },
     WorkoutDashboard: {
