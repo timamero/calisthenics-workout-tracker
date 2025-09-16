@@ -1,5 +1,6 @@
 import { View, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
 
@@ -9,6 +10,7 @@ import CardButton from '../components/common/CardButton';
 import LargeButton from '../components/common/LargeButton';
 
 export default function StartWorkoutScreen() {
+  const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
 
   const workoutBuilds = useWorkoutLibraryStore(
@@ -39,7 +41,7 @@ export default function StartWorkoutScreen() {
         Create or Begin A Workout
       </Text>
 
-      <LargeButton onButtonClick={() => console.log('navigate to workout')}>
+      <LargeButton onButtonClick={() => navigation.navigate('Workout')}>
         Build New Workout
       </LargeButton>
 
