@@ -32,8 +32,7 @@ const getStyles = (theme: CustomTheme) =>
       marginBlock: 12,
       marginInline: 36,
       backgroundColor: theme.colors.background,
-      boxShadow:
-        'rgba(222, 226, 230, 0.05) 0px 1px 3px 0px, rgba(222, 226, 230, 0.05) 0px 28px 23px -7px, rgba(222, 226, 230, 0.04) 0px 12px 12px -7px',
+      boxShadow: 'rgba(222, 226, 230, 0.25) 1px 3px 17px -1px',
       padding: 16,
       borderColor: theme.colors.light,
       borderWidth: 1,

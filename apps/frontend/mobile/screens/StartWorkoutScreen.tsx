@@ -1,8 +1,12 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
+import { CustomTheme } from '../theme';
+import { Text } from '../customText';
+import CardButton from '../components/common/CardButton';
+
 export default function StartWorkoutScreen() {
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
 
   return (
     <View
@@ -10,14 +14,13 @@ export default function StartWorkoutScreen() {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.background,
       }}
     >
-      <Text>Start Workout Screen</Text>
-      <Text>
-        This page is the starting point for a workout. The user will be able to
-        start from a blank slate or start a workout from a template.
+      <Text style={{ color: theme.colors.light }}>
+        Create or Begin A Workout
       </Text>
+      <CardButton>Example card</CardButton>
     </View>
   );
 }
