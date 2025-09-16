@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
+
 import HomeScreen from '../screens/Home';
 import StartWorkoutScreen from '../screens/StartWorkoutScreen';
 import LibraryScreen from '../screens/LibraryScreen';
@@ -12,10 +14,18 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import OnboardingComplete from '../screens/OnboardingComplete';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // import { useAuthStore } from '@cwt/state/auth';
 import { useAuthStore } from '@cwt/state/stores';
+import WorkoutScreen from '../screens/Workout';
+
+const WorkoutStack = createNativeStackNavigator({
+  screens: {
+    WorkoutDashboard: StartWorkoutScreen,
+    Workout: WorkoutScreen,
+  },
+  initialRouteName: 'WorkoutStack',
+});
 
 // App Navigator
 const MyTabs = createBottomTabNavigator({
@@ -31,7 +41,7 @@ const MyTabs = createBottomTabNavigator({
           : 'information-circle-outline';
       } else if (route.name === 'Library') {
         iconName = focused ? 'library' : 'library-outline';
-      } else if (route.name === 'Workout') {
+      } else if (route.name === 'WorkoutDashboard') {
         iconName = focused ? 'fitness' : 'fitness-outline';
       } else if (route.name === 'History') {
         iconName = focused ? 'file-tray-full' : 'file-tray-outline';
@@ -60,7 +70,16 @@ const MyTabs = createBottomTabNavigator({
         },
       },
     },
-    Workout: StartWorkoutScreen,
+    WorkoutDashboard: {
+      screen: WorkoutStack,
+      options: {
+        title: 'Create or Begin A Workout',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontFamily: 'monospace',
+        },
+      },
+    },
     History: HistoryScreen,
     Settings: SettingsScreen,
   },
