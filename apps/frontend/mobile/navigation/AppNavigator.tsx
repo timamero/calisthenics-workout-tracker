@@ -23,36 +23,32 @@ import OnboardingComplete from '../screens/OnboardingComplete';
 import { useAuthStore } from '@cwt/state/stores';
 import WorkoutScreen from '../screens/Workout';
 
-const WorkoutStack = createStackNavigator({
-  screenOptions: {
-    headerStyle: {
-      backgroundColor: 'rgb(20 20 20)', // 👈 header background
-    },
-    headerTitleStyle: {
-      color: 'rgb(255 244 230)',
-    },
-  },
-  screens: {
-    WorkoutDashboard: {
-      screen: StartWorkoutScreen,
-      options: {
-        title: 'Create or Begin A Workout',
-        // headerTitleStyle: {
-        //   fontWeight: 'bold',
-        //   fontFamily: 'monospace',
-        // },
-      },
-    },
-    Workout: WorkoutScreen,
-  },
-  initialRouteName: 'WorkoutDashboard',
-});
+// const WorkoutStack = createStackNavigator({
+//   screenOptions: {
+//     headerStyle: {
+//       backgroundColor: 'rgb(20 20 20)', // 👈 header background
+//     },
+//     headerTitleStyle: {
+//       color: 'rgb(255 244 230)',
+//     },
+//   },
+//   screens: {
+//     // WorkoutDashboard: {
+//     //   screen: StartWorkoutScreen,
+//     //   options: {
+//     //     title: 'Create or Begin A Workout',
+//     //   },
+//     // },
+//     Workout: WorkoutScreen,
+//   },
+//   initialRouteName: 'Workout',
+// });
 
 // App Navigator
 const MyTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => {
-    const routeName = getFocusedRouteNameFromRoute(route);
-    const hideBottomTabBar = routeName === 'Workout';
+    // const routeName = getFocusedRouteNameFromRoute(route);
+    // const hideBottomTabBar = routeName === 'Workout';
 
     return {
       headerStyle: {
@@ -91,9 +87,10 @@ const MyTabs = createBottomTabNavigator({
       // },
       tabBarActiveTintColor: 'tomato',
       tabBarInactiveTintColor: 'rgb(255 244 230)',
-      tabBarStyle: hideBottomTabBar
-        ? { display: 'none' }
-        : { backgroundColor: 'rgb(20 20 20)' },
+      tabBarStyle: { backgroundColor: 'rgb(20 20 20)' },
+      // tabBarStyle: hideBottomTabBar
+      //   ? { display: 'none' }
+      //   : { backgroundColor: 'rgb(20 20 20)' },
     };
   },
 
@@ -103,26 +100,18 @@ const MyTabs = createBottomTabNavigator({
       screen: LibraryScreen,
       options: {
         title: 'Exercise Library',
-        // headerTitleStyle: {
-        //   fontWeight: 'bold',
-        //   fontFamily: 'monospace',
-        // },
       },
-    },
-    WorkoutDashboard: {
-      screen: WorkoutStack,
-      options: { headerShown: false },
     },
     // WorkoutDashboard: {
     //   screen: WorkoutStack,
-    //   options: {
-    //     title: 'Create or Begin A Workout',
-    //     headerTitleStyle: {
-    //       fontWeight: 'bold',
-    //       fontFamily: 'monospace',
-    //     },
-    //   },
+    //   options: { headerShown: false },
     // },
+    WorkoutDashboard: {
+      screen: StartWorkoutScreen,
+      options: {
+        title: 'Create or Begin A Workout',
+      },
+    },
     History: HistoryScreen,
     Settings: SettingsScreen,
   },
@@ -160,16 +149,31 @@ function useIsSignedOut() {
 
 // Root Stack Navigator
 const RootStack = createNativeStackNavigator({
-  screens: {
-    Auth: {
+  groups: {
+    SignedOut: {
       if: useIsSignedOut,
-      screen: AuthStack,
+      screens: { screen: AuthStack },
       options: { headerShown: false },
     },
-    App: {
+    SignedIn: {
       if: useIsSignedIn,
-      screen: MyTabs,
-      options: { headerShown: false },
+      screens: {
+        // App: {
+        //   if: useIsSignedIn,
+        //   screen: MyTabs,
+        //   options: { headerShown: false },
+        // },
+        Home: {
+          screen: MyTabs,
+          options: { headerShown: false },
+        },
+        // WorkoutDashboard: {
+        //   // if: useIsSignedIn,
+        //   screen: WorkoutStack,
+        //   options: { headerShown: false },
+        // },
+        Workout: WorkoutScreen,
+      },
     },
   },
 });
