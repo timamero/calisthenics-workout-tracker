@@ -1,43 +1,43 @@
 {
-	"private": true,
-	"scripts": {
-		"build": "turbo run build",
-		"build:web": "turbo run build --filter=@cwt/web",
-		"build:api": "turbo run build --filter=@cwt/api",
-		"build:auth": "turbo run build --filter=@cwt/auth",
-		"build:hooks": "turbo run build --filter=@cwt/hooks",
-		"build:mocks": "turbo run build --filter=@cwt/mocks",
-		"build:schema": "turbo run build --filter=@cwt/schema",
-		"build:state": "turbo run build --filter=@cwt/state",
-		"build:packages": "pnpm build:api && pnpm build:auth && pnpm build:hooks && pnpm build:mocks && pnpm build:schema && pnpm build:state",
-		"lint": "turbo run lint",
-		"dev": "turbo run dev",
-		"dev:backend": "turbo run dev --filter=@cwt/backend",
-		"dev:web": "turbo run dev --filter=@cwt/web",
-		"dev:mobile": "turbo run dev --filter=@cwt/mobile",
-		"dev:web+backend": "turbo run dev --filter=@cwt/web --filter=@cwt/backend",
-		"dev:mobile+backend": "turbo run dev --filter=@cwt/mobile --filter=@cwt/backend",
-		"test": "turbo run test",
-		"test:watch": "turbo run test:watch",
-		"test:web": "vitest",
-		"prepare": "husky",
-		"install:backend": "turbo run install --filter=@cwt/backend",
-		"supabase-login": "supabase login",
-		"generate-schema-types": "supabase gen types --project-id ocdfgrsizsxyltygfpje --schema public > packages/schema/src/lib/common/database.types.ts"
-	},
-	"devDependencies": {
-		"husky": "^9.1.7",
-		"supabase": "^2.34.3",
-		"turbo": "^2.5.3"
-	},
-	"pnpm": {
-		"overrides": {
-			"react": "19.0.0",
-			"@types/react": "18.2.76"
-		},
-		"onlyBuiltDependencies": [
-			"supabase"
-		]
-	},
-	"packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=@cwt/web",
+    "build:api": "turbo run build --filter=@cwt/api",
+    "build:auth": "turbo run build --filter=@cwt/auth",
+    "build:hooks": "turbo run build --filter=@cwt/hooks",
+    "build:mocks": "turbo run build --filter=@cwt/mocks",
+    "build:schema": "turbo run build --filter=@cwt/schema",
+    "build:state": "turbo run build --filter=@cwt/state",
+    "build:packages": "pnpm build:api && pnpm build:auth && pnpm build:hooks && pnpm build:mocks && pnpm build:schema && pnpm build:state",
+    "lint": "turbo run lint",
+    "dev": "turbo run dev",
+    "dev:backend": "turbo run dev --filter=@cwt/backend",
+    "dev:web": "turbo run dev --filter=@cwt/web",
+    "dev:mobile": "turbo run dev --filter=@cwt/mobile",
+    "dev:web+backend": "turbo run dev --filter=@cwt/web --filter=@cwt/backend",
+    "dev:mobile+backend": "turbo run dev --filter=@cwt/mobile --filter=@cwt/backend",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
+    "test:web": "vitest",
+    "prepare": "husky",
+    "install:backend": "turbo run install --filter=@cwt/backend",
+    "supabase-login": "supabase login",
+    "generate-schema-types": "supabase gen types --project-id ocdfgrsizsxyltygfpje --schema public > packages/schema/src/lib/common/database.types.ts"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "supabase": "^2.34.3",
+    "turbo": "^2.5.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "19.0.0",
+      "@types/react": "19.0.10"
+    },
+    "onlyBuiltDependencies": [
+      "supabase"
+    ]
+  },
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
 }
