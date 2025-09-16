@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from '../screens/Home';
@@ -19,12 +20,21 @@ import OnboardingComplete from '../screens/OnboardingComplete';
 import { useAuthStore } from '@cwt/state/stores';
 import WorkoutScreen from '../screens/Workout';
 
-const WorkoutStack = createNativeStackNavigator({
+const WorkoutStack = createStackNavigator({
   screens: {
-    WorkoutDashboard: StartWorkoutScreen,
+    WorkoutDashboard: {
+      screen: StartWorkoutScreen,
+      options: {
+        title: 'Create or Begin A Workout',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontFamily: 'monospace',
+        },
+      },
+    },
     Workout: WorkoutScreen,
   },
-  initialRouteName: 'WorkoutStack',
+  initialRouteName: 'WorkoutDashboard',
 });
 
 // App Navigator
@@ -70,16 +80,17 @@ const MyTabs = createBottomTabNavigator({
         },
       },
     },
-    WorkoutDashboard: {
-      screen: WorkoutStack,
-      options: {
-        title: 'Create or Begin A Workout',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontFamily: 'monospace',
-        },
-      },
-    },
+    WorkoutDashboard: WorkoutStack,
+    // WorkoutDashboard: {
+    //   screen: WorkoutStack,
+    //   options: {
+    //     title: 'Create or Begin A Workout',
+    //     headerTitleStyle: {
+    //       fontWeight: 'bold',
+    //       fontFamily: 'monospace',
+    //     },
+    //   },
+    // },
     History: HistoryScreen,
     Settings: SettingsScreen,
   },
