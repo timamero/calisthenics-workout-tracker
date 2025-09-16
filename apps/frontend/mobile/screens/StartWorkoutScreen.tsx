@@ -2,7 +2,10 @@ import { View, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-import { useWorkoutLibraryStore } from '@cwt/state/stores';
+import {
+  useWorkoutLibraryStore,
+  useWorkoutDraftStore,
+} from '@cwt/state/stores';
 
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
@@ -12,6 +15,10 @@ import LargeButton from '../components/common/LargeButton';
 export default function StartWorkoutScreen() {
   const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
+
+  const initializeWorkout = useWorkoutDraftStore(
+    (state) => state.initializeWorkout,
+  );
 
   const workoutBuilds = useWorkoutLibraryStore(
     (state) => state.displayedWorkoutBuilds,
@@ -28,6 +35,11 @@ export default function StartWorkoutScreen() {
     );
   });
 
+  const onBuildNewWorkoutPress = () => {
+    initializeWorkout('build');
+    navigation.navigate('Workout');
+  };
+
   return (
     <View
       style={{
@@ -35,7 +47,7 @@ export default function StartWorkoutScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <LargeButton onButtonClick={() => navigation.navigate('Workout')}>
+      <LargeButton handlePress={onBuildNewWorkoutPress}>
         Build New Workout
       </LargeButton>
 

@@ -6,19 +6,19 @@ import { CustomTheme } from '../../theme';
 import { Text } from '../../customText';
 
 interface LargeButtonProps {
-  onButtonClick: () => void;
+  handlePress: () => void;
   children: ReactNode;
 }
 
 export default function LargeButton({
-  onButtonClick,
+  handlePress,
   children,
 }: LargeButtonProps) {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
   return (
-    <Card style={styles.card} onPress={() => onButtonClick()}>
+    <Card style={styles.card} onPress={() => handlePress()}>
       <Card.Content style={styles.cardContent}>
         <View style={styles.titleContainer}>
           <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
