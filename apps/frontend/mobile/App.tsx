@@ -2,7 +2,6 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { PaperProvider, ActivityIndicator, Text } from 'react-native-paper';
 
-// import { useAuthStore } from '@cwt/state/auth';
 import { useExerciseLibraryStore, useAuthStore } from '@cwt/state/stores';
 import { useSupabaseAuth } from '@cwt/hooks';
 
