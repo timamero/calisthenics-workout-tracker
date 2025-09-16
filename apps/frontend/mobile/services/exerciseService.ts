@@ -3,7 +3,7 @@ import { ExerciseResponse } from '@cwt/schema/exercises';
 import { sampleExercises } from '@cwt/mocks/sampleExercises';
 
 const baseUrl = process.env.EXPO_PUBLIC_BASE_URL || '';
-const environment = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || null;
+const environment = process.env.EXPO_PUBLIC_ENVIRONMENT || null;
 
 export async function getExercises(token: string): Promise<ExerciseResponse[]> {
   try {
@@ -13,7 +13,7 @@ export async function getExercises(token: string): Promise<ExerciseResponse[]> {
     }
     return await apiGetExercises(baseUrl, token);
   } catch (error) {
-    console.error('Mobile: Error fetching exercises from API:', error);
+    console.error('Mobile: Error fetching exercises from API', error);
     throw error;
   }
 }
