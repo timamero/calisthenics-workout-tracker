@@ -12,6 +12,7 @@ import {
   INITIAL_WORKOUT_LOG_TITLE,
   INITIAL_WORKOUT_BUILD_TITLE,
   INITIALIZED_SET,
+  INITIALIZED_WORKOUT_TO_SAVE,
   DEFAULT_REP_SET,
   DEFAULT_TIME_SET,
 } from './workoutDefaults';
@@ -190,30 +191,16 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       if (state.mode === 'build') {
         state.workoutToSave = {
+          ...INITIALIZED_WORKOUT_TO_SAVE,
           workout_data: state.workoutData,
           title: state.workoutTitle || 'Untitled workout',
-          status: 'draft',
-          source: 'manual',
-          notes: null,
-          estimated_duration: null,
-          updated_at: null,
-          user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
-          description: null,
-          goal: null,
         };
       } else {
         // update later for workout logs
         state.workoutToSave = {
+          ...INITIALIZED_WORKOUT_TO_SAVE,
           workout_data: state.workoutData,
           title: state.workoutTitle || 'Untitled workout',
-          status: 'draft',
-          source: 'manual',
-          notes: null,
-          estimated_duration: null,
-          updated_at: null,
-          user_id: null,
-          description: null,
-          goal: null,
         };
       }
 
