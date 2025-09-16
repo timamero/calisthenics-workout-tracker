@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useTheme, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import { CustomTheme } from '../theme';
@@ -13,6 +13,17 @@ export default function WorkoutScreen() {
   React.useEffect(() => {
     navigation.setOptions({
       title: 'Workout Title Here',
+      headerLeft: () => (
+        <Button
+          mode="text"
+          onPress={() => console.log('pressed cancel workout')}
+          style={{
+            marginRight: 24,
+          }}
+        >
+          Cancel
+        </Button>
+      ),
     });
   }, [navigation]);
 
