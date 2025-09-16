@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
@@ -29,15 +29,21 @@ export default function StartWorkoutScreen() {
     <View
       style={{
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         backgroundColor: theme.colors.background,
       }}
     >
       <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
         Create or Begin A Workout
       </Text>
-      {workoutBuildCards}
+
+      <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
+        Start from a template
+      </Text>
+      <View>
+        <ScrollView horizontal>{workoutBuildCards}</ScrollView>
+      </View>
     </View>
   );
 }
