@@ -122,7 +122,7 @@ const RootStack = createNativeStackNavigator({
     SignedIn: {
       if: useIsSignedIn,
       screens: {
-        Home: {
+        App: {
           // Need to rename
           screen: MyTabs,
           options: { headerShown: false },
