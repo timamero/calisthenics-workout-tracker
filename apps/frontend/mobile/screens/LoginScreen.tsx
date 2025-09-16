@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useTheme, TextInput, Text, Button } from 'react-native-paper';
 
-// eslint-disable-next-line import/no-unresolved
 import { signIn } from '@cwt/auth/signIn';
 import { supabase } from '../services/supabaseClient';
 
