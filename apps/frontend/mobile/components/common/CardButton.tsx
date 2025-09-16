@@ -25,7 +25,7 @@ const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     card: {
       marginBlock: 12,
-      marginInline: 36,
+      marginInline: 8,
       backgroundColor: theme.colors.background,
       boxShadow: 'rgba(222, 226, 230, 0.25) 1px 3px 17px -1px',
       padding: 16,
