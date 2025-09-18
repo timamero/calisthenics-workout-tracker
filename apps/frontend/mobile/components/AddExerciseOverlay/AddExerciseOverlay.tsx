@@ -33,7 +33,8 @@ export default function AddExerciseOverlay({
     (state) => state.getExerciseByID,
   );
 
-  const handleAddExerciseClick = () => {
+  const handleAddExercisePress = () => {
+    console.log('called handleAddExercisePress');
     addExercise(
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
@@ -78,7 +79,7 @@ export default function AddExerciseOverlay({
         </Button>
         <Button
           mode="contained"
-          onPress={() => handleAddExerciseClick()}
+          onPress={() => handleAddExercisePress()}
           style={{
             borderRadius: 4,
           }}
