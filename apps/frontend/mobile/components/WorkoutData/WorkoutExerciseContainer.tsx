@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import type { WorkoutExercise as WorkoutExerciseType } from '@cwt/schema/workouts';
 import {
   useExerciseLibraryStore,
@@ -5,20 +7,34 @@ import {
 } from '@cwt/state/stores';
 
 import WorkoutExercise from './WorkoutExercise';
+import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 
 interface WorkoutExerciseProps {
-  exerciseIndex: number;
-  workoutExercise: WorkoutExerciseType;
-  handleOpenDialog: () => void;
-  handleDeleteSetDialog: () => void;
+  // exerciseIndex: number;
+  // workoutExercise: WorkoutExerciseType;
+  // handleOpenDialog: () => void;
+  // handleDeleteSetDialog: () => void;
 }
 
-export default function WorkoutExerciseContainer({
-  exerciseIndex,
-  workoutExercise,
-  handleOpenDialog,
-  handleDeleteSetDialog,
-}: WorkoutExerciseProps) {
+export default function WorkoutExerciseContainer(
+  {
+    // exerciseIndex,
+    // workoutExercise,
+    // handleOpenDialog,
+    // handleDeleteSetDialog,
+  }: WorkoutExerciseProps,
+) {
+  const exerciseIndex: number = React.useContext(
+    WorkoutExerciseContext,
+  )!.exerciseIndex;
+  const workoutExercise: WorkoutExerciseType = React.useContext(
+    WorkoutExerciseContext,
+  )!.workoutExercise;
+  const setIsDeleteExerciseDialogVisible = React.useContext(
+    WorkoutExerciseContext,
+  )!.setIsDeleteExerciseDialogVisible;
+  // const set;
+
   const addSet = useWorkoutDraftStore((state) => state.addSet);
   const setSelectedExerciseIndexToDel = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIndexToMod,
@@ -26,11 +42,11 @@ export default function WorkoutExerciseContainer({
   const getExerciseNameById = useExerciseLibraryStore(
     (state) => state.getExerciseNameByID,
   );
-  const name = getExerciseNameById(workoutExercise.exercise_id);
+  const name = getExerciseNameById(workoutExercise!.exercise_id);
 
   const handleDeleteExercisePress = () => {
     setSelectedExerciseIndexToDel(exerciseIndex);
-    handleOpenDialog();
+    setIsDeleteExerciseDialogVisible(true);
   };
 
   return (
@@ -39,7 +55,7 @@ export default function WorkoutExerciseContainer({
       exerciseIndex={exerciseIndex}
       handleAddSet={addSet}
       handleDeleteExercisePress={handleDeleteExercisePress}
-      handleDeleteSetDialog={handleDeleteSetDialog}
+      // handleDeleteSetDialog={handleDeleteSetDialog}
     />
   );
 }

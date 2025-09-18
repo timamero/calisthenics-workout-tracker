@@ -9,6 +9,7 @@ import WorkoutExercise from './WorkoutExerciseContainer';
 import ConfirmationDialog from '../common/ConfirmationDialog';
 import { CustomTheme } from '../../theme';
 import { Text } from '../../customText';
+import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 
 export default function WorkoutData() {
   const theme = useTheme() as CustomTheme;
@@ -37,13 +38,23 @@ export default function WorkoutData() {
 
   const workoutExercises = workoutData.exercises.map((ex, i) => {
     return (
-      <WorkoutExercise
+      <WorkoutExerciseContext.Provider
         key={ex.id}
-        workoutExercise={ex}
-        exerciseIndex={i}
-        handleOpenDialog={() => setIsDeleteExerciseDialogVisible(true)}
-        handleDeleteSetDialog={() => setIsDeleteSetDialogVisible(true)}
-      />
+        value={{
+          workoutExercise: ex,
+          exerciseIndex: i,
+          setIsDeleteExerciseDialogVisible: setIsDeleteExerciseDialogVisible,
+          setIsDeleteSetDialogVisible: setIsDeleteSetDialogVisible,
+        }}
+      >
+        <WorkoutExercise
+        // key={ex.id}
+        // workoutExercise={ex}
+        // exerciseIndex={i}
+        // handleOpenDialog={() => setIsDeleteExerciseDialogVisible(true)}
+        // handleDeleteSetDialog={() => setIsDeleteSetDialogVisible(true)}
+        />
+      </WorkoutExerciseContext.Provider>
     );
   });
 
