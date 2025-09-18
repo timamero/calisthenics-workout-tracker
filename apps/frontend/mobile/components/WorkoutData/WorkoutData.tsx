@@ -2,10 +2,9 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-// import { useStore } from '@cwt/state/store';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import WorkoutExercise from './WorkoutExerciseContainer';
+import WorkoutExerciseContainer from './WorkoutExerciseContainer';
 import ConfirmationDialog from '../common/ConfirmationDialog';
 import { CustomTheme } from '../../theme';
 import { Text } from '../../customText';
@@ -47,13 +46,7 @@ export default function WorkoutData() {
           setIsDeleteSetDialogVisible: setIsDeleteSetDialogVisible,
         }}
       >
-        <WorkoutExercise
-        // key={ex.id}
-        // workoutExercise={ex}
-        // exerciseIndex={i}
-        // handleOpenDialog={() => setIsDeleteExerciseDialogVisible(true)}
-        // handleDeleteSetDialog={() => setIsDeleteSetDialogVisible(true)}
-        />
+        <WorkoutExerciseContainer />
       </WorkoutExerciseContext.Provider>
     );
   });
@@ -92,7 +85,6 @@ export default function WorkoutData() {
   };
 
   return (
-    // <Stack gap="xl" align="center">
     <View>
       <EmptyWorkoutPlaceholder />
       {workoutExercises}
