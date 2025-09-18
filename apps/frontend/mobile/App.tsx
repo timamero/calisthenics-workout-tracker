@@ -1,4 +1,5 @@
 import * as React from 'react';
+import 'react-native-get-random-values';
 import { View } from 'react-native';
 import { PaperProvider, ActivityIndicator, Text } from 'react-native-paper';
 
