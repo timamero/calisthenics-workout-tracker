@@ -6,6 +6,7 @@ import { CustomTheme } from '../../theme';
 
 import FullScreenModal from '../common/FullScreenModal';
 import ExerciseCard from './ExerciseCard';
+import ExerciseList from './ExerciseList';
 
 interface AddExerciseOverlayProps {
   isVisible: boolean;
@@ -31,9 +32,10 @@ export default function AddExerciseOverlay({
           paddingBlock: 16,
         }}
       >
-        <ExerciseCard
+        <ExerciseList />
+        {/* <ExerciseCard
           exercise={{
-            id: 1,
+            id: 12,
             name: 'pull ups',
             target_muscles: ['chest'],
             required_equipment: ['none'],
@@ -43,7 +45,7 @@ export default function AddExerciseOverlay({
             instructions: ['1', '2'],
             default_tracking_type: ['reps'],
           }}
-        />
+        /> */}
       </ScrollView>
       <View>
         <Text>Buttons here</Text>
