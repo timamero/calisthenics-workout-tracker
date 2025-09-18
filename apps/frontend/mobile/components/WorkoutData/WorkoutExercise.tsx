@@ -9,17 +9,20 @@ import {
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
+import Sets from './Sets';
 
 interface WorkoutExerciseProps {
   exerciseIndex: number;
   workoutExercise: WorkoutExerciseType;
   handleOpenDialog: () => void;
+  handleDeleteSetDialog: () => void;
 }
 
 export default function WorkoutExercise({
   exerciseIndex,
   workoutExercise,
   handleOpenDialog,
+  handleDeleteSetDialog,
 }: WorkoutExerciseProps) {
   const theme = useTheme() as CustomTheme;
 
@@ -61,6 +64,12 @@ export default function WorkoutExercise({
           Delete
         </Button>
       </View>
+      <Sets
+        tracked={workoutExercise.tracked}
+        sets={workoutExercise.sets}
+        exerciseIndex={exerciseIndex}
+        handleOpenDeleteSetDialog={handleDeleteSetDialog}
+      />
       <Divider />
     </View>
   );
