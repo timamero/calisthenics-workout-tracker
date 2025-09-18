@@ -21,9 +21,11 @@ export default function FullScreenModal({
   const theme = useTheme() as CustomTheme;
   const containerStyle = {
     backgroundColor: theme.colors.background,
-    paddingBlock: 20,
+    paddingBlock: 16,
+    marginBlock: 20,
     marginInline: 16,
     borderWidth: 2,
+    borderRadius: 16,
     borderColor: theme.colors.orange1,
   };
   return (

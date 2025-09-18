@@ -87,7 +87,7 @@ const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     card: {
       marginBlock: 12,
-      marginInline: 36,
+      marginInline: 12,
       backgroundColor: theme.colors.background,
       boxShadow:
         'rgba(222, 226, 230, 0.05) 0px 1px 3px 0px, rgba(222, 226, 230, 0.05) 0px 28px 23px -7px, rgba(222, 226, 230, 0.04) 0px 12px 12px -7px',
@@ -116,6 +116,7 @@ const getStyles = (theme: CustomTheme) =>
     exerciseMetadataContainer: {
       display: 'flex',
       flexDirection: 'row',
+      // flexWrap: 'wrap',
       alignItems: 'center',
       gap: 12,
     },
@@ -123,5 +124,11 @@ const getStyles = (theme: CustomTheme) =>
       textTransform: 'uppercase',
       color: theme.colors.grey,
     },
-    metadataPillsContainer: { display: 'flex', flexDirection: 'row', gap: 8 },
+    metadataPillsContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 8,
+      maxWidth: 240,
+    },
   });
