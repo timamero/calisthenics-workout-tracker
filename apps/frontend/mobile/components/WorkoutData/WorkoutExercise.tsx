@@ -26,7 +26,7 @@ export default function WorkoutExercise({
 }: WorkoutExerciseProps) {
   const theme = useTheme() as CustomTheme;
 
-  // const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
+  const addSet = useWorkoutDraftStore((state) => state.addSet);
   const setSelectedExerciseIndexToDel = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIndexToMod,
   );
@@ -71,6 +71,9 @@ export default function WorkoutExercise({
         handleOpenDeleteSetDialog={handleDeleteSetDialog}
       />
       <Divider />
+      <Button mode="contained" onPress={() => addSet(exerciseIndex)}>
+        Add Set
+      </Button>
     </View>
   );
 }
