@@ -1,18 +1,15 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { useTheme } from 'react-native-paper';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import WorkoutExerciseContainer from './WorkoutExerciseContainer';
-import ConfirmationDialog from '../common/ConfirmationDialog';
-import { CustomTheme } from '../../theme';
-import { Text } from '../../customText';
 import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 
-export default function WorkoutData() {
-  const theme = useTheme() as CustomTheme;
+import WorkoutExerciseContainer from './WorkoutExerciseContainer';
+import ConfirmationDialog from '../common/ConfirmationDialog';
+import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
 
+export default function WorkoutData() {
   const [isDeleteExerciseDialogVisible, setIsDeleteExerciseDialogVisible] =
     React.useState<boolean>(false);
   const [isDeleteSetDialogVisible, setIsDeleteSetDialogVisible] =
@@ -51,42 +48,9 @@ export default function WorkoutData() {
     );
   });
 
-  const EmptyWorkoutPlaceholder = () => {
-    if (workoutData.exercises.length === 0) {
-      return (
-        <View
-          style={{
-            borderColor: theme.colors.grey,
-            borderWidth: 2,
-            borderStyle: 'dashed',
-            display: 'flex',
-            alignItems: 'center',
-            marginInline: 20,
-            padding: 16,
-            gap: 16,
-          }}
-        >
-          <Text
-            variant="bodyLarge"
-            style={{
-              color: theme.colors.light,
-              fontWeight: 800,
-              textAlign: 'center',
-            }}
-          >
-            Ready to start building your workout?
-          </Text>
-          <Text style={{ color: theme.colors.light, textAlign: 'center' }}>
-            Add your first exercise to begin
-          </Text>
-        </View>
-      );
-    }
-  };
-
   return (
     <View>
-      <EmptyWorkoutPlaceholder />
+      {workoutData.exercises.length === 0 && <EmptyWorkoutPlaceholder />}
       {workoutExercises}
       <ConfirmationDialog
         title="Delete Exercise"
