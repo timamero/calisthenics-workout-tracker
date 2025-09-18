@@ -70,10 +70,12 @@ export default function WorkoutExercise({
         exerciseIndex={exerciseIndex}
         handleOpenDeleteSetDialog={handleDeleteSetDialog}
       />
-      <Divider />
-      <Button mode="contained" onPress={() => addSet(exerciseIndex)}>
-        Add Set
-      </Button>
+      <View style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <Button mode="contained" onPress={() => addSet(exerciseIndex)}>
+          Add Set
+        </Button>
+      </View>
+      <Divider style={{ marginTop: 24 }} />
     </View>
   );
 }
