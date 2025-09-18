@@ -34,7 +34,6 @@ export default function AddExerciseOverlay({
   );
 
   const handleAddExercisePress = () => {
-    console.log('called handleAddExercisePress');
     addExercise(
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
@@ -78,6 +77,7 @@ export default function AddExerciseOverlay({
           Clear All
         </Button>
         <Button
+          disabled={selectedExerciseIDToAdd === null}
           mode="contained"
           onPress={() => handleAddExercisePress()}
           style={{
