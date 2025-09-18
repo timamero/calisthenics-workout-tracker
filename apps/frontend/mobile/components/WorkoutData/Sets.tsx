@@ -6,6 +6,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
+import SetListItem from './SetListItem';
 
 interface SetsProps {
   exerciseIndex: number;
@@ -41,23 +42,6 @@ export default function Sets({
   };
 
   const setList = sets.map((set, i) => {
-    const fields = tracked.map((field) => {
-      if (field === 'reps') {
-        return (
-          <View key={set.id}>
-            <TextInput
-              keyboardType="number-pad"
-              label="Reps"
-              value={set.fields.reps!.toString()}
-              onChangeText={(text) =>
-                handleSetFieldChange(i, { reps: Number(text) })
-              }
-            />
-          </View>
-        );
-      }
-    });
-
     const onDeleteSetPress = () => {
       setSelectedSetIndexToMod(i);
       setSelectedExerciseIndexToMod(exerciseIndex);
@@ -74,7 +58,13 @@ export default function Sets({
             </Button>
           )}
         </View>
-        {fields}
+        <SetListItem
+          tracked={{ tracked }}
+          set={set}
+          setIndex={i}
+          handleSetFieldChange={handleSetFieldChange}
+        />
+        {/* {fields} */}
       </View>
     );
   });
