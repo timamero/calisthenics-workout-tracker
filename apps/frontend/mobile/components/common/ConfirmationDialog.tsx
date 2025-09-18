@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View } from 'react-native';
 import { Button, Dialog, Portal, Text } from 'react-native-paper';
 
 interface ConfirmationDialogProps {
