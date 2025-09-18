@@ -1,38 +1,35 @@
 import { View } from 'react-native';
 import { useTheme, TextInput, Button } from 'react-native-paper';
 
-import type { WorkoutExercise, SetFields } from '@cwt/schema/workouts';
+import type { SetFields } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
 
-// interface SetsProps {
-//   tracked: Pick<WorkoutExercise, 'tracked'>;
-//   sets: Pick<WorkoutExercise, 'sets'>;
-//   exerciseIndex: number;
-//   handleOpenDeleteSetDialog: () => void;
-// }
-type SetsProps = Pick<WorkoutExercise, 'sets' | 'tracked'> & {
+interface SetsProps {
   exerciseIndex: number;
   handleOpenDeleteSetDialog: () => void;
-};
+}
 
 export default function Sets({
-  tracked,
-  sets,
   exerciseIndex,
   handleOpenDeleteSetDialog,
 }: SetsProps) {
   const theme = useTheme() as CustomTheme;
 
+  const sets = useWorkoutDraftStore((state) => state.workoutData).exercises[
+    exerciseIndex
+  ].sets;
+  const tracked = useWorkoutDraftStore((state) => state.workoutData).exercises[
+    exerciseIndex
+  ].tracked;
   const setSelectedSetIndexToMod = useWorkoutDraftStore(
     (state) => state.setSelectedSetIndexToMod,
   );
   const setSelectedExerciseIndexToMod = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIndexToMod,
   );
-  // const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
   const updateField = useWorkoutDraftStore((state) => state.updateField);
 
   const handleSetFieldChange = (
@@ -71,7 +68,7 @@ export default function Sets({
       <View key={`set-${i}`}>
         <View>
           <Text style={{ color: theme.colors.light }}>{`Set ${i + 1}`}</Text>
-          {fields.length > 1 && (
+          {sets.length > 1 && (
             <Button mode="outlined" onPress={() => onDeleteSetPress()}>
               Delete
             </Button>

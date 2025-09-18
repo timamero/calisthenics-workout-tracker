@@ -65,8 +65,6 @@ export default function WorkoutExercise({
         </Button>
       </View>
       <Sets
-        tracked={workoutExercise.tracked}
-        sets={workoutExercise.sets}
         exerciseIndex={exerciseIndex}
         handleOpenDeleteSetDialog={handleDeleteSetDialog}
       />
