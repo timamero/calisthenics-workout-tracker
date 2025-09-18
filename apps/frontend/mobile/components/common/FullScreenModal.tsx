@@ -22,7 +22,7 @@ export default function FullScreenModal({
   const containerStyle = {
     backgroundColor: theme.colors.background,
     paddingBlock: 16,
-    marginBlock: 20,
+    marginBlock: 40,
     marginInline: 16,
     borderWidth: 2,
     borderRadius: 16,
