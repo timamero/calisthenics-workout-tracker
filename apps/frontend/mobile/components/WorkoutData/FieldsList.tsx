@@ -3,7 +3,7 @@ import { TextInput } from 'react-native-paper';
 
 import type { SetFields, Set, WorkoutExercise } from '@cwt/schema/workouts';
 
-interface SetListItemProps {
+interface FieldsListProps {
   tracked: Pick<WorkoutExercise, 'tracked'>;
   set: Set;
   setIndex: number;
@@ -13,12 +13,12 @@ interface SetListItemProps {
   ) => void;
 }
 
-export default function SetListItem({
+export default function FieldsList({
   tracked,
   set,
   setIndex,
   handleSetFieldChange,
-}: SetListItemProps) {
+}: FieldsListProps) {
   const fields = tracked.tracked.map((field) => {
     if (field === 'reps') {
       return (
