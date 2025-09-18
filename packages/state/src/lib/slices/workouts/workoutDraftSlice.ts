@@ -1,5 +1,6 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
+import { v4 as uuidv4 } from 'uuid';
 
 import type {
   SetFields,
@@ -94,8 +95,6 @@ export const createWorkoutDraftSlice: StateCreator<
           return;
         }
         if (state.mode === 'edit' || state.mode === 'build') {
-          // const tracking: Tracking[] =
-          //   get().getExerciseByID(exerciseID).default_tracking_type;
           let fields: SetFields = {};
           if (tracking.includes('reps')) {
             fields = DEFAULT_REP_SET;
@@ -104,12 +103,10 @@ export const createWorkoutDraftSlice: StateCreator<
           }
 
           state.workoutData.exercises.push({
-            sets: [
-              { ...INITIALIZED_SET, id: crypto.randomUUID(), fields: fields },
-            ],
+            sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
             exercise_id: exerciseID,
             tracked: tracking,
-            id: crypto.randomUUID(),
+            id: uuidv4(),
           });
         } else {
           console.error('Cannot add exercise in log mode');
@@ -140,7 +137,7 @@ export const createWorkoutDraftSlice: StateCreator<
         }
         state.workoutData.exercises[exerciseIndex].sets.push({
           ...INITIALIZED_SET,
-          id: crypto.randomUUID(),
+          id: uuidv4(),
           fields: fields,
         });
       } else {
