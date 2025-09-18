@@ -4,7 +4,7 @@ import { useTheme } from 'react-native-paper';
 // import { useStore } from '@cwt/state/store';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-// import WorkoutExercise from './WorkoutExercise';
+import WorkoutExercise from './WorkoutExercise';
 import { CustomTheme } from '../../theme';
 import { Text } from '../../customText';
 
@@ -12,6 +12,12 @@ export default function Workout() {
   const theme = useTheme() as CustomTheme;
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
+
+  const workoutExercises = workoutData.exercises.map((ex, i) => {
+    return (
+      <WorkoutExercise key={ex.id} workoutExercise={ex} exerciseIndex={i} />
+    );
+  });
 
   const EmptyWorkoutPlaceholder = () => {
     if (workoutData.exercises.length === 0) {
@@ -50,7 +56,7 @@ export default function Workout() {
     // <Stack gap="xl" align="center">
     <View>
       <EmptyWorkoutPlaceholder />
-      {/* {workoutExercises} */}
+      {workoutExercises}
     </View>
   );
 }
