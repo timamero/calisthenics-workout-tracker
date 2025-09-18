@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import Workout from '../components/Workout/Workout';
+import WorkoutData from '../components/WorkoutData/';
 import { CustomTheme } from '../theme';
 import ConfirmationDialog from '../components/common/ConfirmationDialog';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
@@ -69,7 +69,7 @@ export default function WorkoutScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Workout />
+      <WorkoutData />
       <View style={{ flex: 1 }}>
         <FAB
           icon="plus"
