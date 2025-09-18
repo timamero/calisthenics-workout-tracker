@@ -26,7 +26,7 @@ interface WorkoutDraftState {
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
-  selectedExerciseIndexToDel: number | null;
+  selectedExerciseIndexToMod: number | null;
   isWorkoutSavePending: boolean;
   workoutToSave: WorkoutBuildRequest | null;
 }
@@ -36,7 +36,7 @@ interface WorkoutDraftAction {
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSelectedSetIndexToMod: (setIndex: number | null) => void;
-  setSelectedExerciseIndexToDel: (exerciseIndex: number | null) => void;
+  setSelectedExerciseIndexToMod: (exerciseIndex: number | null) => void;
   addExercise: (tracking: Tracking[]) => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
@@ -64,7 +64,7 @@ export const createWorkoutDraftSlice: StateCreator<
   workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
-  selectedExerciseIndexToDel: null,
+  selectedExerciseIndexToMod: null,
   isWorkoutSavePending: false,
   workoutToSave: null,
 
@@ -88,9 +88,9 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       state.selectedSetIndexToMod = setIndex;
     }),
-  setSelectedExerciseIndexToDel: (exerciseIndex) =>
+  setSelectedExerciseIndexToMod: (exerciseIndex) =>
     set((state) => {
-      state.selectedExerciseIndexToDel = exerciseIndex;
+      state.selectedExerciseIndexToMod = exerciseIndex;
     }),
   addExercise: (tracking) =>
     set(
