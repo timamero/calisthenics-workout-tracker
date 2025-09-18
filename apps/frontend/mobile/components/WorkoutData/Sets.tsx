@@ -29,6 +29,9 @@ export default function Sets({
   const setSelectedSetIndexToMod = useWorkoutDraftStore(
     (state) => state.setSelectedSetIndexToMod,
   );
+  const setSelectedExerciseIndexToMod = useWorkoutDraftStore(
+    (state) => state.setSelectedExerciseIndexToMod,
+  );
   // const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
   const updateField = useWorkoutDraftStore((state) => state.updateField);
 
@@ -60,6 +63,7 @@ export default function Sets({
 
     const onDeleteSetPress = () => {
       setSelectedSetIndexToMod(i);
+      setSelectedExerciseIndexToMod(exerciseIndex);
       handleOpenDeleteSetDialog();
     };
 

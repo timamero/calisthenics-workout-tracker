@@ -32,7 +32,7 @@ export default function WorkoutData() {
 
   const onDeleteSetPress = () => {
     deleteSet(selectedExerciseIndexToMod!);
-    setIsDeleteExerciseDialogVisible(false);
+    setIsDeleteSetDialogVisible(false);
   };
 
   const workoutExercises = workoutData.exercises.map((ex, i) => {
