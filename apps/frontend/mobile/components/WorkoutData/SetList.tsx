@@ -12,13 +12,9 @@ import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 
 interface SetListProps {
   exerciseIndex: number;
-  // handleOpenDeleteSetDialog: () => void;
 }
 
-export default function SetList({
-  exerciseIndex,
-  // handleOpenDeleteSetDialog,
-}: SetListProps) {
+export default function SetList({ exerciseIndex }: SetListProps) {
   const theme = useTheme() as CustomTheme;
 
   const setIsDeleteSetDialogVisible = React.useContext(
@@ -53,7 +49,6 @@ export default function SetList({
       setSelectedSetIndexToMod(i);
       setSelectedExerciseIndexToMod(exerciseIndex);
       setIsDeleteSetDialogVisible(true);
-      // handleOpenDeleteSetDialog();
     };
 
     return (
