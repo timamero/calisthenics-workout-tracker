@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -5,13 +6,18 @@ import { useTheme } from 'react-native-paper';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import WorkoutExercise from './WorkoutExercise';
+import ConfirmationDialog from '../common/ConfirmationDialog';
 import { CustomTheme } from '../../theme';
 import { Text } from '../../customText';
 
-export default function Workout() {
+export default function WorkoutData() {
   const theme = useTheme() as CustomTheme;
 
+  const [isDeleteExerciseDialogVisible, setIsDeleteExerciseDialogVisible] =
+    React.useState<boolean>(false);
+
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
+  const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
 
   const workoutExercises = workoutData.exercises.map((ex, i) => {
     return (
@@ -57,6 +63,14 @@ export default function Workout() {
     <View>
       <EmptyWorkoutPlaceholder />
       {workoutExercises}
+      <ConfirmationDialog
+        title="Delete Exercise"
+        message="Delete exercise from this workout?"
+        confirmButtonLabel="Delete exercise"
+        isVisible={isDeleteExerciseDialogVisible}
+        handleHideDialog={setIsDeleteExerciseDialogVisible}
+        onConfirmationPress={() => deleteExercise(1)}
+      />
     </View>
   );
 }
