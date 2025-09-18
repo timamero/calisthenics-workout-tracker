@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Modal, Portal, Button, useTheme } from 'react-native-paper';
+import { Modal, Portal, useTheme } from 'react-native-paper';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
