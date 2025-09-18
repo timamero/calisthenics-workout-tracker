@@ -1,45 +1,26 @@
 import { View } from 'react-native';
 import { Divider, useTheme, Button } from 'react-native-paper';
 
-import type { WorkoutExercise as WorkoutExerciseType } from '@cwt/schema/workouts';
-import {
-  useExerciseLibraryStore,
-  useWorkoutDraftStore,
-} from '@cwt/state/stores';
-
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
-// import Sets from './Sets';
 import SetList from './SetList';
 
 interface WorkoutExerciseProps {
+  name: string;
   exerciseIndex: number;
-  workoutExercise: WorkoutExerciseType;
-  handleOpenDialog: () => void;
+  handleAddSet: (exerciseIndex: number) => void;
+  handleDeleteExercisePress: () => void;
   handleDeleteSetDialog: () => void;
 }
 
 export default function WorkoutExercise({
+  name,
   exerciseIndex,
-  workoutExercise,
-  handleOpenDialog,
+  handleAddSet,
+  handleDeleteExercisePress,
   handleDeleteSetDialog,
 }: WorkoutExerciseProps) {
   const theme = useTheme() as CustomTheme;
-
-  const addSet = useWorkoutDraftStore((state) => state.addSet);
-  const setSelectedExerciseIndexToDel = useWorkoutDraftStore(
-    (state) => state.setSelectedExerciseIndexToMod,
-  );
-  const getExerciseNameById = useExerciseLibraryStore(
-    (state) => state.getExerciseNameByID,
-  );
-  const name = getExerciseNameById(workoutExercise.exercise_id);
-
-  const handleDeleteExercisePress = () => {
-    setSelectedExerciseIndexToDel(exerciseIndex);
-    handleOpenDialog();
-  };
 
   return (
     <View style={{ marginInline: 16 }}>
@@ -61,7 +42,7 @@ export default function WorkoutExercise({
         >
           {name}
         </Text>
-        <Button mode="outlined" onPress={() => handleDeleteExercisePress()}>
+        <Button mode="outlined" onPress={handleDeleteExercisePress}>
           Delete
         </Button>
       </View>
@@ -70,7 +51,7 @@ export default function WorkoutExercise({
         handleOpenDeleteSetDialog={handleDeleteSetDialog}
       />
       <View style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <Button mode="contained" onPress={() => addSet(exerciseIndex)}>
+        <Button mode="contained" onPress={() => handleAddSet(exerciseIndex)}>
           Add Set
         </Button>
       </View>
