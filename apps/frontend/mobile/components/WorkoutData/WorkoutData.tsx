@@ -17,11 +17,24 @@ export default function WorkoutData() {
     React.useState<boolean>(false);
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
+  const selectedExerciseIndexToDel = useWorkoutDraftStore(
+    (state) => state.selectedExerciseIndexToDel,
+  );
   const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
+
+  const onDeleteExercisePress = () => {
+    deleteExercise(selectedExerciseIndexToDel!);
+    setIsDeleteExerciseDialogVisible(false);
+  };
 
   const workoutExercises = workoutData.exercises.map((ex, i) => {
     return (
-      <WorkoutExercise key={ex.id} workoutExercise={ex} exerciseIndex={i} />
+      <WorkoutExercise
+        key={ex.id}
+        workoutExercise={ex}
+        exerciseIndex={i}
+        handleOpenDialog={() => setIsDeleteExerciseDialogVisible(true)}
+      />
     );
   });
 
@@ -69,7 +82,7 @@ export default function WorkoutData() {
         confirmButtonLabel="Delete exercise"
         isVisible={isDeleteExerciseDialogVisible}
         handleHideDialog={setIsDeleteExerciseDialogVisible}
-        onConfirmationPress={() => deleteExercise(1)}
+        onConfirmationPress={() => onDeleteExercisePress()}
       />
     </View>
   );
