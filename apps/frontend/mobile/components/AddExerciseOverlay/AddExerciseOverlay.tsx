@@ -55,7 +55,16 @@ export default function AddExerciseOverlay({
       >
         <ExerciseList />
       </ScrollView>
-      <View>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          paddingTop: 20,
+          borderTopWidth: 2,
+          borderTopColor: theme.colors.orange1,
+        }}
+      >
         <Button
           mode="outlined"
           textColor="rgb(134, 142, 150)"
@@ -74,7 +83,7 @@ export default function AddExerciseOverlay({
             borderRadius: 4,
           }}
         >
-          Apply Filters
+          Add Exercise
         </Button>
       </View>
     </FullScreenModal>
