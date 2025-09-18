@@ -6,9 +6,9 @@ import type { SetFields, Set, WorkoutExercise } from '@cwt/schema/workouts';
 interface FieldsListProps {
   tracked: Pick<WorkoutExercise, 'tracked'>;
   set: Set;
-  setIndex: number;
+  // setIndex: number;
   handleSetFieldChange: (
-    setIndex: number,
+    // setIndex: number,
     updatedField: Partial<SetFields>,
   ) => void;
 }
@@ -16,7 +16,7 @@ interface FieldsListProps {
 export default function FieldsList({
   tracked,
   set,
-  setIndex,
+  // setIndex,
   handleSetFieldChange,
 }: FieldsListProps) {
   const fields = tracked.tracked.map((field) => {
@@ -28,7 +28,7 @@ export default function FieldsList({
             label="Reps"
             value={set.fields.reps!.toString()}
             onChangeText={(text) =>
-              handleSetFieldChange(setIndex, { reps: Number(text) })
+              handleSetFieldChange({ reps: Number(text) })
             }
           />
         </View>
