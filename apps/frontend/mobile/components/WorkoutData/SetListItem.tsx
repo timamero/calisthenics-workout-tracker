@@ -1,10 +1,10 @@
 import { View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
-import type { SetFields, Set } from '@cwt/schema/workouts';
+import type { SetFields, Set, WorkoutExercise } from '@cwt/schema/workouts';
 
 interface SetListItemProps {
-  field: 'reps' | 'time' | 'weight' | 'rpe';
+  tracked: Pick<WorkoutExercise, 'tracked'>;
   set: Set;
   setIndex: number;
   handleSetFieldChange: (
@@ -14,23 +14,26 @@ interface SetListItemProps {
 }
 
 export default function SetListItem({
-  field,
+  tracked,
   set,
   setIndex,
   handleSetFieldChange,
 }: SetListItemProps) {
-  if (field === 'reps') {
-    return (
-      <View key={set.id}>
-        <TextInput
-          keyboardType="number-pad"
-          label="Reps"
-          value={set.fields.reps!.toString()}
-          onChangeText={(text) =>
-            handleSetFieldChange(setIndex, { reps: Number(text) })
-          }
-        />
-      </View>
-    );
-  }
+  const fields = tracked.tracked.map((field) => {
+    if (field === 'reps') {
+      return (
+        <View key={set.id}>
+          <TextInput
+            keyboardType="number-pad"
+            label="Reps"
+            value={set.fields.reps!.toString()}
+            onChangeText={(text) =>
+              handleSetFieldChange(setIndex, { reps: Number(text) })
+            }
+          />
+        </View>
+      );
+    }
+  });
+  return <View>{fields}</View>;
 }
