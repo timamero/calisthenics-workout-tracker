@@ -64,7 +64,7 @@ const fontConfig = {
       android: 'monospace',
       default: 'monospace',
     }),
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '400',
     letterSpacing: 0.15,
     lineHeight: 24,

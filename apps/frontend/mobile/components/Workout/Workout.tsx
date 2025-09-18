@@ -12,21 +12,33 @@ export default function Workout() {
   const theme = useTheme() as CustomTheme;
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
-  console.log('rendering workout');
-  // if (!workoutData) {
-  //   return <Text>Loading</Text>;
-  // }
 
   const EmptyWorkoutPlaceholder = () => {
     if (workoutData.exercises.length === 0) {
       return (
-        // <Stack align="center" bd="2px dashed gray.6" p="lg">
-        <View>
-          {/* <Text size="lg" fw={800}> */}
-          <Text style={{ color: theme.colors.light }}>
+        <View
+          style={{
+            borderColor: theme.colors.grey,
+            borderWidth: 2,
+            borderStyle: 'dashed',
+            display: 'flex',
+            alignItems: 'center',
+            marginInline: 20,
+            padding: 16,
+            gap: 16,
+          }}
+        >
+          <Text
+            variant="bodyLarge"
+            style={{
+              color: theme.colors.light,
+              fontWeight: 800,
+              textAlign: 'center',
+            }}
+          >
             Ready to start building your workout?
           </Text>
-          <Text style={{ color: theme.colors.light }}>
+          <Text style={{ color: theme.colors.light, textAlign: 'center' }}>
             Add your first exercise to begin
           </Text>
         </View>
@@ -34,11 +46,6 @@ export default function Workout() {
     }
   };
 
-  // const workoutExercises = workoutData.exercises.map((ex, i) => {
-  //   return (
-  //     <WorkoutExercise key={ex.id} workoutExercise={ex} exerciseIndex={i} />
-  //   );
-  // });
   return (
     // <Stack gap="xl" align="center">
     <View>
