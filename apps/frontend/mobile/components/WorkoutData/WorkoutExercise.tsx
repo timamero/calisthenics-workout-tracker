@@ -13,19 +13,30 @@ import { CustomTheme } from '../../theme';
 interface WorkoutExerciseProps {
   exerciseIndex: number;
   workoutExercise: WorkoutExerciseType;
+  handleOpenDialog: () => void;
 }
 
 export default function WorkoutExercise({
   exerciseIndex,
   workoutExercise,
+  handleOpenDialog,
 }: WorkoutExerciseProps) {
   const theme = useTheme() as CustomTheme;
 
-  const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
+  // const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
+  const setSelectedExerciseIndexToDel = useWorkoutDraftStore(
+    (state) => state.setSelectedExerciseIndexToDel,
+  );
   const getExerciseNameById = useExerciseLibraryStore(
     (state) => state.getExerciseNameByID,
   );
   const name = getExerciseNameById(workoutExercise.exercise_id);
+
+  const handleDeleteExercisePress = () => {
+    setSelectedExerciseIndexToDel(exerciseIndex);
+    handleOpenDialog();
+  };
+
   return (
     <View>
       <View>
@@ -41,12 +52,12 @@ export default function WorkoutExercise({
         </Text>
         <Button
           mode="text"
-          onPress={() => deleteExercise(exerciseIndex)}
+          onPress={() => handleDeleteExercisePress()}
           style={{
             marginRight: 24,
           }}
         >
-          Cancel
+          Delete
         </Button>
       </View>
       <Divider />
