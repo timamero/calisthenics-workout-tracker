@@ -52,7 +52,7 @@ export default function WorkoutScreen() {
       }}
     >
       <Workout />
-      <View>
+      <View style={{ flex: 1 }}>
         <FAB
           icon="plus"
           label="Add Exercise"
