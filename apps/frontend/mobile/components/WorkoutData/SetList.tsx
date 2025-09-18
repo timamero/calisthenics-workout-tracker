@@ -9,65 +9,67 @@ import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
 import FieldsList from './FieldsList';
 import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
+import SetContainer from './SetContainer';
 
 interface SetListProps {
   exerciseIndex: number;
 }
 
 export default function SetList({ exerciseIndex }: SetListProps) {
-  const theme = useTheme() as CustomTheme;
+  // const theme = useTheme() as CustomTheme;
 
-  const setIsDeleteSetDialogVisible = React.useContext(
-    WorkoutExerciseContext,
-  )!.setIsDeleteSetDialogVisible;
+  // const setIsDeleteSetDialogVisible = React.useContext(
+  //   WorkoutExerciseContext,
+  // )!.setIsDeleteSetDialogVisible;
 
   const sets = useWorkoutDraftStore((state) => state.workoutData).exercises[
     exerciseIndex
   ].sets;
-  const tracked = useWorkoutDraftStore((state) => state.workoutData).exercises[
-    exerciseIndex
-  ].tracked;
+  // const tracked = useWorkoutDraftStore((state) => state.workoutData).exercises[
+  //   exerciseIndex
+  // ].tracked;
 
-  const setSelectedSetIndexToMod = useWorkoutDraftStore(
-    (state) => state.setSelectedSetIndexToMod,
-  );
-  const setSelectedExerciseIndexToMod = useWorkoutDraftStore(
-    (state) => state.setSelectedExerciseIndexToMod,
-  );
-  const updateField = useWorkoutDraftStore((state) => state.updateField);
+  // const setSelectedSetIndexToMod = useWorkoutDraftStore(
+  //   (state) => state.setSelectedSetIndexToMod,
+  // );
+  // const setSelectedExerciseIndexToMod = useWorkoutDraftStore(
+  //   (state) => state.setSelectedExerciseIndexToMod,
+  // );
+  // const updateField = useWorkoutDraftStore((state) => state.updateField);
 
-  const handleSetFieldChange = (
-    setIndex: number,
-    updatedField: Partial<SetFields>,
-  ) => {
-    setSelectedSetIndexToMod(setIndex);
-    updateField(exerciseIndex, updatedField);
-  };
+  // const handleSetFieldChange = (
+  //   setIndex: number,
+  //   updatedField: Partial<SetFields>,
+  // ) => {
+  //   setSelectedSetIndexToMod(setIndex);
+  //   updateField(exerciseIndex, updatedField);
+  // };
 
   const setList = sets.map((set, i) => {
-    const onDeleteSetPress = () => {
-      setSelectedSetIndexToMod(i);
-      setSelectedExerciseIndexToMod(exerciseIndex);
-      setIsDeleteSetDialogVisible(true);
-    };
+    // const onDeleteSetPress = () => {
+    //   setSelectedSetIndexToMod(i);
+    //   setSelectedExerciseIndexToMod(exerciseIndex);
+    //   setIsDeleteSetDialogVisible(true);
+    // };
 
     return (
-      <View key={`set-${i}`}>
-        <View>
-          <Text style={{ color: theme.colors.light }}>{`Set ${i + 1}`}</Text>
-          {sets.length > 1 && (
-            <Button mode="outlined" onPress={() => onDeleteSetPress()}>
-              Delete
-            </Button>
-          )}
-        </View>
-        <FieldsList
-          tracked={{ tracked }}
-          set={set}
-          setIndex={i}
-          handleSetFieldChange={handleSetFieldChange}
-        />
-      </View>
+      <SetContainer key={set.id} setIndex={i} />
+      // <View key={`set-${i}`}>
+      //   <View>
+      //     <Text style={{ color: theme.colors.light }}>{`Set ${i + 1}`}</Text>
+      //     {sets.length > 1 && (
+      //       <Button mode="outlined" onPress={() => onDeleteSetPress()}>
+      //         Delete
+      //       </Button>
+      //     )}
+      //   </View>
+      //   <FieldsList
+      //     tracked={{ tracked }}
+      //     set={set}
+      //     setIndex={i}
+      //     handleSetFieldChange={handleSetFieldChange}
+      //   />
+      // </View>
     );
   });
   return <View>{setList}</View>;
