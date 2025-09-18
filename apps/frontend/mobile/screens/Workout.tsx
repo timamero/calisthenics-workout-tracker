@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, BackHandler, Alert } from 'react-native';
+import { View, StyleSheet, BackHandler } from 'react-native';
 import { useTheme, Button, FAB } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
