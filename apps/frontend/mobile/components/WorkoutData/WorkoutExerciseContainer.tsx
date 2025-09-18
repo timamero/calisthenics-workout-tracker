@@ -9,21 +9,7 @@ import {
 import WorkoutExercise from './WorkoutExercise';
 import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 
-interface WorkoutExerciseProps {
-  // exerciseIndex: number;
-  // workoutExercise: WorkoutExerciseType;
-  // handleOpenDialog: () => void;
-  // handleDeleteSetDialog: () => void;
-}
-
-export default function WorkoutExerciseContainer(
-  {
-    // exerciseIndex,
-    // workoutExercise,
-    // handleOpenDialog,
-    // handleDeleteSetDialog,
-  }: WorkoutExerciseProps,
-) {
+export default function WorkoutExerciseContainer() {
   const exerciseIndex: number = React.useContext(
     WorkoutExerciseContext,
   )!.exerciseIndex;
@@ -33,7 +19,6 @@ export default function WorkoutExerciseContainer(
   const setIsDeleteExerciseDialogVisible = React.useContext(
     WorkoutExerciseContext,
   )!.setIsDeleteExerciseDialogVisible;
-  // const set;
 
   const addSet = useWorkoutDraftStore((state) => state.addSet);
   const setSelectedExerciseIndexToDel = useWorkoutDraftStore(
@@ -55,7 +40,6 @@ export default function WorkoutExerciseContainer(
       exerciseIndex={exerciseIndex}
       handleAddSet={addSet}
       handleDeleteExercisePress={handleDeleteExercisePress}
-      // handleDeleteSetDialog={handleDeleteSetDialog}
     />
   );
 }

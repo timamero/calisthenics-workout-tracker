@@ -4,9 +4,6 @@ import { WorkoutExercise } from '@cwt/schema/workouts';
 
 interface WorkoutExerciseContextType {
   workoutExercise: WorkoutExercise;
-  // setWorkoutExercise: React.Dispatch<
-  //   React.SetStateAction<WorkoutExercise | null>
-  // >;
   exerciseIndex: number;
   setIsDeleteExerciseDialogVisible: React.Dispatch<
     React.SetStateAction<boolean>
