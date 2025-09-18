@@ -1,7 +1,11 @@
 import { ScrollView, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useTheme, Button } from 'react-native-paper';
 
-import { Text } from '../../customText';
+import {
+  useWorkoutDraftStore,
+  useExerciseLibraryStore,
+} from '@cwt/state/stores';
+
 import { CustomTheme } from '../../theme';
 
 import FullScreenModal from '../common/FullScreenModal';
@@ -17,6 +21,25 @@ export default function AddExerciseOverlay({
   handleHideModal,
 }: AddExerciseOverlayProps) {
   const theme = useTheme() as CustomTheme;
+
+  const selectedExerciseIDToAdd = useWorkoutDraftStore(
+    (state) => state.selectedExerciseIDToAdd,
+  );
+  const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
+    (state) => state.setSelectedExerciseIDToAdd,
+  );
+  const addExercise = useWorkoutDraftStore((state) => state.addExercise);
+  const getExerciseById = useExerciseLibraryStore(
+    (state) => state.getExerciseByID,
+  );
+
+  const handleAddExerciseClick = () => {
+    addExercise(
+      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
+    );
+    setSelectedExerciseIDToAdd(null);
+    handleHideModal();
+  };
   return (
     <FullScreenModal
       title="Add Exercise"
@@ -33,7 +56,26 @@ export default function AddExerciseOverlay({
         <ExerciseList />
       </ScrollView>
       <View>
-        <Text>Buttons here</Text>
+        <Button
+          mode="outlined"
+          textColor="rgb(134, 142, 150)"
+          onPress={() => handleHideModal()}
+          style={{
+            borderColor: 'rgb(134, 142, 150)',
+            borderRadius: 4,
+          }}
+        >
+          Clear All
+        </Button>
+        <Button
+          mode="contained"
+          onPress={() => handleAddExerciseClick()}
+          style={{
+            borderRadius: 4,
+          }}
+        >
+          Apply Filters
+        </Button>
       </View>
     </FullScreenModal>
   );
