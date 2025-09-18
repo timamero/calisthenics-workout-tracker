@@ -9,7 +9,8 @@ import {
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
-import Sets from './Sets';
+// import Sets from './Sets';
+import SetList from './SetList';
 
 interface WorkoutExerciseProps {
   exerciseIndex: number;
@@ -64,7 +65,7 @@ export default function WorkoutExercise({
           Delete
         </Button>
       </View>
-      <Sets
+      <SetList
         exerciseIndex={exerciseIndex}
         handleOpenDeleteSetDialog={handleDeleteSetDialog}
       />
