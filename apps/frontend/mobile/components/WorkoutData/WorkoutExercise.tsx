@@ -10,7 +10,7 @@ interface WorkoutExerciseProps {
   exerciseIndex: number;
   handleAddSet: (exerciseIndex: number) => void;
   handleDeleteExercisePress: () => void;
-  handleDeleteSetDialog: () => void;
+  // handleDeleteSetDialog: () => void;
 }
 
 export default function WorkoutExercise({
@@ -18,7 +18,7 @@ export default function WorkoutExercise({
   exerciseIndex,
   handleAddSet,
   handleDeleteExercisePress,
-  handleDeleteSetDialog,
+  // handleDeleteSetDialog,
 }: WorkoutExerciseProps) {
   const theme = useTheme() as CustomTheme;
 
@@ -48,7 +48,7 @@ export default function WorkoutExercise({
       </View>
       <SetList
         exerciseIndex={exerciseIndex}
-        handleOpenDeleteSetDialog={handleDeleteSetDialog}
+        // handleOpenDeleteSetDialog={handleDeleteSetDialog}
       />
       <View style={{ display: 'flex', alignItems: 'flex-end' }}>
         <Button mode="contained" onPress={() => handleAddSet(exerciseIndex)}>

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
@@ -7,17 +8,22 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
 import FieldsList from './FieldsList';
+import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 
 interface SetListProps {
   exerciseIndex: number;
-  handleOpenDeleteSetDialog: () => void;
+  // handleOpenDeleteSetDialog: () => void;
 }
 
 export default function SetList({
   exerciseIndex,
-  handleOpenDeleteSetDialog,
+  // handleOpenDeleteSetDialog,
 }: SetListProps) {
   const theme = useTheme() as CustomTheme;
+
+  const setIsDeleteSetDialogVisible = React.useContext(
+    WorkoutExerciseContext,
+  )!.setIsDeleteSetDialogVisible;
 
   const sets = useWorkoutDraftStore((state) => state.workoutData).exercises[
     exerciseIndex
@@ -46,7 +52,8 @@ export default function SetList({
     const onDeleteSetPress = () => {
       setSelectedSetIndexToMod(i);
       setSelectedExerciseIndexToMod(exerciseIndex);
-      handleOpenDeleteSetDialog();
+      setIsDeleteSetDialogVisible(true);
+      // handleOpenDeleteSetDialog();
     };
 
     return (
