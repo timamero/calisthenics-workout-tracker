@@ -71,9 +71,11 @@ export default function Sets({
       <View key={`set-${i}`}>
         <View>
           <Text style={{ color: theme.colors.light }}>{`Set ${i + 1}`}</Text>
-          <Button mode="outlined" onPress={() => onDeleteSetPress()}>
-            Delete
-          </Button>
+          {fields.length > 1 && (
+            <Button mode="outlined" onPress={() => onDeleteSetPress()}>
+              Delete
+            </Button>
+          )}
         </View>
         {fields}
       </View>
