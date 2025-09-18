@@ -15,15 +15,23 @@ export default function WorkoutData() {
 
   const [isDeleteExerciseDialogVisible, setIsDeleteExerciseDialogVisible] =
     React.useState<boolean>(false);
+  const [isDeleteSetDialogVisible, setIsDeleteSetDialogVisible] =
+    React.useState<boolean>(false);
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
   const selectedExerciseIndexToDel = useWorkoutDraftStore(
     (state) => state.selectedExerciseIndexToDel,
   );
+  const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
   const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
 
   const onDeleteExercisePress = () => {
     deleteExercise(selectedExerciseIndexToDel!);
+    setIsDeleteExerciseDialogVisible(false);
+  };
+
+  const onDeleteSetPress = () => {
+    deleteSet(selectedExerciseIndexToDel!);
     setIsDeleteExerciseDialogVisible(false);
   };
 
@@ -34,6 +42,7 @@ export default function WorkoutData() {
         workoutExercise={ex}
         exerciseIndex={i}
         handleOpenDialog={() => setIsDeleteExerciseDialogVisible(true)}
+        handleDeleteSetDialog={() => setIsDeleteSetDialogVisible(true)}
       />
     );
   });
@@ -83,6 +92,14 @@ export default function WorkoutData() {
         isVisible={isDeleteExerciseDialogVisible}
         handleHideDialog={setIsDeleteExerciseDialogVisible}
         onConfirmationPress={() => onDeleteExercisePress()}
+      />
+      <ConfirmationDialog
+        title="Delete Set"
+        message="Delete set from this exercise?"
+        confirmButtonLabel="Delete"
+        isVisible={isDeleteSetDialogVisible}
+        handleHideDialog={setIsDeleteSetDialogVisible}
+        onConfirmationPress={() => onDeleteSetPress()}
       />
     </View>
   );
