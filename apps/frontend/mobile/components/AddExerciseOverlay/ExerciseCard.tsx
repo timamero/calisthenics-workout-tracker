@@ -11,21 +11,27 @@ import Pill from '.././Pill';
 
 interface ExerciseCardProps {
   exercise: ExerciseResponse;
+  isSelected: boolean;
+  onExercisePress: () => void;
 }
 
-export default function ExerciseCard({ exercise }: ExerciseCardProps) {
+export default function ExerciseCard({
+  exercise,
+  isSelected,
+  onExercisePress,
+}: ExerciseCardProps) {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
-  const onExercisePress = (): void => {
-    console.log('pressed exercise target', exercise.id);
-  };
+  // const onExercisePress = (): void => {
+  //   console.log('pressed exercise target', exercise.id);
+  // };
 
   return (
     <Card
-      style={styles.card}
+      style={isSelected ? styles.cardActive : styles.card}
       onPress={(e) => onExercisePress()}
-      data-exercise-id={exercise.id}
+      // data-exercise-id={exercise.id}
     >
       <Card.Content style={styles.cardContent}>
         <View style={styles.titleContainer}>
@@ -93,6 +99,16 @@ const getStyles = (theme: CustomTheme) =>
         'rgba(222, 226, 230, 0.05) 0px 1px 3px 0px, rgba(222, 226, 230, 0.05) 0px 28px 23px -7px, rgba(222, 226, 230, 0.04) 0px 12px 12px -7px',
       padding: 16,
       borderColor: theme.colors.light,
+      borderWidth: 1,
+    },
+    cardActive: {
+      marginBlock: 12,
+      marginInline: 12,
+      backgroundColor: theme.colors.background,
+      boxShadow:
+        'rgba(222, 226, 230, 0.05) 0px 1px 3px 0px, rgba(222, 226, 230, 0.05) 0px 28px 23px -7px, rgba(222, 226, 230, 0.04) 0px 12px 12px -7px',
+      padding: 16,
+      borderColor: theme.colors.primary,
       borderWidth: 1,
     },
     cardContent: {
