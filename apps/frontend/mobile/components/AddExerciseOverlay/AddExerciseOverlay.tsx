@@ -1,14 +1,39 @@
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import FullScreenModal from '../common/FullScreenModal';
 
-export default function AddExerciseOverlay() {
+import { Text } from '../../customText';
+import { CustomTheme } from '../../theme';
+
+interface AddExerciseOverlayProps {
+  isVisible: boolean;
+  handleHideModal: () => void;
+}
+
+export default function AddExerciseOverlay({
+  isVisible,
+  handleHideModal,
+}: AddExerciseOverlayProps) {
+  const theme = useTheme() as CustomTheme;
   return (
     <FullScreenModal
       title="Add Exercise"
-      visible={false}
-      handleHideModal={() => console.log('close')}
+      visible={isVisible}
+      handleHideModal={handleHideModal}
     >
-      <View>Add Exercise Overlay</View>
+      <ScrollView
+        style={{
+          height: 460,
+          backgroundColor: theme.colors.background,
+          paddingInline: 20,
+          paddingBlock: 16,
+        }}
+      >
+        <Text>Exercises will be here</Text>
+      </ScrollView>
+      <View>
+        <Text>Buttons here</Text>
+      </View>
     </FullScreenModal>
   );
 }

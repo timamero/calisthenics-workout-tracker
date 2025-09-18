@@ -8,6 +8,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import Workout from '../components/Workout/Workout';
 import { CustomTheme } from '../theme';
 import ConfirmationDialog from '../components/common/ConfirmationDialog';
+import AddExerciseOverlay from '../components/AddExerciseOverlay';
 
 export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;
@@ -19,6 +20,8 @@ export default function WorkoutScreen() {
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   const [isCancelWorktoutDialogVisible, setIsCancelWorktoutDialogVisible] =
+    React.useState<boolean>(false);
+  const [isAddExerciseOverlayVisible, setIsAddExerciseOverlayVisible] =
     React.useState<boolean>(false);
 
   const onCancelWorkoutPress = () => {
@@ -57,9 +60,13 @@ export default function WorkoutScreen() {
           icon="plus"
           label="Add Exercise"
           style={styles.fab}
-          onPress={() => console.log('Pressed')}
+          onPress={() => setIsAddExerciseOverlayVisible(true)}
         />
       </View>
+      <AddExerciseOverlay
+        isVisible={isAddExerciseOverlayVisible}
+        handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
+      />
       <ConfirmationDialog
         title="Cancel Workout Building"
         message="Confirm cancelling workout building. This will discard the current workout."
