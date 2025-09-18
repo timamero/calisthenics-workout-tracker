@@ -1,9 +1,11 @@
 import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import FullScreenModal from '../common/FullScreenModal';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
+
+import FullScreenModal from '../common/FullScreenModal';
+import ExerciseCard from './ExerciseCard';
 
 interface AddExerciseOverlayProps {
   isVisible: boolean;
@@ -29,7 +31,19 @@ export default function AddExerciseOverlay({
           paddingBlock: 16,
         }}
       >
-        <Text>Exercises will be here</Text>
+        <ExerciseCard
+          exercise={{
+            id: 1,
+            name: 'pull ups',
+            target_muscles: ['chest'],
+            required_equipment: ['none'],
+            emphasis: 'power',
+            difficulty: 'beginner',
+            tags: [],
+            instructions: ['1', '2'],
+            default_tracking_type: ['reps'],
+          }}
+        />
       </ScrollView>
       <View>
         <Text>Buttons here</Text>
