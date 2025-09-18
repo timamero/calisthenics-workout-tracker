@@ -1,12 +1,12 @@
 import { View } from 'react-native';
-import { useTheme, TextInput, Button } from 'react-native-paper';
+import { useTheme, Button } from 'react-native-paper';
 
 import type { SetFields } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
-import SetListItem from './SetListItem';
+import FieldsList from './FieldsList';
 
 interface SetsProps {
   exerciseIndex: number;
@@ -58,13 +58,12 @@ export default function Sets({
             </Button>
           )}
         </View>
-        <SetListItem
+        <FieldsList
           tracked={{ tracked }}
           set={set}
           setIndex={i}
           handleSetFieldChange={handleSetFieldChange}
         />
-        {/* {fields} */}
       </View>
     );
   });
