@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card, useTheme } from 'react-native-paper';
-import { View, StyleSheet, GestureResponderEvent } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import { ExerciseResponse, Attributes } from '@cwt/schema/exercises';
 
@@ -17,12 +17,16 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
-  const onExercisePress = (e: GestureResponderEvent): void => {
-    console.log('pressed exercise target', e.target);
+  const onExercisePress = (): void => {
+    console.log('pressed exercise target', exercise.id);
   };
 
   return (
-    <Card style={styles.card} onPress={(e) => onExercisePress(e)}>
+    <Card
+      style={styles.card}
+      onPress={(e) => onExercisePress()}
+      data-exercise-id={exercise.id}
+    >
       <Card.Content style={styles.cardContent}>
         <View style={styles.titleContainer}>
           <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
