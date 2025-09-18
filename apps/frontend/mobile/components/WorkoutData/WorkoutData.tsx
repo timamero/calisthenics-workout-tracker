@@ -5,7 +5,7 @@ import { useTheme } from 'react-native-paper';
 // import { useStore } from '@cwt/state/store';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import WorkoutExercise from './WorkoutExercise';
+import WorkoutExercise from './WorkoutExerciseContainer';
 import ConfirmationDialog from '../common/ConfirmationDialog';
 import { CustomTheme } from '../../theme';
 import { Text } from '../../customText';
