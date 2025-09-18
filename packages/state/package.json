@@ -23,9 +23,10 @@
     }
   },
   "dependencies": {
-    "@cwt/schema": "workspace:*",
     "@cwt/auth": "workspace:*",
+    "@cwt/schema": "workspace:*",
     "immer": "^10.1.3",
+    "uuid": "^13.0.0",
     "zustand": "^5.0.5"
   },
   "devDependencies": {
