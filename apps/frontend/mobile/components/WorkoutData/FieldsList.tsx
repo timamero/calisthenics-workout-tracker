@@ -6,17 +6,12 @@ import type { SetFields, Set, WorkoutExercise } from '@cwt/schema/workouts';
 interface FieldsListProps {
   tracked: Pick<WorkoutExercise, 'tracked'>;
   set: Set;
-  // setIndex: number;
-  handleSetFieldChange: (
-    // setIndex: number,
-    updatedField: Partial<SetFields>,
-  ) => void;
+  handleSetFieldChange: (updatedField: Partial<SetFields>) => void;
 }
 
 export default function FieldsList({
   tracked,
   set,
-  // setIndex,
   handleSetFieldChange,
 }: FieldsListProps) {
   const fields = tracked.tracked.map((field) => {
