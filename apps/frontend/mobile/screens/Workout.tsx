@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { useTheme, Button } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { useTheme, Button, FAB } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
@@ -52,6 +52,14 @@ export default function WorkoutScreen() {
       }}
     >
       <Workout />
+      <View>
+        <FAB
+          icon="plus"
+          label="Add Exercise"
+          style={styles.fab}
+          onPress={() => console.log('Pressed')}
+        />
+      </View>
       <ConfirmationDialog
         title="Cancel Workout Building"
         message="Confirm cancelling workout building. This will discard the current workout."
@@ -63,3 +71,12 @@ export default function WorkoutScreen() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
+});
