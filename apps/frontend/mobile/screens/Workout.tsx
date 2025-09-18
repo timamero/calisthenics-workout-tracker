@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, BackHandler, Alert } from 'react-native';
 import { useTheme, Button, FAB } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -46,6 +46,21 @@ export default function WorkoutScreen() {
       ),
     });
   }, [navigation]);
+
+  React.useEffect(() => {
+    const onBackPress = () => {
+      setIsCancelWorktoutDialogVisible(true);
+
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <View
