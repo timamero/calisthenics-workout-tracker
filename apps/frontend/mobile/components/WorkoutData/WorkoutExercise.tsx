@@ -38,8 +38,15 @@ export default function WorkoutExercise({
   };
 
   return (
-    <View>
-      <View>
+    <View style={{ marginInline: 16 }}>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
         <Text
           variant="bodyLarge"
           style={{
@@ -50,13 +57,7 @@ export default function WorkoutExercise({
         >
           {name}
         </Text>
-        <Button
-          mode="text"
-          onPress={() => handleDeleteExercisePress()}
-          style={{
-            marginRight: 24,
-          }}
-        >
+        <Button mode="outlined" onPress={() => handleDeleteExercisePress()}>
           Delete
         </Button>
       </View>
