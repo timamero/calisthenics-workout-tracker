@@ -28,7 +28,7 @@ export default function WorkoutExercise({
 
   // const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
   const setSelectedExerciseIndexToDel = useWorkoutDraftStore(
-    (state) => state.setSelectedExerciseIndexToDel,
+    (state) => state.setSelectedExerciseIndexToMod,
   );
   const getExerciseNameById = useExerciseLibraryStore(
     (state) => state.getExerciseNameByID,

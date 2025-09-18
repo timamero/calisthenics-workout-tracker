@@ -19,19 +19,19 @@ export default function WorkoutData() {
     React.useState<boolean>(false);
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
-  const selectedExerciseIndexToDel = useWorkoutDraftStore(
-    (state) => state.selectedExerciseIndexToDel,
+  const selectedExerciseIndexToMod = useWorkoutDraftStore(
+    (state) => state.selectedExerciseIndexToMod,
   );
   const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
   const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
 
   const onDeleteExercisePress = () => {
-    deleteExercise(selectedExerciseIndexToDel!);
+    deleteExercise(selectedExerciseIndexToMod!);
     setIsDeleteExerciseDialogVisible(false);
   };
 
   const onDeleteSetPress = () => {
-    deleteSet(selectedExerciseIndexToDel!);
+    deleteSet(selectedExerciseIndexToMod!);
     setIsDeleteExerciseDialogVisible(false);
   };
 
