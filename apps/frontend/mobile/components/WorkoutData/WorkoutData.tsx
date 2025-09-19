@@ -7,7 +7,11 @@ import ConfirmationDialog from '../common/ConfirmationDialog';
 import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
 import WorkoutExerciseList from './WorkoutExerciseList';
 
-export default function WorkoutData() {
+interface WorkoutDataProps {
+  scrollViewRef: React.RefObject<ScrollView | null>;
+}
+
+export default function WorkoutData({ scrollViewRef }: WorkoutDataProps) {
   const [isDeleteExerciseDialogVisible, setIsDeleteExerciseDialogVisible] =
     React.useState<boolean>(false);
   const [isDeleteSetDialogVisible, setIsDeleteSetDialogVisible] =
@@ -38,7 +42,7 @@ export default function WorkoutData() {
       style={{ flexGrow: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView style={{ marginBottom: 72, flexGrow: 1 }}>
+      <ScrollView style={{ marginBottom: 72, flexGrow: 1 }} ref={scrollViewRef}>
         {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder />}
         <WorkoutExerciseList
           setIsDeleteExerciseDialogVisible={setIsDeleteExerciseDialogVisible}

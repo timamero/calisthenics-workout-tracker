@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
@@ -14,11 +15,13 @@ import ExerciseList from './ExerciseList';
 interface AddExerciseOverlayProps {
   isVisible: boolean;
   handleHideModal: () => void;
+  workoutDataScrollViewRef: React.RefObject<ScrollView | null>;
 }
 
 export default function AddExerciseOverlay({
   isVisible,
   handleHideModal,
+  workoutDataScrollViewRef,
 }: AddExerciseOverlayProps) {
   const theme = useTheme() as CustomTheme;
 
@@ -39,6 +42,7 @@ export default function AddExerciseOverlay({
     );
     setSelectedExerciseIDToAdd(null);
     handleHideModal();
+    workoutDataScrollViewRef.current?.scrollToEnd({ animated: true });
   };
   return (
     <FullScreenModal
