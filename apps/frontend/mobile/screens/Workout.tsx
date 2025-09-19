@@ -15,7 +15,7 @@ export default function WorkoutScreen() {
   const navigation = useNavigation<any>();
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData); // DELETE THIS LINE LATER
-  console.log('workout - workoutData: ', workoutData); // DELETE THIS LINE LATER
+  console.log('workout - workoutData: ', JSON.stringify(workoutData)); // DELETE THIS LINE LATER
 
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
