@@ -21,7 +21,16 @@ export default function WorkoutExercise({
   const theme = useTheme() as CustomTheme;
 
   return (
-    <View style={{ marginInline: 16 }}>
+    <View
+      style={{
+        paddingInline: 16,
+        paddingBlock: 16,
+        marginBlock: 8,
+        marginInline: 16,
+        borderWidth: 1,
+        borderColor: theme.colors.light,
+      }}
+    >
       <View
         style={{
           display: 'flex',
@@ -36,6 +45,7 @@ export default function WorkoutExercise({
             color: theme.colors.light,
             fontWeight: 800,
             textAlign: 'center',
+            flexShrink: 1,
           }}
         >
           {name}
@@ -45,7 +55,7 @@ export default function WorkoutExercise({
           onPress={handleDeleteExercisePress}
           labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
           textColor={theme.colors.grey}
-          style={{ borderColor: theme.colors.error }}
+          style={{ borderColor: theme.colors.error, flexShrink: 0 }}
         >
           Delete Exercise
         </Button>
@@ -61,7 +71,6 @@ export default function WorkoutExercise({
           Add Set
         </Button>
       </View>
-      <Divider style={{ marginTop: 24 }} />
     </View>
   );
 }
