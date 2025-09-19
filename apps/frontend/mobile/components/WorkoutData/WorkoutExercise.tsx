@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { Divider, useTheme, Button } from 'react-native-paper';
+import { useTheme, Button } from 'react-native-paper';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
