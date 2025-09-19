@@ -8,6 +8,7 @@ import { getSecondsInDuration } from '@cwt/utils';
 
 import { SetContext } from '../../contexts/SetContext';
 import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
+import NumeralInput from './NumeralInput';
 
 export default function FieldsList() {
   const exerciseIndex = React.useContext(WorkoutExerciseContext)!.exerciseIndex;
@@ -19,22 +20,6 @@ export default function FieldsList() {
   const tracked = useWorkoutDraftStore((state) => state.workoutData).exercises[
     exerciseIndex
   ].tracked;
-
-  const handleNumeralFieldChange = (text: string) => {
-    // Allow empty string for controlled input
-    if (text === '') {
-      const updatedField: Partial<SetFields> = {
-        reps: undefined, // Set to undefined to allow empty field
-      };
-      handleSetFieldChange(setIndex, updatedField);
-      return;
-    } else {
-      const updatedField: Partial<SetFields> = {
-        reps: Number(text),
-      };
-      handleSetFieldChange(setIndex, updatedField);
-    }
-  };
 
   const handleRestFieldChange = (text: string) => {
     // Allow empty string for controlled input
@@ -61,17 +46,7 @@ export default function FieldsList() {
   const fields = tracked.map((field, i) => {
     switch (field) {
       case 'reps':
-        return (
-          <TextInput
-            key={`${set.id}-${i}`}
-            keyboardType="number-pad"
-            label="Reps"
-            value={
-              set.fields.reps === undefined ? '' : set.fields.reps.toString()
-            }
-            onChangeText={(text) => handleNumeralFieldChange(text)}
-          />
-        );
+        return <NumeralInput key={`${set.id}-${i}`} />;
       case 'time':
         return (
           <TextInput
