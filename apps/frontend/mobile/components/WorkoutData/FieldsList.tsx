@@ -21,10 +21,8 @@ export default function FieldsList() {
   ].tracked;
 
   const handleNumeralFieldChange = (text: string) => {
-    console.log('calling handleNumeralFieldChange with text', text);
     // Allow empty string for controlled input
     if (text === '') {
-      console.log('setting to undefined');
       const updatedField: Partial<SetFields> = {
         reps: undefined, // Set to undefined to allow empty field
       };
@@ -68,7 +66,6 @@ export default function FieldsList() {
             key={`${set.id}-${i}`}
             keyboardType="number-pad"
             label="Reps"
-            // value={set.fields.reps!.toString()}
             value={
               set.fields.reps === undefined ? '' : set.fields.reps.toString()
             }
@@ -87,7 +84,6 @@ export default function FieldsList() {
         );
       default:
         return <></>;
-      // }
     }
   });
   return (
