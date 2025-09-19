@@ -12,11 +12,6 @@ interface DurationInputProps {
 
 export default function DurationInput({ label }: DurationInputProps) {
   const set = React.useContext(SetContext)!.set;
-  console.log('set', set);
-  // console.log(
-  //   'getSecondsInDuration(set.fields.time!)',
-  //   getSecondsInDuration(set.fields.time!),
-  // );
   const handleSetFieldChange =
     React.useContext(SetContext)!.handleSetFieldChange;
   const setIndex = React.useContext(SetContext)!.setIndex;
