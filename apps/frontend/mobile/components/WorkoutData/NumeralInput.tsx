@@ -28,9 +28,17 @@ export default function NumeralInput() {
   };
   return (
     <TextInput
-      // key={`${set.id}-${i}`}
+      mode="outlined"
+      placeholder="0"
+      placeholderTextColor="grey"
+      textColor="#fff"
       keyboardType="number-pad"
       label="Reps"
+      theme={{
+        colors: {
+          onSurfaceVariant: '#FFF',
+        },
+      }}
       value={set.fields.reps === undefined ? '' : set.fields.reps.toString()}
       onChangeText={(text) => handleNumeralFieldChange(text)}
     />

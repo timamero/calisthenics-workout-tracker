@@ -39,7 +39,16 @@ export default function DurationInput({ label }: DurationInputProps) {
   };
   return (
     <TextInput
+      mode="outlined"
       keyboardType="number-pad"
+      placeholder="0"
+      placeholderTextColor="grey"
+      theme={{
+        colors: {
+          onSurfaceVariant: '#FFF',
+        },
+      }}
+      textColor="#fff"
       label={label[0].toUpperCase() + label.slice(1)}
       value={getSecondsInDuration(set.fields[label]!.toString())}
       onChangeText={(text) => handleRestFieldChange(text)}
