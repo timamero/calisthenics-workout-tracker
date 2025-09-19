@@ -44,6 +44,9 @@ importers:
       '@cwt/state':
         specifier: workspace:*
         version: link:../../../packages/state
+      '@cwt/utils':
+        specifier: workspace:*
+        version: link:../../../packages/utils
       '@expo/vector-icons':
         specifier: ^14.1.0
         version: 14.1.0(expo-font@13.3.2(expo@53.0.22(@babel/core@7.28.4)(react-native@0.79.5(@babel/core@7.28.4)(@types/react@19.0.10)(react@19.0.0))(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.4)(@types/react@19.0.10)(react@19.0.0))(react@19.0.0)
@@ -159,6 +162,9 @@ importers:
       '@cwt/state':
         specifier: workspace:*
         version: link:../../../packages/state
+      '@cwt/utils':
+        specifier: workspace:*
+        version: link:../../../packages/utils
       '@mantine/core':
         specifier: ^8.2.4
         version: 8.3.1(@mantine/hooks@8.3.1(react@19.0.0))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -349,6 +355,12 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
+  packages/utils:
+    devDependencies:
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
