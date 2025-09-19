@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
+import WorkoutTitleContainer from '../components/WorkoutData/WorkoutTitleContainer';
 import WorkoutData from '../components/WorkoutData/';
 import { CustomTheme } from '../theme';
 import ConfirmationDialog from '../components/common/ConfirmationDialog';
@@ -34,7 +35,6 @@ export default function WorkoutScreen() {
 
   React.useEffect(() => {
     navigation.setOptions({
-      title: 'Workout Title Here',
       headerLeft: () => (
         <Button
           mode="text"
@@ -47,6 +47,7 @@ export default function WorkoutScreen() {
           Cancel
         </Button>
       ),
+      headerTitle: () => <WorkoutTitleContainer />,
     });
   }, [navigation, theme.colors.grey]);
 
