@@ -1,55 +1,25 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { TextInput } from 'react-native-paper';
 
-import { SetFields } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { getSecondsInDuration } from '@cwt/utils';
 
-import { SetContext } from '../../contexts/SetContext';
 import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 import NumeralInput from './NumeralInput';
 import DurationInput from './DurationInput';
 
 export default function FieldsList() {
   const exerciseIndex = React.useContext(WorkoutExerciseContext)!.exerciseIndex;
-  const set = React.useContext(SetContext)!.set;
-  const setIndex = React.useContext(SetContext)!.setIndex;
-  const handleSetFieldChange =
-    React.useContext(SetContext)!.handleSetFieldChange;
 
   const tracked = useWorkoutDraftStore((state) => state.workoutData).exercises[
     exerciseIndex
   ].tracked;
 
-  // const handleRestFieldChange = (text: string) => {
-  //   // Allow empty string for controlled input
-  //   if (text === '') {
-  //     const updatedField: Partial<SetFields> = {
-  //       rest: '',
-  //     };
-  //     handleSetFieldChange(setIndex, updatedField);
-  //     return;
-  //   }
-  //   // Validate: only numbers, no leading zeros except for '0'
-  //   if (/^(0|[1-9][0-9]{0,2})$/.test(text)) {
-  //     const num = Number(text);
-  //     if (num >= 0 && num <= 300) {
-  //       const updatedField: Partial<SetFields> = {
-  //         rest: 'PT' + text + 'S',
-  //       };
-  //       handleSetFieldChange(setIndex, updatedField);
-  //     }
-  //   }
-  //   // Otherwise, do not update
-  // };
-
   const fields = tracked.map((field, i) => {
     switch (field) {
       case 'reps':
-        return <NumeralInput key={`${set.id}-${i}`} />;
+        return <NumeralInput key={`${field}-${i}`} />;
       case 'time':
-        return <DurationInput key={`${set.id}-${i}`} label="time" />;
+        return <DurationInput key={`${field}-${i}`} label="time" />;
       default:
         return <></>;
     }
