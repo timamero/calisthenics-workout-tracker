@@ -45,6 +45,8 @@ export default function Set({
             mode="outlined"
             onPress={() => onDeleteSetPress()}
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+            textColor={theme.colors.grey}
+            style={{ borderColor: theme.colors.error }}
           >
             Delete Set
           </Button>

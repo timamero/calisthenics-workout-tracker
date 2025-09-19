@@ -67,14 +67,14 @@ export default function AddExerciseOverlay({
       >
         <Button
           mode="outlined"
-          textColor="rgb(134, 142, 150)"
+          textColor={theme.colors.light}
           onPress={() => handleHideModal()}
           style={{
             borderColor: 'rgb(134, 142, 150)',
             borderRadius: 4,
           }}
         >
-          Clear All
+          Cancel
         </Button>
         <Button
           disabled={selectedExerciseIDToAdd === null}
