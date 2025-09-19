@@ -3,11 +3,12 @@ import { View } from 'react-native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
+// import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 
-import WorkoutExerciseContainer from './WorkoutExerciseContainer';
+// import WorkoutExerciseContainer from './WorkoutExerciseContainer';
 import ConfirmationDialog from '../common/ConfirmationDialog';
 import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
+import WorkoutExerciseList from './WorkoutExerciseList';
 
 export default function WorkoutData() {
   const [isDeleteExerciseDialogVisible, setIsDeleteExerciseDialogVisible] =
@@ -15,7 +16,11 @@ export default function WorkoutData() {
   const [isDeleteSetDialogVisible, setIsDeleteSetDialogVisible] =
     React.useState<boolean>(false);
 
-  const workoutData = useWorkoutDraftStore((state) => state.workoutData);
+  // const workoutData = useWorkoutDraftStore((state) => state.workoutData);
+  const workoutExercisesLength = useWorkoutDraftStore(
+    (state) => state.workoutData,
+  ).exercises.length;
+
   const selectedExerciseIndexToMod = useWorkoutDraftStore(
     (state) => state.selectedExerciseIndexToMod,
   );
@@ -32,26 +37,30 @@ export default function WorkoutData() {
     setIsDeleteSetDialogVisible(false);
   };
 
-  const workoutExercises = workoutData.exercises.map((ex, i) => {
-    return (
-      <WorkoutExerciseContext.Provider
-        key={ex.id}
-        value={{
-          workoutExercise: ex,
-          exerciseIndex: i,
-          setIsDeleteExerciseDialogVisible: setIsDeleteExerciseDialogVisible,
-          setIsDeleteSetDialogVisible: setIsDeleteSetDialogVisible,
-        }}
-      >
-        <WorkoutExerciseContainer />
-      </WorkoutExerciseContext.Provider>
-    );
-  });
+  // const workoutExercises = workoutData.exercises.map((ex, i) => {
+  //   return (
+  //     <WorkoutExerciseContext.Provider
+  //       key={ex.id}
+  //       value={{
+  //         workoutExercise: ex,
+  //         exerciseIndex: i,
+  //         setIsDeleteExerciseDialogVisible: setIsDeleteExerciseDialogVisible,
+  //         setIsDeleteSetDialogVisible: setIsDeleteSetDialogVisible,
+  //       }}
+  //     >
+  //       <WorkoutExerciseContainer />
+  //     </WorkoutExerciseContext.Provider>
+  //   );
+  // });
 
   return (
     <View>
-      {workoutData.exercises.length === 0 && <EmptyWorkoutPlaceholder />}
-      {workoutExercises}
+      {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder />}
+      <WorkoutExerciseList
+        setIsDeleteExerciseDialogVisible={setIsDeleteExerciseDialogVisible}
+        setIsDeleteSetDialogVisible={setIsDeleteSetDialogVisible}
+      />
+      {/* {workoutExercises} */}
       <ConfirmationDialog
         title="Delete Exercise"
         message="Delete exercise from this workout?"
