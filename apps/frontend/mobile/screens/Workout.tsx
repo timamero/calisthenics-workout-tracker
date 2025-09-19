@@ -10,6 +10,7 @@ import {
 } from '@cwt/state/stores';
 import { useWorkoutSave } from '@cwt/hooks';
 
+import { postWorkoutBuild } from '../services/workoutsService';
 import WorkoutTitleContainer from '../components/WorkoutData/WorkoutTitleContainer';
 import WorkoutData from '../components/WorkoutData/';
 import { CustomTheme } from '../theme';
@@ -47,7 +48,7 @@ export default function WorkoutScreen() {
     resetWorkout();
   };
 
-  const onSaveWorkoutPress = () => {
+  const onSaveWorkoutPress = async () => {
     setWorkoutToSaveWithUser();
     const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
     if (!supabaseSession || !workoutToSave) {
@@ -55,9 +56,9 @@ export default function WorkoutScreen() {
       return;
     }
 
-    const result = workoutToSave; // TEMP
-    // const body = JSON.stringify(workoutToSave);
-    // const result = await postWorkoutBuild(supabaseSession.access_token, body);
+    // const result = workoutToSave; // TEMP
+    const body = JSON.stringify(workoutToSave);
+    const result = await postWorkoutBuild(supabaseSession.access_token, body);
     if (result) {
       completeWorkout(workoutToSave, mode!);
       resetWorkout();
