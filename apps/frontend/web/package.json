@@ -20,6 +20,7 @@
     "@cwt/mocks": "workspace:*",
     "@cwt/schema": "workspace:*",
     "@cwt/state": "workspace:*",
+    "@cwt/utils": "workspace:*",
     "@mantine/core": "^8.2.4",
     "@mantine/dates": "^8.2.4",
     "@mantine/form": "^8.2.4",
