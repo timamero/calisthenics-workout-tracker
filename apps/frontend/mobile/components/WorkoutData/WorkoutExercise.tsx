@@ -40,13 +40,24 @@ export default function WorkoutExercise({
         >
           {name}
         </Text>
-        <Button mode="outlined" onPress={handleDeleteExercisePress}>
-          Delete
+        <Button
+          mode="outlined"
+          onPress={handleDeleteExercisePress}
+          labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+          textColor={theme.colors.grey}
+          style={{ borderColor: theme.colors.error }}
+        >
+          Delete Exercise
         </Button>
       </View>
       <SetList exerciseIndex={exerciseIndex} />
       <View style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <Button mode="contained" onPress={() => handleAddSet(exerciseIndex)}>
+        <Button
+          mode="contained"
+          onPress={() => handleAddSet(exerciseIndex)}
+          buttonColor={theme.colors.grey}
+          textColor={theme.colors.dark9}
+        >
           Add Set
         </Button>
       </View>

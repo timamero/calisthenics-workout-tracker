@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, BackHandler } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import { useTheme, Button, FAB } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -40,12 +40,13 @@ export default function WorkoutScreen() {
           style={{
             marginRight: 24,
           }}
+          textColor={theme.colors.grey}
         >
           Cancel
         </Button>
       ),
     });
-  }, [navigation]);
+  }, [navigation, theme.colors.grey]);
 
   React.useEffect(() => {
     const onBackPress = () => {
@@ -73,8 +74,20 @@ export default function WorkoutScreen() {
       <View style={{ flex: 1 }}>
         <FAB
           icon="plus"
+          mode="elevated"
           label="Add Exercise"
-          style={styles.fab}
+          theme={{
+            colors: {
+              primaryContainer: theme.colors.primary,
+              onPrimaryContainer: theme.colors.light,
+            },
+          }}
+          style={{
+            position: 'absolute',
+            margin: 16,
+            right: 0,
+            bottom: 0,
+          }}
           onPress={() => setIsAddExerciseOverlayVisible(true)}
         />
       </View>
@@ -93,12 +106,3 @@ export default function WorkoutScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
-  },
-});
