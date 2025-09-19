@@ -25,7 +25,14 @@ export default function FieldsList() {
     }
   });
   return (
-    <View>
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 24,
+        justifyContent: 'center',
+      }}
+    >
       {fields}
       <DurationInput label="rest" />
     </View>
