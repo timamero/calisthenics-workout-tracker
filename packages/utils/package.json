@@ -1,0 +1,20 @@
+{
+  "name": "@cwt/utils",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "description": "Utils for CWT",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "default": "./dist/lib/index.js"
+    }
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3"
+  }
+}
