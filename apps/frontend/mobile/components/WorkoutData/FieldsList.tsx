@@ -39,24 +39,36 @@ export default function FieldsList() {
         handleSetFieldChange(setIndex, updatedField);
       }
     }
-    // Otherwise, do not updat
+    // Otherwise, do not update
   };
 
   const fields = tracked.map((field, i) => {
-    if (field === 'reps') {
-      return (
-        // <View key={`${set.id}-${i}`}>
-        <TextInput
-          key={`${set.id}-${i}`}
-          keyboardType="number-pad"
-          label="Reps"
-          value={set.fields.reps!.toString()}
-          onChangeText={(text) =>
-            handleSetFieldChange(setIndex, { reps: Number(text) })
-          }
-        />
-        // </View>
-      );
+    switch (field) {
+      case 'reps':
+        return (
+          <TextInput
+            key={`${set.id}-${i}`}
+            keyboardType="number-pad"
+            label="Reps"
+            value={set.fields.reps!.toString()}
+            onChangeText={(text) =>
+              handleSetFieldChange(setIndex, { reps: Number(text) })
+            }
+          />
+        );
+      case 'time':
+        return (
+          <TextInput
+            key={`${set.id}-${i}`}
+            keyboardType="number-pad"
+            label="Time"
+            value={getSecondsInDuration(set.fields.time!.toString())}
+            onChangeText={(text) => handleRestFieldChange(text)}
+          />
+        );
+      default:
+        return <></>;
+      // }
     }
   });
   return (
