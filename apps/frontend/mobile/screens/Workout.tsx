@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, BackHandler } from 'react-native';
+import { View, BackHandler, ScrollView } from 'react-native';
 import { useTheme, Button, FAB } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -11,6 +11,8 @@ import ConfirmationDialog from '../components/common/ConfirmationDialog';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
 
 export default function WorkoutScreen() {
+  const workoutDataScrollViewRef = React.useRef<ScrollView | null>(null);
+
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
@@ -70,7 +72,7 @@ export default function WorkoutScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <WorkoutData />
+      <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
       <View style={{ flex: 1 }}>
         <FAB
           icon="plus"
@@ -94,6 +96,7 @@ export default function WorkoutScreen() {
       <AddExerciseOverlay
         isVisible={isAddExerciseOverlayVisible}
         handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
+        workoutDataScrollViewRef={workoutDataScrollViewRef}
       />
       <ConfirmationDialog
         title="Cancel Workout Building"
