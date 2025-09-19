@@ -2,7 +2,9 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
+import { SetFields } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { getSecondsInDuration } from '@cwt/utils';
 
 import { SetContext } from '../../contexts/SetContext';
 import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
@@ -18,21 +20,54 @@ export default function FieldsList() {
     exerciseIndex
   ].tracked;
 
+  const handleRestFieldChange = (text: string) => {
+    // Allow empty string for controlled input
+    if (text === '') {
+      const updatedField: Partial<SetFields> = {
+        rest: '',
+      };
+      handleSetFieldChange(setIndex, updatedField);
+      return;
+    }
+    // Validate: only numbers, no leading zeros except for '0'
+    if (/^(0|[1-9][0-9]{0,2})$/.test(text)) {
+      const num = Number(text);
+      if (num >= 0 && num <= 300) {
+        const updatedField: Partial<SetFields> = {
+          rest: 'PT' + text + 'S',
+        };
+        handleSetFieldChange(setIndex, updatedField);
+      }
+    }
+    // Otherwise, do not updat
+  };
+
   const fields = tracked.map((field, i) => {
     if (field === 'reps') {
       return (
-        <View key={`${set.id}-${i}`}>
-          <TextInput
-            keyboardType="number-pad"
-            label="Reps"
-            value={set.fields.reps!.toString()}
-            onChangeText={(text) =>
-              handleSetFieldChange(setIndex, { reps: Number(text) })
-            }
-          />
-        </View>
+        // <View key={`${set.id}-${i}`}>
+        <TextInput
+          key={`${set.id}-${i}`}
+          keyboardType="number-pad"
+          label="Reps"
+          value={set.fields.reps!.toString()}
+          onChangeText={(text) =>
+            handleSetFieldChange(setIndex, { reps: Number(text) })
+          }
+        />
+        // </View>
       );
     }
   });
-  return <View>{fields}</View>;
+  return (
+    <View>
+      {fields}
+      <TextInput
+        keyboardType="number-pad"
+        label="Rest"
+        value={getSecondsInDuration(set.fields.rest!.toString())}
+        onChangeText={(text) => handleRestFieldChange(text)}
+      />
+    </View>
+  );
 }
