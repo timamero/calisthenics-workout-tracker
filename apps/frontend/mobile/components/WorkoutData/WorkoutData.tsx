@@ -3,9 +3,6 @@ import { View } from 'react-native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-// import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
-
-// import WorkoutExerciseContainer from './WorkoutExerciseContainer';
 import ConfirmationDialog from '../common/ConfirmationDialog';
 import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
 import WorkoutExerciseList from './WorkoutExerciseList';
@@ -16,7 +13,6 @@ export default function WorkoutData() {
   const [isDeleteSetDialogVisible, setIsDeleteSetDialogVisible] =
     React.useState<boolean>(false);
 
-  // const workoutData = useWorkoutDraftStore((state) => state.workoutData);
   const workoutExercisesLength = useWorkoutDraftStore(
     (state) => state.workoutData,
   ).exercises.length;
@@ -37,22 +33,6 @@ export default function WorkoutData() {
     setIsDeleteSetDialogVisible(false);
   };
 
-  // const workoutExercises = workoutData.exercises.map((ex, i) => {
-  //   return (
-  //     <WorkoutExerciseContext.Provider
-  //       key={ex.id}
-  //       value={{
-  //         workoutExercise: ex,
-  //         exerciseIndex: i,
-  //         setIsDeleteExerciseDialogVisible: setIsDeleteExerciseDialogVisible,
-  //         setIsDeleteSetDialogVisible: setIsDeleteSetDialogVisible,
-  //       }}
-  //     >
-  //       <WorkoutExerciseContainer />
-  //     </WorkoutExerciseContext.Provider>
-  //   );
-  // });
-
   return (
     <View>
       {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder />}
@@ -60,7 +40,6 @@ export default function WorkoutData() {
         setIsDeleteExerciseDialogVisible={setIsDeleteExerciseDialogVisible}
         setIsDeleteSetDialogVisible={setIsDeleteSetDialogVisible}
       />
-      {/* {workoutExercises} */}
       <ConfirmationDialog
         title="Delete Exercise"
         message="Delete exercise from this workout?"
