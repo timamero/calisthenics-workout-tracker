@@ -15,6 +15,9 @@ export async function getWorkoutBuilds(
     console.log('Web: Local environment, return sample workout builds.');
     return sampleWorkoutBuilds;
   }
+  console.log(
+    'Web: Full stack development environment, returning builds from database.',
+  );
   return apiGetWorkoutBuilds(baseUrl, token);
 }
 
