@@ -20,6 +20,24 @@ export default function FieldsList() {
     exerciseIndex
   ].tracked;
 
+  const handleNumeralFieldChange = (text: string) => {
+    console.log('calling handleNumeralFieldChange with text', text);
+    // Allow empty string for controlled input
+    if (text === '') {
+      console.log('setting to undefined');
+      const updatedField: Partial<SetFields> = {
+        reps: undefined, // Set to undefined to allow empty field
+      };
+      handleSetFieldChange(setIndex, updatedField);
+      return;
+    } else {
+      const updatedField: Partial<SetFields> = {
+        reps: Number(text),
+      };
+      handleSetFieldChange(setIndex, updatedField);
+    }
+  };
+
   const handleRestFieldChange = (text: string) => {
     // Allow empty string for controlled input
     if (text === '') {
@@ -50,10 +68,11 @@ export default function FieldsList() {
             key={`${set.id}-${i}`}
             keyboardType="number-pad"
             label="Reps"
-            value={set.fields.reps!.toString()}
-            onChangeText={(text) =>
-              handleSetFieldChange(setIndex, { reps: Number(text) })
+            // value={set.fields.reps!.toString()}
+            value={
+              set.fields.reps === undefined ? '' : set.fields.reps.toString()
             }
+            onChangeText={(text) => handleNumeralFieldChange(text)}
           />
         );
       case 'time':
