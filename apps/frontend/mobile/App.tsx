@@ -31,17 +31,13 @@ export default function App() {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token) {
         const exercises = await getExercises(supabaseSession.access_token);
-        console.log('fetched exercises: exercises[0]', exercises[0]);
-        const workoutBuilds = await getWorkoutBuilds(
-          supabaseSession.access_token,
-        );
-        console.log(
-          'fetched workout builds: workouBuilds[0]',
-          workoutBuilds[0],
-        );
         if (exercises) {
           setExercises(exercises);
         }
+
+        const workoutBuilds = await getWorkoutBuilds(
+          supabaseSession.access_token,
+        );
         if (workoutBuilds) {
           setWorkouts([], workoutBuilds);
         }
