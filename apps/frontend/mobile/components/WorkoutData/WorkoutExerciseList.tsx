@@ -17,15 +17,7 @@ export default function WorkoutExerciseList({
   setIsDeleteExerciseDialogVisible,
   setIsDeleteSetDialogVisible,
 }: WorkoutExerciseListProps) {
-  // const [isDeleteExerciseDialogVisible, setIsDeleteExerciseDialogVisible] =
-  //   React.useState<boolean>(false);
-  // const [isDeleteSetDialogVisible, setIsDeleteSetDialogVisible] =
-  //   React.useState<boolean>(false);
-
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
-  // const selectedExerciseIndexToMod = useWorkoutDraftStore(
-  //   (state) => state.selectedExerciseIndexToMod,
-  // );
 
   const workoutExercises = workoutData.exercises.map((ex, i) => {
     return (
