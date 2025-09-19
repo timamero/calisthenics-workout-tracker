@@ -11,19 +11,19 @@ import FieldsList from './FieldsList';
 interface SetProps {
   setIndex: number;
   showDeleteButton: boolean;
-  tracked: Pick<WorkoutExercise, 'tracked'>;
-  set: Set;
+  // tracked: Pick<WorkoutExercise, 'tracked'>;
+  // set: Set;
   onDeleteSetPress: () => void;
-  handleSetFieldChange: (updatedField: Partial<SetFields>) => void;
+  // handleSetFieldChange: (updatedField: Partial<SetFields>) => void;
 }
 
 export default function Set({
   setIndex,
   showDeleteButton,
-  tracked,
-  set,
+  // tracked,
+  // set,
   onDeleteSetPress,
-  handleSetFieldChange,
+  // handleSetFieldChange,
 }: SetProps) {
   const theme = useTheme() as CustomTheme;
 
@@ -40,9 +40,9 @@ export default function Set({
         )}
       </View>
       <FieldsList
-        tracked={tracked}
-        set={set}
-        handleSetFieldChange={handleSetFieldChange}
+      // tracked={tracked}
+      // set={set}
+      // handleSetFieldChange={handleSetFieldChange}
       />
     </View>
   );
