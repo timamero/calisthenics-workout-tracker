@@ -14,7 +14,7 @@ export async function getWorkoutBuilds(baseUrl: string, token: string) {
       token,
     );
   } catch (error) {
-    console.error('Web: Error fetching workout builds from API.', error);
+    console.error('Error fetching workout builds from API.', error);
     throw error;
   }
 }
@@ -37,7 +37,7 @@ export async function postWorkoutBuild(
       body,
     );
   } catch (error) {
-    console.error('Web: Error posting workout to API.', error);
+    console.error('Error posting workout to API.', error);
     throw error;
   }
 }
