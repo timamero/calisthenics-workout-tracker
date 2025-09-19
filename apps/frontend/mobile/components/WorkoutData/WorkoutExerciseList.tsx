@@ -5,6 +5,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 
 import WorkoutExerciseContainer from './WorkoutExerciseContainer';
+import { View } from 'react-native';
 
 interface WorkoutExerciseListProps {
   setIsDeleteExerciseDialogVisible: React.Dispatch<
@@ -34,5 +35,5 @@ export default function WorkoutExerciseList({
       </WorkoutExerciseContext.Provider>
     );
   });
-  return <>{workoutExercises}</>;
+  return <View style={{ flex: 1 }}>{workoutExercises}</View>;
 }

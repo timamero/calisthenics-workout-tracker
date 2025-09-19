@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
@@ -34,28 +34,33 @@ export default function WorkoutData() {
   };
 
   return (
-    <View>
-      {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder />}
-      <WorkoutExerciseList
-        setIsDeleteExerciseDialogVisible={setIsDeleteExerciseDialogVisible}
-        setIsDeleteSetDialogVisible={setIsDeleteSetDialogVisible}
-      />
-      <ConfirmationDialog
-        title="Delete Exercise"
-        message="Delete exercise from this workout?"
-        confirmButtonLabel="Delete exercise"
-        isVisible={isDeleteExerciseDialogVisible}
-        handleHideDialog={setIsDeleteExerciseDialogVisible}
-        onConfirmationPress={() => onDeleteExercisePress()}
-      />
-      <ConfirmationDialog
-        title="Delete Set"
-        message="Delete set from this exercise?"
-        confirmButtonLabel="Delete"
-        isVisible={isDeleteSetDialogVisible}
-        handleHideDialog={setIsDeleteSetDialogVisible}
-        onConfirmationPress={() => onDeleteSetPress()}
-      />
-    </View>
+    <KeyboardAvoidingView
+      style={{ flexGrow: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <ScrollView style={{ marginBottom: 72, flexGrow: 1 }}>
+        {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder />}
+        <WorkoutExerciseList
+          setIsDeleteExerciseDialogVisible={setIsDeleteExerciseDialogVisible}
+          setIsDeleteSetDialogVisible={setIsDeleteSetDialogVisible}
+        />
+        <ConfirmationDialog
+          title="Delete Exercise"
+          message="Delete exercise from this workout?"
+          confirmButtonLabel="Delete exercise"
+          isVisible={isDeleteExerciseDialogVisible}
+          handleHideDialog={setIsDeleteExerciseDialogVisible}
+          onConfirmationPress={() => onDeleteExercisePress()}
+        />
+        <ConfirmationDialog
+          title="Delete Set"
+          message="Delete set from this exercise?"
+          confirmButtonLabel="Delete"
+          isVisible={isDeleteSetDialogVisible}
+          handleHideDialog={setIsDeleteSetDialogVisible}
+          onConfirmationPress={() => onDeleteSetPress()}
+        />
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
