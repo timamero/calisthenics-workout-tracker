@@ -2,25 +2,12 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
-import type { SetFields, Set, WorkoutExercise } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { SetContext } from '../../contexts/SetContext';
 import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
 
-interface FieldsListProps {
-  // tracked: Pick<WorkoutExercise, 'tracked'>;
-  // set: Set;
-  // handleSetFieldChange: (updatedField: Partial<SetFields>) => void;
-}
-
-export default function FieldsList(
-  {
-    // tracked,
-    // set,
-    // handleSetFieldChange,
-  }: FieldsListProps,
-) {
+export default function FieldsList() {
   const exerciseIndex = React.useContext(WorkoutExerciseContext)!.exerciseIndex;
   const set = React.useContext(SetContext)!.set;
   const setIndex = React.useContext(SetContext)!.setIndex;
