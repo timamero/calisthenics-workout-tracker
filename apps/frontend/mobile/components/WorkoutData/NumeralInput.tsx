@@ -1,0 +1,38 @@
+import * as React from 'react';
+import { TextInput } from 'react-native-paper';
+
+import type { SetFields } from '@cwt/schema/workouts';
+
+import { SetContext } from '../../contexts/SetContext';
+
+export default function NumeralInput() {
+  const set = React.useContext(SetContext)!.set;
+  const handleSetFieldChange =
+    React.useContext(SetContext)!.handleSetFieldChange;
+  const setIndex = React.useContext(SetContext)!.setIndex;
+
+  const handleNumeralFieldChange = (text: string) => {
+    // Allow empty string for controlled input
+    if (text === '') {
+      const updatedField: Partial<SetFields> = {
+        reps: undefined, // Set to undefined to allow empty field
+      };
+      handleSetFieldChange(setIndex, updatedField);
+      return;
+    } else {
+      const updatedField: Partial<SetFields> = {
+        reps: Number(text),
+      };
+      handleSetFieldChange(setIndex, updatedField);
+    }
+  };
+  return (
+    <TextInput
+      // key={`${set.id}-${i}`}
+      keyboardType="number-pad"
+      label="Reps"
+      value={set.fields.reps === undefined ? '' : set.fields.reps.toString()}
+      onChangeText={(text) => handleNumeralFieldChange(text)}
+    />
+  );
+}
