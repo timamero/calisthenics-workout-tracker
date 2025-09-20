@@ -21,20 +21,19 @@ export const Route = createFileRoute('/workout')({
 
 function WorkoutView() {
   const navigate = useNavigate();
+
   const [saveOverlayOpened, saveOverlayHandler] = useDisclosure(false);
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
 
   const mode = useWorkoutDraftStore((state) => state.mode);
-  // const setWorkoutToSave = useWorkoutDraftStore(
-  //   (state) => state.setWorkoutToSave,
-  // );
+  const supabaseSession = useAuthStore((state) => state.session);
+
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
     (state) => state.completeWorkout,
   );
-  const supabaseSession = useAuthStore((state) => state.session);
 
   const { setWorkoutToSaveWithUser } = useWorkoutSave();
 
