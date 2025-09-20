@@ -19,22 +19,15 @@ export default function WorkoutData() {
     (state) => state.selectedExerciseIndexToMod,
   );
 
-  // const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
   const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
 
   if (!workoutData) {
     return <Text>Loading</Text>;
   }
 
-  // const workoutExercises = workoutData.exercises.map((ex, i) => {
-  //   return (
-  //     <WorkoutExercise key={ex.id} workoutExercise={ex} exerciseIndex={i} />
-  //   );
-  // });
   return (
     <Stack gap="xl" align="center">
       {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder />}
-      {/* {workoutExercises} */}
       <WorkoutExerciseList deleteExOverlayHandler={deleteExOverlayHandler} />
       <ConfirmationOverlay
         title="Delete Exercise"
