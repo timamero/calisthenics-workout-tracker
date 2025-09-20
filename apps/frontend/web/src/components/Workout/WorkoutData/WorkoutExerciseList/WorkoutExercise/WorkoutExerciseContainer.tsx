@@ -6,10 +6,10 @@ import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { WorkoutExercise } from '@cwt/schema/workouts';
 
-import { WorkoutExerciseContext } from '../../../../contexts/WorkoutExerciseContext';
+import { WorkoutExerciseContext } from '../../../../../contexts/WorkoutExerciseContext';
 import Sets from './Sets';
 
-export default function WorkoutExercise() {
+export default function WorkoutExerciseContainer() {
   const exerciseIndex: number = React.useContext(
     WorkoutExerciseContext,
   )!.exerciseIndex;
