@@ -29,8 +29,6 @@ export async function postWorkoutBuild(
     console.log('Mobile: Local environment, return workout build body.');
     return JSON.parse(body as string);
   }
-  console.log('sending body: ', body);
-  // console.log('sending with token', token);
   console.log(
     'Mobile: Full stack development environment, posting build to database.',
   );

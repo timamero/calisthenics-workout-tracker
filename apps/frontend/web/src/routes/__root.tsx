@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-
 import { AppShell, Burger, Loader, Stack } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { NavLink } from '@mantine/core';
-import { supabase } from '../services/supabaseClient';
 
+import { useDisclosure } from '@mantine/hooks';
 import { useSupabaseAuth } from '@cwt/hooks';
+import { NavLink } from '@mantine/core';
 import { useWorkoutDraftStore, useAuthStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 
+import { supabase } from '../services/supabaseClient';
 import { getExercises } from '../services/exercisesService';
 
 export const Route = createRootRoute({
@@ -26,8 +25,6 @@ function RootComponent() {
 
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
-  // const setSession = useAuthStore((state) => state.setSession);
-  // const setLoading = useAuthStore((state) => state.setLoading);
 
   // Manage state to open and close menu
   const [opened, { toggle }] = useDisclosure();
