@@ -26,8 +26,8 @@ function RootComponent() {
 
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
-  const setSession = useAuthStore((state) => state.setSession);
-  const setLoading = useAuthStore((state) => state.setLoading);
+  // const setSession = useAuthStore((state) => state.setSession);
+  // const setLoading = useAuthStore((state) => state.setLoading);
 
   // Manage state to open and close menu
   const [opened, { toggle }] = useDisclosure();
@@ -41,7 +41,7 @@ function RootComponent() {
     { label: 'Settings', to: '/settings' },
   ];
 
-  useSupabaseAuth(supabase, setSession, setLoading);
+  useSupabaseAuth(supabase);
 
   useEffect(() => {
     const asyncFetchData = async () => {
