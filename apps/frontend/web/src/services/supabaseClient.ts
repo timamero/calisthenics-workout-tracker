@@ -1,4 +1,5 @@
 import { supabaseClient } from '@cwt/auth/supabase';
+import type { SupabaseClient } from '@cwt/auth/types';
 
 // const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 // const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -6,7 +7,7 @@ import { supabaseClient } from '@cwt/auth/supabase';
 
 // export const supabase = supabaseClient(supabaseUrl, supabaseAnonKey, options);
 
-let supabase;
+let supabase: SupabaseClient;
 try {
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
   const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
