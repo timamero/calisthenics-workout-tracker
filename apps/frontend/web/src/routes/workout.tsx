@@ -11,8 +11,8 @@ import { useWorkoutSave } from '@cwt/hooks';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
-import WorkoutData from '../components/WorkoutData';
-import WorkoutTitleContainer from '../components/WorkoutData/WorkoutTitleContainer';
+import WorkoutData from '../components/Workout/WorkoutData';
+import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle';
 import { postWorkoutBuild } from '../services/workoutsService';
 
 export const Route = createFileRoute('/workout')({
@@ -70,7 +70,7 @@ function WorkoutView() {
 
   return (
     <Stack gap="xl" align="center">
-      <WorkoutTitleContainer />
+      <WorkoutTitle />
       <Stack gap="xl" align="center">
         <WorkoutData />
         <Stack justify="center">
