@@ -5,7 +5,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import WorkoutExercise from './WorkoutExercise';
 
-export default function Workout() {
+export default function WorkoutData() {
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
 
   if (!workoutData) {
