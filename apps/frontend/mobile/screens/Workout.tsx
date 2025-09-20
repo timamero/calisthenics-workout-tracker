@@ -56,7 +56,7 @@ export default function WorkoutScreen() {
       return;
     }
 
-    // const result = workoutToSave; // TEMP
+    console.log('workoutToSave: ', workoutToSave);
     const body = JSON.stringify(workoutToSave);
     const result = await postWorkoutBuild(supabaseSession.access_token, body);
     if (result) {
