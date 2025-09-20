@@ -3,7 +3,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { UseDisclosureHandlers } from '@mantine/hooks';
 
 import { WorkoutExerciseContext } from '../../../../contexts/WorkoutExerciseContext';
-import WorkoutExercise from './WorkoutExercise';
+import { WorkoutExerciseContainer as WorkoutExercise } from './WorkoutExercise';
 
 interface WorkoutExerciseListProps {
   deleteExOverlayHandler: UseDisclosureHandlers;

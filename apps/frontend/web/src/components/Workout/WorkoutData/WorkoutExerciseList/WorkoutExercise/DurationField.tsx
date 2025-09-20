@@ -1,5 +1,5 @@
-import DurationInput from '../../../common/DurationInput';
-import { getSecondsInDuration } from '../../../../utils/durationUtils';
+import DurationInput from '../../../../common/DurationInput';
+import { getSecondsInDuration } from '../../../../../utils/durationUtils';
 
 interface DurationFieldProps {
   index: number;
