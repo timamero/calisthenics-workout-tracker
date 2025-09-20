@@ -1,7 +1,14 @@
 import * as React from 'react';
-import { SupabaseClient, Session, User } from '@supabase/supabase-js';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { useAuthStore } from '@cwt/state/stores';
 
+/**
+ *
+ * @param client - Supabase client instance
+ *
+ * Custom hook to manage Supabase authentication state.
+ * It listens for authentication state changes and updates the global auth store accordingly.
+ */
 export function useSupabaseAuth(client: SupabaseClient) {
   const setLoading = useAuthStore((state) => state.setLoading);
   const setSession = useAuthStore((state) => state.setSession);
@@ -42,10 +49,10 @@ export function useSupabaseAuth(client: SupabaseClient) {
               break;
             case 'PASSWORD_RECOVERY':
               console.log('Password recovery initiated.');
-              // You might want to navigate to a password reset screen here
+              // TODO: Initiate password recovery here
               break;
             default:
-              // Handle other events if necessary
+              // TODO: Handle other events
               console.log(`Unhandled auth event: ${_event}`);
               break;
           }

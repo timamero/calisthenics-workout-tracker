@@ -23,9 +23,6 @@ export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
-  const workoutData = useWorkoutDraftStore((state) => state.workoutData); // DELETE THIS LINE LATER
-  console.log('workout - workoutData: ', JSON.stringify(workoutData)); // DELETE THIS LINE LATER
-
   const mode = useWorkoutDraftStore((state) => state.mode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const supabaseSession = useAuthStore((state) => state.session);
@@ -56,7 +53,6 @@ export default function WorkoutScreen() {
       return;
     }
 
-    console.log('workoutToSave: ', workoutToSave);
     const body = JSON.stringify(workoutToSave);
     const result = await postWorkoutBuild(supabaseSession.access_token, body);
     if (result) {

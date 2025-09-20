@@ -3,7 +3,6 @@ import { useAuthStore } from '@cwt/state/stores';
 
 export function useWorkoutSave() {
   const user = useAuthStore((state) => state.user);
-  // Problem here, user is null
   if (user == null) {
     console.error('user object is null');
   }
