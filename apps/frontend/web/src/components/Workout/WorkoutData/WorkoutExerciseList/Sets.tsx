@@ -7,7 +7,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import RepField from './RepField';
 import DurationField from './DurationField';
-import ConfirmationOverlay from '../../common/ConfirmationOverlay';
+import ConfirmationOverlay from '../../../common/ConfirmationOverlay';
 
 export default function Sets({
   tracked,

@@ -2,8 +2,9 @@ import { Stack, Text } from '@mantine/core';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import WorkoutExercise from './WorkoutExercise';
+// import WorkoutExercise from './WorkoutExercise';
 import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
+import WorkoutExerciseList from './WorkoutExerciseList';
 
 export default function WorkoutData() {
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
@@ -16,15 +17,16 @@ export default function WorkoutData() {
     return <Text>Loading</Text>;
   }
 
-  const workoutExercises = workoutData.exercises.map((ex, i) => {
-    return (
-      <WorkoutExercise key={ex.id} workoutExercise={ex} exerciseIndex={i} />
-    );
-  });
+  // const workoutExercises = workoutData.exercises.map((ex, i) => {
+  //   return (
+  //     <WorkoutExercise key={ex.id} workoutExercise={ex} exerciseIndex={i} />
+  //   );
+  // });
   return (
     <Stack gap="xl" align="center">
       {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder />}
-      {workoutExercises}
+      {/* {workoutExercises} */}
+      <WorkoutExerciseList />
     </Stack>
   );
 }

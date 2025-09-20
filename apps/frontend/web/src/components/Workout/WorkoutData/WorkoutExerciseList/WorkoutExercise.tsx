@@ -6,7 +6,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { WorkoutExercise } from '@cwt/schema/workouts';
 
 import Sets from './Sets';
-import ConfirmationOverlay from '../../common/ConfirmationOverlay';
+import ConfirmationOverlay from '../../../common/ConfirmationOverlay';
 
 interface WorkoutExerciseProps {
   exerciseIndex: number;
