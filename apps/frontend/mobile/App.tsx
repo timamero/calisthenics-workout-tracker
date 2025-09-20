@@ -20,12 +20,13 @@ export default function App() {
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
 
-  const setSession = useAuthStore((state) => state.setSession);
-  const setLoading = useAuthStore((state) => state.setLoading);
+  // const setSession = useAuthStore((state) => state.setSession);
+  // const setUser = useAuthStore((state) => state.setUser);
+  // const setLoading = useAuthStore((state) => state.setLoading);
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
 
-  useSupabaseAuth(supabase, setSession, setLoading);
+  useSupabaseAuth(supabase);
 
   React.useEffect(() => {
     const asyncFetchData = async () => {
