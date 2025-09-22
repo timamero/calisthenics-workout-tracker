@@ -2,6 +2,7 @@ import type { SetFields } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { SetContext } from '../../../../../../contexts/SetContext';
+import SetContainer from './SetContainer';
 
 interface SetListProps {
   exerciseIndex: number;
@@ -35,7 +36,7 @@ export default function SetList({ exerciseIndex }: SetListProps) {
           handleSetFieldChange: handleSetFieldChange,
         }}
       >
-        {/* <SetContainer key={set.id} /> */}
+        <SetContainer />
         <div>placeholder</div>
       </SetContext.Provider>
     );

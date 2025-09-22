@@ -9,6 +9,8 @@ import ConfirmationOverlay from '../../common/ConfirmationOverlay';
 
 export default function WorkoutData() {
   const [deleteExOverlayOpened, deleteExOverlayHandler] = useDisclosure(false);
+  const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
+    useDisclosure(false);
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
 
@@ -20,6 +22,7 @@ export default function WorkoutData() {
   );
 
   const deleteExercise = useWorkoutDraftStore((state) => state.removeExercise);
+  const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
 
   if (!workoutData) {
     return <Text>Loading</Text>;
@@ -28,7 +31,10 @@ export default function WorkoutData() {
   return (
     <Stack gap="xl" align="center">
       {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder />}
-      <WorkoutExerciseList deleteExOverlayHandler={deleteExOverlayHandler} />
+      <WorkoutExerciseList
+        deleteExOverlayHandler={deleteExOverlayHandler}
+        deleteSetOverlayHandler={deleteSetOverlayHandler}
+      />
       <ConfirmationOverlay
         title="Delete Exercise"
         message="Delete exercise from this workout?"
@@ -36,6 +42,14 @@ export default function WorkoutData() {
         opened={deleteExOverlayOpened}
         handler={deleteExOverlayHandler}
         onConfirmationClick={() => deleteExercise(selectedExerciseIndexToMod!)}
+      />
+      <ConfirmationOverlay
+        title="Delete Set"
+        message="Delete set from this exercise?"
+        confirmButtonLabel="Delete"
+        opened={deleteSetOverlayOpened}
+        handler={deleteSetOverlayHandler}
+        onConfirmationClick={() => deleteSet(selectedExerciseIndexToMod!)}
       />
     </Stack>
   );

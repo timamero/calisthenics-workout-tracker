@@ -7,7 +7,7 @@ interface WorkoutExerciseContextType {
   workoutExercise: WorkoutExercise;
   exerciseIndex: number;
   deleteExOverlayHandler: UseDisclosureHandlers;
-  // setIsDeleteSetDialogVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteSetOverlayHandler: UseDisclosureHandlers;
 }
 
 export const WorkoutExerciseContext =
