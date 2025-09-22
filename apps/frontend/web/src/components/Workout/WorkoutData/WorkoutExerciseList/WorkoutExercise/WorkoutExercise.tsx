@@ -1,6 +1,7 @@
 import { Stack, Text, Button, Group } from '@mantine/core';
 
 import type { WorkoutExercise } from '@cwt/schema/workouts';
+import SetList from './SetList';
 
 interface WorkoutExerciseProps {
   name: string;
@@ -27,6 +28,7 @@ export default function WorkoutExercise({
           Delete
         </Button>
       </Group>
+      <SetList exerciseIndex={exerciseIndex} />
       {/* <Sets
         tracked={workoutExercise.tracked}
         sets={workoutExercise.sets}
