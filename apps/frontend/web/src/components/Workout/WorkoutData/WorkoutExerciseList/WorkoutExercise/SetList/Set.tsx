@@ -1,5 +1,7 @@
 import { Stack, Text, Group, Button } from '@mantine/core';
 
+import FieldsList from './FieldsList';
+
 interface SetProps {
   setIndex: number;
   showDeleteButton: boolean;
@@ -25,8 +27,7 @@ export default function Set({
           </Button>
         )}
       </Group>
-      {/* {fields} */}
-      <div>fields list placeholder</div>
+      <FieldsList />
     </Stack>
   );
 }
