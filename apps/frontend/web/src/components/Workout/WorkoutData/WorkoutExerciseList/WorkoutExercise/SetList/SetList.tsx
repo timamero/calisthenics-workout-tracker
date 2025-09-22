@@ -37,7 +37,6 @@ export default function SetList({ exerciseIndex }: SetListProps) {
         }}
       >
         <SetContainer />
-        <div>placeholder</div>
       </SetContext.Provider>
     );
   });
