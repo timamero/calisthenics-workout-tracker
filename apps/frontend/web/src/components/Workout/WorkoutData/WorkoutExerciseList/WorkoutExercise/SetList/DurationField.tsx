@@ -1,57 +1,41 @@
-import DurationInput from '../../../../common/DurationInput';
-import { getSecondsInDuration } from '../../../../../utils/durationUtils';
+import * as React from 'react';
+import type { SetFields } from '@cwt/schema/workouts';
+
+import { SetContext } from '../../../../../../contexts/SetContext';
+import DurationInput from '../../../../../common/DurationInput';
+import { getSecondsInDuration } from '../../../../../../utils/durationUtils'; //TODO: Replace with package util
 
 interface DurationFieldProps {
-  index: number;
-  value: string;
   fieldName: 'rest' | 'time';
-  handleSetFieldChange: (
-    setIndex: number,
-    updatedField: {
-      reps?: number | undefined;
-      weight?: number | undefined;
-      time?: string | undefined;
-      rest?: string | undefined;
-    },
-  ) => void;
   label?: string;
 }
 
 export default function DurationField({
-  index,
-  value,
   fieldName,
-  handleSetFieldChange,
   label,
 }: DurationFieldProps) {
+  const set = React.useContext(SetContext)!.set;
+  const handleSetFieldChange =
+    React.useContext(SetContext)!.handleSetFieldChange;
+  const setIndex = React.useContext(SetContext)!.setIndex;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     // Allow empty string for controlled input
     if (value === '') {
-      const updatedField: {
-        reps?: number | undefined;
-        weight?: number | undefined;
-        time?: string | undefined;
-        rest?: string | undefined;
-      } = {
+      const updatedField: Partial<SetFields> = {
         [fieldName]: '',
       };
-      handleSetFieldChange(index, updatedField);
+      handleSetFieldChange(setIndex, updatedField);
       return;
     }
     // Validate: only numbers, no leading zeros except for '0'
     if (/^(0|[1-9][0-9]{0,2})$/.test(value)) {
       const num = Number(value);
       if (num >= 0 && num <= 300) {
-        const updatedField: {
-          reps?: number | undefined;
-          weight?: number | undefined;
-          time?: string | undefined;
-          rest?: string | undefined;
-        } = {
+        const updatedField: Partial<SetFields> = {
           [fieldName]: 'PT' + event.currentTarget.value + 'S',
         };
-        handleSetFieldChange(index, updatedField);
+        handleSetFieldChange(setIndex, updatedField);
       }
     }
     // Otherwise, do not update
@@ -59,7 +43,7 @@ export default function DurationField({
   return (
     <DurationInput
       label={label || (fieldName === 'rest' ? 'Rest' : 'Time')}
-      sec={getSecondsInDuration(value)}
+      sec={getSecondsInDuration(set.fields[fieldName]!.toString())}
       handleChange={handleChange}
     />
   );

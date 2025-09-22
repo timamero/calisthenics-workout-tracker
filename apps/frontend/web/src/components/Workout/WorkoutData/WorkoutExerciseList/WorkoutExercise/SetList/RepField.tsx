@@ -1,52 +1,34 @@
+import * as React from 'react';
 import { TextInput } from '@mantine/core';
 
-interface RepFieldProps {
-  index: number;
-  value: number;
-  handleSetFieldChange: (
-    setIndex: number,
-    updatedField: {
-      reps?: number | undefined;
-      weight?: number | undefined;
-      time?: string | undefined;
-      rest?: string | undefined;
-    },
-  ) => void;
-}
+import type { SetFields } from '@cwt/schema/workouts';
 
-export default function RepField({
-  index,
-  value,
-  handleSetFieldChange,
-}: RepFieldProps) {
+import { SetContext } from '../../../../../../contexts/SetContext';
+
+export default function RepField() {
+  const set = React.useContext(SetContext)!.set;
+  const handleSetFieldChange =
+    React.useContext(SetContext)!.handleSetFieldChange;
+  const setIndex = React.useContext(SetContext)!.setIndex;
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.value == '') {
-      const updatedField: {
-        reps?: number | undefined;
-        weight?: number | undefined;
-        time?: string | undefined;
-        rest?: string | undefined;
-      } = {
+      const updatedField: Partial<SetFields> = {
         reps: undefined,
       };
-      handleSetFieldChange(index, updatedField);
+      handleSetFieldChange(setIndex, updatedField);
     } else {
-      const updatedField: {
-        reps?: number | undefined;
-        weight?: number | undefined;
-        time?: string | undefined;
-        rest?: string | undefined;
-      } = {
+      const updatedField: Partial<SetFields> = {
         reps: Number(event.currentTarget.value),
       };
-      handleSetFieldChange(index, updatedField);
+      handleSetFieldChange(setIndex, updatedField);
     }
   };
   return (
     <TextInput
       label="Reps"
       placeholder={'0'}
-      value={value === undefined ? '' : value.toString()}
+      value={set.fields.reps === undefined ? '' : set.fields.reps.toString()}
       onChange={handleChange}
     />
   );
