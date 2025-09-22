@@ -7,10 +7,12 @@ import { WorkoutExerciseContainer as WorkoutExercise } from './WorkoutExercise';
 
 interface WorkoutExerciseListProps {
   deleteExOverlayHandler: UseDisclosureHandlers;
+  deleteSetOverlayHandler: UseDisclosureHandlers;
 }
 
 export default function WorkoutExerciseList({
   deleteExOverlayHandler,
+  deleteSetOverlayHandler,
 }: WorkoutExerciseListProps) {
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
 
@@ -22,6 +24,7 @@ export default function WorkoutExerciseList({
           workoutExercise: ex,
           exerciseIndex: i,
           deleteExOverlayHandler: deleteExOverlayHandler,
+          deleteSetOverlayHandler: deleteSetOverlayHandler,
         }}
       >
         <WorkoutExercise />
