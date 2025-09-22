@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { Stack, Text, Button, Group } from '@mantine/core';
-// import { useDisclosure } from '@mantine/hooks';
+// import { Stack, Text, Button, Group } from '@mantine/core';
 
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import type { WorkoutExercise } from '@cwt/schema/workouts';
+import type { WorkoutExercise as WorkoutExerciseType } from '@cwt/schema/workouts';
 
 import { WorkoutExerciseContext } from '../../../../../contexts/WorkoutExerciseContext';
-import Sets from './Sets';
+import WorkoutExercise from './WorkoutExercise';
+// import Sets from './Sets';
 
 export default function WorkoutExerciseContainer() {
   const exerciseIndex: number = React.useContext(
     WorkoutExerciseContext,
   )!.exerciseIndex;
-  const workoutExercise: WorkoutExercise = React.useContext(
+  const workoutExercise: WorkoutExerciseType = React.useContext(
     WorkoutExerciseContext,
   )!.workoutExercise;
   const deleteExOverlayHandler = React.useContext(
@@ -35,29 +35,11 @@ export default function WorkoutExerciseContainer() {
   };
 
   return (
-    <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
-      <Group>
-        <Text>{name}</Text>
-        <Button
-          color="red"
-          variant="white"
-          onClick={() => handleDeleteExerciseClick()}
-        >
-          Delete
-        </Button>
-      </Group>
-      <Sets
-        tracked={workoutExercise.tracked}
-        sets={workoutExercise.sets}
-        exerciseIndex={exerciseIndex}
-      />
-      <Button
-        variant="outline"
-        color="dark"
-        onClick={() => addSet(exerciseIndex)}
-      >
-        Add Set
-      </Button>
-    </Stack>
+    <WorkoutExercise
+      name={name}
+      exerciseIndex={exerciseIndex}
+      handleAddSetClick={addSet}
+      handleDeleteExerciseClick={handleDeleteExerciseClick}
+    />
   );
 }
