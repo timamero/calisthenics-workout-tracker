@@ -14,6 +14,7 @@ export default function SetContainer() {
     WorkoutExerciseContext,
   )!.deleteSetOverlayHandler;
 
+  const mode = useWorkoutDraftStore((state) => state.mode);
   const sets = useWorkoutDraftStore((state) => state.workoutData).exercises[
     exerciseIndex
   ].sets;
@@ -33,6 +34,7 @@ export default function SetContainer() {
 
   return (
     <Set
+      mode={mode!}
       setIndex={setIndex}
       showDeleteButton={sets.length > 1}
       onDeleteSetClick={onDeleteSetClick}

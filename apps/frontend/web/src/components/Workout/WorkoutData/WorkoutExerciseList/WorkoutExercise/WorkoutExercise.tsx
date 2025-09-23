@@ -1,9 +1,10 @@
 import { Stack, Text, Button, Group } from '@mantine/core';
 
-import type { WorkoutExercise } from '@cwt/schema/workouts';
+import type { WorkoutExercise, Mode } from '@cwt/schema/workouts';
 import SetList from './SetList';
 
 interface WorkoutExerciseProps {
+  mode: Mode;
   name: string;
   exerciseIndex: number;
   handleAddSetClick: (exerciseIndex: number) => void;
@@ -11,6 +12,7 @@ interface WorkoutExerciseProps {
 }
 
 export default function WorkoutExercise({
+  mode,
   name,
   exerciseIndex,
   handleAddSetClick,
@@ -20,13 +22,15 @@ export default function WorkoutExercise({
     <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
       <Group>
         <Text>{name}</Text>
-        <Button
-          color="red"
-          variant="white"
-          onClick={() => handleDeleteExerciseClick()}
-        >
-          Delete
-        </Button>
+        {mode !== 'log' && (
+          <Button
+            color="red"
+            variant="white"
+            onClick={() => handleDeleteExerciseClick()}
+          >
+            Delete
+          </Button>
+        )}
       </Group>
       <SetList exerciseIndex={exerciseIndex} />
       {/* <Sets
@@ -34,13 +38,15 @@ export default function WorkoutExercise({
         sets={workoutExercise.sets}
         exerciseIndex={exerciseIndex}
       /> */}
-      <Button
-        variant="outline"
-        color="dark"
-        onClick={() => handleAddSetClick(exerciseIndex)}
-      >
-        Add Set
-      </Button>
+      {mode !== 'log' && (
+        <Button
+          variant="outline"
+          color="dark"
+          onClick={() => handleAddSetClick(exerciseIndex)}
+        >
+          Add Set
+        </Button>
+      )}
     </Stack>
   );
 }
