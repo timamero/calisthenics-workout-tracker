@@ -28,6 +28,7 @@ function WorkoutView() {
     useDisclosure(false);
 
   const mode = useWorkoutDraftStore((state) => state.mode);
+  console.log('Workout page - mode = ', mode);
   const supabaseSession = useAuthStore((state) => state.session);
 
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
