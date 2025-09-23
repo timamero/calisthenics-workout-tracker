@@ -45,6 +45,11 @@ interface WorkoutDraftAction {
     exerciseIndex: number,
     updatedField: Partial<SetFields>,
   ) => void;
+  toggleCompleted: (
+    exerciseIndex: number,
+    setIndex: number,
+    value: boolean,
+  ) => void;
   initializeWorkoutToSave: () => void;
   addUserIDToWorkoutToSave: (userID: string) => void;
   setWorkoutToSave: () => void; // superseded
@@ -193,6 +198,11 @@ export const createWorkoutDraftSlice: StateCreator<
       } else {
         console.error('Cannot update field in log mode');
       }
+    }),
+  toggleCompleted: (exerciseIndex, setIndex, value) =>
+    set((state) => {
+      state.workoutData.exercises[exerciseIndex].sets[setIndex].completed =
+        value;
     }),
   initializeWorkoutToSave: () =>
     set((state) => {
