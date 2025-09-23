@@ -19,6 +19,7 @@ declare module '@tanstack/react-router' {
 }
 
 const theme = createTheme({
+  cursorType: 'pointer',
   fontFamily: 'Optima, Candara, Noto Sans, source-sans-pro, sans-serif',
   headings: {
     fontFamily:
