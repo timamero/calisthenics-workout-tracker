@@ -6,6 +6,7 @@ import type {
   SetFields,
   WorkoutBuildRequest,
   WorkoutData,
+  Mode,
 } from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
 
@@ -17,8 +18,6 @@ import {
   DEFAULT_REP_SET,
   DEFAULT_TIME_SET,
 } from './workoutDefaults';
-
-export type Mode = 'build' | 'edit' | 'log';
 
 interface WorkoutDraftState {
   mode: Mode | null;
