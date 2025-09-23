@@ -20,6 +20,7 @@ export default function WorkoutExerciseContainer() {
     WorkoutExerciseContext,
   )!.deleteExOverlayHandler;
 
+  const mode = useWorkoutDraftStore((state) => state.mode);
   const addSet = useWorkoutDraftStore((state) => state.addSet);
   const setSelectedExerciseIndexToDel = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIndexToMod,
@@ -36,6 +37,7 @@ export default function WorkoutExerciseContainer() {
 
   return (
     <WorkoutExercise
+      mode={mode!}
       name={name}
       exerciseIndex={exerciseIndex}
       handleAddSetClick={addSet}

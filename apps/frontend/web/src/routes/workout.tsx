@@ -91,13 +91,16 @@ function WorkoutView() {
       <Stack gap="xl" align="center">
         <WorkoutData />
         <Stack justify="center">
-          <Button
-            variant="filled"
-            color="orange.9"
-            onClick={() => addExerciseOverlayHandler.open()}
-          >
-            Add Exercise
-          </Button>
+          {mode !== 'log' && (
+            <Button
+              variant="filled"
+              color="orange.9"
+              onClick={() => addExerciseOverlayHandler.open()}
+            >
+              Add Exercise
+            </Button>
+          )}
+
           <Button
             variant="filled"
             color="orange"
