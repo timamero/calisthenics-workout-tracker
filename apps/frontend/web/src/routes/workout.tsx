@@ -114,8 +114,8 @@ function WorkoutView() {
         onConfirmationClick={onSaveWorkoutClick}
       />
       <ConfirmationOverlay
-        title="Cancel Workout Building"
-        message="Confirm cancelling workout building. This will discard the current workout."
+        title={`Cancel Workout ${mode === 'build' ? 'Building' : 'Logging'}`}
+        message={`Confirm cancelling workout ${mode === 'build' ? 'building' : 'logging'}. This will discard the current workout.`}
         confirmButtonLabel="Discard this workout"
         opened={cancelOverlayOpened}
         handler={cancelOverlayHandler}
