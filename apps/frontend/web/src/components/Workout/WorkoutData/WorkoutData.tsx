@@ -13,6 +13,7 @@ export default function WorkoutData() {
     useDisclosure(false);
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
+  console.log('workoutData = ', JSON.stringify(workoutData));
   const mode = useWorkoutDraftStore((state) => state.mode);
 
   const workoutExercisesLength = useWorkoutDraftStore(
