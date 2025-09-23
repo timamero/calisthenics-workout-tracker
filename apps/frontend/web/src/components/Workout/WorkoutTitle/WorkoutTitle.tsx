@@ -1,6 +1,9 @@
 import { Title, TextInput, Button, Group } from '@mantine/core';
 
+import type { Mode } from '@cwt/schema/workouts';
+
 interface WorkoutTitleProps {
+  mode: Mode;
   isEditMode: boolean;
   workoutTitle: string;
   onEditClick: () => void;
@@ -9,6 +12,7 @@ interface WorkoutTitleProps {
 }
 
 export default function WorkoutTitle({
+  mode,
   isEditMode,
   workoutTitle,
   onEditClick,
@@ -20,9 +24,11 @@ export default function WorkoutTitle({
       {!isEditMode && (
         <Group>
           <Title size="h6">{workoutTitle}</Title>
-          <Button onClick={onEditClick} variant="outline" color="dark">
-            Edit Title
-          </Button>
+          {mode !== 'log' && (
+            <Button onClick={onEditClick} variant="outline" color="dark">
+              Edit Title
+            </Button>
+          )}
         </Group>
       )}
       {isEditMode && (
