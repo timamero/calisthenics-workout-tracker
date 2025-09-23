@@ -36,10 +36,14 @@ export default function Set({
         )}
       </Group>
       <FieldsList />
-      <Checkbox
-        checked={isCompleted}
-        onChange={(event) => handleToggleCompleted(event.currentTarget.checked)}
-      />
+      {mode === 'log' && (
+        <Checkbox
+          checked={isCompleted}
+          onChange={(event) =>
+            handleToggleCompleted(event.currentTarget.checked)
+          }
+        />
+      )}
     </Stack>
   );
 }
