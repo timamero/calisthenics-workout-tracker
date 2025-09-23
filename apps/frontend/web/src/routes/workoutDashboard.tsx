@@ -49,6 +49,9 @@ function WorkoutDashboardView() {
   const handleCreateWorkoutBuildClick = () => {
     initializeWorkout('build');
   };
+  const handleCreateWorkoutLogClick = () => {
+    initializeWorkout('edit');
+  };
 
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
@@ -64,7 +67,10 @@ function WorkoutDashboardView() {
     <Stack gap="xl">
       <Title size="h6">Start Workout</Title>
       <LargeButton to="/workout" onButtonClick={handleCreateWorkoutBuildClick}>
-        <Text>Build Workout Template</Text>
+        <Text>Build New Workout</Text>
+      </LargeButton>
+      <LargeButton to="/workout" onButtonClick={handleCreateWorkoutLogClick}>
+        <Text>Start Blank Workout</Text>
       </LargeButton>
       <ScrollArea>
         <Group wrap="nowrap">{workoutBuildCards}</Group>
