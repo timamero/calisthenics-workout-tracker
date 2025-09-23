@@ -4,7 +4,7 @@ import { TextInput } from '@mantine/core';
 import type { SetFields } from '@cwt/schema/workouts';
 
 import { SetContext } from '../../../../../../contexts/SetContext';
-import { getSecondsInDuration } from '../../../../../../utils/durationUtils'; //TODO: Replace with package util
+import { getSecondsInDuration } from '@cwt/utils';
 
 interface DurationInputProps {
   label: 'rest' | 'time';
