@@ -94,7 +94,7 @@ function WorkoutView() {
             color="gray"
             onClick={() => cancelOverlayHandler.open()}
           >
-            Cancel Workout Building
+            {`Cancel Workout ${mode === 'build' ? 'Building' : 'Logging'}`}
           </Button>
         </Stack>
       </Stack>
