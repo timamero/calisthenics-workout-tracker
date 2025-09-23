@@ -4,18 +4,13 @@ import { TextInput } from '@mantine/core';
 import type { SetFields } from '@cwt/schema/workouts';
 
 import { SetContext } from '../../../../../../contexts/SetContext';
-// import DurationInput from '../../../../../common/DurationInput';
 import { getSecondsInDuration } from '../../../../../../utils/durationUtils'; //TODO: Replace with package util
 
 interface DurationInputProps {
-  // fieldName: 'rest' | 'time';
   label: 'rest' | 'time';
 }
 
-export default function DurationInput({
-  // fieldName,
-  label,
-}: DurationInputProps) {
+export default function DurationInput({ label }: DurationInputProps) {
   const set = React.useContext(SetContext)!.set;
   const handleSetFieldChange =
     React.useContext(SetContext)!.handleSetFieldChange;
