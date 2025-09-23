@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { Stack, Button } from '@mantine/core';
+import { Stack, Button, Switch } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import {
@@ -71,6 +71,7 @@ function WorkoutView() {
 
   return (
     <Stack gap="xl" align="center">
+      <Switch defaultChecked label="Edit mode" />
       <WorkoutTitle />
       <Stack gap="xl" align="center">
         <WorkoutData />
