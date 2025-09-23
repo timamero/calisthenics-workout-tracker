@@ -33,6 +33,7 @@ interface WorkoutDraftState {
 
 interface WorkoutDraftAction {
   initializeWorkout: (mode: Mode) => void;
+  setMode: (mode: Mode) => void;
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSelectedSetIndexToMod: (setIndex: number | null) => void;
@@ -75,6 +76,10 @@ export const createWorkoutDraftSlice: StateCreator<
         mode === 'build'
           ? INITIAL_WORKOUT_BUILD_TITLE
           : INITIAL_WORKOUT_LOG_TITLE;
+    }),
+  setMode: (mode) =>
+    set((state) => {
+      state.mode = mode;
     }),
   setWorkoutTitle: (title) =>
     set((state) => {
