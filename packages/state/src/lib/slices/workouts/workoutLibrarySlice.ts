@@ -5,9 +5,8 @@ import type {
   WorkoutLog,
   WorkoutBuildRequest,
   WorkoutBuildResponse,
+  Mode,
 } from '@cwt/schema/workouts';
-
-import type { Mode } from './workoutDraftSlice';
 
 export interface WorkoutLibrarySlice {
   masterWorkoutLogs: WorkoutLog[];
