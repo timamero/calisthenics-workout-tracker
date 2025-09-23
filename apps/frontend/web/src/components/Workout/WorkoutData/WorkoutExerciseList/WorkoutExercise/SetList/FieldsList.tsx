@@ -19,9 +19,7 @@ export default function FieldsList() {
       case 'reps':
         return <NumeralInput key={`${field}-${i}`} label="reps" />;
       case 'time':
-        return (
-          <DurationInput key={`${field}-${i}`} label="time" />
-        );
+        return <DurationInput key={`${field}-${i}`} label="time" />;
       default:
         return <></>;
     }
