@@ -1,4 +1,4 @@
-import { Stack, Text, Group, Button } from '@mantine/core';
+import { Stack, Text, Group, Button, Checkbox } from '@mantine/core';
 
 import type { Mode } from '@cwt/schema/workouts';
 
@@ -7,14 +7,18 @@ import FieldsList from './FieldsList';
 interface SetProps {
   mode: Mode;
   setIndex: number;
+  isCompleted: boolean;
   showDeleteButton: boolean;
+  handleToggleCompleted: (value: boolean) => void;
   onDeleteSetClick: () => void;
 }
 
 export default function Set({
   mode,
   setIndex,
+  isCompleted,
   showDeleteButton,
+  handleToggleCompleted,
   onDeleteSetClick,
 }: SetProps) {
   return (
@@ -32,6 +36,10 @@ export default function Set({
         )}
       </Group>
       <FieldsList />
+      <Checkbox
+        checked={isCompleted}
+        onChange={(event) => handleToggleCompleted(event.currentTarget.checked)}
+      />
     </Stack>
   );
 }

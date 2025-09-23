@@ -19,6 +19,9 @@ export default function SetContainer() {
     exerciseIndex
   ].sets;
 
+  const toggleCompleted = useWorkoutDraftStore(
+    (state) => state.toggleCompleted,
+  );
   const setSelectedSetIndexToMod = useWorkoutDraftStore(
     (state) => state.setSelectedSetIndexToMod,
   );
@@ -32,10 +35,16 @@ export default function SetContainer() {
     deleteSetOverlayHandler.open();
   };
 
+  const handleToggleCompleted = (value: boolean) => {
+    toggleCompleted(exerciseIndex, setIndex, value);
+  };
+
   return (
     <Set
       mode={mode!}
       setIndex={setIndex}
+      isCompleted={sets[setIndex].completed}
+      handleToggleCompleted={handleToggleCompleted}
       showDeleteButton={sets.length > 1}
       onDeleteSetClick={onDeleteSetClick}
     />
