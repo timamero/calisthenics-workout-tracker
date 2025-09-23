@@ -71,7 +71,9 @@ function WorkoutView() {
 
   return (
     <Stack gap="xl" align="center">
-      <Switch defaultChecked label="Edit mode" />
+      {mode !== 'build' && (
+        <Switch checked={mode === 'edit' ? true : false} label="Edit mode" />
+      )}
       <WorkoutTitle />
       <Stack gap="xl" align="center">
         <WorkoutData />
