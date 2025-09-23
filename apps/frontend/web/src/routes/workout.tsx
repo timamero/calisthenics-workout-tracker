@@ -31,6 +31,7 @@ function WorkoutView() {
   console.log('Workout page - mode = ', mode);
   const supabaseSession = useAuthStore((state) => state.session);
 
+  const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
     (state) => state.completeWorkout,
@@ -69,10 +70,22 @@ function WorkoutView() {
     resetWorkout();
   };
 
+  const handleSetMode = () => {
+    if (mode === 'edit') {
+      setMode('log');
+    } else if (mode === 'log') {
+      setMode('edit');
+    }
+  };
+
   return (
     <Stack gap="xl" align="center">
       {mode !== 'build' && (
-        <Switch checked={mode === 'edit' ? true : false} label="Edit mode" />
+        <Switch
+          checked={mode === 'edit' ? true : false}
+          onChange={() => handleSetMode()}
+          label="Edit mode"
+        />
       )}
       <WorkoutTitle />
       <Stack gap="xl" align="center">
