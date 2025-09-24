@@ -38,7 +38,6 @@ def insert_workout_log(
             .insert(json=workout_log_dict, returning="representation")
             .execute()
         )
-        print("response.data from database", response.data)
         return response.data[0]
     except Exception as e:
         print(f"Error saving workout: {e}")
