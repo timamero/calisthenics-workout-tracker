@@ -8,7 +8,7 @@ const WorkoutLogBase = z.object({
   date: z.iso.datetime(),
   title: z.nullable(z.string().max(70)),
   description: z.nullable(z.string().max(500)),
-  duration: z.iso.time(),
+  duration: z.nullable(z.iso.time()),
   workout_data: WorkoutDataSchema,
   rpe: z.nullable(z.number().lte(10)),
   notes: z.nullable(z.string().max(750)),
