@@ -29,10 +29,7 @@ interface WorkoutDraftState {
   selectedSetIndexToMod: number | null;
   selectedExerciseIndexToMod: number | null;
   isWorkoutSavePending: boolean;
-  workoutToSave:
-    | WorkoutBuildRequest
-    | Omit<WorkoutLogRequest, 'duration'>
-    | null;
+  workoutToSave: WorkoutBuildRequest | WorkoutLogRequest | null;
 }
 
 interface WorkoutDraftAction {
@@ -229,6 +226,7 @@ export const createWorkoutDraftSlice: StateCreator<
           workout_data: state.workoutData,
           title: state.workoutTitle || 'Untitled workout',
           date: new Date().toISOString(),
+          duration: 'PT25M', // Placeholder duration, replace with actual duration
         };
       }
 
