@@ -7,14 +7,14 @@ export interface WorkoutStopwatchSlice {
   start: () => void;
   stop: () => void;
   reset: () => void;
-  getTime: () => void;
+  getTime: () => number;
 }
 
 export const createWorkoutStopwatchSlice: StateCreator<
-   WorkoutStopwatchSlice,
+  WorkoutStopwatchSlice,
   [['zustand/immer', never]],
   [],
-   WorkoutStopwatchSlice
+  WorkoutStopwatchSlice
 > = (set, get) => ({
   running: false,
   startTime: 0,
