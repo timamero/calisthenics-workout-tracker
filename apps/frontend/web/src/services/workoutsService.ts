@@ -42,7 +42,7 @@ export async function getWorkoutLogs(
   token: string,
 ): Promise<WorkoutLogResponse[]> {
   if (environment === 'local') {
-    console.log('Web: Local environment, return sample workoutlogs.');
+    console.log('Web: Local environment, return sample workout logs.');
     return sampleWorkoutLogs;
   }
   console.log(
