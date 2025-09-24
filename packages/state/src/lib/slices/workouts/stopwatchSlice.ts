@@ -25,15 +25,19 @@ export const createStopwatchSlice: StateCreator<
   elapsedTime: 0,
   start: () =>
     set((state) => {
-      if (state.running) {
-        return {
-          running: true,
-          startTime: Date.now(),
-        };
+      console.log('start timer called');
+      if (state.running === false) {
+        console.log('starting timer');
+        state.running = true;
+        state.startTime = Date.now();
+        // return {
+        //   running: true,
+        //   startTime: Date.now(),
+        // };
       }
-      return {
-        ...state,
-      };
+      // return {
+      //   ...state,
+      // };
     }),
   stop: () =>
     set((state) => {
