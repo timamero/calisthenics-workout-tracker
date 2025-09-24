@@ -97,14 +97,23 @@ function WorkoutDashboardView() {
       <LargeButton to="/workout" onButtonClick={handleCreateWorkoutLogClick}>
         <Text>Start Blank Workout</Text>
       </LargeButton>
-      <Text>Start Workout From Template</Text>
-      <ScrollArea>
-        <Group wrap="nowrap">{workoutBuildCards}</Group>
-      </ScrollArea>
-      <Text>Start Workout From Recent Workout</Text>
-      <ScrollArea>
-        <Group wrap="nowrap">{workoutLogCards}</Group>
-      </ScrollArea>
+      {workoutBuildCards.length > 0 && (
+        <Stack>
+          <Text>Start Workout From Template</Text>
+          <ScrollArea>
+            <Group wrap="nowrap">{workoutBuildCards}</Group>
+          </ScrollArea>
+        </Stack>
+      )}
+
+      {workoutLogCards.length > 0 && (
+        <Stack>
+          <Text>Start Workout From Recent Workout</Text>
+          <ScrollArea>
+            <Group wrap="nowrap">{workoutLogCards}</Group>
+          </ScrollArea>
+        </Stack>
+      )}
     </Stack>
   );
 }
