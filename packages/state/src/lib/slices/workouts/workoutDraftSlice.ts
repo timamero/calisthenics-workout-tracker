@@ -84,6 +84,9 @@ export const createWorkoutDraftSlice: StateCreator<
         mode === 'build'
           ? INITIAL_WORKOUT_BUILD_TITLE
           : INITIAL_WORKOUT_LOG_TITLE;
+
+      // Start timer
+      get().start();
     }),
   setMode: (mode) =>
     set((state) => {

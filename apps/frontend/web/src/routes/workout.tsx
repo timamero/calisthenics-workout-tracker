@@ -84,6 +84,8 @@ function WorkoutView() {
     } else if (mode === 'log') {
       setMode('edit');
     }
+    console.log('timer running: ', useWorkoutDraftStore.getState().running);
+    console.log('get time: ', useWorkoutDraftStore.getState().getTime());
   };
 
   return (
