@@ -29,7 +29,7 @@ export const INITIALIZED_WORKOUT_TO_SAVE: Omit<
 
 export const INITIALIZED_WORKOUT_LOG_TO_SAVE: Omit<
   WorkoutLogRequest,
-  'workout_data' | 'title' | 'date' | 'duration'
+  'workout_data' | 'title' | 'date'
 > = {
   workout_build_id: null,
   status: 'draft',
@@ -39,6 +39,7 @@ export const INITIALIZED_WORKOUT_LOG_TO_SAVE: Omit<
   goal: null,
   rpe: null,
   user_id: null,
+  duration: null,
 };
 
 export const DEFAULT_REP_SET: SetFields = { reps: 10, rest: 'PT30S' };

@@ -236,7 +236,6 @@ export const createWorkoutDraftSlice: StateCreator<
           workout_data: state.workoutData,
           title: state.workoutTitle || 'Untitled workout',
           date: new Date().toISOString(),
-          duration: 'PT25M', // Placeholder duration, replace with actual duration
         };
       }
 
