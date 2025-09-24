@@ -18,6 +18,7 @@ import {
   INITIALIZED_WORKOUT_TO_SAVE,
   DEFAULT_REP_SET,
   DEFAULT_TIME_SET,
+  INITIALIZED_WORKOUT_LOG_TO_SAVE,
 } from './workoutDefaults';
 
 interface WorkoutDraftState {
@@ -28,7 +29,10 @@ interface WorkoutDraftState {
   selectedSetIndexToMod: number | null;
   selectedExerciseIndexToMod: number | null;
   isWorkoutSavePending: boolean;
-  workoutToSave: WorkoutBuildRequest | WorkoutLogRequest | null;
+  workoutToSave:
+    | WorkoutBuildRequest
+    | Omit<WorkoutLogRequest, 'duration'>
+    | null;
 }
 
 interface WorkoutDraftAction {
@@ -220,11 +224,11 @@ export const createWorkoutDraftSlice: StateCreator<
           title: state.workoutTitle || 'Untitled workout',
         };
       } else {
-        // update later for workout logs
         state.workoutToSave = {
-          ...INITIALIZED_WORKOUT_TO_SAVE,
+          ...INITIALIZED_WORKOUT_LOG_TO_SAVE,
           workout_data: state.workoutData,
           title: state.workoutTitle || 'Untitled workout',
+          date: new Date().toISOString(),
         };
       }
 

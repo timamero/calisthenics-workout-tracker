@@ -1,4 +1,9 @@
-import { Set, SetFields, WorkoutBuildRequest } from '@cwt/schema/workouts';
+import {
+  Set,
+  SetFields,
+  WorkoutBuildRequest,
+  WorkoutLogRequest,
+} from '@cwt/schema/workouts';
 
 export const INITIAL_WORKOUT_LOG_TITLE: string = 'New workout log';
 export const INITIAL_WORKOUT_BUILD_TITLE: string = 'New workout template';
@@ -20,6 +25,20 @@ export const INITIALIZED_WORKOUT_TO_SAVE: Omit<
   user_id: null,
   description: null,
   goal: null,
+};
+
+export const INITIALIZED_WORKOUT_LOG_TO_SAVE: Omit<
+  WorkoutLogRequest,
+  'workout_data' | 'title' | 'date' | 'duration'
+> = {
+  workout_build_id: null,
+  status: 'draft',
+  notes: null,
+  updated_at: null,
+  description: null,
+  goal: null,
+  rpe: null,
+  user_id: null,
 };
 
 export const DEFAULT_REP_SET: SetFields = { reps: 10, rest: 'PT30S' };
