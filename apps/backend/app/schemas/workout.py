@@ -99,7 +99,7 @@ class WorkoutLogResponseSchema(BaseModel):
 #     workout_data: WorkoutDataSchema
 #     status: Literal["draft", "finalized", "archived"]
 #     goal:
-#       Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
+#        Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
 #     notes: Optional[str] = Field(None, max_length=750)
 
 
