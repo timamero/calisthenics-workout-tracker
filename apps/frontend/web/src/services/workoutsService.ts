@@ -1,9 +1,15 @@
 import {
   getWorkoutBuilds as apiGetWorkoutBuilds,
   postWorkoutBuild as apiPostWorkoutBuild,
+  getWorkoutLogs as apiGetWorkoutLogs,
+  postWorkoutLog as apiPostWorkoutLog,
 } from '@cwt/api/workoutsService';
-import type { WorkoutBuildResponse } from '@cwt/schema/workouts';
+import type {
+  WorkoutBuildResponse,
+  WorkoutLogResponse,
+} from '@cwt/schema/workouts';
 import { sampleWorkoutBuilds } from '@cwt/mocks/sampleWorkoutBuilds';
+import { sampleWorkoutLogs } from '@cwt/mocks/sampleWorkoutLogs';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const environment = import.meta.env.VITE_ENVIRONMENT || null;
@@ -30,4 +36,28 @@ export async function postWorkoutBuild(
     return JSON.parse(body as string);
   }
   return apiPostWorkoutBuild(baseUrl, token, body);
+}
+
+export async function getWorkoutLogs(
+  token: string,
+): Promise<WorkoutLogResponse[]> {
+  if (environment === 'local') {
+    console.log('Web: Local environment, return sample workoutlogs.');
+    return sampleWorkoutLogs;
+  }
+  console.log(
+    'Web: Full stack development environment, returning logs from database.',
+  );
+  return apiGetWorkoutLogs(baseUrl, token);
+}
+
+export async function postWorkoutLog(
+  token: string,
+  body: BodyInit,
+): Promise<WorkoutLogResponse | null> {
+  if (environment === 'local') {
+    console.log('Web: Local environment, return workout log body.');
+    return JSON.parse(body as string);
+  }
+  return apiPostWorkoutLog(baseUrl, token, body);
 }

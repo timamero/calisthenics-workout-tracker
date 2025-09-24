@@ -1,9 +1,14 @@
 import { apiFetch } from './httpClient';
-import { WorkoutLog, WorkoutBuildResponse } from '@cwt/schema/workouts';
+import { WorkoutLogResponse, WorkoutBuildResponse } from '@cwt/schema/workouts';
 
 export function getWorkoutLogs(baseUrl: string, token: string) {
   try {
-    return apiFetch<WorkoutLog[]>(baseUrl, '/workout/logs', 'GET', token);
+    return apiFetch<WorkoutLogResponse[]>(
+      baseUrl,
+      '/workout/logs',
+      'GET',
+      token,
+    );
   } catch (error) {
     console.error('Error fetching workout logs from API.', error);
     throw error;
@@ -26,7 +31,13 @@ export async function getWorkoutBuilds(baseUrl: string, token: string) {
 
 export function postWorkoutLog(baseUrl: string, token: string, body: BodyInit) {
   try {
-    return apiFetch<WorkoutLog>(baseUrl, '/workout/log', 'POST', token, body);
+    return apiFetch<WorkoutLogResponse>(
+      baseUrl,
+      '/workout/log',
+      'POST',
+      token,
+      body,
+    );
   } catch (error) {
     console.error('Error posting workou log to API.', error);
     throw error;
