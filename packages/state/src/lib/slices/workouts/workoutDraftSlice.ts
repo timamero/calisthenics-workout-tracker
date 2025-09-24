@@ -202,8 +202,14 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   toggleCompleted: (exerciseIndex, setIndex, value) =>
     set((state) => {
-      state.workoutData.exercises[exerciseIndex].sets[setIndex].completed =
-        value;
+      if (state.mode === 'log') {
+        state.workoutData.exercises[exerciseIndex].sets[setIndex].completed =
+          value;
+      } else {
+        console.error(
+          'Cannot updated completed checkbox in edit or build mode',
+        );
+      }
     }),
   initializeWorkoutToSave: () =>
     set((state) => {
