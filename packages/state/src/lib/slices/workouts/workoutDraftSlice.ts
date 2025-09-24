@@ -11,8 +11,6 @@ import type {
 } from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
 
-import { WorkoutDraftStoreState } from '../../stores/workouts/workoutDraftStore';
-
 import {
   INITIAL_WORKOUT_LOG_TITLE,
   INITIAL_WORKOUT_BUILD_TITLE,
@@ -63,7 +61,7 @@ interface WorkoutDraftAction {
 export type WorkoutDraftSlice = WorkoutDraftState & WorkoutDraftAction;
 
 export const createWorkoutDraftSlice: StateCreator<
-  WorkoutDraftStoreState,
+  WorkoutDraftSlice,
   [['zustand/immer', never]],
   [],
   WorkoutDraftSlice
@@ -226,7 +224,6 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   initializeWorkoutToSave: () =>
     set((state) => {
-      console.log('getTime', get().getTime());
       if (state.mode === 'build') {
         state.workoutToSave = {
           ...INITIALIZED_WORKOUT_TO_SAVE,
