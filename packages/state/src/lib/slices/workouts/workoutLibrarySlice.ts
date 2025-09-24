@@ -44,6 +44,7 @@ export const createWorkoutLibrarySlice: StateCreator<
       masterWorkoutLogs: logs,
       masterWorkoutBuilds: builds,
       displayedWorkoutBuilds: builds,
+      displayedWorkoutLogs: logs,
     })),
   addWorkout: (workout, mode) =>
     set(
@@ -54,15 +55,7 @@ export const createWorkoutLibrarySlice: StateCreator<
             workout,
           ];
         } else {
-          state.masterWorkoutLogs = [
-            ...state.masterWorkoutLogs,
-            {
-              workout_data: workout.workout_data,
-              title: workout.title || 'Untitled workout',
-              status: 'draft',
-              source: 'manual',
-            },
-          ];
+          state.displayedWorkoutLogs = [...state.displayedWorkoutLogs, workout];
         }
       }),
     ),
