@@ -206,6 +206,16 @@ export const createWorkoutDraftSlice: StateCreator<
       if (state.mode === 'log') {
         state.workoutData.exercises[exerciseIndex].sets[setIndex].completed =
           value;
+
+        if (value === true) {
+          state.workoutData.exercises[exerciseIndex].sets[
+            setIndex
+          ].completed_at = new Date().toISOString();
+        } else {
+          state.workoutData.exercises[exerciseIndex].sets[
+            setIndex
+          ].completed_at = null;
+        }
       } else {
         console.error(
           'Cannot updated completed checkbox in edit or build mode',
