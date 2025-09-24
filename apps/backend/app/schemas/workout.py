@@ -76,6 +76,7 @@ class WorkoutLogRequestSchema(BaseModel):
 class WorkoutLogResponseSchema(BaseModel):
     id: int
     created_at: datetime
+    user_id: UUID
     workout_build_id: Optional[int]
     date: datetime
     title: Optional[str] = Field(None, max_length=70)
@@ -85,27 +86,5 @@ class WorkoutLogResponseSchema(BaseModel):
     rpe: Optional[int] = Field(None, le=10)
     notes: Optional[str] = Field(None, max_length=750)
     status: Literal["draft", "finalized", "archived"]
-    goal: Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
     updated_at: Optional[datetime]
-    user_id: UUID
-
-
-# class BaseWorkoutSchema(BaseModel):
-#     id: int
-#     created_at: datetime
-#     updated_at: Optional[datetime]
-#     title: Optional[str] = Field(None, max_length=70)
-#     description: Optional[str] = Field(None, max_length=500)
-#     workout_data: WorkoutDataSchema
-#     status: Literal["draft", "finalized", "archived"]
-#     goal:
-#        Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
-#     notes: Optional[str] = Field(None, max_length=750)
-
-
-# class WorkoutLogSchema(BaseWorkoutSchema):
-#     user_id: UUID
-#     workout_build_id: int
-#     date: date
-#     duration: timedelta
-#     rpe: Optional[int] = Field(None, le=10)
+    goal: Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
