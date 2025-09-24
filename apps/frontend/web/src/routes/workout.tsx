@@ -44,11 +44,18 @@ function WorkoutView() {
     (state) => state.completeWorkout,
   );
 
-  const { setWorkoutToSaveWithUser } = useWorkoutSave();
+  const { setWorkoutToSaveWithUser, setWorkoutToSaveWithUserAndDuration } =
+    useWorkoutSave();
 
   const onSaveWorkoutClick = async () => {
-    setWorkoutToSaveWithUser();
+    if (mode === 'build') {
+      setWorkoutToSaveWithUser();
+    } else {
+      // mode is 'edit' or 'log'
+      setWorkoutToSaveWithUserAndDuration();
+    }
     const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
+    console.log('workoutToSave!!', workoutToSave);
     if (!supabaseSession || !workoutToSave) {
       console.error('Session not found or workout data invalid');
       return;
