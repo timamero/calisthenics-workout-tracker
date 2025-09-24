@@ -13,6 +13,7 @@ export interface WorkoutLibrarySlice {
   masterWorkoutLogs: Array<WorkoutLogRequest | WorkoutLogResponse>;
   masterWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
   displayedWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
+  displayedWorkoutLogs: Array<WorkoutLogRequest | WorkoutLogResponse>;
   setWorkouts: (
     logs: Array<WorkoutLogRequest | WorkoutLogResponse>,
     builds: Array<WorkoutBuildRequest | WorkoutBuildResponse>,
@@ -36,6 +37,7 @@ export const createWorkoutLibrarySlice: StateCreator<
   masterWorkoutLogs: [], // TODO: Check that the max number returned is 20
   masterWorkoutBuilds: [], // TODO: Check that the max number returned is 10
   displayedWorkoutBuilds: [],
+  displayedWorkoutLogs: [],
   // TODO: Create action function to sort logs by date and builds by creation date
   setWorkouts: (logs, builds) =>
     set(() => ({
