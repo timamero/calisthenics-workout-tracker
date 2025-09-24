@@ -1,8 +1,6 @@
 import { StateCreator } from 'zustand';
 
-import { WorkoutDraftStoreState } from '../../stores/workouts/workoutDraftStore';
-
-export interface StopwatchSlice {
+export interface WorkoutStopwatchSlice {
   running: boolean;
   startTime: number;
   elapsedTime: number;
@@ -12,11 +10,11 @@ export interface StopwatchSlice {
   getTime: () => void;
 }
 
-export const createStopwatchSlice: StateCreator<
-  WorkoutDraftStoreState,
+export const createWorkoutStopwatchSlice: StateCreator<
+   WorkoutStopwatchSlice,
   [['zustand/immer', never]],
   [],
-  StopwatchSlice
+   WorkoutStopwatchSlice
 > = (set, get) => ({
   running: false,
   startTime: 0,
