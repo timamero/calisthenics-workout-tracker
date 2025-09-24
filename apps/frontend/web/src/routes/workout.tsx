@@ -8,12 +8,16 @@ import {
   useAuthStore,
 } from '@cwt/state/stores';
 import { useWorkoutSave } from '@cwt/hooks';
+import type {
+  WorkoutBuildResponse,
+  WorkoutLogResponse,
+} from '@cwt/schema/workouts';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
 import WorkoutData from '../components/Workout/WorkoutData';
 import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle';
-import { postWorkoutBuild } from '../services/workoutsService';
+import { postWorkoutBuild, postWorkoutLog } from '../services/workoutsService';
 
 export const Route = createFileRoute('/workout')({
   component: WorkoutView,
@@ -48,14 +52,19 @@ function WorkoutView() {
     }
 
     const body = JSON.stringify(workoutToSave);
-    const result = await postWorkoutBuild(supabaseSession.access_token, body);
+    let result: WorkoutBuildResponse | WorkoutLogResponse | null = null;
+    if (mode === 'build') {
+      result = await postWorkoutBuild(supabaseSession.access_token, body);
+    } else {
+      result = await postWorkoutLog(supabaseSession.access_token, body);
+    }
     if (result) {
       completeWorkout(workoutToSave, mode!);
       resetWorkout();
     } else {
       // TODO: Save to state called unsavedBuilds
       resetWorkout();
-      console.error('Workout build post request failed');
+      console.error('Workout post request failed');
     }
 
     navigate({
