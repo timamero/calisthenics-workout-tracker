@@ -82,10 +82,8 @@ def read_workout_logs(request: Request) -> List[WorkoutLogResponseSchema]:
     else:
         access_token = auth_header.split(" ")[1]
         logs = get_workout_logs(access_token)
-        print("logs before HTTPException line", logs)
     if logs is None:
         raise HTTPException(status_code=400, detail="Invalid request")
-    print("returning logs: ", logs)
     return logs
 
 
