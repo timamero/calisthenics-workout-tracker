@@ -5,6 +5,7 @@ import { useDisclosure } from '@mantine/hooks';
 import {
   useWorkoutDraftStore,
   useWorkoutLibraryStore,
+  useWorkoutStopwatchStore,
   useAuthStore,
 } from '@cwt/state/stores';
 import { useWorkoutSave } from '@cwt/hooks';
@@ -34,9 +35,9 @@ function WorkoutView() {
   const mode = useWorkoutDraftStore((state) => state.mode);
   const supabaseSession = useAuthStore((state) => state.session);
 
-  const startTimer = useWorkoutDraftStore((state) => state.start);
-  const stopTimer = useWorkoutDraftStore((state) => state.stop);
-  const resetTimer = useWorkoutDraftStore((state) => state.reset);
+  const startTimer = useWorkoutStopwatchStore((state) => state.start);
+  const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
+  const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
@@ -70,8 +71,8 @@ function WorkoutView() {
       resetTimer();
       console.error('Workout post request failed');
     }
-    console.log('timer running: ', useWorkoutDraftStore.getState().running);
-    console.log('get time: ', useWorkoutDraftStore.getState().getTime());
+    console.log('timer running: ', useWorkoutStopwatchStore.getState().running);
+    console.log('get time: ', useWorkoutStopwatchStore.getState().getTime());
     navigate({
       to: '/workoutDashboard',
     });
@@ -84,8 +85,8 @@ function WorkoutView() {
     resetWorkout();
     resetTimer();
 
-    console.log('timer running: ', useWorkoutDraftStore.getState().running);
-    console.log('get time: ', useWorkoutDraftStore.getState().getTime());
+    console.log('timer running: ', useWorkoutStopwatchStore.getState().running);
+    console.log('get time: ', useWorkoutStopwatchStore.getState().getTime());
   };
 
   const handleSetMode = () => {
@@ -96,8 +97,8 @@ function WorkoutView() {
       setMode('edit');
       stopTimer();
     }
-    console.log('timer running: ', useWorkoutDraftStore.getState().running);
-    console.log('get time: ', useWorkoutDraftStore.getState().getTime());
+    console.log('timer running: ', useWorkoutStopwatchStore.getState().running);
+    console.log('get time: ', useWorkoutStopwatchStore.getState().getTime());
   };
 
   return (
