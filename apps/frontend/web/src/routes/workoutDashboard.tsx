@@ -79,7 +79,7 @@ function WorkoutDashboardView() {
     );
   });
   const workoutLogCards = workouts.logs.map((wo, i) => {
-    const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
+    const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
     return (
       <CardButton key={i}>
         <Title order={3} size="h5">
