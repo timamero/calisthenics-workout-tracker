@@ -11,6 +11,8 @@ import type {
 } from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
 
+import { WorkoutDraftStoreState } from '../../stores/workouts/workoutDraftStore';
+
 import {
   INITIAL_WORKOUT_LOG_TITLE,
   INITIAL_WORKOUT_BUILD_TITLE,
@@ -61,7 +63,7 @@ interface WorkoutDraftAction {
 export type WorkoutDraftSlice = WorkoutDraftState & WorkoutDraftAction;
 
 export const createWorkoutDraftSlice: StateCreator<
-  WorkoutDraftSlice,
+  WorkoutDraftStoreState,
   [['zustand/immer', never]],
   [],
   WorkoutDraftSlice
