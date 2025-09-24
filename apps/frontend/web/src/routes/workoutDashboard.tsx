@@ -50,6 +50,7 @@ function WorkoutDashboardView() {
     builds: WorkoutBuildResponse[];
   } = Route.useLoaderData();
 
+  const startTimer = useWorkoutDraftStore((state) => state.start);
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
 
   // On initial load, set the workout builds in the store
@@ -66,6 +67,7 @@ function WorkoutDashboardView() {
   };
   const handleCreateWorkoutLogClick = () => {
     initializeWorkout('edit');
+    startTimer();
   };
 
   const workoutBuildCards = workouts.builds.map((wo, i) => {
