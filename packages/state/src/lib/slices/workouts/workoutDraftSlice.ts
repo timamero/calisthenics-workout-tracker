@@ -191,15 +191,15 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Invalid set index');
         return;
       }
-      if (state.mode === 'edit' || state.mode === 'build') {
-        const set = state.workoutData.exercises[exerciseIndex].sets[setIndex];
-        state.workoutData.exercises[exerciseIndex].sets[setIndex] = {
-          ...set,
-          fields: { ...set.fields, ...updatedField },
-        };
-      } else {
-        console.error('Cannot update field in log mode');
-      }
+      // if (state.mode === 'edit' || state.mode === 'build') {
+      const set = state.workoutData.exercises[exerciseIndex].sets[setIndex];
+      state.workoutData.exercises[exerciseIndex].sets[setIndex] = {
+        ...set,
+        fields: { ...set.fields, ...updatedField },
+      };
+      // } else {
+      //   console.error('Cannot update field in log mode');
+      // }
     }),
   toggleCompleted: (exerciseIndex, setIndex, value) =>
     set((state) => {
