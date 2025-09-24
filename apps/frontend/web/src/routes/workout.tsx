@@ -32,7 +32,6 @@ function WorkoutView() {
     useDisclosure(false);
 
   const mode = useWorkoutDraftStore((state) => state.mode);
-  console.log('Workout page - mode = ', mode);
   const supabaseSession = useAuthStore((state) => state.session);
 
   const setMode = useWorkoutDraftStore((state) => state.setMode);
@@ -131,9 +130,9 @@ function WorkoutView() {
         handler={addExerciseOverlayHandler}
       />
       <ConfirmationOverlay
-        title="Save Workout Template"
-        message="Complete workout building and save this template."
-        confirmButtonLabel="Save Workout Template"
+        title={`Save Workout ${mode === 'build' ? 'Template' : ''}`}
+        message={`Complete and save this ${mode === 'build' ? 'template' : 'log'}.`}
+        confirmButtonLabel={`Save Workout ${mode === 'build' ? 'Template' : ''}`}
         opened={saveOverlayOpened}
         handler={saveOverlayHandler}
         onConfirmationClick={onSaveWorkoutClick}
