@@ -6,7 +6,7 @@ import {
   createWorkoutStopwatchSlice,
 } from '../../slices/workouts/workoutStopwatchSlice';
 
-export const useWorkoutDraftStore = create<WorkoutStopwatchSlice>()(
+export const useWorkoutStopwatchStore = create<WorkoutStopwatchSlice>()(
   immer((...a) => ({
     ...createWorkoutStopwatchSlice(...a),
   })),
