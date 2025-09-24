@@ -38,9 +38,10 @@ def insert_workout_log(
             .insert(json=workout_log_dict, returning="representation")
             .execute()
         )
-        return response.data
+        print("response.data from database", response.data)
+        return response.data[0]
     except Exception as e:
-        print(f"Error saving workout with ID: {e}")
+        print(f"Error saving workout: {e}")
 
 
 def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
