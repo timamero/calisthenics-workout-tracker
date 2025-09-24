@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import type {
   SetFields,
   WorkoutBuildRequest,
+  WorkoutLogRequest,
   WorkoutData,
   Mode,
 } from '@cwt/schema/workouts';
@@ -27,7 +28,7 @@ interface WorkoutDraftState {
   selectedSetIndexToMod: number | null;
   selectedExerciseIndexToMod: number | null;
   isWorkoutSavePending: boolean;
-  workoutToSave: WorkoutBuildRequest | null;
+  workoutToSave: WorkoutBuildRequest | WorkoutLogRequest | null;
 }
 
 interface WorkoutDraftAction {
@@ -52,7 +53,7 @@ interface WorkoutDraftAction {
   ) => void;
   initializeWorkoutToSave: () => void;
   addUserIDToWorkoutToSave: (userID: string) => void;
-  setWorkoutToSave: () => void; // superseded
+  // setWorkoutToSave: () => void; // superseded
   resetWorkout: () => void;
 }
 
@@ -231,39 +232,40 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('workoutToSave is null, cannot add userID');
       }
     }),
-  setWorkoutToSave: () =>
-    set((state) => {
-      if (state.mode === 'build') {
-        state.workoutToSave = {
-          workout_data: state.workoutData,
-          title: state.workoutTitle || 'Untitled workout',
-          status: 'draft',
-          source: 'manual',
-          notes: null,
-          estimated_duration: null,
-          updated_at: null,
-          user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
-          description: null,
-          goal: null,
-        };
-      } else {
-        // update later for workout logs
-        state.workoutToSave = {
-          workout_data: state.workoutData,
-          title: state.workoutTitle || 'Untitled workout',
-          status: 'draft',
-          source: 'manual',
-          notes: null,
-          estimated_duration: null,
-          updated_at: null,
-          user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
-          description: null,
-          goal: null,
-        };
-      }
+  // setWorkoutToSave: () =>
+  //   set((state) => {
+  //     if (state.mode === 'build') {
+  //       state.workoutToSave = {
+  //         workout_data: state.workoutData,
+  //         title: state.workoutTitle || 'Untitled workout',
+  //         status: 'draft',
+  //         source: 'manual',
+  //         notes: null,
+  //         estimated_duration: null,
+  //         updated_at: null,
+  //         user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
+  //         description: null,
+  //         goal: null,
+  //       } as WorkoutBuildRequest;
+  //     } else {
+  //       state.workoutToSave = {
+  //         workout_build_id: null,
+  //         date: new Date(),
+  //         workout_data: state.workoutData,
+  //         title: state.workoutTitle || 'Untitled workout',
+  //         status: 'draft',
+  //         notes: null,
+  //         duration: null,
+  //         updated_at: null,
+  //         user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
+  //         description: null,
+  //         goal: null,
+  //         rpe: null,
+  //       } as WorkoutLogRequest;
+  //     }
 
-      state.isWorkoutSavePending = true;
-    }),
+  //     state.isWorkoutSavePending = true;
+  //   }),
   resetWorkout: () =>
     set(() => ({
       workoutData: { exercises: [] },

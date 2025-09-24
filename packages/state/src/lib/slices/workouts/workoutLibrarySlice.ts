@@ -2,22 +2,29 @@ import { StateCreator } from 'zustand';
 import { produce } from 'immer';
 
 import type {
-  WorkoutLog,
+  WorkoutLogRequest,
+  WorkoutLogResponse,
   WorkoutBuildRequest,
   WorkoutBuildResponse,
   Mode,
 } from '@cwt/schema/workouts';
 
 export interface WorkoutLibrarySlice {
-  masterWorkoutLogs: WorkoutLog[];
+  masterWorkoutLogs: Array<WorkoutLogRequest | WorkoutLogResponse>;
   masterWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
   displayedWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
   setWorkouts: (
-    logs: WorkoutLog[],
+    logs: Array<WorkoutLogRequest | WorkoutLogResponse>,
     builds: Array<WorkoutBuildRequest | WorkoutBuildResponse>,
   ) => void;
-  addWorkout: (workout: WorkoutBuildRequest, mode: Mode) => void;
-  completeWorkout: (workout: WorkoutBuildRequest, mode: Mode) => void;
+  addWorkout: (
+    workout: WorkoutBuildRequest | WorkoutLogRequest,
+    mode: Mode,
+  ) => void;
+  completeWorkout: (
+    workout: WorkoutBuildRequest | WorkoutLogRequest,
+    mode: Mode,
+  ) => void;
 }
 
 export const createWorkoutLibrarySlice: StateCreator<
