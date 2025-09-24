@@ -13,7 +13,7 @@ export const SetSchema = z.object({
   id: z.uuid(),
   fields: SetFieldsSchema,
   completed: z.boolean(),
-  completed_at: z.nullable(z.date()),
+  completed_at: z.nullable(z.iso.datetime()),
 });
 
 export const WorkoutExerciseSchema = z.object({
