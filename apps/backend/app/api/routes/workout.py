@@ -105,6 +105,6 @@ def read_workout_builds(request: Request) -> List[WorkoutBuildResponseSchema]:
         access_token = auth_header.split(" ")[1]
         builds = get_workout_builds(access_token)
 
-    if not builds:
+    if builds is None:
         raise HTTPException(status_code=400, detail="Invalid request")
     return builds
