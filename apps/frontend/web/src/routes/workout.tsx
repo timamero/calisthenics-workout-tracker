@@ -55,7 +55,6 @@ function WorkoutView() {
       setWorkoutToSaveWithUserAndDuration();
     }
     const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
-    console.log('workoutToSave!!', workoutToSave);
     if (!supabaseSession || !workoutToSave) {
       console.error('Session not found or workout data invalid');
       return;
@@ -78,8 +77,7 @@ function WorkoutView() {
       resetTimer();
       console.error('Workout post request failed');
     }
-    console.log('timer running: ', useWorkoutStopwatchStore.getState().running);
-    console.log('get time: ', useWorkoutStopwatchStore.getState().getTime());
+
     navigate({
       to: '/workoutDashboard',
     });
@@ -91,9 +89,6 @@ function WorkoutView() {
     });
     resetWorkout();
     resetTimer();
-
-    console.log('timer running: ', useWorkoutStopwatchStore.getState().running);
-    console.log('get time: ', useWorkoutStopwatchStore.getState().getTime());
   };
 
   const handleSetMode = () => {
@@ -104,8 +99,6 @@ function WorkoutView() {
       setMode('edit');
       stopTimer();
     }
-    console.log('timer running: ', useWorkoutStopwatchStore.getState().running);
-    console.log('get time: ', useWorkoutStopwatchStore.getState().getTime());
   };
 
   return (
