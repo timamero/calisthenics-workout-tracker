@@ -34,6 +34,8 @@ function WorkoutView() {
   const mode = useWorkoutDraftStore((state) => state.mode);
   const supabaseSession = useAuthStore((state) => state.session);
 
+  const startTimer = useWorkoutDraftStore((state) => state.start);
+  const stopTimer = useWorkoutDraftStore((state) => state.stop);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
@@ -81,8 +83,10 @@ function WorkoutView() {
   const handleSetMode = () => {
     if (mode === 'edit') {
       setMode('log');
+      startTimer();
     } else if (mode === 'log') {
       setMode('edit');
+      stopTimer();
     }
     console.log('timer running: ', useWorkoutDraftStore.getState().running);
     console.log('get time: ', useWorkoutDraftStore.getState().getTime());
