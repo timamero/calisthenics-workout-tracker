@@ -36,6 +36,7 @@ function WorkoutView() {
 
   const startTimer = useWorkoutDraftStore((state) => state.start);
   const stopTimer = useWorkoutDraftStore((state) => state.stop);
+  const resetTimer = useWorkoutDraftStore((state) => state.reset);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
@@ -62,12 +63,15 @@ function WorkoutView() {
     if (result) {
       completeWorkout(workoutToSave, mode!);
       resetWorkout();
+      resetTimer();
     } else {
       // TODO: Save to state called unsavedBuilds
       resetWorkout();
+      resetTimer();
       console.error('Workout post request failed');
     }
-
+    console.log('timer running: ', useWorkoutDraftStore.getState().running);
+    console.log('get time: ', useWorkoutDraftStore.getState().getTime());
     navigate({
       to: '/workoutDashboard',
     });
@@ -78,6 +82,10 @@ function WorkoutView() {
       to: '/workoutDashboard',
     });
     resetWorkout();
+    resetTimer();
+
+    console.log('timer running: ', useWorkoutDraftStore.getState().running);
+    console.log('get time: ', useWorkoutDraftStore.getState().getTime());
   };
 
   const handleSetMode = () => {
