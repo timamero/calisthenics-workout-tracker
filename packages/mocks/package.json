@@ -16,6 +16,10 @@
     "./sampleWorkoutBuilds": {
       "types": "./dist/sampleWorkoutBuilds.d.ts",
       "default": "./dist/sampleWorkoutBuilds.js"
+    },
+    "./sampleWorkoutLogs": {
+      "types": "./dist/sampleWorkoutLogs.d.ts",
+      "default": "./dist/sampleWorkoutLogs.js"
     }
   },
   "dependencies": {
