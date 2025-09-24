@@ -226,6 +226,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   initializeWorkoutToSave: () =>
     set((state) => {
+      console.log('getTime', get().getTime());
       if (state.mode === 'build') {
         state.workoutToSave = {
           ...INITIALIZED_WORKOUT_TO_SAVE,
