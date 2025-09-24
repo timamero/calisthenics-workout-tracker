@@ -10,7 +10,9 @@ from app.api.utils.workout import (
 from app.schemas.workout import (
     WorkoutBuildRequestSchema,
     WorkoutBuildResponseSchema,
-    WorkoutLogSchema,
+    WorkoutLogRequestSchema,
+    WorkoutLogResponseSchema,
+    # WorkoutLogSchema,
 )
 
 from app.core.config import settings
@@ -43,7 +45,9 @@ def save_build(
 
 
 @router.post("/log")
-def save_log(log: WorkoutLogSchema, request: Request):
+def save_log(
+    log: WorkoutLogRequestSchema, request: Request
+) -> WorkoutLogResponseSchema:
     """
     Insert workout log.
     """
@@ -64,7 +68,7 @@ def save_log(log: WorkoutLogSchema, request: Request):
 
 
 @router.get("/logs")
-def read_workout_logs(request: Request):
+def read_workout_logs(request: Request) -> List[WorkoutLogResponseSchema]:
     """
     Retrieve list of workout logs
     """
@@ -78,9 +82,10 @@ def read_workout_logs(request: Request):
     else:
         access_token = auth_header.split(" ")[1]
         logs = get_workout_logs(access_token)
-    if not logs:
+        print("logs before HTTPException line", logs)
+    if logs is None:
         raise HTTPException(status_code=400, detail="Invalid request")
-
+    print("returning logs: ", logs)
     return logs
 
 

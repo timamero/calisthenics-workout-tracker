@@ -4,7 +4,9 @@ from app.services.supabase_client import get_supabase_client
 from app.schemas.workout import (
     WorkoutBuildRequestSchema,
     WorkoutBuildResponseSchema,
-    WorkoutLogSchema,
+    WorkoutLogRequestSchema,
+    WorkoutLogResponseSchema,
+    # WorkoutLogSchema,
 )
 
 
@@ -24,7 +26,9 @@ def insert_workout_build(
         print(f"Error saving workout: {e}")
 
 
-def insert_workout_log(workout_log: WorkoutLogSchema, access_token: str | None = None):
+def insert_workout_log(
+    workout_log: WorkoutLogRequestSchema, access_token: str | None = None
+):
     supabase = get_supabase_client(access_token)
     try:
         workout_log_dict = workout_log.model_dump(mode="json")
@@ -36,10 +40,10 @@ def insert_workout_log(workout_log: WorkoutLogSchema, access_token: str | None =
         )
         return response.data
     except Exception as e:
-        print(f"Error saving workout with ID {workout_log.id}: {e}")
+        print(f"Error saving workout with ID: {e}")
 
 
-def get_workout_logs(access_token: str | None = None):
+def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
     supabase = get_supabase_client(access_token)
     try:
         select_query = supabase.table("workout_logs").select("*")
