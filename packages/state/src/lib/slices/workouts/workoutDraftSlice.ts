@@ -54,7 +54,7 @@ interface WorkoutDraftAction {
   ) => void;
   initializeWorkoutToSave: () => void;
   addUserIDToWorkoutToSave: (userID: string) => void;
-  // setWorkoutToSave: () => void; // superseded
+  addDurationToWorkoutToSave: (duration: string) => void;
   resetWorkout: () => void;
 }
 
@@ -250,40 +250,18 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('workoutToSave is null, cannot add userID');
       }
     }),
-  // setWorkoutToSave: () =>
-  //   set((state) => {
-  //     if (state.mode === 'build') {
-  //       state.workoutToSave = {
-  //         workout_data: state.workoutData,
-  //         title: state.workoutTitle || 'Untitled workout',
-  //         status: 'draft',
-  //         source: 'manual',
-  //         notes: null,
-  //         estimated_duration: null,
-  //         updated_at: null,
-  //         user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
-  //         description: null,
-  //         goal: null,
-  //       } as WorkoutBuildRequest;
-  //     } else {
-  //       state.workoutToSave = {
-  //         workout_build_id: null,
-  //         date: new Date(),
-  //         workout_data: state.workoutData,
-  //         title: state.workoutTitle || 'Untitled workout',
-  //         status: 'draft',
-  //         notes: null,
-  //         duration: null,
-  //         updated_at: null,
-  //         user_id: 'ee98b2ee-4d06-4c42-803c-04e645dc26e4',
-  //         description: null,
-  //         goal: null,
-  //         rpe: null,
-  //       } as WorkoutLogRequest;
-  //     }
-
-  //     state.isWorkoutSavePending = true;
-  //   }),
+  addDurationToWorkoutToSave: (duration) =>
+    set((state) => {
+      if (
+        state.workoutToSave &&
+        state.mode !== 'build' &&
+        'duration' in state.workoutToSave
+      ) {
+        state.workoutToSave.duration = duration;
+      } else {
+        console.error('workoutToSave is null, cannot add userID');
+      }
+    }),
   resetWorkout: () =>
     set(() => ({
       workoutData: { exercises: [] },
