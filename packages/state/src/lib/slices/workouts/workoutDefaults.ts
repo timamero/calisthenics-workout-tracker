@@ -13,7 +13,7 @@ export const INITIALIZED_SET: Omit<Set, 'fields' | 'id'> = {
   completed_at: null,
 };
 
-export const INITIALIZED_WORKOUT_TO_SAVE: Omit<
+export const INITIALIZED_WORKOUT_BUILD_TO_SAVE: Omit<
   WorkoutBuildRequest,
   'workout_data' | 'title'
 > = {
