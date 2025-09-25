@@ -1,9 +1,9 @@
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
-import { Text } from '../../customText';
-import { CustomTheme } from '../../theme';
-import SetList from './SetList';
+import { Text } from '../../../../../customText';
+import { CustomTheme } from '../../../../../theme';
+import SetList from './SetList/SetList';
 
 interface WorkoutExerciseProps {
   name: string;

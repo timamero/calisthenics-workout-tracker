@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
+import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContext';
 import NumeralInput from './NumeralInput';
 import DurationInput from './DurationInput';
 

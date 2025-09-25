@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
-import { SetContext } from '../../contexts/SetContext';
+import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContext';
+import { SetContext } from '../../../../../../contexts/SetContext';
 import Set from './Set';
 
 export default function SetContainer() {

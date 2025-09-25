@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-paper';
 import type { SetFields } from '@cwt/schema/workouts';
 import { getSecondsInDuration } from '@cwt/utils';
 
-import { SetContext } from '../../contexts/SetContext';
+import { SetContext } from '../../../../../../contexts/SetContext';
 
 interface DurationInputProps {
   label: 'time' | 'rest';

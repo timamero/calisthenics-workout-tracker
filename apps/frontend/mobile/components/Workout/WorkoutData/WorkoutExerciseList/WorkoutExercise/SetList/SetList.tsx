@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { SetFields } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { SetContext } from '../../contexts/SetContext';
+import { SetContext } from '../../../../../../contexts/SetContext';
 import SetContainer from './SetContainer';
 
 interface SetListProps {

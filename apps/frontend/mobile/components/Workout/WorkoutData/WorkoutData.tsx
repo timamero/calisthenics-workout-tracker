@@ -3,7 +3,7 @@ import { ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import ConfirmationDialog from '../common/ConfirmationDialog';
+import ConfirmationDialog from '../../common/ConfirmationDialog';
 import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
 import WorkoutExerciseList from './WorkoutExerciseList';
 
