@@ -15,7 +15,7 @@ import {
   INITIAL_WORKOUT_LOG_TITLE,
   INITIAL_WORKOUT_BUILD_TITLE,
   INITIALIZED_SET,
-  INITIALIZED_WORKOUT_TO_SAVE,
+  INITIALIZED_WORKOUT_BUILD_TO_SAVE,
   DEFAULT_REP_SET,
   DEFAULT_TIME_SET,
   INITIALIZED_WORKOUT_LOG_TO_SAVE,
@@ -191,15 +191,11 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Invalid set index');
         return;
       }
-      // if (state.mode === 'edit' || state.mode === 'build') {
       const set = state.workoutData.exercises[exerciseIndex].sets[setIndex];
       state.workoutData.exercises[exerciseIndex].sets[setIndex] = {
         ...set,
         fields: { ...set.fields, ...updatedField },
       };
-      // } else {
-      //   console.error('Cannot update field in log mode');
-      // }
     }),
   toggleCompleted: (exerciseIndex, setIndex, value) =>
     set((state) => {
@@ -226,7 +222,7 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       if (state.mode === 'build') {
         state.workoutToSave = {
-          ...INITIALIZED_WORKOUT_TO_SAVE,
+          ...INITIALIZED_WORKOUT_BUILD_TO_SAVE,
           workout_data: state.workoutData,
           title: state.workoutTitle || 'Untitled workout',
         };
