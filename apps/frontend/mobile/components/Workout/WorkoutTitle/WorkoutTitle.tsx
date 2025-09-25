@@ -2,8 +2,8 @@
 import { View } from 'react-native';
 import { Button, TextInput, useTheme } from 'react-native-paper';
 
-import { Text } from '../../customText';
-import { CustomTheme } from '../../theme';
+import { Text } from '../../../customText';
+import { CustomTheme } from '../../../theme';
 
 interface WorkoutTitleProps {
   isEditMode: boolean;

@@ -1,8 +1,8 @@
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
-import { Text } from '../../customText';
-import { CustomTheme } from '../../theme';
+import { Text } from '../../../../../../customText';
+import { CustomTheme } from '../../../../../../theme';
 import FieldsList from './FieldsList';
 
 interface SetProps {

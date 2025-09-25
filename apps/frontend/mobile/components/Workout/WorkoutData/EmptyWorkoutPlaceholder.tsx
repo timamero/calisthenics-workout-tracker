@@ -1,8 +1,8 @@
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { CustomTheme } from '../../theme';
-import { Text } from '../../customText';
+import { CustomTheme } from '../../../theme';
+import { Text } from '../../../customText';
 
 export default function EmptyWorkoutPlaceholder() {
   const theme = useTheme() as CustomTheme;
