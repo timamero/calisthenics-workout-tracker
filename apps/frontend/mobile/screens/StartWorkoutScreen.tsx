@@ -43,6 +43,11 @@ export default function StartWorkoutScreen() {
     navigation.navigate('Workout');
   };
 
+  const onLogNewWorkoutPress = () => {
+    initializeWorkout('edit');
+    navigation.navigate('Workout');
+  };
+
   return (
     <View
       style={{
@@ -52,6 +57,9 @@ export default function StartWorkoutScreen() {
     >
       <LargeButton handlePress={onBuildNewWorkoutPress}>
         Build New Workout
+      </LargeButton>
+      <LargeButton handlePress={onLogNewWorkoutPress}>
+        Start Blank Workout
       </LargeButton>
 
       <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
