@@ -7,7 +7,7 @@ import {
 } from '@cwt/state/stores';
 
 import WorkoutExercise from './WorkoutExercise';
-import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
+import { WorkoutExerciseContext } from '../../../../../contexts/WorkoutExerciseContext';
 
 export default function WorkoutExerciseContainer() {
   const exerciseIndex: number = React.useContext(

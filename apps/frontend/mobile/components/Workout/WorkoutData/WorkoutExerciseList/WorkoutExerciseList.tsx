@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { WorkoutExerciseContext } from '../../contexts/WorkoutExerciseContext';
+import { WorkoutExerciseContext } from '../../../../contexts/WorkoutExerciseContext';
 
-import WorkoutExerciseContainer from './WorkoutExerciseContainer';
+import { WorkoutExerciseContainer as WorkoutExercise } from './WorkoutExercise/';
 import { View } from 'react-native';
 
 interface WorkoutExerciseListProps {
@@ -31,7 +31,7 @@ export default function WorkoutExerciseList({
           setIsDeleteSetDialogVisible: setIsDeleteSetDialogVisible,
         }}
       >
-        <WorkoutExerciseContainer />
+        <WorkoutExercise />
       </WorkoutExerciseContext.Provider>
     );
   });

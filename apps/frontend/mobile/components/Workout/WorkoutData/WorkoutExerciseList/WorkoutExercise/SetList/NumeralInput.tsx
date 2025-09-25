@@ -3,7 +3,7 @@ import { TextInput } from 'react-native-paper';
 
 import type { SetFields } from '@cwt/schema/workouts';
 
-import { SetContext } from '../../contexts/SetContext';
+import { SetContext } from '../../../../../../contexts/SetContext';
 
 export default function NumeralInput() {
   const set = React.useContext(SetContext)!.set;

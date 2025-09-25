@@ -11,8 +11,8 @@ import {
 import { useWorkoutSave } from '@cwt/hooks';
 
 import { postWorkoutBuild } from '../services/workoutsService';
-import WorkoutTitleContainer from '../components/WorkoutData/WorkoutTitleContainer';
-import WorkoutData from '../components/WorkoutData/';
+import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle/';
+import WorkoutData from '../components/Workout/WorkoutData';
 import { CustomTheme } from '../theme';
 import ConfirmationDialog from '../components/common/ConfirmationDialog';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
@@ -82,7 +82,7 @@ export default function WorkoutScreen() {
           Cancel
         </Button>
       ),
-      headerTitle: () => <WorkoutTitleContainer />,
+      headerTitle: () => <WorkoutTitle />,
     });
   }, [navigation, theme.colors.grey]);
 
