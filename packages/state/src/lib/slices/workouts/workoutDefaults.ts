@@ -17,7 +17,7 @@ export const INITIALIZED_WORKOUT_TO_SAVE: Omit<
   WorkoutBuildRequest,
   'workout_data' | 'title'
 > = {
-  status: 'draft',
+  status: 'finalized',
   source: 'manual',
   notes: null,
   estimated_duration: null,
@@ -32,7 +32,7 @@ export const INITIALIZED_WORKOUT_LOG_TO_SAVE: Omit<
   'workout_data' | 'title' | 'date'
 > = {
   workout_build_id: null,
-  status: 'draft',
+  status: 'finalized',
   notes: null,
   updated_at: null,
   description: null,
