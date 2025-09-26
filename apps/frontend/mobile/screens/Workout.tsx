@@ -9,6 +9,8 @@ import {
   useWorkoutLibraryStore,
 } from '@cwt/state/stores';
 import { useWorkoutSave } from '@cwt/hooks';
+import { Mode } from '@cwt/schema/workouts';
+import { saveWorkoutConfirmationContent } from '@cwt/content';
 
 import { postWorkoutBuild } from '../services/workoutsService';
 import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle/';
@@ -23,7 +25,7 @@ export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
-  const mode = useWorkoutDraftStore((state) => state.mode);
+  const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const supabaseSession = useAuthStore((state) => state.session);
   const completeWorkout = useWorkoutLibraryStore(
@@ -155,9 +157,11 @@ export default function WorkoutScreen() {
         workoutDataScrollViewRef={workoutDataScrollViewRef}
       />
       <ConfirmationDialog
-        title="Save Workout Template"
-        message="Complete workout building and save this template."
-        confirmButtonLabel="Save Workout Template"
+        title={saveWorkoutConfirmationContent(mode).title}
+        message={saveWorkoutConfirmationContent(mode).message}
+        confirmButtonLabel={
+          saveWorkoutConfirmationContent(mode).confirmButtonLabel
+        }
         isVisible={isSaveWorkoutDialogVisible}
         handleHideDialog={setIsSaveWorkoutDialogVisible}
         onConfirmationPress={onSaveWorkoutPress}
