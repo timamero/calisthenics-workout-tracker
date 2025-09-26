@@ -32,6 +32,9 @@ importers:
       '@cwt/auth':
         specifier: workspace:*
         version: link:../../../packages/auth
+      '@cwt/content':
+        specifier: workspace:*
+        version: link:../../../packages/content
       '@cwt/hooks':
         specifier: workspace:*
         version: link:../../../packages/hooks
@@ -150,6 +153,9 @@ importers:
       '@cwt/auth':
         specifier: workspace:*
         version: link:../../../packages/auth
+      '@cwt/content':
+        specifier: workspace:*
+        version: link:../../../packages/content
       '@cwt/hooks':
         specifier: workspace:*
         version: link:../../../packages/hooks
@@ -287,6 +293,16 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.51.0
         version: 2.57.4
+    devDependencies:
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
+  packages/content:
+    dependencies:
+      '@cwt/schema':
+        specifier: workspace:*
+        version: link:../schema
     devDependencies:
       typescript:
         specifier: ~5.8.3
