@@ -1,5 +1,12 @@
 import { Mode } from '@cwt/schema/workouts';
 
+export const emptyWorkoutPlaceholderContent = (mode: Mode) => {
+  return {
+    heading: `Ready to start ${mode === 'build' ? 'building' : 'logging'} your workout?`,
+    message: 'Add your first exercise to begin',
+  };
+};
+
 export const saveWorkoutConfirmationContent = (mode: Mode) => {
   return {
     title: `Save Workout ${mode === 'build' ? 'Template' : ''}`,

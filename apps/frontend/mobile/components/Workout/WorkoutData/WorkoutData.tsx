@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { Mode } from '@cwt/schema/workouts';
 
 import ConfirmationDialog from '../../common/ConfirmationDialog';
 import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
@@ -17,10 +18,10 @@ export default function WorkoutData({ scrollViewRef }: WorkoutDataProps) {
   const [isDeleteSetDialogVisible, setIsDeleteSetDialogVisible] =
     React.useState<boolean>(false);
 
+  const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const workoutExercisesLength = useWorkoutDraftStore(
     (state) => state.workoutData,
   ).exercises.length;
-
   const selectedExerciseIndexToMod = useWorkoutDraftStore(
     (state) => state.selectedExerciseIndexToMod,
   );
@@ -43,7 +44,9 @@ export default function WorkoutData({ scrollViewRef }: WorkoutDataProps) {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={{ marginBottom: 72, flexGrow: 1 }} ref={scrollViewRef}>
-        {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder />}
+        {workoutExercisesLength === 0 && (
+          <EmptyWorkoutPlaceholder mode={mode} />
+        )}
         <WorkoutExerciseList
           setIsDeleteExerciseDialogVisible={setIsDeleteExerciseDialogVisible}
           setIsDeleteSetDialogVisible={setIsDeleteSetDialogVisible}
