@@ -1,3 +1,6 @@
-import { saveWorkoutConfirmationContent } from './workoutContent';
+import {
+  saveWorkoutConfirmationContent,
+  cancelWorkoutConfirmationContent,
+} from './workoutContent';
 
-export { saveWorkoutConfirmationContent };
+export { saveWorkoutConfirmationContent, cancelWorkoutConfirmationContent };

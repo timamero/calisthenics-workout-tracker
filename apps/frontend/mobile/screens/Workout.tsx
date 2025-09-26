@@ -10,7 +10,10 @@ import {
 } from '@cwt/state/stores';
 import { useWorkoutSave } from '@cwt/hooks';
 import { Mode } from '@cwt/schema/workouts';
-import { saveWorkoutConfirmationContent } from '@cwt/content';
+import {
+  saveWorkoutConfirmationContent,
+  cancelWorkoutConfirmationContent,
+} from '@cwt/content';
 
 import { postWorkoutBuild } from '../services/workoutsService';
 import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle/';
@@ -167,9 +170,11 @@ export default function WorkoutScreen() {
         onConfirmationPress={onSaveWorkoutPress}
       />
       <ConfirmationDialog
-        title="Cancel Workout Building"
-        message="Confirm cancelling workout building. This will discard the current workout."
-        confirmButtonLabel="Discard this workout"
+        title={cancelWorkoutConfirmationContent(mode).title}
+        message={cancelWorkoutConfirmationContent(mode).message}
+        confirmButtonLabel={
+          cancelWorkoutConfirmationContent(mode).confirmButtonLabel
+        }
         isVisible={isCancelWorkoutDialogVisible}
         handleHideDialog={setIsCancelWorkoutDialogVisible}
         onConfirmationPress={onCancelWorkoutPress}
