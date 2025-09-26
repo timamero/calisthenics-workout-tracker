@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, BackHandler, ScrollView } from 'react-native';
-import { useTheme, Button, FAB } from 'react-native-paper';
+import { View, BackHandler, ScrollView, SafeAreaView } from 'react-native';
+import { useTheme, Button, FAB, SegmentedButtons } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import {
@@ -29,6 +29,8 @@ export default function WorkoutScreen() {
   const navigation = useNavigation<any>();
 
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
+  console.log('mode set to ', mode);
+  const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const supabaseSession = useAuthStore((state) => state.session);
   const completeWorkout = useWorkoutLibraryStore(
@@ -114,7 +116,7 @@ export default function WorkoutScreen() {
       }}
     >
       <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
-      <View style={{ flex: 1 }}>
+      <View style={{ position: 'absolute', bottom: 0 }}>
         <FAB
           icon="plus"
           mode="elevated"
@@ -126,10 +128,10 @@ export default function WorkoutScreen() {
             },
           }}
           style={{
-            position: 'absolute',
+            // position: 'absolute',
             margin: 16,
-            right: 0,
-            bottom: 0,
+            // right: 0,
+            // bottom: 0,
           }}
           onPress={() => setIsAddExerciseOverlayVisible(true)}
         />
@@ -144,16 +146,27 @@ export default function WorkoutScreen() {
             },
           }}
           style={{
-            position: 'absolute',
+            // position: 'absolute',
             margin: 16,
-            left: 0,
-            bottom: 0,
+            // left: 0,
+            // bottom: 0,
             borderWidth: 2,
             borderColor: theme.colors.primary,
           }}
           onPress={() => setIsSaveWorkoutDialogVisible(true)}
         />
+        <SegmentedButtons
+          density="small"
+          value={mode}
+          onValueChange={setMode}
+          buttons={[
+            { value: 'edit', label: 'Edit' },
+            { value: 'log', label: 'Log' },
+          ]}
+        />
       </View>
+      {/* <View>
+      </View> */}
       <AddExerciseOverlay
         isVisible={isAddExerciseOverlayVisible}
         handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
