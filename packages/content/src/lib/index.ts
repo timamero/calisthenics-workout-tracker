@@ -1,6 +1,11 @@
 import {
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
+  emptyWorkoutPlaceholderContent,
 } from './workoutContent';
 
-export { saveWorkoutConfirmationContent, cancelWorkoutConfirmationContent };
+export {
+  saveWorkoutConfirmationContent,
+  cancelWorkoutConfirmationContent,
+  emptyWorkoutPlaceholderContent,
+};
