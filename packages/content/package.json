@@ -1,0 +1,23 @@
+{
+  "name": "@cwt/content",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "description": "CWT Content",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "default": "./dist/lib/index.js"
+    }
+  },
+  "dependencies": {
+    "@cwt/schema": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3"
+  }
+}
