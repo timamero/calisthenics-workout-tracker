@@ -1,10 +1,13 @@
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
+import { Mode } from '@cwt/schema/workouts';
+import { emptyWorkoutPlaceholderContent } from '@cwt/content';
+
 import { CustomTheme } from '../../../theme';
 import { Text } from '../../../customText';
 
-export default function EmptyWorkoutPlaceholder() {
+export default function EmptyWorkoutPlaceholder({ mode }: { mode: Mode }) {
   const theme = useTheme() as CustomTheme;
 
   return (
@@ -28,10 +31,10 @@ export default function EmptyWorkoutPlaceholder() {
           textAlign: 'center',
         }}
       >
-        Ready to start building your workout?
+        {emptyWorkoutPlaceholderContent(mode).heading}
       </Text>
       <Text style={{ color: theme.colors.light, textAlign: 'center' }}>
-        Add your first exercise to begin
+        {emptyWorkoutPlaceholderContent(mode).message}
       </Text>
     </View>
   );
