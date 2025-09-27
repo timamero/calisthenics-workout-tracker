@@ -1,11 +1,14 @@
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
+import { Mode } from '@cwt/schema/workouts';
+
 import { Text } from '../../../../../customText';
 import { CustomTheme } from '../../../../../theme';
 import SetList from './SetList/SetList';
 
 interface WorkoutExerciseProps {
+  mode: Mode;
   name: string;
   exerciseIndex: number;
   handleAddSet: (exerciseIndex: number) => void;
@@ -13,6 +16,7 @@ interface WorkoutExerciseProps {
 }
 
 export default function WorkoutExercise({
+  mode,
   name,
   exerciseIndex,
   handleAddSet,
@@ -50,27 +54,31 @@ export default function WorkoutExercise({
         >
           {name}
         </Text>
-        <Button
-          mode="outlined"
-          onPress={handleDeleteExercisePress}
-          labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-          textColor={theme.colors.grey}
-          style={{ borderColor: theme.colors.error, flexShrink: 0 }}
-        >
-          Delete Exercise
-        </Button>
+        {mode !== 'log' && (
+          <Button
+            mode="outlined"
+            onPress={handleDeleteExercisePress}
+            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+            textColor={theme.colors.grey}
+            style={{ borderColor: theme.colors.error, flexShrink: 0 }}
+          >
+            Delete Exercise
+          </Button>
+        )}
       </View>
       <SetList exerciseIndex={exerciseIndex} />
-      <View style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <Button
-          mode="contained"
-          onPress={() => handleAddSet(exerciseIndex)}
-          buttonColor={theme.colors.grey}
-          textColor={theme.colors.dark9}
-        >
-          Add Set
-        </Button>
-      </View>
+      {mode !== 'log' && (
+        <View style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Button
+            mode="contained"
+            onPress={() => handleAddSet(exerciseIndex)}
+            buttonColor={theme.colors.grey}
+            textColor={theme.colors.dark9}
+          >
+            Add Set
+          </Button>
+        </View>
+      )}
     </View>
   );
 }

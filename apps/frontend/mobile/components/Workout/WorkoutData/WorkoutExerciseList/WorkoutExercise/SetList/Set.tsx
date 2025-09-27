@@ -1,17 +1,21 @@
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
+import { Mode } from '@cwt/schema/workouts';
+
 import { Text } from '../../../../../../customText';
 import { CustomTheme } from '../../../../../../theme';
 import FieldsList from './FieldsList';
 
 interface SetProps {
+  mode: Mode;
   setIndex: number;
   showDeleteButton: boolean;
   onDeleteSetPress: () => void;
 }
 
 export default function Set({
+  mode,
   setIndex,
   showDeleteButton,
   onDeleteSetPress,
@@ -40,7 +44,7 @@ export default function Set({
         <Text
           style={{ color: theme.colors.light }}
         >{`Set ${setIndex + 1}`}</Text>
-        {showDeleteButton && (
+        {showDeleteButton && mode !== 'log' && (
           <Button
             mode="outlined"
             onPress={() => onDeleteSetPress()}

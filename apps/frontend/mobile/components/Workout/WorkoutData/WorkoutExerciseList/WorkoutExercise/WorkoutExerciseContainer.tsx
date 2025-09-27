@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import type { WorkoutExercise as WorkoutExerciseType } from '@cwt/schema/workouts';
+import type {
+  Mode,
+  WorkoutExercise as WorkoutExerciseType,
+} from '@cwt/schema/workouts';
 import {
   useExerciseLibraryStore,
   useWorkoutDraftStore,
@@ -20,6 +23,7 @@ export default function WorkoutExerciseContainer() {
     WorkoutExerciseContext,
   )!.setIsDeleteExerciseDialogVisible;
 
+  const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const addSet = useWorkoutDraftStore((state) => state.addSet);
   const setSelectedExerciseIndexToDel = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIndexToMod,
@@ -36,6 +40,7 @@ export default function WorkoutExerciseContainer() {
 
   return (
     <WorkoutExercise
+      mode={mode}
       name={name}
       exerciseIndex={exerciseIndex}
       handleAddSet={addSet}
