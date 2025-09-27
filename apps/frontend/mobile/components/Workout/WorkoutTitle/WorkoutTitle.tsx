@@ -1,11 +1,13 @@
 // import { Title, TextInput, Button, Group } from '@mantine/core';
 import { View } from 'react-native';
+import { Mode } from '@cwt/schema/workouts';
 import { Button, TextInput, useTheme } from 'react-native-paper';
 
 import { Text } from '../../../customText';
 import { CustomTheme } from '../../../theme';
 
 interface WorkoutTitleProps {
+  mode: Mode;
   isEditMode: boolean;
   workoutTitle: string;
   onEditClick: () => void;
@@ -14,6 +16,7 @@ interface WorkoutTitleProps {
 }
 
 export default function WorkoutTitle({
+  mode,
   isEditMode,
   workoutTitle,
   onEditClick,
@@ -49,7 +52,9 @@ export default function WorkoutTitle({
             >
               {workoutTitle}
             </Text>
-            <Button onPress={onEditClick}>Edit Title</Button>
+            {mode !== 'log' && (
+              <Button onPress={onEditClick}>Edit Title</Button>
+            )}
           </View>
         </View>
       )}
