@@ -5,6 +5,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContext';
 import { SetContext } from '../../../../../../contexts/SetContext';
 import Set from './Set';
+import { Mode } from '@cwt/schema/workouts';
 
 export default function SetContainer() {
   const exerciseIndex = React.useContext(WorkoutExerciseContext)!.exerciseIndex;
@@ -14,6 +15,7 @@ export default function SetContainer() {
     WorkoutExerciseContext,
   )!.setIsDeleteSetDialogVisible;
 
+  const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const sets = useWorkoutDraftStore((state) => state.workoutData).exercises[
     exerciseIndex
   ].sets;
@@ -33,6 +35,7 @@ export default function SetContainer() {
 
   return (
     <Set
+      mode={mode}
       setIndex={setIndex}
       showDeleteButton={sets.length > 1}
       onDeleteSetPress={onDeleteSetPress}
