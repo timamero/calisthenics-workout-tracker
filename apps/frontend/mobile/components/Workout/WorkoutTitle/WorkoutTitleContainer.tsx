@@ -1,9 +1,13 @@
 import { useState } from 'react';
+
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { Mode } from '@cwt/schema/workouts';
+
 import WorkoutTitle from './WorkoutTitle';
 
 export default function WorkoutTitleContainer() {
   const [isEditMode, setIsEditMode] = useState(false);
+  const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const workoutTitle = useWorkoutDraftStore((state) => state.workoutTitle);
   const setWorkoutTitle = useWorkoutDraftStore(
     (state) => state.setWorkoutTitle,
@@ -15,6 +19,7 @@ export default function WorkoutTitleContainer() {
 
   return (
     <WorkoutTitle
+      mode={mode}
       isEditMode={isEditMode}
       workoutTitle={workoutTitle || ''}
       onEditClick={handleEditClick}
