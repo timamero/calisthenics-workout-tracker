@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, BackHandler, ScrollView, SafeAreaView } from 'react-native';
-import { useTheme, Button, FAB, SegmentedButtons } from 'react-native-paper';
+import { View, BackHandler, ScrollView } from 'react-native';
+import { useTheme, Button, SegmentedButtons } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import {
@@ -21,7 +21,6 @@ import WorkoutData from '../components/Workout/WorkoutData';
 import { CustomTheme } from '../theme';
 import ConfirmationDialog from '../components/common/ConfirmationDialog';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
-import theme from '../theme';
 
 export default function WorkoutScreen() {
   const workoutDataScrollViewRef = React.useRef<ScrollView | null>(null);
@@ -126,22 +125,25 @@ export default function WorkoutScreen() {
           flexDirection: 'column',
         }}
       >
-        <Button
-          icon="plus"
-          mode="contained"
-          theme={{
-            colors: {
-              primaryContainer: theme.colors.primary,
-              onPrimaryContainer: theme.colors.light,
-            },
-          }}
-          style={{
-            margin: 16,
-          }}
-          onPress={() => setIsAddExerciseOverlayVisible(true)}
-        >
-          Add Exercise
-        </Button>
+        {mode !== 'log' && (
+          <Button
+            icon="plus"
+            mode="contained"
+            theme={{
+              colors: {
+                primaryContainer: theme.colors.primary,
+                onPrimaryContainer: theme.colors.light,
+              },
+            }}
+            style={{
+              margin: 16,
+            }}
+            onPress={() => setIsAddExerciseOverlayVisible(true)}
+          >
+            Add Exercise
+          </Button>
+        )}
+
         <View
           style={{
             position: 'relative',
