@@ -43,7 +43,10 @@ export default function WorkoutData({ scrollViewRef }: WorkoutDataProps) {
       style={{ flexGrow: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView style={{ marginBottom: 72, flexGrow: 1 }} ref={scrollViewRef}>
+      <ScrollView
+        style={{ marginBottom: 104, flexGrow: 1 }}
+        ref={scrollViewRef}
+      >
         {workoutExercisesLength === 0 && (
           <EmptyWorkoutPlaceholder mode={mode} />
         )}

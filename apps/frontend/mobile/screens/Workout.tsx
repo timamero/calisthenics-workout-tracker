@@ -21,6 +21,7 @@ import WorkoutData from '../components/Workout/WorkoutData';
 import { CustomTheme } from '../theme';
 import ConfirmationDialog from '../components/common/ConfirmationDialog';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
+import theme from '../theme';
 
 export default function WorkoutScreen() {
   const workoutDataScrollViewRef = React.useRef<ScrollView | null>(null);
@@ -116,11 +117,18 @@ export default function WorkoutScreen() {
       }}
     >
       <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
-      <View style={{ position: 'absolute', bottom: 0 }}>
-        <FAB
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Button
           icon="plus"
-          mode="elevated"
-          label="Add Exercise"
+          mode="contained"
           theme={{
             colors: {
               primaryContainer: theme.colors.primary,
@@ -128,45 +136,58 @@ export default function WorkoutScreen() {
             },
           }}
           style={{
-            // position: 'absolute',
             margin: 16,
-            // right: 0,
-            // bottom: 0,
           }}
           onPress={() => setIsAddExerciseOverlayVisible(true)}
-        />
-        <FAB
-          icon="check"
-          mode="elevated"
-          label="Complete Workout"
-          theme={{
-            colors: {
-              primaryContainer: theme.colors.background,
-              onPrimaryContainer: theme.colors.light,
-            },
-          }}
+        >
+          Add Exercise
+        </Button>
+        <View
           style={{
-            // position: 'absolute',
-            margin: 16,
-            // left: 0,
-            // bottom: 0,
-            borderWidth: 2,
-            borderColor: theme.colors.primary,
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginInline: 16,
+            marginBottom: 16,
           }}
-          onPress={() => setIsSaveWorkoutDialogVisible(true)}
-        />
-        <SegmentedButtons
-          density="small"
-          value={mode}
-          onValueChange={setMode}
-          buttons={[
-            { value: 'edit', label: 'Edit' },
-            { value: 'log', label: 'Log' },
-          ]}
-        />
+        >
+          <SegmentedButtons
+            density="small"
+            value={mode}
+            onValueChange={setMode}
+            theme={{ colors: { secondaryContainer: theme.colors.primary } }}
+            buttons={[
+              {
+                value: 'edit',
+                label: 'Edit',
+                uncheckedColor: theme.colors.light,
+              },
+              {
+                value: 'log',
+                label: 'Log',
+                uncheckedColor: theme.colors.light,
+              },
+            ]}
+          />
+          <Button
+            icon="check"
+            theme={{
+              colors: {
+                primaryContainer: theme.colors.background,
+                onPrimaryContainer: theme.colors.light,
+              },
+            }}
+            style={{
+              borderWidth: 2,
+              borderColor: theme.colors.primary,
+            }}
+            onPress={() => setIsSaveWorkoutDialogVisible(true)}
+          >
+            Complete Workout
+          </Button>
+        </View>
       </View>
-      {/* <View>
-      </View> */}
       <AddExerciseOverlay
         isVisible={isAddExerciseOverlayVisible}
         handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
