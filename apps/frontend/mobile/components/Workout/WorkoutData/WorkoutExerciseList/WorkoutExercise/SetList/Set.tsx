@@ -66,6 +66,7 @@ export default function Set({
           label="Completed"
           status={isCompleted ? 'checked' : 'unchecked'}
           onPress={() => handleToggleCompleted()}
+          labelStyle={{ color: theme.colors.light }}
         />
       )}
     </View>
