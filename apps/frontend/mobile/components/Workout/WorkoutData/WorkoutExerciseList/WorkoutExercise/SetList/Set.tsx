@@ -1,5 +1,5 @@
-import { View } from 'react-native';
-import { useTheme, Button } from 'react-native-paper';
+import { NativeMethods, View } from 'react-native';
+import { useTheme, Button, Checkbox } from 'react-native-paper';
 
 import { Mode } from '@cwt/schema/workouts';
 
@@ -10,14 +10,18 @@ import FieldsList from './FieldsList';
 interface SetProps {
   mode: Mode;
   setIndex: number;
+  isCompleted: boolean;
   showDeleteButton: boolean;
+  handleToggleCompleted: () => void;
   onDeleteSetPress: () => void;
 }
 
 export default function Set({
   mode,
   setIndex,
+  isCompleted,
   showDeleteButton,
+  handleToggleCompleted,
   onDeleteSetPress,
 }: SetProps) {
   const theme = useTheme() as CustomTheme;
@@ -57,6 +61,13 @@ export default function Set({
         )}
       </View>
       <FieldsList />
+      {mode === 'log' && (
+        <Checkbox.Item
+          label="Completed"
+          status={isCompleted ? 'checked' : 'unchecked'}
+          onPress={() => handleToggleCompleted()}
+        />
+      )}
     </View>
   );
 }

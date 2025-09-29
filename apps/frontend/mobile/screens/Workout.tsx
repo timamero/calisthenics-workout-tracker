@@ -91,7 +91,7 @@ export default function WorkoutScreen() {
       return;
     }
 
-    console.log('saving :::: workoutToSave: ', workoutToSave);
+    console.log('saving :::: workoutToSave: ', JSON.stringify(workoutToSave));
     const body = JSON.stringify(workoutToSave);
     let result: WorkoutBuildResponse | WorkoutLogResponse | null = null;
 
@@ -101,6 +101,7 @@ export default function WorkoutScreen() {
       result = await postWorkoutLog(supabaseSession.access_token, body);
     }
     if (result) {
+      console.log('saving workout');
       completeWorkout(workoutToSave, mode!);
       resetWorkout();
       resetTimer();
