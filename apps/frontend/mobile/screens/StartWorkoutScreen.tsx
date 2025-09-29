@@ -27,9 +27,6 @@ export default function StartWorkoutScreen() {
     (state) => state.initializeWorkout,
   );
 
-  const workoutData = useWorkoutDraftStore((state) => state.workoutData); // DELETE THIS LINE LATER
-  console.log('workout - workoutData: ', JSON.stringify(workoutData)); // DELETE THIS LINE LATER
-
   const onBuildNewWorkoutPress = () => {
     initializeWorkout('build');
     navigation.navigate('Workout');
