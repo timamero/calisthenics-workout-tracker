@@ -6,6 +6,7 @@ import {
   useWorkoutLibraryStore,
   useWorkoutDraftStore,
 } from '@cwt/state/stores';
+import { startWorkoutContent } from '@cwt/content';
 
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
@@ -16,16 +17,28 @@ export default function StartWorkoutScreen() {
   const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
 
+  const workoutBuilds = useWorkoutLibraryStore(
+    (state) => state.displayedWorkoutBuilds,
+  );
+  const workoutLogs = useWorkoutLibraryStore(
+    (state) => state.displayedWorkoutLogs,
+  );
   const initializeWorkout = useWorkoutDraftStore(
     (state) => state.initializeWorkout,
   );
 
-  const workoutBuilds = useWorkoutLibraryStore(
-    (state) => state.displayedWorkoutBuilds,
-  );
-
   const workoutData = useWorkoutDraftStore((state) => state.workoutData); // DELETE THIS LINE LATER
   console.log('workout - workoutData: ', JSON.stringify(workoutData)); // DELETE THIS LINE LATER
+
+  const onBuildNewWorkoutPress = () => {
+    initializeWorkout('build');
+    navigation.navigate('Workout');
+  };
+
+  const onLogNewWorkoutPress = () => {
+    initializeWorkout('edit');
+    navigation.navigate('Workout');
+  };
 
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
@@ -38,15 +51,16 @@ export default function StartWorkoutScreen() {
     );
   });
 
-  const onBuildNewWorkoutPress = () => {
-    initializeWorkout('build');
-    navigation.navigate('Workout');
-  };
-
-  const onLogNewWorkoutPress = () => {
-    initializeWorkout('edit');
-    navigation.navigate('Workout');
-  };
+  const workoutLogCards = workoutLogs.map((wo, i) => {
+    const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
+    return (
+      <CardButton key={i}>
+        <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
+          {workoutTitle}
+        </Text>
+      </CardButton>
+    );
+  });
 
   return (
     <View
@@ -56,17 +70,23 @@ export default function StartWorkoutScreen() {
       }}
     >
       <LargeButton handlePress={onBuildNewWorkoutPress}>
-        Build New Workout
+        {startWorkoutContent().createNewBuildButton}
       </LargeButton>
       <LargeButton handlePress={onLogNewWorkoutPress}>
-        Start Blank Workout
+        {startWorkoutContent().createNewLogButton}
       </LargeButton>
 
       <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
-        Start from a template
+        {startWorkoutContent().workoutBuildListHeading}
       </Text>
       <View>
         <ScrollView horizontal>{workoutBuildCards}</ScrollView>
+      </View>
+      <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
+        {startWorkoutContent().workoutLogListHeading}
+      </Text>
+      <View>
+        <ScrollView horizontal>{workoutLogCards}</ScrollView>
       </View>
     </View>
   );

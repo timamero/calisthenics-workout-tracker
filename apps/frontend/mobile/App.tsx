@@ -14,7 +14,7 @@ import theme from './theme';
 import { supabase } from './services/supabaseClient';
 import Navigation from './navigation';
 import { getExercises } from './services/exercisesService';
-import { getWorkoutBuilds } from './services/workoutsService';
+import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
@@ -36,8 +36,9 @@ export default function App() {
         const workoutBuilds = await getWorkoutBuilds(
           supabaseSession.access_token,
         );
+        const workoutLogs = await getWorkoutLogs(supabaseSession.access_token);
         if (workoutBuilds) {
-          setWorkouts([], workoutBuilds);
+          setWorkouts(workoutLogs, workoutBuilds);
         }
       }
     };
