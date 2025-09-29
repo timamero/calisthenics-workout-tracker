@@ -3,8 +3,13 @@ import { View, BackHandler, ScrollView } from 'react-native';
 import { useTheme, Button, SegmentedButtons } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
+import type {
+  WorkoutBuildResponse,
+  WorkoutLogResponse,
+} from '@cwt/schema/workouts';
 import {
   useWorkoutDraftStore,
+  useWorkoutStopwatchStore,
   useAuthStore,
   useWorkoutLibraryStore,
 } from '@cwt/state/stores';
@@ -15,7 +20,7 @@ import {
   cancelWorkoutConfirmationContent,
 } from '@cwt/content';
 
-import { postWorkoutBuild } from '../services/workoutsService';
+import { postWorkoutBuild, postWorkoutLog } from '../services/workoutsService';
 import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle/';
 import WorkoutData from '../components/Workout/WorkoutData';
 import { CustomTheme } from '../theme';
@@ -28,6 +33,9 @@ export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
+  const startTimer = useWorkoutStopwatchStore((state) => state.start);
+  const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
+  const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   console.log('mode set to ', mode);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
@@ -37,7 +45,8 @@ export default function WorkoutScreen() {
     (state) => state.completeWorkout,
   );
 
-  const { setWorkoutToSaveWithUser } = useWorkoutSave();
+  const { setWorkoutToSaveWithUser, setWorkoutToSaveWithUserAndDuration } =
+    useWorkoutSave();
 
   const [isCancelWorkoutDialogVisible, setIsCancelWorkoutDialogVisible] =
     React.useState<boolean>(false);
@@ -50,24 +59,55 @@ export default function WorkoutScreen() {
     setIsCancelWorkoutDialogVisible(false);
     navigation.navigate('App', { screen: 'WorkoutDashboard' });
     resetWorkout();
+    resetTimer();
+  };
+
+  const handleSetMode = (modeValue: Mode) => {
+    if (modeValue === 'log') {
+      setMode('log');
+      startTimer();
+    } else if (modeValue === 'edit') {
+      setMode('edit');
+      stopTimer();
+    }
+    console.log(
+      'is timer running: ',
+      useWorkoutStopwatchStore.getState().running,
+    );
+    console.log('current time', useWorkoutStopwatchStore.getState().getTime());
   };
 
   const onSaveWorkoutPress = async () => {
-    setWorkoutToSaveWithUser();
+    if (mode === 'build') {
+      setWorkoutToSaveWithUser();
+    } else {
+      // mode is 'edit' or 'log'
+      console.log('setting user and duration');
+      setWorkoutToSaveWithUserAndDuration();
+    }
     const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
     if (!supabaseSession || !workoutToSave) {
       console.error('Session not found or workout data invalid');
       return;
     }
 
+    console.log('saving :::: workoutToSave: ', workoutToSave);
     const body = JSON.stringify(workoutToSave);
-    const result = await postWorkoutBuild(supabaseSession.access_token, body);
+    let result: WorkoutBuildResponse | WorkoutLogResponse | null = null;
+
+    if (mode === 'build') {
+      result = await postWorkoutBuild(supabaseSession.access_token, body);
+    } else {
+      result = await postWorkoutLog(supabaseSession.access_token, body);
+    }
     if (result) {
       completeWorkout(workoutToSave, mode!);
       resetWorkout();
+      resetTimer();
     } else {
       // TODO: Save to state called unsavedBuilds
       resetWorkout();
+      resetTimer();
       console.error('Workout build post request failed');
     }
 
@@ -157,7 +197,7 @@ export default function WorkoutScreen() {
           <SegmentedButtons
             density="small"
             value={mode}
-            onValueChange={setMode}
+            onValueChange={(value: Mode) => handleSetMode(value)}
             theme={{ colors: { secondaryContainer: theme.colors.primary } }}
             buttons={[
               {
