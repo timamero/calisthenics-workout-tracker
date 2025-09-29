@@ -1,5 +1,6 @@
 import {
   getWorkoutBuilds as apiGetWorkoutBuilds,
+  getWorkoutLogs as apiGetWorkoutLogs,
   postWorkoutBuild as apiPostWorkoutBuild,
   postWorkoutLog as apiPostWorkoutLog,
 } from '@cwt/api/workoutsService';
@@ -8,6 +9,7 @@ import type {
   WorkoutLogResponse,
 } from '@cwt/schema/workouts';
 import { sampleWorkoutBuilds } from '@cwt/mocks/sampleWorkoutBuilds';
+import { sampleWorkoutLogs } from '@cwt/mocks/sampleWorkoutLogs';
 
 const baseUrl = process.env.EXPO_PUBLIC_BASE_URL || '';
 const environment = process.env.EXPO_PUBLIC_ENVIRONMENT || null;
@@ -23,6 +25,19 @@ export async function getWorkoutBuilds(
     'Mobile: Full stack development environment, returning builds from database.',
   );
   return apiGetWorkoutBuilds(baseUrl, token);
+}
+
+export async function getWorkoutLogs(
+  token: string,
+): Promise<WorkoutLogResponse[]> {
+  if (environment === 'local') {
+    console.log('Mobile: Local environment, return sample workout builds.');
+    return sampleWorkoutLogs;
+  }
+  console.log(
+    'Mobile: Full stack development environment, returning builds from database.',
+  );
+  return apiGetWorkoutLogs(baseUrl, token);
 }
 
 export async function postWorkoutBuild(
