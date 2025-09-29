@@ -37,7 +37,6 @@ export default function WorkoutScreen() {
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
   const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
-  console.log('mode set to ', mode);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const supabaseSession = useAuthStore((state) => state.session);
@@ -70,11 +69,6 @@ export default function WorkoutScreen() {
       setMode('edit');
       stopTimer();
     }
-    console.log(
-      'is timer running: ',
-      useWorkoutStopwatchStore.getState().running,
-    );
-    console.log('current time', useWorkoutStopwatchStore.getState().getTime());
   };
 
   const onSaveWorkoutPress = async () => {
@@ -82,7 +76,6 @@ export default function WorkoutScreen() {
       setWorkoutToSaveWithUser();
     } else {
       // mode is 'edit' or 'log'
-      console.log('setting user and duration');
       setWorkoutToSaveWithUserAndDuration();
     }
     const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
@@ -101,7 +94,6 @@ export default function WorkoutScreen() {
       result = await postWorkoutLog(supabaseSession.access_token, body);
     }
     if (result) {
-      console.log('saving workout');
       completeWorkout(workoutToSave, mode!);
       resetWorkout();
       resetTimer();

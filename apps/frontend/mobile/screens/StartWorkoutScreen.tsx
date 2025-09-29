@@ -25,7 +25,7 @@ export default function StartWorkoutScreen() {
   );
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData); // DELETE THIS LINE LATER
-  console.log('workout - workoutData: ', workoutData); // DELETE THIS LINE LATER
+  console.log('workout - workoutData: ', JSON.stringify(workoutData)); // DELETE THIS LINE LATER
 
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
