@@ -84,7 +84,6 @@ export default function WorkoutScreen() {
       return;
     }
 
-    console.log('saving :::: workoutToSave: ', JSON.stringify(workoutToSave));
     const body = JSON.stringify(workoutToSave);
     let result: WorkoutBuildResponse | WorkoutLogResponse | null = null;
 
