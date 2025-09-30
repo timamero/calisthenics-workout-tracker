@@ -30,7 +30,7 @@
   "devDependencies": {
     "husky": "^9.1.7",
     "supabase": "^2.34.3",
-    "turbo": "^2.5.3"
+    "turbo": "^2.5.8"
   },
   "pnpm": {
     "overrides": {
