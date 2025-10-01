@@ -15,8 +15,7 @@
       "distribution": "internal",
       "env": {
         "APP_VARIANT": "preview"
-      },
-      "prebuildCommand": "cd ../../.. && pnpm install --filter=@cwt/state && pnpm install --filter=@cwt/schema && pnpm install --filter=@cwt/auth && pnpm install --filter=@cwt/api && pnpm install --filter=@cwt/mocks && pnpm install --filter=@cwt/hooks && pnpm install --filter=@cwt/utils && pnpm install --filter=@cwt/content && pnpm build:state && pnpm build:schema && pnpm build:auth && pnpm build:api && pnpm build:mocks && pnpm build:hooks && pnpm build:utils && pnpm build:content"
+      }
     },
     "production": {
       "autoIncrement": true
