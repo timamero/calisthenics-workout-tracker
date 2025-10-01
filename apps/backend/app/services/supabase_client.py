@@ -5,7 +5,7 @@ from app.core.config import settings
 url: str = settings.supabase_url
 
 environment: str = settings.environment
-if environment == "development":
+if environment == "development" or environment == "staging":
     key: str = settings.supabase_anon_key  # Use this key when integrating with frontend
 elif environment == "local":
     key: str = (
