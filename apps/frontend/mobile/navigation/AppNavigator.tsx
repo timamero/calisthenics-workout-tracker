@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
   createStaticNavigation,
-  getFocusedRouteNameFromRoute,
+  // getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createStackNavigator } from '@react-navigation/stack';
+// import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from '../screens/Home';
@@ -19,6 +19,7 @@ import SignupScreen from '../screens/SignupScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import OnboardingComplete from '../screens/OnboardingComplete';
 import WorkoutScreen from '../screens/Workout';
+import UserScreen from '../screens/UserScreen';
 
 import { useAuthStore } from '@cwt/state/stores';
 
@@ -123,9 +124,16 @@ const RootStack = createNativeStackNavigator({
       if: useIsSignedIn,
       screens: {
         App: {
-          // Need to rename
           screen: MyTabs,
           options: { headerShown: false },
+        },
+        Profile: {
+          screen: UserScreen,
+          options: {
+            headerStyle: {
+              backgroundColor: 'rgb(20 20 20)',
+            },
+          },
         },
         Workout: {
           screen: WorkoutScreen,
