@@ -1,27 +1,52 @@
-import { View, Text, Button } from 'react-native';
+import React from 'react';
+import { useTheme, Button } from 'react-native-paper';
+import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useBearStore } from '@cwt/state/counter';
-import { User } from '@cwt/schema/sampleSchema';
+
+import { CustomTheme } from '../theme';
 
 export default function HomeScreen() {
   const navigation = useNavigation<any>();
-  const bears = useBearStore((state) => state.bears);
-  const increase = useBearStore((state) => state.increase);
-  const user: User = {
+  const theme = useTheme() as CustomTheme;
+
+  const user = {
     name: 'Jane Doe',
     xp: 90,
   };
 
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          mode="text"
+          onPress={() => navigation.navigate('Profile')}
+          style={{
+            marginRight: 24,
+          }}
+          textColor={theme.colors.grey}
+        >
+          Profile
+        </Button>
+      ),
+    });
+  }, [navigation, theme.colors.grey]);
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Welcome Home {user.name}!</Text>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: theme.colors.background,
+      }}
+    >
+      <Text style={{ color: theme.colors.light }}>
+        Welcome Home {user.name}!
+      </Text>
       <Text>xp = {user.xp}</Text>
-      <Button
-        title="Go to About"
-        onPress={() => navigation.navigate('About')}
-      />
-      <Text>{bears} bears around here</Text>
-      <Button title="one up" onPress={() => increase(1)} />
+      <Button onPress={() => navigation.navigate('StartWorkout')}>
+        Start a workout
+      </Button>
     </View>
   );
 }
