@@ -133,6 +133,10 @@ const RootStack = createNativeStackNavigator({
             headerStyle: {
               backgroundColor: 'rgb(20 20 20)',
             },
+            headerTitleStyle: {
+              color: 'rgb(255 244 230)',
+            },
+            headerTintColor: 'white',
           },
         },
         Workout: {

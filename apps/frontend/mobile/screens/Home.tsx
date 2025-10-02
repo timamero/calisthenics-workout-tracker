@@ -19,6 +19,7 @@ export default function HomeScreen() {
       headerRight: () => (
         <Button
           mode="text"
+          icon="account"
           onPress={() => navigation.navigate('Profile')}
           style={{
             marginRight: 24,
@@ -44,7 +45,7 @@ export default function HomeScreen() {
         Welcome Home {user.name}!
       </Text>
       <Text>xp = {user.xp}</Text>
-      <Button onPress={() => navigation.navigate('StartWorkout')}>
+      <Button onPress={() => navigation.navigate('WorkoutDashboard')}>
         Start a workout
       </Button>
     </View>
