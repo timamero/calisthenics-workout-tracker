@@ -17,6 +17,18 @@ export type CustomTheme = typeof DefaultTheme & {
     dark9: string;
     orange1: string;
     light: string;
+
+    dark50: string;
+    dark100: string;
+    dark200: string;
+    dark300: string;
+    dark400: string;
+    dark500: string;
+    dark600: string;
+    dark700: string;
+    dark800: string;
+    dark900: string;
+    dark950: string;
   };
 };
 
@@ -103,6 +115,18 @@ const theme: CustomTheme = {
     dark9: 'rgb(20 20 20)', // mantine: dark.9
     orange1: 'rgb(255 232 204)', // mantine: orange.1
     light: 'rgb(255 244 230)', // mantine: orange.0
+
+    dark50: '#f1f1f1',
+    dark100: '#e2e2e2',
+    dark200: '#c4c4c4',
+    dark300: '#a8a8a8',
+    dark400: '#8b8b8b',
+    dark500: '#727272',
+    dark600: '#595959',
+    dark700: '#404040',
+    dark800: '#2a2a2a',
+    dark900: '#141414',
+    dark950: '#0b0b0b',
   },
 };
 
