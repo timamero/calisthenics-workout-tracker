@@ -177,33 +177,44 @@ export default function WorkoutScreen() {
         )}
 
         <View
-          style={{
-            position: 'relative',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginInline: 16,
-            marginBottom: 16,
-          }}
+          style={
+            mode === 'build'
+              ? {
+                  position: 'relative',
+                  marginInline: 16,
+                  marginBottom: 16,
+                }
+              : {
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginInline: 16,
+                  marginBottom: 16,
+                }
+          }
         >
-          <SegmentedButtons
-            density="small"
-            value={mode}
-            onValueChange={(value: Mode) => handleSetMode(value)}
-            theme={{ colors: { secondaryContainer: theme.colors.primary } }}
-            buttons={[
-              {
-                value: 'edit',
-                label: 'Edit',
-                uncheckedColor: theme.colors.light,
-              },
-              {
-                value: 'log',
-                label: 'Log',
-                uncheckedColor: theme.colors.light,
-              },
-            ]}
-          />
+          {mode !== 'build' && (
+            <SegmentedButtons
+              density="small"
+              value={mode}
+              onValueChange={(value: Mode) => handleSetMode(value)}
+              theme={{ colors: { secondaryContainer: theme.colors.primary } }}
+              buttons={[
+                {
+                  value: 'edit',
+                  label: 'Edit',
+                  uncheckedColor: theme.colors.light,
+                },
+                {
+                  value: 'log',
+                  label: 'Log',
+                  uncheckedColor: theme.colors.light,
+                },
+              ]}
+            />
+          )}
+
           <Button
             icon="check"
             theme={{
