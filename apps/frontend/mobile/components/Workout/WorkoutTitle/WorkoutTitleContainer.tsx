@@ -1,7 +1,3 @@
-import { useState } from 'react';
-
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { Mode } from '@cwt/schema/workouts';
 import { useUpdateWorkoutTitle } from '@cwt/hooks';
 
 import WorkoutTitle from './WorkoutTitle';
