@@ -5,29 +5,60 @@ from uuid import UUID
 from pydantic import BaseModel, Field
 
 
+class LeverageSchema(BaseModel):
+    id: UUID
+    leverages_assists_id: int
+    value: Optional[int | str] = None
+
+
+class AssistSchema(BaseModel):
+    id: UUID
+    leverages_assists_id: int
+    value: Optional[int | str] = None
+
+
 class SetFieldsSchema(BaseModel):
     reps: Optional[int] = None
-    time: Optional[timedelta] = None
+    time: Optional[str] = None  # ISO 8601 duration string
     weight: Optional[int] = None
-    rest: Optional[timedelta] = None
+    rest: Optional[str] = None  # ISO 8601 duration string
+    leverages: Optional[List[LeverageSchema]] = None
+    assists: Optional[List[AssistSchema]] = None
 
 
 class SetSchema(BaseModel):
     id: UUID
-    fields: SetFieldsSchema
     completed: bool
-    completed_at: Optional[datetime] = None
+    completed_at: Optional[str] = None  # ISO 8601 timestamp or null
+    fields: SetFieldsSchema
 
 
 class WorkoutExerciseSchema(BaseModel):
     id: UUID
     exercise_id: int
-    tracked: List[Literal["reps", "time", "weight", "rpe"]]
+    tracked: List[str]
+    order: int
+    type: Literal["exercise"] = "exercise"
     sets: List[SetSchema]
 
 
-class WorkoutDataSchema(BaseModel):
+class SupersetSchema(BaseModel):
+    id: UUID
+    order: int
+    type: Literal["superset"] = "superset"
     exercises: List[WorkoutExerciseSchema]
+
+
+class SectionSchema(BaseModel):
+    id: UUID
+    name: Optional[str]
+    order: int
+    type: Literal["section"] = "section"
+    items: List[WorkoutExerciseSchema | SupersetSchema]
+
+
+class WorkoutDataSchema(BaseModel):
+    data: List[WorkoutExerciseSchema | SectionSchema | SupersetSchema]
 
 
 class WorkoutBuildRequestSchema(BaseModel):
