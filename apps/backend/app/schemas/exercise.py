@@ -12,6 +12,12 @@ class ExerciseSchema(BaseModel):
     tags: List[str]
     instructions: List[str]
     default_tracking_type: List[Literal["reps", "weight", "time", "rpe"]]
+    video_url: Optional[str] = None
+    source: Optional[str] = None
+    updated_at: Optional[str] = None
+    created_at: Optional[str] = None
+    default_leverage_id: Optional[int] = None
+    default_assist_id: Optional[int] = None
 
 
 class ExerciseFilterParams(BaseModel):
