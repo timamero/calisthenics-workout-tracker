@@ -10,11 +10,11 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "12.2.3 (519615d)"
+    PostgrestVersion: "13.0.5"
   }
   public: {
     Tables: {
-      emphasis: {
+      emphasis_inactive: {
         Row: {
           description: string | null
           id: number
@@ -32,7 +32,7 @@ export type Database = {
         }
         Relationships: []
       }
-      equipments: {
+      equipments_inactive: {
         Row: {
           id: number
           is_supplemental: boolean | null
@@ -52,6 +52,9 @@ export type Database = {
       }
       exercises: {
         Row: {
+          created_at: string
+          default_assist_id: number | null
+          default_leverage_id: number | null
           default_tracking_type: Database["public"]["Enums"]["tracking_type"][]
           difficulty: Database["public"]["Enums"]["difficulty_type"]
           emphasis: Database["public"]["Enums"]["emphasis_type"]
@@ -59,10 +62,16 @@ export type Database = {
           instructions: string[]
           name: string
           required_equipment: Database["public"]["Enums"]["equipment"][] | null
+          source: Database["public"]["Enums"]["source"]
           tags: string[]
           target_muscles: Database["public"]["Enums"]["muscles"][]
+          updated_at: string | null
+          video_url: string | null
         }
         Insert: {
+          created_at?: string
+          default_assist_id?: number | null
+          default_leverage_id?: number | null
           default_tracking_type?: Database["public"]["Enums"]["tracking_type"][]
           difficulty: Database["public"]["Enums"]["difficulty_type"]
           emphasis: Database["public"]["Enums"]["emphasis_type"]
@@ -70,10 +79,16 @@ export type Database = {
           instructions: string[]
           name: string
           required_equipment?: Database["public"]["Enums"]["equipment"][] | null
+          source?: Database["public"]["Enums"]["source"]
           tags: string[]
           target_muscles: Database["public"]["Enums"]["muscles"][]
+          updated_at?: string | null
+          video_url?: string | null
         }
         Update: {
+          created_at?: string
+          default_assist_id?: number | null
+          default_leverage_id?: number | null
           default_tracking_type?: Database["public"]["Enums"]["tracking_type"][]
           difficulty?: Database["public"]["Enums"]["difficulty_type"]
           emphasis?: Database["public"]["Enums"]["emphasis_type"]
@@ -81,12 +96,78 @@ export type Database = {
           instructions?: string[]
           name?: string
           required_equipment?: Database["public"]["Enums"]["equipment"][] | null
+          source?: Database["public"]["Enums"]["source"]
           tags?: string[]
           target_muscles?: Database["public"]["Enums"]["muscles"][]
+          updated_at?: string | null
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exercises_default_assist_id_fkey"
+            columns: ["default_assist_id"]
+            isOneToOne: false
+            referencedRelation: "leverages_assists"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exercises_default_leverage_id_fkey"
+            columns: ["default_leverage_id"]
+            isOneToOne: false
+            referencedRelation: "leverages_assists"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leverages_assists: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          id: number
+          name: string
+          type: Database["public"]["Enums"]["leverage_assist"]
+          updated_at: string | null
+          value_int_difficulty_direction:
+            | Database["public"]["Enums"]["sort_direction"]
+            | null
+          value_int_unit: Database["public"]["Enums"]["unit"] | null
+          value_options: string[] | null
+          value_type: Database["public"]["Enums"]["leverages_assist_value_type"]
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order: number
+          id?: number
+          name: string
+          type: Database["public"]["Enums"]["leverage_assist"]
+          updated_at?: string | null
+          value_int_difficulty_direction?:
+            | Database["public"]["Enums"]["sort_direction"]
+            | null
+          value_int_unit?: Database["public"]["Enums"]["unit"] | null
+          value_options?: string[] | null
+          value_type: Database["public"]["Enums"]["leverages_assist_value_type"]
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: number
+          name?: string
+          type?: Database["public"]["Enums"]["leverage_assist"]
+          updated_at?: string | null
+          value_int_difficulty_direction?:
+            | Database["public"]["Enums"]["sort_direction"]
+            | null
+          value_int_unit?: Database["public"]["Enums"]["unit"] | null
+          value_options?: string[] | null
+          value_type?: Database["public"]["Enums"]["leverages_assist_value_type"]
         }
         Relationships: []
       }
-      muscle_groups: {
+      muscle_groups_inactive: {
         Row: {
           id: number
           name: string
@@ -107,7 +188,7 @@ export type Database = {
           goal: string | null
           id: number
           initial_fitness_test: Json
-          updated_on: string
+          updated_at: string
           user_id: string
         }
         Insert: {
@@ -115,7 +196,7 @@ export type Database = {
           goal?: string | null
           id?: number
           initial_fitness_test: Json
-          updated_on: string
+          updated_at: string
           user_id?: string
         }
         Update: {
@@ -123,12 +204,12 @@ export type Database = {
           goal?: string | null
           id?: number
           initial_fitness_test?: Json
-          updated_on?: string
+          updated_at?: string
           user_id?: string
         }
         Relationships: []
       }
-      progression_exercises: {
+      progression_exercises_inactive: {
         Row: {
           category: string
           exercise_id: number
@@ -171,12 +252,12 @@ export type Database = {
             foreignKeyName: "progression_exercises_progression_id_fkey"
             columns: ["progression_id"]
             isOneToOne: false
-            referencedRelation: "progressions"
+            referencedRelation: "progressions_inactive"
             referencedColumns: ["id"]
           },
         ]
       }
-      progressions: {
+      progressions_inactive: {
         Row: {
           description: string
           difficulty: string
@@ -219,7 +300,7 @@ export type Database = {
         Row: {
           created_at: string
           description: string | null
-          duration: unknown | null
+          estimated_duration: unknown | null
           goal: Database["public"]["Enums"]["goal"] | null
           id: number
           notes: string | null
@@ -233,7 +314,7 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
-          duration?: unknown | null
+          estimated_duration?: unknown | null
           goal?: Database["public"]["Enums"]["goal"] | null
           id?: number
           notes?: string | null
@@ -247,7 +328,7 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
-          duration?: unknown | null
+          estimated_duration?: unknown | null
           goal?: Database["public"]["Enums"]["goal"] | null
           id?: number
           notes?: string | null
@@ -349,6 +430,8 @@ export type Database = {
         | "resistance bands"
         | "none"
       goal: "function" | "endurance" | "hypertrophy" | "strength" | "power"
+      leverage_assist: "leverage" | "assist"
+      leverages_assist_value_type: "int" | "options"
       muscles:
         | "chest"
         | "glutes"
@@ -367,9 +450,17 @@ export type Database = {
         | "full body"
         | "core"
         | "forearms"
+      sort_direction: "ascending" | "descending"
       source: "manual" | "ai_generated" | "default"
       status: "draft" | "finalized" | "archived"
-      tracking_type: "reps" | "time" | "weight" | "rpe"
+      tracking_type:
+        | "reps"
+        | "time"
+        | "weight"
+        | "rpe"
+        | "leverages"
+        | "assists"
+      unit: "lb" | "kg" | "in" | "cm" | "m" | "ft" | "deg"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -521,6 +612,8 @@ export const Constants = {
         "none",
       ],
       goal: ["function", "endurance", "hypertrophy", "strength", "power"],
+      leverage_assist: ["leverage", "assist"],
+      leverages_assist_value_type: ["int", "options"],
       muscles: [
         "chest",
         "glutes",
@@ -540,9 +633,11 @@ export const Constants = {
         "core",
         "forearms",
       ],
+      sort_direction: ["ascending", "descending"],
       source: ["manual", "ai_generated", "default"],
       status: ["draft", "finalized", "archived"],
-      tracking_type: ["reps", "time", "weight", "rpe"],
+      tracking_type: ["reps", "time", "weight", "rpe", "leverages", "assists"],
+      unit: ["lb", "kg", "in", "cm", "m", "ft", "deg"],
     },
   },
 } as const
