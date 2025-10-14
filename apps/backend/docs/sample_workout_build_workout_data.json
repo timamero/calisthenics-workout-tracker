@@ -1,0 +1,207 @@
+{
+  "data": [
+    {
+      "id": "b7e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+      "name": "Warm-up",
+      "order": 1,
+      "type": "section",
+      "items": [
+        {
+          "id": "a1e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+          "exercise_id": 16,
+          "tracked": ["time"],
+          "order": 1,
+          "type": "exercise",
+          "sets": [
+            {
+              "id": "c1e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+              "completed": false,
+              "completed_at": null,
+              "fields": {
+                "time": "PT30S",
+                "reps": null,
+                "weight": null,
+                "rest": "PT30S",
+                "leverages": null,
+                "assists": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "a2e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+          "exercise_id": 1,
+          "tracked": ["reps"],
+          "order": 2,
+          "type": "exercise",
+          "sets": [
+            {
+              "id": "c2e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+              "completed": false,
+              "completed_at": null,
+              "fields": {
+                "reps": 10,
+                "time": null,
+                "weight": null,
+                "rest": "PT45S",
+                "leverages": null,
+                "assists": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d7e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+      "order": 2,
+      "type": "superset",
+      "exercises": [
+        {
+          "id": "a3e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+          "exercise_id": 21,
+          "tracked": ["reps"],
+          "order": 1,
+          "type": "exercise",
+          "sets": [
+            {
+              "id": "c3e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+              "completed": false,
+              "completed_at": null,
+              "fields": {
+                "reps": 8,
+                "weight": null,
+                "time": null,
+                "rest": "PT90S",
+                "leverages": null,
+                "assists": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "a4e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+          "exercise_id": 17,
+          "tracked": ["time"],
+          "order": 2,
+          "type": "exercise",
+          "sets": [
+            {
+              "id": "c4e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+              "completed": false,
+              "completed_at": null,
+              "fields": {
+                "time": "PT60S",
+                "reps": null,
+                "weight": null,
+                "rest": "PT30S",
+                "leverages": null,
+                "assists": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a5e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+      "exercise_id": 8,
+      "tracked": ["time"],
+      "order": 3,
+      "type": "exercise",
+      "sets": [
+        {
+          "id": "c5e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+          "completed": false,
+          "completed_at": null,
+          "fields": {
+            "reps": null,
+            "time": "PT45S",
+            "weight": null,
+            "rest": "PT60S",
+            "leverages": null,
+            "assists": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "a6e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+      "exercise_id": 3,
+      "tracked": ["repst"],
+      "order": 4,
+      "type": "exercise",
+      "sets": [
+        {
+          "id": "c6e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+          "completed": false,
+          "completed_at": null,
+          "fields": {
+            "reps": 20,
+            "time": null,
+            "weight": null,
+            "rest": "PT120S",
+            "leverages": null,
+            "assists": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "a7e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+      "exercise_id": 4,
+      "tracked": ["reps", "leverages"],
+      "order": 5,
+      "type": "exercise",
+      "sets": [
+        {
+          "id": "c7e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+          "completed": false,
+          "completed_at": null,
+          "fields": {
+            "reps": 12,
+            "weight": null,
+            "time": null,
+            "rest": "PT60S",
+            "leverages": [
+              {
+                "id": "b1e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+                "leverages_assists_id": 12,
+                "value": 1
+              }
+            ],
+            "assists": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "a8e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+      "exercise_id": 12,
+      "tracked": ["reps", "assists"],
+      "order": 6,
+      "type": "exercise",
+      "sets": [
+        {
+          "id": "c8e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+          "completed": false,
+          "completed_at": null,
+          "fields": {
+            "reps": 6,
+            "weight": null,
+            "time": null,
+            "rest": "PT90S",
+            "leverages": null,
+            "assists": [
+              {
+                "id": "b2e6e2e2-1c2a-4e2e-9e2e-1e2e2e2e2e2e",
+                "leverages_assists_id": 13,
+                "value": 1
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
