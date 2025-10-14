@@ -310,6 +310,9 @@ importers:
 
   packages/hooks:
     dependencies:
+      '@cwt/schema':
+        specifier: workspace:*
+        version: link:../schema
       '@cwt/state':
         specifier: workspace:*
         version: link:../state
