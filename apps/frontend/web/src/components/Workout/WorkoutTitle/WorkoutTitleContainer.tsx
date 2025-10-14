@@ -1,19 +1,16 @@
-import { useState } from 'react';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { useUpdateWorkoutTitle } from '@cwt/hooks';
+
 import WorkoutTitle from './WorkoutTitle';
 
 export default function WorkoutTitleContainer() {
-  const [isEditMode, setIsEditMode] = useState(false);
-
-  const mode = useWorkoutDraftStore((state) => state.mode);
-  const workoutTitle = useWorkoutDraftStore((state) => state.workoutTitle);
-  const setWorkoutTitle = useWorkoutDraftStore(
-    (state) => state.setWorkoutTitle,
-  );
-
-  const handleEditClick = () => setIsEditMode(true);
-  const handleSaveClick = () => setIsEditMode(false);
-  const handleTitleChange = (value: string) => setWorkoutTitle(value);
+  const {
+    mode,
+    isEditMode,
+    workoutTitle,
+    handleEditClick,
+    handleSaveClick,
+    handleTitleChange,
+  } = useUpdateWorkoutTitle();
 
   return (
     <WorkoutTitle

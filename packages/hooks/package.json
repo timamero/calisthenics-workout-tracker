@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@cwt/state": "workspace:*",
+    "@cwt/schema": "workspace:*",
     "@supabase/supabase-js": "^2.51.0"
   },
   "devDependencies": {
