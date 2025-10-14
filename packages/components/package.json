@@ -1,0 +1,23 @@
+{
+  "name": "@cwt/components",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "description": "Logic components for CWT",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "default": "./dist/lib/index.js"
+    }
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  }
+}
