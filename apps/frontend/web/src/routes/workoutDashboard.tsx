@@ -68,26 +68,34 @@ function WorkoutDashboardView() {
     initializeWorkout('edit');
   };
 
-  const workoutBuildCards = workouts.builds.map((wo, i) => {
-    const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
-    return (
-      <CardButton key={i}>
-        <Title order={3} size="h5">
-          {workoutTitle}
-        </Title>
-      </CardButton>
-    );
-  });
-  const workoutLogCards = workouts.logs.map((wo, i) => {
-    const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
-    return (
-      <CardButton key={i}>
-        <Title order={3} size="h5">
-          {workoutTitle}
-        </Title>
-      </CardButton>
-    );
-  });
+  let workoutBuildCards = null;
+  let workoutLogCards = null;
+
+  if (workouts.builds) {
+    workoutBuildCards = workouts.builds.map((wo, i) => {
+      const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
+      return (
+        <CardButton key={i}>
+          <Title order={3} size="h5">
+            {workoutTitle}
+          </Title>
+        </CardButton>
+      );
+    });
+  }
+
+  if (workouts.logs) {
+    workoutLogCards = workouts.logs.map((wo, i) => {
+      const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
+      return (
+        <CardButton key={i}>
+          <Title order={3} size="h5">
+            {workoutTitle}
+          </Title>
+        </CardButton>
+      );
+    });
+  }
   return (
     <Stack gap="xl">
       <Title size="h6">Start Workout</Title>
@@ -97,7 +105,7 @@ function WorkoutDashboardView() {
       <LargeButton to="/workout" onButtonClick={handleCreateWorkoutLogClick}>
         <Text>Start Blank Workout</Text>
       </LargeButton>
-      {workoutBuildCards.length > 0 && (
+      {workoutBuildCards && workoutBuildCards.length > 0 && (
         <Stack>
           <Text>Start Workout From Template</Text>
           <ScrollArea>
@@ -106,7 +114,7 @@ function WorkoutDashboardView() {
         </Stack>
       )}
 
-      {workoutLogCards.length > 0 && (
+      {workoutLogCards && workoutLogCards.length > 0 && (
         <Stack>
           <Text>Start Workout From Recent Workout</Text>
           <ScrollArea>
