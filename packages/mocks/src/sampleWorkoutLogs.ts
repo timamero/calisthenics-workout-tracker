@@ -11,21 +11,37 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
     description: "Push day with focus on chest and triceps",
     duration: "00:45:00",
     workout_data: {
-      exercises: [
+      data: [
         {
           id: "ex1",
           exercise_id: 1,
+          order: 0,
+          type: "exercise",
           tracked: ["reps"],
           sets: [
             {
               id: "set1",
-              fields: { reps: 10 },
+              fields: {
+                reps: 10,
+                time: null,
+                weight: null,
+                rest: null,
+                leverages: null,
+                assists: null,
+              },
               completed: true,
               completed_at: "2025-09-01T08:15:00.000Z",
             },
             {
               id: "set2",
-              fields: { reps: 8 },
+              fields: {
+                reps: 8,
+                time: null,
+                weight: null,
+                rest: null,
+                leverages: null,
+                assists: null,
+              },
               completed: true,
               completed_at: "2025-09-01T08:20:00.000Z",
             },
@@ -49,21 +65,37 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
     description: "Squats and lunges",
     duration: "00:50:00",
     workout_data: {
-      exercises: [
+      data: [
         {
           id: "ex2",
           exercise_id: 9,
+          order: 0,
+          type: "exercise",
           tracked: ["reps", "weight"],
           sets: [
             {
               id: "set3",
-              fields: { reps: 12, weight: 40 },
+              fields: {
+                reps: 12,
+                time: null,
+                weight: 40,
+                rest: null,
+                leverages: null,
+                assists: null,
+              },
               completed: true,
               completed_at: "2025-09-02T09:20:00.000Z",
             },
             {
               id: "set4",
-              fields: { reps: 10, weight: 40 },
+              fields: {
+                reps: 10,
+                time: null,
+                weight: 40,
+                rest: null,
+                leverages: null,
+                assists: null,
+              },
               completed: true,
               completed_at: "2025-09-02T09:30:00.000Z",
             },
@@ -87,21 +119,37 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
     description: "Abs and obliques",
     duration: "00:30:00",
     workout_data: {
-      exercises: [
+      data: [
         {
           id: "ex3",
           exercise_id: 16,
+          order: 0,
+          type: "exercise",
           tracked: ["time"],
           sets: [
             {
               id: "set5",
-              fields: { time: "00:01:00" },
+              fields: {
+                reps: null,
+                time: "00:01:00",
+                weight: null,
+                rest: null,
+                leverages: null,
+                assists: null,
+              },
               completed: true,
               completed_at: "2025-09-03T10:10:00.000Z",
             },
             {
               id: "set6",
-              fields: { time: "00:01:00" },
+              fields: {
+                reps: null,
+                time: "00:01:00",
+                weight: null,
+                rest: null,
+                leverages: null,
+                assists: null,
+              },
               completed: true,
               completed_at: "2025-09-03T10:15:00.000Z",
             },
@@ -125,21 +173,37 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
     description: "Back and biceps",
     duration: "00:55:00",
     workout_data: {
-      exercises: [
+      data: [
         {
           id: "ex4",
           exercise_id: 5,
+          order: 0,
+          type: "exercise",
           tracked: ["reps"],
           sets: [
             {
               id: "set7",
-              fields: { reps: 8 },
+              fields: {
+                reps: 8,
+                time: null,
+                weight: null,
+                rest: null,
+                leverages: null,
+                assists: null,
+              },
               completed: true,
               completed_at: "2025-09-04T11:20:00.000Z",
             },
             {
               id: "set8",
-              fields: { reps: 8 },
+              fields: {
+                reps: 8,
+                time: null,
+                weight: null,
+                rest: null,
+                leverages: null,
+                assists: null,
+              },
               completed: true,
               completed_at: "2025-09-04T11:30:00.000Z",
             },
@@ -163,15 +227,24 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
     description: "Light stretching and mobility",
     duration: "00:20:00",
     workout_data: {
-      exercises: [
+      data: [
         {
           id: "ex5",
           exercise_id: 20,
+          order: 0,
+          type: "exercise",
           tracked: ["time"],
           sets: [
             {
               id: "set9",
-              fields: { time: "00:02:00" },
+              fields: {
+                reps: null,
+                time: "00:02:00",
+                weight: null,
+                rest: null,
+                leverages: null,
+                assists: null,
+              },
               completed: true,
               completed_at: "2025-09-05T12:10:00.000Z",
             },
