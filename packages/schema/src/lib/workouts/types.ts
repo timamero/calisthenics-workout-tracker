@@ -5,9 +5,12 @@ import {
   WorkoutBuildResponseSchema,
   WorkoutLogRequestSchema,
   WorkoutLogResponseSchema,
-  WorkoutLogSchema,
   WorkoutDataSchema,
-  WorkoutExerciseSchema,
+  ExerciseSchema,
+  SupersetSchema,
+  SectionSchema,
+  LeverageSchema,
+  AssistSchema,
   SetSchema,
   SetFieldsSchema,
   GoalSchema,
@@ -21,9 +24,12 @@ export type WorkoutBuildResponse = z.infer<typeof WorkoutBuildResponseSchema>;
 export type WorkoutBuildRequest = z.infer<typeof WorkoutBuildRequestSchema>;
 export type WorkoutLogResponse = z.infer<typeof WorkoutLogResponseSchema>;
 export type WorkoutLogRequest = z.infer<typeof WorkoutLogRequestSchema>;
-export type WorkoutLog = z.infer<typeof WorkoutLogSchema>;
 export type WorkoutData = z.infer<typeof WorkoutDataSchema>;
-export type WorkoutExercise = z.infer<typeof WorkoutExerciseSchema>;
+export type Exercise = z.infer<typeof ExerciseSchema>;
+export type Superset = z.infer<typeof SupersetSchema>;
+export type Section = z.infer<typeof SectionSchema>;
+export type Leverage = z.infer<typeof LeverageSchema>;
+export type Assist = z.infer<typeof AssistSchema>;
 export type Set = z.infer<typeof SetSchema>;
 export type SetFields = z.infer<typeof SetFieldsSchema>;
 export type Goal = z.infer<typeof GoalSchema>;

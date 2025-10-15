@@ -2,27 +2,58 @@ import { z } from 'zod';
 
 import { TrackingTypeSchema } from '../enums.schema';
 
+export const LeverageSchema = z.object({
+  id: z.string(),
+  leverages_assists_id: z.number(),
+  value: z.union([z.number(), z.string(), z.null()]),
+});
+
+export const AssistSchema = z.object({
+  id: z.string(),
+  leverages_assists_id: z.number(),
+  value: z.union([z.number(), z.string(), z.null()]),
+});
+
 export const SetFieldsSchema = z.object({
-  reps: z.optional(z.number()),
-  weight: z.optional(z.number()),
-  time: z.optional(z.iso.time()),
-  rest: z.optional(z.iso.time()),
+  reps: z.nullable(z.number()),
+  time: z.nullable(z.string()), // ISO 8601 duration
+  weight: z.nullable(z.number()),
+  rest: z.nullable(z.string()), // ISO 8601 duration
+  leverages: z.nullable(z.array(LeverageSchema)),
+  assists: z.nullable(z.array(AssistSchema)),
 });
 
 export const SetSchema = z.object({
-  id: z.uuid(),
+  id: z.string(),
   fields: SetFieldsSchema,
   completed: z.boolean(),
-  completed_at: z.nullable(z.iso.datetime()),
+  completed_at: z.nullable(z.string()), // ISO 8601 datetime
 });
 
-export const WorkoutExerciseSchema = z.object({
-  id: z.uuid(),
-  exercise_id: z.int(),
-  tracked: z.array(TrackingTypeSchema),
+export const ExerciseSchema = z.object({
+  id: z.string(),
+  exercise_id: z.number(),
+  order: z.number(),
+  type: z.literal('exercise'),
+  tracked: z.array(z.string()),
   sets: z.array(SetSchema),
 });
 
+export const SupersetSchema = z.object({
+  id: z.string(),
+  order: z.number(),
+  type: z.literal('superset'),
+  exercises: z.array(ExerciseSchema),
+});
+
+export const SectionSchema = z.object({
+  id: z.string(),
+  name: z.nullable(z.string()),
+  order: z.number(),
+  type: z.literal('section'),
+  items: z.array(z.union([ExerciseSchema, SupersetSchema])),
+});
+
 export const WorkoutDataSchema = z.object({
-  exercises: z.array(WorkoutExerciseSchema),
+  data: z.array(z.union([ExerciseSchema, SectionSchema, SupersetSchema])),
 });
