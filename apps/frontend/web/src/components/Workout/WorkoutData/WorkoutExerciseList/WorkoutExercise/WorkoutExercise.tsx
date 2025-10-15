@@ -1,6 +1,6 @@
 import { Stack, Text, Button, Group } from '@mantine/core';
 
-import type { WorkoutExercise, Mode } from '@cwt/schema/workouts';
+import type { Mode } from '@cwt/schema/workouts';
 import SetList from './SetList';
 
 interface WorkoutExerciseProps {

@@ -1,4 +1,4 @@
-import type { SetFields } from '@cwt/schema/workouts';
+import type { Exercise, SetFields } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { SetContext } from '../../../../../../contexts/SetContext';
@@ -9,19 +9,17 @@ interface SetListProps {
 }
 
 export default function SetList({ exerciseIndex }: SetListProps) {
-  const sets = useWorkoutDraftStore((state) => state.workoutData).exercises[
-    exerciseIndex
-  ].sets;
+  const exercise = useWorkoutDraftStore(
+    (state) => state.workoutData[exerciseIndex],
+  ) as Exercise;
+  const sets = exercise.sets;
 
   const setSelectedSetIndexToMod = useWorkoutDraftStore(
     (state) => state.setSelectedSetIndexToMod,
   );
   const updateField = useWorkoutDraftStore((state) => state.updateField);
 
-  const handleSetFieldChange = (
-    setIndex: number,
-    updatedField: Partial<SetFields>,
-  ) => {
+  const handleSetFieldChange = (setIndex: number, updatedField: SetFields) => {
     setSelectedSetIndexToMod(setIndex);
     updateField(exerciseIndex, updatedField);
   };
