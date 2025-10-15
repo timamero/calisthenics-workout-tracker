@@ -316,7 +316,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   resetWorkout: () =>
     set(() => ({
-      workoutData: { exercises: [] },
+      workoutData: [],
       mode: null,
       workoutToSave: null,
       isWorkoutSavePending: false,
