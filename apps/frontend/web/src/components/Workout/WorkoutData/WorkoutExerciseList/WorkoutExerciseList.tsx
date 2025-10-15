@@ -14,9 +14,16 @@ export default function WorkoutExerciseList({
   deleteExOverlayHandler,
   deleteSetOverlayHandler,
 }: WorkoutExerciseListProps) {
+  console.log('WorkoutExerciseList rendered');
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
-
-  const workoutExercises = workoutData.exercises.map((ex, i) => {
+  console.log(
+    'WorkoutExerciseList - workoutData: ',
+    JSON.stringify(workoutData),
+  );
+  const workoutExercises = workoutData.map((ex, i) => {
+    console.log('exercise: ', JSON.stringify(ex));
+    if (ex.type !== 'exercise') return null;
+    console.log('return exercises');
     return (
       <WorkoutExerciseContext.Provider
         key={ex.id}

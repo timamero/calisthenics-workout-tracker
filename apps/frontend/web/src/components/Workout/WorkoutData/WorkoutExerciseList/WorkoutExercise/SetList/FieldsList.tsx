@@ -6,13 +6,15 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContext';
 import NumeralInput from './NumeralInput';
 import DurationInput from './DurationInput';
+import type { Exercise } from '@cwt/schema/workouts';
 
 export default function FieldsList() {
   const exerciseIndex = React.useContext(WorkoutExerciseContext)!.exerciseIndex;
 
-  const tracked = useWorkoutDraftStore((state) => state.workoutData).exercises[
-    exerciseIndex
-  ].tracked;
+  const exercise = useWorkoutDraftStore(
+    (state) => state.workoutData[exerciseIndex],
+  ) as Exercise;
+  const tracked = exercise.tracked;
 
   const fields = tracked.map((field, i) => {
     switch (field) {

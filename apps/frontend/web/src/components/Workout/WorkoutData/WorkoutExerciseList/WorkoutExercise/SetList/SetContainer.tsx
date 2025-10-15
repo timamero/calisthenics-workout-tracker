@@ -5,6 +5,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContext';
 import { SetContext } from '../../../../../../contexts/SetContext';
 import Set from './Set';
+import type { Exercise } from '@cwt/schema/workouts';
 
 export default function SetContainer() {
   const exerciseIndex = React.useContext(WorkoutExerciseContext)!.exerciseIndex;
@@ -15,9 +16,10 @@ export default function SetContainer() {
   )!.deleteSetOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
-  const sets = useWorkoutDraftStore((state) => state.workoutData).exercises[
-    exerciseIndex
-  ].sets;
+  const exercise = useWorkoutDraftStore(
+    (state) => state.workoutData[exerciseIndex],
+  ) as Exercise;
+  const sets = exercise.sets;
 
   const toggleCompleted = useWorkoutDraftStore(
     (state) => state.toggleCompleted,
