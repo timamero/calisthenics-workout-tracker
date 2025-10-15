@@ -123,6 +123,7 @@ export const createWorkoutDraftSlice: StateCreator<
           return;
         }
         if (state.mode === 'edit' || state.mode === 'build') {
+          console.log('addExercise action - adding exercise');
           // let fields: SetFields = {};
           let fields;
           if (tracking.includes('reps')) {
@@ -135,6 +136,7 @@ export const createWorkoutDraftSlice: StateCreator<
             sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
             exercise_id: exerciseID,
             tracked: tracking,
+            type: 'exercise',
             id: uuidv4(),
           } as Exercise);
         } else {

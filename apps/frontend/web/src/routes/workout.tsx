@@ -25,6 +25,7 @@ export const Route = createFileRoute('/workout')({
 });
 
 function WorkoutView() {
+  console.log('Workout page rendered');
   const navigate = useNavigate();
 
   const [saveOverlayOpened, saveOverlayHandler] = useDisclosure(false);

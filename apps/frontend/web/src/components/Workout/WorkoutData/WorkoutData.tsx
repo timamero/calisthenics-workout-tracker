@@ -17,7 +17,7 @@ export default function WorkoutData() {
 
   const workoutExercisesLength = useWorkoutDraftStore(
     (state) => state.workoutData,
-  ).exercises.length;
+  ).length;
   const selectedExerciseIndexToMod = useWorkoutDraftStore(
     (state) => state.selectedExerciseIndexToMod,
   );

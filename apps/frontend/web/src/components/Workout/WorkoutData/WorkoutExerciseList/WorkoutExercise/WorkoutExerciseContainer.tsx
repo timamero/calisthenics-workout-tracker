@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import type { WorkoutExercise as WorkoutExerciseType } from '@cwt/schema/workouts';
+import type { Exercise } from '@cwt/schema/workouts';
 
 import { WorkoutExerciseContext } from '../../../../../contexts/WorkoutExerciseContext';
 import WorkoutExercise from './WorkoutExercise';
@@ -13,7 +13,7 @@ export default function WorkoutExerciseContainer() {
   const exerciseIndex: number = React.useContext(
     WorkoutExerciseContext,
   )!.exerciseIndex;
-  const workoutExercise: WorkoutExerciseType = React.useContext(
+  const workoutExercise: Exercise = React.useContext(
     WorkoutExerciseContext,
   )!.workoutExercise;
   const deleteExOverlayHandler = React.useContext(

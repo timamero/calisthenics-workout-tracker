@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { type UseDisclosureHandlers } from '@mantine/hooks';
 
-import type { WorkoutExercise } from '@cwt/schema/workouts';
+import type { Exercise } from '@cwt/schema/workouts';
 
 interface WorkoutExerciseContextType {
-  workoutExercise: WorkoutExercise;
+  workoutExercise: Exercise;
   exerciseIndex: number;
   deleteExOverlayHandler: UseDisclosureHandlers;
   deleteSetOverlayHandler: UseDisclosureHandlers;
