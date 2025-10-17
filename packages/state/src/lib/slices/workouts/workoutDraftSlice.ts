@@ -44,6 +44,8 @@ interface WorkoutDraftAction {
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSelectedSetIndexToMod: (setIndex: number | null) => void;
   setSelectedExerciseIndexToMod: (exerciseIndex: number | null) => void;
+  addSection: () => void; // CWT-230
+  addSuperset: () => void; // CWT-230
   addExercise: (tracking: Tracking[]) => void;
   removeExercise: (exerciseIndex: number) => void;
   addSet: (exerciseIndex: number) => void;
@@ -112,6 +114,25 @@ export const createWorkoutDraftSlice: StateCreator<
   setSelectedExerciseIndexToMod: (exerciseIndex) =>
     set((state) => {
       state.selectedExerciseIndexToMod = exerciseIndex;
+    }),
+  addSection: () =>
+    set((state) => {
+      state.workoutData.push({
+        id: uuidv4(),
+        name: null,
+        order: state.workoutData.length,
+        type: 'section',
+        items: [],
+      });
+    }),
+  addSuperset: () =>
+    set((state) => {
+      state.workoutData.push({
+        id: uuidv4(),
+        order: state.workoutData.length,
+        type: 'superset',
+        exercises: [],
+      });
     }),
   addExercise: (tracking) =>
     set(
