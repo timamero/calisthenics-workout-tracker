@@ -68,9 +68,9 @@ interface WorkoutDraftAction {
 
 export type WorkoutDraftSlice = WorkoutDraftState & WorkoutDraftAction;
 
-function isExercise(item: Exercise | Section | Superset): item is Exercise {
-  return 'sets' in item;
-}
+// function isExercise(item: Exercise | Section | Superset): item is Exercise {
+//   return 'sets' in item;
+// }
 
 export const createWorkoutDraftSlice: StateCreator<
   WorkoutDraftSlice,
@@ -180,12 +180,13 @@ export const createWorkoutDraftSlice: StateCreator<
         return;
       }
       if (state.mode === 'edit' || state.mode === 'build') {
-        const item = state.workoutData[exerciseIndex];
-        if (!isExercise(item)) {
-          console.error('Item is not an exercise');
-          return;
-        }
-        let exercise: Exercise = item;
+        // const item = state.workoutData[exerciseIndex];
+        // if (!isExercise(item)) {
+        //   console.error('Item is not an exercise');
+        //   return;
+        // }
+        // let exercise: Exercise = item;
+        let exercise = state.workoutData[exerciseIndex] as Exercise;
 
         const tracking = exercise.tracked;
         // const tracking = state.workoutData.data[exerciseIndex].tracked;
@@ -204,6 +205,7 @@ export const createWorkoutDraftSlice: StateCreator<
           ],
         };
         state.workoutData[exerciseIndex] = exercise;
+
         // state.workoutData[exerciseIndex].sets.push({
         //   ...INITIALIZED_SET,
         //   id: uuidv4(),
@@ -226,12 +228,13 @@ export const createWorkoutDraftSlice: StateCreator<
         return;
       }
       if (state.mode === 'edit' || state.mode === 'build') {
-        const item = state.workoutData[exerciseIndex];
-        if (!isExercise(item)) {
-          console.error('Item is not an exercise');
-          return;
-        }
-        let exercise: Exercise = item;
+        // const item = state.workoutData[exerciseIndex];
+        // if (!isExercise(item)) {
+        //   console.error('Item is not an exercise');
+        //   return;
+        // }
+        // let exercise: Exercise = item;
+        let exercise = state.workoutData[exerciseIndex] as Exercise;
 
         exercise.sets.splice(setIndex, 1);
         // state.workoutData[exerciseIndex].sets.splice(setIndex, 1);
@@ -253,12 +256,13 @@ export const createWorkoutDraftSlice: StateCreator<
         return;
       }
 
-      const item = state.workoutData[exerciseIndex];
-      if (!isExercise(item)) {
-        console.error('Item is not an exercise');
-        return;
-      }
-      let exercise: Exercise = item;
+      // const item = state.workoutData[exerciseIndex];
+      // if (!isExercise(item)) {
+      //   console.error('Item is not an exercise');
+      //   return;
+      // }
+      // let exercise: Exercise = item;
+      let exercise = state.workoutData[exerciseIndex] as Exercise;
 
       exercise.sets[setIndex] = {
         ...exercise.sets[setIndex],
@@ -275,12 +279,13 @@ export const createWorkoutDraftSlice: StateCreator<
   toggleCompleted: (exerciseIndex, setIndex, value) =>
     set((state) => {
       if (state.mode === 'log') {
-        const item = state.workoutData[exerciseIndex];
-        if (!isExercise(item)) {
-          console.error('Item is not an exercise');
-          return;
-        }
-        let exercise: Exercise = item;
+        // const item = state.workoutData[exerciseIndex];
+        // if (!isExercise(item)) {
+        //   console.error('Item is not an exercise');
+        //   return;
+        // }
+        // let exercise: Exercise = item;
+        let exercise = state.workoutData[exerciseIndex] as Exercise;
         exercise.sets[setIndex].completed = value;
         state.workoutData[exerciseIndex] = exercise;
 
