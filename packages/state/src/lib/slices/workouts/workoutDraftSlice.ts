@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
-import { v4 as uuidv4 } from 'uuid';
+import { UUIDTypes, v4 as uuidv4 } from 'uuid';
 
 import type {
   Exercise,
@@ -48,6 +48,7 @@ interface WorkoutDraftAction {
   addSuperset: () => void; // CWT-230
   addExercise: (tracking: Tracking[]) => void;
   removeExercise: (exerciseIndex: number) => void;
+  addExerciseToSection: (sectionID: UUIDTypes, tracking: Tracking[]) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number) => void;
   updateField: (
@@ -172,6 +173,10 @@ export const createWorkoutDraftSlice: StateCreator<
       } else {
         console.error('Cannot remove exercise in log mode');
       }
+    }),
+  addExerciseToSection: (sectionID) =>
+    set((state) => {
+      // action to add exercise to section
     }),
   addSet: (exerciseIndex) =>
     set((state) => {
