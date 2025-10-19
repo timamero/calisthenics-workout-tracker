@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
-import { UUIDTypes, v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import type {
   Exercise,
@@ -48,7 +48,10 @@ interface WorkoutDraftAction {
   addSuperset: () => void; // CWT-230
   addExercise: (tracking: Tracking[]) => void;
   removeExercise: (exerciseIndex: number) => void;
-  addExerciseToSection: (sectionID: UUIDTypes, tracking: Tracking[]) => void; // CWT-230
+  addExerciseToSection: (sectionID: string, tracking: Tracking[]) => void; // CWT-230
+  removeExerciseFromSection: (sectionID: string, exerciseID: string) => void; // CWT-230
+  addExerciseToSuperset: (supersetID: string, tracking: Tracking[]) => void; // CWT-230
+  removeExerciseFromSuperset: (supersetID: string, exerciseID: string) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number) => void;
   updateField: (
@@ -177,6 +180,18 @@ export const createWorkoutDraftSlice: StateCreator<
   addExerciseToSection: (sectionID) =>
     set((state) => {
       // action to add exercise to section
+    }),
+  removeExerciseFromSection: (sectionID, exerciseID) =>
+    set((state) => {
+      // action to remove exercise from section
+    }),
+  addExerciseToSuperset: (supersetID) =>
+    set((state) => {
+      // action to add exercise to superset
+    }),
+  removeExerciseFromSuperset: (supersetID, exerciseID) =>
+    set((state) => {
+      // action to remove exercise from superset
     }),
   addSet: (exerciseIndex) =>
     set((state) => {
