@@ -48,9 +48,12 @@ interface WorkoutDraftAction {
   addSuperset: (sectionID: string | null) => void; // CWT-230
   addExercise: (tracking: Tracking[]) => void;
   removeExercise: (exerciseIndex: number) => void;
-  addExerciseToSection: (sectionID: string, tracking: Tracking[]) => void; // CWT-230
+  addExerciseUpdated: (
+    sectionID: string | null,
+    supersetID: string | null,
+    tracking: Tracking[],
+  ) => void; // CWT-230
   removeExerciseFromSection: (sectionID: string, exerciseID: string) => void; // CWT-230
-  addExerciseToSuperset: (supersetID: string, tracking: Tracking[]) => void; // CWT-230
   removeExerciseFromSuperset: (supersetID: string, exerciseID: string) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number) => void;
@@ -199,21 +202,17 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot remove exercise in log mode');
       }
     }),
-  addExerciseToSection: (sectionID, tracking) =>
+  addExerciseUpdated: (sectionID = null, supersetID = null, tracking) =>
     set((state) => {
-      const section = state.workoutData.find(
-        (section) => section.id === sectionID,
-      ) as Section;
-
-      let updatedSection: Section = section;
-
-      const selectedExerciseID = state.selectedExerciseIDToAdd;
-      if (selectedExerciseID == null) {
+      const exerciseID = state.selectedExerciseIDToAdd;
+      if (exerciseID == null) {
         console.error('No exerciseID provided');
         return;
       }
 
       if (state.mode === 'edit' || state.mode === 'build') {
+        console.log('addExercise action - adding exercise');
+        // let fields: SetFields = {};
         let fields;
         if (tracking.includes('reps')) {
           fields = DEFAULT_REP_SET;
@@ -221,21 +220,49 @@ export const createWorkoutDraftSlice: StateCreator<
           fields = DEFAULT_TIME_SET;
         }
 
-        updatedSection.items.push({
+        const exercise = {
           sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
-          exercise_id: selectedExerciseID,
+          exercise_id: exerciseID,
           tracked: tracking,
           type: 'exercise',
           id: uuidv4(),
-        } as Exercise);
+        } as Exercise;
 
-        state.workoutData = state.workoutData.map((item) => {
-          if (item.id === sectionID) {
-            return updatedSection;
+        if (!sectionID && !supersetID) {
+          state.workoutData.push(exercise);
+        } else {
+          if (sectionID) {
+            const section = state.workoutData.find(
+              (section) => section.id === sectionID,
+            ) as Section;
+
+            let updatedSection: Section = section;
+            updatedSection.items.push(exercise);
+
+            state.workoutData = state.workoutData.map((item) => {
+              if (item.id === sectionID) {
+                return updatedSection;
+              } else {
+                return item;
+              }
+            });
           } else {
-            return item;
+            const superset = state.workoutData.find(
+              (superset) => superset.id === supersetID,
+            ) as Superset;
+
+            let updatedSuperset: Superset = superset;
+            updatedSuperset.exercises.push(exercise);
+
+            state.workoutData = state.workoutData.map((item) => {
+              if (item.id === supersetID) {
+                return updatedSuperset;
+              } else {
+                return item;
+              }
+            });
           }
-        });
+        }
       } else {
         console.error('Cannot add exercise in log mode');
       }
@@ -262,47 +289,6 @@ export const createWorkoutDraftSlice: StateCreator<
         });
       } else {
         console.error('Cannot remove exercise in log mode');
-      }
-    }),
-  addExerciseToSuperset: (supersetID, tracking) =>
-    set((state) => {
-      const superset = state.workoutData.find(
-        (superset) => superset.id === supersetID,
-      ) as Superset;
-
-      let updatedSuperset: Superset = superset;
-
-      const selectedExerciseID = state.selectedExerciseIDToAdd;
-      if (selectedExerciseID == null) {
-        console.error('No exerciseID provided');
-        return;
-      }
-
-      if (state.mode === 'edit' || state.mode === 'build') {
-        let fields;
-        if (tracking.includes('reps')) {
-          fields = DEFAULT_REP_SET;
-        } else if (tracking.includes('time')) {
-          fields = DEFAULT_TIME_SET;
-        }
-
-        updatedSuperset.exercises.push({
-          sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
-          exercise_id: selectedExerciseID,
-          tracked: tracking,
-          type: 'exercise',
-          id: uuidv4(),
-        } as Exercise);
-
-        state.workoutData = state.workoutData.map((item) => {
-          if (item.id === supersetID) {
-            return updatedSuperset;
-          } else {
-            return item;
-          }
-        });
-      } else {
-        console.error('Cannot add exercise in log mode');
       }
     }),
   removeExerciseFromSuperset: (supersetID, exerciseID) =>
