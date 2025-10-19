@@ -277,7 +277,21 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   removeExerciseFromSuperset: (supersetID, exerciseID) =>
     set((state) => {
-      // action to remove exercise from superset
+      if (state.mode === 'edit' || state.mode === 'build') {
+        const superset = state.workoutData.find(
+          (superset) => superset.id === supersetID,
+        ) as Superset;
+
+        let updatedSuperset: Superset = superset;
+        updatedSuperset = {
+          ...updatedSuperset,
+          exercises: updatedSuperset.exercises.filter(
+            (exercise) => exercise.id !== exerciseID,
+          ),
+        };
+      } else {
+        console.error('Cannot remove exercise in log mode');
+      }
     }),
   addSet: (exerciseIndex) =>
     set((state) => {
