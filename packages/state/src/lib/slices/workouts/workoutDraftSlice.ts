@@ -54,6 +54,11 @@ interface WorkoutDraftAction {
     tracking: Tracking[],
   ) => void; // CWT-230
   removeRootItem: (id: string) => void; // CWT-230
+  removeNestedItem: (
+    sectionID: string | null,
+    supersetID: string | null,
+    exerciseID: string,
+  ) => void; // CWT-230
   removeExerciseFromSection: (sectionID: string, exerciseID: string) => void; // CWT-230
   removeExerciseFromSuperset: (supersetID: string, exerciseID: string) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
@@ -292,6 +297,17 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
         state.workoutData = state.workoutData.filter((item) => item.id !== id);
+      } else {
+        console.error('Cannot remove exercise in log mode');
+      }
+    }),
+  removeNestedItem: (sectionID = null, supersetID = null, exerciseID) =>
+    set((state) => {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        // Remove exercise in section
+        // Remove superset in section
+        // Remove exercise in superset
+        // Remove exercise in superset inside section
       } else {
         console.error('Cannot remove exercise in log mode');
       }
