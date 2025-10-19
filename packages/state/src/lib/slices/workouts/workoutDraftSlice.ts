@@ -239,6 +239,27 @@ export const createWorkoutDraftSlice: StateCreator<
         if (!sectionID && !supersetID) {
           // Add exercise to root of workout data
           state.workoutData.push(exercise);
+        } else if (sectionID && supersetID) {
+          // Add exercise to superset that is inside a section
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          const superset = section.items.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+          let updatedSection = section;
+          let updatedSuperset = superset;
+
+          updatedSuperset.exercises.push(exercise);
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item) => {
+              if (item.id === supersetID) {
+                return updatedSuperset;
+              }
+              return item;
+            }),
+          };
         } else {
           // Add exercise to superset or section root items
           const itemID = sectionID ? sectionID : supersetID;
