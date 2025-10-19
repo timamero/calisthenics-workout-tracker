@@ -45,7 +45,7 @@ interface WorkoutDraftAction {
   setSelectedSetIndexToMod: (setIndex: number | null) => void;
   setSelectedExerciseIndexToMod: (exerciseIndex: number | null) => void;
   addSection: () => void; // CWT-230
-  addSuperset: () => void; // CWT-230
+  addSuperset: (sectionID: string | null) => void; // CWT-230
   addExercise: (tracking: Tracking[]) => void;
   removeExercise: (exerciseIndex: number) => void;
   addExerciseToSection: (sectionID: string, tracking: Tracking[]) => void; // CWT-230
@@ -129,14 +129,36 @@ export const createWorkoutDraftSlice: StateCreator<
         items: [],
       });
     }),
-  addSuperset: () =>
+  addSuperset: (sectionID = null) =>
     set((state) => {
-      state.workoutData.push({
-        id: uuidv4(),
-        order: state.workoutData.length,
-        type: 'superset',
-        exercises: [],
-      });
+      if (sectionID === null) {
+        state.workoutData.push({
+          id: uuidv4(),
+          order: state.workoutData.length,
+          type: 'superset',
+          exercises: [],
+        });
+      } else {
+        const section = state.workoutData.find(
+          (section) => section.id === sectionID,
+        ) as Section;
+
+        let updatedSection: Section = section;
+        updatedSection.items.push({
+          id: uuidv4(),
+          order: state.workoutData.length,
+          type: 'superset',
+          exercises: [],
+        });
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === sectionID) {
+            return updatedSection;
+          } else {
+            return item;
+          }
+        });
+      }
     }),
   addExercise: (tracking) =>
     set(
@@ -207,7 +229,7 @@ export const createWorkoutDraftSlice: StateCreator<
           id: uuidv4(),
         } as Exercise);
 
-        state.workoutData.map((item) => {
+        state.workoutData = state.workoutData.map((item) => {
           if (item.id === sectionID) {
             return updatedSection;
           } else {
@@ -230,6 +252,14 @@ export const createWorkoutDraftSlice: StateCreator<
           ...updatedSection,
           items: updatedSection.items.filter((item) => item.id !== exerciseID),
         };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === sectionID) {
+            return updatedSection;
+          } else {
+            return item;
+          }
+        });
       } else {
         console.error('Cannot remove exercise in log mode');
       }
@@ -264,7 +294,7 @@ export const createWorkoutDraftSlice: StateCreator<
           id: uuidv4(),
         } as Exercise);
 
-        state.workoutData.map((item) => {
+        state.workoutData = state.workoutData.map((item) => {
           if (item.id === supersetID) {
             return updatedSuperset;
           } else {
@@ -289,6 +319,14 @@ export const createWorkoutDraftSlice: StateCreator<
             (exercise) => exercise.id !== exerciseID,
           ),
         };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === supersetID) {
+            return updatedSuperset;
+          } else {
+            return item;
+          }
+        });
       } else {
         console.error('Cannot remove exercise in log mode');
       }
