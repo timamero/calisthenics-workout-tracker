@@ -79,6 +79,14 @@ export type WorkoutDraftSlice = WorkoutDraftState & WorkoutDraftAction;
 //   return 'sets' in item;
 // }
 
+function isSection(item: any): item is Section {
+  return item?.type === 'section';
+}
+
+function isSuperset(item: any): item is Superset {
+  return item?.type === 'superset';
+}
+
 export const createWorkoutDraftSlice: StateCreator<
   WorkoutDraftSlice,
   [['zustand/immer', never]],
@@ -229,39 +237,29 @@ export const createWorkoutDraftSlice: StateCreator<
         } as Exercise;
 
         if (!sectionID && !supersetID) {
+          // Add exercise to root of workout data
           state.workoutData.push(exercise);
         } else {
-          if (sectionID) {
-            const section = state.workoutData.find(
-              (section) => section.id === sectionID,
-            ) as Section;
+          // Add exercise to superset or section root items
+          const itemID = sectionID ? sectionID : supersetID;
+          const item = state.workoutData.find((item) => item.id === itemID) as
+            | Section
+            | Superset;
+          let updatedItem = item;
 
-            let updatedSection: Section = section;
-            updatedSection.items.push(exercise);
-
-            state.workoutData = state.workoutData.map((item) => {
-              if (item.id === sectionID) {
-                return updatedSection;
-              } else {
-                return item;
-              }
-            });
-          } else {
-            const superset = state.workoutData.find(
-              (superset) => superset.id === supersetID,
-            ) as Superset;
-
-            let updatedSuperset: Superset = superset;
-            updatedSuperset.exercises.push(exercise);
-
-            state.workoutData = state.workoutData.map((item) => {
-              if (item.id === supersetID) {
-                return updatedSuperset;
-              } else {
-                return item;
-              }
-            });
+          if (isSection(updatedItem)) {
+            updatedItem.items.push(exercise);
+          } else if (isSuperset(updatedItem)) {
+            updatedItem.exercises.push(exercise);
           }
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedItem;
+            } else {
+              return item;
+            }
+          });
         }
       } else {
         console.error('Cannot add exercise in log mode');
