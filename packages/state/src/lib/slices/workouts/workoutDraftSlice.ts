@@ -177,9 +177,46 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot remove exercise in log mode');
       }
     }),
-  addExerciseToSection: (sectionID) =>
+  addExerciseToSection: (sectionID, tracking) =>
     set((state) => {
-      // action to add exercise to section
+      const section = state.workoutData.find(
+        (section) => section.id === sectionID,
+      ) as Section;
+
+      let updatedSection: Section = section;
+
+      const selectedExerciseID = state.selectedExerciseIDToAdd;
+      if (selectedExerciseID == null) {
+        console.error('No exerciseID provided');
+        return;
+      }
+
+      if (state.mode === 'edit' || state.mode === 'build') {
+        let fields;
+        if (tracking.includes('reps')) {
+          fields = DEFAULT_REP_SET;
+        } else if (tracking.includes('time')) {
+          fields = DEFAULT_TIME_SET;
+        }
+
+        updatedSection.items.push({
+          sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
+          exercise_id: selectedExerciseID,
+          tracked: tracking,
+          type: 'exercise',
+          id: uuidv4(),
+        } as Exercise);
+
+        state.workoutData.map((item) => {
+          if (item.id === sectionID) {
+            return updatedSection;
+          } else {
+            return item;
+          }
+        });
+      } else {
+        console.error('Cannot add exercise in log mode');
+      }
     }),
   removeExerciseFromSection: (sectionID, exerciseID) =>
     set((state) => {
