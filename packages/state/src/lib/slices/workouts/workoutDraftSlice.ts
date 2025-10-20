@@ -57,7 +57,7 @@ interface WorkoutDraftAction {
   removeNestedItem: (
     sectionID: string | null,
     supersetID: string | null,
-    exerciseID: string,
+    exerciseID: string | null,
   ) => void; // CWT-230
   removeExerciseFromSection: (sectionID: string, exerciseID: string) => void; // CWT-230
   removeExerciseFromSuperset: (supersetID: string, exerciseID: string) => void; // CWT-230
@@ -266,6 +266,14 @@ export const createWorkoutDraftSlice: StateCreator<
               return item;
             }),
           };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            } else {
+              return item;
+            }
+          });
         } else {
           // Add exercise to superset or section root items
           const itemID = sectionID ? sectionID : supersetID;
@@ -301,13 +309,89 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot remove exercise in log mode');
       }
     }),
-  removeNestedItem: (sectionID = null, supersetID = null, exerciseID) =>
+  removeNestedItem: (sectionID = null, supersetID = null, exerciseID = null) =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
-        // Remove exercise in section
-        // Remove superset in section
-        // Remove exercise in superset
         // Remove exercise in superset inside section
+        if (sectionID && supersetID && exerciseID) {
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          const superset = section.items.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+          let updatedSection = section;
+          let updatedSuperset = superset;
+
+          updatedSuperset = {
+            ...updatedSuperset,
+            exercises: updatedSuperset.exercises.filter(
+              (exercise) => exercise.id !== exerciseID,
+            ),
+          };
+
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item) => {
+              if (item.id === supersetID) {
+                return updatedSuperset;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            } else {
+              return item;
+            }
+          });
+        } else if (
+          (sectionID && supersetID && !exerciseID) ||
+          (sectionID && !supersetID && exerciseID)
+        ) {
+          // Remove superset or exercise in section
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          let updatedSection = section;
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.filter(
+              (item) => item.id !== supersetID || item.id !== exerciseID,
+            ),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            } else {
+              return item;
+            }
+          });
+        } else if (!sectionID && supersetID && exerciseID) {
+          // Remove exercise in root section
+          const superset = state.workoutData.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+          let updatedSuperset = superset;
+
+          updatedSuperset = {
+            ...updatedSuperset,
+            exercises: updatedSuperset.exercises.filter(
+              (exercise) => exercise.id !== exerciseID,
+            ),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSuperset;
+            } else {
+              return item;
+            }
+          });
+        }
       } else {
         console.error('Cannot remove exercise in log mode');
       }
