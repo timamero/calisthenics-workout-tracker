@@ -148,6 +148,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   addSuperset: (sectionID = null) =>
     set((state) => {
+      // Add superset to root workout data
       if (sectionID === null) {
         state.workoutData.push({
           id: uuidv4(),
@@ -156,6 +157,7 @@ export const createWorkoutDraftSlice: StateCreator<
           exercises: [],
         });
       } else {
+        // Add superset to section
         const section = state.workoutData.find(
           (section) => section.id === sectionID,
         ) as Section;
@@ -163,7 +165,7 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedSection: Section = section;
         updatedSection.items.push({
           id: uuidv4(),
-          order: state.workoutData.length,
+          order: section.items.length,
           type: 'superset',
           exercises: [],
         });
@@ -244,6 +246,7 @@ export const createWorkoutDraftSlice: StateCreator<
 
         if (!sectionID && !supersetID) {
           // Add exercise to root of workout data
+          exercise.order = state.workoutData.length;
           state.workoutData.push(exercise);
         } else if (sectionID && supersetID) {
           // Add exercise to superset that is inside a section
@@ -255,6 +258,8 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Superset;
           let updatedSection = section;
           let updatedSuperset = superset;
+
+          exercise.order = superset.exercises.length;
 
           updatedSuperset.exercises.push(exercise);
           updatedSection = {
@@ -283,8 +288,10 @@ export const createWorkoutDraftSlice: StateCreator<
           let updatedItem = item;
 
           if (isSection(updatedItem)) {
+            exercise.order = updatedItem.items.length;
             updatedItem.items.push(exercise);
           } else if (isSuperset(updatedItem)) {
+            exercise.order = updatedItem.exercises.length;
             updatedItem.exercises.push(exercise);
           }
 
