@@ -32,7 +32,9 @@ interface WorkoutDraftState {
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
+  setIDToMod: string | null; // CWT-230
   selectedExerciseIndexToMod: number | null;
+  exerciseIDToMod: string | null; // CWT-230
   isWorkoutSavePending: boolean;
   workoutToSave: WorkoutBuildRequest | WorkoutLogRequest | null;
 }
@@ -43,7 +45,9 @@ interface WorkoutDraftAction {
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSelectedSetIndexToMod: (setIndex: number | null) => void;
+  setSetIDToMod: (id: string | null) => void; // CWT-230
   setSelectedExerciseIndexToMod: (exerciseIndex: number | null) => void;
+  setExerciseIDToMod: (id: string | null) => void; // CWT-230
   addSection: () => void; // CWT-230
   addSuperset: (sectionID: string | null) => void; // CWT-230
   addExercise: (tracking: Tracking[]) => void;
@@ -67,6 +71,11 @@ interface WorkoutDraftAction {
     newOrder: number,
   ) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
+  addSetUpdated: (
+    sectionID: string | null,
+    supersetID: string | null,
+    exerciseID: string,
+  ) => void;
   deleteSet: (exerciseIndex: number) => void;
   updateField: (
     exerciseIndex: number,
@@ -109,7 +118,9 @@ export const createWorkoutDraftSlice: StateCreator<
   workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
+  setIDToMod: null,
   selectedExerciseIndexToMod: null,
+  exerciseIDToMod: null,
   isWorkoutSavePending: false,
   workoutToSave: null,
 
@@ -137,9 +148,17 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       state.selectedSetIndexToMod = setIndex;
     }),
+  setSetIDToMod: (id) =>
+    set((state) => {
+      state.setIDToMod = id;
+    }),
   setSelectedExerciseIndexToMod: (exerciseIndex) =>
     set((state) => {
       state.selectedExerciseIndexToMod = exerciseIndex;
+    }),
+  setExerciseIDToMod: (id) =>
+    set((state) => {
+      state.exerciseIDToMod = id;
     }),
   addSection: () =>
     set((state) => {
@@ -656,6 +675,44 @@ export const createWorkoutDraftSlice: StateCreator<
         //   id: uuidv4(),
         //   fields: fields,
         // });
+      } else {
+        console.error('Cannot add set in log mode');
+      }
+    }),
+  addSetUpdated: (sectionID = null, supersetID = null, exerciseID) =>
+    set((state) => {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        // Add set to exercise in root
+        if (!sectionID && !supersetID && exerciseID) {
+          const exercise = state.workoutData.find(
+            (item) => item.id === exerciseID,
+          );
+          let updatedExercise = exercise as Exercise;
+          const tracking = updatedExercise.tracked;
+          // const tracking = state.workoutData.data[exerciseIndex].tracked;
+          let fields;
+          if (tracking.includes('reps')) {
+            fields = DEFAULT_REP_SET;
+          } else if (tracking.includes('time')) {
+            fields = DEFAULT_TIME_SET;
+          }
+
+          updatedExercise = {
+            ...updatedExercise,
+            sets: [
+              ...updatedExercise.sets,
+              { ...INITIALIZED_SET, id: uuidv4(), fields: fields as SetFields },
+            ],
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          });
+        }
+        // Add additional logic here
       } else {
         console.error('Cannot add set in log mode');
       }
