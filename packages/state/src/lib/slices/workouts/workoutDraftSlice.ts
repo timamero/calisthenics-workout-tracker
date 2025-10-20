@@ -59,8 +59,6 @@ interface WorkoutDraftAction {
     supersetID: string | null,
     exerciseID: string | null,
   ) => void; // CWT-230
-  removeExerciseFromSection: (sectionID: string, exerciseID: string) => void; // CWT-230
-  removeExerciseFromSuperset: (supersetID: string, exerciseID: string) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number) => void;
   updateField: (
@@ -457,56 +455,6 @@ export const createWorkoutDraftSlice: StateCreator<
             }
           });
         }
-      } else {
-        console.error('Cannot remove exercise in log mode');
-      }
-    }),
-  removeExerciseFromSection: (sectionID, exerciseID) =>
-    set((state) => {
-      if (state.mode === 'edit' || state.mode === 'build') {
-        const section = state.workoutData.find(
-          (section) => section.id === sectionID,
-        ) as Section;
-
-        let updatedSection: Section = section;
-        updatedSection = {
-          ...updatedSection,
-          items: updatedSection.items.filter((item) => item.id !== exerciseID),
-        };
-
-        state.workoutData = state.workoutData.map((item) => {
-          if (item.id === sectionID) {
-            return updatedSection;
-          } else {
-            return item;
-          }
-        });
-      } else {
-        console.error('Cannot remove exercise in log mode');
-      }
-    }),
-  removeExerciseFromSuperset: (supersetID, exerciseID) =>
-    set((state) => {
-      if (state.mode === 'edit' || state.mode === 'build') {
-        const superset = state.workoutData.find(
-          (superset) => superset.id === supersetID,
-        ) as Superset;
-
-        let updatedSuperset: Superset = superset;
-        updatedSuperset = {
-          ...updatedSuperset,
-          exercises: updatedSuperset.exercises.filter(
-            (exercise) => exercise.id !== exerciseID,
-          ),
-        };
-
-        state.workoutData = state.workoutData.map((item) => {
-          if (item.id === supersetID) {
-            return updatedSuperset;
-          } else {
-            return item;
-          }
-        });
       } else {
         console.error('Cannot remove exercise in log mode');
       }
