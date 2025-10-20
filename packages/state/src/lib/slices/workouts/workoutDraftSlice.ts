@@ -311,7 +311,19 @@ export const createWorkoutDraftSlice: StateCreator<
   removeRootItem: (id) =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
+        const indexOfRemovedItem = state.workoutData.findIndex(
+          (item) => item.id == id,
+        );
         state.workoutData = state.workoutData.filter((item) => item.id !== id);
+
+        // Update order field for items after deleted item
+        state.workoutData = state.workoutData.map((item, index) => {
+          if (index >= indexOfRemovedItem) {
+            --item.order;
+            return item;
+          }
+          return item;
+        });
       } else {
         console.error('Cannot remove exercise in log mode');
       }
@@ -327,14 +339,29 @@ export const createWorkoutDraftSlice: StateCreator<
           const superset = section.items.find(
             (superset) => superset.id === supersetID,
           ) as Superset;
+          const indexOfRemovedItem = superset.exercises.findIndex(
+            (exercise) => exercise.id == exerciseID,
+          );
+
           let updatedSection = section;
           let updatedSuperset = superset;
 
+          let updatedExercises = updatedSuperset.exercises.filter(
+            (exercise) => exercise.id !== exerciseID,
+          );
+
+          // Update order field for exercises after deleted exercise
+          const exercises = updatedExercises.map((exercise, index) => {
+            if (index >= indexOfRemovedItem) {
+              --exercise.order;
+              return exercise;
+            }
+            return exercise;
+          });
+
           updatedSuperset = {
             ...updatedSuperset,
-            exercises: updatedSuperset.exercises.filter(
-              (exercise) => exercise.id !== exerciseID,
-            ),
+            exercises: exercises,
           };
 
           updatedSection = {
@@ -362,12 +389,28 @@ export const createWorkoutDraftSlice: StateCreator<
           const section = state.workoutData.find(
             (section) => section.id === sectionID,
           ) as Section;
+          const indexOfRemovedItem = section.items.findIndex(
+            (item) => item.id == exerciseID || item.id == supersetID,
+          );
+
           let updatedSection = section;
           updatedSection = {
             ...updatedSection,
             items: updatedSection.items.filter(
               (item) => item.id !== supersetID || item.id !== exerciseID,
             ),
+          };
+
+          // Update order field for items after deleted item
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item, index) => {
+              if (index >= indexOfRemovedItem) {
+                --item.order;
+                return item;
+              }
+              return item;
+            }),
           };
 
           state.workoutData = state.workoutData.map((item) => {
@@ -378,17 +421,32 @@ export const createWorkoutDraftSlice: StateCreator<
             }
           });
         } else if (!sectionID && supersetID && exerciseID) {
-          // Remove exercise in root section
+          // Remove exercise in root superset
           const superset = state.workoutData.find(
             (superset) => superset.id === supersetID,
           ) as Superset;
+          const indexOfRemovedItem = superset.exercises.findIndex(
+            (exercise) => exercise.id == exerciseID,
+          );
+
           let updatedSuperset = superset;
+
+          let updatedExercises = updatedSuperset.exercises.filter(
+            (exercise) => exercise.id !== exerciseID,
+          );
+
+          // Update order field for exercises after deleted exercise
+          const exercises = updatedExercises.map((exercise, index) => {
+            if (index >= indexOfRemovedItem) {
+              --exercise.order;
+              return exercise;
+            }
+            return exercise;
+          });
 
           updatedSuperset = {
             ...updatedSuperset,
-            exercises: updatedSuperset.exercises.filter(
-              (exercise) => exercise.id !== exerciseID,
-            ),
+            exercises: exercises,
           };
 
           state.workoutData = state.workoutData.map((item) => {
