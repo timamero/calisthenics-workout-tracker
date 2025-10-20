@@ -60,6 +60,12 @@ interface WorkoutDraftAction {
     exerciseID: string | null,
   ) => void; // CWT-230
   reorderRootItem: (id: string, newOrder: number) => void; // CWT-230
+  reorderNestedItem: (
+    sectionID: string | null,
+    supersetID: string | null,
+    exerciseID: string | null,
+    newOrder: number,
+  ) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number) => void;
   updateField: (
@@ -476,6 +482,138 @@ export const createWorkoutDraftSlice: StateCreator<
           item.order = index;
           return item;
         });
+      } else {
+        console.error('Cannot add set in log mode');
+      }
+    }),
+  reorderNestedItem: (
+    sectionID = null,
+    supersetID = null,
+    exerciseID = null,
+    newOrder,
+  ) =>
+    set((state) => {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        if (sectionID && supersetID && exerciseID) {
+          // Reorder exercise in superset inside section
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          const superset = section.items.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+
+          if (superset.exercises.find((ex) => ex.id === exerciseID) === null) {
+            console.error('Exercise to reorder not found');
+            return;
+          }
+          const exerciseToMove = superset.exercises.find(
+            (ex) => ex.id === exerciseID,
+          );
+          let updatedSuperset = superset;
+          updatedSuperset.exercises = updatedSuperset.exercises.filter(
+            (ex) => ex.id !== exerciseID,
+          );
+          updatedSuperset.exercises.splice(newOrder, 0, exerciseToMove!);
+
+          // Update order field for all exercises
+          updatedSuperset.exercises = updatedSuperset.exercises.map(
+            (exercise, index) => {
+              exercise.order = index;
+              return exercise;
+            },
+          );
+
+          let updatedSection = section;
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item) => {
+              if (item.id === supersetID) {
+                return updatedSuperset;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            } else {
+              return item;
+            }
+          });
+
+          // Update order of superset or exercise in section
+        } else if (sectionID && (supersetID || exerciseID)) {
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          if (
+            section.items.find(
+              (item) => item.id === supersetID || item.id === exerciseID,
+            ) === null
+          ) {
+            console.error('Item to reorder not found');
+            return;
+          }
+          const itemToMove = section.items.find(
+            (item) => item.id === supersetID || item.id === exerciseID,
+          );
+          let updatedSection = section;
+          updatedSection.items = updatedSection.items.filter(
+            (item) => item.id !== supersetID && item.id !== exerciseID,
+          );
+          updatedSection.items.splice(newOrder, 0, itemToMove!);
+
+          // Update order field for all items
+          updatedSection.items = updatedSection.items.map((item, index) => {
+            item.order = index;
+            return item;
+          });
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            } else {
+              return item;
+            }
+          });
+
+          // Update order of exercise in root superset
+        } else if (!sectionID && supersetID && exerciseID) {
+          const superset = state.workoutData.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+
+          if (superset.exercises.find((ex) => ex.id === exerciseID) === null) {
+            console.error('Exercise to reorder not found');
+            return;
+          }
+          const exerciseToMove = superset.exercises.find(
+            (ex) => ex.id === exerciseID,
+          );
+          let updatedSuperset = superset;
+          updatedSuperset.exercises = updatedSuperset.exercises.filter(
+            (ex) => ex.id !== exerciseID,
+          );
+          updatedSuperset.exercises.splice(newOrder, 0, exerciseToMove!);
+
+          // Update order field for all exercises
+          updatedSuperset.exercises = updatedSuperset.exercises.map(
+            (exercise, index) => {
+              exercise.order = index;
+              return exercise;
+            },
+          );
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === supersetID) {
+              return updatedSuperset;
+            } else {
+              return item;
+            }
+          });
+        }
       } else {
         console.error('Cannot add set in log mode');
       }
