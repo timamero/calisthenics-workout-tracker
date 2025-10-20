@@ -59,6 +59,7 @@ interface WorkoutDraftAction {
     supersetID: string | null,
     exerciseID: string | null,
   ) => void; // CWT-230
+  reorderRootItem: (id: string, newOrder: number) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
   deleteSet: (exerciseIndex: number) => void;
   updateField: (
@@ -457,6 +458,26 @@ export const createWorkoutDraftSlice: StateCreator<
         }
       } else {
         console.error('Cannot remove exercise in log mode');
+      }
+    }),
+  reorderRootItem: (id, newOrder) =>
+    set((state) => {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        if (state.workoutData.find((item) => item.id === id) === null) {
+          console.error('Item to reorder not found');
+          return;
+        }
+        const itemToMove = state.workoutData.find((item) => item.id === id);
+        state.workoutData = state.workoutData.filter((item) => item.id !== id);
+        state.workoutData.splice(newOrder, 0, itemToMove!);
+
+        // Update order field for all items
+        state.workoutData = state.workoutData.map((item, index) => {
+          item.order = index;
+          return item;
+        });
+      } else {
+        console.error('Cannot add set in log mode');
       }
     }),
   addSet: (exerciseIndex) =>
