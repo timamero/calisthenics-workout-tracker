@@ -2,6 +2,7 @@ import { Stack, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import type { Mode } from '@cwt/schema/workouts';
 
 import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
 import WorkoutExerciseList from './WorkoutExerciseList';
@@ -13,7 +14,7 @@ export default function WorkoutData() {
     useDisclosure(false);
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
-  const mode = useWorkoutDraftStore((state) => state.mode);
+  const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
 
   const workoutExercisesLength = useWorkoutDraftStore(
     (state) => state.workoutData,
@@ -31,11 +32,7 @@ export default function WorkoutData() {
 
   return (
     <Stack gap="xl" align="center">
-      {workoutExercisesLength === 0 && (
-        <EmptyWorkoutPlaceholder
-          action={mode === 'build' ? 'building' : 'logging'}
-        />
-      )}
+      {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder mode={mode} />}
       <WorkoutExerciseList
         deleteExOverlayHandler={deleteExOverlayHandler}
         deleteSetOverlayHandler={deleteSetOverlayHandler}
