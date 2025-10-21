@@ -7,6 +7,7 @@ import type { Exercise, Superset, Section } from '@cwt/schema/workouts';
 
 import { WorkoutDataContext } from '../../../../../contexts/WorkoutDataContext';
 import WorkoutDataItem from './WorkoutDataItem';
+import { WorkoutExerciseContainer } from './WorkoutExercise';
 // import Sets from './Sets';
 
 export default function WorkoutDataItemContainer() {
@@ -38,6 +39,10 @@ export default function WorkoutDataItemContainer() {
     }
     deleteRootItemOverlayHandler.open();
   };
+
+  if (itemType === 'exercise') {
+    return <WorkoutExerciseContainer />
+  }
 
   return (
     <WorkoutDataItem

@@ -95,7 +95,7 @@ interface WorkoutDraftAction {
     sectionID: string | null,
     supersetID: string | null,
     exerciseID: string,
-    updatedField: SetFields,
+    updatedField: Partial<SetFields>,
   ) => void;
   toggleCompleted: (
     exerciseIndex: number,
