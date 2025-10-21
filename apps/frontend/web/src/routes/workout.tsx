@@ -17,6 +17,7 @@ import type {
 import {
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
+  addSectionConfirmationContent,
 } from '@cwt/content';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
@@ -170,9 +171,9 @@ function WorkoutView() {
         handler={addExerciseOverlayHandler}
       />
       <ConfirmationOverlay
-        title="Add Section"
-        message="Add a section to this workout"
-        confirmButtonLabel="Add section"
+        title={addSectionConfirmationContent().title}
+        message={addSectionConfirmationContent().message}
+        confirmButtonLabel={addSectionConfirmationContent().confirmButtonLabel}
         opened={addSectionOverlayOpened}
         handler={addSectionOverlayHandler}
         onConfirmationClick={onAddSectionClick}
