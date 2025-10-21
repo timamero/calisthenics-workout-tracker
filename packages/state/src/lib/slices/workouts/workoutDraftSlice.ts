@@ -87,6 +87,12 @@ interface WorkoutDraftAction {
     updatedField: SetFields,
     // updatedField: Partial<SetFields>,
   ) => void;
+  updateFieldUpdated: (
+    sectionID: string | null,
+    supersetID: string | null,
+    exerciseID: string,
+    updatedField: SetFields,
+  ) => void;
   toggleCompleted: (
     exerciseIndex: number,
     setIndex: number,
@@ -1035,6 +1041,19 @@ export const createWorkoutDraftSlice: StateCreator<
       };
       state.workoutData[exerciseIndex] = exercise;
       // };
+    }),
+  updateFieldUpdated: (
+    sectionID = null,
+    supersetID = null,
+    exerciseID,
+    updatedField,
+  ) =>
+    set((state) => {
+      if (state.mode === 'edit' || state.mode === 'build') {
+      } else {
+        console.error('Cannot update field in log mode');
+        return;
+      }
     }),
   toggleCompleted: (exerciseIndex, setIndex, value) =>
     set((state) => {
