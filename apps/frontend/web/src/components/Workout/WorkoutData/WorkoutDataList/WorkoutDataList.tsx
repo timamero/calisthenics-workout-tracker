@@ -6,12 +6,12 @@ import { WorkoutDataContext } from '../../../../contexts/WorkoutDataContext';
 // import { WorkoutDataContainer as WorkoutData } from './WorkoutData';
 
 interface WorkoutDataListProps {
-  deleteItemOverlayHandler: UseDisclosureHandlers;
+  deleteRootItemOverlayHandler: UseDisclosureHandlers;
   deleteSetOverlayHandler: UseDisclosureHandlers;
 }
 
 export default function WorkoutDataList({
-  deleteItemOverlayHandler,
+  deleteRootItemOverlayHandler,
   deleteSetOverlayHandler,
 }: WorkoutDataListProps) {
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
@@ -21,7 +21,7 @@ export default function WorkoutDataList({
         key={item.id}
         value={{
           item: item,
-          deleteItemOverlayHandler: deleteItemOverlayHandler,
+          deleteRootItemOverlayHandler: deleteRootItemOverlayHandler,
           deleteSetOverlayHandler: deleteSetOverlayHandler,
         }}
       >
