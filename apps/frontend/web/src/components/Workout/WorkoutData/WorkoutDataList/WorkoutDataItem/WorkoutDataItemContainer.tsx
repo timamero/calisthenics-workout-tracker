@@ -8,6 +8,7 @@ import type { Exercise, Superset, Section } from '@cwt/schema/workouts';
 import { WorkoutDataContext } from '../../../../../contexts/WorkoutDataContext';
 import WorkoutDataItem from './WorkoutDataItem';
 import { ExerciseItemContainer } from './ExerciseItem';
+import { SectionItemContainer } from './SectionItem';
 // import Sets from './Sets';
 
 export default function WorkoutDataItemContainer() {
@@ -42,6 +43,8 @@ export default function WorkoutDataItemContainer() {
 
   if (itemType === 'exercise') {
     return <ExerciseItemContainer />;
+  } else if (itemType === 'section') {
+    return <SectionItemContainer />;
   }
 
   return (
