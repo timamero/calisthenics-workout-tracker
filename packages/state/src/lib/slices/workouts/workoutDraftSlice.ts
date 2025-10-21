@@ -1049,10 +1049,170 @@ export const createWorkoutDraftSlice: StateCreator<
     updatedField,
   ) =>
     set((state) => {
-      if (state.mode === 'edit' || state.mode === 'build') {
-      } else {
-        console.error('Cannot update field in log mode');
-        return;
+      // Update field of exercise in root
+      if (!sectionID && !supersetID && exerciseID) {
+        const exercise = state.workoutData.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        const setID = state.setIDToMod;
+        if (setID == null) {
+          console.error('No setID provided');
+          return;
+        }
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            return {
+              ...set,
+              fields: { ...set.fields, ...updatedField },
+            };
+          }
+          return set;
+        });
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === exerciseID) {
+            return updatedExercise;
+          }
+          return item;
+        });
+        // Update field of exercise in section
+      } else if (sectionID && !supersetID && exerciseID) {
+        const section = state.workoutData.find(
+          (section) => section.id === sectionID,
+        ) as Section;
+        const exercise = section.items.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        const setID = state.setIDToMod;
+        if (setID == null) {
+          console.error('No setID provided');
+          return;
+        }
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            return {
+              ...set,
+              fields: { ...set.fields, ...updatedField },
+            };
+          }
+          return set;
+        });
+
+        let updatedSection = section;
+        updatedSection = {
+          ...updatedSection,
+          items: updatedSection.items.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          }),
+        };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === sectionID) {
+            return updatedSection;
+          }
+          return item;
+        });
+        // Update field of exercise in superset
+      } else if (!sectionID && supersetID && exerciseID) {
+        const superset = state.workoutData.find(
+          (superset) => superset.id === supersetID,
+        ) as Superset;
+        const exercise = superset.exercises.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        const setID = state.setIDToMod;
+        if (setID == null) {
+          console.error('No setID provided');
+          return;
+        }
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            return {
+              ...set,
+              fields: { ...set.fields, ...updatedField },
+            };
+          }
+          return set;
+        });
+
+        let updatedSuperset = superset;
+        updatedSuperset = {
+          ...updatedSuperset,
+          exercises: updatedSuperset.exercises.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          }),
+        };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === supersetID) {
+            return updatedSuperset;
+          }
+          return item;
+        });
+        // Update field of exercise in superset inside a section
+      } else if (sectionID && supersetID && exerciseID) {
+        const section = state.workoutData.find(
+          (section) => section.id === sectionID,
+        ) as Section;
+        const superset = section.items.find(
+          (superset) => superset.id === supersetID,
+        ) as Superset;
+        const exercise = superset.exercises.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        const setID = state.setIDToMod;
+        if (setID == null) {
+          console.error('No setID provided');
+          return;
+        }
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            return {
+              ...set,
+              fields: { ...set.fields, ...updatedField },
+            };
+          }
+          return set;
+        });
+
+        let updatedSuperset = superset;
+        updatedSuperset = {
+          ...updatedSuperset,
+          exercises: updatedSuperset.exercises.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          }),
+        };
+
+        let updatedSection = section;
+        updatedSection = {
+          ...updatedSection,
+          items: updatedSection.items.map((item) => {
+            if (item.id === supersetID) {
+              return updatedSuperset;
+            }
+            return item;
+          }),
+        };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === sectionID) {
+            return updatedSection;
+          }
+          return item;
+        });
       }
     }),
   toggleCompleted: (exerciseIndex, setIndex, value) =>
