@@ -77,6 +77,11 @@ interface WorkoutDraftAction {
     exerciseID: string,
   ) => void;
   deleteSet: (exerciseIndex: number) => void;
+  deleteSetUpdated: (
+    sectionID: string | null,
+    supersetID: string | null,
+    exerciseID: string,
+  ) => void;
   updateField: (
     exerciseIndex: number,
     updatedField: SetFields,
@@ -644,16 +649,9 @@ export const createWorkoutDraftSlice: StateCreator<
         return;
       }
       if (state.mode === 'edit' || state.mode === 'build') {
-        // const item = state.workoutData[exerciseIndex];
-        // if (!isExercise(item)) {
-        //   console.error('Item is not an exercise');
-        //   return;
-        // }
-        // let exercise: Exercise = item;
         let exercise = state.workoutData[exerciseIndex] as Exercise;
 
         const tracking = exercise.tracked;
-        // const tracking = state.workoutData.data[exerciseIndex].tracked;
         let fields;
         if (tracking.includes('reps')) {
           fields = DEFAULT_REP_SET;
@@ -669,12 +667,6 @@ export const createWorkoutDraftSlice: StateCreator<
           ],
         };
         state.workoutData[exerciseIndex] = exercise;
-
-        // state.workoutData[exerciseIndex].sets.push({
-        //   ...INITIALIZED_SET,
-        //   id: uuidv4(),
-        //   fields: fields,
-        // });
       } else {
         console.error('Cannot add set in log mode');
       }
@@ -689,7 +681,6 @@ export const createWorkoutDraftSlice: StateCreator<
           );
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          // const tracking = state.workoutData.data[exerciseIndex].tracked;
           let fields;
           if (tracking.includes('reps')) {
             fields = DEFAULT_REP_SET;
@@ -721,7 +712,6 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Exercise;
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          // const tracking = state.workoutData.data[exerciseIndex].tracked;
           let fields;
           if (tracking.includes('reps')) {
             fields = DEFAULT_REP_SET;
@@ -764,7 +754,6 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Exercise;
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          // const tracking = state.workoutData.data[exerciseIndex].tracked;
           let fields;
           if (tracking.includes('reps')) {
             fields = DEFAULT_REP_SET;
@@ -810,7 +799,6 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Exercise;
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          // const tracking = state.workoutData.data[exerciseIndex].tracked;
           let fields;
           if (tracking.includes('reps')) {
             fields = DEFAULT_REP_SET;
@@ -872,17 +860,20 @@ export const createWorkoutDraftSlice: StateCreator<
         return;
       }
       if (state.mode === 'edit' || state.mode === 'build') {
-        // const item = state.workoutData[exerciseIndex];
-        // if (!isExercise(item)) {
-        //   console.error('Item is not an exercise');
-        //   return;
-        // }
-        // let exercise: Exercise = item;
         let exercise = state.workoutData[exerciseIndex] as Exercise;
-
         exercise.sets.splice(setIndex, 1);
-        // state.workoutData[exerciseIndex].sets.splice(setIndex, 1);
         state.workoutData[exerciseIndex] = exercise;
+      } else {
+        console.error('Cannot add set in log mode');
+      }
+    }),
+  deleteSetUpdated: (sectionID = null, supersetID = null, exerciseID) =>
+    set((state) => {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        // Delete set of exercise in root
+        // Delete set of exercise in section
+        // Delete set of exercise in superset
+        // Delete set of exercise in superset inside a section
       } else {
         console.error('Cannot add set in log mode');
       }
@@ -899,13 +890,6 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Invalid set index');
         return;
       }
-
-      // const item = state.workoutData[exerciseIndex];
-      // if (!isExercise(item)) {
-      //   console.error('Item is not an exercise');
-      //   return;
-      // }
-      // let exercise: Exercise = item;
       let exercise = state.workoutData[exerciseIndex] as Exercise;
 
       exercise.sets[setIndex] = {
@@ -913,28 +897,14 @@ export const createWorkoutDraftSlice: StateCreator<
         fields: { ...exercise.sets[setIndex].fields, ...updatedField },
       };
       state.workoutData[exerciseIndex] = exercise;
-
-      // const set = state.workoutData[exerciseIndex].sets[setIndex];
-      // state.workoutData[exerciseIndex].sets[setIndex] = {
-      //   ...set,
-      //   fields: { ...set.fields, ...updatedField },
       // };
     }),
   toggleCompleted: (exerciseIndex, setIndex, value) =>
     set((state) => {
       if (state.mode === 'log') {
-        // const item = state.workoutData[exerciseIndex];
-        // if (!isExercise(item)) {
-        //   console.error('Item is not an exercise');
-        //   return;
-        // }
-        // let exercise: Exercise = item;
         let exercise = state.workoutData[exerciseIndex] as Exercise;
         exercise.sets[setIndex].completed = value;
         state.workoutData[exerciseIndex] = exercise;
-
-        // state.workoutData[exerciseIndex].sets[setIndex].completed = value;
-
         if (value === true) {
           state.workoutData[exerciseIndex].sets[setIndex].completed_at =
             new Date().toISOString();
