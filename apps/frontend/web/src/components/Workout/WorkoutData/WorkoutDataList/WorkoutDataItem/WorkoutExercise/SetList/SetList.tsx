@@ -18,9 +18,7 @@ export default function SetList() {
 
   const sets = exercise.sets;
 
-  const setSetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
+  const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   // const setSelectedSetIndexToMod = useWorkoutDraftStore(
   //   (state) => state.setSelectedSetIndexToMod,
   // );
@@ -31,7 +29,6 @@ export default function SetList() {
     updatedField: Partial<SetFields>,
   ) => {
     setSetIDToMod(setID);
-    // setSelectedSetIndexToMod(setIndex);
     updateField(null, null, exercise.id, updatedField);
   };
 
