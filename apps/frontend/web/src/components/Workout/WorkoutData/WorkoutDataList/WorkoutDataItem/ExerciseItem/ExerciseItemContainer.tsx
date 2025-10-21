@@ -7,10 +7,10 @@ import type { Exercise } from '@cwt/schema/workouts';
 
 import { WorkoutDataContext } from '../../../../../../contexts/WorkoutDataContext';
 // import { WorkoutExerciseContext } from '../../../../../contexts/WorkoutExerciseContext';
-import WorkoutExercise from './WorkoutExercise';
+import ExerciseItem from './ExerciseItem';
 // import Sets from './Sets';
 
-export default function WorkoutExerciseContainer() {
+export default function ExerciseItemContainer() {
   const exercise = React.useContext(WorkoutDataContext)!.item as Exercise;
   const deleteRootItemOverlayHandler =
     React.useContext(WorkoutDataContext)!.deleteRootItemOverlayHandler;
@@ -46,7 +46,7 @@ export default function WorkoutExerciseContainer() {
   };
 
   return (
-    <WorkoutExercise
+    <ExerciseItem
       mode={mode!}
       name={name}
       exerciseID={exercise.id}
