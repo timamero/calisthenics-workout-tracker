@@ -871,9 +871,146 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
         // Delete set of exercise in root
-        // Delete set of exercise in section
-        // Delete set of exercise in superset
-        // Delete set of exercise in superset inside a section
+        if (!sectionID && !supersetID && exerciseID) {
+          const exercise = state.workoutData.find(
+            (item) => item.id === exerciseID,
+          ) as Exercise;
+          const setID = state.setIDToMod;
+          if (setID == null) {
+            console.error('No setID provided');
+            return;
+          }
+          let updatedExercise = exercise;
+          updatedExercise.sets = updatedExercise.sets.filter(
+            (set) => set.id !== setID,
+          );
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          });
+          // Delete set of exercise in section
+        } else if (sectionID && !supersetID && exerciseID) {
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          const exercise = section.items.find(
+            (item) => item.id === exerciseID,
+          ) as Exercise;
+          const setID = state.setIDToMod;
+          if (setID == null) {
+            console.error('No setID provided');
+            return;
+          }
+          let updatedExercise = exercise;
+          updatedExercise.sets = updatedExercise.sets.filter(
+            (set) => set.id !== setID,
+          );
+
+          let updatedSection = section;
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item) => {
+              if (item.id === exerciseID) {
+                return updatedExercise;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            }
+            return item;
+          });
+          // Delete set of exercise in superset
+        } else if (!sectionID && supersetID && exerciseID) {
+          const superset = state.workoutData.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+          const exercise = superset.exercises.find(
+            (item) => item.id === exerciseID,
+          ) as Exercise;
+          const setID = state.setIDToMod;
+          if (setID == null) {
+            console.error('No setID provided');
+            return;
+          }
+          let updatedExercise = exercise;
+          updatedExercise.sets = updatedExercise.sets.filter(
+            (set) => set.id !== setID,
+          );
+
+          let updatedSuperset = superset;
+          updatedSuperset = {
+            ...updatedSuperset,
+            exercises: updatedSuperset.exercises.map((item) => {
+              if (item.id === exerciseID) {
+                return updatedExercise;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === supersetID) {
+              return updatedSuperset;
+            }
+            return item;
+          });
+          // Delete set of exercise in superset inside a section
+        } else if (sectionID && supersetID && exerciseID) {
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          const superset = section.items.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+          const exercise = superset.exercises.find(
+            (item) => item.id === exerciseID,
+          ) as Exercise;
+          const setID = state.setIDToMod;
+          if (setID == null) {
+            console.error('No setID provided');
+            return;
+          }
+          let updatedExercise = exercise;
+          updatedExercise.sets = updatedExercise.sets.filter(
+            (set) => set.id !== setID,
+          );
+
+          let updatedSuperset = superset;
+          updatedSuperset = {
+            ...updatedSuperset,
+            exercises: updatedSuperset.exercises.map((item) => {
+              if (item.id === exerciseID) {
+                return updatedExercise;
+              }
+              return item;
+            }),
+          };
+
+          let updatedSection = section;
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item) => {
+              if (item.id === supersetID) {
+                return updatedSuperset;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            }
+            return item;
+          });
+        }
       } else {
         console.error('Cannot add set in log mode');
       }
