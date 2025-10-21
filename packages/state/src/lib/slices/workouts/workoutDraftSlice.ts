@@ -35,6 +35,8 @@ interface WorkoutDraftState {
   setIDToMod: string | null; // CWT-230
   selectedExerciseIndexToMod: number | null;
   exerciseIDToMod: string | null; // CWT-230
+  supersetIDToMod: string | null; // CWT-230
+  sectionIDToMOD: string | null; // CWT-230
   isWorkoutSavePending: boolean;
   workoutToSave: WorkoutBuildRequest | WorkoutLogRequest | null;
 }
@@ -48,6 +50,8 @@ interface WorkoutDraftAction {
   setSetIDToMod: (id: string | null) => void; // CWT-230
   setSelectedExerciseIndexToMod: (exerciseIndex: number | null) => void;
   setExerciseIDToMod: (id: string | null) => void; // CWT-230
+  setSupersetIDToMod: (id: string | null) => void; // CWT-230
+  setSectionIDToMod: (id: string | null) => void; // CWT-230
   addSection: () => void; // CWT-230
   addSuperset: (sectionID: string | null) => void; // CWT-230
   addExercise: (tracking: Tracking[]) => void;
@@ -139,6 +143,8 @@ export const createWorkoutDraftSlice: StateCreator<
   setIDToMod: null,
   selectedExerciseIndexToMod: null,
   exerciseIDToMod: null,
+  supersetIDToMod: null,
+  sectionIDToMOD: null,
   isWorkoutSavePending: false,
   workoutToSave: null,
 
@@ -177,6 +183,14 @@ export const createWorkoutDraftSlice: StateCreator<
   setExerciseIDToMod: (id) =>
     set((state) => {
       state.exerciseIDToMod = id;
+    }),
+  setSupersetIDToMod: (id) =>
+    set((state) => {
+      state.supersetIDToMod = id;
+    }),
+  setSectionIDToMod: (id) =>
+    set((state) => {
+      state.sectionIDToMOD = id;
     }),
   addSection: () =>
     set((state) => {

@@ -5,7 +5,7 @@ import type { Section, Superset, Exercise } from '@cwt/schema/workouts';
 
 interface WorkoutDataContextType {
   item: Section | Superset | Exercise;
-  deleteItemOverlayHandler: UseDisclosureHandlers;
+  deleteRootItemOverlayHandler: UseDisclosureHandlers;
   deleteSetOverlayHandler: UseDisclosureHandlers;
 }
 
