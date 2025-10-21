@@ -14,16 +14,16 @@ export default function WorkoutExerciseList({
   deleteExOverlayHandler,
   deleteSetOverlayHandler,
 }: WorkoutExerciseListProps) {
-  console.log('WorkoutExerciseList rendered');
+  // console.log('WorkoutExerciseList rendered');
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
-  console.log(
-    'WorkoutExerciseList - workoutData: ',
-    JSON.stringify(workoutData),
-  );
+  // console.log(
+  //   'WorkoutExerciseList - workoutData: ',
+  //   JSON.stringify(workoutData),
+  // );
   const workoutExercises = workoutData.map((ex, i) => {
-    console.log('exercise: ', JSON.stringify(ex));
+    // console.log('exercise: ', JSON.stringify(ex));
     if (ex.type !== 'exercise') return null;
-    console.log('return exercises');
+    // console.log('return exercises');
     return (
       <WorkoutExerciseContext.Provider
         key={ex.id}
