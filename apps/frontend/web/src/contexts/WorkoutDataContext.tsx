@@ -1,17 +1,13 @@
 import * as React from 'react';
 import { type UseDisclosureHandlers } from '@mantine/hooks';
 
-import type { Exercise } from '@cwt/schema/workouts';
+import type { Section, Superset, Exercise } from '@cwt/schema/workouts';
 
 interface WorkoutDataContextType {
-  exercise: Exercise;
-  sectionID: string | null;
-  suspersetID: string | null;
-  exerciseID: string | null;
-  setID: string | null;
-  deleteExOverlayHandler: UseDisclosureHandlers;
+  item: Section | Superset | Exercise;
+  deleteItemOverlayHandler: UseDisclosureHandlers;
   deleteSetOverlayHandler: UseDisclosureHandlers;
 }
 
-export const WorkoutExerciseContext =
+export const WorkoutDataContext =
   React.createContext<WorkoutDataContextType | null>(null);
