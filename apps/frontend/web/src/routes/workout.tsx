@@ -35,12 +35,16 @@ function WorkoutView() {
   const [addSectionOverlayOpened, addSectionOverlayHandler] =
     useDisclosure(false);
 
+  const workoutData = useWorkoutDraftStore((state) => state.workoutData);
+  console.log('workoutData: ', JSON.stringify(workoutData));
+
   const mode = useWorkoutDraftStore((state) => state.mode);
   const supabaseSession = useAuthStore((state) => state.session);
 
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
   const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
+  const addSection = useWorkoutDraftStore((state) => state.addSection);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
@@ -92,6 +96,10 @@ function WorkoutView() {
     });
     resetWorkout();
     resetTimer();
+  };
+
+  const onAddSectionClick = () => {
+    addSection();
   };
 
   const handleSetMode = () => {
@@ -162,7 +170,7 @@ function WorkoutView() {
         confirmButtonLabel="Add section"
         opened={addSectionOverlayOpened}
         handler={addSectionOverlayHandler}
-        onConfirmationClick={() => console.log('clicked add section')}
+        onConfirmationClick={onAddSectionClick}
       />
       <ConfirmationOverlay
         title={`Save Workout ${mode === 'build' ? 'Template' : ''}`}
