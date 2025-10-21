@@ -98,6 +98,13 @@ interface WorkoutDraftAction {
     setIndex: number,
     value: boolean,
   ) => void;
+  toggleCompletedUpdated: (
+    sectionID: string | null,
+    supersetID: string | null,
+    exerciseID: string,
+    setID: string,
+    value: boolean,
+  ) => void;
   initializeWorkoutToSave: () => void;
   addUserIDToWorkoutToSave: (userID: string) => void;
   addDurationToWorkoutToSave: (duration: string) => void;
@@ -1231,6 +1238,164 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error(
           'Cannot updated completed checkbox in edit or build mode',
         );
+      }
+    }),
+  toggleCompletedUpdated: (
+    sectionID = null,
+    supersetID = null,
+    exerciseID,
+    setID,
+    value,
+  ) =>
+    set((state) => {
+      // Toggle completed of set in exercise in root
+      if (!sectionID && !supersetID && exerciseID) {
+        const exercise = state.workoutData.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            return {
+              ...set,
+              completed: value,
+              completed_at: value ? new Date().toISOString() : null,
+            };
+          }
+          return set;
+        });
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === exerciseID) {
+            return updatedExercise;
+          }
+          return item;
+        });
+        // Toggle complete of set of exercise in section
+      } else if (sectionID && !supersetID && exerciseID) {
+        const section = state.workoutData.find(
+          (section) => section.id === sectionID,
+        ) as Section;
+        const exercise = section.items.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            return {
+              ...set,
+              completed: value,
+              completed_at: value ? new Date().toISOString() : null,
+            };
+          }
+          return set;
+        });
+
+        let updatedSection = section;
+        updatedSection = {
+          ...updatedSection,
+          items: updatedSection.items.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          }),
+        };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === sectionID) {
+            return updatedSection;
+          }
+          return item;
+        });
+        // Toggle complete of set of exercise in superset
+      } else if (!sectionID && supersetID && exerciseID) {
+        const superset = state.workoutData.find(
+          (superset) => superset.id === supersetID,
+        ) as Superset;
+        const exercise = superset.exercises.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            return {
+              ...set,
+              completed: value,
+              completed_at: value ? new Date().toISOString() : null,
+            };
+          }
+          return set;
+        });
+
+        let updatedSuperset = superset;
+        updatedSuperset = {
+          ...updatedSuperset,
+          exercises: updatedSuperset.exercises.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          }),
+        };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === supersetID) {
+            return updatedSuperset;
+          }
+          return item;
+        });
+        // Toggle complete of set of exercise in superset inside a section
+      } else if (sectionID && supersetID && exerciseID) {
+        const section = state.workoutData.find(
+          (section) => section.id === sectionID,
+        ) as Section;
+        const superset = section.items.find(
+          (superset) => superset.id === supersetID,
+        ) as Superset;
+        const exercise = superset.exercises.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            return {
+              ...set,
+              completed: value,
+              completed_at: value ? new Date().toISOString() : null,
+            };
+          }
+          return set;
+        });
+
+        let updatedSuperset = superset;
+        updatedSuperset = {
+          ...updatedSuperset,
+          exercises: updatedSuperset.exercises.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          }),
+        };
+
+        let updatedSection = section;
+        updatedSection = {
+          ...updatedSection,
+          items: updatedSection.items.map((item) => {
+            if (item.id === supersetID) {
+              return updatedSuperset;
+            }
+            return item;
+          }),
+        };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === sectionID) {
+            return updatedSection;
+          }
+          return item;
+        });
       }
     }),
   initializeWorkoutToSave: () =>
