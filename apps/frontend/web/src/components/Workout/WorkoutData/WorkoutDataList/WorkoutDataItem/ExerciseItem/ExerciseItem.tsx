@@ -3,7 +3,7 @@ import { Stack, Text, Button, Group } from '@mantine/core';
 import type { Mode } from '@cwt/schema/workouts';
 import SetList from './SetList';
 
-interface WorkoutExerciseProps {
+interface ExerciseItemProps {
   mode: Mode;
   name: string;
   exerciseID: string;
@@ -15,13 +15,13 @@ interface WorkoutExerciseProps {
   handleDeleteExerciseClick: () => void;
 }
 
-export default function WorkoutExercise({
+export default function ExerciseItem({
   mode,
   name,
   exerciseID,
   handleAddSetClick,
   handleDeleteExerciseClick,
-}: WorkoutExerciseProps) {
+}: ExerciseItemProps) {
   return (
     <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
       <Group>
