@@ -3,7 +3,8 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { UseDisclosureHandlers } from '@mantine/hooks';
 
 import { WorkoutDataContext } from '../../../../contexts/WorkoutDataContext';
-// import { WorkoutDataContainer as WorkoutData } from './WorkoutData';
+import { WorkoutDataItemContainer } from './WorkoutDataItem';
+// import { WorkoutDataItemContainer as WorkoutDataItem } from './WorkoutDataItem';
 
 interface WorkoutDataListProps {
   deleteRootItemOverlayHandler: UseDisclosureHandlers;
@@ -25,7 +26,7 @@ export default function WorkoutDataList({
           deleteSetOverlayHandler: deleteSetOverlayHandler,
         }}
       >
-        <div>workout data placeholder</div>
+        <WorkoutDataItemContainer />
       </WorkoutDataContext.Provider>
     );
   });
