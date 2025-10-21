@@ -711,8 +711,10 @@ export const createWorkoutDraftSlice: StateCreator<
             }
             return item;
           });
+          // Add set to exercise in section
         }
-        // Add additional logic here
+        // Add set to exercise in superset
+        // Add set to exercise in superset inside a section
       } else {
         console.error('Cannot add set in log mode');
       }
