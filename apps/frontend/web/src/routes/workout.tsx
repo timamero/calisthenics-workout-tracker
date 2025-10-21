@@ -32,6 +32,8 @@ function WorkoutView() {
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
   const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
     useDisclosure(false);
+  const [addSectionOverlayOpened, addSectionOverlayHandler] =
+    useDisclosure(false);
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const supabaseSession = useAuthStore((state) => state.session);
@@ -116,13 +118,22 @@ function WorkoutView() {
         <WorkoutData />
         <Stack justify="center">
           {mode !== 'log' && (
-            <Button
-              variant="filled"
-              color="orange.9"
-              onClick={() => addExerciseOverlayHandler.open()}
-            >
-              Add Exercise
-            </Button>
+            <Stack>
+              <Button
+                variant="filled"
+                color="orange.9"
+                onClick={() => addExerciseOverlayHandler.open()}
+              >
+                Add Exercise
+              </Button>
+              <Button
+                variant="filled"
+                color="orange.9"
+                onClick={() => addSectionOverlayHandler.open()}
+              >
+                Add Section
+              </Button>
+            </Stack>
           )}
 
           <Button
@@ -144,6 +155,14 @@ function WorkoutView() {
       <AddExerciseOverlay
         opened={addExerciseOverlayOpened}
         handler={addExerciseOverlayHandler}
+      />
+      <ConfirmationOverlay
+        title="Add Section"
+        message="Add a section to this workout"
+        confirmButtonLabel="Add section"
+        opened={addSectionOverlayOpened}
+        handler={addSectionOverlayHandler}
+        onConfirmationClick={() => console.log('clicked add section')}
       />
       <ConfirmationOverlay
         title={`Save Workout ${mode === 'build' ? 'Template' : ''}`}
