@@ -1075,7 +1075,8 @@ export const createWorkoutDraftSlice: StateCreator<
         const exercise = state.workoutData.find(
           (item) => item.id === exerciseID,
         ) as Exercise;
-        const setID = state.setIDToMod;
+        // const setID = state.setIDToMod;
+        const setID = get().setIDToMod;
         if (setID == null) {
           console.error('No setID provided');
           return;
