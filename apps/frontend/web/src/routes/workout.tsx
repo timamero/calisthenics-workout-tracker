@@ -12,7 +12,12 @@ import { useWorkoutSave } from '@cwt/hooks';
 import type {
   WorkoutBuildResponse,
   WorkoutLogResponse,
+  Mode,
 } from '@cwt/schema/workouts';
+import {
+  saveWorkoutConfirmationContent,
+  cancelWorkoutConfirmationContent,
+} from '@cwt/content';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
@@ -38,7 +43,7 @@ function WorkoutView() {
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
   console.log('workoutData: ', JSON.stringify(workoutData));
 
-  const mode = useWorkoutDraftStore((state) => state.mode);
+  const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const supabaseSession = useAuthStore((state) => state.session);
 
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
@@ -173,17 +178,21 @@ function WorkoutView() {
         onConfirmationClick={onAddSectionClick}
       />
       <ConfirmationOverlay
-        title={`Save Workout ${mode === 'build' ? 'Template' : ''}`}
-        message={`Complete and save this ${mode === 'build' ? 'template' : 'log'}.`}
-        confirmButtonLabel={`Save Workout ${mode === 'build' ? 'Template' : ''}`}
+        title={saveWorkoutConfirmationContent(mode).title}
+        message={saveWorkoutConfirmationContent(mode).message}
+        confirmButtonLabel={
+          saveWorkoutConfirmationContent(mode).confirmButtonLabel
+        }
         opened={saveOverlayOpened}
         handler={saveOverlayHandler}
         onConfirmationClick={onSaveWorkoutClick}
       />
       <ConfirmationOverlay
-        title={`Cancel Workout ${mode === 'build' ? 'Building' : 'Logging'}`}
-        message={`Confirm cancelling workout ${mode === 'build' ? 'building' : 'logging'}. This will discard the current workout.`}
-        confirmButtonLabel="Discard this workout"
+        title={cancelWorkoutConfirmationContent(mode).title}
+        message={cancelWorkoutConfirmationContent(mode).message}
+        confirmButtonLabel={
+          cancelWorkoutConfirmationContent(mode).confirmButtonLabel
+        }
         opened={cancelOverlayOpened}
         handler={cancelOverlayHandler}
         onConfirmationClick={onCancelWorkoutClick}
