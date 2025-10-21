@@ -712,9 +712,149 @@ export const createWorkoutDraftSlice: StateCreator<
             return item;
           });
           // Add set to exercise in section
+        } else if (sectionID && !supersetID && exerciseID) {
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          const exercise = section.items.find(
+            (item) => item.id === exerciseID,
+          ) as Exercise;
+          let updatedExercise = exercise as Exercise;
+          const tracking = updatedExercise.tracked;
+          // const tracking = state.workoutData.data[exerciseIndex].tracked;
+          let fields;
+          if (tracking.includes('reps')) {
+            fields = DEFAULT_REP_SET;
+          } else if (tracking.includes('time')) {
+            fields = DEFAULT_TIME_SET;
+          }
+
+          updatedExercise = {
+            ...updatedExercise,
+            sets: [
+              ...updatedExercise.sets,
+              { ...INITIALIZED_SET, id: uuidv4(), fields: fields as SetFields },
+            ],
+          };
+
+          let updatedSection = section;
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item) => {
+              if (item.id === exerciseID) {
+                return updatedExercise;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            }
+            return item;
+          });
+          // Add set to exercise in superset
+        } else if (!sectionID && supersetID && exerciseID) {
+          const superset = state.workoutData.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+          const exercise = superset.exercises.find(
+            (item) => item.id === exerciseID,
+          ) as Exercise;
+          let updatedExercise = exercise as Exercise;
+          const tracking = updatedExercise.tracked;
+          // const tracking = state.workoutData.data[exerciseIndex].tracked;
+          let fields;
+          if (tracking.includes('reps')) {
+            fields = DEFAULT_REP_SET;
+          } else if (tracking.includes('time')) {
+            fields = DEFAULT_TIME_SET;
+          }
+
+          updatedExercise = {
+            ...updatedExercise,
+            sets: [
+              ...updatedExercise.sets,
+              { ...INITIALIZED_SET, id: uuidv4(), fields: fields as SetFields },
+            ],
+          };
+
+          let updatedSuperset = superset;
+          updatedSuperset = {
+            ...updatedSuperset,
+            exercises: updatedSuperset.exercises.map((item) => {
+              if (item.id === exerciseID) {
+                return updatedExercise;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === supersetID) {
+              return updatedSuperset;
+            }
+            return item;
+          });
+          // Add set to exercise in superset inside a section
+        } else if (sectionID && supersetID && exerciseID) {
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          const superset = section.items.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+          const exercise = superset.exercises.find(
+            (item) => item.id === exerciseID,
+          ) as Exercise;
+          let updatedExercise = exercise as Exercise;
+          const tracking = updatedExercise.tracked;
+          // const tracking = state.workoutData.data[exerciseIndex].tracked;
+          let fields;
+          if (tracking.includes('reps')) {
+            fields = DEFAULT_REP_SET;
+          } else if (tracking.includes('time')) {
+            fields = DEFAULT_TIME_SET;
+          }
+
+          updatedExercise = {
+            ...updatedExercise,
+            sets: [
+              ...updatedExercise.sets,
+              { ...INITIALIZED_SET, id: uuidv4(), fields: fields as SetFields },
+            ],
+          };
+
+          let updatedSuperset = superset;
+          updatedSuperset = {
+            ...updatedSuperset,
+            exercises: updatedSuperset.exercises.map((item) => {
+              if (item.id === exerciseID) {
+                return updatedExercise;
+              }
+              return item;
+            }),
+          };
+
+          let updatedSection = section;
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item) => {
+              if (item.id === supersetID) {
+                return updatedSuperset;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            }
+            return item;
+          });
         }
-        // Add set to exercise in superset
-        // Add set to exercise in superset inside a section
       } else {
         console.error('Cannot add set in log mode');
       }
