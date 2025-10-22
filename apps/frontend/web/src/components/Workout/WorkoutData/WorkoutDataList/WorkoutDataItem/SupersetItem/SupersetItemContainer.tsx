@@ -9,17 +9,35 @@ import SupersetItem from './SupersetItem';
 
 export default function SupersetItemContainer() {
   const superset = useContext(WorkoutDataItemContext)!.item as Superset;
+  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
+  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
+  const deleteNestedItemOverlayHandler =
+    useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const setSupersetIDToMod = useWorkoutDraftStore(
     (state) => state.setSupersetIDToMod,
   );
+  const setSectionIDToMod = useWorkoutDraftStore(
+    (state) => state.setSectionIDToMod,
+  );
 
   const handleDeleteSupersetClick = () => {
     setSupersetIDToMod(superset.id);
-    deleteRootItemOverlayHandler.open();
+    if (parentSupersetID) {
+      setSupersetIDToMod(parentSupersetID);
+    }
+    if (parentSectionID) {
+      setSectionIDToMod(parentSectionID);
+    }
+
+    if (parentSectionID || parentSupersetID) {
+      deleteNestedItemOverlayHandler.open();
+    } else {
+      deleteRootItemOverlayHandler.open();
+    }
   };
   return (
     <SupersetItem
