@@ -10,6 +10,8 @@ import ExerciseItem from './ExerciseItem';
 
 export default function ExerciseItemContainer() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
+  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
@@ -19,11 +21,30 @@ export default function ExerciseItemContainer() {
   const setExerciseIDToMod = useWorkoutDraftStore(
     (state) => state.setExerciseIDToMod,
   );
+  const setSupersetIDToMod = useWorkoutDraftStore(
+    (state) => state.setSupersetIDToMod,
+  );
+  const setSectionIDToMod = useWorkoutDraftStore(
+    (state) => state.setSectionIDToMod,
+  );
   const getExerciseNameById = useExerciseLibraryStore(
     (state) => state.getExerciseNameByID,
   );
 
   const name = getExerciseNameById(exercise!.exercise_id);
+
+  const handleAddSetClick = () => {
+    setExerciseIDToMod(exercise!.id);
+
+    if (parentSupersetID) {
+      setSupersetIDToMod(parentSupersetID);
+    }
+    if (parentSectionID) {
+      setSectionIDToMod(parentSectionID);
+    }
+
+    addSet();
+  };
 
   const handleDeleteExerciseClick = () => {
     setExerciseIDToMod(exercise!.id);
@@ -34,8 +55,7 @@ export default function ExerciseItemContainer() {
     <ExerciseItem
       mode={mode!}
       name={name}
-      exerciseID={exercise!.id}
-      handleAddSetClick={addSet}
+      handleAddSetClick={handleAddSetClick}
       handleDeleteExerciseClick={handleDeleteExerciseClick}
     />
   );

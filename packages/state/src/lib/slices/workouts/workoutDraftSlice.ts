@@ -373,7 +373,7 @@ export const createWorkoutDraftSlice: StateCreator<
       if (state.mode === 'edit' || state.mode === 'build') {
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
-        const exerciseID = get().supersetIDToMod;
+        const exerciseID = get().exerciseIDToMod;
         // Remove exercise in superset inside section
         if (sectionID && supersetID && exerciseID) {
           const section = state.workoutData.find(
@@ -695,9 +695,10 @@ export const createWorkoutDraftSlice: StateCreator<
       if (state.mode === 'edit' || state.mode === 'build') {
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
-        const exerciseID = get().supersetIDToMod;
+        const exerciseID = get().exerciseIDToMod;
         // Add set to exercise in root
         if (!sectionID && !supersetID && exerciseID) {
+          console.log('adding set to exercise in root');
           const exercise = state.workoutData.find(
             (item) => item.id === exerciseID,
           );
@@ -898,7 +899,7 @@ export const createWorkoutDraftSlice: StateCreator<
       if (state.mode === 'edit' || state.mode === 'build') {
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
-        const exerciseID = get().supersetIDToMod;
+        const exerciseID = get().exerciseIDToMod;
         // Delete set of exercise in root
         if (!sectionID && !supersetID && exerciseID) {
           const exercise = state.workoutData.find(
@@ -1075,7 +1076,7 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
-      const exerciseID = get().supersetIDToMod;
+      const exerciseID = get().exerciseIDToMod;
       // Update field of exercise in root
       if (!sectionID && !supersetID && exerciseID) {
         const exercise = state.workoutData.find(
@@ -1273,7 +1274,7 @@ export const createWorkoutDraftSlice: StateCreator<
 
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
-      const exerciseID = get().supersetIDToMod;
+      const exerciseID = get().exerciseIDToMod;
       const setID = get().setIDToMod;
       if (!sectionID && !supersetID && exerciseID) {
         const exercise = state.workoutData.find(
