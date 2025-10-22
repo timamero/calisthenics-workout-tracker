@@ -3,10 +3,8 @@ import { useContext } from 'react';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise } from '@cwt/schema/workouts';
 
-// import { WorkoutDataContext } from '../../../../../../../contexts/WorkoutDataContext';
 import { WorkoutContext } from '../../../../../../../contexts/WorkoutContext';
 import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
-// import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
 import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 import Set from './Set';
 

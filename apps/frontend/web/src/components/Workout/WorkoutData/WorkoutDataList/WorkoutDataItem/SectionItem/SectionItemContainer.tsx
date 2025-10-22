@@ -5,7 +5,6 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
 import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
-// import { WorkoutDataContext } from '../../../../../../contexts/WorkoutDataContext';
 import SectionItem from './SectionItem';
 
 export default function SectionItemContainer() {
