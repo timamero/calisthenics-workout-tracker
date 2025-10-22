@@ -5,7 +5,6 @@ import type { Mode, Section } from '@cwt/schema/workouts';
 
 import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
 import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
-// import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContextUpdated';
 import { ExerciseItemContainer } from '../ExerciseItem';
 import { SupersetItemContainer } from '../SupersetItem';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
@@ -49,6 +48,7 @@ export default function SectionItem({
         if (item.type === 'exercise') {
           return (
             <WorkoutDataItemContext.Provider
+              key={item.id}
               value={{ item: item, parentType: 'section' }}
             >
               <ExerciseItemContainer />

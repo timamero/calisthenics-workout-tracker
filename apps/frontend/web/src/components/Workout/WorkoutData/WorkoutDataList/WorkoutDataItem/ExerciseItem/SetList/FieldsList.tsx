@@ -4,7 +4,6 @@ import { Stack } from '@mantine/core';
 import type { Exercise } from '@cwt/schema/workouts';
 
 import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
-// import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
 import NumeralInput from './NumeralInput';
 import DurationInput from './DurationInput';
 
