@@ -36,7 +36,7 @@ interface WorkoutDraftState {
   selectedExerciseIndexToMod: number | null;
   exerciseIDToMod: string | null; // CWT-230
   supersetIDToMod: string | null; // CWT-230
-  sectionIDToMOD: string | null; // CWT-230
+  sectionIDToMod: string | null; // CWT-230
   isWorkoutSavePending: boolean;
   workoutToSave: WorkoutBuildRequest | WorkoutLogRequest | null;
 }
@@ -144,7 +144,7 @@ export const createWorkoutDraftSlice: StateCreator<
   selectedExerciseIndexToMod: null,
   exerciseIDToMod: null,
   supersetIDToMod: null,
-  sectionIDToMOD: null,
+  sectionIDToMod: null,
   isWorkoutSavePending: false,
   workoutToSave: null,
 
@@ -190,7 +190,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   setSectionIDToMod: (id) =>
     set((state) => {
-      state.sectionIDToMOD = id;
+      state.sectionIDToMod = id;
     }),
   addSection: () =>
     set((state) => {
@@ -513,6 +513,11 @@ export const createWorkoutDraftSlice: StateCreator<
             }
           });
         }
+
+        // Reset state
+        state.exerciseIDToMod = null;
+        state.supersetIDToMod = null;
+        state.sectionIDToMod = null;
       } else {
         console.error('Cannot remove exercise in log mode');
       }
