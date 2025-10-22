@@ -255,7 +255,6 @@ export const createWorkoutDraftSlice: StateCreator<
       }
 
       if (state.mode === 'edit' || state.mode === 'build') {
-        console.log('addExercise action - adding exercise');
         // let fields: SetFields = {};
         let fields;
         if (tracking.includes('reps')) {
@@ -374,8 +373,12 @@ export const createWorkoutDraftSlice: StateCreator<
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
         const exerciseID = get().exerciseIDToMod;
+        console.log('removeNestedItem - sectionID: ', sectionID);
+        console.log('removeNestedItem - supersetID: ', supersetID);
+        console.log('removeNestedItem - exerciseID: ', exerciseID);
         // Remove exercise in superset inside section
         if (sectionID && supersetID && exerciseID) {
+          console.log('Remove exercise in superset inside section');
           const section = state.workoutData.find(
             (section) => section.id === sectionID,
           ) as Section;
@@ -429,18 +432,23 @@ export const createWorkoutDraftSlice: StateCreator<
           (sectionID && !supersetID && exerciseID)
         ) {
           // Remove superset or exercise in section
+          console.log('Remove superset or exercise in section');
           const section = state.workoutData.find(
             (section) => section.id === sectionID,
           ) as Section;
+          console.log('section before updating', section);
           const indexOfRemovedItem = section.items.findIndex(
             (item) => item.id == exerciseID || item.id == supersetID,
           );
+          console.log('indexOfRemovedItem', indexOfRemovedItem);
+
+          const itemIDToRemove = supersetID ? supersetID : exerciseID;
 
           let updatedSection = section;
           updatedSection = {
             ...updatedSection,
             items: updatedSection.items.filter(
-              (item) => item.id !== supersetID || item.id !== exerciseID,
+              (item) => item.id !== itemIDToRemove,
             ),
           };
 
@@ -456,6 +464,8 @@ export const createWorkoutDraftSlice: StateCreator<
             }),
           };
 
+          console.log('updated section', updatedSection);
+
           state.workoutData = state.workoutData.map((item) => {
             if (item.id === sectionID) {
               return updatedSection;
@@ -464,6 +474,7 @@ export const createWorkoutDraftSlice: StateCreator<
             }
           });
         } else if (!sectionID && supersetID && exerciseID) {
+          console.log('Remove exercise in root superset');
           // Remove exercise in root superset
           const superset = state.workoutData.find(
             (superset) => superset.id === supersetID,

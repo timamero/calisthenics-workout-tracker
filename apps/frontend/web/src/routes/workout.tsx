@@ -47,6 +47,8 @@ function WorkoutView() {
     useDisclosure(false);
   const [deleteRootItemOverlayOpened, deleteRootItemOverlayHandler] =
     useDisclosure(false);
+  const [deleteNestedItemOverlayOpened, deleteNestedItemOverlayHandler] =
+    useDisclosure(false);
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);
 
@@ -65,7 +67,10 @@ function WorkoutView() {
   const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
-  const deleteItem = useWorkoutDraftStore((state) => state.removeRootItem);
+  const removeRootItem = useWorkoutDraftStore((state) => state.removeRootItem);
+  const removeNestedItem = useWorkoutDraftStore(
+    (state) => state.removeNestedItem,
+  );
   const deleteSet = useWorkoutDraftStore((state) => state.deleteSetUpdated);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
@@ -144,6 +149,7 @@ function WorkoutView() {
         addExerciseOverlayHandler: addExerciseOverlayHandler,
         deleteRootItemOverlayHandler: deleteRootItemOverlayHandler,
         deleteSetOverlayHandler: deleteSetOverlayHandler,
+        deleteNestedItemOverlayHandler: deleteNestedItemOverlayHandler,
       }}
     >
       <Stack gap="xl" align="center">
@@ -231,7 +237,7 @@ function WorkoutView() {
           opened={deleteRootItemOverlayOpened}
           handler={deleteRootItemOverlayHandler}
           onConfirmationClick={() =>
-            deleteItem(
+            removeRootItem(
               exerciseIDToMod
                 ? exerciseIDToMod!
                 : supersetIDToMod
@@ -239,6 +245,14 @@ function WorkoutView() {
                   : sectionIDToMod!,
             )
           }
+        />
+        <ConfirmationOverlay
+          title={`Delete ${exerciseIDToMod ? 'Exercise' : supersetIDToMod ? 'Superset' : 'Section'}`}
+          message={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'} from this workout?`}
+          confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
+          opened={deleteNestedItemOverlayOpened}
+          handler={deleteNestedItemOverlayHandler}
+          onConfirmationClick={() => removeNestedItem()}
         />
         <ConfirmationOverlay
           title="Delete Set"
