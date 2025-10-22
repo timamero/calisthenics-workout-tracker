@@ -24,6 +24,7 @@ export default function SupersetItemContainer() {
   return (
     <SupersetItem
       mode={mode!}
+      superset={superset}
       handleDeleteSupersetClick={handleDeleteSupersetClick}
     />
   );
