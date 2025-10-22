@@ -16,19 +16,40 @@ export default function WorkoutDataItemContainer({
 
   if (itemType === 'exercise') {
     return (
-      <WorkoutDataItemContext.Provider value={{ item: item, parentType: null }}>
+      <WorkoutDataItemContext.Provider
+        value={{
+          item: item,
+          parentType: null,
+          parentSectionID: null,
+          parentSupersetID: null,
+        }}
+      >
         <ExerciseItemContainer />
       </WorkoutDataItemContext.Provider>
     );
   } else if (itemType === 'section') {
     return (
-      <WorkoutDataItemContext.Provider value={{ item: item, parentType: null }}>
+      <WorkoutDataItemContext.Provider
+        value={{
+          item: item,
+          parentType: null,
+          parentSectionID: null,
+          parentSupersetID: null,
+        }}
+      >
         <SectionItemContainer />
       </WorkoutDataItemContext.Provider>
     );
   }
   return (
-    <WorkoutDataItemContext.Provider value={{ item: item, parentType: null }}>
+    <WorkoutDataItemContext.Provider
+      value={{
+        item: item,
+        parentType: null,
+        parentSectionID: null,
+        parentSupersetID: null,
+      }}
+    >
       <SupersetItemContainer />
     </WorkoutDataItemContext.Provider>
   );
