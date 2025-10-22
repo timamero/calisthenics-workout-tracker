@@ -18,6 +18,7 @@ import {
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
   addSectionConfirmationContent,
+  addSupersetConfirmationContent,
 } from '@cwt/content';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
@@ -40,6 +41,8 @@ function WorkoutView() {
     useDisclosure(false);
   const [addSectionOverlayOpened, addSectionOverlayHandler] =
     useDisclosure(false);
+  const [addSupersetOverlayOpened, addSupersetOverlayHandler] =
+    useDisclosure(false);
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
   console.log('workoutData: ', JSON.stringify(workoutData));
@@ -51,6 +54,7 @@ function WorkoutView() {
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
   const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
   const addSection = useWorkoutDraftStore((state) => state.addSection);
+  const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
@@ -108,6 +112,10 @@ function WorkoutView() {
     addSection();
   };
 
+  const onAddSupersetClick = () => {
+    addSuperset(null);
+  };
+
   const handleSetMode = () => {
     if (mode === 'edit') {
       setMode('log');
@@ -147,6 +155,13 @@ function WorkoutView() {
               >
                 Add Section
               </Button>
+              <Button
+                variant="filled"
+                color="orange.9"
+                onClick={() => addSupersetOverlayHandler.open()}
+              >
+                Add Superset
+              </Button>
             </Stack>
           )}
 
@@ -177,6 +192,14 @@ function WorkoutView() {
         opened={addSectionOverlayOpened}
         handler={addSectionOverlayHandler}
         onConfirmationClick={onAddSectionClick}
+      />
+      <ConfirmationOverlay
+        title={addSupersetConfirmationContent().title}
+        message={addSupersetConfirmationContent().message}
+        confirmButtonLabel={addSupersetConfirmationContent().confirmButtonLabel}
+        opened={addSupersetOverlayOpened}
+        handler={addSupersetOverlayHandler}
+        onConfirmationClick={onAddSupersetClick}
       />
       <ConfirmationOverlay
         title={saveWorkoutConfirmationContent(mode).title}

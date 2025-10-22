@@ -3,8 +3,9 @@ import {
   cancelWorkoutConfirmationContent,
   emptyWorkoutPlaceholderContent,
   addSectionConfirmationContent,
-} from "./workoutContent";
-import { startWorkoutContent } from "./startWorkoutContent";
+  addSupersetConfirmationContent,
+} from './workoutContent';
+import { startWorkoutContent } from './startWorkoutContent';
 
 export {
   saveWorkoutConfirmationContent,
@@ -12,4 +13,5 @@ export {
   emptyWorkoutPlaceholderContent,
   startWorkoutContent,
   addSectionConfirmationContent,
+  addSupersetConfirmationContent,
 };
