@@ -1,21 +1,28 @@
-import * as React from 'react';
+// import * as React from 'react';
 // import { Stack, Text, Button, Group } from '@mantine/core';
 
 // import { useExerciseLibraryStore } from '@cwt/state/stores';
 // import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise, Superset, Section } from '@cwt/schema/workouts';
 
-import { WorkoutDataContext } from '../../../../../contexts/WorkoutDataContext';
-import { WorkoutExerciseContext } from '../../../../../contexts/WorkoutExerciseContextUpdated';
+// import { WorkoutDataContext } from '../../../../../contexts/WorkoutDataContext';
+import { WorkoutDataItemContext } from '../../../../../contexts/WorkoutDataItemContext';
+// import { WorkoutExerciseContext } from '../../../../../contexts/WorkoutExerciseContextUpdated';
 // import WorkoutDataItem from './WorkoutDataItem';
 import { ExerciseItemContainer } from './ExerciseItem';
 import { SectionItemContainer } from './SectionItem';
 import { SupersetItemContainer } from './SupersetItem';
 // import Sets from './Sets';
 
-export default function WorkoutDataItemContainer() {
-  const item: Exercise | Superset | Section =
-    React.useContext(WorkoutDataContext)!.item;
+interface WorkoutDataItemContainerProps {
+  item: Exercise | Superset | Section;
+}
+
+export default function WorkoutDataItemContainer({
+  item,
+}: WorkoutDataItemContainerProps) {
+  // const item: Exercise | Superset | Section =
+  //   React.useContext(WorkoutDataContext)!.item;
   // const deleteRootItemOverlayHandler =
   //   React.useContext(WorkoutDataContext)!.deleteRootItemOverlayHandler;
 
@@ -45,16 +52,22 @@ export default function WorkoutDataItemContainer() {
 
   if (itemType === 'exercise') {
     return (
-      <WorkoutExerciseContext.Provider
-        value={{ exercise: item, parentType: null }}
-      >
+      <WorkoutDataItemContext.Provider value={{ item: item, parentType: null }}>
         <ExerciseItemContainer />
-      </WorkoutExerciseContext.Provider>
+      </WorkoutDataItemContext.Provider>
     );
   } else if (itemType === 'section') {
-    return <SectionItemContainer />;
+    return (
+      <WorkoutDataItemContext.Provider value={{ item: item, parentType: null }}>
+        <SectionItemContainer />
+      </WorkoutDataItemContext.Provider>
+    );
   }
-  return <SupersetItemContainer />;
+  return (
+    <WorkoutDataItemContext.Provider value={{ item: item, parentType: null }}>
+      <SupersetItemContainer />
+    </WorkoutDataItemContext.Provider>
+  );
 
   // return (
   //   <WorkoutDataItem

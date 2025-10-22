@@ -3,11 +3,12 @@ import type { Exercise, SetFields } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
-import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
+import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
+// import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
 import SetContainer from './SetContainer';
 
 export default function SetList() {
-  const exercise = useContext(WorkoutExerciseContext)?.exercise as Exercise;
+  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
 
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const updateField = useWorkoutDraftStore((state) => state.updateFieldUpdated);

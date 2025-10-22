@@ -3,17 +3,19 @@ import { useContext } from 'react';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise } from '@cwt/schema/workouts';
 
-import { WorkoutDataContext } from '../../../../../../../contexts/WorkoutDataContext';
-import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
+// import { WorkoutDataContext } from '../../../../../../../contexts/WorkoutDataContext';
+import { WorkoutContext } from '../../../../../../../contexts/WorkoutContext';
+import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
+// import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
 import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 import Set from './Set';
 
 export default function SetContainer() {
-  const exercise = useContext(WorkoutExerciseContext)?.exercise as Exercise;
+  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const set = useContext(SetContext)!.set;
   const setIndex = useContext(SetContext)!.setIndex;
   const deleteSetOverlayHandler =
-    useContext(WorkoutDataContext)!.deleteSetOverlayHandler;
+    useContext(WorkoutContext)!.deleteSetOverlayHandler;
   const sets = exercise.sets;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
