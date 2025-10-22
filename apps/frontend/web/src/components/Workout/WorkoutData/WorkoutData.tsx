@@ -1,22 +1,22 @@
 import { Stack, Text } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+// import { useDisclosure } from '@mantine/hooks';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Mode } from '@cwt/schema/workouts';
 
 import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
 // import WorkoutExerciseList from './WorkoutExerciseList';
-import ConfirmationOverlay from '../../common/ConfirmationOverlay';
+// import ConfirmationOverlay from '../../common/ConfirmationOverlay';
 import WorkoutDataList from './WorkoutDataList';
 
 export default function WorkoutData() {
   // const [deleteExOverlayOpened, deleteExOverlayHandler] = useDisclosure(false);
   // const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
   //   useDisclosure(false);
-  const [deleteRootItemOverlayOpened, deleteRootItemOverlayHandler] =
-    useDisclosure(false);
-  const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
-    useDisclosure(false);
+  // const [deleteRootItemOverlayOpened, deleteRootItemOverlayHandler] =
+  //   useDisclosure(false);
+  // const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
+  //   useDisclosure(false);
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
   console.log('workoutData:::', JSON.stringify(workoutData));
@@ -25,16 +25,16 @@ export default function WorkoutData() {
   const workoutExercisesLength = useWorkoutDraftStore(
     (state) => state.workoutData,
   ).length;
-  const selectedExerciseIndexToMod = useWorkoutDraftStore(
-    (state) => state.selectedExerciseIndexToMod,
-  );
-  const exerciseIDToMod = useWorkoutDraftStore(
-    (state) => state.exerciseIDToMod,
-  );
-  const sectionIDToMod = useWorkoutDraftStore((state) => state.sectionIDToMod);
-  const supersetIDToMod = useWorkoutDraftStore(
-    (state) => state.supersetIDToMod,
-  );
+  // const selectedExerciseIndexToMod = useWorkoutDraftStore(
+  //   (state) => state.selectedExerciseIndexToMod,
+  // );
+  // const exerciseIDToMod = useWorkoutDraftStore(
+  //   (state) => state.exerciseIDToMod,
+  // );
+  // const sectionIDToMod = useWorkoutDraftStore((state) => state.sectionIDToMod);
+  // const supersetIDToMod = useWorkoutDraftStore(
+  //   (state) => state.supersetIDToMod,
+  // );
 
   // const rootItemIDToMod = exerciseIDToMod
   //   ? exerciseIDToMod
@@ -42,8 +42,8 @@ export default function WorkoutData() {
   //     ? sectionIDToMod
   //     : supersetIDToMod;
 
-  const deleteItem = useWorkoutDraftStore((state) => state.removeRootItem);
-  const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
+  // const deleteItem = useWorkoutDraftStore((state) => state.removeRootItem);
+  // const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
 
   // const handleDeleteItem = () => {
   //   console.log('root')
@@ -58,14 +58,14 @@ export default function WorkoutData() {
     <Stack gap="xl" align="center">
       {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder mode={mode} />}
       <WorkoutDataList
-        deleteRootItemOverlayHandler={deleteRootItemOverlayHandler}
-        deleteSetOverlayHandler={deleteSetOverlayHandler}
+      // deleteRootItemOverlayHandler={deleteRootItemOverlayHandler}
+      // deleteSetOverlayHandler={deleteSetOverlayHandler}
       />
       {/* <WorkoutExerciseList
         deleteExOverlayHandler={deleteExOverlayHandler}
         deleteSetOverlayHandler={deleteSetOverlayHandler}
       /> */}
-      <ConfirmationOverlay
+      {/* <ConfirmationOverlay
         title={`Delete ${exerciseIDToMod ? 'Exercise' : supersetIDToMod ? 'Superset' : 'Section'}`}
         message={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'} from this workout?`}
         confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
@@ -80,7 +80,7 @@ export default function WorkoutData() {
                 : sectionIDToMod!,
           )
         }
-      />
+      /> */}
       {/* <ConfirmationOverlay
         title="Delete Exercise"
         message="Delete exercise from this workout?"
@@ -89,14 +89,14 @@ export default function WorkoutData() {
         handler={deleteExOverlayHandler}
         onConfirmationClick={() => deleteExercise(exerciseIDToMod!)}
       /> */}
-      <ConfirmationOverlay
+      {/* <ConfirmationOverlay
         title="Delete Set"
         message="Delete set from this exercise?"
         confirmButtonLabel="Delete"
         opened={deleteSetOverlayOpened}
         handler={deleteSetOverlayHandler}
         onConfirmationClick={() => deleteSet(selectedExerciseIndexToMod!)}
-      />
+      /> */}
     </Stack>
   );
 }

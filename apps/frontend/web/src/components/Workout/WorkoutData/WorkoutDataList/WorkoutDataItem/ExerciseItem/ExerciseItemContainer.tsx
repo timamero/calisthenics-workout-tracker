@@ -4,15 +4,17 @@ import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise } from '@cwt/schema/workouts';
 
-import { WorkoutDataContext } from '../../../../../../contexts/WorkoutDataContext';
-import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContextUpdated';
+// import { WorkoutDataContext } from '../../../../../../contexts/WorkoutDataContext';
+import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
+import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
+// import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContextUpdated';
 import ExerciseItem from './ExerciseItem';
 
 export default function ExerciseItemContainer() {
-  const exercise = useContext(WorkoutExerciseContext)?.exercise as Exercise;
+  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
 
   const deleteRootItemOverlayHandler =
-    useContext(WorkoutDataContext)!.deleteRootItemOverlayHandler;
+    useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const addSet = useWorkoutDraftStore((state) => state.addSetUpdated);
