@@ -17,7 +17,7 @@ export default function SetList() {
     updatedField: Partial<SetFields>,
   ) => {
     setSetIDToMod(setID);
-    updateField(null, null, exercise.id, updatedField);
+    updateField(updatedField);
   };
 
   const setList = exercise!.sets.map((set, i) => {
