@@ -4,7 +4,8 @@ import { Stack, Group, Text, Button } from '@mantine/core';
 import type { Mode, Section } from '@cwt/schema/workouts';
 
 import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
-import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContextUpdated';
+import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
+// import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContextUpdated';
 import { ExerciseItemContainer } from '../ExerciseItem';
 import { SupersetItemContainer } from '../SupersetItem';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
@@ -47,11 +48,11 @@ export default function SectionItem({
       {section.items.map((item) => {
         if (item.type === 'exercise') {
           return (
-            <WorkoutExerciseContext.Provider
-              value={{ exercise: item, parentType: 'section' }}
+            <WorkoutDataItemContext.Provider
+              value={{ item: item, parentType: 'section' }}
             >
               <ExerciseItemContainer />
-            </WorkoutExerciseContext.Provider>
+            </WorkoutDataItemContext.Provider>
           );
         }
         return <SupersetItemContainer />;

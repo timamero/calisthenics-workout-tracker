@@ -3,12 +3,13 @@ import { Stack } from '@mantine/core';
 
 import type { Exercise } from '@cwt/schema/workouts';
 
-import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
+import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
+// import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
 import NumeralInput from './NumeralInput';
 import DurationInput from './DurationInput';
 
 export default function FieldsList() {
-  const exercise = useContext(WorkoutExerciseContext)?.exercise as Exercise;
+  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const tracked = exercise.tracked;
 
   const fields = tracked.map((field, i) => {
