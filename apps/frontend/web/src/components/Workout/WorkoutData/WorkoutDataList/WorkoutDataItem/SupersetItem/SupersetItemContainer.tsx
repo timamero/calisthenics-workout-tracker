@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext } from 'react';
 
 import type { Superset } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
@@ -7,9 +7,9 @@ import { WorkoutDataContext } from '../../../../../../contexts/WorkoutDataContex
 import SupersetItem from './SupersetItem';
 
 export default function SupersetItemContainer() {
-  const superset = React.useContext(WorkoutDataContext)!.item as Superset;
+  const superset = useContext(WorkoutDataContext)!.item as Superset;
   const deleteRootItemOverlayHandler =
-    React.useContext(WorkoutDataContext)!.deleteRootItemOverlayHandler;
+    useContext(WorkoutDataContext)!.deleteRootItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const setSupersetIDToMod = useWorkoutDraftStore(

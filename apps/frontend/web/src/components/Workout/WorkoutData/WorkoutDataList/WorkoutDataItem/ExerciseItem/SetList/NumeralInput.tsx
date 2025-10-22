@@ -13,7 +13,6 @@ export default function NumeralInput({ label }: NumeralInputProps) {
   const set = React.useContext(SetContext)!.set;
   const handleSetFieldChange =
     React.useContext(SetContext)!.handleSetFieldChange;
-  // const setIndex = React.useContext(SetContext)!.setIndex;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.value == '') {
