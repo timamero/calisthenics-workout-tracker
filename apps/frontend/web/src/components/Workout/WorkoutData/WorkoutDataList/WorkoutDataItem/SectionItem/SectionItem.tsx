@@ -2,12 +2,12 @@ import { useContext } from 'react';
 import { Stack, Group, Text, Button } from '@mantine/core';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
 import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
 import { ExerciseItemContainer } from '../ExerciseItem';
 import { SupersetItemContainer } from '../SupersetItem';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 interface SectionItemProps {
   mode: Mode;
@@ -49,7 +49,12 @@ export default function SectionItem({
           return (
             <WorkoutDataItemContext.Provider
               key={item.id}
-              value={{ item: item, parentType: 'section', parentSectionID: section.id, parentSupersetID: null }}
+              value={{
+                item: item,
+                parentType: 'section',
+                parentSectionID: section.id,
+                parentSupersetID: null,
+              }}
             >
               <ExerciseItemContainer />
             </WorkoutDataItemContext.Provider>
