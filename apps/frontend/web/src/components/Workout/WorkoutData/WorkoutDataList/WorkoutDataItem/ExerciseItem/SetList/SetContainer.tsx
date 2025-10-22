@@ -35,7 +35,7 @@ export default function SetContainer() {
   };
 
   const handleToggleCompleted = (value: boolean) => {
-    toggleCompleted(null, null, exercise.id, set.id, value);
+    toggleCompleted(value);
   };
 
   return (
