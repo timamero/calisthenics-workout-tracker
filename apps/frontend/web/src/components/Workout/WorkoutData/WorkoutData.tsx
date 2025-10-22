@@ -28,7 +28,7 @@ export default function WorkoutData() {
   const exerciseIDToMod = useWorkoutDraftStore(
     (state) => state.exerciseIDToMod,
   );
-  const sectionIDToMod = useWorkoutDraftStore((state) => state.sectionIDToMOD);
+  const sectionIDToMod = useWorkoutDraftStore((state) => state.sectionIDToMod);
   const supersetIDToMod = useWorkoutDraftStore(
     (state) => state.supersetIDToMod,
   );
