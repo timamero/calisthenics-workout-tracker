@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext } from 'react';
 import { TextInput } from '@mantine/core';
 
 import type { SetFields } from '@cwt/schema/workouts';
@@ -11,10 +11,8 @@ interface DurationInputProps {
 }
 
 export default function DurationInput({ label }: DurationInputProps) {
-  const set = React.useContext(SetContext)!.set;
-  const handleSetFieldChange =
-    React.useContext(SetContext)!.handleSetFieldChange;
-  // const setIndex = React.useContext(SetContext)!.setIndex;
+  const set = useContext(SetContext)!.set;
+  const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     // Allow empty string for controlled input

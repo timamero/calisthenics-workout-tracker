@@ -5,7 +5,6 @@ import type { Mode, Section } from '@cwt/schema/workouts';
 
 import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
 import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContextUpdated';
-// import { SectionContext } from '../../../../../../contexts/SectionContext';
 import { ExerciseItemContainer } from '../ExerciseItem';
 import { SupersetItemContainer } from '../SupersetItem';
 import { useWorkoutDraftStore } from '@cwt/state/stores';

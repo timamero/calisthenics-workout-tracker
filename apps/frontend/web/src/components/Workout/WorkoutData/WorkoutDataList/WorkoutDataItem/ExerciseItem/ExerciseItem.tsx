@@ -37,11 +37,6 @@ export default function ExerciseItem({
         )}
       </Group>
       <SetList />
-      {/* <Sets
-        tracked={workoutExercise.tracked}
-        sets={workoutExercise.sets}
-        exerciseIndex={exerciseIndex}
-      /> */}
       {mode !== 'log' && (
         <Button
           variant="outline"
