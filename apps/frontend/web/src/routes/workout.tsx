@@ -58,9 +58,6 @@ function WorkoutView() {
   const supersetIDToMod = useWorkoutDraftStore(
     (state) => state.supersetIDToMod,
   );
-  const selectedExerciseIndexToMod = useWorkoutDraftStore(
-    (state) => state.selectedExerciseIndexToMod,
-  );
   const supabaseSession = useAuthStore((state) => state.session);
 
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
@@ -69,7 +66,7 @@ function WorkoutView() {
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
   const deleteItem = useWorkoutDraftStore((state) => state.removeRootItem);
-  const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
+  const deleteSet = useWorkoutDraftStore((state) => state.deleteSetUpdated);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
@@ -249,7 +246,7 @@ function WorkoutView() {
           confirmButtonLabel="Delete"
           opened={deleteSetOverlayOpened}
           handler={deleteSetOverlayHandler}
-          onConfirmationClick={() => deleteSet(selectedExerciseIndexToMod!)}
+          onConfirmationClick={() => deleteSet()}
         />
         <ConfirmationOverlay
           title={saveWorkoutConfirmationContent(mode).title}
