@@ -49,7 +49,7 @@ export default function SectionItem({
           return (
             <WorkoutDataItemContext.Provider
               key={item.id}
-              value={{ item: item, parentType: 'section' }}
+              value={{ item: item, parentType: 'section', parentSectionID: section.id, parentSupersetID: null }}
             >
               <ExerciseItemContainer />
             </WorkoutDataItemContext.Provider>

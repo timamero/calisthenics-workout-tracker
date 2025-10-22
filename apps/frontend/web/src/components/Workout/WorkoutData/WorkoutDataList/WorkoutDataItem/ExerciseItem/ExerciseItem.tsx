@@ -6,19 +6,13 @@ import SetList from './SetList';
 interface ExerciseItemProps {
   mode: Mode;
   name: string;
-  exerciseID: string;
-  handleAddSetClick: (
-    sectionID: string | null,
-    supersetID: string | null,
-    exerciseID: string,
-  ) => void;
+  handleAddSetClick: () => void;
   handleDeleteExerciseClick: () => void;
 }
 
 export default function ExerciseItem({
   mode,
   name,
-  exerciseID,
   handleAddSetClick,
   handleDeleteExerciseClick,
 }: ExerciseItemProps) {
@@ -41,7 +35,7 @@ export default function ExerciseItem({
         <Button
           variant="outline"
           color="dark"
-          onClick={() => handleAddSetClick(null, null, exerciseID)}
+          onClick={() => handleAddSetClick()}
         >
           Add Set
         </Button>
