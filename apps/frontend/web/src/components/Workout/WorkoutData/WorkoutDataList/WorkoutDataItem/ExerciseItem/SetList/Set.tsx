@@ -10,7 +10,7 @@ interface SetProps {
   isCompleted: boolean;
   showDeleteButton: boolean;
   handleToggleCompleted: (value: boolean) => void;
-  onDeleteSetClick: () => void;
+  handleDeleteSetClick: () => void;
 }
 
 export default function Set({
@@ -19,7 +19,7 @@ export default function Set({
   isCompleted,
   showDeleteButton,
   handleToggleCompleted,
-  onDeleteSetClick,
+  handleDeleteSetClick,
 }: SetProps) {
   return (
     <Stack bg="gray.1">
@@ -29,7 +29,7 @@ export default function Set({
           <Button
             color="red"
             variant="white"
-            onClick={() => onDeleteSetClick()}
+            onClick={() => handleDeleteSetClick()}
           >
             Delete
           </Button>

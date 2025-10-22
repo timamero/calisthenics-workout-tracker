@@ -218,7 +218,6 @@ export const createWorkoutDraftSlice: StateCreator<
           return;
         }
         if (state.mode === 'edit' || state.mode === 'build') {
-          console.log('addExercise action - adding exercise');
           // let fields: SetFields = {};
           let fields;
           if (tracking.includes('reps')) {
@@ -339,6 +338,7 @@ export const createWorkoutDraftSlice: StateCreator<
         // Reset state
         state.sectionIDToMod = null;
         state.supersetIDToMod = null;
+        // state.selectedExerciseIDToAdd = null;
       } else {
         console.error('Cannot add exercise in log mode');
       }
@@ -696,9 +696,9 @@ export const createWorkoutDraftSlice: StateCreator<
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
         const exerciseID = get().exerciseIDToMod;
+
         // Add set to exercise in root
         if (!sectionID && !supersetID && exerciseID) {
-          console.log('adding set to exercise in root');
           const exercise = state.workoutData.find(
             (item) => item.id === exerciseID,
           );
@@ -900,6 +900,7 @@ export const createWorkoutDraftSlice: StateCreator<
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
         const exerciseID = get().exerciseIDToMod;
+
         // Delete set of exercise in root
         if (!sectionID && !supersetID && exerciseID) {
           const exercise = state.workoutData.find(
