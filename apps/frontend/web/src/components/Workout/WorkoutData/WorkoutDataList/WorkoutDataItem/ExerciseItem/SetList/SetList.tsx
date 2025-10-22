@@ -8,8 +8,19 @@ import SetContainer from './SetContainer';
 
 export default function SetList() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
+  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
+  const setExerciseIDToMod = useWorkoutDraftStore(
+    (state) => state.setExerciseIDToMod,
+  );
+  const setSupersetIDToMod = useWorkoutDraftStore(
+    (state) => state.setSupersetIDToMod,
+  );
+  const setSectionIDToMod = useWorkoutDraftStore(
+    (state) => state.setSectionIDToMod,
+  );
   const updateField = useWorkoutDraftStore((state) => state.updateFieldUpdated);
 
   const handleSetFieldChange = (
@@ -17,6 +28,13 @@ export default function SetList() {
     updatedField: Partial<SetFields>,
   ) => {
     setSetIDToMod(setID);
+    setExerciseIDToMod(exercise.id);
+    if (parentSupersetID) {
+      setSupersetIDToMod(parentSupersetID);
+    }
+    if (parentSectionID) {
+      setSectionIDToMod(parentSectionID);
+    }
     updateField(updatedField);
   };
 
