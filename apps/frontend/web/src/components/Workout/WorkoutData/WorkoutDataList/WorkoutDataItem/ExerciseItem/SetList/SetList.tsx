@@ -3,7 +3,9 @@ import type { Exercise, SetFields } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
-import { WorkoutDataContext } from '../../../../../../../contexts/WorkoutDataContext';
+// import { WorkoutDataContext } from '../../../../../../../contexts/WorkoutDataContext';
+import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
+// import { SectionContext } from '../../../../../../../contexts/SectionContext';
 import SetContainer from './SetContainer';
 
 // interface SetListProps {
@@ -11,12 +13,8 @@ import SetContainer from './SetContainer';
 // }
 
 export default function SetList() {
-  // const exercise = useWorkoutDraftStore(
-  //   (state) => state.workoutData[exerciseIndex],
-  // ) as Exercise;
-  const exercise = React.useContext(WorkoutDataContext)?.item as Exercise;
-
-  const sets = exercise.sets;
+  const exercise = React.useContext(WorkoutExerciseContext)
+    ?.exercise as Exercise;
 
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   // const setSelectedSetIndexToMod = useWorkoutDraftStore(
@@ -32,7 +30,7 @@ export default function SetList() {
     updateField(null, null, exercise.id, updatedField);
   };
 
-  const setList = sets.map((set, i) => {
+  const setList = exercise!.sets.map((set, i) => {
     return (
       <SetContext.Provider
         key={set.id}
