@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { WorkoutDataContext } from '../../../../../../../contexts/WorkoutDataContext';
+import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
 // import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContext';
 import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 // import { SetContext } from '../../../../../../contexts/SetContext';
@@ -11,7 +12,9 @@ import type { Exercise } from '@cwt/schema/workouts';
 
 export default function SetContainer() {
   // const exerciseIndex = React.useContext(WorkoutExerciseContext)!.exerciseIndex;
-  const exercise = React.useContext(WorkoutDataContext)?.item as Exercise;
+  // const exercise = React.useContext(WorkoutDataContext)?.item as Exercise;
+  const exercise = React.useContext(WorkoutExerciseContext)
+    ?.exercise as Exercise;
   const set = React.useContext(SetContext)!.set;
   const setIndex = React.useContext(SetContext)!.setIndex;
 

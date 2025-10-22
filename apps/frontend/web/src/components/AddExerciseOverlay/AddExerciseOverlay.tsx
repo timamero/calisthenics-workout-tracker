@@ -23,7 +23,7 @@ export default function AddExerciseOverlay({
   const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIDToAdd,
   );
-  const addExercise = useWorkoutDraftStore((state) => state.addExercise);
+  const addExercise = useWorkoutDraftStore((state) => state.addExerciseUpdated);
   const getExerciseById = useExerciseLibraryStore(
     (state) => state.getExerciseByID,
   );

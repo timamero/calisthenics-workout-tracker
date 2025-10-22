@@ -11,12 +11,15 @@ import WorkoutDataList from './WorkoutDataList';
 
 export default function WorkoutData() {
   // const [deleteExOverlayOpened, deleteExOverlayHandler] = useDisclosure(false);
+  // const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
+  //   useDisclosure(false);
   const [deleteRootItemOverlayOpened, deleteRootItemOverlayHandler] =
     useDisclosure(false);
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
+  console.log('workoutData:::', JSON.stringify(workoutData));
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
 
   const workoutExercisesLength = useWorkoutDraftStore(

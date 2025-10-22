@@ -1,3 +1,4 @@
+// import { useContext } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Stack, Button, Switch } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -21,6 +22,7 @@ import {
   addSupersetConfirmationContent,
 } from '@cwt/content';
 
+import { WorkoutContext } from '../contexts/WorkoutContext';
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
 import WorkoutData from '../components/Workout/WorkoutData';
@@ -43,9 +45,6 @@ function WorkoutView() {
     useDisclosure(false);
   const [addSupersetOverlayOpened, addSupersetOverlayHandler] =
     useDisclosure(false);
-
-  const workoutData = useWorkoutDraftStore((state) => state.workoutData);
-  console.log('workoutData: ', JSON.stringify(workoutData));
 
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const supabaseSession = useAuthStore((state) => state.session);
@@ -127,100 +126,108 @@ function WorkoutView() {
   };
 
   return (
-    <Stack gap="xl" align="center">
-      {mode !== 'build' && (
-        <Switch
-          checked={mode === 'edit' ? true : false}
-          onChange={() => handleSetMode()}
-          label="Edit mode"
-        />
-      )}
-      <WorkoutTitle />
+    <WorkoutContext.Provider
+      value={{ addExerciseOverlayHandler: addExerciseOverlayHandler }}
+    >
       <Stack gap="xl" align="center">
-        <WorkoutData />
-        <Stack justify="center">
-          {mode !== 'log' && (
-            <Stack>
-              <Button
-                variant="filled"
-                color="orange.9"
-                onClick={() => addExerciseOverlayHandler.open()}
-              >
-                Add Exercise
-              </Button>
-              <Button
-                variant="filled"
-                color="orange.9"
-                onClick={() => addSectionOverlayHandler.open()}
-              >
-                Add Section
-              </Button>
-              <Button
-                variant="filled"
-                color="orange.9"
-                onClick={() => addSupersetOverlayHandler.open()}
-              >
-                Add Superset
-              </Button>
-            </Stack>
-          )}
+        {mode !== 'build' && (
+          <Switch
+            checked={mode === 'edit' ? true : false}
+            onChange={() => handleSetMode()}
+            label="Edit mode"
+          />
+        )}
+        <WorkoutTitle />
+        <Stack gap="xl" align="center">
+          <WorkoutData />
+          <Stack justify="center">
+            {mode !== 'log' && (
+              <Stack>
+                <Button
+                  variant="filled"
+                  color="orange.9"
+                  onClick={() => addExerciseOverlayHandler.open()}
+                >
+                  Add Exercise
+                </Button>
+                <Button
+                  variant="filled"
+                  color="orange.9"
+                  onClick={() => addSectionOverlayHandler.open()}
+                >
+                  Add Section
+                </Button>
+                <Button
+                  variant="filled"
+                  color="orange.9"
+                  onClick={() => addSupersetOverlayHandler.open()}
+                >
+                  Add Superset
+                </Button>
+              </Stack>
+            )}
 
-          <Button
-            variant="filled"
-            color="orange"
-            onClick={() => saveOverlayHandler.open()}
-          >
-            Save Workout
-          </Button>
-          <Button
-            variant="subtle"
-            color="gray"
-            onClick={() => cancelOverlayHandler.open()}
-          >
-            {`Cancel Workout ${mode === 'build' ? 'Building' : 'Logging'}`}
-          </Button>
+            <Button
+              variant="filled"
+              color="orange"
+              onClick={() => saveOverlayHandler.open()}
+            >
+              Save Workout
+            </Button>
+            <Button
+              variant="subtle"
+              color="gray"
+              onClick={() => cancelOverlayHandler.open()}
+            >
+              {`Cancel Workout ${mode === 'build' ? 'Building' : 'Logging'}`}
+            </Button>
+          </Stack>
         </Stack>
+        <AddExerciseOverlay
+          opened={addExerciseOverlayOpened}
+          handler={addExerciseOverlayHandler}
+        />
+        <ConfirmationOverlay
+          title={addSectionConfirmationContent().title}
+          message={addSectionConfirmationContent().message}
+          confirmButtonLabel={
+            addSectionConfirmationContent().confirmButtonLabel
+          }
+          opened={addSectionOverlayOpened}
+          handler={addSectionOverlayHandler}
+          onConfirmationClick={onAddSectionClick}
+        />
+        <ConfirmationOverlay
+          title={addSupersetConfirmationContent().title}
+          message={addSupersetConfirmationContent().message}
+          confirmButtonLabel={
+            addSupersetConfirmationContent().confirmButtonLabel
+          }
+          opened={addSupersetOverlayOpened}
+          handler={addSupersetOverlayHandler}
+          onConfirmationClick={onAddSupersetClick}
+        />
+        <ConfirmationOverlay
+          title={saveWorkoutConfirmationContent(mode).title}
+          message={saveWorkoutConfirmationContent(mode).message}
+          confirmButtonLabel={
+            saveWorkoutConfirmationContent(mode).confirmButtonLabel
+          }
+          opened={saveOverlayOpened}
+          handler={saveOverlayHandler}
+          onConfirmationClick={onSaveWorkoutClick}
+        />
+        <ConfirmationOverlay
+          title={cancelWorkoutConfirmationContent(mode).title}
+          message={cancelWorkoutConfirmationContent(mode).message}
+          confirmButtonLabel={
+            cancelWorkoutConfirmationContent(mode).confirmButtonLabel
+          }
+          opened={cancelOverlayOpened}
+          handler={cancelOverlayHandler}
+          onConfirmationClick={onCancelWorkoutClick}
+        />
       </Stack>
-      <AddExerciseOverlay
-        opened={addExerciseOverlayOpened}
-        handler={addExerciseOverlayHandler}
-      />
-      <ConfirmationOverlay
-        title={addSectionConfirmationContent().title}
-        message={addSectionConfirmationContent().message}
-        confirmButtonLabel={addSectionConfirmationContent().confirmButtonLabel}
-        opened={addSectionOverlayOpened}
-        handler={addSectionOverlayHandler}
-        onConfirmationClick={onAddSectionClick}
-      />
-      <ConfirmationOverlay
-        title={addSupersetConfirmationContent().title}
-        message={addSupersetConfirmationContent().message}
-        confirmButtonLabel={addSupersetConfirmationContent().confirmButtonLabel}
-        opened={addSupersetOverlayOpened}
-        handler={addSupersetOverlayHandler}
-        onConfirmationClick={onAddSupersetClick}
-      />
-      <ConfirmationOverlay
-        title={saveWorkoutConfirmationContent(mode).title}
-        message={saveWorkoutConfirmationContent(mode).message}
-        confirmButtonLabel={
-          saveWorkoutConfirmationContent(mode).confirmButtonLabel
-        }
-        opened={saveOverlayOpened}
-        handler={saveOverlayHandler}
-        onConfirmationClick={onSaveWorkoutClick}
-      />
-      <ConfirmationOverlay
-        title={cancelWorkoutConfirmationContent(mode).title}
-        message={cancelWorkoutConfirmationContent(mode).message}
-        confirmButtonLabel={
-          cancelWorkoutConfirmationContent(mode).confirmButtonLabel
-        }
-        opened={cancelOverlayOpened}
-        handler={cancelOverlayHandler}
-        onConfirmationClick={onCancelWorkoutClick}
-      />
-    </Stack>
+    </WorkoutContext.Provider>
   );
 }

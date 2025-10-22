@@ -1,16 +1,36 @@
+import { useContext } from 'react';
 import { Stack, Group, Text, Button } from '@mantine/core';
 
-import type { Mode } from '@cwt/schema/workouts';
+import type { Mode, Section } from '@cwt/schema/workouts';
+
+import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
+import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContextUpdated';
+// import { SectionContext } from '../../../../../../contexts/SectionContext';
+import { ExerciseItemContainer } from '../ExerciseItem';
+import { SupersetItemContainer } from '../SupersetItem';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 interface SectionItemProps {
   mode: Mode;
+  section: Section;
   handleDeleteSectionClick: () => void;
 }
 
 export default function SectionItem({
   mode,
+  section,
   handleDeleteSectionClick,
 }: SectionItemProps) {
+  const addExerciseOverlayHandler =
+    useContext(WorkoutContext)?.addExerciseOverlayHandler;
+  const setSectionIDToMod = useWorkoutDraftStore(
+    (state) => state.setSectionIDToMod,
+  );
+
+  const handleOpenAddExerciseOverlay = () => {
+    setSectionIDToMod(section.id);
+    addExerciseOverlayHandler!.open();
+  };
   return (
     <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
       <Group>
@@ -25,7 +45,25 @@ export default function SectionItem({
           </Button>
         )}
       </Group>
-      <Text>Exercises and Supersets placeholder</Text>
+      {section.items.map((item) => {
+        if (item.type === 'exercise') {
+          return (
+            <WorkoutExerciseContext.Provider
+              value={{ exercise: item, parentType: 'section' }}
+            >
+              <ExerciseItemContainer />
+            </WorkoutExerciseContext.Provider>
+          );
+        }
+        return <SupersetItemContainer />;
+      })}
+      <Button
+        variant="filled"
+        color="orange.9"
+        onClick={() => handleOpenAddExerciseOverlay()}
+      >
+        Add Exercise
+      </Button>
     </Stack>
   );
 }
