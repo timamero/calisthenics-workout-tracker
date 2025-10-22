@@ -29,11 +29,9 @@ export default function AddExerciseOverlay({
   );
 
   const handleAddExerciseClick = () => {
-    console.log('handleAddExerciseClick called');
     addExercise(
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
-    console.log('addExercise function completed');
     setSelectedExerciseIDToAdd(null);
     handler.close();
   };

@@ -4,6 +4,7 @@ import { type UseDisclosureHandlers } from '@mantine/hooks';
 interface WorkoutContextType {
   addExerciseOverlayHandler: UseDisclosureHandlers;
   deleteRootItemOverlayHandler: UseDisclosureHandlers;
+  deleteNestedItemOverlayHandler: UseDisclosureHandlers;
   deleteSetOverlayHandler: UseDisclosureHandlers;
 }
 

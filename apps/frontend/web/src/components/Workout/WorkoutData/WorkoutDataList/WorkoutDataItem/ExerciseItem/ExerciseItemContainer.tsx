@@ -15,6 +15,8 @@ export default function ExerciseItemContainer() {
 
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
+  const deleteNestedItemOverlayHandler =
+    useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const addSet = useWorkoutDraftStore((state) => state.addSetUpdated);
@@ -48,7 +50,19 @@ export default function ExerciseItemContainer() {
 
   const handleDeleteExerciseClick = () => {
     setExerciseIDToMod(exercise!.id);
-    deleteRootItemOverlayHandler.open();
+
+    if (parentSupersetID) {
+      setSupersetIDToMod(parentSupersetID);
+    }
+    if (parentSectionID) {
+      setSectionIDToMod(parentSectionID);
+    }
+
+    if (parentSectionID || parentSupersetID) {
+      deleteNestedItemOverlayHandler.open();
+    } else {
+      deleteRootItemOverlayHandler.open();
+    }
   };
 
   return (
