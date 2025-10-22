@@ -6,6 +6,7 @@ import * as React from 'react';
 import type { Exercise, Superset, Section } from '@cwt/schema/workouts';
 
 import { WorkoutDataContext } from '../../../../../contexts/WorkoutDataContext';
+import { WorkoutExerciseContext } from '../../../../../contexts/WorkoutExerciseContextUpdated';
 // import WorkoutDataItem from './WorkoutDataItem';
 import { ExerciseItemContainer } from './ExerciseItem';
 import { SectionItemContainer } from './SectionItem';
@@ -43,7 +44,13 @@ export default function WorkoutDataItemContainer() {
   // };
 
   if (itemType === 'exercise') {
-    return <ExerciseItemContainer />;
+    return (
+      <WorkoutExerciseContext.Provider
+        value={{ exercise: item, parentType: null }}
+      >
+        <ExerciseItemContainer />
+      </WorkoutExerciseContext.Provider>
+    );
   } else if (itemType === 'section') {
     return <SectionItemContainer />;
   }

@@ -23,6 +23,7 @@ export default function SectionItemContainer() {
   return (
     <SectionItem
       mode={mode!}
+      section={section}
       handleDeleteSectionClick={handleDeleteSectionClick}
     />
   );

@@ -3,7 +3,8 @@ import { Stack } from '@mantine/core';
 
 // import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { WorkoutDataContext } from '../../../../../../../contexts/WorkoutDataContext';
+// import { WorkoutDataContext } from '../../../../../../../contexts/WorkoutDataContext';
+import { WorkoutExerciseContext } from '../../../../../../../contexts/WorkoutExerciseContextUpdated';
 import NumeralInput from './NumeralInput';
 import DurationInput from './DurationInput';
 import type { Exercise } from '@cwt/schema/workouts';
@@ -14,7 +15,9 @@ export default function FieldsList() {
   // const exercise = useWorkoutDraftStore(
   //   (state) => state.workoutData[exerciseIndex],
   // ) as Exercise;
-  const exercise = React.useContext(WorkoutDataContext)?.item as Exercise;
+  // const exercise = React.useContext(WorkoutDataContext)?.item as Exercise;
+  const exercise = React.useContext(WorkoutExerciseContext)
+    ?.exercise as Exercise;
   const tracked = exercise.tracked;
 
   const fields = tracked.map((field, i) => {

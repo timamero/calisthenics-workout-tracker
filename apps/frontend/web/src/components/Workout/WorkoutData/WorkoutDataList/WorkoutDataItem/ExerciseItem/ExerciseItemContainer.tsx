@@ -6,12 +6,22 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise } from '@cwt/schema/workouts';
 
 import { WorkoutDataContext } from '../../../../../../contexts/WorkoutDataContext';
+// import { SectionContext } from '../../../../../../contexts/SectionContext';
+import { WorkoutExerciseContext } from '../../../../../../contexts/WorkoutExerciseContextUpdated';
 // import { WorkoutExerciseContext } from '../../../../../contexts/WorkoutExerciseContext';
 import ExerciseItem from './ExerciseItem';
 // import Sets from './Sets';
 
 export default function ExerciseItemContainer() {
-  const exercise = React.useContext(WorkoutDataContext)!.item as Exercise;
+  const exercise = React.useContext(WorkoutExerciseContext)
+    ?.exercise as Exercise;
+  // const workoutDataContext = React.useContext(WorkoutDataContext);
+  // const sectionContext = React.useContext(SectionContext);
+
+  // const exercise = !parentType
+  //   ? (workoutDataContext?.item as Exercise)
+  //   : (sectionContext?.item as Exercise);
+
   const deleteRootItemOverlayHandler =
     React.useContext(WorkoutDataContext)!.deleteRootItemOverlayHandler;
   // const exerciseIndex: number = React.useContext(
@@ -38,10 +48,10 @@ export default function ExerciseItemContainer() {
   const getExerciseNameById = useExerciseLibraryStore(
     (state) => state.getExerciseNameByID,
   );
-  const name = getExerciseNameById(exercise.exercise_id);
+  const name = getExerciseNameById(exercise!.exercise_id);
 
   const handleDeleteExerciseClick = () => {
-    setExerciseIDToMod(exercise.id);
+    setExerciseIDToMod(exercise!.id);
     deleteRootItemOverlayHandler.open();
   };
 
@@ -49,7 +59,7 @@ export default function ExerciseItemContainer() {
     <ExerciseItem
       mode={mode!}
       name={name}
-      exerciseID={exercise.id}
+      exerciseID={exercise!.id}
       handleAddSetClick={addSet}
       handleDeleteExerciseClick={handleDeleteExerciseClick}
     />

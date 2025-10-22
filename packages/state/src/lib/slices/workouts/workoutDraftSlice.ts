@@ -56,11 +56,7 @@ interface WorkoutDraftAction {
   addSuperset: (sectionID: string | null) => void; // CWT-230
   addExercise: (tracking: Tracking[]) => void;
   removeExercise: (exerciseIndex: number) => void;
-  addExerciseUpdated: (
-    sectionID: string | null,
-    supersetID: string | null,
-    tracking: Tracking[],
-  ) => void; // CWT-230
+  addExerciseUpdated: (tracking: Tracking[]) => void; // CWT-230
   removeRootItem: (id: string) => void; // CWT-230
   removeNestedItem: (
     sectionID: string | null,
@@ -274,7 +270,7 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot remove exercise in log mode');
       }
     }),
-  addExerciseUpdated: (sectionID = null, supersetID = null, tracking) =>
+  addExerciseUpdated: (tracking) =>
     set((state) => {
       const exerciseID = state.selectedExerciseIDToAdd;
       if (exerciseID == null) {
@@ -299,6 +295,9 @@ export const createWorkoutDraftSlice: StateCreator<
           type: 'exercise',
           id: uuidv4(),
         } as Exercise;
+
+        const sectionID = get().sectionIDToMod;
+        const supersetID = get().supersetIDToMod;
 
         if (!sectionID && !supersetID) {
           // Add exercise to root of workout data
@@ -359,6 +358,10 @@ export const createWorkoutDraftSlice: StateCreator<
             }
           });
         }
+
+        // Reset state
+        state.sectionIDToMod = null;
+        state.supersetIDToMod = null;
       } else {
         console.error('Cannot add exercise in log mode');
       }
