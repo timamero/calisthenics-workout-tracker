@@ -58,11 +58,7 @@ interface WorkoutDraftAction {
   removeExercise: (exerciseIndex: number) => void;
   addExerciseUpdated: (tracking: Tracking[]) => void; // CWT-230
   removeRootItem: (id: string) => void; // CWT-230
-  removeNestedItem: (
-    sectionID: string | null,
-    supersetID: string | null,
-    exerciseID: string | null,
-  ) => void; // CWT-230
+  removeNestedItem: () => void; // CWT-230
   reorderRootItem: (id: string, newOrder: number) => void; // CWT-230
   reorderNestedItem: (
     sectionID: string | null,
@@ -71,40 +67,21 @@ interface WorkoutDraftAction {
     newOrder: number,
   ) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
-  addSetUpdated: (
-    sectionID: string | null,
-    supersetID: string | null,
-    exerciseID: string,
-  ) => void;
+  addSetUpdated: () => void;
   deleteSet: (exerciseIndex: number) => void;
-  deleteSetUpdated: (
-    sectionID: string | null,
-    supersetID: string | null,
-    exerciseID: string,
-  ) => void;
+  deleteSetUpdated: () => void;
   updateField: (
     exerciseIndex: number,
     updatedField: SetFields,
     // updatedField: Partial<SetFields>,
   ) => void;
-  updateFieldUpdated: (
-    sectionID: string | null,
-    supersetID: string | null,
-    exerciseID: string,
-    updatedField: Partial<SetFields>,
-  ) => void;
+  updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
   toggleCompleted: (
     exerciseIndex: number,
     setIndex: number,
     value: boolean,
   ) => void;
-  toggleCompletedUpdated: (
-    sectionID: string | null,
-    supersetID: string | null,
-    exerciseID: string,
-    setID: string,
-    value: boolean,
-  ) => void;
+  toggleCompletedUpdated: (value: boolean) => void;
   initializeWorkoutToSave: () => void;
   addUserIDToWorkoutToSave: (userID: string) => void;
   addDurationToWorkoutToSave: (duration: string) => void;
@@ -391,9 +368,12 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot remove exercise in log mode');
       }
     }),
-  removeNestedItem: (sectionID = null, supersetID = null, exerciseID = null) =>
+  removeNestedItem: () =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
+        const sectionID = get().sectionIDToMod;
+        const supersetID = get().supersetIDToMod;
+        const exerciseID = get().supersetIDToMod;
         // Remove exercise in superset inside section
         if (sectionID && supersetID && exerciseID) {
           const section = state.workoutData.find(
@@ -521,10 +501,10 @@ export const createWorkoutDraftSlice: StateCreator<
           });
         }
 
-        // // Reset state
-        // state.exerciseIDToMod = null;
-        // state.supersetIDToMod = null;
-        // state.sectionIDToMod = null;
+        // Reset state
+        state.exerciseIDToMod = null;
+        state.supersetIDToMod = null;
+        state.sectionIDToMod = null;
       } else {
         console.error('Cannot remove exercise in log mode');
       }
@@ -710,9 +690,12 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot add set in log mode');
       }
     }),
-  addSetUpdated: (sectionID = null, supersetID = null, exerciseID) =>
+  addSetUpdated: () =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
+        const sectionID = get().sectionIDToMod;
+        const supersetID = get().supersetIDToMod;
+        const exerciseID = get().supersetIDToMod;
         // Add set to exercise in root
         if (!sectionID && !supersetID && exerciseID) {
           const exercise = state.workoutData.find(
@@ -882,6 +865,10 @@ export const createWorkoutDraftSlice: StateCreator<
             return item;
           });
         }
+        // Reset state
+        state.exerciseIDToMod = null;
+        state.supersetIDToMod = null;
+        state.sectionIDToMod = null;
       } else {
         console.error('Cannot add set in log mode');
       }
@@ -906,15 +893,18 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot add set in log mode');
       }
     }),
-  deleteSetUpdated: (sectionID = null, supersetID = null, exerciseID) =>
+  deleteSetUpdated: () =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
+        const sectionID = get().sectionIDToMod;
+        const supersetID = get().supersetIDToMod;
+        const exerciseID = get().supersetIDToMod;
         // Delete set of exercise in root
         if (!sectionID && !supersetID && exerciseID) {
           const exercise = state.workoutData.find(
             (item) => item.id === exerciseID,
           ) as Exercise;
-          const setID = state.setIDToMod;
+          const setID = get().setIDToMod;
           if (setID == null) {
             console.error('No setID provided');
             return;
@@ -1050,6 +1040,12 @@ export const createWorkoutDraftSlice: StateCreator<
             return item;
           });
         }
+
+        // Reset state
+        state.exerciseIDToMod = null;
+        state.supersetIDToMod = null;
+        state.sectionIDToMod = null;
+        state.setIDToMod = null;
       } else {
         console.error('Cannot add set in log mode');
       }
@@ -1075,13 +1071,11 @@ export const createWorkoutDraftSlice: StateCreator<
       state.workoutData[exerciseIndex] = exercise;
       // };
     }),
-  updateFieldUpdated: (
-    sectionID = null,
-    supersetID = null,
-    exerciseID,
-    updatedField,
-  ) =>
+  updateFieldUpdated: (updatedField) =>
     set((state) => {
+      const sectionID = get().sectionIDToMod;
+      const supersetID = get().supersetIDToMod;
+      const exerciseID = get().supersetIDToMod;
       // Update field of exercise in root
       if (!sectionID && !supersetID && exerciseID) {
         const exercise = state.workoutData.find(
@@ -1248,6 +1242,12 @@ export const createWorkoutDraftSlice: StateCreator<
           return item;
         });
       }
+
+      // Reset state
+      state.exerciseIDToMod = null;
+      state.supersetIDToMod = null;
+      state.sectionIDToMod = null;
+      state.setIDToMod = null;
     }),
   toggleCompleted: (exerciseIndex, setIndex, value) =>
     set((state) => {
@@ -1267,15 +1267,14 @@ export const createWorkoutDraftSlice: StateCreator<
         );
       }
     }),
-  toggleCompletedUpdated: (
-    sectionID = null,
-    supersetID = null,
-    exerciseID,
-    setID,
-    value,
-  ) =>
+  toggleCompletedUpdated: (value) =>
     set((state) => {
       // Toggle completed of set in exercise in root
+
+      const sectionID = get().sectionIDToMod;
+      const supersetID = get().supersetIDToMod;
+      const exerciseID = get().supersetIDToMod;
+      const setID = get().setIDToMod;
       if (!sectionID && !supersetID && exerciseID) {
         const exercise = state.workoutData.find(
           (item) => item.id === exerciseID,
@@ -1424,6 +1423,12 @@ export const createWorkoutDraftSlice: StateCreator<
           return item;
         });
       }
+
+      // Reset state
+      state.exerciseIDToMod = null;
+      state.supersetIDToMod = null;
+      state.sectionIDToMod = null;
+      state.setIDToMod = null;
     }),
   initializeWorkoutToSave: () =>
     set((state) => {
