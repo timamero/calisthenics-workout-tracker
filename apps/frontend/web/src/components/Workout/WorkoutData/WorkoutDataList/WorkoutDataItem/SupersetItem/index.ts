@@ -1,3 +1,3 @@
-import SectionItemContainer from './SectionItemContainer';
+import SupersetItemContainer from './SupersetItemContainer';
 
-export { SectionItemContainer };
+export { SupersetItemContainer };

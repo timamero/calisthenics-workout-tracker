@@ -4,28 +4,28 @@ import type { Mode } from '@cwt/schema/workouts';
 
 interface SupersetItemProps {
   mode: Mode;
-  handleDeleteSectionClick: () => void;
+  handleDeleteSupersetClick: () => void;
 }
 
 export default function SupersetItem({
   mode,
-  handleDeleteSectionClick,
+  handleDeleteSupersetClick,
 }: SupersetItemProps) {
   return (
     <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
       <Group>
-        <Text>Section</Text>
+        <Text>Superset</Text>
         {mode !== 'log' && (
           <Button
             color="red"
             variant="white"
-            onClick={() => handleDeleteSectionClick()}
+            onClick={() => handleDeleteSupersetClick()}
           >
             Delete
           </Button>
         )}
       </Group>
-      <Text>Exercises and Supersets placeholder</Text>
+      <Text>Exercises placeholder</Text>
     </Stack>
   );
 }
