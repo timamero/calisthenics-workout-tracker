@@ -380,6 +380,10 @@ export const createWorkoutDraftSlice: StateCreator<
           }
           return item;
         });
+        // Reset state
+        state.exerciseIDToMod = null;
+        state.supersetIDToMod = null;
+        state.sectionIDToMod = null;
       } else {
         console.error('Cannot remove exercise in log mode');
       }
@@ -514,10 +518,10 @@ export const createWorkoutDraftSlice: StateCreator<
           });
         }
 
-        // Reset state
-        state.exerciseIDToMod = null;
-        state.supersetIDToMod = null;
-        state.sectionIDToMod = null;
+        // // Reset state
+        // state.exerciseIDToMod = null;
+        // state.supersetIDToMod = null;
+        // state.sectionIDToMod = null;
       } else {
         console.error('Cannot remove exercise in log mode');
       }

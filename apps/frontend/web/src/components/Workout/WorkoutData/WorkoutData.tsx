@@ -33,14 +33,19 @@ export default function WorkoutData() {
     (state) => state.supersetIDToMod,
   );
 
-  const rootItemIDToMod = exerciseIDToMod
-    ? exerciseIDToMod
-    : sectionIDToMod
-      ? sectionIDToMod
-      : supersetIDToMod;
+  // const rootItemIDToMod = exerciseIDToMod
+  //   ? exerciseIDToMod
+  //   : sectionIDToMod
+  //     ? sectionIDToMod
+  //     : supersetIDToMod;
 
   const deleteItem = useWorkoutDraftStore((state) => state.removeRootItem);
   const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
+
+  // const handleDeleteItem = () => {
+  //   console.log('root')
+  //   deleteItem(rootItemIDToMod!);
+  // };
 
   if (!workoutData) {
     return <Text>Loading</Text>;
@@ -63,7 +68,15 @@ export default function WorkoutData() {
         confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
         opened={deleteRootItemOverlayOpened}
         handler={deleteRootItemOverlayHandler}
-        onConfirmationClick={() => deleteItem(rootItemIDToMod!)}
+        onConfirmationClick={() =>
+          deleteItem(
+            exerciseIDToMod
+              ? exerciseIDToMod!
+              : supersetIDToMod
+                ? supersetIDToMod!
+                : sectionIDToMod!,
+          )
+        }
       />
       {/* <ConfirmationOverlay
         title="Delete Exercise"
