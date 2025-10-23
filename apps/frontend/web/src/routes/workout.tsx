@@ -130,7 +130,7 @@ function WorkoutView() {
   };
 
   const onAddSupersetClick = () => {
-    addSuperset(null);
+    addSuperset(sectionIDToMod);
   };
 
   const handleSetMode = () => {
@@ -150,6 +150,7 @@ function WorkoutView() {
         deleteRootItemOverlayHandler: deleteRootItemOverlayHandler,
         deleteSetOverlayHandler: deleteSetOverlayHandler,
         deleteNestedItemOverlayHandler: deleteNestedItemOverlayHandler,
+        addSupersetOverlayHandler: addSupersetOverlayHandler,
       }}
     >
       <Stack gap="xl" align="center">
