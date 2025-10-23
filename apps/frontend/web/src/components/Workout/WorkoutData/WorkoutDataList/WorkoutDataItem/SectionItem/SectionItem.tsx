@@ -55,7 +55,7 @@ export default function SectionItem({
           isLast={isLast}
         />
       )}
-      <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
+      <Stack bg="gray.1" p="xl" bdrs="sm">
         <Group>
           <Text>Section</Text>
           {mode !== 'log' && (
