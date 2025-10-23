@@ -60,7 +60,12 @@ export default function SupersetItem({
         />
       )}
 
-      <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
+      <Stack
+        bg="transparent"
+        p="xs"
+        bd="4px solid var(--mantine-color-default-border)"
+        bdrs="md"
+      >
         <Group>
           <Text>Superset</Text>
           {mode !== 'log' && (

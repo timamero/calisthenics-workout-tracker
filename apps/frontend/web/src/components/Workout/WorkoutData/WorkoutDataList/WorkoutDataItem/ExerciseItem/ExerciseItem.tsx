@@ -36,7 +36,13 @@ export default function ExerciseItem({
           isLast={isLast}
         />
       )}
-      <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
+      <Stack
+        bd="1px solid var(--mantine-color-default-border)"
+        p="lg"
+        w={300}
+        bg="transparent"
+        bdrs="lg"
+      >
         <Group>
           <Text>{name}</Text>
           {mode !== 'log' && (
@@ -49,7 +55,9 @@ export default function ExerciseItem({
             </Button>
           )}
         </Group>
-        <SetList />
+        <Stack gap="xs">
+          <SetList />
+        </Stack>
         {mode !== 'log' && (
           <Button
             variant="outline"

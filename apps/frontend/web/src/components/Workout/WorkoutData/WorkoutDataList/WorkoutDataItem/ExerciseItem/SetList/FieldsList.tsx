@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Stack } from '@mantine/core';
+import { Group } from '@mantine/core';
 
 import type { Exercise } from '@cwt/schema/workouts';
 
@@ -22,9 +22,9 @@ export default function FieldsList() {
     }
   });
   return (
-    <Stack>
+    <Group align="center">
       {fields}
       <DurationInput label="rest" />
-    </Stack>
+    </Group>
   );
 }
