@@ -11,7 +11,8 @@ export default function SupersetItemContainer() {
   const superset = useContext(WorkoutDataItemContext)!.item as Superset;
   console.log('superset order', superset.order);
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
-  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+  const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
+  // const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
   const deleteNestedItemOverlayHandler =
@@ -24,6 +25,9 @@ export default function SupersetItemContainer() {
   const reorderRootItem = useWorkoutDraftStore(
     (state) => state.reorderRootItem,
   );
+  const reorderNestedItem = useWorkoutDraftStore(
+    (state) => state.reorderNestedItem,
+  );
   const setSupersetIDToMod = useWorkoutDraftStore(
     (state) => state.setSupersetIDToMod,
   );
@@ -32,37 +36,55 @@ export default function SupersetItemContainer() {
   );
 
   const handleUpClick = () => {
-    if (!parentSectionID && !parentSupersetID) {
+    if (!parentSectionID) {
       reorderRootItem(superset!.id, superset!.order - 1);
+    } else {
+      setSupersetIDToMod(superset.id);
+      if (parentSectionID) {
+        setSectionIDToMod(parentSectionID);
+      }
+      reorderNestedItem(superset!.order - 1);
     }
   };
   const handleDownClick = () => {
-    if (!parentSectionID && !parentSupersetID) {
+    if (!parentSectionID) {
       reorderRootItem(superset!.id, superset!.order + 1);
+    } else {
+      setSupersetIDToMod(superset.id);
+      if (parentSectionID) {
+        setSectionIDToMod(parentSectionID);
+      }
+      reorderNestedItem(superset!.order + 1);
     }
   };
 
   const handleDeleteSupersetClick = () => {
     setSupersetIDToMod(superset.id);
-    if (parentSupersetID) {
-      setSupersetIDToMod(parentSupersetID);
-    }
     if (parentSectionID) {
       setSectionIDToMod(parentSectionID);
     }
 
-    if (parentSectionID || parentSupersetID) {
+    if (parentSectionID) {
       deleteNestedItemOverlayHandler.open();
     } else {
       deleteRootItemOverlayHandler.open();
     }
   };
+
+  const useParentItemsLength = () => {
+    if (!parentSectionID) {
+      return rootWorkoutDataLength;
+    }
+    // const length = useContext(WorkoutDataItemContext)?.parentItemsLength;
+    return parentLength ? parentLength : 0;
+  };
+
   return (
     <SupersetItem
       mode={mode!}
       superset={superset}
       isFirst={superset!.order === 0}
-      isLast={superset!.order === rootWorkoutDataLength - 1}
+      isLast={superset!.order === useParentItemsLength() - 1}
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleDeleteSupersetClick={handleDeleteSupersetClick}
