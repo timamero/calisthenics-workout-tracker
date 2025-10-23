@@ -9,6 +9,7 @@ import SupersetItem from './SupersetItem';
 
 export default function SupersetItemContainer() {
   const superset = useContext(WorkoutDataItemContext)!.item as Superset;
+  console.log('superset order', superset.order);
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const deleteRootItemOverlayHandler =
