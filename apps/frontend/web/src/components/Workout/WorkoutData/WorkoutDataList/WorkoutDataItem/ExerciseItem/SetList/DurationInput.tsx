@@ -26,7 +26,7 @@ export default function DurationInput({ label }: DurationInputProps) {
     // Validate: only numbers, no leading zeros except for '0'
     if (/^(0|[1-9][0-9]{0,2})$/.test(value)) {
       const num = Number(value);
-      if (num >= 0 && num <= 300) {
+      if (num >= 0 && num <= 999) {
         const updatedField: Partial<SetFields> = {
           [label]: 'PT' + event.currentTarget.value + 'S',
         };
@@ -37,13 +37,14 @@ export default function DurationInput({ label }: DurationInputProps) {
   };
   return (
     <TextInput
-      label={label[0].toUpperCase() + label.slice(1)}
-      description="Seconds (0-300)"
+      w={68}
+      label={`${label[0].toUpperCase() + label.slice(1)} (sec)`}
+      // description="Seconds"
       type="text"
       inputMode="numeric"
       pattern="^(0|[1-9][0-9]{0,2})$"
       min={0}
-      max={300}
+      max={999}
       value={getSecondsInDuration(set.fields[label]!.toString())}
       onChange={handleChange}
       maxLength={3}

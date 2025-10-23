@@ -1,4 +1,4 @@
-import { Stack, Text, Group, Button, Checkbox } from '@mantine/core';
+import { Stack, Text, Group, Button, Checkbox, Divider } from '@mantine/core';
 
 import type { Mode } from '@cwt/schema/workouts';
 
@@ -6,6 +6,7 @@ import FieldsList from './FieldsList';
 
 interface SetProps {
   mode: Mode;
+  setsLength: number;
   setIndex: number;
   isCompleted: boolean;
   showDeleteButton: boolean;
@@ -15,6 +16,7 @@ interface SetProps {
 
 export default function Set({
   mode,
+  setsLength,
   setIndex,
   isCompleted,
   showDeleteButton,
@@ -22,9 +24,9 @@ export default function Set({
   handleDeleteSetClick,
 }: SetProps) {
   return (
-    <Stack bg="gray.1">
+    <Stack gap="xs" p="sm">
       <Group>
-        <Text>{`Set ${setIndex + 1}`}</Text>
+        <Text size="xs" fw={600}>{`Set ${setIndex + 1}`}</Text>
         {showDeleteButton && (mode === 'build' || mode === 'edit') && (
           <Button
             color="red"
@@ -37,13 +39,18 @@ export default function Set({
       </Group>
       <FieldsList />
       {mode === 'log' && (
-        <Checkbox
-          checked={isCompleted}
-          onChange={(event) =>
-            handleToggleCompleted(event.currentTarget.checked)
-          }
-        />
+        <Group justify="flex-end">
+          <Checkbox
+            label="Completed"
+            labelPosition="left"
+            checked={isCompleted}
+            onChange={(event) =>
+              handleToggleCompleted(event.currentTarget.checked)
+            }
+          />
+        </Group>
       )}
+      {setsLength > 0 && setIndex !== setsLength - 1 && <Divider />}
     </Stack>
   );
 }

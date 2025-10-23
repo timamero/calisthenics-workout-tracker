@@ -72,6 +72,7 @@ export default function SetContainer() {
   return (
     <Set
       mode={mode!}
+      setsLength={sets.length}
       setIndex={setIndex}
       isCompleted={set.completed}
       handleToggleCompleted={handleToggleCompleted}

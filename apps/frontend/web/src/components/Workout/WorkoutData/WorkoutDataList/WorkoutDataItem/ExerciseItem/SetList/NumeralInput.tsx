@@ -29,6 +29,7 @@ export default function NumeralInput({ label }: NumeralInputProps) {
   };
   return (
     <TextInput
+      w={68}
       label={label[0].toUpperCase() + label.slice(1)}
       placeholder={'0'}
       value={
