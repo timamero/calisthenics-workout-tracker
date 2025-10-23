@@ -21,7 +21,16 @@ export default function ExerciseItemContainer() {
     useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
+  const rootWorkoutDataLength = useWorkoutDraftStore(
+    (state) => state.workoutData.length || 0,
+  );
   const addSet = useWorkoutDraftStore((state) => state.addSetUpdated);
+  const reorderRootItem = useWorkoutDraftStore(
+    (state) => state.reorderRootItem,
+  );
+  // const reorderNestedItem = useWorkoutDraftStore(
+  //   (state) => state.reorderNestedItem,
+  // );
   const setExerciseIDToMod = useWorkoutDraftStore(
     (state) => state.setExerciseIDToMod,
   );
@@ -51,10 +60,14 @@ export default function ExerciseItemContainer() {
   };
 
   const handleUpClick = () => {
-    console.log('move exercise up');
+    if (!parentSectionID && !parentSupersetID) {
+      reorderRootItem(exercise!.id, exercise!.order - 1);
+    }
   };
   const handleDownClick = () => {
-    console.log('move exercise down');
+    if (!parentSectionID && !parentSupersetID) {
+      reorderRootItem(exercise!.id, exercise!.order + 1);
+    }
   };
 
   const handleDeleteExerciseClick = () => {
@@ -78,6 +91,8 @@ export default function ExerciseItemContainer() {
     <ExerciseItem
       mode={mode!}
       name={name}
+      isFirst={exercise!.order === 0}
+      isLast={exercise!.order === rootWorkoutDataLength - 1}
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleAddSetClick={handleAddSetClick}
