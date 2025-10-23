@@ -6,6 +6,7 @@ interface WorkoutContextType {
   deleteRootItemOverlayHandler: UseDisclosureHandlers;
   deleteNestedItemOverlayHandler: UseDisclosureHandlers;
   deleteSetOverlayHandler: UseDisclosureHandlers;
+  addSupersetOverlayHandler: UseDisclosureHandlers;
 }
 
 export const WorkoutContext = React.createContext<WorkoutContextType | null>(
