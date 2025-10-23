@@ -22,6 +22,8 @@ export default function SectionItem({
 }: SectionItemProps) {
   const addExerciseOverlayHandler =
     useContext(WorkoutContext)?.addExerciseOverlayHandler;
+  const addSupersetOverlayHandler =
+    useContext(WorkoutContext)?.addSupersetOverlayHandler;
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod,
   );
@@ -29,6 +31,10 @@ export default function SectionItem({
   const handleOpenAddExerciseOverlay = () => {
     setSectionIDToMod(section.id);
     addExerciseOverlayHandler!.open();
+  };
+  const handleOpenAddSupersetOverlay = () => {
+    setSectionIDToMod(section.id);
+    addSupersetOverlayHandler!.open();
   };
   return (
     <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
@@ -60,7 +66,19 @@ export default function SectionItem({
             </WorkoutDataItemContext.Provider>
           );
         }
-        return <SupersetItemContainer />;
+        return (
+          <WorkoutDataItemContext.Provider
+            key={item.id}
+            value={{
+              item: item,
+              parentType: 'section',
+              parentSectionID: section.id,
+              parentSupersetID: null,
+            }}
+          >
+            <SupersetItemContainer />
+          </WorkoutDataItemContext.Provider>
+        );
       })}
       <Button
         variant="filled"
@@ -68,6 +86,13 @@ export default function SectionItem({
         onClick={() => handleOpenAddExerciseOverlay()}
       >
         Add Exercise
+      </Button>
+      <Button
+        variant="filled"
+        color="orange.9"
+        onClick={() => handleOpenAddSupersetOverlay()}
+      >
+        Add Superset
       </Button>
     </Stack>
   );
