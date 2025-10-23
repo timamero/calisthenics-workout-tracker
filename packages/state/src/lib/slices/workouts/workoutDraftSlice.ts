@@ -60,12 +60,7 @@ interface WorkoutDraftAction {
   removeRootItem: (id: string) => void; // CWT-230
   removeNestedItem: () => void; // CWT-230
   reorderRootItem: (id: string, newOrder: number) => void; // CWT-230
-  reorderNestedItem: (
-    sectionID: string | null,
-    supersetID: string | null,
-    exerciseID: string | null,
-    newOrder: number,
-  ) => void; // CWT-230
+  reorderNestedItem: (newOrder: number) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
   addSetUpdated: () => void;
   deleteSet: (exerciseIndex: number) => void;
@@ -373,9 +368,6 @@ export const createWorkoutDraftSlice: StateCreator<
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
         const exerciseID = get().exerciseIDToMod;
-        console.log('removeNestedItem - sectionID: ', sectionID);
-        console.log('removeNestedItem - supersetID: ', supersetID);
-        console.log('removeNestedItem - exerciseID: ', exerciseID);
         // Remove exercise in superset inside section
         if (sectionID && supersetID && exerciseID) {
           console.log('Remove exercise in superset inside section');
@@ -432,16 +424,12 @@ export const createWorkoutDraftSlice: StateCreator<
           (sectionID && !supersetID && exerciseID)
         ) {
           // Remove superset or exercise in section
-          console.log('Remove superset or exercise in section');
           const section = state.workoutData.find(
             (section) => section.id === sectionID,
           ) as Section;
-          console.log('section before updating', section);
           const indexOfRemovedItem = section.items.findIndex(
             (item) => item.id == exerciseID || item.id == supersetID,
           );
-          console.log('indexOfRemovedItem', indexOfRemovedItem);
-
           const itemIDToRemove = supersetID ? supersetID : exerciseID;
 
           let updatedSection = section;
@@ -464,8 +452,6 @@ export const createWorkoutDraftSlice: StateCreator<
             }),
           };
 
-          console.log('updated section', updatedSection);
-
           state.workoutData = state.workoutData.map((item) => {
             if (item.id === sectionID) {
               return updatedSection;
@@ -474,7 +460,6 @@ export const createWorkoutDraftSlice: StateCreator<
             }
           });
         } else if (!sectionID && supersetID && exerciseID) {
-          console.log('Remove exercise in root superset');
           // Remove exercise in root superset
           const superset = state.workoutData.find(
             (superset) => superset.id === supersetID,
@@ -540,14 +525,12 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot add set in log mode');
       }
     }),
-  reorderNestedItem: (
-    sectionID = null,
-    supersetID = null,
-    exerciseID = null,
-    newOrder,
-  ) =>
+  reorderNestedItem: (newOrder) =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
+        const sectionID = get().sectionIDToMod;
+        const supersetID = get().supersetIDToMod;
+        const exerciseID = get().exerciseIDToMod;
         if (sectionID && supersetID && exerciseID) {
           // Reorder exercise in superset inside section
           const section = state.workoutData.find(
@@ -668,6 +651,11 @@ export const createWorkoutDraftSlice: StateCreator<
             }
           });
         }
+
+        // Reset state
+        state.exerciseIDToMod = null;
+        state.supersetIDToMod = null;
+        state.sectionIDToMod = null;
       } else {
         console.error('Cannot add set in log mode');
       }
