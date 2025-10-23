@@ -21,6 +21,10 @@ export default function SupersetItem({
 }: SupersetItemProps) {
   const addExerciseOverlayHandler =
     useContext(WorkoutContext)?.addExerciseOverlayHandler;
+  const supersetParentsSectionID = useContext(
+    WorkoutDataItemContext,
+  )?.parentSectionID;
+
   const setSupersetIDToMod = useWorkoutDraftStore(
     (state) => state.setSupersetIDToMod,
   );
@@ -50,7 +54,9 @@ export default function SupersetItem({
             value={{
               item: exercise,
               parentType: 'superset',
-              parentSectionID: null,
+              parentSectionID: supersetParentsSectionID
+                ? supersetParentsSectionID
+                : null,
               parentSupersetID: superset.id,
             }}
           >
