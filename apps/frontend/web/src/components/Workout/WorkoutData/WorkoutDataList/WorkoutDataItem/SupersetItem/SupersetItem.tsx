@@ -7,16 +7,25 @@ import type { Mode, Superset } from '@cwt/schema/workouts';
 import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
 import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
 import { ExerciseItemContainer } from '../ExerciseItem';
+import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 
 interface SupersetItemProps {
   mode: Mode;
   superset: Superset;
+  isFirst: boolean;
+  isLast: boolean;
+  handleUpClick: () => void;
+  handleDownClick: () => void;
   handleDeleteSupersetClick: () => void;
 }
 
 export default function SupersetItem({
   mode,
   superset,
+  isFirst,
+  isLast,
+  handleUpClick,
+  handleDownClick,
   handleDeleteSupersetClick,
 }: SupersetItemProps) {
   const addExerciseOverlayHandler =
@@ -34,45 +43,53 @@ export default function SupersetItem({
     addExerciseOverlayHandler!.open();
   };
   return (
-    <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
-      <Group>
-        <Text>Superset</Text>
+    <Group align="flex-start">
+      <ReorderButtonGroup
+        handleUpClick={() => handleUpClick()}
+        handleDownClick={() => handleDownClick()}
+        isFirst={isFirst}
+        isLast={isLast}
+      />
+      <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
+        <Group>
+          <Text>Superset</Text>
+          {mode !== 'log' && (
+            <Button
+              color="red"
+              variant="white"
+              onClick={() => handleDeleteSupersetClick()}
+            >
+              Delete
+            </Button>
+          )}
+        </Group>
+        {superset.exercises.map((exercise) => {
+          return (
+            <WorkoutDataItemContext.Provider
+              key={exercise.id}
+              value={{
+                item: exercise,
+                parentType: 'superset',
+                parentSectionID: supersetParentsSectionID
+                  ? supersetParentsSectionID
+                  : null,
+                parentSupersetID: superset.id,
+              }}
+            >
+              <ExerciseItemContainer />
+            </WorkoutDataItemContext.Provider>
+          );
+        })}
         {mode !== 'log' && (
           <Button
-            color="red"
-            variant="white"
-            onClick={() => handleDeleteSupersetClick()}
+            variant="filled"
+            color="orange.9"
+            onClick={() => handleOpenAddExerciseOverlay()}
           >
-            Delete
+            Add Exercise
           </Button>
         )}
-      </Group>
-      {superset.exercises.map((exercise) => {
-        return (
-          <WorkoutDataItemContext.Provider
-            key={exercise.id}
-            value={{
-              item: exercise,
-              parentType: 'superset',
-              parentSectionID: supersetParentsSectionID
-                ? supersetParentsSectionID
-                : null,
-              parentSupersetID: superset.id,
-            }}
-          >
-            <ExerciseItemContainer />
-          </WorkoutDataItemContext.Provider>
-        );
-      })}
-      {mode !== 'log' && (
-        <Button
-          variant="filled"
-          color="orange.9"
-          onClick={() => handleOpenAddExerciseOverlay()}
-        >
-          Add Exercise
-        </Button>
-      )}
-    </Stack>
+      </Stack>
+    </Group>
   );
 }
