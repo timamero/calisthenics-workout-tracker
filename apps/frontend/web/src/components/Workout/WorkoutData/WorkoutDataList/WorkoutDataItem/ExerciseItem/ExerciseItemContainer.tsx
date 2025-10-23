@@ -12,6 +12,11 @@ export default function ExerciseItemContainer() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
+
+  console.log('parentSectionID', parentSectionID);
+  console.log('parentSupersetID', parentSupersetID);
+  console.log('parentType', parentType);
 
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
