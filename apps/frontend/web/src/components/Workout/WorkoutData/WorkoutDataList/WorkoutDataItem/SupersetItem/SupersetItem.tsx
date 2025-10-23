@@ -64,13 +64,15 @@ export default function SupersetItem({
           </WorkoutDataItemContext.Provider>
         );
       })}
-      <Button
-        variant="filled"
-        color="orange.9"
-        onClick={() => handleOpenAddExerciseOverlay()}
-      >
-        Add Exercise
-      </Button>
+      {mode !== 'log' && (
+        <Button
+          variant="filled"
+          color="orange.9"
+          onClick={() => handleOpenAddExerciseOverlay()}
+        >
+          Add Exercise
+        </Button>
+      )}
     </Stack>
   );
 }
