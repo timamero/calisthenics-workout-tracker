@@ -54,6 +54,18 @@ export default function SetContainer() {
   };
 
   const handleToggleCompleted = (value: boolean) => {
+    // console.log('delete set clicked');
+    setSetIDToMod(set.id);
+    setExerciseIDToMod(exercise.id);
+
+    if (parentSupersetID) {
+      // console.log('setting parent superset id');
+      setSupersetIDToMod(parentSupersetID);
+    }
+    if (parentSectionID) {
+      // console.log('setting parent section id');
+      setSectionIDToMod(parentSectionID);
+    }
     toggleCompleted(value);
   };
 
