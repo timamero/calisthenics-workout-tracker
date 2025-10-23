@@ -28,12 +28,14 @@ export default function ExerciseItem({
 }: ExerciseItemProps) {
   return (
     <Group align="flex-start">
-      <ReorderButtonGroup
-        handleUpClick={() => handleUpClick()}
-        handleDownClick={() => handleDownClick()}
-        isFirst={isFirst}
-        isLast={isLast}
-      />
+      {mode !== 'log' && (
+        <ReorderButtonGroup
+          handleUpClick={() => handleUpClick()}
+          handleDownClick={() => handleDownClick()}
+          isFirst={isFirst}
+          isLast={isLast}
+        />
+      )}
       <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
         <Group>
           <Text>{name}</Text>
