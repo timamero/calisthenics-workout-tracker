@@ -5,6 +5,7 @@ import type { Exercise, Superset, Section } from '@cwt/schema/workouts';
 interface WorkoutDataItemContextType {
   item: Exercise | Superset | Section;
   parentType: 'section' | 'superset' | null;
+  parentItemsLength?: number;
   parentSectionID: string | null;
   parentSupersetID: string | null;
 }

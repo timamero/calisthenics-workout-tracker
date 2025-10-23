@@ -74,6 +74,7 @@ export default function SectionItem({
                 value={{
                   item: item,
                   parentType: 'section',
+                  parentItemsLength: section.items.length,
                   parentSectionID: section.id,
                   parentSupersetID: null,
                 }}
@@ -88,6 +89,7 @@ export default function SectionItem({
               value={{
                 item: item,
                 parentType: 'section',
+                parentItemsLength: section.items.length,
                 parentSectionID: section.id,
                 parentSupersetID: null,
               }}

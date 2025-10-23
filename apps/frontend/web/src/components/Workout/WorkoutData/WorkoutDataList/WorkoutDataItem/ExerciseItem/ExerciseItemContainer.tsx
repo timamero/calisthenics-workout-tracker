@@ -13,6 +13,7 @@ export default function ExerciseItemContainer() {
   console.log('exercise order ', exercise.order);
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+  const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
   // const parentType = useContext(WorkoutDataItemContext)?.parentType;
 
   const deleteRootItemOverlayHandler =
@@ -28,9 +29,9 @@ export default function ExerciseItemContainer() {
   const reorderRootItem = useWorkoutDraftStore(
     (state) => state.reorderRootItem,
   );
-  // const reorderNestedItem = useWorkoutDraftStore(
-  //   (state) => state.reorderNestedItem,
-  // );
+  const reorderNestedItem = useWorkoutDraftStore(
+    (state) => state.reorderNestedItem,
+  );
   const setExerciseIDToMod = useWorkoutDraftStore(
     (state) => state.setExerciseIDToMod,
   );
@@ -62,11 +63,31 @@ export default function ExerciseItemContainer() {
   const handleUpClick = () => {
     if (!parentSectionID && !parentSupersetID) {
       reorderRootItem(exercise!.id, exercise!.order - 1);
+    } else {
+      setExerciseIDToMod(exercise!.id);
+
+      if (parentSupersetID) {
+        setSupersetIDToMod(parentSupersetID);
+      }
+      if (parentSectionID) {
+        setSectionIDToMod(parentSectionID);
+      }
+      reorderNestedItem(exercise!.order - 1);
     }
   };
   const handleDownClick = () => {
     if (!parentSectionID && !parentSupersetID) {
       reorderRootItem(exercise!.id, exercise!.order + 1);
+    } else {
+      setExerciseIDToMod(exercise!.id);
+
+      if (parentSupersetID) {
+        setSupersetIDToMod(parentSupersetID);
+      }
+      if (parentSectionID) {
+        setSectionIDToMod(parentSectionID);
+      }
+      reorderNestedItem(exercise!.order + 1);
     }
   };
 
@@ -87,12 +108,20 @@ export default function ExerciseItemContainer() {
     }
   };
 
+  const useParentItemsLength = () => {
+    if (!parentSectionID && !parentSupersetID) {
+      return rootWorkoutDataLength;
+    }
+    // const length = useContext(WorkoutDataItemContext)?.parentItemsLength;
+    return parentLength ? parentLength : 0;
+  };
+
   return (
     <ExerciseItem
       mode={mode!}
       name={name}
       isFirst={exercise!.order === 0}
-      isLast={exercise!.order === rootWorkoutDataLength - 1}
+      isLast={exercise!.order === useParentItemsLength() - 1}
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleAddSetClick={handleAddSetClick}
