@@ -80,20 +80,24 @@ export default function SectionItem({
           </WorkoutDataItemContext.Provider>
         );
       })}
-      <Button
-        variant="filled"
-        color="orange.9"
-        onClick={() => handleOpenAddExerciseOverlay()}
-      >
-        Add Exercise
-      </Button>
-      <Button
-        variant="filled"
-        color="orange.9"
-        onClick={() => handleOpenAddSupersetOverlay()}
-      >
-        Add Superset
-      </Button>
+      {mode !== 'log' && (
+        <Stack>
+          <Button
+            variant="filled"
+            color="orange.9"
+            onClick={() => handleOpenAddExerciseOverlay()}
+          >
+            Add Exercise
+          </Button>
+          <Button
+            variant="filled"
+            color="orange.9"
+            onClick={() => handleOpenAddSupersetOverlay()}
+          >
+            Add Superset
+          </Button>
+        </Stack>
+      )}
     </Stack>
   );
 }
