@@ -9,6 +9,7 @@ import SectionItem from './SectionItem';
 
 export default function SectionItemContainer() {
   const section = useContext(WorkoutDataItemContext)!.item as Section;
+  console.log('section order ', section.order);
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
 
