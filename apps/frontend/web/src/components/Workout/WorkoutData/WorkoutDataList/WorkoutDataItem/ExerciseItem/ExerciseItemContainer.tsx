@@ -10,13 +10,10 @@ import ExerciseItem from './ExerciseItem';
 
 export default function ExerciseItemContainer() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  console.log('exercise order ', exercise.order);
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-  const parentType = useContext(WorkoutDataItemContext)?.parentType;
-
-  console.log('parentSectionID', parentSectionID);
-  console.log('parentSupersetID', parentSupersetID);
-  console.log('parentType', parentType);
+  // const parentType = useContext(WorkoutDataItemContext)?.parentType;
 
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
