@@ -8,6 +8,8 @@ import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 interface ExerciseItemProps {
   mode: Mode;
   name: string;
+  handleUpClick: () => void;
+  handleDownClick: () => void;
   handleAddSetClick: () => void;
   handleDeleteExerciseClick: () => void;
 }
@@ -15,14 +17,16 @@ interface ExerciseItemProps {
 export default function ExerciseItem({
   mode,
   name,
+  handleUpClick,
+  handleDownClick,
   handleAddSetClick,
   handleDeleteExerciseClick,
 }: ExerciseItemProps) {
   return (
     <Group align="flex-start">
       <ReorderButtonGroup
-        handleUpClick={() => console.log('clicked up')}
-        handleDownClick={() => console.log('clicked down')}
+        handleUpClick={() => handleUpClick()}
+        handleDownClick={() => handleDownClick()}
       />
       <Stack bd="1px solid var(--mantine-color-default-border)" p="lg">
         <Group>

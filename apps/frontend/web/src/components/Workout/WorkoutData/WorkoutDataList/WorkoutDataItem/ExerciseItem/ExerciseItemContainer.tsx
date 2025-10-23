@@ -50,6 +50,13 @@ export default function ExerciseItemContainer() {
     addSet();
   };
 
+  const handleUpClick = () => {
+    console.log('move exercise up');
+  };
+  const handleDownClick = () => {
+    console.log('move exercise down');
+  };
+
   const handleDeleteExerciseClick = () => {
     setExerciseIDToMod(exercise!.id);
 
@@ -71,6 +78,8 @@ export default function ExerciseItemContainer() {
     <ExerciseItem
       mode={mode!}
       name={name}
+      handleUpClick={handleUpClick}
+      handleDownClick={handleDownClick}
       handleAddSetClick={handleAddSetClick}
       handleDeleteExerciseClick={handleDeleteExerciseClick}
     />
