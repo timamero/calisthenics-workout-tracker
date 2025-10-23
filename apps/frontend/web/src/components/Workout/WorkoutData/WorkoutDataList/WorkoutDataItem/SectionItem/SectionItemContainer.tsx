@@ -14,9 +14,22 @@ export default function SectionItemContainer() {
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
+  const rootWorkoutDataLength = useWorkoutDraftStore(
+    (state) => state.workoutData.length || 0,
+  );
+  const reorderRootItem = useWorkoutDraftStore(
+    (state) => state.reorderRootItem,
+  );
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod,
   );
+
+  const handleUpClick = () => {
+    reorderRootItem(section!.id, section!.order - 1);
+  };
+  const handleDownClick = () => {
+    reorderRootItem(section!.id, section!.order + 1);
+  };
 
   const handleDeleteSectionClick = () => {
     setSectionIDToMod(section.id);
@@ -26,6 +39,10 @@ export default function SectionItemContainer() {
     <SectionItem
       mode={mode!}
       section={section}
+      isFirst={section!.order === 0}
+      isLast={section!.order === rootWorkoutDataLength - 1}
+      handleUpClick={handleUpClick}
+      handleDownClick={handleDownClick}
       handleDeleteSectionClick={handleDeleteSectionClick}
     />
   );
