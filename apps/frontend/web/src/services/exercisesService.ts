@@ -1,6 +1,6 @@
-import { getExercises as apiGetExercises } from '@cwt/api/exercisesService';
+import { getExercises as apiGetExercises } from '@cwt/api';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
-import { sampleExercises } from '@cwt/mocks/sampleExercises';
+import { sampleExercises } from '@cwt/mocks';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const environment = import.meta.env.VITE_ENVIRONMENT || null;

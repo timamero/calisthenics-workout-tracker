@@ -9,17 +9,9 @@
     "build": "tsc"
   },
   "exports": {
-    "./sampleExercises": {
-      "types": "./dist/sampleExercises.d.ts",
-      "default": "./dist/sampleExercises.js"
-    },
-    "./sampleWorkoutBuilds": {
-      "types": "./dist/sampleWorkoutBuilds.d.ts",
-      "default": "./dist/sampleWorkoutBuilds.js"
-    },
-    "./sampleWorkoutLogs": {
-      "types": "./dist/sampleWorkoutLogs.d.ts",
-      "default": "./dist/sampleWorkoutLogs.js"
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "default": "./dist/lib/index.js"
     }
   },
   "dependencies": {
