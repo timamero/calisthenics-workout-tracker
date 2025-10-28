@@ -11,6 +11,7 @@ import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import { supabase } from '../services/supabaseClient';
 import { getExercises } from '../services/exercisesService';
+import { getLeveragesAssists } from '../services/leveragesAssistsService';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -45,6 +46,11 @@ function RootComponent() {
       if (supabaseSession?.access_token) {
         const exercises = await getExercises(supabaseSession.access_token);
         setExercises(exercises);
+
+        const leveragesAssists = await getLeveragesAssists(
+          supabaseSession.access_token,
+        );
+        console.log('leveragesAssists from api', leveragesAssists);
       }
     };
     asyncFetchData();
