@@ -133,7 +133,7 @@ export type Database = {
             | null
           value_int_unit: Database["public"]["Enums"]["unit"] | null
           value_options: string[] | null
-          value_type: Database["public"]["Enums"]["leverages_assist_value_type"]
+          value_type: Database["public"]["Enums"]["leverage_assist_value_type"]
         }
         Insert: {
           created_at?: string
@@ -148,7 +148,7 @@ export type Database = {
             | null
           value_int_unit?: Database["public"]["Enums"]["unit"] | null
           value_options?: string[] | null
-          value_type: Database["public"]["Enums"]["leverages_assist_value_type"]
+          value_type: Database["public"]["Enums"]["leverage_assist_value_type"]
         }
         Update: {
           created_at?: string
@@ -163,7 +163,7 @@ export type Database = {
             | null
           value_int_unit?: Database["public"]["Enums"]["unit"] | null
           value_options?: string[] | null
-          value_type?: Database["public"]["Enums"]["leverages_assist_value_type"]
+          value_type?: Database["public"]["Enums"]["leverage_assist_value_type"]
         }
         Relationships: []
       }
@@ -300,7 +300,7 @@ export type Database = {
         Row: {
           created_at: string
           description: string | null
-          estimated_duration: unknown | null
+          estimated_duration: unknown
           goal: Database["public"]["Enums"]["goal"] | null
           id: number
           notes: string | null
@@ -314,7 +314,7 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
-          estimated_duration?: unknown | null
+          estimated_duration?: unknown
           goal?: Database["public"]["Enums"]["goal"] | null
           id?: number
           notes?: string | null
@@ -328,7 +328,7 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
-          estimated_duration?: unknown | null
+          estimated_duration?: unknown
           goal?: Database["public"]["Enums"]["goal"] | null
           id?: number
           notes?: string | null
@@ -431,6 +431,7 @@ export type Database = {
         | "none"
       goal: "function" | "endurance" | "hypertrophy" | "strength" | "power"
       leverage_assist: "leverage" | "assist"
+      leverage_assist_value_type: "int" | "options"
       leverages_assist_value_type: "int" | "options"
       muscles:
         | "chest"
@@ -613,6 +614,7 @@ export const Constants = {
       ],
       goal: ["function", "endurance", "hypertrophy", "strength", "power"],
       leverage_assist: ["leverage", "assist"],
+      leverage_assist_value_type: ["int", "options"],
       leverages_assist_value_type: ["int", "options"],
       muscles: [
         "chest",
