@@ -9,17 +9,9 @@
     "build": "tsc"
   },
   "exports": {
-    "./httpClient": {
-      "types": "./dist/httpClient.d.ts",
-      "default": "./dist/httpClient.js"
-    },
-    "./exercisesService": {
-      "types": "./dist/exercisesService.d.ts",
-      "default": "./dist/exercisesService.js"
-    },
-    "./workoutsService": {
-      "types": "./dist/workoutsService.d.ts",
-      "default": "./dist/workoutsService.js"
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "default": "./dist/lib/index.js"
     }
   },
   "dependencies": {
