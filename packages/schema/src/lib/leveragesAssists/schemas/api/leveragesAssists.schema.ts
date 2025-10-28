@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import {
   LeverageAssistSchema,
-  LeveragesAssistValueTypeSchema,
+  LeverageAssistValueTypeSchema,
   SortDirectionSchema,
   UnitSchema,
 } from '../enums.schema';
@@ -10,7 +10,7 @@ export const LeveragesAssistsResponseSchema = z.object({
   id: z.number(),
   name: z.string(),
   type: LeverageAssistSchema,
-  value_type: LeveragesAssistValueTypeSchema,
+  value_type: LeverageAssistValueTypeSchema,
   value_options: z
     .string()
     .nullable()
