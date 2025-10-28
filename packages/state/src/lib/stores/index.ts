@@ -4,6 +4,7 @@ import { useWorkoutStopwatchStore } from './workouts/workoutStopWatchStore';
 import { useExerciseLibraryStore } from './exercises/exerciseLibraryStore';
 import { useExercisesFilterStore } from './exercises/exercisesFilterStore';
 import { useExercisesSearchStore } from './exercises/exercisesSearchStore';
+import { useLeveragesAssistsStore } from './leveragesAssistsStore';
 import { useAuthStore } from './authStore';
 
 export {
@@ -13,5 +14,6 @@ export {
   useExerciseLibraryStore,
   useExercisesFilterStore,
   useExercisesSearchStore,
+  useLeveragesAssistsStore,
   useAuthStore,
 };
