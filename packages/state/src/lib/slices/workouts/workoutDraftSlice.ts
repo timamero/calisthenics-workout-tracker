@@ -294,7 +294,7 @@ export const createWorkoutDraftSlice: StateCreator<
               value: null,
             };
           } else {
-            const firstOption = leverage.value_options;
+            const firstOption = leverage.value_options[0];
             leverageField = {
               id: uuidv4(),
               leverages_assists_id: leverageID,
