@@ -6,10 +6,11 @@ import type { SetFields } from '@cwt/schema/workouts';
 import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 
 interface NumeralInputProps {
-  label: 'reps' | 'weight';
+  label: string;
+  fieldName: 'reps' | 'weight' | 'leverages' | 'assists';
 }
 
-export default function NumeralInput({ label }: NumeralInputProps) {
+export default function NumeralInput({ label, fieldName }: NumeralInputProps) {
   const set = React.useContext(SetContext)!.set;
   const handleSetFieldChange =
     React.useContext(SetContext)!.handleSetFieldChange;
@@ -17,24 +18,36 @@ export default function NumeralInput({ label }: NumeralInputProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.value == '') {
       const updatedField: Partial<SetFields> = {
-        [label]: undefined,
+        [fieldName]: undefined,
       };
       handleSetFieldChange(set.id, updatedField);
     } else {
       const updatedField: Partial<SetFields> = {
-        [label]: Number(event.currentTarget.value),
+        [fieldName]: Number(event.currentTarget.value),
       };
       handleSetFieldChange(set.id, updatedField);
     }
   };
+
+  const value =
+    fieldName === 'leverages'
+      ? set.fields.leverages![0].value === null
+        ? ''
+        : set.fields.leverages![0].value!.toString()
+      : set.fields[fieldName] === undefined
+        ? ''
+        : set.fields[fieldName]!.toString();
   return (
     <TextInput
       w={68}
-      label={label[0].toUpperCase() + label.slice(1)}
+      label={label}
       placeholder={'0'}
-      value={
-        set.fields[label] === undefined ? '' : set.fields[label]!.toString()
-      }
+      value={value}
+      // value={
+      //   set.fields[fieldName] === undefined
+      //     ? ''
+      //     : set.fields[fieldName]!.toString()
+      // }
       onChange={handleChange}
     />
   );
