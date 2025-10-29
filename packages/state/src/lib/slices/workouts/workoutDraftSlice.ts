@@ -261,6 +261,21 @@ export const createWorkoutDraftSlice: StateCreator<
         if (tracking.includes('time')) {
           fields = { ...fields, ...DEFAULT_TIME_SET };
         }
+        if (tracking.includes('leverages')) {
+          // Get leverage id
+          // get value type (int or options)
+          // if value type is int, append to leverages: {
+          //     id: {generated id};
+          //     leverages_assists_id: {leverage id};
+          //     value: null;
+          // }
+          // if value is options, first get list of options
+          // then append to leverages: {
+          //     id: {generated id};
+          //     leverages_assists_id: {leverage id};
+          //     value: {first option};
+          // }
+        }
 
         fields = { ...fields, ...DEFAULT_REST_SET };
 
