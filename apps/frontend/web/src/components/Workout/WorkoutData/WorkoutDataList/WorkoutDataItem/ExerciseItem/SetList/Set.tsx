@@ -3,6 +3,7 @@ import { Stack, Text, Group, Button, Checkbox, Divider } from '@mantine/core';
 import type { Mode } from '@cwt/schema/workouts';
 
 import FieldsList from './FieldsList';
+import LeverageAssistFieldsList from './LeverageAssistFieldsList';
 
 interface SetProps {
   mode: Mode;
@@ -38,6 +39,7 @@ export default function Set({
         )}
       </Group>
       <FieldsList />
+      <LeverageAssistFieldsList />
       {mode === 'log' && (
         <Group justify="flex-end">
           <Checkbox
