@@ -12,8 +12,14 @@ import type {
   Mode,
   Section,
   Superset,
+  Leverage,
 } from '@cwt/schema/workouts';
-import type { Tracking } from '@cwt/schema/exercises';
+import type { ExerciseResponse, Tracking } from '@cwt/schema/exercises';
+
+import {
+  useExerciseLibraryStore,
+  useLeveragesAssistsStore,
+} from '../../stores';
 
 import {
   INITIAL_WORKOUT_LOG_TITLE,
@@ -26,6 +32,10 @@ import {
   INITIALIZED_WORKOUT_LOG_TO_SAVE,
   DEFAULT_REST_SET,
 } from './workoutDefaults';
+import {
+  LeverageAssistValueType,
+  LeveragesAssistsResponse,
+} from '@cwt/schema/leveragesAssists';
 
 interface WorkoutDraftState {
   mode: Mode | null;
@@ -262,19 +272,37 @@ export const createWorkoutDraftSlice: StateCreator<
           fields = { ...fields, ...DEFAULT_TIME_SET };
         }
         if (tracking.includes('leverages')) {
-          // Get leverage id
-          // get value type (int or options)
-          // if value type is int, append to leverages: {
-          //     id: {generated id};
-          //     leverages_assists_id: {leverage id};
-          //     value: null;
-          // }
-          // if value is options, first get list of options
-          // then append to leverages: {
-          //     id: {generated id};
-          //     leverages_assists_id: {leverage id};
-          //     value: {first option};
-          // }
+          const exercise: ExerciseResponse = useExerciseLibraryStore
+            .getState()
+            .getExerciseByID(exerciseID);
+
+          if (!exercise.default_leverage_id) {
+            console.error('This exercise does not have a default_leverage_id');
+            return;
+          }
+          const leverageID: number = exercise.default_leverage_id;
+          const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
+            .getState()
+            .getLeverageOrAssistByID(leverageID);
+          const valueType = leverage.value_type;
+
+          let leverageField: Leverage;
+          if (valueType === 'int') {
+            leverageField = {
+              id: uuidv4(),
+              leverages_assists_id: leverageID,
+              value: null,
+            };
+          } else {
+            const firstOption = leverage.value_options;
+            leverageField = {
+              id: uuidv4(),
+              leverages_assists_id: leverageID,
+              value: firstOption,
+            };
+          }
+
+          fields = { ...fields, leverages: [leverageField] };
         }
 
         fields = { ...fields, ...DEFAULT_REST_SET };
