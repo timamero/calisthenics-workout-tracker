@@ -20,9 +20,11 @@ import {
   INITIAL_WORKOUT_BUILD_TITLE,
   INITIALIZED_SET,
   INITIALIZED_WORKOUT_BUILD_TO_SAVE,
+  DEFAULT_FIELDS,
   DEFAULT_REP_SET,
   DEFAULT_TIME_SET,
   INITIALIZED_WORKOUT_LOG_TO_SAVE,
+  DEFAULT_REST_SET,
 } from './workoutDefaults';
 
 interface WorkoutDraftState {
@@ -251,12 +253,16 @@ export const createWorkoutDraftSlice: StateCreator<
 
       if (state.mode === 'edit' || state.mode === 'build') {
         // let fields: SetFields = {};
-        let fields;
+        // let fields;
+        let fields = DEFAULT_FIELDS;
         if (tracking.includes('reps')) {
-          fields = DEFAULT_REP_SET;
-        } else if (tracking.includes('time')) {
-          fields = DEFAULT_TIME_SET;
+          fields = { ...fields, ...DEFAULT_REP_SET };
         }
+        if (tracking.includes('time')) {
+          fields = { ...fields, ...DEFAULT_TIME_SET };
+        }
+
+        fields = { ...fields, ...DEFAULT_REST_SET };
 
         const exercise = {
           sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
