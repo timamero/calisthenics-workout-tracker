@@ -6,8 +6,13 @@ import { AppShell, Burger, Loader, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useSupabaseAuth } from '@cwt/hooks';
 import { NavLink } from '@mantine/core';
-import { useWorkoutDraftStore, useAuthStore } from '@cwt/state/stores';
-import { useExerciseLibraryStore } from '@cwt/state/stores';
+import {
+  useWorkoutDraftStore,
+  useAuthStore,
+  useLeveragesAssistsStore,
+  useExerciseLibraryStore,
+} from '@cwt/state/stores';
+// import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import { supabase } from '../services/supabaseClient';
 import { getExercises } from '../services/exercisesService';
@@ -23,6 +28,9 @@ function RootComponent() {
     (state) => state.isWorkoutSavePending,
   );
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
+  const setLeveragesAssists = useLeveragesAssistsStore(
+    (state) => state.setLeveragesAssists,
+  );
 
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
@@ -50,11 +58,11 @@ function RootComponent() {
         const leveragesAssists = await getLeveragesAssists(
           supabaseSession.access_token,
         );
-        console.log('leveragesAssists from api', leveragesAssists);
+        setLeveragesAssists(leveragesAssists);
       }
     };
     asyncFetchData();
-  }, [supabaseSession, setExercises]);
+  }, [supabaseSession, setExercises, setLeveragesAssists]);
 
   if (loading || isWorkoutSavePending) {
     return (
