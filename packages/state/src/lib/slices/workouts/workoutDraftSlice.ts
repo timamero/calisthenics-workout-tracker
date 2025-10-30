@@ -196,10 +196,8 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   addSuperset: (sectionID = null) =>
     set((state) => {
-      console.log('addSuperset called with sectionID ', sectionID);
       // Add superset to root workout data
       if (sectionID === null) {
-        console.log('adding superset to root');
         state.workoutData.push({
           id: uuidv4(),
           order: state.workoutData.length,
@@ -208,7 +206,6 @@ export const createWorkoutDraftSlice: StateCreator<
         });
       } else {
         // Add superset to section
-        console.log('adding superset to section');
         const section = state.workoutData.find(
           (section) => section.id === sectionID,
         ) as Section;
@@ -436,7 +433,6 @@ export const createWorkoutDraftSlice: StateCreator<
         const exerciseID = get().exerciseIDToMod;
         // Remove exercise in superset inside section
         if (sectionID && supersetID && exerciseID) {
-          console.log('Remove exercise in superset inside section');
           const section = state.workoutData.find(
             (section) => section.id === sectionID,
           ) as Section;
@@ -1317,7 +1313,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   updateFieldUpdated: (updatedField) =>
     set((state) => {
-      console.log('updateFieldUpdated - updatedField: ', updatedField);
+      // console.log('updateFieldUpdated - updatedField: ', updatedField);
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
       const exerciseID = get().exerciseIDToMod;
@@ -1325,7 +1321,6 @@ export const createWorkoutDraftSlice: StateCreator<
 
       // Update field of exercise in root
       if (!sectionID && !supersetID && exerciseID) {
-        console.log('updateFieldUpdated - updating field of exercise in root');
         const exercise = state.workoutData.find(
           (item) => item.id === exerciseID,
         ) as Exercise;
@@ -1371,9 +1366,6 @@ export const createWorkoutDraftSlice: StateCreator<
           }
           return set;
         });
-        console.log(
-          'updateFieldUpdated - adding updated exercise to workout data',
-        );
 
         state.workoutData = state.workoutData.map((item) => {
           if (item.id === exerciseID) {
