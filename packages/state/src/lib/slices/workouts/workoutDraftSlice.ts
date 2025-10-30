@@ -1222,7 +1222,6 @@ export const createWorkoutDraftSlice: StateCreator<
                 return field;
               }) as Leverage[];
 
-              // TODO: Add updated leverage field
               return {
                 ...set,
                 fields: { ...set.fields, leverages: updatedLeverageFields },
@@ -1261,6 +1260,31 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedExercise = exercise;
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
+            if (leverageID) {
+              let updatedLeverageValue = updatedField as Pick<
+                Leverage,
+                'value'
+              >;
+              const leverageFields = set.fields.leverages;
+              const leverageFieldToUpdate = leverageFields?.find(
+                (field) => field.id === leverageID,
+              );
+              const updatedLeverageField = {
+                ...leverageFieldToUpdate,
+                ...updatedLeverageValue,
+              };
+              const updatedLeverageFields = leverageFields?.map((field) => {
+                if (field.id === leverageID) {
+                  return updatedLeverageField;
+                }
+                return field;
+              }) as Leverage[];
+
+              return {
+                ...set,
+                fields: { ...set.fields, leverages: updatedLeverageFields },
+              };
+            }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
@@ -1302,6 +1326,31 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedExercise = exercise;
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
+            if (leverageID) {
+              let updatedLeverageValue = updatedField as Pick<
+                Leverage,
+                'value'
+              >;
+              const leverageFields = set.fields.leverages;
+              const leverageFieldToUpdate = leverageFields?.find(
+                (field) => field.id === leverageID,
+              );
+              const updatedLeverageField = {
+                ...leverageFieldToUpdate,
+                ...updatedLeverageValue,
+              };
+              const updatedLeverageFields = leverageFields?.map((field) => {
+                if (field.id === leverageID) {
+                  return updatedLeverageField;
+                }
+                return field;
+              }) as Leverage[];
+
+              return {
+                ...set,
+                fields: { ...set.fields, leverages: updatedLeverageFields },
+              };
+            }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
@@ -1346,6 +1395,31 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedExercise = exercise;
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
+            if (leverageID) {
+              let updatedLeverageValue = updatedField as Pick<
+                Leverage,
+                'value'
+              >;
+              const leverageFields = set.fields.leverages;
+              const leverageFieldToUpdate = leverageFields?.find(
+                (field) => field.id === leverageID,
+              );
+              const updatedLeverageField = {
+                ...leverageFieldToUpdate,
+                ...updatedLeverageValue,
+              };
+              const updatedLeverageFields = leverageFields?.map((field) => {
+                if (field.id === leverageID) {
+                  return updatedLeverageField;
+                }
+                return field;
+              }) as Leverage[];
+
+              return {
+                ...set,
+                fields: { ...set.fields, leverages: updatedLeverageFields },
+              };
+            }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
