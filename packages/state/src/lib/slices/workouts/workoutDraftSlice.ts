@@ -84,7 +84,12 @@ interface WorkoutDraftAction {
     updatedField: SetFields,
     // updatedField: Partial<SetFields>,
   ) => void;
-  updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
+  updateFieldUpdated: (
+    updatedField:
+      | Pick<SetFields, 'reps' | 'rest' | 'time'>
+      | Pick<Leverage, 'value'>,
+  ) => void;
+  // updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
   toggleCompleted: (
     exerciseIndex: number,
     setIndex: number,
@@ -1196,12 +1201,29 @@ export const createWorkoutDraftSlice: StateCreator<
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
             if (leverageID) {
-              const leverageFieldToUpdate = set.fields.leverages?.find(
+              let updatedLeverageValue = updatedField as Pick<
+                Leverage,
+                'value'
+              >;
+              const leverageFields = set.fields.leverages;
+              const leverageFieldToUpdate = leverageFields?.find(
                 (field) => field.id === leverageID,
               );
               const updatedLeverageField = {
                 ...leverageFieldToUpdate,
-                ...updatedField,
+                ...updatedLeverageValue,
+              };
+              const updatedLeverageFields = leverageFields?.map((field) => {
+                if (field.id === leverageID) {
+                  return updatedLeverageField;
+                }
+                return field;
+              });
+
+              // TODO: Add updated leverage field
+              return {
+                ...set,
+                fields: { ...set.fields },
               };
             }
             return {
