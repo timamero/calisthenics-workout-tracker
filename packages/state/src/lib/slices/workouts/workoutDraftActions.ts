@@ -16,13 +16,13 @@ import {
 
 export function addLeveragesOrAssistsField(
   fields: SetFields,
-  updatedExercise: Exercise,
+  selectedExerciseID: number,
   tracking: string[],
 ): SetFields {
   let updatedFields = fields;
   const selectedExercise: ExerciseResponse = useExerciseLibraryStore
     .getState()
-    .getExerciseByID(updatedExercise.exercise_id);
+    .getExerciseByID(selectedExerciseID);
 
   if (tracking.includes('leverages')) {
     if (!selectedExercise.default_leverage_id) {
