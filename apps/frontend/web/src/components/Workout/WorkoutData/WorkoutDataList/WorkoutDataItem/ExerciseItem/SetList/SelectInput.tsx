@@ -1,15 +1,19 @@
 import * as React from 'react';
-import { TextInput } from '@mantine/core';
+import { Select } from '@mantine/core';
+// import type { ComboboxItem } from '@mantine/core';
 
-import type { Leverage } from '@cwt/schema/workouts';
+// import type { Leverage } from '@cwt/schema/workouts';
 
 import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+import {
+  useLeveragesAssistsStore,
+  useWorkoutDraftStore,
+} from '@cwt/state/stores';
 
 interface NumeralInputProps {
   label: string;
   // fieldName: 'value';
-  fieldID?: string;
+  fieldID: string;
 }
 
 export default function SelectInput({ label, fieldID }: NumeralInputProps) {
@@ -17,39 +21,34 @@ export default function SelectInput({ label, fieldID }: NumeralInputProps) {
   const handleSetFieldChange =
     React.useContext(SetContext)!.handleSetFieldChange;
 
+  const leverage = useLeveragesAssistsStore((state) =>
+    state.getLeverageOrAssistByID(
+      set.fields.leverages?.find((field) => field.id === fieldID)!
+        .leverages_assists_id as number,
+    ),
+  );
   const setLeverageIDToMod = useWorkoutDraftStore(
     (state) => state.setLeverageIDToMod,
   );
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (fieldID) {
-      setLeverageIDToMod(fieldID);
-    }
-    if (event.currentTarget.value == '') {
-      const updatedField: Pick<Leverage, 'value'> = {
-        value: null,
-      };
-      handleSetFieldChange(set.id, updatedField);
-    } else {
-      const updatedField: Pick<Leverage, 'value'> = {
-        value: Number(event.currentTarget.value),
-      };
-      handleSetFieldChange(set.id, updatedField);
-    }
+  const options = leverage.value_options;
+
+  const handleChange = (value: string | null) => {
+    setLeverageIDToMod(fieldID);
+    const updatedField = { value: value };
+    handleSetFieldChange(set.id, updatedField);
   };
 
   return (
-    <TextInput
-      w={68}
+    <Select
       label={label}
-      placeholder={'0'}
+      // placeholder="Pick value"
+      data={options}
       value={
-        set.fields.leverages!.find((field) => field.id === fieldID)!.value ===
-        null
-          ? ''
-          : set.fields
-              .leverages!.find((field) => field.id === fieldID)!
-              .value!.toString()
+        set.fields.leverages?.find((field) => field.id === fieldID)?.value
+          ? (set.fields.leverages.find((field) => field.id === fieldID)!
+              .value as string)
+          : null
       }
       onChange={handleChange}
     />
