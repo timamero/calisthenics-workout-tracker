@@ -49,6 +49,7 @@ interface WorkoutDraftState {
   exerciseIDToMod: string | null; // CWT-230
   supersetIDToMod: string | null; // CWT-230
   sectionIDToMod: string | null; // CWT-230
+  leverageIDToMod: string | null; // CWT-230
   isWorkoutSavePending: boolean;
   workoutToSave: WorkoutBuildRequest | WorkoutLogRequest | null;
 }
@@ -64,6 +65,7 @@ interface WorkoutDraftAction {
   setExerciseIDToMod: (id: string | null) => void; // CWT-230
   setSupersetIDToMod: (id: string | null) => void; // CWT-230
   setSectionIDToMod: (id: string | null) => void; // CWT-230
+  setLeverageIDToMod: (id: string | null) => void; // CWT-230
   addSection: () => void; // CWT-230
   addSuperset: (sectionID: string | null) => void; // CWT-230
   addExercise: (tracking: Tracking[]) => void;
@@ -125,6 +127,7 @@ export const createWorkoutDraftSlice: StateCreator<
   exerciseIDToMod: null,
   supersetIDToMod: null,
   sectionIDToMod: null,
+  leverageIDToMod: null,
   isWorkoutSavePending: false,
   workoutToSave: null,
 
@@ -171,6 +174,10 @@ export const createWorkoutDraftSlice: StateCreator<
   setSectionIDToMod: (id) =>
     set((state) => {
       state.sectionIDToMod = id;
+    }),
+  setLeverageIDToMod: (id) =>
+    set((state) => {
+      state.leverageIDToMod = id;
     }),
   addSection: () =>
     set((state) => {
@@ -1171,6 +1178,8 @@ export const createWorkoutDraftSlice: StateCreator<
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
       const exerciseID = get().exerciseIDToMod;
+      const leverageID = get().leverageIDToMod;
+
       // Update field of exercise in root
       if (!sectionID && !supersetID && exerciseID) {
         const exercise = state.workoutData.find(
