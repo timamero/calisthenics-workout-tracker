@@ -840,12 +840,56 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Exercise;
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          let fields;
+          // let fields;
+          // if (tracking.includes('reps')) {
+          //   fields = DEFAULT_REP_SET;
+          // } else if (tracking.includes('time')) {
+          //   fields = DEFAULT_TIME_SET;
+          // }
+          let fields = DEFAULT_FIELDS;
           if (tracking.includes('reps')) {
-            fields = DEFAULT_REP_SET;
-          } else if (tracking.includes('time')) {
-            fields = DEFAULT_TIME_SET;
+            fields = { ...fields, ...DEFAULT_REP_SET };
           }
+          if (tracking.includes('time')) {
+            fields = { ...fields, ...DEFAULT_TIME_SET };
+          }
+          if (tracking.includes('leverages')) {
+            const selectedExercise: ExerciseResponse = useExerciseLibraryStore
+              .getState()
+              .getExerciseByID(updatedExercise.exercise_id);
+
+            if (!selectedExercise.default_leverage_id) {
+              console.error(
+                'This exercise does not have a default_leverage_id',
+              );
+              return;
+            }
+            const leverageID: number = selectedExercise.default_leverage_id;
+            const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
+              .getState()
+              .getLeverageOrAssistByID(leverageID);
+            const valueType = leverage.value_type;
+
+            let leverageField: Leverage;
+            if (valueType === 'int') {
+              leverageField = {
+                id: uuidv4(),
+                leverages_assists_id: leverageID,
+                value: null,
+              };
+            } else {
+              const firstOption = leverage.value_options[0];
+              leverageField = {
+                id: uuidv4(),
+                leverages_assists_id: leverageID,
+                value: firstOption,
+              };
+            }
+
+            fields = { ...fields, leverages: [leverageField] };
+          }
+
+          fields = { ...fields, ...DEFAULT_REST_SET };
 
           updatedExercise = {
             ...updatedExercise,
@@ -882,12 +926,56 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Exercise;
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          let fields;
+          // let fields;
+          // if (tracking.includes('reps')) {
+          //   fields = DEFAULT_REP_SET;
+          // } else if (tracking.includes('time')) {
+          //   fields = DEFAULT_TIME_SET;
+          // }
+          let fields = DEFAULT_FIELDS;
           if (tracking.includes('reps')) {
-            fields = DEFAULT_REP_SET;
-          } else if (tracking.includes('time')) {
-            fields = DEFAULT_TIME_SET;
+            fields = { ...fields, ...DEFAULT_REP_SET };
           }
+          if (tracking.includes('time')) {
+            fields = { ...fields, ...DEFAULT_TIME_SET };
+          }
+          if (tracking.includes('leverages')) {
+            const selectedExercise: ExerciseResponse = useExerciseLibraryStore
+              .getState()
+              .getExerciseByID(updatedExercise.exercise_id);
+
+            if (!selectedExercise.default_leverage_id) {
+              console.error(
+                'This exercise does not have a default_leverage_id',
+              );
+              return;
+            }
+            const leverageID: number = selectedExercise.default_leverage_id;
+            const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
+              .getState()
+              .getLeverageOrAssistByID(leverageID);
+            const valueType = leverage.value_type;
+
+            let leverageField: Leverage;
+            if (valueType === 'int') {
+              leverageField = {
+                id: uuidv4(),
+                leverages_assists_id: leverageID,
+                value: null,
+              };
+            } else {
+              const firstOption = leverage.value_options[0];
+              leverageField = {
+                id: uuidv4(),
+                leverages_assists_id: leverageID,
+                value: firstOption,
+              };
+            }
+
+            fields = { ...fields, leverages: [leverageField] };
+          }
+
+          fields = { ...fields, ...DEFAULT_REST_SET };
 
           updatedExercise = {
             ...updatedExercise,
@@ -927,12 +1015,56 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Exercise;
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          let fields;
+          // let fields;
+          // if (tracking.includes('reps')) {
+          //   fields = DEFAULT_REP_SET;
+          // } else if (tracking.includes('time')) {
+          //   fields = DEFAULT_TIME_SET;
+          // }
+          let fields = DEFAULT_FIELDS;
           if (tracking.includes('reps')) {
-            fields = DEFAULT_REP_SET;
-          } else if (tracking.includes('time')) {
-            fields = DEFAULT_TIME_SET;
+            fields = { ...fields, ...DEFAULT_REP_SET };
           }
+          if (tracking.includes('time')) {
+            fields = { ...fields, ...DEFAULT_TIME_SET };
+          }
+          if (tracking.includes('leverages')) {
+            const selectedExercise: ExerciseResponse = useExerciseLibraryStore
+              .getState()
+              .getExerciseByID(updatedExercise.exercise_id);
+
+            if (!selectedExercise.default_leverage_id) {
+              console.error(
+                'This exercise does not have a default_leverage_id',
+              );
+              return;
+            }
+            const leverageID: number = selectedExercise.default_leverage_id;
+            const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
+              .getState()
+              .getLeverageOrAssistByID(leverageID);
+            const valueType = leverage.value_type;
+
+            let leverageField: Leverage;
+            if (valueType === 'int') {
+              leverageField = {
+                id: uuidv4(),
+                leverages_assists_id: leverageID,
+                value: null,
+              };
+            } else {
+              const firstOption = leverage.value_options[0];
+              leverageField = {
+                id: uuidv4(),
+                leverages_assists_id: leverageID,
+                value: firstOption,
+              };
+            }
+
+            fields = { ...fields, leverages: [leverageField] };
+          }
+
+          fields = { ...fields, ...DEFAULT_REST_SET };
 
           updatedExercise = {
             ...updatedExercise,
