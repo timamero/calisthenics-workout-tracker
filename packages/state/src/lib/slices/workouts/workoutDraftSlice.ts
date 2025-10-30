@@ -196,8 +196,10 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   addSuperset: (sectionID = null) =>
     set((state) => {
+      console.log('addSuperset called with sectionID ', sectionID);
       // Add superset to root workout data
       if (sectionID === null) {
+        console.log('adding superset to root');
         state.workoutData.push({
           id: uuidv4(),
           order: state.workoutData.length,
@@ -206,6 +208,7 @@ export const createWorkoutDraftSlice: StateCreator<
         });
       } else {
         // Add superset to section
+        console.log('adding superset to section');
         const section = state.workoutData.find(
           (section) => section.id === sectionID,
         ) as Section;
@@ -226,6 +229,8 @@ export const createWorkoutDraftSlice: StateCreator<
           }
         });
       }
+
+      state.sectionIDToMod = null;
     }),
   addExercise: (tracking) =>
     set(
