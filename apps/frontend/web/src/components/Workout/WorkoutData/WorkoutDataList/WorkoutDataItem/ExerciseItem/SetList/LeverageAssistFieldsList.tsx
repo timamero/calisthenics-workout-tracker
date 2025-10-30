@@ -20,6 +20,7 @@ export default function LeverageAssistFieldsList() {
   let leverageFields;
 
   if (tracked.includes('leverages')) {
+    console.log('LeverageAssistFieldsList - adding leverages field');
     leverageFields = set?.fields.leverages!.map((leverageField) => {
       const leverage = getLeverageOrAssistByID(
         leverageField.leverages_assists_id,
@@ -30,7 +31,8 @@ export default function LeverageAssistFieldsList() {
           <NumeralInput
             key={leverageField.id}
             label={`${leverage.name} (${leverage.value_int_unit})`}
-            fieldName="leverages"
+            fieldName="value"
+            fieldID={leverageField.id}
           />
         );
       } else {
@@ -38,6 +40,7 @@ export default function LeverageAssistFieldsList() {
       }
     });
   }
+  console.log('LeverageAssistFieldsList - returning leverageFields');
 
   // const fields = tracked.map((field, i) => {
   //   switch (field) {

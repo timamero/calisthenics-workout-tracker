@@ -1180,6 +1180,7 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   updateFieldUpdated: (updatedField) =>
     set((state) => {
+      console.log('updateFieldUpdated - updatedField: ', updatedField);
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
       const exerciseID = get().exerciseIDToMod;
@@ -1187,6 +1188,7 @@ export const createWorkoutDraftSlice: StateCreator<
 
       // Update field of exercise in root
       if (!sectionID && !supersetID && exerciseID) {
+        console.log('updateFieldUpdated - updating field of exercise in root');
         const exercise = state.workoutData.find(
           (item) => item.id === exerciseID,
         ) as Exercise;
@@ -1218,12 +1220,12 @@ export const createWorkoutDraftSlice: StateCreator<
                   return updatedLeverageField;
                 }
                 return field;
-              });
+              }) as Leverage[];
 
               // TODO: Add updated leverage field
               return {
                 ...set,
-                fields: { ...set.fields },
+                fields: { ...set.fields, leverages: updatedLeverageFields },
               };
             }
             return {
@@ -1233,6 +1235,9 @@ export const createWorkoutDraftSlice: StateCreator<
           }
           return set;
         });
+        console.log(
+          'updateFieldUpdated - adding updated exercise to workout data',
+        );
 
         state.workoutData = state.workoutData.map((item) => {
           if (item.id === exerciseID) {
@@ -1384,6 +1389,7 @@ export const createWorkoutDraftSlice: StateCreator<
       state.supersetIDToMod = null;
       state.sectionIDToMod = null;
       state.setIDToMod = null;
+      state.leverageIDToMod = null;
     }),
   toggleCompleted: (exerciseIndex, setIndex, value) =>
     set((state) => {
