@@ -1192,8 +1192,18 @@ export const createWorkoutDraftSlice: StateCreator<
           return;
         }
         let updatedExercise = exercise;
+
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
+            if (leverageID) {
+              const leverageFieldToUpdate = set.fields.leverages?.find(
+                (field) => field.id === leverageID,
+              );
+              const updatedLeverageField = {
+                ...leverageFieldToUpdate,
+                ...updatedField,
+              };
+            }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
