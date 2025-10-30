@@ -84,11 +84,8 @@ interface WorkoutDraftAction {
     updatedField: SetFields,
     // updatedField: Partial<SetFields>,
   ) => void;
-  updateFieldUpdated: (
-    updatedField:
-      | Pick<SetFields, 'reps' | 'rest' | 'time'>
-      | Pick<Leverage, 'value'>,
-  ) => void;
+  updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
+  updateLeverageOrAssistField: (updatedField: Pick<Leverage, 'value'>) => void;
   // updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
   toggleCompleted: (
     exerciseIndex: number,
@@ -1317,7 +1314,7 @@ export const createWorkoutDraftSlice: StateCreator<
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
       const exerciseID = get().exerciseIDToMod;
-      const leverageID = get().leverageIDToMod;
+      // const leverageID = get().leverageIDToMod;
 
       // Update field of exercise in root
       if (!sectionID && !supersetID && exerciseID) {
@@ -1334,31 +1331,31 @@ export const createWorkoutDraftSlice: StateCreator<
 
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
-            if (leverageID) {
-              let updatedLeverageValue = updatedField as Pick<
-                Leverage,
-                'value'
-              >;
-              const leverageFields = set.fields.leverages;
-              const leverageFieldToUpdate = leverageFields?.find(
-                (field) => field.id === leverageID,
-              );
-              const updatedLeverageField = {
-                ...leverageFieldToUpdate,
-                ...updatedLeverageValue,
-              };
-              const updatedLeverageFields = leverageFields?.map((field) => {
-                if (field.id === leverageID) {
-                  return updatedLeverageField;
-                }
-                return field;
-              }) as Leverage[];
+            // if (leverageID) {
+            //   let updatedLeverageValue = updatedField as Pick<
+            //     Leverage,
+            //     'value'
+            //   >;
+            //   const leverageFields = set.fields.leverages;
+            //   const leverageFieldToUpdate = leverageFields?.find(
+            //     (field) => field.id === leverageID,
+            //   );
+            //   const updatedLeverageField = {
+            //     ...leverageFieldToUpdate,
+            //     ...updatedLeverageValue,
+            //   };
+            //   const updatedLeverageFields = leverageFields?.map((field) => {
+            //     if (field.id === leverageID) {
+            //       return updatedLeverageField;
+            //     }
+            //     return field;
+            //   }) as Leverage[];
 
-              return {
-                ...set,
-                fields: { ...set.fields, leverages: updatedLeverageFields },
-              };
-            }
+            //   return {
+            //     ...set,
+            //     fields: { ...set.fields, leverages: updatedLeverageFields },
+            //   };
+            // }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
@@ -1389,31 +1386,31 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedExercise = exercise;
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
-            if (leverageID) {
-              let updatedLeverageValue = updatedField as Pick<
-                Leverage,
-                'value'
-              >;
-              const leverageFields = set.fields.leverages;
-              const leverageFieldToUpdate = leverageFields?.find(
-                (field) => field.id === leverageID,
-              );
-              const updatedLeverageField = {
-                ...leverageFieldToUpdate,
-                ...updatedLeverageValue,
-              };
-              const updatedLeverageFields = leverageFields?.map((field) => {
-                if (field.id === leverageID) {
-                  return updatedLeverageField;
-                }
-                return field;
-              }) as Leverage[];
+            // if (leverageID) {
+            //   let updatedLeverageValue = updatedField as Pick<
+            //     Leverage,
+            //     'value'
+            //   >;
+            //   const leverageFields = set.fields.leverages;
+            //   const leverageFieldToUpdate = leverageFields?.find(
+            //     (field) => field.id === leverageID,
+            //   );
+            //   const updatedLeverageField = {
+            //     ...leverageFieldToUpdate,
+            //     ...updatedLeverageValue,
+            //   };
+            //   const updatedLeverageFields = leverageFields?.map((field) => {
+            //     if (field.id === leverageID) {
+            //       return updatedLeverageField;
+            //     }
+            //     return field;
+            //   }) as Leverage[];
 
-              return {
-                ...set,
-                fields: { ...set.fields, leverages: updatedLeverageFields },
-              };
-            }
+            //   return {
+            //     ...set,
+            //     fields: { ...set.fields, leverages: updatedLeverageFields },
+            //   };
+            // }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
@@ -1455,31 +1452,31 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedExercise = exercise;
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
-            if (leverageID) {
-              let updatedLeverageValue = updatedField as Pick<
-                Leverage,
-                'value'
-              >;
-              const leverageFields = set.fields.leverages;
-              const leverageFieldToUpdate = leverageFields?.find(
-                (field) => field.id === leverageID,
-              );
-              const updatedLeverageField = {
-                ...leverageFieldToUpdate,
-                ...updatedLeverageValue,
-              };
-              const updatedLeverageFields = leverageFields?.map((field) => {
-                if (field.id === leverageID) {
-                  return updatedLeverageField;
-                }
-                return field;
-              }) as Leverage[];
+            // if (leverageID) {
+            //   let updatedLeverageValue = updatedField as Pick<
+            //     Leverage,
+            //     'value'
+            //   >;
+            //   const leverageFields = set.fields.leverages;
+            //   const leverageFieldToUpdate = leverageFields?.find(
+            //     (field) => field.id === leverageID,
+            //   );
+            //   const updatedLeverageField = {
+            //     ...leverageFieldToUpdate,
+            //     ...updatedLeverageValue,
+            //   };
+            //   const updatedLeverageFields = leverageFields?.map((field) => {
+            //     if (field.id === leverageID) {
+            //       return updatedLeverageField;
+            //     }
+            //     return field;
+            //   }) as Leverage[];
 
-              return {
-                ...set,
-                fields: { ...set.fields, leverages: updatedLeverageFields },
-              };
-            }
+            //   return {
+            //     ...set,
+            //     fields: { ...set.fields, leverages: updatedLeverageFields },
+            //   };
+            // }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
@@ -1524,34 +1521,281 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedExercise = exercise;
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
-            if (leverageID) {
-              let updatedLeverageValue = updatedField as Pick<
-                Leverage,
-                'value'
-              >;
-              const leverageFields = set.fields.leverages;
-              const leverageFieldToUpdate = leverageFields?.find(
-                (field) => field.id === leverageID,
-              );
-              const updatedLeverageField = {
-                ...leverageFieldToUpdate,
-                ...updatedLeverageValue,
-              };
-              const updatedLeverageFields = leverageFields?.map((field) => {
-                if (field.id === leverageID) {
-                  return updatedLeverageField;
-                }
-                return field;
-              }) as Leverage[];
+            // if (leverageID) {
+            //   let updatedLeverageValue = updatedField as Pick<
+            //     Leverage,
+            //     'value'
+            //   >;
+            //   const leverageFields = set.fields.leverages;
+            //   const leverageFieldToUpdate = leverageFields?.find(
+            //     (field) => field.id === leverageID,
+            //   );
+            //   const updatedLeverageField = {
+            //     ...leverageFieldToUpdate,
+            //     ...updatedLeverageValue,
+            //   };
+            //   const updatedLeverageFields = leverageFields?.map((field) => {
+            //     if (field.id === leverageID) {
+            //       return updatedLeverageField;
+            //     }
+            //     return field;
+            //   }) as Leverage[];
 
-              return {
-                ...set,
-                fields: { ...set.fields, leverages: updatedLeverageFields },
-              };
-            }
+            //   return {
+            //     ...set,
+            //     fields: { ...set.fields, leverages: updatedLeverageFields },
+            //   };
+            // }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
+            };
+          }
+          return set;
+        });
+
+        let updatedSuperset = superset;
+        updatedSuperset = {
+          ...updatedSuperset,
+          exercises: updatedSuperset.exercises.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          }),
+        };
+
+        let updatedSection = section;
+        updatedSection = {
+          ...updatedSection,
+          items: updatedSection.items.map((item) => {
+            if (item.id === supersetID) {
+              return updatedSuperset;
+            }
+            return item;
+          }),
+        };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === sectionID) {
+            return updatedSection;
+          }
+          return item;
+        });
+      }
+
+      // Reset state
+      state.exerciseIDToMod = null;
+      state.supersetIDToMod = null;
+      state.sectionIDToMod = null;
+      state.setIDToMod = null;
+      state.leverageIDToMod = null;
+    }),
+  updateLeverageOrAssistField: (updatedField) =>
+    set((state) => {
+      // console.log('updateFieldUpdated - updatedField: ', updatedField);
+      const sectionID = get().sectionIDToMod;
+      const supersetID = get().supersetIDToMod;
+      const exerciseID = get().exerciseIDToMod;
+      const leverageID = get().leverageIDToMod;
+
+      // Update field of exercise in root
+      if (!sectionID && !supersetID && exerciseID) {
+        const exercise = state.workoutData.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        // const setID = state.setIDToMod;
+        const setID = get().setIDToMod;
+        if (setID == null) {
+          console.error('No setID provided');
+          return;
+        }
+        let updatedExercise = exercise;
+
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            let updatedLeverageValue = updatedField;
+            const leverageFields = set.fields.leverages;
+            const leverageFieldToUpdate = leverageFields?.find(
+              (field) => field.id === leverageID,
+            );
+            const updatedLeverageField = {
+              ...leverageFieldToUpdate,
+              ...updatedLeverageValue,
+            };
+            const updatedLeverageFields = leverageFields?.map((field) => {
+              if (field.id === leverageID) {
+                return updatedLeverageField;
+              }
+              return field;
+            }) as Leverage[];
+
+            return {
+              ...set,
+              fields: { ...set.fields, leverages: updatedLeverageFields },
+            };
+          }
+          return set;
+        });
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === exerciseID) {
+            return updatedExercise;
+          }
+          return item;
+        });
+        // Update field of exercise in section
+      } else if (sectionID && !supersetID && exerciseID) {
+        const section = state.workoutData.find(
+          (section) => section.id === sectionID,
+        ) as Section;
+        const exercise = section.items.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        const setID = state.setIDToMod;
+        if (setID == null) {
+          console.error('No setID provided');
+          return;
+        }
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            let updatedLeverageValue = updatedField;
+            const leverageFields = set.fields.leverages;
+            const leverageFieldToUpdate = leverageFields?.find(
+              (field) => field.id === leverageID,
+            );
+            const updatedLeverageField = {
+              ...leverageFieldToUpdate,
+              ...updatedLeverageValue,
+            };
+            const updatedLeverageFields = leverageFields?.map((field) => {
+              if (field.id === leverageID) {
+                return updatedLeverageField;
+              }
+              return field;
+            }) as Leverage[];
+
+            return {
+              ...set,
+              fields: { ...set.fields, leverages: updatedLeverageFields },
+            };
+          }
+          return set;
+        });
+
+        let updatedSection = section;
+        updatedSection = {
+          ...updatedSection,
+          items: updatedSection.items.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          }),
+        };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === sectionID) {
+            return updatedSection;
+          }
+          return item;
+        });
+        // Update field of exercise in superset
+      } else if (!sectionID && supersetID && exerciseID) {
+        const superset = state.workoutData.find(
+          (superset) => superset.id === supersetID,
+        ) as Superset;
+        const exercise = superset.exercises.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        const setID = state.setIDToMod;
+        if (setID == null) {
+          console.error('No setID provided');
+          return;
+        }
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            let updatedLeverageValue = updatedField;
+            const leverageFields = set.fields.leverages;
+            const leverageFieldToUpdate = leverageFields?.find(
+              (field) => field.id === leverageID,
+            );
+            const updatedLeverageField = {
+              ...leverageFieldToUpdate,
+              ...updatedLeverageValue,
+            };
+            const updatedLeverageFields = leverageFields?.map((field) => {
+              if (field.id === leverageID) {
+                return updatedLeverageField;
+              }
+              return field;
+            }) as Leverage[];
+
+            return {
+              ...set,
+              fields: { ...set.fields, leverages: updatedLeverageFields },
+            };
+          }
+          return set;
+        });
+
+        let updatedSuperset = superset;
+        updatedSuperset = {
+          ...updatedSuperset,
+          exercises: updatedSuperset.exercises.map((item) => {
+            if (item.id === exerciseID) {
+              return updatedExercise;
+            }
+            return item;
+          }),
+        };
+
+        state.workoutData = state.workoutData.map((item) => {
+          if (item.id === supersetID) {
+            return updatedSuperset;
+          }
+          return item;
+        });
+        // Update field of exercise in superset inside a section
+      } else if (sectionID && supersetID && exerciseID) {
+        const section = state.workoutData.find(
+          (section) => section.id === sectionID,
+        ) as Section;
+        const superset = section.items.find(
+          (superset) => superset.id === supersetID,
+        ) as Superset;
+        const exercise = superset.exercises.find(
+          (item) => item.id === exerciseID,
+        ) as Exercise;
+        const setID = state.setIDToMod;
+        if (setID == null) {
+          console.error('No setID provided');
+          return;
+        }
+        let updatedExercise = exercise;
+        updatedExercise.sets = updatedExercise.sets.map((set) => {
+          if (set.id === setID) {
+            let updatedLeverageValue = updatedField;
+            const leverageFields = set.fields.leverages;
+            const leverageFieldToUpdate = leverageFields?.find(
+              (field) => field.id === leverageID,
+            );
+            const updatedLeverageField = {
+              ...leverageFieldToUpdate,
+              ...updatedLeverageValue,
+            };
+            const updatedLeverageFields = leverageFields?.map((field) => {
+              if (field.id === leverageID) {
+                return updatedLeverageField;
+              }
+              return field;
+            }) as Leverage[];
+
+            return {
+              ...set,
+              fields: { ...set.fields, leverages: updatedLeverageFields },
             };
           }
           return set;
