@@ -5,11 +5,13 @@ import type {
   SetFields,
   Leverage,
   Assist,
+  Set,
 } from '@cwt/schema/workouts';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
 import type { LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
 
 import {
+  useWorkoutDraftStore,
   useExerciseLibraryStore,
   useLeveragesAssistsStore,
 } from '../../stores';
@@ -85,4 +87,76 @@ export function addLeveragesOrAssistsField(
   }
 
   return updatedFields;
+}
+
+export function updateLeverageOrAssistFieldInSets(
+  sets: Set[],
+  updatedField: Pick<Leverage, 'value'>,
+): Set[] {
+  let trackingTypeUpdated: 'leverages' | 'assists';
+  const setID = useWorkoutDraftStore.getState().setIDToMod;
+  const leverageOrAssistID =
+    useWorkoutDraftStore.getState().leverageOrAssistIDToMod;
+
+  const updatedSets = sets.map((set) => {
+    if (set.id === setID) {
+      // let updatedValue = updatedField;
+      const leverageFields = set.fields.leverages;
+      const assistFields = set.fields.assists;
+
+      let fieldToUpdate = null;
+
+      if (leverageFields) {
+        fieldToUpdate = leverageFields.find(
+          (field) => field.id === leverageOrAssistID,
+        );
+        if (fieldToUpdate) {
+          trackingTypeUpdated = 'leverages';
+        }
+      } else if (assistFields && !fieldToUpdate) {
+        fieldToUpdate = assistFields.find(
+          (field) => field.id === leverageOrAssistID,
+        );
+        trackingTypeUpdated = 'assists';
+      }
+
+      // const leverageFieldToUpdate = leverageFields.find(
+      //   (field) => field.id === leverageOrAssistID,
+      // );
+      const updatedAssistOrLeverageField = {
+        ...fieldToUpdate,
+        ...updatedField,
+      };
+
+      if (trackingTypeUpdated === 'leverages' && leverageFields) {
+        const updatedLeverageFields = leverageFields.map((field) => {
+          if (field.id === leverageOrAssistID) {
+            return updatedAssistOrLeverageField;
+          }
+          return field;
+        }) as Leverage[];
+
+        return {
+          ...set,
+          fields: { ...set.fields, leverages: updatedLeverageFields },
+        };
+      } else if (trackingTypeUpdated === 'assists' && assistFields) {
+        const updatedAssistFields = assistFields.map((field) => {
+          if (field.id === leverageOrAssistID) {
+            return updatedAssistOrLeverageField;
+          }
+          return field;
+        }) as Assist[];
+
+        return {
+          ...set,
+          fields: { ...set.fields, leverages: updatedAssistFields },
+        };
+      }
+    }
+
+    return set;
+  });
+
+  return updatedSets;
 }
