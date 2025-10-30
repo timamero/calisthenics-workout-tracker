@@ -283,39 +283,40 @@ export const createWorkoutDraftSlice: StateCreator<
         if (tracking.includes('time')) {
           fields = { ...fields, ...DEFAULT_TIME_SET };
         }
-        if (tracking.includes('leverages')) {
-          const exercise: ExerciseResponse = useExerciseLibraryStore
-            .getState()
-            .getExerciseByID(exerciseID);
+        // if (tracking.includes('leverages')) {
+        //   const exercise: ExerciseResponse = useExerciseLibraryStore
+        //     .getState()
+        //     .getExerciseByID(exerciseID);
 
-          if (!exercise.default_leverage_id) {
-            console.error('This exercise does not have a default_leverage_id');
-            return;
-          }
-          const leverageID: number = exercise.default_leverage_id;
-          const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
-            .getState()
-            .getLeverageOrAssistByID(leverageID);
-          const valueType = leverage.value_type;
+        //   if (!exercise.default_leverage_id) {
+        //     console.error('This exercise does not have a default_leverage_id');
+        //     return;
+        //   }
+        //   const leverageID: number = exercise.default_leverage_id;
+        //   const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
+        //     .getState()
+        //     .getLeverageOrAssistByID(leverageID);
+        //   const valueType = leverage.value_type;
 
-          let leverageField: Leverage;
-          if (valueType === 'int') {
-            leverageField = {
-              id: uuidv4(),
-              leverages_assists_id: leverageID,
-              value: null,
-            };
-          } else {
-            const firstOption = leverage.value_options[0];
-            leverageField = {
-              id: uuidv4(),
-              leverages_assists_id: leverageID,
-              value: firstOption,
-            };
-          }
+        //   let leverageField: Leverage;
+        //   if (valueType === 'int') {
+        //     leverageField = {
+        //       id: uuidv4(),
+        //       leverages_assists_id: leverageID,
+        //       value: null,
+        //     };
+        //   } else {
+        //     const firstOption = leverage.value_options[0];
+        //     leverageField = {
+        //       id: uuidv4(),
+        //       leverages_assists_id: leverageID,
+        //       value: firstOption,
+        //     };
+        //   }
 
-          fields = { ...fields, leverages: [leverageField] };
-        }
+        //   fields = { ...fields, leverages: [leverageField] };
+        // }
+        fields = addLeveragesOrAssistsField(fields, exerciseID, tracking);
 
         fields = { ...fields, ...DEFAULT_REST_SET };
 
@@ -814,7 +815,7 @@ export const createWorkoutDraftSlice: StateCreator<
           // }
           fields = addLeveragesOrAssistsField(
             fields,
-            updatedExercise,
+            updatedExercise.exercise_id,
             tracking,
           );
 
@@ -894,7 +895,7 @@ export const createWorkoutDraftSlice: StateCreator<
           // }
           fields = addLeveragesOrAssistsField(
             fields,
-            updatedExercise,
+            updatedExercise.exercise_id,
             tracking,
           );
 
@@ -985,7 +986,7 @@ export const createWorkoutDraftSlice: StateCreator<
           // }
           fields = addLeveragesOrAssistsField(
             fields,
-            updatedExercise,
+            updatedExercise.exercise_id,
             tracking,
           );
 
@@ -1080,7 +1081,7 @@ export const createWorkoutDraftSlice: StateCreator<
 
           fields = addLeveragesOrAssistsField(
             fields,
-            updatedExercise,
+            updatedExercise.exercise_id,
             tracking,
           );
 
