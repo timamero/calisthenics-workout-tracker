@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextInput } from '@mantine/core';
 
-import type { SetFields } from '@cwt/schema/workouts';
+import type { Leverage, SetFields } from '@cwt/schema/workouts';
 
 import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
@@ -30,12 +30,12 @@ export default function NumeralInput({
       setLeverageIDToMod(fieldID);
     }
     if (event.currentTarget.value == '') {
-      const updatedField: Partial<SetFields> = {
+      const updatedField: Partial<SetFields> | Pick<Leverage, 'value'> = {
         [fieldName]: undefined,
       };
       handleSetFieldChange(set.id, updatedField);
     } else {
-      const updatedField: Partial<SetFields> = {
+      const updatedField: Partial<SetFields> | Pick<Leverage, 'value'> = {
         [fieldName]: Number(event.currentTarget.value),
       };
       handleSetFieldChange(set.id, updatedField);
