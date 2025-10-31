@@ -1,5 +1,10 @@
 import { useContext } from 'react';
-import type { Exercise, Leverage, SetFields } from '@cwt/schema/workouts';
+import type {
+  Assist,
+  Exercise,
+  Leverage,
+  SetFields,
+} from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
@@ -28,7 +33,10 @@ export default function SetList() {
 
   const handleSetFieldChange = (
     setID: string,
-    updatedField: Partial<SetFields> | Pick<Leverage, 'value'>,
+    updatedField:
+      | Partial<SetFields>
+      | Pick<Leverage, 'value'>
+      | Pick<Assist, 'value'>,
   ) => {
     setSetIDToMod(setID);
     setExerciseIDToMod(exercise.id);
@@ -39,7 +47,9 @@ export default function SetList() {
       setSectionIDToMod(parentSectionID);
     }
     if (useWorkoutDraftStore.getState().leverageOrAssistIDToMod) {
-      updateLeverageOrAssistField(updatedField as Pick<Leverage, 'value'>);
+      updateLeverageOrAssistField(
+        updatedField as Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
+      );
     } else {
       updateField(updatedField as Partial<SetFields>);
     }

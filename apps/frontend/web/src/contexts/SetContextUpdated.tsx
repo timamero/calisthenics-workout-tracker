@@ -1,13 +1,16 @@
 import * as React from 'react';
 
-import type { Leverage, Set, SetFields } from '@cwt/schema/workouts';
+import type { Leverage, Assist, Set, SetFields } from '@cwt/schema/workouts';
 
 interface SetContextType {
   set: Set;
   setIndex: number;
   handleSetFieldChange: (
     setID: string,
-    updatedField: Partial<SetFields> | Pick<Leverage, 'value'>,
+    updatedField:
+      | Partial<SetFields>
+      | Pick<Leverage, 'value'>
+      | Pick<Assist, 'value'>,
   ) => void;
 }
 
