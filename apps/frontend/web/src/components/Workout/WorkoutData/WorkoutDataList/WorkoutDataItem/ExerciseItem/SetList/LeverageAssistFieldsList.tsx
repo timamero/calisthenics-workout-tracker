@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Group } from '@mantine/core';
+import { Group, Stack } from '@mantine/core';
 
 import type { Exercise } from '@cwt/schema/workouts';
 
@@ -47,7 +47,33 @@ export default function LeverageAssistFieldsList() {
       }
     });
   }
-  // console.log('LeverageAssistFieldsList - returning leverageFields');
+  let assistFields;
+
+  if (tracked.includes('assists')) {
+    assistFields = set?.fields.assists!.map((assistField) => {
+      const assist = getLeverageOrAssistByID(assistField.leverages_assists_id);
+
+      if (assist.value_type === 'int') {
+        return (
+          <NumeralInput
+            key={assistField.id}
+            label={`${assist.name} (${assist.value_int_unit})`}
+            fieldName="value"
+            fieldID={assistField.id}
+          />
+        );
+      } else {
+        return (
+          <SelectInput
+            key={assistField.id}
+            label={`${assist.name}`}
+            fieldID={assistField.id}
+          />
+        );
+      }
+    });
+  }
+  // console.log('assistAssistFieldsList - returning assistFields');
 
   // const fields = tracked.map((field, i) => {
   //   switch (field) {
@@ -59,5 +85,10 @@ export default function LeverageAssistFieldsList() {
   //       return <></>;
   //   }
   // });
-  return <Group align="center">{leverageFields}</Group>;
+  return (
+    <Stack>
+      <Group align="center">{leverageFields}</Group>
+      <Group align="center">{assistFields}</Group>
+    </Stack>
+  );
 }
