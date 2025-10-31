@@ -213,33 +213,31 @@ export const createWorkoutDraftSlice: StateCreator<
       state.sectionIDToMod = null;
     }),
   addExercise: (tracking) =>
-    set(
-      (state) => {
-        const exerciseID = state.selectedExerciseIDToAdd;
-        if (exerciseID == null) {
-          console.error('No exerciseID provided');
-          return;
+    set((state) => {
+      const exerciseID = state.selectedExerciseIDToAdd;
+      if (exerciseID == null) {
+        console.error('No exerciseID provided');
+        return;
+      }
+      if (state.mode === 'edit' || state.mode === 'build') {
+        let fields;
+        if (tracking.includes('reps')) {
+          fields = DEFAULT_REP_SET;
+        } else if (tracking.includes('time')) {
+          fields = DEFAULT_TIME_SET;
         }
-        if (state.mode === 'edit' || state.mode === 'build') {
-          let fields;
-          if (tracking.includes('reps')) {
-            fields = DEFAULT_REP_SET;
-          } else if (tracking.includes('time')) {
-            fields = DEFAULT_TIME_SET;
-          }
 
-          state.workoutData.push({
-            sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
-            exercise_id: exerciseID,
-            tracked: tracking,
-            type: 'exercise',
-            id: uuidv4(),
-          } as Exercise);
-        } else {
-          console.error('Cannot add exercise in log mode');
-        }
-      }, // }),
-    ),
+        state.workoutData.push({
+          sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
+          exercise_id: exerciseID,
+          tracked: tracking,
+          type: 'exercise',
+          id: uuidv4(),
+        } as Exercise);
+      } else {
+        console.error('Cannot add exercise in log mode');
+      }
+    }),
   removeExercise: (exerciseIndex) =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
@@ -726,11 +724,19 @@ export const createWorkoutDraftSlice: StateCreator<
             fields = { ...fields, ...DEFAULT_TIME_SET };
           }
 
-          fields = addLeveragesOrAssistsField(
-            fields,
-            updatedExercise.exercise_id,
-            tracking,
-          );
+          if (tracking.includes('leverages') || tracking.includes('assists')) {
+            fields = addLeveragesOrAssistsField(
+              fields,
+              updatedExercise.exercise_id,
+              tracking,
+            );
+          }
+
+          // fields = addLeveragesOrAssistsField(
+          //   fields,
+          //   updatedExercise.exercise_id,
+          //   tracking,
+          // );
 
           fields = { ...fields, ...DEFAULT_REST_SET };
 
@@ -767,11 +773,19 @@ export const createWorkoutDraftSlice: StateCreator<
             fields = { ...fields, ...DEFAULT_TIME_SET };
           }
 
-          fields = addLeveragesOrAssistsField(
-            fields,
-            updatedExercise.exercise_id,
-            tracking,
-          );
+          if (tracking.includes('leverages') || tracking.includes('assists')) {
+            fields = addLeveragesOrAssistsField(
+              fields,
+              updatedExercise.exercise_id,
+              tracking,
+            );
+          }
+
+          // fields = addLeveragesOrAssistsField(
+          //   fields,
+          //   updatedExercise.exercise_id,
+          //   tracking,
+          // );
 
           fields = { ...fields, ...DEFAULT_REST_SET };
 
@@ -819,11 +833,18 @@ export const createWorkoutDraftSlice: StateCreator<
             fields = { ...fields, ...DEFAULT_TIME_SET };
           }
 
-          fields = addLeveragesOrAssistsField(
-            fields,
-            updatedExercise.exercise_id,
-            tracking,
-          );
+          if (tracking.includes('leverages') || tracking.includes('assists')) {
+            fields = addLeveragesOrAssistsField(
+              fields,
+              updatedExercise.exercise_id,
+              tracking,
+            );
+          }
+          // fields = addLeveragesOrAssistsField(
+          //   fields,
+          //   updatedExercise.exercise_id,
+          //   tracking,
+          // );
 
           fields = { ...fields, ...DEFAULT_REST_SET };
 
@@ -874,11 +895,18 @@ export const createWorkoutDraftSlice: StateCreator<
             fields = { ...fields, ...DEFAULT_TIME_SET };
           }
 
-          fields = addLeveragesOrAssistsField(
-            fields,
-            updatedExercise.exercise_id,
-            tracking,
-          );
+          if (tracking.includes('leverages') || tracking.includes('assists')) {
+            fields = addLeveragesOrAssistsField(
+              fields,
+              updatedExercise.exercise_id,
+              tracking,
+            );
+          }
+          // fields = addLeveragesOrAssistsField(
+          //   fields,
+          //   updatedExercise.exercise_id,
+          //   tracking,
+          // );
 
           fields = { ...fields, ...DEFAULT_REST_SET };
 
