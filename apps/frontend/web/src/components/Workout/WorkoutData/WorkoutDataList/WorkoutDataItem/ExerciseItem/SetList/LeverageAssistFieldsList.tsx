@@ -42,6 +42,7 @@ export default function LeverageAssistFieldsList() {
             key={leverageField.id}
             label={`${leverage.name}`}
             fieldID={leverageField.id}
+            trackingType="leverages"
           />
         );
       }
@@ -69,6 +70,7 @@ export default function LeverageAssistFieldsList() {
             key={assistField.id}
             label={`${assist.name}`}
             fieldID={assistField.id}
+            trackingType="assists"
           />
         );
       }
