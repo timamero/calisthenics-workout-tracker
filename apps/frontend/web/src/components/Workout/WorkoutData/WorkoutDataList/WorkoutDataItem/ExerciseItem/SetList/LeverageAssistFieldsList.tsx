@@ -13,7 +13,6 @@ export default function LeverageAssistFieldsList() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const tracked = exercise.tracked;
   const set = useContext(SetContext)?.set;
-  console.log('LeverageAssistFieldsList - tracked', tracked);
 
   const getLeverageOrAssistByID = useLeveragesAssistsStore(
     (state) => state.getLeverageOrAssistByID,
@@ -22,7 +21,6 @@ export default function LeverageAssistFieldsList() {
   let leverageFields;
 
   if (tracked.includes('leverages')) {
-    //   console.log('LeverageAssistFieldsList - adding leverages field');
     leverageFields = set?.fields.leverages!.map((leverageField) => {
       const leverage = getLeverageOrAssistByID(
         leverageField.leverages_assists_id,
@@ -48,12 +46,10 @@ export default function LeverageAssistFieldsList() {
         );
       }
     });
-    console.log('leverageFields', leverageFields);
   }
   let assistFields;
 
   if (tracked.includes('assists')) {
-    console.log('LeverageAssistFieldsList - adding assists field');
     assistFields = set?.fields.assists!.map((assistField) => {
       const assist = getLeverageOrAssistByID(assistField.leverages_assists_id);
 
@@ -78,18 +74,7 @@ export default function LeverageAssistFieldsList() {
       }
     });
   }
-  // console.log('assistAssistFieldsList - returning assistFields');
 
-  // const fields = tracked.map((field, i) => {
-  //   switch (field) {
-  //     case 'reps':
-  //       return <NumeralInput key={`${field}-${i}`} label="reps" />;
-  //     case 'time':
-  //       return <DurationInput key={`${field}-${i}`} label="time" />;
-  //     default:
-  //       return <></>;
-  //   }
-  // });
   return (
     <Stack>
       <Group align="center">{leverageFields}</Group>

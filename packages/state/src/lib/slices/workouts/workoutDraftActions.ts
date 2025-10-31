@@ -102,12 +102,8 @@ export function updateLeverageOrAssistFieldInSets(
 
   const updatedSets = sets.map((set) => {
     if (set.id === setID) {
-      // let updatedValue = updatedField;
       const leverageFields = set.fields.leverages;
       const assistFields = set.fields.assists;
-
-      console.log('leverageFields: ', leverageFields);
-      console.log('assistFields: ', assistFields);
 
       let fieldToUpdate = null;
 
@@ -119,16 +115,12 @@ export function updateLeverageOrAssistFieldInSets(
           trackingTypeUpdated = 'leverages';
         }
       } else if (assistFields && !fieldToUpdate) {
-        console.log('updating assist field in action');
         fieldToUpdate = assistFields.find(
           (field) => field.id === leverageOrAssistID,
         );
         trackingTypeUpdated = 'assists';
       }
 
-      // const leverageFieldToUpdate = leverageFields.find(
-      //   (field) => field.id === leverageOrAssistID,
-      // );
       const updatedAssistOrLeverageField = {
         ...fieldToUpdate,
         ...updatedField,
@@ -139,7 +131,6 @@ export function updateLeverageOrAssistFieldInSets(
         leverageFields &&
         leverageFields.length > 0
       ) {
-        console.log('adding updated leverage field');
         const updatedLeverageFields = leverageFields.map((field) => {
           if (field.id === leverageOrAssistID) {
             return updatedAssistOrLeverageField;
@@ -173,6 +164,5 @@ export function updateLeverageOrAssistFieldInSets(
 
     return set;
   });
-  console.log('updatedSets: ', updatedSets);
   return updatedSets;
 }
