@@ -328,7 +328,6 @@ export const createWorkoutDraftSlice: StateCreator<
         // Reset state
         state.sectionIDToMod = null;
         state.supersetIDToMod = null;
-        // state.selectedExerciseIDToAdd = null;
       } else {
         console.error('Cannot add exercise in log mode');
       }
