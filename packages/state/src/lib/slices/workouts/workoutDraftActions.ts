@@ -82,7 +82,9 @@ export function addLeveragesOrAssistsField(
     }
 
     updatedFields = { ...fields, assists: [assistField] };
-  } else {
+  }
+
+  if (!tracking.includes('leverages') && !tracking.includes('assists')) {
     console.error('Invalid tracking type.');
   }
 
