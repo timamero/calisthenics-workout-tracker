@@ -19,8 +19,8 @@ export default function FieldsList() {
         );
       case 'time':
         return <DurationInput key={`${field}-${i}`} label="time" />;
-      default:
-        return <></>;
+      // default:
+      //   return <></>;
     }
   });
   return (
