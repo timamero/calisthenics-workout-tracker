@@ -277,6 +277,7 @@ export const createWorkoutDraftSlice: StateCreator<
       }
 
       if (state.mode === 'edit' || state.mode === 'build') {
+        console.log('addExerciseUpdated - tracking: ', tracking);
         // let fields: SetFields = {};
         // let fields;
         let fields = DEFAULT_FIELDS;
@@ -319,7 +320,9 @@ export const createWorkoutDraftSlice: StateCreator<
 
         //   fields = { ...fields, leverages: [leverageField] };
         // }
-        fields = addLeveragesOrAssistsField(fields, exerciseID, tracking);
+        if (tracking.includes('leverages') || tracking.includes('assists')) {
+          fields = addLeveragesOrAssistsField(fields, exerciseID, tracking);
+        }
 
         fields = { ...fields, ...DEFAULT_REST_SET };
 

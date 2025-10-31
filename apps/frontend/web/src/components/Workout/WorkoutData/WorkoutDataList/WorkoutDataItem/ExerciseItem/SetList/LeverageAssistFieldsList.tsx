@@ -13,6 +13,7 @@ export default function LeverageAssistFieldsList() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const tracked = exercise.tracked;
   const set = useContext(SetContext)?.set;
+  console.log('LeverageAssistFieldsList - tracked', tracked);
 
   const getLeverageOrAssistByID = useLeveragesAssistsStore(
     (state) => state.getLeverageOrAssistByID,
@@ -21,7 +22,7 @@ export default function LeverageAssistFieldsList() {
   let leverageFields;
 
   if (tracked.includes('leverages')) {
-    // console.log('LeverageAssistFieldsList - adding leverages field');
+    //   console.log('LeverageAssistFieldsList - adding leverages field');
     leverageFields = set?.fields.leverages!.map((leverageField) => {
       const leverage = getLeverageOrAssistByID(
         leverageField.leverages_assists_id,
@@ -34,6 +35,7 @@ export default function LeverageAssistFieldsList() {
             label={`${leverage.name} (${leverage.value_int_unit})`}
             fieldName="value"
             fieldID={leverageField.id}
+            trackingType="leverages"
           />
         );
       } else {
@@ -46,10 +48,12 @@ export default function LeverageAssistFieldsList() {
         );
       }
     });
+    console.log('leverageFields', leverageFields);
   }
   let assistFields;
 
   if (tracked.includes('assists')) {
+    console.log('LeverageAssistFieldsList - adding assists field');
     assistFields = set?.fields.assists!.map((assistField) => {
       const assist = getLeverageOrAssistByID(assistField.leverages_assists_id);
 
@@ -60,6 +64,7 @@ export default function LeverageAssistFieldsList() {
             label={`${assist.name} (${assist.value_int_unit})`}
             fieldName="value"
             fieldID={assistField.id}
+            trackingType="assists"
           />
         );
       } else {
