@@ -16,6 +16,13 @@ import {
   useLeveragesAssistsStore,
 } from '../../stores';
 
+import {
+  DEFAULT_FIELDS,
+  DEFAULT_REP_SET,
+  DEFAULT_TIME_SET,
+  DEFAULT_REST_SET,
+} from './workoutDefaults';
+
 export function addLeveragesOrAssistsField(
   fields: SetFields,
   selectedExerciseID: number,
@@ -165,4 +172,22 @@ export function updateLeverageOrAssistFieldInSets(
     return set;
   });
   return updatedSets;
+}
+
+export function createFields(tracking: string[], exerciseID: number) {
+  let fields = DEFAULT_FIELDS;
+  if (tracking.includes('reps')) {
+    fields = { ...fields, ...DEFAULT_REP_SET };
+  }
+  if (tracking.includes('time')) {
+    fields = { ...fields, ...DEFAULT_TIME_SET };
+  }
+
+  if (tracking.includes('leverages') || tracking.includes('assists')) {
+    fields = addLeveragesOrAssistsField(fields, exerciseID, tracking);
+  }
+
+  fields = { ...fields, ...DEFAULT_REST_SET };
+
+  return fields;
 }
