@@ -22,7 +22,7 @@ export default function NumeralInput({
     React.useContext(SetContext)!.handleSetFieldChange;
 
   const setLeverageIDToMod = useWorkoutDraftStore(
-    (state) => state.setLeverageIDToMod,
+    (state) => state.setLeverageOrAssistIDToMod,
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
