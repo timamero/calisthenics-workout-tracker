@@ -7,20 +7,13 @@ import type {
   SetFields,
   WorkoutBuildRequest,
   WorkoutLogRequest,
-  WorkoutData,
-  Set,
   Mode,
   Section,
   Superset,
   Leverage,
   Assist,
 } from '@cwt/schema/workouts';
-import type { ExerciseResponse, Tracking } from '@cwt/schema/exercises';
-
-import {
-  useExerciseLibraryStore,
-  useLeveragesAssistsStore,
-} from '../../stores';
+import type { Tracking } from '@cwt/schema/exercises';
 
 import {
   INITIAL_WORKOUT_LOG_TITLE,
@@ -34,10 +27,6 @@ import {
   DEFAULT_REST_SET,
 } from './workoutDefaults';
 import {
-  LeverageAssistValueType,
-  LeveragesAssistsResponse,
-} from '@cwt/schema/leveragesAssists';
-import {
   addLeveragesOrAssistsField,
   updateLeverageOrAssistFieldInSets,
 } from './workoutDraftActions';
@@ -45,7 +34,6 @@ import {
 interface WorkoutDraftState {
   mode: Mode | null;
   workoutData: Array<Exercise | Section | Superset>;
-  // workoutData: WorkoutData;
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
@@ -84,16 +72,11 @@ interface WorkoutDraftAction {
   addSetUpdated: () => void;
   deleteSet: (exerciseIndex: number) => void;
   deleteSetUpdated: () => void;
-  updateField: (
-    exerciseIndex: number,
-    updatedField: SetFields,
-    // updatedField: Partial<SetFields>,
-  ) => void;
+  updateField: (exerciseIndex: number, updatedField: SetFields) => void;
   updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
   updateLeverageOrAssistField: (
     updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
   ) => void;
-  // updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
   toggleCompleted: (
     exerciseIndex: number,
     setIndex: number,
@@ -107,10 +90,6 @@ interface WorkoutDraftAction {
 }
 
 export type WorkoutDraftSlice = WorkoutDraftState & WorkoutDraftAction;
-
-// function isExercise(item: Exercise | Section | Superset): item is Exercise {
-//   return 'sets' in item;
-// }
 
 function isSection(item: any): item is Section {
   return item?.type === 'section';
@@ -236,14 +215,12 @@ export const createWorkoutDraftSlice: StateCreator<
   addExercise: (tracking) =>
     set(
       (state) => {
-        // produce((state) => {
         const exerciseID = state.selectedExerciseIDToAdd;
         if (exerciseID == null) {
           console.error('No exerciseID provided');
           return;
         }
         if (state.mode === 'edit' || state.mode === 'build') {
-          // let fields: SetFields = {};
           let fields;
           if (tracking.includes('reps')) {
             fields = DEFAULT_REP_SET;
@@ -281,8 +258,7 @@ export const createWorkoutDraftSlice: StateCreator<
 
       if (state.mode === 'edit' || state.mode === 'build') {
         console.log('addExerciseUpdated - tracking: ', tracking);
-        // let fields: SetFields = {};
-        // let fields;
+
         let fields = DEFAULT_FIELDS;
         if (tracking.includes('reps')) {
           fields = { ...fields, ...DEFAULT_REP_SET };
@@ -290,39 +266,7 @@ export const createWorkoutDraftSlice: StateCreator<
         if (tracking.includes('time')) {
           fields = { ...fields, ...DEFAULT_TIME_SET };
         }
-        // if (tracking.includes('leverages')) {
-        //   const exercise: ExerciseResponse = useExerciseLibraryStore
-        //     .getState()
-        //     .getExerciseByID(exerciseID);
 
-        //   if (!exercise.default_leverage_id) {
-        //     console.error('This exercise does not have a default_leverage_id');
-        //     return;
-        //   }
-        //   const leverageID: number = exercise.default_leverage_id;
-        //   const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
-        //     .getState()
-        //     .getLeverageOrAssistByID(leverageID);
-        //   const valueType = leverage.value_type;
-
-        //   let leverageField: Leverage;
-        //   if (valueType === 'int') {
-        //     leverageField = {
-        //       id: uuidv4(),
-        //       leverages_assists_id: leverageID,
-        //       value: null,
-        //     };
-        //   } else {
-        //     const firstOption = leverage.value_options[0];
-        //     leverageField = {
-        //       id: uuidv4(),
-        //       leverages_assists_id: leverageID,
-        //       value: firstOption,
-        //     };
-        //   }
-
-        //   fields = { ...fields, leverages: [leverageField] };
-        // }
         if (tracking.includes('leverages') || tracking.includes('assists')) {
           fields = addLeveragesOrAssistsField(fields, exerciseID, tracking);
         }
@@ -773,12 +717,6 @@ export const createWorkoutDraftSlice: StateCreator<
           );
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          // let fields;
-          // if (tracking.includes('reps')) {
-          //   fields = DEFAULT_REP_SET;
-          // } else if (tracking.includes('time')) {
-          //   fields = DEFAULT_TIME_SET;
-          // }
 
           let fields = DEFAULT_FIELDS;
           if (tracking.includes('reps')) {
@@ -787,41 +725,7 @@ export const createWorkoutDraftSlice: StateCreator<
           if (tracking.includes('time')) {
             fields = { ...fields, ...DEFAULT_TIME_SET };
           }
-          // if (tracking.includes('leverages')) {
-          //   const selectedExercise: ExerciseResponse = useExerciseLibraryStore
-          //     .getState()
-          //     .getExerciseByID(updatedExercise.exercise_id);
 
-          //   if (!selectedExercise.default_leverage_id) {
-          //     console.error(
-          //       'This exercise does not have a default_leverage_id',
-          //     );
-          //     return;
-          //   }
-          //   const leverageID: number = selectedExercise.default_leverage_id;
-          //   const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
-          //     .getState()
-          //     .getLeverageOrAssistByID(leverageID);
-          //   const valueType = leverage.value_type;
-
-          //   let leverageField: Leverage;
-          //   if (valueType === 'int') {
-          //     leverageField = {
-          //       id: uuidv4(),
-          //       leverages_assists_id: leverageID,
-          //       value: null,
-          //     };
-          //   } else {
-          //     const firstOption = leverage.value_options[0];
-          //     leverageField = {
-          //       id: uuidv4(),
-          //       leverages_assists_id: leverageID,
-          //       value: firstOption,
-          //     };
-          //   }
-
-          //   fields = { ...fields, leverages: [leverageField] };
-          // }
           fields = addLeveragesOrAssistsField(
             fields,
             updatedExercise.exercise_id,
@@ -854,12 +758,7 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Exercise;
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          // let fields;
-          // if (tracking.includes('reps')) {
-          //   fields = DEFAULT_REP_SET;
-          // } else if (tracking.includes('time')) {
-          //   fields = DEFAULT_TIME_SET;
-          // }
+
           let fields = DEFAULT_FIELDS;
           if (tracking.includes('reps')) {
             fields = { ...fields, ...DEFAULT_REP_SET };
@@ -867,41 +766,7 @@ export const createWorkoutDraftSlice: StateCreator<
           if (tracking.includes('time')) {
             fields = { ...fields, ...DEFAULT_TIME_SET };
           }
-          // if (tracking.includes('leverages')) {
-          //   const selectedExercise: ExerciseResponse = useExerciseLibraryStore
-          //     .getState()
-          //     .getExerciseByID(updatedExercise.exercise_id);
 
-          //   if (!selectedExercise.default_leverage_id) {
-          //     console.error(
-          //       'This exercise does not have a default_leverage_id',
-          //     );
-          //     return;
-          //   }
-          //   const leverageID: number = selectedExercise.default_leverage_id;
-          //   const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
-          //     .getState()
-          //     .getLeverageOrAssistByID(leverageID);
-          //   const valueType = leverage.value_type;
-
-          //   let leverageField: Leverage;
-          //   if (valueType === 'int') {
-          //     leverageField = {
-          //       id: uuidv4(),
-          //       leverages_assists_id: leverageID,
-          //       value: null,
-          //     };
-          //   } else {
-          //     const firstOption = leverage.value_options[0];
-          //     leverageField = {
-          //       id: uuidv4(),
-          //       leverages_assists_id: leverageID,
-          //       value: firstOption,
-          //     };
-          //   }
-
-          //   fields = { ...fields, leverages: [leverageField] };
-          // }
           fields = addLeveragesOrAssistsField(
             fields,
             updatedExercise.exercise_id,
@@ -945,12 +810,7 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Exercise;
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          // let fields;
-          // if (tracking.includes('reps')) {
-          //   fields = DEFAULT_REP_SET;
-          // } else if (tracking.includes('time')) {
-          //   fields = DEFAULT_TIME_SET;
-          // }
+
           let fields = DEFAULT_FIELDS;
           if (tracking.includes('reps')) {
             fields = { ...fields, ...DEFAULT_REP_SET };
@@ -958,41 +818,7 @@ export const createWorkoutDraftSlice: StateCreator<
           if (tracking.includes('time')) {
             fields = { ...fields, ...DEFAULT_TIME_SET };
           }
-          // if (tracking.includes('leverages')) {
-          //   const selectedExercise: ExerciseResponse = useExerciseLibraryStore
-          //     .getState()
-          //     .getExerciseByID(updatedExercise.exercise_id);
 
-          //   if (!selectedExercise.default_leverage_id) {
-          //     console.error(
-          //       'This exercise does not have a default_leverage_id',
-          //     );
-          //     return;
-          //   }
-          //   const leverageID: number = selectedExercise.default_leverage_id;
-          //   const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
-          //     .getState()
-          //     .getLeverageOrAssistByID(leverageID);
-          //   const valueType = leverage.value_type;
-
-          //   let leverageField: Leverage;
-          //   if (valueType === 'int') {
-          //     leverageField = {
-          //       id: uuidv4(),
-          //       leverages_assists_id: leverageID,
-          //       value: null,
-          //     };
-          //   } else {
-          //     const firstOption = leverage.value_options[0];
-          //     leverageField = {
-          //       id: uuidv4(),
-          //       leverages_assists_id: leverageID,
-          //       value: firstOption,
-          //     };
-          //   }
-
-          //   fields = { ...fields, leverages: [leverageField] };
-          // }
           fields = addLeveragesOrAssistsField(
             fields,
             updatedExercise.exercise_id,
@@ -1039,12 +865,7 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Exercise;
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
-          // let fields;
-          // if (tracking.includes('reps')) {
-          //   fields = DEFAULT_REP_SET;
-          // } else if (tracking.includes('time')) {
-          //   fields = DEFAULT_TIME_SET;
-          // }
+
           let fields = DEFAULT_FIELDS;
           if (tracking.includes('reps')) {
             fields = { ...fields, ...DEFAULT_REP_SET };
@@ -1052,41 +873,6 @@ export const createWorkoutDraftSlice: StateCreator<
           if (tracking.includes('time')) {
             fields = { ...fields, ...DEFAULT_TIME_SET };
           }
-          // if (tracking.includes('leverages')) {
-          //   const selectedExercise: ExerciseResponse = useExerciseLibraryStore
-          //     .getState()
-          //     .getExerciseByID(updatedExercise.exercise_id);
-
-          //   if (!selectedExercise.default_leverage_id) {
-          //     console.error(
-          //       'This exercise does not have a default_leverage_id',
-          //     );
-          //     return;
-          //   }
-          //   const leverageID: number = selectedExercise.default_leverage_id;
-          //   const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
-          //     .getState()
-          //     .getLeverageOrAssistByID(leverageID);
-          //   const valueType = leverage.value_type;
-
-          //   let leverageField: Leverage;
-          //   if (valueType === 'int') {
-          //     leverageField = {
-          //       id: uuidv4(),
-          //       leverages_assists_id: leverageID,
-          //       value: null,
-          //     };
-          //   } else {
-          //     const firstOption = leverage.value_options[0];
-          //     leverageField = {
-          //       id: uuidv4(),
-          //       leverages_assists_id: leverageID,
-          //       value: firstOption,
-          //     };
-          //   }
-
-          //   fields = { ...fields, leverages: [leverageField] };
-          // }
 
           fields = addLeveragesOrAssistsField(
             fields,
@@ -1342,18 +1128,15 @@ export const createWorkoutDraftSlice: StateCreator<
     }),
   updateFieldUpdated: (updatedField) =>
     set((state) => {
-      // console.log('updateFieldUpdated - updatedField: ', updatedField);
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
       const exerciseID = get().exerciseIDToMod;
-      // const leverageID = get().leverageIDToMod;
 
       // Update field of exercise in root
       if (!sectionID && !supersetID && exerciseID) {
         const exercise = state.workoutData.find(
           (item) => item.id === exerciseID,
         ) as Exercise;
-        // const setID = state.setIDToMod;
         const setID = get().setIDToMod;
         if (setID == null) {
           console.error('No setID provided');
@@ -1363,31 +1146,6 @@ export const createWorkoutDraftSlice: StateCreator<
 
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
-            // if (leverageID) {
-            //   let updatedLeverageValue = updatedField as Pick<
-            //     Leverage,
-            //     'value'
-            //   >;
-            //   const leverageFields = set.fields.leverages;
-            //   const leverageFieldToUpdate = leverageFields?.find(
-            //     (field) => field.id === leverageID,
-            //   );
-            //   const updatedLeverageField = {
-            //     ...leverageFieldToUpdate,
-            //     ...updatedLeverageValue,
-            //   };
-            //   const updatedLeverageFields = leverageFields?.map((field) => {
-            //     if (field.id === leverageID) {
-            //       return updatedLeverageField;
-            //     }
-            //     return field;
-            //   }) as Leverage[];
-
-            //   return {
-            //     ...set,
-            //     fields: { ...set.fields, leverages: updatedLeverageFields },
-            //   };
-            // }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
@@ -1418,31 +1176,6 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedExercise = exercise;
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
-            // if (leverageID) {
-            //   let updatedLeverageValue = updatedField as Pick<
-            //     Leverage,
-            //     'value'
-            //   >;
-            //   const leverageFields = set.fields.leverages;
-            //   const leverageFieldToUpdate = leverageFields?.find(
-            //     (field) => field.id === leverageID,
-            //   );
-            //   const updatedLeverageField = {
-            //     ...leverageFieldToUpdate,
-            //     ...updatedLeverageValue,
-            //   };
-            //   const updatedLeverageFields = leverageFields?.map((field) => {
-            //     if (field.id === leverageID) {
-            //       return updatedLeverageField;
-            //     }
-            //     return field;
-            //   }) as Leverage[];
-
-            //   return {
-            //     ...set,
-            //     fields: { ...set.fields, leverages: updatedLeverageFields },
-            //   };
-            // }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
@@ -1484,31 +1217,6 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedExercise = exercise;
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
-            // if (leverageID) {
-            //   let updatedLeverageValue = updatedField as Pick<
-            //     Leverage,
-            //     'value'
-            //   >;
-            //   const leverageFields = set.fields.leverages;
-            //   const leverageFieldToUpdate = leverageFields?.find(
-            //     (field) => field.id === leverageID,
-            //   );
-            //   const updatedLeverageField = {
-            //     ...leverageFieldToUpdate,
-            //     ...updatedLeverageValue,
-            //   };
-            //   const updatedLeverageFields = leverageFields?.map((field) => {
-            //     if (field.id === leverageID) {
-            //       return updatedLeverageField;
-            //     }
-            //     return field;
-            //   }) as Leverage[];
-
-            //   return {
-            //     ...set,
-            //     fields: { ...set.fields, leverages: updatedLeverageFields },
-            //   };
-            // }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
@@ -1553,31 +1261,6 @@ export const createWorkoutDraftSlice: StateCreator<
         let updatedExercise = exercise;
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
-            // if (leverageID) {
-            //   let updatedLeverageValue = updatedField as Pick<
-            //     Leverage,
-            //     'value'
-            //   >;
-            //   const leverageFields = set.fields.leverages;
-            //   const leverageFieldToUpdate = leverageFields?.find(
-            //     (field) => field.id === leverageID,
-            //   );
-            //   const updatedLeverageField = {
-            //     ...leverageFieldToUpdate,
-            //     ...updatedLeverageValue,
-            //   };
-            //   const updatedLeverageFields = leverageFields?.map((field) => {
-            //     if (field.id === leverageID) {
-            //       return updatedLeverageField;
-            //     }
-            //     return field;
-            //   }) as Leverage[];
-
-            //   return {
-            //     ...set,
-            //     fields: { ...set.fields, leverages: updatedLeverageFields },
-            //   };
-            // }
             return {
               ...set,
               fields: { ...set.fields, ...updatedField },
@@ -1621,11 +1304,9 @@ export const createWorkoutDraftSlice: StateCreator<
       state.supersetIDToMod = null;
       state.sectionIDToMod = null;
       state.setIDToMod = null;
-      // state.leverageIDToMod = null;
     }),
   updateLeverageOrAssistField: (updatedField) =>
     set((state) => {
-      // console.log('updateFieldUpdated - updatedField: ', updatedField);
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
       const exerciseID = get().exerciseIDToMod;
@@ -1636,7 +1317,6 @@ export const createWorkoutDraftSlice: StateCreator<
         const exercise = state.workoutData.find(
           (item) => item.id === exerciseID,
         ) as Exercise;
-        // const setID = state.setIDToMod;
         const setID = get().setIDToMod;
         if (setID == null) {
           console.error('No setID provided');
@@ -1648,32 +1328,6 @@ export const createWorkoutDraftSlice: StateCreator<
           updatedExercise.sets,
           updatedField,
         );
-
-        // updatedExercise.sets = updatedExercise.sets.map((set) => {
-        //   if (set.id === setID) {
-        //     let updatedLeverageValue = updatedField;
-        //     const leverageFields = set.fields.leverages;
-        //     const leverageFieldToUpdate = leverageFields?.find(
-        //       (field) => field.id === leverageID,
-        //     );
-        //     const updatedLeverageField = {
-        //       ...leverageFieldToUpdate,
-        //       ...updatedLeverageValue,
-        //     };
-        //     const updatedLeverageFields = leverageFields?.map((field) => {
-        //       if (field.id === leverageID) {
-        //         return updatedLeverageField;
-        //       }
-        //       return field;
-        //     }) as Leverage[];
-
-        //     return {
-        //       ...set,
-        //       fields: { ...set.fields, leverages: updatedLeverageFields },
-        //     };
-        //   }
-        //   return set;
-        // });
 
         state.workoutData = state.workoutData.map((item) => {
           if (item.id === exerciseID) {
@@ -1699,31 +1353,6 @@ export const createWorkoutDraftSlice: StateCreator<
           updatedExercise.sets,
           updatedField,
         );
-        // updatedExercise.sets = updatedExercise.sets.map((set) => {
-        //   if (set.id === setID) {
-        //     let updatedLeverageValue = updatedField;
-        //     const leverageFields = set.fields.leverages;
-        //     const leverageFieldToUpdate = leverageFields?.find(
-        //       (field) => field.id === leverageID,
-        //     );
-        //     const updatedLeverageField = {
-        //       ...leverageFieldToUpdate,
-        //       ...updatedLeverageValue,
-        //     };
-        //     const updatedLeverageFields = leverageFields?.map((field) => {
-        //       if (field.id === leverageID) {
-        //         return updatedLeverageField;
-        //       }
-        //       return field;
-        //     }) as Leverage[];
-
-        //     return {
-        //       ...set,
-        //       fields: { ...set.fields, leverages: updatedLeverageFields },
-        //     };
-        //   }
-        //   return set;
-        // });
 
         let updatedSection = section;
         updatedSection = {
@@ -1760,31 +1389,6 @@ export const createWorkoutDraftSlice: StateCreator<
           updatedExercise.sets,
           updatedField,
         );
-        // updatedExercise.sets = updatedExercise.sets.map((set) => {
-        //   if (set.id === setID) {
-        //     let updatedLeverageValue = updatedField;
-        //     const leverageFields = set.fields.leverages;
-        //     const leverageFieldToUpdate = leverageFields?.find(
-        //       (field) => field.id === leverageID,
-        //     );
-        //     const updatedLeverageField = {
-        //       ...leverageFieldToUpdate,
-        //       ...updatedLeverageValue,
-        //     };
-        //     const updatedLeverageFields = leverageFields?.map((field) => {
-        //       if (field.id === leverageID) {
-        //         return updatedLeverageField;
-        //       }
-        //       return field;
-        //     }) as Leverage[];
-
-        //     return {
-        //       ...set,
-        //       fields: { ...set.fields, leverages: updatedLeverageFields },
-        //     };
-        //   }
-        //   return set;
-        // });
 
         let updatedSuperset = superset;
         updatedSuperset = {
@@ -1824,31 +1428,6 @@ export const createWorkoutDraftSlice: StateCreator<
           updatedExercise.sets,
           updatedField,
         );
-        // updatedExercise.sets = updatedExercise.sets.map((set) => {
-        //   if (set.id === setID) {
-        //     let updatedLeverageValue = updatedField;
-        //     const leverageFields = set.fields.leverages;
-        //     const leverageFieldToUpdate = leverageFields?.find(
-        //       (field) => field.id === leverageID,
-        //     );
-        //     const updatedLeverageField = {
-        //       ...leverageFieldToUpdate,
-        //       ...updatedLeverageValue,
-        //     };
-        //     const updatedLeverageFields = leverageFields?.map((field) => {
-        //       if (field.id === leverageID) {
-        //         return updatedLeverageField;
-        //       }
-        //       return field;
-        //     }) as Leverage[];
-
-        //     return {
-        //       ...set,
-        //       fields: { ...set.fields, leverages: updatedLeverageFields },
-        //     };
-        //   }
-        //   return set;
-        // });
 
         let updatedSuperset = superset;
         updatedSuperset = {
