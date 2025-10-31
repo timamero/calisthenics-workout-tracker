@@ -28,7 +28,7 @@ export default function SelectInput({ label, fieldID }: NumeralInputProps) {
     ),
   );
   const setLeverageIDToMod = useWorkoutDraftStore(
-    (state) => state.setLeverageIDToMod,
+    (state) => state.setLeverageOrAssistIDToMod,
   );
 
   const options = leverage.value_options;

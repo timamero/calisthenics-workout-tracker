@@ -38,7 +38,7 @@ export default function SetList() {
     if (parentSectionID) {
       setSectionIDToMod(parentSectionID);
     }
-    if (useWorkoutDraftStore.getState().leverageIDToMod) {
+    if (useWorkoutDraftStore.getState().leverageOrAssistIDToMod) {
       updateLeverageOrAssistField(updatedField as Pick<Leverage, 'value'>);
     } else {
       updateField(updatedField as Partial<SetFields>);
