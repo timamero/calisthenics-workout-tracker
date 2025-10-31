@@ -14,24 +14,32 @@ interface NumeralInputProps {
   label: string;
   // fieldName: 'value';
   fieldID: string;
+  trackingType?: string | null;
 }
 
-export default function SelectInput({ label, fieldID }: NumeralInputProps) {
+export default function SelectInput({
+  label,
+  fieldID,
+  trackingType = null,
+}: NumeralInputProps) {
   const set = React.useContext(SetContext)!.set;
   const handleSetFieldChange =
     React.useContext(SetContext)!.handleSetFieldChange;
+  console.log('tracking type: ', trackingType);
+  const leverageOrAssistID =
+    trackingType === 'leverages'
+      ? (set.fields.leverages?.find((field) => field.id === fieldID)!
+          .leverages_assists_id as number)
+      : (set.fields.assists?.find((field) => field.id === fieldID)!
+          .leverages_assists_id as number);
 
-  const leverage = useLeveragesAssistsStore((state) =>
-    state.getLeverageOrAssistByID(
-      set.fields.leverages?.find((field) => field.id === fieldID)!
-        .leverages_assists_id as number,
-    ),
+  console.log('leverageOrAssistID', leverageOrAssistID);
+  const leverageOrAssist = useLeveragesAssistsStore((state) =>
+    state.getLeverageOrAssistByID(leverageOrAssistID),
   );
   const setLeverageIDToMod = useWorkoutDraftStore(
     (state) => state.setLeverageOrAssistIDToMod,
   );
-
-  const options = leverage.value_options;
 
   const handleChange = (value: string | null) => {
     setLeverageIDToMod(fieldID);
@@ -39,18 +47,36 @@ export default function SelectInput({ label, fieldID }: NumeralInputProps) {
     handleSetFieldChange(set.id, updatedField);
   };
 
-  return (
-    <Select
-      label={label}
-      // placeholder="Pick value"
-      data={options}
-      value={
-        set.fields.leverages?.find((field) => field.id === fieldID)?.value
-          ? (set.fields.leverages.find((field) => field.id === fieldID)!
-              .value as string)
-          : null
-      }
-      onChange={handleChange}
-    />
-  );
+  const options = leverageOrAssist.value_options;
+  if (trackingType === 'leverages') {
+    return (
+      <Select
+        label={label}
+        // placeholder="Pick value"
+        data={options}
+        value={
+          set.fields.leverages?.find((field) => field.id === fieldID)?.value
+            ? (set.fields.leverages.find((field) => field.id === fieldID)!
+                .value as string)
+            : null
+        }
+        onChange={handleChange}
+      />
+    );
+  } else if (trackingType === 'assists') {
+    return (
+      <Select
+        label={label}
+        // placeholder="Pick value"
+        data={options}
+        value={
+          set.fields.assists?.find((field) => field.id === fieldID)?.value
+            ? (set.fields.assists.find((field) => field.id === fieldID)!
+                .value as string)
+            : null
+        }
+        onChange={handleChange}
+      />
+    );
+  }
 }
