@@ -50,16 +50,6 @@ export default function NumeralInput({
     }
   };
 
-  // const value =
-  //   fieldName === 'value'
-  //     ? set.fields.leverages![0].value === null
-  //       ? ''
-  //       : set.fields.leverages![0].value!.toString()
-  //     : set.fields[fieldName] === undefined
-  //       ? ''
-  //       : set.fields[fieldName]!.toString();
-  // console.log('NumeralInput - value: ', value);
-
   if (fieldName === 'value' && trackingType === 'leverages') {
     return (
       <TextInput
