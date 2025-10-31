@@ -13,6 +13,7 @@ import type {
   Section,
   Superset,
   Leverage,
+  Assist,
 } from '@cwt/schema/workouts';
 import type { ExerciseResponse, Tracking } from '@cwt/schema/exercises';
 
@@ -89,7 +90,9 @@ interface WorkoutDraftAction {
     // updatedField: Partial<SetFields>,
   ) => void;
   updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
-  updateLeverageOrAssistField: (updatedField: Pick<Leverage, 'value'>) => void;
+  updateLeverageOrAssistField: (
+    updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
+  ) => void;
   // updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
   toggleCompleted: (
     exerciseIndex: number,

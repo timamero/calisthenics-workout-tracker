@@ -93,7 +93,7 @@ export function addLeveragesOrAssistsField(
 
 export function updateLeverageOrAssistFieldInSets(
   sets: Set[],
-  updatedField: Pick<Leverage, 'value'>,
+  updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
 ): Set[] {
   let trackingTypeUpdated: 'leverages' | 'assists';
   const setID = useWorkoutDraftStore.getState().setIDToMod;
@@ -106,6 +106,9 @@ export function updateLeverageOrAssistFieldInSets(
       const leverageFields = set.fields.leverages;
       const assistFields = set.fields.assists;
 
+      console.log('leverageFields: ', leverageFields);
+      console.log('assistFields: ', assistFields);
+
       let fieldToUpdate = null;
 
       if (leverageFields) {
@@ -116,6 +119,7 @@ export function updateLeverageOrAssistFieldInSets(
           trackingTypeUpdated = 'leverages';
         }
       } else if (assistFields && !fieldToUpdate) {
+        console.log('updating assist field in action');
         fieldToUpdate = assistFields.find(
           (field) => field.id === leverageOrAssistID,
         );
@@ -130,7 +134,12 @@ export function updateLeverageOrAssistFieldInSets(
         ...updatedField,
       };
 
-      if (trackingTypeUpdated === 'leverages' && leverageFields) {
+      if (
+        trackingTypeUpdated === 'leverages' &&
+        leverageFields &&
+        leverageFields.length > 0
+      ) {
+        console.log('adding updated leverage field');
         const updatedLeverageFields = leverageFields.map((field) => {
           if (field.id === leverageOrAssistID) {
             return updatedAssistOrLeverageField;
@@ -142,7 +151,12 @@ export function updateLeverageOrAssistFieldInSets(
           ...set,
           fields: { ...set.fields, leverages: updatedLeverageFields },
         };
-      } else if (trackingTypeUpdated === 'assists' && assistFields) {
+      } else if (
+        trackingTypeUpdated === 'assists' &&
+        assistFields &&
+        assistFields.length > 0
+      ) {
+        console.log('adding updated assist field');
         const updatedAssistFields = assistFields.map((field) => {
           if (field.id === leverageOrAssistID) {
             return updatedAssistOrLeverageField;
@@ -152,13 +166,13 @@ export function updateLeverageOrAssistFieldInSets(
 
         return {
           ...set,
-          fields: { ...set.fields, leverages: updatedAssistFields },
+          fields: { ...set.fields, assists: updatedAssistFields },
         };
       }
     }
 
     return set;
   });
-
+  console.log('updatedSets: ', updatedSets);
   return updatedSets;
 }
