@@ -5,7 +5,7 @@ from ...services.supabase_client import get_supabase_client
 
 
 def get_leverages_assists_list(
-    access_token: Optional[str] = None
+    access_token: Optional[str] = None,
 ) -> List[LeveragesAssistsResponseSchema]:
     """
     Retrieve list of all leverages and assists from the database.
@@ -22,9 +22,7 @@ def get_leverages_assists_list(
             .order("display_order")
             .execute()
         )
-        return [
-            LeveragesAssistsResponseSchema(**item) for item in response.data
-        ]
+        return [LeveragesAssistsResponseSchema(**item) for item in response.data]
     except Exception as e:
         print(f"Error fetching leverages and assists: {e}")
         raise
