@@ -1,7 +1,7 @@
 from typing import List, Optional
 
-from ...schemas.leveragesAssists import LeveragesAssistsResponseSchema
-from ...services.supabase_client import get_supabase_client
+from app.schemas.leveragesAssists import LeveragesAssistsResponseSchema
+from app.services.supabase_client import get_supabase_client
 
 
 def get_leverages_assists_list(
