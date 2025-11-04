@@ -2,6 +2,9 @@ from pydantic import BaseModel
 from typing import List, Optional, Literal
 
 
+TrackingType = Literal["reps", "time", "weight", "rpe", "leverages", "assists"]
+
+
 class ExerciseSchema(BaseModel):
     id: int
     name: str
@@ -11,7 +14,7 @@ class ExerciseSchema(BaseModel):
     difficulty: Literal["beginner", "intermediate", "advanced"]
     tags: List[str]
     instructions: List[str]
-    default_tracking_type: List[Literal["reps", "weight", "time", "rpe"]]
+    default_tracking_type: List[TrackingType]
     video_url: Optional[str] = None
     source: Optional[str] = None
     updated_at: Optional[str] = None
