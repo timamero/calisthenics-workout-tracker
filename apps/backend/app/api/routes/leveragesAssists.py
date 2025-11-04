@@ -9,7 +9,7 @@ from app.core.config import settings
 environment: str = settings.environment
 
 router = APIRouter(
-    prefix="/leveragesAssists",
+    prefix="/leverages-assists",
     tags=["leveragesAssists"],
     responses={404: {"description": "Not found"}},
 )
