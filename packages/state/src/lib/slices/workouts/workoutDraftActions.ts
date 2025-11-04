@@ -154,7 +154,6 @@ export function updateLeverageOrAssistFieldInSets(
         assistFields &&
         assistFields.length > 0
       ) {
-        console.log('adding updated assist field');
         const updatedAssistFields = assistFields.map((field) => {
           if (field.id === leverageOrAssistID) {
             return updatedAssistOrLeverageField;
