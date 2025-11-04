@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 LeverageAssistType = Literal["leverage", "assist"]
 ValueType = Literal["int", "options"]
 SortDirection = Literal["ascending", "descending"]
-Unit = Literal["ft", "in", "deg", "lb", "kg"]
+Unit = Literal["lb", "kg", "in", "cm", "m", "ft", "deg"]
 
 
 class LeveragesAssistsResponseSchema(BaseModel):
