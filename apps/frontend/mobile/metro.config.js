@@ -18,6 +18,7 @@ const monorepoPackages = {
   '@cwt/mocks': path.resolve(monorepoRoot, 'packages/mocks'),
   '@cwt/utils': path.resolve(monorepoRoot, 'packages/utils'),
   '@cwt/content': path.resolve(monorepoRoot, 'packages/content'),
+  '@cwt/context': path.resolve(monorepoRoot, 'packages/context'),
 };
 
 // 1. Watch the local app directory, and only the shared packages (limiting the scope and speeding it up)
