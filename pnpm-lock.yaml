@@ -308,6 +308,19 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
+  packages/context:
+    dependencies:
+      '@cwt/schema':
+        specifier: workspace:*
+        version: link:../schema
+      react:
+        specifier: 19.0.0
+        version: 19.0.0
+    devDependencies:
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+
   packages/hooks:
     dependencies:
       '@cwt/schema':
