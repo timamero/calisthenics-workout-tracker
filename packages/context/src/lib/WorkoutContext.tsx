@@ -19,9 +19,9 @@ interface WorkoutContextType {
   >;
   setIsDeleteSetDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   setIsAddSupersetDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsDeleteExerciseDialogVisible?: React.Dispatch<
-    React.SetStateAction<boolean>
-  >; // will be superseded
+  // setIsDeleteExerciseDialogVisible?: React.Dispatch<
+  //   React.SetStateAction<boolean>
+  // >; // will be superseded
 }
 
 export const WorkoutContext = React.createContext<WorkoutContextType | null>(
