@@ -3,13 +3,12 @@ import {
   getWorkoutLogs as apiGetWorkoutLogs,
   postWorkoutBuild as apiPostWorkoutBuild,
   postWorkoutLog as apiPostWorkoutLog,
-} from '@cwt/api/workoutsService';
+} from '@cwt/api';
 import type {
   WorkoutBuildResponse,
   WorkoutLogResponse,
 } from '@cwt/schema/workouts';
-import { sampleWorkoutBuilds } from '@cwt/mocks/sampleWorkoutBuilds';
-import { sampleWorkoutLogs } from '@cwt/mocks/sampleWorkoutLogs';
+import { sampleWorkoutBuilds, sampleWorkoutLogs } from '@cwt/mocks';
 
 const baseUrl = process.env.EXPO_PUBLIC_BASE_URL || '';
 const environment = process.env.EXPO_PUBLIC_ENVIRONMENT || null;
