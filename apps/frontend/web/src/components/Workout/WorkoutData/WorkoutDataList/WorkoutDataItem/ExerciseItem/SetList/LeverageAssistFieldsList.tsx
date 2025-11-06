@@ -2,9 +2,11 @@ import { useContext } from 'react';
 import { Group, Stack } from '@mantine/core';
 
 import type { Exercise } from '@cwt/schema/workouts';
+import { WorkoutDataItemContext } from '@cwt/context';
+import { SetContext } from '@cwt/context';
 
-import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
-import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
+// import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
+// import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 import NumeralInput from './NumeralInput';
 import { useLeveragesAssistsStore } from '@cwt/state/stores';
 import SelectInput from './SelectInput';

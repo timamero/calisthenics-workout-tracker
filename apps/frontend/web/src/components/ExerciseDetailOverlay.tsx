@@ -10,7 +10,7 @@ import {
   Title,
 } from '@mantine/core';
 
-import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
+import { ExerciseDetailContext } from '@cwt/context';
 import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
 export default function ExerciseDetailOverlay() {
@@ -39,15 +39,18 @@ export default function ExerciseDetailOverlay() {
       );
     },
   );
-  const equipmentMetadata = exerciseDetail?.required_equipment?.map(
-    (equipment: Equipment, i: number) => {
+  const equipmentMetadata = exerciseDetail?.required_equipment
+    ?.filter(
+      (equipment): equipment is NonNullable<Equipment> =>
+        equipment !== undefined,
+    )
+    .map((equipment: Equipment, i: number) => {
       return (
         <Badge size="lg" color="dark" variant="outline" key={i}>
           {equipment}
         </Badge>
       );
-    },
-  );
+    });
   const instructions = exerciseDetail?.instructions.map(
     (instruction: string, i: number) => {
       const regex = /\d\. /g;

@@ -11,7 +11,7 @@ import {
 } from '@mantine/core';
 import { type ExerciseResponse } from '@cwt/schema/exercises';
 
-import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
+import { ExerciseDetailContext } from '@cwt/context';
 
 interface ExerciseCardProps {
   exercise: ExerciseResponse;
