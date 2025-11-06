@@ -21,8 +21,9 @@ import {
   addSectionConfirmationContent,
   addSupersetConfirmationContent,
 } from '@cwt/content';
+import { WorkoutContext } from '@cwt/context';
 
-import { WorkoutContext } from '../contexts/WorkoutContext';
+// import { WorkoutContext } from '../contexts/WorkoutContext';
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
 import WorkoutData from '../components/Workout/WorkoutData';

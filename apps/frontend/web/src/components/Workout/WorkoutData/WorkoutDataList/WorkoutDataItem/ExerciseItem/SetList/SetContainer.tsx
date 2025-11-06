@@ -3,9 +3,12 @@ import { useContext } from 'react';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise } from '@cwt/schema/workouts';
 
-import { WorkoutContext } from '../../../../../../../contexts/WorkoutContext';
-import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
-import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
+import { WorkoutContext } from '@cwt/context';
+import { WorkoutDataItemContext } from '@cwt/context';
+import { SetContext } from '@cwt/context';
+// import { WorkoutContext } from '../../../../../../../contexts/WorkoutContext';
+// import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
+// import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 import Set from './Set';
 
 export default function SetContainer() {

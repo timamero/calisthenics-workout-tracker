@@ -3,9 +3,11 @@ import { Stack, Group, Text, Button } from '@mantine/core';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { WorkoutContext } from '@cwt/context';
+import { WorkoutDataItemContext } from '@cwt/context';
 
-import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
-import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
+// import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
+// import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
 import { ExerciseItemContainer } from '../ExerciseItem';
 import { SupersetItemContainer } from '../SupersetItem';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';

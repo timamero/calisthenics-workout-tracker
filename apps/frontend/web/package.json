@@ -17,6 +17,7 @@
     "@cwt/api": "workspace:*",
     "@cwt/auth": "workspace:*",
     "@cwt/content": "workspace:*",
+    "@cwt/context": "workspace:*",
     "@cwt/hooks": "workspace:*",
     "@cwt/mocks": "workspace:*",
     "@cwt/schema": "workspace:*",

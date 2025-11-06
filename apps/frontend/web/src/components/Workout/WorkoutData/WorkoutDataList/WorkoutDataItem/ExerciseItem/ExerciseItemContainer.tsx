@@ -4,8 +4,10 @@ import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise } from '@cwt/schema/workouts';
 
-import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
-import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
+import { WorkoutContext } from '@cwt/context';
+import { WorkoutDataItemContext } from '@cwt/context';
+// import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
+// import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
 import ExerciseItem from './ExerciseItem';
 
 export default function ExerciseItemContainer() {
