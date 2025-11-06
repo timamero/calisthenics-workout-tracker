@@ -156,6 +156,9 @@ importers:
       '@cwt/content':
         specifier: workspace:*
         version: link:../../../packages/content
+      '@cwt/context':
+        specifier: workspace:*
+        version: link:../../../packages/context
       '@cwt/hooks':
         specifier: workspace:*
         version: link:../../../packages/hooks

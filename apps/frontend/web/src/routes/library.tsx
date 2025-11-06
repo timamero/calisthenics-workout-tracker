@@ -5,8 +5,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import type { ExerciseResponse } from '@cwt/schema/exercises';
+import { ExerciseDetailContext } from '@cwt/context';
 
-import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import ExercisesList from '../components/ExercisesList';
 import ExercisesFilterOverlay from '../components/ExercisesFilterOverlay';
 import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';

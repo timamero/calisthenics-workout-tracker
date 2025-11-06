@@ -1,6 +1,5 @@
 import { SimpleGrid } from '@mantine/core';
 
-// import { useStore } from '@cwt/state/store';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import ExerciseCard from './ExerciseCard';

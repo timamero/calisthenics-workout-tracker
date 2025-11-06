@@ -2,8 +2,9 @@ import { useContext } from 'react';
 import { TextInput } from '@mantine/core';
 
 import type { SetFields } from '@cwt/schema/workouts';
+import { SetContext } from '@cwt/context';
 
-import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
+// import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 import { getSecondsInDuration } from '@cwt/utils';
 
 interface DurationInputProps {

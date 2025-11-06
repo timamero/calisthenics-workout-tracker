@@ -3,8 +3,8 @@ import { useContext } from 'react';
 import type { Superset } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
-import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
+import { WorkoutContext } from '@cwt/context';
+import { WorkoutDataItemContext } from '@cwt/context';
 import SupersetItem from './SupersetItem';
 
 export default function SupersetItemContainer() {
