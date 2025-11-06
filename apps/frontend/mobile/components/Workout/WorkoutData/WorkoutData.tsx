@@ -21,7 +21,7 @@ export default function WorkoutData({ scrollViewRef }: WorkoutDataProps) {
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const workoutExercisesLength = useWorkoutDraftStore(
     (state) => state.workoutData,
-  ).exercises.length;
+  ).length;
   const selectedExerciseIndexToMod = useWorkoutDraftStore(
     (state) => state.selectedExerciseIndexToMod,
   );

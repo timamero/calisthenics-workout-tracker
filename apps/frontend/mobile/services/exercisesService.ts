@@ -1,6 +1,6 @@
-import { getExercises as apiGetExercises } from '@cwt/api/exercisesService';
+import { getExercises as apiGetExercises } from '@cwt/api';
 import { ExerciseResponse } from '@cwt/schema/exercises';
-import { sampleExercises } from '@cwt/mocks/sampleExercises';
+import { sampleExercises } from '@cwt/mocks';
 
 const baseUrl = process.env.EXPO_PUBLIC_BASE_URL || '';
 const environment = process.env.EXPO_PUBLIC_ENVIRONMENT || null;
