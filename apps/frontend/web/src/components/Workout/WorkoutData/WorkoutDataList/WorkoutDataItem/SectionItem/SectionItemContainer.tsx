@@ -5,13 +5,10 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-// import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
-// import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
 import SectionItem from './SectionItem';
 
 export default function SectionItemContainer() {
   const section = useContext(WorkoutDataItemContext)!.item as Section;
-  // console.log('section order ', section.order);
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
 

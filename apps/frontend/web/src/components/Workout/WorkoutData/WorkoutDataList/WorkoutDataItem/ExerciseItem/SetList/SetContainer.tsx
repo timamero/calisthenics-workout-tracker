@@ -6,17 +6,12 @@ import type { Exercise } from '@cwt/schema/workouts';
 import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
 import { SetContext } from '@cwt/context';
-// import { WorkoutContext } from '../../../../../../../contexts/WorkoutContext';
-// import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
-// import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 import Set from './Set';
 
 export default function SetContainer() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-  // console.log('parentSectionID', parentSectionID);
-  // console.log('parentSupersetID', parentSupersetID);
 
   const set = useContext(SetContext)!.set;
   const setIndex = useContext(SetContext)!.setIndex;
@@ -40,16 +35,13 @@ export default function SetContainer() {
   );
 
   const handleDeleteSetClick = () => {
-    // console.log('delete set clicked');
     setSetIDToMod(set.id);
     setExerciseIDToMod(exercise.id);
 
     if (parentSupersetID) {
-      // console.log('setting parent superset id');
       setSupersetIDToMod(parentSupersetID);
     }
     if (parentSectionID) {
-      // console.log('setting parent section id');
       setSectionIDToMod(parentSectionID);
     }
 

@@ -1,6 +1,6 @@
 import type { Exercise, Superset, Section } from '@cwt/schema/workouts';
-
 import { WorkoutDataItemContext } from '@cwt/context';
+
 import { ExerciseItemContainer } from './ExerciseItem';
 import { SectionItemContainer } from './SectionItem';
 import { SupersetItemContainer } from './SupersetItem';

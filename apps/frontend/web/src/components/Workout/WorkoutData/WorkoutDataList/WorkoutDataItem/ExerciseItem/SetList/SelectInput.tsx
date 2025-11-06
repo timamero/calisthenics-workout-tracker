@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { Select } from '@mantine/core';
-// import type { ComboboxItem } from '@mantine/core';
-
-// import type { Leverage } from '@cwt/schema/workouts';
 
 import { SetContext } from '@cwt/context';
 import {
