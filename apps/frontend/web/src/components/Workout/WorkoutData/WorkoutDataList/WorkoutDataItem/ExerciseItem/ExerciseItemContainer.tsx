@@ -6,17 +6,13 @@ import type { Exercise } from '@cwt/schema/workouts';
 
 import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
-// import { WorkoutContext } from '../../../../../../contexts/WorkoutContext';
-// import { WorkoutDataItemContext } from '../../../../../../contexts/WorkoutDataItemContext';
 import ExerciseItem from './ExerciseItem';
 
 export default function ExerciseItemContainer() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
-  console.log('exercise order ', exercise.order);
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
-  // const parentType = useContext(WorkoutDataItemContext)?.parentType;
 
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;

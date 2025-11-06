@@ -10,8 +10,6 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { SetContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-// import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
-// import { WorkoutDataItemContext } from '../../../../../../../contexts/WorkoutDataItemContext';
 import SetContainer from './SetContainer';
 
 export default function SetList() {
