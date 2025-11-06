@@ -19,6 +19,7 @@ import {
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
 } from '@cwt/content';
+import { WorkoutContext } from '@cwt/context';
 
 import { postWorkoutBuild, postWorkoutLog } from '../services/workoutsService';
 import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle/';
@@ -141,123 +142,127 @@ export default function WorkoutScreen() {
   }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: theme.colors.background,
-      }}
+    <WorkoutContext.Provider
+      value={{ setIsAddExerciseDialogVisible: setIsAddExerciseOverlayVisible }}
     >
-      <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
       <View
         style={{
-          position: 'absolute',
-          bottom: 0,
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
+          flex: 1,
+          backgroundColor: theme.colors.background,
         }}
       >
-        {mode !== 'log' && (
-          <Button
-            icon="plus"
-            mode="contained"
-            theme={{
-              colors: {
-                primaryContainer: theme.colors.primary,
-                onPrimaryContainer: theme.colors.light,
-              },
-            }}
-            style={{
-              margin: 16,
-            }}
-            onPress={() => setIsAddExerciseOverlayVisible(true)}
-          >
-            Add Exercise
-          </Button>
-        )}
-
+        <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
         <View
-          style={
-            mode === 'build'
-              ? {
-                  position: 'relative',
-                  marginInline: 16,
-                  marginBottom: 16,
-                }
-              : {
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginInline: 16,
-                  marginBottom: 16,
-                }
-          }
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
-          {mode !== 'build' && (
-            <SegmentedButtons
-              density="small"
-              value={mode}
-              onValueChange={(value: Mode) => handleSetMode(value)}
-              theme={{ colors: { secondaryContainer: theme.colors.primary } }}
-              buttons={[
-                {
-                  value: 'edit',
-                  label: 'Edit',
-                  uncheckedColor: theme.colors.light,
+          {mode !== 'log' && (
+            <Button
+              icon="plus"
+              mode="contained"
+              theme={{
+                colors: {
+                  primaryContainer: theme.colors.primary,
+                  onPrimaryContainer: theme.colors.light,
                 },
-                {
-                  value: 'log',
-                  label: 'Log',
-                  uncheckedColor: theme.colors.light,
-                },
-              ]}
-            />
+              }}
+              style={{
+                margin: 16,
+              }}
+              onPress={() => setIsAddExerciseOverlayVisible(true)}
+            >
+              Add Exercise
+            </Button>
           )}
 
-          <Button
-            icon="check"
-            theme={{
-              colors: {
-                primaryContainer: theme.colors.background,
-                onPrimaryContainer: theme.colors.light,
-              },
-            }}
-            style={{
-              borderWidth: 2,
-              borderColor: theme.colors.primary,
-            }}
-            onPress={() => setIsSaveWorkoutDialogVisible(true)}
+          <View
+            style={
+              mode === 'build'
+                ? {
+                    position: 'relative',
+                    marginInline: 16,
+                    marginBottom: 16,
+                  }
+                : {
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginInline: 16,
+                    marginBottom: 16,
+                  }
+            }
           >
-            Complete Workout
-          </Button>
+            {mode !== 'build' && (
+              <SegmentedButtons
+                density="small"
+                value={mode}
+                onValueChange={(value: Mode) => handleSetMode(value)}
+                theme={{ colors: { secondaryContainer: theme.colors.primary } }}
+                buttons={[
+                  {
+                    value: 'edit',
+                    label: 'Edit',
+                    uncheckedColor: theme.colors.light,
+                  },
+                  {
+                    value: 'log',
+                    label: 'Log',
+                    uncheckedColor: theme.colors.light,
+                  },
+                ]}
+              />
+            )}
+
+            <Button
+              icon="check"
+              theme={{
+                colors: {
+                  primaryContainer: theme.colors.background,
+                  onPrimaryContainer: theme.colors.light,
+                },
+              }}
+              style={{
+                borderWidth: 2,
+                borderColor: theme.colors.primary,
+              }}
+              onPress={() => setIsSaveWorkoutDialogVisible(true)}
+            >
+              Complete Workout
+            </Button>
+          </View>
         </View>
+        <AddExerciseOverlay
+          isVisible={isAddExerciseOverlayVisible}
+          handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
+          workoutDataScrollViewRef={workoutDataScrollViewRef}
+        />
+        <ConfirmationDialog
+          title={saveWorkoutConfirmationContent(mode).title}
+          message={saveWorkoutConfirmationContent(mode).message}
+          confirmButtonLabel={
+            saveWorkoutConfirmationContent(mode).confirmButtonLabel
+          }
+          isVisible={isSaveWorkoutDialogVisible}
+          handleHideDialog={setIsSaveWorkoutDialogVisible}
+          onConfirmationPress={onSaveWorkoutPress}
+        />
+        <ConfirmationDialog
+          title={cancelWorkoutConfirmationContent(mode).title}
+          message={cancelWorkoutConfirmationContent(mode).message}
+          confirmButtonLabel={
+            cancelWorkoutConfirmationContent(mode).confirmButtonLabel
+          }
+          isVisible={isCancelWorkoutDialogVisible}
+          handleHideDialog={setIsCancelWorkoutDialogVisible}
+          onConfirmationPress={onCancelWorkoutPress}
+        />
       </View>
-      <AddExerciseOverlay
-        isVisible={isAddExerciseOverlayVisible}
-        handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
-        workoutDataScrollViewRef={workoutDataScrollViewRef}
-      />
-      <ConfirmationDialog
-        title={saveWorkoutConfirmationContent(mode).title}
-        message={saveWorkoutConfirmationContent(mode).message}
-        confirmButtonLabel={
-          saveWorkoutConfirmationContent(mode).confirmButtonLabel
-        }
-        isVisible={isSaveWorkoutDialogVisible}
-        handleHideDialog={setIsSaveWorkoutDialogVisible}
-        onConfirmationPress={onSaveWorkoutPress}
-      />
-      <ConfirmationDialog
-        title={cancelWorkoutConfirmationContent(mode).title}
-        message={cancelWorkoutConfirmationContent(mode).message}
-        confirmButtonLabel={
-          cancelWorkoutConfirmationContent(mode).confirmButtonLabel
-        }
-        isVisible={isCancelWorkoutDialogVisible}
-        handleHideDialog={setIsCancelWorkoutDialogVisible}
-        onConfirmationPress={onCancelWorkoutPress}
-      />
-    </View>
+    </WorkoutContext.Provider>
   );
 }
