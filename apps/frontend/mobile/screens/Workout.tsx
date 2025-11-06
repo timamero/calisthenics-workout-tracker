@@ -18,6 +18,7 @@ import { Mode } from '@cwt/schema/workouts';
 import {
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
+  addSupersetConfirmationContent,
 } from '@cwt/content';
 import { WorkoutContext } from '@cwt/context';
 
@@ -51,6 +52,16 @@ export default function WorkoutScreen() {
   const [isCancelWorkoutDialogVisible, setIsCancelWorkoutDialogVisible] =
     React.useState<boolean>(false);
   const [isAddExerciseOverlayVisible, setIsAddExerciseOverlayVisible] =
+    React.useState<boolean>(false);
+  const [isDeleteRootItemOverlayVisible, setIsDeleteRootItemOverlayVisible] =
+    React.useState<boolean>(false);
+  const [
+    isDeleteNestedItemOverlayVisible,
+    setIsDeleteNestedItemOverlayVisible,
+  ] = React.useState<boolean>(false);
+  const [isDeleteSetOverlayVisible, setIsDeleteSetOverlayVisible] =
+    React.useState<boolean>(false);
+  const [isAddSupersetOverlayVisible, setIsAddSupersetOverlayVisible] =
     React.useState<boolean>(false);
   const [isSaveWorkoutDialogVisible, setIsSaveWorkoutDialogVisible] =
     React.useState<boolean>(false);
@@ -143,7 +154,13 @@ export default function WorkoutScreen() {
 
   return (
     <WorkoutContext.Provider
-      value={{ setIsAddExerciseDialogVisible: setIsAddExerciseOverlayVisible }}
+      value={{
+        setIsAddExerciseDialogVisible: setIsAddExerciseOverlayVisible,
+        setIsDeleteRootItemDialogVisible: setIsDeleteRootItemOverlayVisible,
+        setIsDeleteNestedItemDialogVisible: setIsDeleteNestedItemOverlayVisible,
+        setIsDeleteSetDialogVisible: setIsDeleteSetOverlayVisible,
+        setIsAddSupersetDialogVisible: setIsAddSupersetOverlayVisible,
+      }}
     >
       <View
         style={{
@@ -241,6 +258,40 @@ export default function WorkoutScreen() {
           isVisible={isAddExerciseOverlayVisible}
           handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
           workoutDataScrollViewRef={workoutDataScrollViewRef}
+        />
+        <ConfirmationDialog
+          title={addSupersetConfirmationContent().title}
+          message={addSupersetConfirmationContent().message}
+          confirmButtonLabel={
+            addSupersetConfirmationContent().confirmButtonLabel
+          }
+          isVisible={isAddSupersetOverlayVisible}
+          handleHideDialog={setIsAddSupersetOverlayVisible}
+          onConfirmationPress={() => console.log('add superset clicked')}
+        />
+        <ConfirmationDialog
+          title="Delete root item (create content)"
+          message="Delete root item message"
+          confirmButtonLabel="delete"
+          isVisible={isDeleteRootItemOverlayVisible}
+          handleHideDialog={setIsDeleteRootItemOverlayVisible}
+          onConfirmationPress={() => console.log('delete root item clicked')}
+        />
+        <ConfirmationDialog
+          title="Delete nested item (create content)"
+          message="Delete nested item message"
+          confirmButtonLabel="delete"
+          isVisible={isDeleteNestedItemOverlayVisible}
+          handleHideDialog={setIsDeleteNestedItemOverlayVisible}
+          onConfirmationPress={() => console.log('delete nested item clicked')}
+        />
+        <ConfirmationDialog
+          title="Delete set (create content)"
+          message="Delete set message"
+          confirmButtonLabel="delete"
+          isVisible={isDeleteSetOverlayVisible}
+          handleHideDialog={setIsDeleteSetOverlayVisible}
+          onConfirmationPress={() => console.log('delete set clicked')}
         />
         <ConfirmationDialog
           title={saveWorkoutConfirmationContent(mode).title}
