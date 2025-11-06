@@ -4,7 +4,6 @@ import { TextInput } from '@mantine/core';
 import type { Leverage, Assist, SetFields } from '@cwt/schema/workouts';
 import { SetContext } from '@cwt/context';
 
-// import { SetContext } from '../../../../../../../contexts/SetContextUpdated';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 interface NumeralInputProps {
