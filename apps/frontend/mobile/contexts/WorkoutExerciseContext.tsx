@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { WorkoutExercise } from '@cwt/schema/workouts';
+import { Exercise } from '@cwt/schema/workouts';
 
 interface WorkoutExerciseContextType {
-  workoutExercise: WorkoutExercise;
+  workoutExercise: Exercise;
   exerciseIndex: number;
   setIsDeleteExerciseDialogVisible: React.Dispatch<
     React.SetStateAction<boolean>
