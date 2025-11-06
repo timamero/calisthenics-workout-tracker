@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { Exercise } from '@cwt/schema/workouts';
 
 import { WorkoutExerciseContext } from '../../../../contexts/WorkoutExerciseContext';
 
@@ -20,12 +21,12 @@ export default function WorkoutExerciseList({
 }: WorkoutExerciseListProps) {
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
 
-  const workoutExercises = workoutData.exercises.map((ex, i) => {
+  const workoutExercises = workoutData.map((ex, i) => {
     return (
       <WorkoutExerciseContext.Provider
         key={ex.id}
         value={{
-          workoutExercise: ex,
+          workoutExercise: ex as Exercise,
           exerciseIndex: i,
           setIsDeleteExerciseDialogVisible: setIsDeleteExerciseDialogVisible,
           setIsDeleteSetDialogVisible: setIsDeleteSetDialogVisible,
