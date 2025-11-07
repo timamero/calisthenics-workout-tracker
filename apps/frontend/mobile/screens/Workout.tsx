@@ -6,7 +6,6 @@ import {
   SegmentedButtons,
   Portal,
   FAB,
-  PaperProvider,
 } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -228,22 +227,6 @@ export default function WorkoutScreen() {
                 }}
               />
             </Portal>
-            // <Button
-            //   icon="plus"
-            //   mode="contained"
-            //   theme={{
-            //     colors: {
-            //       primaryContainer: theme.colors.primary,
-            //       onPrimaryContainer: theme.colors.light,
-            //     },
-            //   }}
-            //   style={{
-            //     margin: 16,
-            //   }}
-            //   onPress={() => setIsAddExerciseOverlayVisible(true)}
-            // >
-            //   Add Exercise
-            // </Button>
           )}
 
           <View
