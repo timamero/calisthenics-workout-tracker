@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { View, BackHandler, ScrollView } from 'react-native';
-import { useTheme, Button, SegmentedButtons } from 'react-native-paper';
+import {
+  useTheme,
+  Button,
+  SegmentedButtons,
+  Portal,
+  FAB,
+  PaperProvider,
+} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import type {
@@ -65,6 +72,12 @@ export default function WorkoutScreen() {
     React.useState<boolean>(false);
   const [isSaveWorkoutDialogVisible, setIsSaveWorkoutDialogVisible] =
     React.useState<boolean>(false);
+
+  const [state, setState] = React.useState({ open: false });
+
+  const onStateChange = ({ open }: { open: boolean }) => setState({ open });
+
+  const { open } = state;
 
   const onCancelWorkoutPress = () => {
     setIsCancelWorkoutDialogVisible(false);
@@ -179,22 +192,55 @@ export default function WorkoutScreen() {
           }}
         >
           {mode !== 'log' && (
-            <Button
-              icon="plus"
-              mode="contained"
-              theme={{
-                colors: {
-                  primaryContainer: theme.colors.primary,
-                  onPrimaryContainer: theme.colors.light,
-                },
-              }}
-              style={{
-                margin: 16,
-              }}
-              onPress={() => setIsAddExerciseOverlayVisible(true)}
-            >
-              Add Exercise
-            </Button>
+            <Portal>
+              <FAB.Group
+                open={open}
+                visible
+                icon={open ? 'close' : 'plus'}
+                actions={[
+                  {
+                    icon: 'application',
+                    label: 'Add Section',
+                    labelTextColor: theme.colors.light,
+                    onPress: () => console.log('Pressed section'),
+                  },
+                  {
+                    icon: 'alpha-s-circle',
+                    label: 'Add Superset',
+                    labelTextColor: theme.colors.light,
+                    onPress: () => console.log('Pressed superset'),
+                  },
+                  {
+                    icon: 'arm-flex',
+                    label: 'Add Exercise',
+                    labelTextColor: theme.colors.light,
+                    onPress: () => console.log('Pressed exercise'),
+                  },
+                ]}
+                onStateChange={onStateChange}
+                onPress={() => {
+                  if (open) {
+                    console.log('speed dial open');
+                  }
+                }}
+              />
+            </Portal>
+            // <Button
+            //   icon="plus"
+            //   mode="contained"
+            //   theme={{
+            //     colors: {
+            //       primaryContainer: theme.colors.primary,
+            //       onPrimaryContainer: theme.colors.light,
+            //     },
+            //   }}
+            //   style={{
+            //     margin: 16,
+            //   }}
+            //   onPress={() => setIsAddExerciseOverlayVisible(true)}
+            // >
+            //   Add Exercise
+            // </Button>
           )}
 
           <View
