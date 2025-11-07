@@ -39,7 +39,11 @@ export default function NumeralInput() {
           onSurfaceVariant: '#FFF',
         },
       }}
-      value={set.fields.reps === undefined ? '' : set.fields.reps!.toString()}
+      value={
+        set.fields.reps === undefined || !set.fields.reps
+          ? ''
+          : set.fields.reps.toString()
+      }
       onChangeText={(text) => handleNumeralFieldChange(text)}
     />
   );
