@@ -26,6 +26,7 @@ import {
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
   addSupersetConfirmationContent,
+  addSectionConfirmationContent,
 } from '@cwt/content';
 import { WorkoutContext } from '@cwt/context';
 
@@ -69,6 +70,8 @@ export default function WorkoutScreen() {
   const [isDeleteSetOverlayVisible, setIsDeleteSetOverlayVisible] =
     React.useState<boolean>(false);
   const [isAddSupersetOverlayVisible, setIsAddSupersetOverlayVisible] =
+    React.useState<boolean>(false);
+  const [isAddSectionOverlayVisible, setIsAddSectionOverlayVisible] =
     React.useState<boolean>(false);
   const [isSaveWorkoutDialogVisible, setIsSaveWorkoutDialogVisible] =
     React.useState<boolean>(false);
@@ -202,7 +205,7 @@ export default function WorkoutScreen() {
                     icon: 'application',
                     label: 'Add Section',
                     labelTextColor: theme.colors.light,
-                    onPress: () => console.log('Pressed section'),
+                    onPress: () => setIsAddSectionOverlayVisible(true),
                   },
                   {
                     icon: 'alpha-s-circle',
@@ -304,6 +307,16 @@ export default function WorkoutScreen() {
           isVisible={isAddExerciseOverlayVisible}
           handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
           workoutDataScrollViewRef={workoutDataScrollViewRef}
+        />
+        <ConfirmationDialog
+          title={addSectionConfirmationContent().title}
+          message={addSectionConfirmationContent().message}
+          confirmButtonLabel={
+            addSectionConfirmationContent().confirmButtonLabel
+          }
+          isVisible={isAddSectionOverlayVisible}
+          handleHideDialog={setIsAddSectionOverlayVisible}
+          onConfirmationPress={() => console.log('add section clicked')}
         />
         <ConfirmationDialog
           title={addSupersetConfirmationContent().title}
