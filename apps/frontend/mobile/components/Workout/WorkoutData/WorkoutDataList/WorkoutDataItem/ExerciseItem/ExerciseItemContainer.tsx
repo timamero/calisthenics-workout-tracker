@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 
-import { useExerciseLibraryStore } from '@cwt/state/stores';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import type { Exercise } from '@cwt/schema/workouts';
+import type { Mode, Exercise } from '@cwt/schema/workouts';
+import {
+  useExerciseLibraryStore,
+  useWorkoutDraftStore,
+} from '@cwt/state/stores';
+import { WorkoutDataItemContext, WorkoutContext } from '@cwt/context';
 
-import { WorkoutContext } from '@cwt/context';
-import { WorkoutDataItemContext } from '@cwt/context';
 import ExerciseItem from './ExerciseItem';
 
 export default function ExerciseItemContainer() {
@@ -45,7 +46,7 @@ export default function ExerciseItemContainer() {
 
   const name = getExerciseNameById(exercise!.exercise_id);
 
-  const handleAddSetClick = () => {
+  const handleAddSetPress = () => {
     setExerciseIDToMod(exercise!.id);
 
     if (parentSupersetID) {
@@ -58,7 +59,7 @@ export default function ExerciseItemContainer() {
     addSet();
   };
 
-  const handleUpClick = () => {
+  const handleUpPress = () => {
     if (!parentSectionID && !parentSupersetID) {
       reorderRootItem(exercise!.id, exercise!.order - 1);
     } else {
@@ -73,7 +74,7 @@ export default function ExerciseItemContainer() {
       reorderNestedItem(exercise!.order - 1);
     }
   };
-  const handleDownClick = () => {
+  const handleDownPress = () => {
     if (!parentSectionID && !parentSupersetID) {
       reorderRootItem(exercise!.id, exercise!.order + 1);
     } else {
@@ -89,7 +90,7 @@ export default function ExerciseItemContainer() {
     }
   };
 
-  const handleDeleteExerciseClick = () => {
+  const handleDeleteExercisePress = () => {
     setExerciseIDToMod(exercise!.id);
 
     if (parentSupersetID) {
@@ -120,10 +121,10 @@ export default function ExerciseItemContainer() {
       name={name}
       isFirst={exercise!.order === 0}
       isLast={exercise!.order === useParentItemsLength() - 1}
-      handleUpClick={handleUpClick}
-      handleDownClick={handleDownClick}
-      handleAddSetClick={handleAddSetClick}
-      handleDeleteExerciseClick={handleDeleteExerciseClick}
+      handleUpPress={handleUpPress}
+      handleDownPress={handleDownPress}
+      handleAddSetPress={handleAddSetPress}
+      handleDeleteExercisePress={handleDeleteExercisePress}
     />
   );
 }
