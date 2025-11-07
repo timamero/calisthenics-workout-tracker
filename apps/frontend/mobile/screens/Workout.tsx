@@ -208,13 +208,13 @@ export default function WorkoutScreen() {
                     icon: 'alpha-s-circle',
                     label: 'Add Superset',
                     labelTextColor: theme.colors.light,
-                    onPress: () => console.log('Pressed superset'),
+                    onPress: () => setIsAddSupersetOverlayVisible(true),
                   },
                   {
                     icon: 'arm-flex',
                     label: 'Add Exercise',
                     labelTextColor: theme.colors.light,
-                    onPress: () => console.log('Pressed exercise'),
+                    onPress: () => setIsAddExerciseOverlayVisible(true),
                   },
                 ]}
                 onStateChange={onStateChange}
