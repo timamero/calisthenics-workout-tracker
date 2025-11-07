@@ -45,9 +45,13 @@ export default function WorkoutScreen() {
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
   const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
+
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const setMode = useWorkoutDraftStore((state) => state.setMode);
+  const addSection = useWorkoutDraftStore((state) => state.addSection);
+  const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+
   const supabaseSession = useAuthStore((state) => state.session);
   const completeWorkout = useWorkoutLibraryStore(
     (state) => state.completeWorkout,
@@ -96,6 +100,16 @@ export default function WorkoutScreen() {
       setMode('edit');
       stopTimer();
     }
+  };
+
+  const onAddSectionPress = () => {
+    addSection();
+    setIsAddSectionOverlayVisible(false);
+  };
+
+  const onAddSupersetPress = () => {
+    addSuperset(null);
+    setIsAddSupersetOverlayVisible(false);
   };
 
   const onSaveWorkoutPress = async () => {
@@ -299,7 +313,7 @@ export default function WorkoutScreen() {
           }
           isVisible={isAddSectionOverlayVisible}
           handleHideDialog={setIsAddSectionOverlayVisible}
-          onConfirmationPress={() => console.log('add section clicked')}
+          onConfirmationPress={onAddSectionPress}
         />
         <ConfirmationDialog
           title={addSupersetConfirmationContent().title}
@@ -309,7 +323,7 @@ export default function WorkoutScreen() {
           }
           isVisible={isAddSupersetOverlayVisible}
           handleHideDialog={setIsAddSupersetOverlayVisible}
-          onConfirmationPress={() => console.log('add superset clicked')}
+          onConfirmationPress={onAddSupersetPress}
         />
         <ConfirmationDialog
           title="Delete root item (create content)"
