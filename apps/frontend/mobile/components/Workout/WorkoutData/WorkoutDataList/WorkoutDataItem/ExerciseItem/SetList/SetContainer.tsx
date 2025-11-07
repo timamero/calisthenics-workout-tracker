@@ -1,12 +1,16 @@
 import { useContext } from 'react';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import type { Exercise } from '@cwt/schema/workouts';
 
-import { WorkoutContext } from '@cwt/context';
-import { WorkoutDataItemContext } from '@cwt/context';
-import { SetContext } from '@cwt/context';
+import {
+  WorkoutContext,
+  WorkoutDataItemContext,
+  SetContext,
+} from '@cwt/context';
+import { Exercise } from '@cwt/schema/workouts';
+
 import Set from './Set';
+// import { Mode } from '@cwt/schema/workouts';
 
 export default function SetContainer() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
@@ -34,7 +38,7 @@ export default function SetContainer() {
     (state) => state.setSectionIDToMod,
   );
 
-  const handleDeleteSetClick = () => {
+  const onDeleteSetPress = () => {
     setSetIDToMod(set.id);
     setExerciseIDToMod(exercise.id);
 
@@ -69,10 +73,10 @@ export default function SetContainer() {
       mode={mode!}
       setsLength={sets.length}
       setIndex={setIndex}
-      isCompleted={set.completed}
+      isCompleted={sets[setIndex].completed}
       handleToggleCompleted={handleToggleCompleted}
       showDeleteButton={sets.length > 1}
-      handleDeleteSetClick={handleDeleteSetClick}
+      onDeleteSetPress={onDeleteSetPress}
     />
   );
 }
