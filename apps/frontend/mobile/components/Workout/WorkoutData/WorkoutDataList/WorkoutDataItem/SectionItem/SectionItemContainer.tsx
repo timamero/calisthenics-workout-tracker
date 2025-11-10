@@ -8,8 +8,8 @@ import SectionItem from './SectionItem';
 
 export default function SectionItemContainer() {
   const section = useContext(WorkoutDataItemContext)!.item as Section;
-  const deleteRootItemOverlayHandler =
-    useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
+  const setIsDeleteRootItemDialogVisible =
+    useContext(WorkoutContext)!.setIsDeleteRootItemDialogVisible;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const rootWorkoutDataLength = useWorkoutDraftStore(
@@ -31,7 +31,8 @@ export default function SectionItemContainer() {
 
   const handleDeleteSectionPress = () => {
     setSectionIDToMod(section.id);
-    if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
+    if (setIsDeleteRootItemDialogVisible)
+      setIsDeleteRootItemDialogVisible(true);
   };
   return (
     <SectionItem
