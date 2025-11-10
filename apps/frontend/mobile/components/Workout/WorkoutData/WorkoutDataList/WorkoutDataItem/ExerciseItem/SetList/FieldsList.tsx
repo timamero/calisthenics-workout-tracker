@@ -15,11 +15,11 @@ export default function FieldsList() {
   const fields = tracked.map((field, i) => {
     switch (field) {
       case 'reps':
-        return <NumeralInput key={`${field}-${i}`} />;
+        return (
+          <NumeralInput key={`${field}-${i}`} label="Reps" fieldName="reps" />
+        );
       case 'time':
         return <DurationInput key={`${field}-${i}`} label="time" />;
-      default:
-        return <></>;
     }
   });
   return (
