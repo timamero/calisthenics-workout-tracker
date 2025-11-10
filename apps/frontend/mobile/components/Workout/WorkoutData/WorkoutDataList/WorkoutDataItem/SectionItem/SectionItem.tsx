@@ -51,47 +51,62 @@ export default function SectionItem({
     addSupersetOverlayHandler!.open();
   };
   return (
-    <View style={{ display: 'flex', flexDirection: 'row' }}>
-      {mode !== 'log' && (
-        <ReorderButtonGroup
-          handleUpPress={() => handleUpPress()}
-          handleDownPress={() => handleDownPress()}
-          isFirst={isFirst}
-          isLast={isLast}
-        />
-      )}
-      <View style={{ display: 'flex', flexDirection: 'column' }}>
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
-          <Text>Section</Text>
+    // <View
+    //   style={{
+    //     display: 'flex',
+    //     flexDirection: 'row',
+    //     backgroundColor: theme.colors.dark800,
+    //   }}
+    // >
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: theme.colors.dark800,
+        paddingInline: 16,
+        paddingBlock: 16,
+        marginBlock: 8,
+        marginInline: 16,
+      }}
+    >
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+      >
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+          }}
+        >
           {mode !== 'log' && (
-            <Button
-              mode="outlined"
-              labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-              textColor={theme.colors.grey}
-              style={{ borderColor: theme.colors.error, flexShrink: 0 }}
-              onPress={() => handleDeleteSectionPress()}
-            >
-              Delete
-            </Button>
+            <ReorderButtonGroup
+              handleUpPress={() => handleUpPress()}
+              handleDownPress={() => handleDownPress()}
+              isFirst={isFirst}
+              isLast={isLast}
+            />
           )}
+          <Text style={{ color: theme.colors.light }}>Section</Text>
         </View>
-        {section.items.map((item) => {
-          if (item.type === 'exercise') {
-            return (
-              <WorkoutDataItemContext.Provider
-                key={item.id}
-                value={{
-                  item: item,
-                  parentType: 'section',
-                  parentItemsLength: section.items.length,
-                  parentSectionID: section.id,
-                  parentSupersetID: null,
-                }}
-              >
-                <ExerciseItemContainer />
-              </WorkoutDataItemContext.Provider>
-            );
-          }
+        {mode !== 'log' && (
+          <Button
+            mode="outlined"
+            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+            textColor={theme.colors.grey}
+            style={{ borderColor: theme.colors.error, flexShrink: 0 }}
+            onPress={() => handleDeleteSectionPress()}
+          >
+            Delete
+          </Button>
+        )}
+      </View>
+      {section.items.map((item) => {
+        if (item.type === 'exercise') {
           return (
             <WorkoutDataItemContext.Provider
               key={item.id}
@@ -103,34 +118,57 @@ export default function SectionItem({
                 parentSupersetID: null,
               }}
             >
-              {/* <SupersetItemContainer /> */}
-              <Text style={{ color: 'white' }}>Superset item placeholder</Text>
+              <ExerciseItemContainer />
             </WorkoutDataItemContext.Provider>
           );
-        })}
-        {mode !== 'log' && (
-          <View style={{ display: 'flex', flexDirection: 'column' }}>
-            <Button
-              mode="outlined"
-              labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-              textColor={theme.colors.primary}
-              style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
-              onPress={() => handleOpenAddExerciseOverlay()}
-            >
-              Add Exercise
-            </Button>
-            <Button
-              mode="outlined"
-              labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-              textColor={theme.colors.primary}
-              style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
-              onPress={() => handleOpenAddSupersetOverlay()}
-            >
-              Add Superset
-            </Button>
-          </View>
-        )}
-      </View>
+        }
+        return (
+          <WorkoutDataItemContext.Provider
+            key={item.id}
+            value={{
+              item: item,
+              parentType: 'section',
+              parentItemsLength: section.items.length,
+              parentSectionID: section.id,
+              parentSupersetID: null,
+            }}
+          >
+            {/* <SupersetItemContainer /> */}
+            <Text style={{ color: 'white' }}>Superset item placeholder</Text>
+          </WorkoutDataItemContext.Provider>
+        );
+      })}
+      {mode !== 'log' && (
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            // justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+            gap: 8,
+          }}
+        >
+          <Button
+            mode="outlined"
+            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+            textColor={theme.colors.primary}
+            style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
+            onPress={() => handleOpenAddExerciseOverlay()}
+          >
+            Add Exercise
+          </Button>
+          <Button
+            mode="outlined"
+            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+            textColor={theme.colors.primary}
+            style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
+            onPress={() => handleOpenAddSupersetOverlay()}
+          >
+            Add Superset
+          </Button>
+        </View>
+      )}
     </View>
+    // </View>
   );
 }
