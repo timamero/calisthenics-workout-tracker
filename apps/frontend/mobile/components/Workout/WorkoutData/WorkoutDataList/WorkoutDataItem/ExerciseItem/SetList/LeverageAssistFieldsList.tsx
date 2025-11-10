@@ -6,7 +6,8 @@ import { WorkoutDataItemContext, SetContext } from '@cwt/context';
 
 import NumeralInput from './NumeralInput';
 import { useLeveragesAssistsStore } from '@cwt/state/stores';
-import { Text } from '../../../../../../../customText';
+// import { Text } from '../../../../../../../customText';
+import SelectInput from './SelectInput';
 
 export default function LeverageAssistFieldsList() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
@@ -35,7 +36,14 @@ export default function LeverageAssistFieldsList() {
           />
         );
       } else {
-        return <Text key={leverageField.id}>Select input placeholder</Text>;
+        return (
+          <SelectInput
+            key={leverageField.id}
+            label={`${leverage.name}`}
+            fieldID={leverageField.id}
+            trackingType="leverages"
+          />
+        );
       }
     });
   }
@@ -56,7 +64,14 @@ export default function LeverageAssistFieldsList() {
           />
         );
       } else {
-        return <Text key={assistField.id}>Select input placeholder</Text>;
+        return (
+          <SelectInput
+            key={assistField.id}
+            label={`${assist.name}`}
+            fieldID={assistField.id}
+            trackingType="leverages"
+          />
+        );
       }
     });
   }
