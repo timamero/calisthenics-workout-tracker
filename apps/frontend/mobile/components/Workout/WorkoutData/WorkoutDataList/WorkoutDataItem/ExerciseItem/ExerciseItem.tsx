@@ -5,6 +5,7 @@ import { Mode } from '@cwt/schema/workouts';
 
 import { Text } from '../../../../../../customText';
 import { CustomTheme } from '../../../../../../theme';
+import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import SetList from './SetList/SetList';
 
 interface ExerciseItemProps {
@@ -49,6 +50,14 @@ export default function ExerciseItem({
           justifyContent: 'space-between',
         }}
       >
+        {mode !== 'log' && (
+          <ReorderButtonGroup
+            handleUpPress={() => handleUpPress()}
+            handleDownPress={() => handleDownPress()}
+            isFirst={isFirst}
+            isLast={isLast}
+          />
+        )}
         <Text
           variant="bodyLarge"
           style={{
