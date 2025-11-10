@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import type { Mode, Exercise } from '@cwt/schema/workouts';
+import type { Exercise } from '@cwt/schema/workouts';
 import {
   useExerciseLibraryStore,
   useWorkoutDraftStore,
