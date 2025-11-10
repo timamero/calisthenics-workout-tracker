@@ -2,7 +2,7 @@ import type { Exercise, Superset, Section } from '@cwt/schema/workouts';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import { ExerciseItemContainer } from './ExerciseItem';
-// import { SectionItemContainer } from './SectionItem';
+import { SectionItemContainer } from './SectionItem';
 // import { SupersetItemContainer } from './SupersetItem';
 
 import { Text } from '../../../../../customText';
@@ -41,7 +41,7 @@ export default function WorkoutDataItemContainer({
         }}
       >
         <Text style={{ color: 'white' }}>Section item</Text>
-        {/* <SectionItemContainer /> */}
+        <SectionItemContainer />
       </WorkoutDataItemContext.Provider>
     );
   }
