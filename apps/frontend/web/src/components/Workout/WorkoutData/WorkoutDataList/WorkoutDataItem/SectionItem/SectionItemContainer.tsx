@@ -32,7 +32,7 @@ export default function SectionItemContainer() {
 
   const handleDeleteSectionClick = () => {
     setSectionIDToMod(section.id);
-    deleteRootItemOverlayHandler.open();
+    if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
   };
   return (
     <SectionItem
