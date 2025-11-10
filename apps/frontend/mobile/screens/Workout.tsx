@@ -47,9 +47,18 @@ export default function WorkoutScreen() {
   const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
 
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
+  const exerciseIDToMod = useWorkoutDraftStore(
+    (state) => state.exerciseIDToMod,
+  );
+  const sectionIDToMod = useWorkoutDraftStore((state) => state.sectionIDToMod);
+  const supersetIDToMod = useWorkoutDraftStore(
+    (state) => state.supersetIDToMod,
+  );
+
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
+  const removeRootItem = useWorkoutDraftStore((state) => state.removeRootItem);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   const supabaseSession = useAuthStore((state) => state.session);
@@ -331,7 +340,16 @@ export default function WorkoutScreen() {
           confirmButtonLabel="delete"
           isVisible={isDeleteRootItemOverlayVisible}
           handleHideDialog={setIsDeleteRootItemOverlayVisible}
-          onConfirmationPress={() => console.log('delete root item clicked')}
+          onConfirmationPress={() => {
+            removeRootItem(
+              exerciseIDToMod
+                ? exerciseIDToMod!
+                : supersetIDToMod
+                  ? supersetIDToMod!
+                  : sectionIDToMod!,
+            );
+            setIsDeleteRootItemOverlayVisible(false);
+          }}
         />
         <ConfirmationDialog
           title="Delete nested item (create content)"
