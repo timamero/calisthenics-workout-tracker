@@ -40,7 +40,6 @@ export default function WorkoutDataItemContainer({
           parentSupersetID: null,
         }}
       >
-        <Text style={{ color: 'white' }}>Section item</Text>
         <SectionItemContainer />
       </WorkoutDataItemContext.Provider>
     );
