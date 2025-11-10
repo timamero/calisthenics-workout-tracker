@@ -59,6 +59,9 @@ export default function WorkoutScreen() {
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
   const removeRootItem = useWorkoutDraftStore((state) => state.removeRootItem);
+  const removeNestedItem = useWorkoutDraftStore(
+    (state) => state.removeNestedItem,
+  );
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   const supabaseSession = useAuthStore((state) => state.session);
@@ -95,7 +98,7 @@ export default function WorkoutScreen() {
   const { open } = state;
 
   const onCancelWorkoutPress = () => {
-    setIsCancelWorkoutDialogVisible(false);
+    // setIsCancelWorkoutDialogVisible(false);
     navigation.navigate('App', { screen: 'WorkoutDashboard' });
     resetWorkout();
     resetTimer();
@@ -111,15 +114,15 @@ export default function WorkoutScreen() {
     }
   };
 
-  const onAddSectionPress = () => {
-    addSection();
-    setIsAddSectionOverlayVisible(false);
-  };
+  // const onAddSectionPress = () => {
+  //   addSection();
+  //   setIsAddSectionOverlayVisible(false);
+  // };
 
-  const onAddSupersetPress = () => {
-    addSuperset(null);
-    setIsAddSupersetOverlayVisible(false);
-  };
+  // const onAddSupersetPress = () => {
+  //   addSuperset(null);
+  //   setIsAddSupersetOverlayVisible(false);
+  // };
 
   const onSaveWorkoutPress = async () => {
     if (mode === 'build') {
@@ -322,7 +325,7 @@ export default function WorkoutScreen() {
           }
           isVisible={isAddSectionOverlayVisible}
           handleHideDialog={setIsAddSectionOverlayVisible}
-          onConfirmationPress={onAddSectionPress}
+          onConfirmationPress={() => addSection()}
         />
         <ConfirmationDialog
           title={addSupersetConfirmationContent().title}
@@ -332,7 +335,7 @@ export default function WorkoutScreen() {
           }
           isVisible={isAddSupersetOverlayVisible}
           handleHideDialog={setIsAddSupersetOverlayVisible}
-          onConfirmationPress={onAddSupersetPress}
+          onConfirmationPress={() => addSuperset(sectionIDToMod)}
         />
         <ConfirmationDialog
           title={`Delete ${exerciseIDToMod ? 'Exercise' : supersetIDToMod ? 'Superset' : 'Section'}`}
@@ -340,24 +343,23 @@ export default function WorkoutScreen() {
           confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
           isVisible={isDeleteRootItemOverlayVisible}
           handleHideDialog={setIsDeleteRootItemOverlayVisible}
-          onConfirmationPress={() => {
+          onConfirmationPress={() =>
             removeRootItem(
               exerciseIDToMod
                 ? exerciseIDToMod!
                 : supersetIDToMod
                   ? supersetIDToMod!
                   : sectionIDToMod!,
-            );
-            setIsDeleteRootItemOverlayVisible(false);
-          }}
+            )
+          }
         />
         <ConfirmationDialog
-          title="Delete nested item (create content)"
-          message="Delete nested item message"
-          confirmButtonLabel="delete"
+          title={`Delete ${exerciseIDToMod ? 'Exercise' : supersetIDToMod ? 'Superset' : 'Section'}`}
+          message={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'} from this workout?`}
+          confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
           isVisible={isDeleteNestedItemOverlayVisible}
           handleHideDialog={setIsDeleteNestedItemOverlayVisible}
-          onConfirmationPress={() => console.log('delete nested item clicked')}
+          onConfirmationPress={() => removeNestedItem()}
         />
         <ConfirmationDialog
           title="Delete set (create content)"

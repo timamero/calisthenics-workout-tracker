@@ -27,7 +27,12 @@ export default function ConfirmationDialog({
         </Dialog.Content>
         <Dialog.Actions>
           <Button onPress={() => handleHideDialog(false)}>Cancel</Button>
-          <Button onPress={() => onConfirmationPress()}>
+          <Button
+            onPress={() => {
+              onConfirmationPress();
+              handleHideDialog(false);
+            }}
+          >
             {confirmButtonLabel}
           </Button>
         </Dialog.Actions>
