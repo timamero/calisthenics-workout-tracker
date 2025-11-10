@@ -335,9 +335,9 @@ export default function WorkoutScreen() {
           onConfirmationPress={onAddSupersetPress}
         />
         <ConfirmationDialog
-          title="Delete root item (create content)"
-          message="Delete root item message"
-          confirmButtonLabel="delete"
+          title={`Delete ${exerciseIDToMod ? 'Exercise' : supersetIDToMod ? 'Superset' : 'Section'}`}
+          message={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'} from this workout?`}
+          confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
           isVisible={isDeleteRootItemOverlayVisible}
           handleHideDialog={setIsDeleteRootItemOverlayVisible}
           onConfirmationPress={() => {
