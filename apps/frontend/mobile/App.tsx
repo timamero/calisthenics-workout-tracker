@@ -7,6 +7,7 @@ import {
   useExerciseLibraryStore,
   useAuthStore,
   useWorkoutLibraryStore,
+  useLeveragesAssistsStore,
 } from '@cwt/state/stores';
 import { useSupabaseAuth } from '@cwt/hooks';
 
@@ -15,6 +16,7 @@ import { supabase } from './services/supabaseClient';
 import Navigation from './navigation';
 import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
+import { getLeveragesAssists } from './services/leveragesAssistsService';
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
@@ -22,6 +24,9 @@ export default function App() {
 
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
+  const setLeveragesAssists = useLeveragesAssistsStore(
+    (state) => state.setLeveragesAssists,
+  );
 
   useSupabaseAuth(supabase);
 
@@ -40,10 +45,17 @@ export default function App() {
         if (workoutBuilds) {
           setWorkouts(workoutLogs, workoutBuilds);
         }
+
+        const leveragesAssists = await getLeveragesAssists(
+          supabaseSession.access_token,
+        );
+        if (leveragesAssists) {
+          setLeveragesAssists(leveragesAssists);
+        }
       }
     };
     asyncFetchData();
-  }, [setExercises, supabaseSession, setWorkouts]);
+  }, [setExercises, supabaseSession, setWorkouts, setLeveragesAssists]);
 
   if (loading) {
     return (

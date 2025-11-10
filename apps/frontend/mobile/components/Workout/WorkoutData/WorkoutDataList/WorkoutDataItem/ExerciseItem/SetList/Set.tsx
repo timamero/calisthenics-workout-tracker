@@ -6,6 +6,7 @@ import { Mode } from '@cwt/schema/workouts';
 import { Text } from '../../../../../../../customText';
 import { CustomTheme } from '../../../../../../../theme';
 import FieldsList from './FieldsList';
+import LeverageAssistFieldsList from './LeverageAssistFieldsList';
 
 interface SetProps {
   mode: Mode;
@@ -62,6 +63,7 @@ export default function Set({
         )}
       </View>
       <FieldsList />
+      <LeverageAssistFieldsList />
       {mode === 'log' && (
         <Checkbox.Item
           label="Completed"
