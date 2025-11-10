@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
-// import { Stack, Group, Text, Button } from '@mantine/core';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
@@ -51,13 +50,6 @@ export default function SectionItem({
     addSupersetOverlayHandler!.open();
   };
   return (
-    // <View
-    //   style={{
-    //     display: 'flex',
-    //     flexDirection: 'row',
-    //     backgroundColor: theme.colors.dark800,
-    //   }}
-    // >
     <View
       style={{
         display: 'flex',
@@ -143,7 +135,6 @@ export default function SectionItem({
           style={{
             display: 'flex',
             flexDirection: 'column',
-            // justifyContent: 'flex-end',
             alignItems: 'flex-end',
             gap: 8,
           }}
@@ -169,6 +160,5 @@ export default function SectionItem({
         </View>
       )}
     </View>
-    // </View>
   );
 }
