@@ -60,7 +60,7 @@ export default function NumeralInput({
         placeholderTextColor="grey"
         textColor="#fff"
         keyboardType="number-pad"
-        label="Reps"
+        label={label}
         theme={{
           colors: {
             onSurfaceVariant: '#FFF',
@@ -89,7 +89,7 @@ export default function NumeralInput({
         placeholderTextColor="grey"
         textColor="#fff"
         keyboardType="number-pad"
-        label="Reps"
+        label={label}
         theme={{
           colors: {
             onSurfaceVariant: '#FFF',
@@ -117,7 +117,7 @@ export default function NumeralInput({
       placeholderTextColor="grey"
       textColor="#fff"
       keyboardType="number-pad"
-      label="Reps"
+      label={label}
       theme={{
         colors: {
           onSurfaceVariant: '#FFF',
