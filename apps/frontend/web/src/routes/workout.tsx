@@ -41,8 +41,6 @@ function WorkoutView() {
 
   const [saveOverlayOpened, saveOverlayHandler] = useDisclosure(false);
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
-  // const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
-  //   useDisclosure(false);
   const [addSectionOverlayOpened, addSectionOverlayHandler] =
     useDisclosure(false);
   const [addSupersetOverlayOpened, addSupersetOverlayHandler] =
@@ -148,7 +146,6 @@ function WorkoutView() {
   return (
     <WorkoutContext.Provider
       value={{
-        // addExerciseOverlayHandler: addExerciseOverlayHandler,
         deleteRootItemOverlayHandler: deleteRootItemOverlayHandler,
         deleteSetOverlayHandler: deleteSetOverlayHandler,
         deleteNestedItemOverlayHandler: deleteNestedItemOverlayHandler,
@@ -209,10 +206,7 @@ function WorkoutView() {
             </Button>
           </Stack>
         </Stack>
-        <AddExerciseOverlay
-        // opened={addExerciseOverlayOpened!}
-        // handler={addExerciseOverlayHandler}
-        />
+        <AddExerciseOverlay />
         <ConfirmationOverlay
           title={addSectionConfirmationContent().title}
           message={addSectionConfirmationContent().message}

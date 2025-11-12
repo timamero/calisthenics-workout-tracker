@@ -78,8 +78,6 @@ export default function WorkoutScreen() {
 
   const [isCancelWorkoutDialogVisible, setIsCancelWorkoutDialogVisible] =
     useState<boolean>(false);
-  // const [isAddExerciseOverlayVisible, setIsAddExerciseOverlayVisible] =
-  //   React.useState<boolean>(false);
   const [isDeleteRootItemOverlayVisible, setIsDeleteRootItemOverlayVisible] =
     useState<boolean>(false);
   const [
@@ -102,7 +100,6 @@ export default function WorkoutScreen() {
   const { open } = state;
 
   const onCancelWorkoutPress = () => {
-    // setIsCancelWorkoutDialogVisible(false);
     navigation.navigate('App', { screen: 'WorkoutDashboard' });
     resetWorkout();
     resetTimer();
@@ -118,21 +115,10 @@ export default function WorkoutScreen() {
     }
   };
 
-  // const onAddSectionPress = () => {
-  //   addSection();
-  //   setIsAddSectionOverlayVisible(false);
-  // };
-
-  // const onAddSupersetPress = () => {
-  //   addSuperset(null);
-  //   setIsAddSupersetOverlayVisible(false);
-  // };
-
   const onSaveWorkoutPress = async () => {
     if (mode === 'build') {
       setWorkoutToSaveWithUser();
     } else {
-      // mode is 'edit' or 'log'
       setWorkoutToSaveWithUserAndDuration();
     }
     const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
@@ -200,7 +186,6 @@ export default function WorkoutScreen() {
   return (
     <WorkoutContext.Provider
       value={{
-        // setIsAddExerciseDialogVisible: setIsAddExerciseOverlayVisible,
         setIsDeleteRootItemDialogVisible: setIsDeleteRootItemOverlayVisible,
         setIsDeleteNestedItemDialogVisible: setIsDeleteNestedItemOverlayVisible,
         setIsDeleteSetDialogVisible: setIsDeleteSetOverlayVisible,
@@ -317,8 +302,6 @@ export default function WorkoutScreen() {
           </View>
         </View>
         <AddExerciseOverlay
-          // isVisible={isAddExerciseOverlayVisible}
-          // handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
           workoutDataScrollViewRef={workoutDataScrollViewRef}
         />
         <ConfirmationDialog

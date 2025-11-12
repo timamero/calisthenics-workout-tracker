@@ -3,7 +3,6 @@ import {
   useWorkoutDraftStore,
   useExerciseLibraryStore,
 } from '@cwt/state/stores';
-// import type { AddExerciseOverlayProps } from '@cwt/schema/ui';
 import { OverlayContext } from '@cwt/context';
 
 import AddExerciseOverlayUI from './AddExerciseOverlayUI';
