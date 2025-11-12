@@ -10,8 +10,6 @@ import AddExerciseOverlayUI from './AddExerciseOverlayUI';
 import { OverlayContext } from '@cwt/context';
 
 export default function AddExerciseOverlay({
-  // isVisible,
-  // handleHideModal,
   workoutDataScrollViewRef,
 }: AddExerciseOverlayProps) {
   const isVisible = useContext(OverlayContext)?.isAddExerciseOverlayVisible;
