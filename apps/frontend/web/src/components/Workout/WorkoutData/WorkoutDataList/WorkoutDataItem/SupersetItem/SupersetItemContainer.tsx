@@ -65,9 +65,9 @@ export default function SupersetItemContainer() {
     }
 
     if (parentSectionID) {
-      deleteNestedItemOverlayHandler.open();
+      if (deleteNestedItemOverlayHandler) deleteNestedItemOverlayHandler.open();
     } else {
-      deleteRootItemOverlayHandler.open();
+      if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
     }
   };
 
