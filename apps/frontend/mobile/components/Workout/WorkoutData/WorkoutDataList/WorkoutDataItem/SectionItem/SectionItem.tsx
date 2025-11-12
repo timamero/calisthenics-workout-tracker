@@ -7,7 +7,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutContext, WorkoutDataItemContext } from '@cwt/context';
 
 import { ExerciseItemContainer } from '../ExerciseItem';
-// import { SupersetItemContainer } from '../SupersetItem';
+import { SupersetItemContainer } from '../SupersetItem';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import { CustomTheme } from '../../../../../../theme';
 import { Text } from '../../../../../../customText';
@@ -125,8 +125,7 @@ export default function SectionItem({
               parentSupersetID: null,
             }}
           >
-            {/* <SupersetItemContainer /> */}
-            <Text style={{ color: 'white' }}>Superset item placeholder</Text>
+            <SupersetItemContainer />
           </WorkoutDataItemContext.Provider>
         );
       })}
