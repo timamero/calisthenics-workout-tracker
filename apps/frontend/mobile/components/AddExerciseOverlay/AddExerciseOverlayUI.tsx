@@ -2,17 +2,12 @@ import * as React from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
+import type { AddExerciseOverlayUIProps } from '@cwt/schema/ui';
+
 import { CustomTheme } from '../../theme';
 
 import FullScreenModal from '../common/FullScreenModal';
 import ExerciseList from './ExerciseList';
-
-interface AddExerciseOverlayUIProps {
-  isVisible: boolean;
-  selectedExerciseIDToAdd: number | null;
-  handleHideModal: () => void;
-  handleAddExercisePress: () => void;
-}
 
 export default function AddExerciseOverlayUI({
   isVisible,
@@ -25,8 +20,8 @@ export default function AddExerciseOverlayUI({
   return (
     <FullScreenModal
       title="Add Exercise"
-      visible={isVisible}
-      handleHideModal={handleHideModal}
+      visible={isVisible!}
+      handleHideModal={handleHideModal!}
     >
       <ScrollView
         style={{
@@ -50,7 +45,7 @@ export default function AddExerciseOverlayUI({
         <Button
           mode="outlined"
           textColor={theme.colors.light}
-          onPress={() => handleHideModal()}
+          onPress={() => handleHideModal?.()}
           style={{
             borderColor: 'rgb(134, 142, 150)',
             borderRadius: 4,
@@ -61,7 +56,7 @@ export default function AddExerciseOverlayUI({
         <Button
           disabled={selectedExerciseIDToAdd === null}
           mode="contained"
-          onPress={() => handleAddExercisePress()}
+          onPress={() => handleAddExercisePress?.()}
           style={{
             borderRadius: 4,
           }}
