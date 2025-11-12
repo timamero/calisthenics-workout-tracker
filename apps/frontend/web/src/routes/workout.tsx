@@ -24,10 +24,10 @@ import {
 import { OverlayContext, WorkoutContext } from '@cwt/context';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
-import AddExerciseOverlay from '../components/AddExerciseOverlay';
 import WorkoutData from '../components/Workout/WorkoutData';
 import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle';
 import { postWorkoutBuild, postWorkoutLog } from '../services/workoutsService';
+import WorkoutOverlays from '../components/Workout/WorkoutOverlays';
 
 export const Route = createFileRoute('/workout')({
   component: WorkoutView,
@@ -206,7 +206,7 @@ function WorkoutView() {
             </Button>
           </Stack>
         </Stack>
-        <AddExerciseOverlay />
+        <WorkoutOverlays />
         <ConfirmationOverlay
           title={addSectionConfirmationContent().title}
           message={addSectionConfirmationContent().message}
