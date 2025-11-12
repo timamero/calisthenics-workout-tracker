@@ -1,4 +1,4 @@
-// import { ExactlyOne, CombineExclusives } from './schemas/helpers.schema';
+import { ExactlyOne } from './schemas/helpers.schema';
 
-// export type { ExactlyOne, CombineExclusives };
+export type { ExactlyOne };
 export { Constants } from './database.types';

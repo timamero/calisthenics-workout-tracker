@@ -207,7 +207,7 @@ function WorkoutView() {
           </Stack>
         </Stack>
         <AddExerciseOverlay
-          opened={addExerciseOverlayOpened}
+          opened={addExerciseOverlayOpened!}
           handler={addExerciseOverlayHandler}
         />
         <ConfirmationOverlay
