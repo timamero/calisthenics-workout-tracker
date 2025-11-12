@@ -18,6 +18,18 @@ export type CustomTheme = typeof DefaultTheme & {
     orange1: string;
     light: string;
 
+    orange50: string;
+    orange100: string;
+    orange200: string;
+    orange300: string;
+    orange400: string;
+    orange500: string;
+    orange600: string;
+    orange700: string;
+    orange800: string;
+    orange900: string;
+    orange950: string;
+
     dark50: string;
     dark100: string;
     dark200: string;
@@ -115,6 +127,18 @@ const theme: CustomTheme = {
     dark9: 'rgb(20 20 20)', // mantine: dark.9
     orange1: 'rgb(255 232 204)', // mantine: orange.1
     light: 'rgb(255 244 230)', // mantine: orange.0
+
+    orange50: '#fff0ef',
+    orange100: '#ffe1df',
+    orange200: '#ffbfba',
+    orange300: '#ff9f96',
+    orange400: '#ff7766',
+    orange500: '#ff4500',
+    orange600: '#cb3500',
+    orange700: '#9c2600',
+    orange800: '#6c1800',
+    orange900: '#420b00',
+    orange950: '#2d0500',
 
     dark50: '#f1f1f1',
     dark100: '#e2e2e2',
