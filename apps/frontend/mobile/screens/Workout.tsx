@@ -34,7 +34,7 @@ import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/Wor
 import WorkoutData from '../components/Workout/WorkoutData';
 import { CustomTheme } from '../theme';
 import ConfirmationDialog from '../components/common/ConfirmationDialog';
-import AddExerciseOverlay from '../components/AddExerciseOverlay';
+import WorkoutOverlays from '../components/Workout/WorkoutOverlays';
 
 export default function WorkoutScreen() {
   const workoutDataScrollViewRef = useRef<ScrollView | null>(null);
@@ -301,9 +301,7 @@ export default function WorkoutScreen() {
             </Button>
           </View>
         </View>
-        <AddExerciseOverlay
-          workoutDataScrollViewRef={workoutDataScrollViewRef}
-        />
+        <WorkoutOverlays workoutDataScrollViewRef={workoutDataScrollViewRef} />
         <ConfirmationDialog
           title={addSectionConfirmationContent().title}
           message={addSectionConfirmationContent().message}
