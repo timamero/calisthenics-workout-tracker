@@ -1,15 +1,17 @@
+import { useContext } from 'react';
 import {
   useWorkoutDraftStore,
   useExerciseLibraryStore,
 } from '@cwt/state/stores';
-import type { AddExerciseOverlayProps } from '@cwt/schema/ui';
+// import type { AddExerciseOverlayProps } from '@cwt/schema/ui';
+import { OverlayContext } from '@cwt/context';
 
 import AddExerciseOverlayUI from './AddExerciseOverlayUI';
 
-export default function AddExerciseOverlay({
-  opened,
-  handler,
-}: AddExerciseOverlayProps) {
+export default function AddExerciseOverlay() {
+  const opened = useContext(OverlayContext)?.addExerciseOverlayOpened;
+  const handler = useContext(OverlayContext)?.addExerciseOverlayHandler;
+
   const selectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.selectedExerciseIDToAdd,
   );

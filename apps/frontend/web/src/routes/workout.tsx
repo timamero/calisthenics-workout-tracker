@@ -1,4 +1,4 @@
-// import { useContext } from 'react';
+import { useContext } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Stack, Button, Switch } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -21,7 +21,7 @@ import {
   addSectionConfirmationContent,
   addSupersetConfirmationContent,
 } from '@cwt/content';
-import { WorkoutContext } from '@cwt/context';
+import { OverlayContext, WorkoutContext } from '@cwt/context';
 
 import ConfirmationOverlay from '../components/common/ConfirmationOverlay';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
@@ -36,10 +36,13 @@ export const Route = createFileRoute('/workout')({
 function WorkoutView() {
   const navigate = useNavigate();
 
+  const addExerciseOverlayHandler =
+    useContext(OverlayContext)?.addExerciseOverlayHandler;
+
   const [saveOverlayOpened, saveOverlayHandler] = useDisclosure(false);
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
-  const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
-    useDisclosure(false);
+  // const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
+  //   useDisclosure(false);
   const [addSectionOverlayOpened, addSectionOverlayHandler] =
     useDisclosure(false);
   const [addSupersetOverlayOpened, addSupersetOverlayHandler] =
@@ -145,7 +148,7 @@ function WorkoutView() {
   return (
     <WorkoutContext.Provider
       value={{
-        addExerciseOverlayHandler: addExerciseOverlayHandler,
+        // addExerciseOverlayHandler: addExerciseOverlayHandler,
         deleteRootItemOverlayHandler: deleteRootItemOverlayHandler,
         deleteSetOverlayHandler: deleteSetOverlayHandler,
         deleteNestedItemOverlayHandler: deleteNestedItemOverlayHandler,
@@ -169,7 +172,7 @@ function WorkoutView() {
                 <Button
                   variant="filled"
                   color="orange.9"
-                  onClick={() => addExerciseOverlayHandler.open()}
+                  onClick={() => addExerciseOverlayHandler?.open()}
                 >
                   Add Exercise
                 </Button>
@@ -207,8 +210,8 @@ function WorkoutView() {
           </Stack>
         </Stack>
         <AddExerciseOverlay
-          opened={addExerciseOverlayOpened!}
-          handler={addExerciseOverlayHandler}
+        // opened={addExerciseOverlayOpened!}
+        // handler={addExerciseOverlayHandler}
         />
         <ConfirmationOverlay
           title={addSectionConfirmationContent().title}
