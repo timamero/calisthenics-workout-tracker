@@ -12,7 +12,7 @@ import ExerciseList from './ExerciseList';
 export default function AddExerciseOverlayUI({
   isVisible,
   selectedExerciseIDToAdd,
-  handleHideModal,
+  setIsVisible,
   handleAddExercisePress,
 }: AddExerciseOverlayUIProps) {
   const theme = useTheme() as CustomTheme;
@@ -21,7 +21,7 @@ export default function AddExerciseOverlayUI({
     <FullScreenModal
       title="Add Exercise"
       visible={isVisible!}
-      handleHideModal={handleHideModal!}
+      setIsVisible={setIsVisible}
     >
       <ScrollView
         style={{
@@ -45,7 +45,7 @@ export default function AddExerciseOverlayUI({
         <Button
           mode="outlined"
           textColor={theme.colors.light}
-          onPress={() => handleHideModal?.()}
+          onPress={() => setIsVisible?.(false)}
           style={{
             borderColor: 'rgb(134, 142, 150)',
             borderRadius: 4,

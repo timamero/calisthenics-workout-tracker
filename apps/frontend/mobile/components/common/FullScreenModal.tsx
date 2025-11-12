@@ -8,13 +8,15 @@ import { CustomTheme } from '../../theme';
 interface FullScreenModalProps {
   visible: boolean;
   title: string;
-  handleHideModal: () => void;
+  handleHideModal?: () => void;
+  setIsVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
 }
 
 export default function FullScreenModal({
   visible,
   handleHideModal,
+  setIsVisible,
   title,
   children,
 }: FullScreenModalProps) {
@@ -32,7 +34,7 @@ export default function FullScreenModal({
     <Portal>
       <Modal
         visible={visible}
-        onDismiss={handleHideModal}
+        onDismiss={() => setIsVisible?.(false)}
         contentContainerStyle={containerStyle}
       >
         <View

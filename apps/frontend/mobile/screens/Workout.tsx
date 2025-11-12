@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext, useRef, useState, useEffect } from 'react';
 import { View, BackHandler, ScrollView } from 'react-native';
 import {
   useTheme,
@@ -27,7 +27,7 @@ import {
   addSupersetConfirmationContent,
   addSectionConfirmationContent,
 } from '@cwt/content';
-import { WorkoutContext } from '@cwt/context';
+import { OverlayContext, WorkoutContext } from '@cwt/context';
 
 import { postWorkoutBuild, postWorkoutLog } from '../services/workoutsService';
 import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle/';
@@ -37,10 +37,13 @@ import ConfirmationDialog from '../components/common/ConfirmationDialog';
 import AddExerciseOverlay from '../components/AddExerciseOverlay';
 
 export default function WorkoutScreen() {
-  const workoutDataScrollViewRef = React.useRef<ScrollView | null>(null);
+  const workoutDataScrollViewRef = useRef<ScrollView | null>(null);
 
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
+
+  const setIsAddExerciseOverlayVisible =
+    useContext(OverlayContext)?.setIsAddExerciseOverlayVisible!;
 
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
@@ -74,25 +77,25 @@ export default function WorkoutScreen() {
     useWorkoutSave();
 
   const [isCancelWorkoutDialogVisible, setIsCancelWorkoutDialogVisible] =
-    React.useState<boolean>(false);
-  const [isAddExerciseOverlayVisible, setIsAddExerciseOverlayVisible] =
-    React.useState<boolean>(false);
+    useState<boolean>(false);
+  // const [isAddExerciseOverlayVisible, setIsAddExerciseOverlayVisible] =
+  //   React.useState<boolean>(false);
   const [isDeleteRootItemOverlayVisible, setIsDeleteRootItemOverlayVisible] =
-    React.useState<boolean>(false);
+    useState<boolean>(false);
   const [
     isDeleteNestedItemOverlayVisible,
     setIsDeleteNestedItemOverlayVisible,
-  ] = React.useState<boolean>(false);
+  ] = useState<boolean>(false);
   const [isDeleteSetOverlayVisible, setIsDeleteSetOverlayVisible] =
-    React.useState<boolean>(false);
+    useState<boolean>(false);
   const [isAddSupersetOverlayVisible, setIsAddSupersetOverlayVisible] =
-    React.useState<boolean>(false);
+    useState<boolean>(false);
   const [isAddSectionOverlayVisible, setIsAddSectionOverlayVisible] =
-    React.useState<boolean>(false);
+    useState<boolean>(false);
   const [isSaveWorkoutDialogVisible, setIsSaveWorkoutDialogVisible] =
-    React.useState<boolean>(false);
+    useState<boolean>(false);
 
-  const [state, setState] = React.useState({ open: false });
+  const [state, setState] = useState({ open: false });
 
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
 
@@ -161,7 +164,7 @@ export default function WorkoutScreen() {
     navigation.navigate('App', { screen: 'WorkoutDashboard' });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
         <Button
@@ -179,7 +182,7 @@ export default function WorkoutScreen() {
     });
   }, [navigation, theme.colors.grey]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const onBackPress = () => {
       setIsCancelWorkoutDialogVisible(true);
 
@@ -197,7 +200,7 @@ export default function WorkoutScreen() {
   return (
     <WorkoutContext.Provider
       value={{
-        setIsAddExerciseDialogVisible: setIsAddExerciseOverlayVisible,
+        // setIsAddExerciseDialogVisible: setIsAddExerciseOverlayVisible,
         setIsDeleteRootItemDialogVisible: setIsDeleteRootItemOverlayVisible,
         setIsDeleteNestedItemDialogVisible: setIsDeleteNestedItemOverlayVisible,
         setIsDeleteSetDialogVisible: setIsDeleteSetOverlayVisible,
@@ -314,8 +317,8 @@ export default function WorkoutScreen() {
           </View>
         </View>
         <AddExerciseOverlay
-          isVisible={isAddExerciseOverlayVisible}
-          handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
+          // isVisible={isAddExerciseOverlayVisible}
+          // handleHideModal={() => setIsAddExerciseOverlayVisible(false)}
           workoutDataScrollViewRef={workoutDataScrollViewRef}
         />
         <ConfirmationDialog

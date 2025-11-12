@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext } from 'react';
 
 import {
   useWorkoutDraftStore,
@@ -7,12 +7,17 @@ import {
 import { AddExerciseOverlayProps } from '@cwt/schema/ui';
 
 import AddExerciseOverlayUI from './AddExerciseOverlayUI';
+import { OverlayContext } from '@cwt/context';
 
 export default function AddExerciseOverlay({
-  isVisible,
-  handleHideModal,
+  // isVisible,
+  // handleHideModal,
   workoutDataScrollViewRef,
 }: AddExerciseOverlayProps) {
+  const isVisible = useContext(OverlayContext)?.isAddExerciseOverlayVisible;
+  const setIsVisible =
+    useContext(OverlayContext)?.setIsAddExerciseOverlayVisible;
+
   const selectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.selectedExerciseIDToAdd,
   );
@@ -29,14 +34,14 @@ export default function AddExerciseOverlay({
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
     setSelectedExerciseIDToAdd(null);
-    handleHideModal?.();
+    setIsVisible?.(false);
     workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
   };
   return (
     <AddExerciseOverlayUI
       isVisible={isVisible!}
       selectedExerciseIDToAdd={selectedExerciseIDToAdd}
-      handleHideModal={handleHideModal!}
+      setIsVisible={setIsVisible!}
       handleAddExercisePress={handleAddExercisePress}
     />
   );
