@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import 'react-native-get-random-values';
 import { View } from 'react-native';
 import { PaperProvider, ActivityIndicator, Text } from 'react-native-paper';
@@ -10,7 +10,6 @@ import {
   useLeveragesAssistsStore,
 } from '@cwt/state/stores';
 import { useSupabaseAuth } from '@cwt/hooks';
-import { OverlayContext } from '@cwt/context';
 
 import theme from './theme';
 import { supabase } from './services/supabaseClient';
@@ -18,6 +17,7 @@ import Navigation from './navigation';
 import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
 import { getLeveragesAssists } from './services/leveragesAssistsService';
+import OverlayContextProvider from './providers/OverlayContextProvider';
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
@@ -28,9 +28,6 @@ export default function App() {
   const setLeveragesAssists = useLeveragesAssistsStore(
     (state) => state.setLeveragesAssists,
   );
-
-  const [isAddExerciseOverlayVisible, setIsAddExerciseOverlayVisible] =
-    useState<boolean>(false);
 
   useSupabaseAuth(supabase);
 
@@ -87,14 +84,9 @@ export default function App() {
 
   return (
     <PaperProvider theme={theme}>
-      <OverlayContext.Provider
-        value={{
-          isAddExerciseOverlayVisible: isAddExerciseOverlayVisible,
-          setIsAddExerciseOverlayVisible: setIsAddExerciseOverlayVisible,
-        }}
-      >
+      <OverlayContextProvider>
         <Navigation />
-      </OverlayContext.Provider>
+      </OverlayContextProvider>
     </PaperProvider>
   );
 }
