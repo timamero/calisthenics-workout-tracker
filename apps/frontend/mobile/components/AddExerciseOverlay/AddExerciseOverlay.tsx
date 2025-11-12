@@ -1,18 +1,12 @@
 import * as React from 'react';
-import { ScrollView } from 'react-native';
 
 import {
   useWorkoutDraftStore,
   useExerciseLibraryStore,
 } from '@cwt/state/stores';
+import { AddExerciseOverlayProps } from '@cwt/schema/ui';
 
 import AddExerciseOverlayUI from './AddExerciseOverlayUI';
-
-interface AddExerciseOverlayProps {
-  isVisible: boolean;
-  handleHideModal: () => void;
-  workoutDataScrollViewRef: React.RefObject<ScrollView | null>;
-}
 
 export default function AddExerciseOverlay({
   isVisible,
@@ -35,8 +29,8 @@ export default function AddExerciseOverlay({
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
     setSelectedExerciseIDToAdd(null);
-    handleHideModal();
-    workoutDataScrollViewRef.current?.scrollToEnd({ animated: true });
+    handleHideModal?.();
+    workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
   };
   return (
     <AddExerciseOverlayUI

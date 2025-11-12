@@ -1,3 +1,6 @@
-import { AddExerciseOverlayUIProps } from './schemas/addExerciseOverlay';
+import {
+  AddExerciseOverlayProps,
+  AddExerciseOverlayUIProps,
+} from './schemas/addExerciseOverlay';
 
-export type { AddExerciseOverlayUIProps };
+export type { AddExerciseOverlayProps, AddExerciseOverlayUIProps };

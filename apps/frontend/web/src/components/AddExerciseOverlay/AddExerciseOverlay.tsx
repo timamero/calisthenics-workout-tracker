@@ -2,13 +2,9 @@ import {
   useWorkoutDraftStore,
   useExerciseLibraryStore,
 } from '@cwt/state/stores';
+import type { AddExerciseOverlayProps } from '@cwt/schema/ui';
 
 import AddExerciseOverlayUI from './AddExerciseOverlayUI';
-
-interface AddExerciseOverlayProps {
-  opened: boolean;
-  handler: { close: () => void };
-}
 
 export default function AddExerciseOverlay({
   opened,
@@ -30,7 +26,7 @@ export default function AddExerciseOverlay({
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
     setSelectedExerciseIDToAdd(null);
-    handler.close();
+    handler!.close();
   };
 
   return (
