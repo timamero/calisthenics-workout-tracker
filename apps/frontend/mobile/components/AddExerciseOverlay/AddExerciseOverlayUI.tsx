@@ -65,6 +65,12 @@ export default function AddExerciseOverlayUI({
           style={{
             borderRadius: 4,
           }}
+          theme={{
+            colors: {
+              surfaceDisabled: theme.colors.dark400,
+              onSurfaceDisabled: theme.colors.dark700,
+            },
+          }}
         >
           Add Exercise
         </Button>
