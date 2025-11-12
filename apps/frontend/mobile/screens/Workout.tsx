@@ -55,6 +55,7 @@ export default function WorkoutScreen() {
     (state) => state.supersetIDToMod,
   );
 
+  const deleteSet = useWorkoutDraftStore((state) => state.deleteSetUpdated);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
@@ -362,12 +363,12 @@ export default function WorkoutScreen() {
           onConfirmationPress={() => removeNestedItem()}
         />
         <ConfirmationDialog
-          title="Delete set (create content)"
-          message="Delete set message"
-          confirmButtonLabel="delete"
+          title="Delete set"
+          message="Delete set from this exercise?"
+          confirmButtonLabel="Delete"
           isVisible={isDeleteSetOverlayVisible}
           handleHideDialog={setIsDeleteSetOverlayVisible}
-          onConfirmationPress={() => console.log('delete set clicked')}
+          onConfirmationPress={() => deleteSet()}
         />
         <ConfirmationDialog
           title={saveWorkoutConfirmationContent(mode).title}
