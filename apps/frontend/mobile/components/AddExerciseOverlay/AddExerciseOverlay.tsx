@@ -34,9 +34,9 @@ export default function AddExerciseOverlay({
   };
   return (
     <AddExerciseOverlayUI
-      isVisible={isVisible}
+      isVisible={isVisible!}
       selectedExerciseIDToAdd={selectedExerciseIDToAdd}
-      handleHideModal={handleHideModal}
+      handleHideModal={handleHideModal!}
       handleAddExercisePress={handleAddExercisePress}
     />
   );

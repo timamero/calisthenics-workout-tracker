@@ -20,7 +20,6 @@ export default function AddExerciseOverlay({
   const getExerciseById = useExerciseLibraryStore(
     (state) => state.getExerciseByID,
   );
-
   const handleAddExerciseClick = () => {
     addExercise(
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
@@ -31,9 +30,9 @@ export default function AddExerciseOverlay({
 
   return (
     <AddExerciseOverlayUI
-      opened={opened}
+      opened={opened!}
       selectedExerciseIDToAdd={selectedExerciseIDToAdd}
-      handler={handler}
+      handler={handler!}
       handleAddExerciseClick={handleAddExerciseClick}
     />
   );
