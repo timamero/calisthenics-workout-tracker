@@ -1,13 +1,8 @@
 import { Group, Modal, Button, Stack, ScrollArea } from '@mantine/core';
 
-import ExercisesList from './ExercisesList';
+import type { AddExerciseOverlayUIProps } from '@cwt/schema/ui';
 
-interface AddExerciseOverlayUIProps {
-  opened: boolean;
-  selectedExerciseIDToAdd: number | null;
-  handler: { close: () => void };
-  handleAddExerciseClick: () => void;
-}
+import ExercisesList from './ExercisesList';
 
 export default function AddExerciseOverlayUI({
   opened,
@@ -17,8 +12,8 @@ export default function AddExerciseOverlayUI({
 }: AddExerciseOverlayUIProps) {
   return (
     <Modal
-      opened={opened}
-      onClose={() => handler.close()}
+      opened={opened!}
+      onClose={() => handler!.close()}
       title="Add Exercise"
       fullScreen
       styles={{
@@ -50,13 +45,13 @@ export default function AddExerciseOverlayUI({
           <Button
             color="gray"
             variant="outline"
-            onClick={() => handler.close()}
+            onClick={() => handler!.close()}
           >
             Cancel
           </Button>
           <Button
             color="orange"
-            onClick={() => handleAddExerciseClick()}
+            onClick={() => handleAddExerciseClick?.()}
             data-disabled={selectedExerciseIDToAdd === null}
           >
             Add Exercise
