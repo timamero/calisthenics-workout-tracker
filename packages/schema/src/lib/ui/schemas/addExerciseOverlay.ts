@@ -1,26 +1,11 @@
-import * as React from 'react';
+import { RefObject, Dispatch, SetStateAction } from 'react';
 import { ScrollView } from 'react-native';
+import { type UseDisclosureHandlers } from '@mantine/hooks';
 
 import { ExactlyOne } from '../../common';
 
-// export type AddExerciseOverlayProps = ExactlyOne<
-//   {
-//     opened?: boolean; // Web
-//     isVisible?: boolean; // Mobile
-//   },
-//   'opened' | 'isVisible'
-// > &
-//   ExactlyOne<
-//     {
-//       handler?: { close: () => void }; // Web
-//       handleHideModal?: () => void; // Mobile
-//     },
-//     'handler' | 'handleHideModal'
-//   > & {
-//     workoutDataScrollViewRef?: React.RefObject<ScrollView | null>;
-//   };
 export type AddExerciseOverlayProps = {
-  workoutDataScrollViewRef?: React.RefObject<ScrollView | null>; // Mobile only
+  workoutDataScrollViewRef?: RefObject<ScrollView | null>; // Mobile only
 };
 
 export type AddExerciseOverlayUIProps = ExactlyOne<
@@ -32,8 +17,8 @@ export type AddExerciseOverlayUIProps = ExactlyOne<
 > &
   ExactlyOne<
     {
-      handler?: { close: () => void }; // Web only
-      setIsVisible?: React.Dispatch<React.SetStateAction<boolean>>; // Mobile only
+      handler?: UseDisclosureHandlers; // Web only
+      setIsVisible?: Dispatch<SetStateAction<boolean>>; // Mobile only
     },
     'handler' | 'setIsVisible'
   > &
