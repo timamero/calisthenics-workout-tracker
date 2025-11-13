@@ -1,4 +1,4 @@
-import { AddExerciseOverlayProps } from '@cwt/schema/ui';
+import { AddExerciseOverlayProps } from '@cwt/schema/workouts';
 
 import AddExerciseOverlayUI from './AddExerciseOverlayUI';
 import { useAddExercise, type UseAddExerciseMobileResult } from '@cwt/hooks';

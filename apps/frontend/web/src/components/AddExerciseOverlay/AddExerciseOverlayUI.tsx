@@ -1,6 +1,6 @@
 import { Group, Modal, Button, Stack, ScrollArea } from '@mantine/core';
 
-import type { AddExerciseOverlayUIProps } from '@cwt/schema/ui';
+import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
 
 import ExercisesList from './ExercisesList';
 
