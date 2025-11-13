@@ -7,7 +7,8 @@ import {
   useExerciseLibraryStore,
 } from "@cwt/state/stores";
 import { AppTypeSchema } from "@cwt/schema/common";
-import { OverlayContext } from "@cwt/context";
+// import { WorkoutContext } from "@cwt/context";
+import { WorkoutContext } from "@cwt/context";
 
 export interface UseAddExerciseWebResult {
   opened: boolean;
@@ -27,12 +28,12 @@ export interface UseAddExerciseMobileResult {
 export function useAddExercise(
   appType: AppTypeSchema
 ): UseAddExerciseMobileResult | UseAddExerciseWebResult | undefined {
-  const opened = useContext(OverlayContext)?.addExerciseOverlayOpened;
-  const handler = useContext(OverlayContext)?.addExerciseOverlayHandler;
+  const opened = useContext(WorkoutContext)?.addExerciseOverlayOpened;
+  const handler = useContext(WorkoutContext)?.addExerciseOverlayHandler;
 
-  const isVisible = useContext(OverlayContext)?.isAddExerciseOverlayVisible;
+  const isVisible = useContext(WorkoutContext)?.isAddExerciseOverlayVisible;
   const setIsVisible =
-    useContext(OverlayContext)?.setIsAddExerciseOverlayVisible;
+    useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
 
   const selectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.selectedExerciseIDToAdd
