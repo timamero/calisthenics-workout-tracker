@@ -15,10 +15,10 @@ export default function ExerciseItemContainer() {
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
 
-  const setIsDeleteRootItemDialogVisible =
-    useContext(WorkoutContext)!.setIsDeleteRootItemDialogVisible;
-  const setIsDeleteNestedItemDialogVisible =
-    useContext(WorkoutContext)!.setIsDeleteNestedItemDialogVisible;
+  const setIsDeleteRootItemOverlayVisible =
+    useContext(WorkoutContext)!.setIsDeleteRootItemOverlayVisible;
+  const setIsDeleteNestedItemOverlayVisible =
+    useContext(WorkoutContext)!.setIsDeleteNestedItemOverlayVisible;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const rootWorkoutDataLength = useWorkoutDraftStore(
@@ -101,11 +101,11 @@ export default function ExerciseItemContainer() {
     }
 
     if (parentSectionID || parentSupersetID) {
-      if (setIsDeleteNestedItemDialogVisible)
-        setIsDeleteNestedItemDialogVisible(true);
+      if (setIsDeleteNestedItemOverlayVisible)
+        setIsDeleteNestedItemOverlayVisible(true);
     } else {
-      if (setIsDeleteRootItemDialogVisible)
-        setIsDeleteRootItemDialogVisible(true);
+      if (setIsDeleteRootItemOverlayVisible)
+        setIsDeleteRootItemOverlayVisible(true);
     }
   };
 

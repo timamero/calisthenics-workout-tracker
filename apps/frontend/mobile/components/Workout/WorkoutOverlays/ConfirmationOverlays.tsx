@@ -40,7 +40,7 @@ export default function ConfirmationOverlays() {
   );
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
-  const deleteSet = useWorkoutDraftStore((state) => state.deleteSetUpdated);
+  const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
   const removeRootItem = useWorkoutDraftStore((state) => state.removeRootItem);
   const removeNestedItem = useWorkoutDraftStore(
     (state) => state.removeNestedItem,

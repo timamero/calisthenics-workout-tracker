@@ -14,7 +14,6 @@ export default function DurationInput({ label }: DurationInputProps) {
   const set = React.useContext(SetContext)!.set;
   const handleSetFieldChange =
     React.useContext(SetContext)!.handleSetFieldChange;
-  const setIndex = React.useContext(SetContext)!.setIndex;
 
   const handleRestFieldChange = (text: string) => {
     // Allow empty string for controlled input
