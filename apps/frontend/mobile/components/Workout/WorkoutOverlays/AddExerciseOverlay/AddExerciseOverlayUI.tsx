@@ -4,9 +4,9 @@ import { useTheme, Button } from 'react-native-paper';
 
 import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
 
-import { CustomTheme } from '../../theme';
+import { CustomTheme } from '../../../../theme';
 
-import FullScreenModal from '../common/FullScreenModal';
+import FullScreenModal from '../../../common/FullScreenModal';
 import ExerciseList from './ExerciseList';
 
 export default function AddExerciseOverlayUI({
