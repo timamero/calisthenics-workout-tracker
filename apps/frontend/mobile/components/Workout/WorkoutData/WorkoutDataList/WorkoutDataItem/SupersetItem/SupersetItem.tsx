@@ -32,8 +32,8 @@ export default function SupersetItem({
 }: SupersetItemProps) {
   const theme = useTheme() as CustomTheme;
 
-  const setIsAddExerciseDialogVisible =
-    useContext(WorkoutContext)?.setIsAddExerciseDialogVisible;
+  const setIsAddExerciseOverlayVisible =
+    useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
   const supersetParentsSectionID = useContext(
     WorkoutDataItemContext,
   )?.parentSectionID;
@@ -51,7 +51,7 @@ export default function SupersetItem({
     if (supersetParentsSectionID) {
       setSectionIDToMod(supersetParentsSectionID);
     }
-    if (setIsAddExerciseDialogVisible) setIsAddExerciseDialogVisible(true);
+    if (setIsAddExerciseOverlayVisible) setIsAddExerciseOverlayVisible(true);
   };
   return (
     <View

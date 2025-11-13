@@ -33,21 +33,21 @@ export default function SectionItem({
 }: SectionItemProps) {
   const theme = useTheme() as CustomTheme;
 
-  const setIsAddExerciseDialogVisible =
-    useContext(WorkoutContext)?.setIsAddExerciseDialogVisible;
-  const setIsAddSupersetDialogVisible =
-    useContext(WorkoutContext)?.setIsAddSupersetDialogVisible;
+  const setIsAddExerciseOverlayVisible =
+    useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
+  const setIsAddSupersetOverlayVisible =
+    useContext(WorkoutContext)?.setIsAddSupersetOverlayVisible;
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod,
   );
 
   const handleOpenAddExerciseOverlay = () => {
     setSectionIDToMod(section.id);
-    if (setIsAddExerciseDialogVisible) setIsAddExerciseDialogVisible(true);
+    if (setIsAddExerciseOverlayVisible) setIsAddExerciseOverlayVisible(true);
   };
   const handleOpenAddSupersetOverlay = () => {
     setSectionIDToMod(section.id);
-    if (setIsAddSupersetDialogVisible) setIsAddSupersetDialogVisible(true);
+    if (setIsAddSupersetOverlayVisible) setIsAddSupersetOverlayVisible(true);
   };
   return (
     <View
