@@ -19,8 +19,8 @@ export default function SetContainer() {
 
   const set = useContext(SetContext)!.set;
   const setIndex = useContext(SetContext)!.setIndex;
-  const setIsDeleteSetDialogVisible =
-    useContext(WorkoutContext)!.setIsDeleteSetDialogVisible;
+  const setIsDeleteSetOverlayVisible =
+    useContext(WorkoutContext)!.setIsDeleteSetOverlayVisible;
   const sets = exercise.sets;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
@@ -49,7 +49,7 @@ export default function SetContainer() {
       setSectionIDToMod(parentSectionID);
     }
 
-    if (setIsDeleteSetDialogVisible) setIsDeleteSetDialogVisible(true);
+    if (setIsDeleteSetOverlayVisible) setIsDeleteSetOverlayVisible(true);
   };
 
   const handleToggleCompleted = (value: boolean) => {

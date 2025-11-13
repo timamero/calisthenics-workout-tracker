@@ -49,9 +49,7 @@ interface WorkoutDraftAction {
   setMode: (mode: Mode) => void;
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
-  setSelectedSetIndexToMod: (setIndex: number | null) => void;
   setSetIDToMod: (id: string | null) => void; // CWT-230
-  setSelectedExerciseIndexToMod: (exerciseIndex: number | null) => void;
   setExerciseIDToMod: (id: string | null) => void; // CWT-230
   setSupersetIDToMod: (id: string | null) => void; // CWT-230
   setSectionIDToMod: (id: string | null) => void; // CWT-230
@@ -67,8 +65,7 @@ interface WorkoutDraftAction {
   reorderNestedItem: (newOrder: number) => void; // CWT-230
   addSet: (exerciseIndex: number) => void;
   addSetUpdated: () => void;
-  deleteSet: (exerciseIndex: number) => void;
-  deleteSetUpdated: () => void;
+  deleteSet: () => void; // check
   updateField: (exerciseIndex: number, updatedField: SetFields) => void;
   updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
   updateLeverageOrAssistField: (
@@ -136,17 +133,9 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       state.selectedExerciseIDToAdd = exerciseID;
     }),
-  setSelectedSetIndexToMod: (setIndex) =>
-    set((state) => {
-      state.selectedSetIndexToMod = setIndex;
-    }),
   setSetIDToMod: (id) =>
     set((state) => {
       state.setIDToMod = id;
-    }),
-  setSelectedExerciseIndexToMod: (exerciseIndex) =>
-    set((state) => {
-      state.selectedExerciseIndexToMod = exerciseIndex;
     }),
   setExerciseIDToMod: (id) =>
     set((state) => {
@@ -851,27 +840,7 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot add set in log mode');
       }
     }),
-  deleteSet: (exerciseIndex) =>
-    set((state) => {
-      if (exerciseIndex === undefined) {
-        console.error('Invalid exercise index');
-        return;
-      }
-
-      const setIndex = state.selectedSetIndexToMod;
-      if (setIndex === undefined || setIndex == null) {
-        console.error('Invalid set index');
-        return;
-      }
-      if (state.mode === 'edit' || state.mode === 'build') {
-        let exercise = state.workoutData[exerciseIndex] as Exercise;
-        exercise.sets.splice(setIndex, 1);
-        state.workoutData[exerciseIndex] = exercise;
-      } else {
-        console.error('Cannot add set in log mode');
-      }
-    }),
-  deleteSetUpdated: () =>
+  deleteSet: () =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
         const sectionID = get().sectionIDToMod;
