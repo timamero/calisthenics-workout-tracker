@@ -2,7 +2,7 @@ import { RefObject, Dispatch, SetStateAction } from 'react';
 import { ScrollView } from 'react-native';
 import { type UseDisclosureHandlers } from '@mantine/hooks';
 
-import { ExactlyOne } from '../../common';
+import { ExactlyOne } from '../../../common';
 
 export type AddExerciseOverlayProps = {
   workoutDataScrollViewRef?: RefObject<ScrollView | null>; // Mobile only

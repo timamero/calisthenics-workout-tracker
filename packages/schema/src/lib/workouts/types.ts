@@ -18,6 +18,8 @@ import {
   StatusSchema,
   TrackingTypeSchema,
   ModeSchema,
+  AddExerciseOverlayProps,
+  AddExerciseOverlayUIProps,
 } from './schemas';
 
 export type WorkoutBuildResponse = z.infer<typeof WorkoutBuildResponseSchema>;
@@ -37,3 +39,5 @@ export type Source = z.infer<typeof SourceSchema>;
 export type Status = z.infer<typeof StatusSchema>;
 export type TrackingType = z.infer<typeof TrackingTypeSchema>;
 export type Mode = z.infer<typeof ModeSchema>;
+
+export type { AddExerciseOverlayProps, AddExerciseOverlayUIProps };
