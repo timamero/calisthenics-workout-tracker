@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
-import type { AddExerciseOverlayUIProps } from '@cwt/schema/ui';
+import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
 
 import { CustomTheme } from '../../theme';
 

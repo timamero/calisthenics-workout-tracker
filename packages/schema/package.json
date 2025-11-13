@@ -30,10 +30,6 @@
       "types": "./dist/lib/leveragesAssists/types.d.ts",
       "default": "./dist/lib/leveragesAssists/types.js"
     },
-    "./ui": {
-      "types": "./dist/lib/ui/types.d.ts",
-      "default": "./dist/lib/ui/types.js"
-    },
     "./sampleSchema": {
       "types": "./dist/sampleSchema.d.ts",
       "default": "./dist/sampleSchema.js"
