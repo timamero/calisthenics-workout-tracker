@@ -29,6 +29,9 @@
   "peerDependenciesMeta": {
     "react-native": {
       "optional": true
+    },
+    "@mantine/hooks": {
+      "optional": true
     }
   }
 }

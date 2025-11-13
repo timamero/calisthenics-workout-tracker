@@ -1,46 +1,55 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 
-import {
-  useWorkoutDraftStore,
-  useExerciseLibraryStore,
-} from '@cwt/state/stores';
+// import {
+//   useWorkoutDraftStore,
+//   useExerciseLibraryStore,
+// } from '@cwt/state/stores';
 import { AddExerciseOverlayProps } from '@cwt/schema/ui';
 
 import AddExerciseOverlayUI from './AddExerciseOverlayUI';
-import { OverlayContext } from '@cwt/context';
+// import { OverlayContext } from '@cwt/context';
+import { useAddExercise, type UseAddExerciseMobileResult } from '@cwt/hooks';
 
 export default function AddExerciseOverlay({
   workoutDataScrollViewRef,
 }: AddExerciseOverlayProps) {
-  const isVisible = useContext(OverlayContext)?.isAddExerciseOverlayVisible;
-  const setIsVisible =
-    useContext(OverlayContext)?.setIsAddExerciseOverlayVisible;
+  const {
+    isVisible,
+    setIsVisible,
+    selectedExerciseIDToAdd,
+    handleAddExercisePress,
+  } = useAddExercise('mobile') as UseAddExerciseMobileResult;
+  // const isVisible = useContext(OverlayContext)?.isAddExerciseOverlayVisible;
+  // const setIsVisible =
+  //   useContext(OverlayContext)?.setIsAddExerciseOverlayVisible;
 
-  const selectedExerciseIDToAdd = useWorkoutDraftStore(
-    (state) => state.selectedExerciseIDToAdd,
-  );
-  const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
-    (state) => state.setSelectedExerciseIDToAdd,
-  );
-  const addExercise = useWorkoutDraftStore((state) => state.addExerciseUpdated);
-  const getExerciseById = useExerciseLibraryStore(
-    (state) => state.getExerciseByID,
-  );
+  // const selectedExerciseIDToAdd = useWorkoutDraftStore(
+  //   (state) => state.selectedExerciseIDToAdd,
+  // );
+  // const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
+  //   (state) => state.setSelectedExerciseIDToAdd,
+  // );
+  // const addExercise = useWorkoutDraftStore((state) => state.addExerciseUpdated);
+  // const getExerciseById = useExerciseLibraryStore(
+  //   (state) => state.getExerciseByID,
+  // );
 
-  const handleAddExercisePress = () => {
-    addExercise(
-      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
-    );
-    setSelectedExerciseIDToAdd(null);
-    setIsVisible?.(false);
-    workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
-  };
+  // const handleAddExercisePress = () => {
+  //   addExercise(
+  //     getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
+  //   );
+  //   setSelectedExerciseIDToAdd(null);
+  //   setIsVisible?.(false);
+  //   workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
+  // };
   return (
     <AddExerciseOverlayUI
       isVisible={isVisible!}
       selectedExerciseIDToAdd={selectedExerciseIDToAdd}
       setIsVisible={setIsVisible!}
-      handleAddExercisePress={handleAddExercisePress}
+      handleAddExercisePress={() =>
+        handleAddExercisePress(workoutDataScrollViewRef!)
+      }
     />
   );
 }
