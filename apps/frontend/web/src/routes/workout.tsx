@@ -18,8 +18,6 @@ import type {
 import {
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
-  // addSectionConfirmationContent,
-  // addSupersetConfirmationContent,
 } from '@cwt/content';
 import { WorkoutContextProvider } from '@cwt/context';
 
@@ -37,44 +35,14 @@ export const Route = createFileRoute('/workout')({
 function WorkoutView() {
   const navigate = useNavigate();
 
-  // const addExerciseOverlayHandler =
-  //   useContext(OverlayContext)?.addExerciseOverlayHandler;
-  // const addExerciseOverlayHandler =
-  //   useContext(WorkoutContext)?.addExerciseOverlayHandler;
-
   const [saveOverlayOpened, saveOverlayHandler] = useDisclosure(false);
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
-  // const [addSectionOverlayOpened, addSectionOverlayHandler] =
-  //   useDisclosure(false);
-  // const [addSupersetOverlayOpened, addSupersetOverlayHandler] =
-  //   useDisclosure(false);
-  // const [deleteRootItemOverlayOpened, deleteRootItemOverlayHandler] =
-  //   useDisclosure(false);
-  // const [deleteNestedItemOverlayOpened, deleteNestedItemOverlayHandler] =
-  //   useDisclosure(false);
-  // const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
-  //   useDisclosure(false);
 
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
-  // const exerciseIDToMod = useWorkoutDraftStore(
-  //   (state) => state.exerciseIDToMod,
-  // );
-  // const sectionIDToMod = useWorkoutDraftStore((state) => state.sectionIDToMod);
-  // const supersetIDToMod = useWorkoutDraftStore(
-  //   (state) => state.supersetIDToMod,
-  // );
   const supabaseSession = useAuthStore((state) => state.session);
-
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
   const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
-  // const addSection = useWorkoutDraftStore((state) => state.addSection);
-  // const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
-  // const removeRootItem = useWorkoutDraftStore((state) => state.removeRootItem);
-  // const removeNestedItem = useWorkoutDraftStore(
-  //   (state) => state.removeNestedItem,
-  // );
-  // const deleteSet = useWorkoutDraftStore((state) => state.deleteSetUpdated);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const completeWorkout = useWorkoutLibraryStore(
@@ -128,14 +96,6 @@ function WorkoutView() {
     resetTimer();
   };
 
-  // const onAddSectionClick = () => {
-  //   addSection();
-  // };
-
-  // const onAddSupersetClick = () => {
-  //   addSuperset(sectionIDToMod);
-  // };
-
   const handleSetMode = () => {
     if (mode === 'edit') {
       setMode('log');
@@ -147,14 +107,6 @@ function WorkoutView() {
   };
 
   return (
-    // <WorkoutContext.Provider
-    //   value={{
-    //     deleteRootItemOverlayHandler: deleteRootItemOverlayHandler,
-    //     deleteSetOverlayHandler: deleteSetOverlayHandler,
-    //     deleteNestedItemOverlayHandler: deleteNestedItemOverlayHandler,
-    //     addSupersetOverlayHandler: addSupersetOverlayHandler,
-    //   }}
-    // >
     <WorkoutContextProvider appType="web">
       <Stack gap="xl" align="center">
         {mode !== 'build' && (
@@ -168,32 +120,7 @@ function WorkoutView() {
         <Stack gap="xl" align="center">
           <WorkoutData />
           <Stack justify="center">
-            {mode !== 'log' && (
-              <AddWorkoutItemButtons />
-              // <Stack>
-              //   <Button
-              //     variant="filled"
-              //     color="orange.9"
-              //     onClick={() => addExerciseOverlayHandler?.open()}
-              //   >
-              //     Add Exercise
-              //   </Button>
-              //   <Button
-              //     variant="filled"
-              //     color="orange.9"
-              //     onClick={() => addSectionOverlayHandler.open()}
-              //   >
-              //     Add Section
-              //   </Button>
-              //   <Button
-              //     variant="filled"
-              //     color="orange.9"
-              //     onClick={() => addSupersetOverlayHandler.open()}
-              //   >
-              //     Add Superset
-              //   </Button>
-              // </Stack>
-            )}
+            {mode !== 'log' && <AddWorkoutItemButtons />}
 
             <Button
               variant="filled"
@@ -212,58 +139,6 @@ function WorkoutView() {
           </Stack>
         </Stack>
         <WorkoutOverlays />
-        {/* <ConfirmationOverlay
-          title={addSectionConfirmationContent().title}
-          message={addSectionConfirmationContent().message}
-          confirmButtonLabel={
-            addSectionConfirmationContent().confirmButtonLabel
-          }
-          opened={addSectionOverlayOpened}
-          handler={addSectionOverlayHandler}
-          onConfirmationClick={onAddSectionClick}
-        />
-        <ConfirmationOverlay
-          title={addSupersetConfirmationContent().title}
-          message={addSupersetConfirmationContent().message}
-          confirmButtonLabel={
-            addSupersetConfirmationContent().confirmButtonLabel
-          }
-          opened={addSupersetOverlayOpened}
-          handler={addSupersetOverlayHandler}
-          onConfirmationClick={onAddSupersetClick}
-        /> */}
-        {/* <ConfirmationOverlay
-          title={`Delete ${exerciseIDToMod ? 'Exercise' : supersetIDToMod ? 'Superset' : 'Section'}`}
-          message={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'} from this workout?`}
-          confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
-          opened={deleteRootItemOverlayOpened}
-          handler={deleteRootItemOverlayHandler}
-          onConfirmationClick={() =>
-            removeRootItem(
-              exerciseIDToMod
-                ? exerciseIDToMod!
-                : supersetIDToMod
-                  ? supersetIDToMod!
-                  : sectionIDToMod!,
-            )
-          }
-        />
-        <ConfirmationOverlay
-          title={`Delete ${exerciseIDToMod ? 'Exercise' : supersetIDToMod ? 'Superset' : 'Section'}`}
-          message={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'} from this workout?`}
-          confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
-          opened={deleteNestedItemOverlayOpened}
-          handler={deleteNestedItemOverlayHandler}
-          onConfirmationClick={() => removeNestedItem()}
-        />
-        <ConfirmationOverlay
-          title="Delete Set"
-          message="Delete set from this exercise?"
-          confirmButtonLabel="Delete"
-          opened={deleteSetOverlayOpened}
-          handler={deleteSetOverlayHandler}
-          onConfirmationClick={() => deleteSet()}
-        /> */}
         <ConfirmationOverlay
           title={saveWorkoutConfirmationContent(mode).title}
           message={saveWorkoutConfirmationContent(mode).message}
@@ -286,6 +161,5 @@ function WorkoutView() {
         />
       </Stack>
     </WorkoutContextProvider>
-    // </WorkoutContext.Provider>
   );
 }

@@ -17,7 +17,6 @@ import Navigation from './navigation';
 import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
 import { getLeveragesAssists } from './services/leveragesAssistsService';
-// import OverlayContextProvider from './providers/OverlayContextProvider';
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
@@ -84,9 +83,7 @@ export default function App() {
 
   return (
     <PaperProvider theme={theme}>
-      {/* <OverlayContextProvider> */}
       <Navigation />
-      {/* </OverlayContextProvider> */}
     </PaperProvider>
   );
 }
