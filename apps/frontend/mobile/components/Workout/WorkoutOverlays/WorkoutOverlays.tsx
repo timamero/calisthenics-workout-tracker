@@ -1,5 +1,5 @@
 import { ScrollView } from 'react-native';
-import AddExerciseOverlay from '../AddExerciseOverlay';
+import AddExerciseOverlay from './AddExerciseOverlay';
 
 interface WorkoutOverlaysProps {
   workoutDataScrollViewRef: React.RefObject<ScrollView | null>;
