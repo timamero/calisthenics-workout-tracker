@@ -1,4 +1,4 @@
-import AddExerciseOverlay from '../AddExerciseOverlay';
+import AddExerciseOverlay from './AddExerciseOverlay';
 
 export default function WorkoutOverlays() {
   return (
