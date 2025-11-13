@@ -7,7 +7,6 @@ import {
   useExerciseLibraryStore,
 } from "@cwt/state/stores";
 import { AppTypeSchema } from "@cwt/schema/common";
-// import { WorkoutContext } from "@cwt/context";
 import { WorkoutContext } from "@cwt/context";
 
 export interface UseAddExerciseWebResult {

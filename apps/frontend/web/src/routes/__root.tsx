@@ -12,12 +12,10 @@ import {
   useLeveragesAssistsStore,
   useExerciseLibraryStore,
 } from '@cwt/state/stores';
-// import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import { supabase } from '../services/supabaseClient';
 import { getExercises } from '../services/exercisesService';
 import { getLeveragesAssists } from '../services/leveragesAssistsService';
-import OverlayContextProvider from '../providers/OverlayContextProvider';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -85,62 +83,58 @@ function RootComponent() {
   // TODO: Update implementation of hiding navigation during workout
   if (mode) {
     return (
-      <OverlayContextProvider>
-        <AppShell
-          header={{ height: 60 }}
-          navbar={{
-            width: 300,
-            breakpoint: 'sm',
-            // collapsed: { mobile: !opened },
-            collapsed: { mobile: true, desktop: true },
-          }}
-          padding="md"
-        >
-          <AppShell.Header>
-            <div>Logo</div>
-          </AppShell.Header>
-          <AppShell.Main>
-            <Outlet />
-            <TanStackRouterDevtools />
-          </AppShell.Main>
-        </AppShell>
-      </OverlayContextProvider>
-    );
-  }
-
-  return (
-    <OverlayContextProvider>
       <AppShell
         header={{ height: 60 }}
         navbar={{
           width: 300,
           breakpoint: 'sm',
-          collapsed: { mobile: !opened },
+          // collapsed: { mobile: !opened },
+          collapsed: { mobile: true, desktop: true },
         }}
         padding="md"
       >
         <AppShell.Header>
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <div>Logo</div>
         </AppShell.Header>
-
-        <AppShell.Navbar p="md">
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              label={link.label}
-              component={Link}
-              to={link.to}
-              onClick={() => opened && toggle()}
-            />
-          ))}
-        </AppShell.Navbar>
-
         <AppShell.Main>
           <Outlet />
           <TanStackRouterDevtools />
         </AppShell.Main>
       </AppShell>
-    </OverlayContextProvider>
+    );
+  }
+
+  return (
+    <AppShell
+      header={{ height: 60 }}
+      navbar={{
+        width: 300,
+        breakpoint: 'sm',
+        collapsed: { mobile: !opened },
+      }}
+      padding="md"
+    >
+      <AppShell.Header>
+        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        <div>Logo</div>
+      </AppShell.Header>
+
+      <AppShell.Navbar p="md">
+        {navLinks.map((link) => (
+          <NavLink
+            key={link.to}
+            label={link.label}
+            component={Link}
+            to={link.to}
+            onClick={() => opened && toggle()}
+          />
+        ))}
+      </AppShell.Navbar>
+
+      <AppShell.Main>
+        <Outlet />
+        <TanStackRouterDevtools />
+      </AppShell.Main>
+    </AppShell>
   );
 }
