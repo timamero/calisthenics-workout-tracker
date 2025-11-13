@@ -8,7 +8,6 @@ import {
   useAuthStore,
   useWorkoutLibraryStore,
   useLeveragesAssistsStore,
-  useWorkoutDraftStore,
 } from '@cwt/state/stores';
 import { useSupabaseAuth } from '@cwt/hooks';
 
@@ -28,8 +27,6 @@ export default function App() {
   const setLeveragesAssists = useLeveragesAssistsStore(
     (state) => state.setLeveragesAssists,
   );
-  const mode = useWorkoutDraftStore((state) => state.mode);
-  console.log('mode', mode);
 
   useSupabaseAuth(supabase);
 
