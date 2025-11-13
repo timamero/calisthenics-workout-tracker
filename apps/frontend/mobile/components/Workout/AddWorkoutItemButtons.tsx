@@ -2,8 +2,10 @@ import { useContext, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTheme, FAB, Portal } from 'react-native-paper';
 
-import { CustomTheme } from '../../theme';
 import { WorkoutContext } from '@cwt/context';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
+
+import { CustomTheme } from '../../theme';
 
 export default function AddWorkoutItemButtons() {
   const theme = useTheme() as CustomTheme;
@@ -20,12 +22,13 @@ export default function AddWorkoutItemButtons() {
   const setIsAddExerciseOverlayVisible =
     useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
 
+  const mode = useWorkoutDraftStore((state) => state.mode);
+
   return (
     <Portal>
       <FAB.Group
         open={open}
-        // variant="surface"
-        visible
+        visible={mode ? true : false}
         icon={open ? 'close' : 'plus'}
         style={styles.fabGroup}
         fabStyle={styles.fab}
