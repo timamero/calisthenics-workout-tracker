@@ -1,12 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { View, BackHandler, ScrollView } from 'react-native';
-import {
-  useTheme,
-  Button,
-  SegmentedButtons,
-  // Portal,
-  // FAB,
-} from 'react-native-paper';
+import { useTheme, Button, SegmentedButtons } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import type {
@@ -24,15 +18,8 @@ import { Mode } from '@cwt/schema/workouts';
 import {
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
-  // addSupersetConfirmationContent,
-  // addSectionConfirmationContent,
 } from '@cwt/content';
-import {
-  // OverlayContext,
-  // WorkoutContext,
-  WorkoutContextProvider,
-  // WorkoutContext,
-} from '@cwt/context';
+import { WorkoutContextProvider } from '@cwt/context';
 
 import { postWorkoutBuild, postWorkoutLog } from '../services/workoutsService';
 import { WorkoutTitleContainer as WorkoutTitle } from '../components/Workout/WorkoutTitle/';
@@ -48,34 +35,12 @@ export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
-  // const setIsAddExerciseOverlayVisible =
-  //   useContext(OverlayContext)?.setIsAddExerciseOverlayVisible!;
-  // const setIsAddExerciseOverlayVisible =
-  //   useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible!;
-
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
   const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
-
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
-  // const exerciseIDToMod = useWorkoutDraftStore(
-  //   (state) => state.exerciseIDToMod,
-  // );
-  // const sectionIDToMod = useWorkoutDraftStore((state) => state.sectionIDToMod);
-  // const supersetIDToMod = useWorkoutDraftStore(
-  //   (state) => state.supersetIDToMod,
-  // );
-
-  // const deleteSet = useWorkoutDraftStore((state) => state.deleteSetUpdated);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
-  // const addSection = useWorkoutDraftStore((state) => state.addSection);
-  // const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
-  // const removeRootItem = useWorkoutDraftStore((state) => state.removeRootItem);
-  // const removeNestedItem = useWorkoutDraftStore(
-  //   (state) => state.removeNestedItem,
-  // );
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
-
   const supabaseSession = useAuthStore((state) => state.session);
   const completeWorkout = useWorkoutLibraryStore(
     (state) => state.completeWorkout,
@@ -86,26 +51,8 @@ export default function WorkoutScreen() {
 
   const [isCancelWorkoutDialogVisible, setIsCancelWorkoutDialogVisible] =
     useState<boolean>(false);
-  // const [isDeleteRootItemOverlayVisible, setIsDeleteRootItemOverlayVisible] =
-  //   useState<boolean>(false);
-  // const [
-  //   isDeleteNestedItemOverlayVisible,
-  //   setIsDeleteNestedItemOverlayVisible,
-  // ] = useState<boolean>(false);
-  // const [isDeleteSetOverlayVisible, setIsDeleteSetOverlayVisible] =
-  //   useState<boolean>(false);
-  // const [isAddSupersetOverlayVisible, setIsAddSupersetOverlayVisible] =
-  //   useState<boolean>(false);
-  // const [isAddSectionOverlayVisible, setIsAddSectionOverlayVisible] =
-  //   useState<boolean>(false);
   const [isSaveWorkoutDialogVisible, setIsSaveWorkoutDialogVisible] =
     useState<boolean>(false);
-
-  // const [state, setState] = useState({ open: false });
-
-  // const onStateChange = ({ open }: { open: boolean }) => setState({ open });
-
-  // const { open } = state;
 
   const onCancelWorkoutPress = () => {
     navigation.navigate('App', { screen: 'WorkoutDashboard' });
@@ -192,14 +139,6 @@ export default function WorkoutScreen() {
   }, []);
 
   return (
-    // <WorkoutContext.Provider
-    //   value={{
-    //     setIsDeleteRootItemDialogVisible: setIsDeleteRootItemOverlayVisible,
-    //     setIsDeleteNestedItemDialogVisible: setIsDeleteNestedItemOverlayVisible,
-    //     setIsDeleteSetDialogVisible: setIsDeleteSetOverlayVisible,
-    //     setIsAddSupersetDialogVisible: setIsAddSupersetOverlayVisible,
-    //   }}
-    // >
     <WorkoutContextProvider appType="mobile">
       <View
         style={{
@@ -217,42 +156,7 @@ export default function WorkoutScreen() {
             flexDirection: 'column',
           }}
         >
-          {mode !== 'log' && (
-            <AddWorkoutItemButtons />
-            // <Portal>
-            //   <FAB.Group
-            //     open={open}
-            //     visible
-            //     icon={open ? 'close' : 'plus'}
-            //     actions={[
-            //       {
-            //         icon: 'application',
-            //         label: 'Add Section',
-            //         labelTextColor: theme.colors.light,
-            //         onPress: () => setIsAddSectionOverlayVisible(true),
-            //       },
-            //       {
-            //         icon: 'alpha-s-circle',
-            //         label: 'Add Superset',
-            //         labelTextColor: theme.colors.light,
-            //         onPress: () => setIsAddSupersetOverlayVisible(true),
-            //       },
-            //       {
-            //         icon: 'arm-flex',
-            //         label: 'Add Exercise',
-            //         labelTextColor: theme.colors.light,
-            //         onPress: () => setIsAddExerciseOverlayVisible(true),
-            //       },
-            //     ]}
-            //     onStateChange={onStateChange}
-            //     onPress={() => {
-            //       if (open) {
-            //         console.log('speed dial open');
-            //       }
-            //     }}
-            //   />
-            // </Portal>
-          )}
+          {mode !== 'log' && <AddWorkoutItemButtons />}
 
           <View
             style={
@@ -312,58 +216,6 @@ export default function WorkoutScreen() {
           </View>
         </View>
         <WorkoutOverlays workoutDataScrollViewRef={workoutDataScrollViewRef} />
-        {/* <ConfirmationDialog
-          title={addSectionConfirmationContent().title}
-          message={addSectionConfirmationContent().message}
-          confirmButtonLabel={
-            addSectionConfirmationContent().confirmButtonLabel
-          }
-          isVisible={isAddSectionOverlayVisible}
-          handleHideDialog={setIsAddSectionOverlayVisible}
-          onConfirmationPress={() => addSection()}
-        />
-        <ConfirmationDialog
-          title={addSupersetConfirmationContent().title}
-          message={addSupersetConfirmationContent().message}
-          confirmButtonLabel={
-            addSupersetConfirmationContent().confirmButtonLabel
-          }
-          isVisible={isAddSupersetOverlayVisible}
-          handleHideDialog={setIsAddSupersetOverlayVisible}
-          onConfirmationPress={() => addSuperset(sectionIDToMod)}
-        /> */}
-        {/* <ConfirmationDialog
-          title={`Delete ${exerciseIDToMod ? 'Exercise' : supersetIDToMod ? 'Superset' : 'Section'}`}
-          message={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'} from this workout?`}
-          confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
-          isVisible={isDeleteRootItemOverlayVisible}
-          handleHideDialog={setIsDeleteRootItemOverlayVisible}
-          onConfirmationPress={() =>
-            removeRootItem(
-              exerciseIDToMod
-                ? exerciseIDToMod!
-                : supersetIDToMod
-                  ? supersetIDToMod!
-                  : sectionIDToMod!,
-            )
-          }
-        />
-        <ConfirmationDialog
-          title={`Delete ${exerciseIDToMod ? 'Exercise' : supersetIDToMod ? 'Superset' : 'Section'}`}
-          message={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'} from this workout?`}
-          confirmButtonLabel={`Delete ${exerciseIDToMod ? 'exercise' : supersetIDToMod ? 'superset' : 'section'}`}
-          isVisible={isDeleteNestedItemOverlayVisible}
-          handleHideDialog={setIsDeleteNestedItemOverlayVisible}
-          onConfirmationPress={() => removeNestedItem()}
-        />
-        <ConfirmationDialog
-          title="Delete set"
-          message="Delete set from this exercise?"
-          confirmButtonLabel="Delete"
-          isVisible={isDeleteSetOverlayVisible}
-          handleHideDialog={setIsDeleteSetOverlayVisible}
-          onConfirmationPress={() => deleteSet()}
-        /> */}
         <ConfirmationDialog
           title={saveWorkoutConfirmationContent(mode).title}
           message={saveWorkoutConfirmationContent(mode).message}
@@ -386,6 +238,5 @@ export default function WorkoutScreen() {
         />
       </View>
     </WorkoutContextProvider>
-    // </WorkoutContext.Provider>
   );
 }

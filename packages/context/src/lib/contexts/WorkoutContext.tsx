@@ -1,4 +1,4 @@
-import * as React from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 import { type UseDisclosureHandlers } from "@mantine/hooks";
 import { ExactlyOne } from "@cwt/schema/common";
 
@@ -12,14 +12,11 @@ type WorkoutContextType = ExactlyOne<
   ExactlyOne<
     {
       addExerciseOverlayHandler?: UseDisclosureHandlers; // Web only
-      setIsAddExerciseOverlayVisible?: React.Dispatch<
-        React.SetStateAction<boolean>
-      >; //  Mobile only
+      setIsAddExerciseOverlayVisible?: Dispatch<SetStateAction<boolean>>; //  Mobile only
     },
     "addExerciseOverlayHandler" | "setIsAddExerciseOverlayVisible"
   > & {
     // Web
-    // addExerciseOverlayHandler?: UseDisclosureHandlers;
     deleteRootItemOverlayOpened?: boolean;
     deleteRootItemOverlayHandler?: UseDisclosureHandlers;
     deleteNestedItemOverlayOpened?: boolean;
@@ -32,54 +29,16 @@ type WorkoutContextType = ExactlyOne<
     addSectionOverlayHandler?: UseDisclosureHandlers;
 
     // Mobile
-    // setIsAddExerciseDialogVisible?: React.Dispatch<
-    //   React.SetStateAction<boolean>
-    // >;
     isDeleteRootItemOverlayVisible?: boolean;
-    setIsDeleteRootItemOverlayVisible?: React.Dispatch<
-      React.SetStateAction<boolean>
-    >;
+    setIsDeleteRootItemOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteNestedItemOverlayVisible?: boolean;
-    setIsDeleteNestedItemOverlayVisible?: React.Dispatch<
-      React.SetStateAction<boolean>
-    >;
+    setIsDeleteNestedItemOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteSetOverlayVisible?: boolean;
-    setIsDeleteSetOverlayVisible?: React.Dispatch<
-      React.SetStateAction<boolean>
-    >;
+    setIsDeleteSetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isAddSupersetOverlayVisible?: boolean;
-    setIsAddSupersetOverlayVisible?: React.Dispatch<
-      React.SetStateAction<boolean>
-    >;
+    setIsAddSupersetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isAddSectionOverlayVisible?: boolean;
-    setIsAddSectionOverlayVisible?: React.Dispatch<
-      React.SetStateAction<boolean>
-    >;
+    setIsAddSectionOverlayVisible?: Dispatch<SetStateAction<boolean>>;
   };
 
-// interface WorkoutContextType {
-//   // Web
-//   addExerciseOverlayHandler?: UseDisclosureHandlers;
-//   deleteRootItemOverlayHandler?: UseDisclosureHandlers;
-//   deleteNestedItemOverlayHandler?: UseDisclosureHandlers;
-//   deleteSetOverlayHandler?: UseDisclosureHandlers;
-//   addSupersetOverlayHandler?: UseDisclosureHandlers;
-
-//   // Mobile
-//   setIsAddExerciseDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
-//   setIsDeleteRootItemDialogVisible?: React.Dispatch<
-//     React.SetStateAction<boolean>
-//   >;
-//   setIsDeleteNestedItemDialogVisible?: React.Dispatch<
-//     React.SetStateAction<boolean>
-//   >;
-//   setIsDeleteSetDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
-//   setIsAddSupersetDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
-//   // setIsDeleteExerciseDialogVisible?: React.Dispatch<
-//   //   React.SetStateAction<boolean>
-//   // >; // will be superseded
-// }
-
-export const WorkoutContext = React.createContext<WorkoutContextType | null>(
-  null
-);
+export const WorkoutContext = createContext<WorkoutContextType | null>(null);
