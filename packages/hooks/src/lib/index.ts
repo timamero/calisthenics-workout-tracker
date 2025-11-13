@@ -5,7 +5,11 @@ import {
 import { useSupabaseAuth } from "./useSupabaseAuth";
 import { useWorkoutSave } from "./useWorkoutSave";
 import { useUpdateWorkoutTitle } from "./Workout/useUpdateWorkoutTitle";
-import { useAddExercise } from "./Workout/useAddExercise";
+import {
+  useAddExercise,
+  type UseAddExerciseMobileResult,
+  type UseAddExerciseWebResult,
+} from "./Workout/useAddExercise";
 
 export {
   useFilterSelectors,
@@ -14,4 +18,6 @@ export {
   useWorkoutSave,
   useUpdateWorkoutTitle,
   useAddExercise,
+  UseAddExerciseMobileResult,
+  UseAddExerciseWebResult,
 };

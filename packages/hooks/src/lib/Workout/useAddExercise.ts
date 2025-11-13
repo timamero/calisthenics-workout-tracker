@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { ScrollView } from "react-native";
+import { type UseDisclosureHandlers } from "@mantine/hooks";
 
 import {
   useWorkoutDraftStore,
@@ -8,7 +9,24 @@ import {
 import { AppTypeSchema } from "@cwt/schema/common";
 import { OverlayContext } from "@cwt/context";
 
-export function useAddExercise(appType: AppTypeSchema) {
+export interface UseAddExerciseWebResult {
+  opened: boolean;
+  handler: UseDisclosureHandlers;
+  selectedExerciseIDToAdd: number | null;
+  handleAddExerciseClick: () => void;
+}
+export interface UseAddExerciseMobileResult {
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedExerciseIDToAdd: number | null;
+  handleAddExercisePress: (
+    workoutDataScrollViewRef: null | React.RefObject<ScrollView | null>
+  ) => void;
+}
+
+export function useAddExercise(
+  appType: AppTypeSchema
+): UseAddExerciseMobileResult | UseAddExerciseWebResult | undefined {
   const opened = useContext(OverlayContext)?.addExerciseOverlayOpened;
   const handler = useContext(OverlayContext)?.addExerciseOverlayHandler;
 
@@ -49,13 +67,13 @@ export function useAddExercise(appType: AppTypeSchema) {
       handler,
       selectedExerciseIDToAdd,
       handleAddExerciseClick: handleAddExerciseAction,
-    };
+    } as UseAddExerciseWebResult;
   } else if (appType == "mobile") {
     return {
       isVisible,
       setIsVisible,
       selectedExerciseIDToAdd,
       handleAddExercisePress: handleAddExerciseAction,
-    };
+    } as UseAddExerciseMobileResult;
   }
 }
