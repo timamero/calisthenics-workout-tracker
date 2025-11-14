@@ -40,7 +40,7 @@ export function useAddExercise(
   const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIDToAdd
   );
-  const addExercise = useWorkoutDraftStore((state) => state.addExerciseUpdated);
+  const addExercise = useWorkoutDraftStore((state) => state.addExercise);
   const getExerciseById = useExerciseLibraryStore(
     (state) => state.getExerciseByID
   );
