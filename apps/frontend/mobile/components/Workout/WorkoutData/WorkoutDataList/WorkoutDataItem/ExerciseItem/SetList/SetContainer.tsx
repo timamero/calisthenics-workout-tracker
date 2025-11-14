@@ -25,7 +25,7 @@ export default function SetContainer() {
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const toggleCompleted = useWorkoutDraftStore(
-    (state) => state.toggleCompletedUpdated,
+    (state) => state.toggleCompleted,
   );
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setExerciseIDToMod = useWorkoutDraftStore(

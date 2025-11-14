@@ -22,7 +22,7 @@ export default function SetList() {
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod,
   );
-  const updateField = useWorkoutDraftStore((state) => state.updateFieldUpdated);
+  const updateField = useWorkoutDraftStore((state) => state.updateField);
   const updateLeverageOrAssistField = useWorkoutDraftStore(
     (state) => state.updateLeverageOrAssistField,
   );

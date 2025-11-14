@@ -24,7 +24,7 @@ export default function ExerciseItemContainer() {
   const rootWorkoutDataLength = useWorkoutDraftStore(
     (state) => state.workoutData.length || 0,
   );
-  const addSet = useWorkoutDraftStore((state) => state.addSetUpdated);
+  const addSet = useWorkoutDraftStore((state) => state.addSet);
   const reorderRootItem = useWorkoutDraftStore(
     (state) => state.reorderRootItem,
   );
