@@ -19,8 +19,6 @@ import {
   INITIAL_WORKOUT_BUILD_TITLE,
   INITIALIZED_SET,
   INITIALIZED_WORKOUT_BUILD_TO_SAVE,
-  DEFAULT_REP_SET,
-  DEFAULT_TIME_SET,
   INITIALIZED_WORKOUT_LOG_TO_SAVE,
 } from './workoutDefaults';
 import {
@@ -34,12 +32,12 @@ interface WorkoutDraftState {
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
-  setIDToMod: string | null; // CWT-230
+  setIDToMod: string | null;
   selectedExerciseIndexToMod: number | null;
-  exerciseIDToMod: string | null; // CWT-230
-  supersetIDToMod: string | null; // CWT-230
-  sectionIDToMod: string | null; // CWT-230
-  leverageOrAssistIDToMod: string | null; // CWT-230
+  exerciseIDToMod: string | null;
+  supersetIDToMod: string | null;
+  sectionIDToMod: string | null;
+  leverageOrAssistIDToMod: string | null;
   isWorkoutSavePending: boolean;
   workoutToSave: WorkoutBuildRequest | WorkoutLogRequest | null;
 }
@@ -49,34 +47,25 @@ interface WorkoutDraftAction {
   setMode: (mode: Mode) => void;
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
-  setSetIDToMod: (id: string | null) => void; // CWT-230
-  setExerciseIDToMod: (id: string | null) => void; // CWT-230
-  setSupersetIDToMod: (id: string | null) => void; // CWT-230
-  setSectionIDToMod: (id: string | null) => void; // CWT-230
-  setLeverageOrAssistIDToMod: (id: string | null) => void; // CWT-230
+  setSetIDToMod: (id: string | null) => void;
+  setExerciseIDToMod: (id: string | null) => void;
+  setSupersetIDToMod: (id: string | null) => void;
+  setSectionIDToMod: (id: string | null) => void;
+  setLeverageOrAssistIDToMod: (id: string | null) => void;
   addSection: () => void; // CWT-230
-  addSuperset: (sectionID: string | null) => void; // CWT-230
+  addSuperset: (sectionID: string | null) => void;
   addExercise: (tracking: Tracking[]) => void;
-  removeExercise: (exerciseIndex: number) => void;
-  addExerciseUpdated: (tracking: Tracking[]) => void; // CWT-230
-  removeRootItem: (id: string) => void; // CWT-230
-  removeNestedItem: () => void; // CWT-230
-  reorderRootItem: (id: string, newOrder: number) => void; // CWT-230
-  reorderNestedItem: (newOrder: number) => void; // CWT-230
-  addSet: (exerciseIndex: number) => void;
-  addSetUpdated: () => void;
-  deleteSet: () => void; // check
-  updateField: (exerciseIndex: number, updatedField: SetFields) => void;
-  updateFieldUpdated: (updatedField: Partial<SetFields>) => void;
+  removeRootItem: (id: string) => void;
+  removeNestedItem: () => void;
+  reorderRootItem: (id: string, newOrder: number) => void;
+  reorderNestedItem: (newOrder: number) => void;
+  addSet: () => void;
+  deleteSet: () => void;
+  updateField: (updatedField: Partial<SetFields>) => void;
   updateLeverageOrAssistField: (
     updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
   ) => void;
-  toggleCompleted: (
-    exerciseIndex: number,
-    setIndex: number,
-    value: boolean,
-  ) => void;
-  toggleCompletedUpdated: (value: boolean) => void;
+  toggleCompleted: (value: boolean) => void;
   initializeWorkoutToSave: () => void;
   addUserIDToWorkoutToSave: (userID: string) => void;
   addDurationToWorkoutToSave: (duration: string) => void;
@@ -199,40 +188,6 @@ export const createWorkoutDraftSlice: StateCreator<
       state.sectionIDToMod = null;
     }),
   addExercise: (tracking) =>
-    set((state) => {
-      const exerciseID = state.selectedExerciseIDToAdd;
-      if (exerciseID == null) {
-        console.error('No exerciseID provided');
-        return;
-      }
-      if (state.mode === 'edit' || state.mode === 'build') {
-        let fields;
-        if (tracking.includes('reps')) {
-          fields = DEFAULT_REP_SET;
-        } else if (tracking.includes('time')) {
-          fields = DEFAULT_TIME_SET;
-        }
-
-        state.workoutData.push({
-          sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
-          exercise_id: exerciseID,
-          tracked: tracking,
-          type: 'exercise',
-          id: uuidv4(),
-        } as Exercise);
-      } else {
-        console.error('Cannot add exercise in log mode');
-      }
-    }),
-  removeExercise: (exerciseIndex) =>
-    set((state) => {
-      if (state.mode === 'edit' || state.mode === 'build') {
-        state.workoutData.splice(exerciseIndex, 1);
-      } else {
-        console.error('Cannot remove exercise in log mode');
-      }
-    }),
-  addExerciseUpdated: (tracking) =>
     set((state) => {
       const exerciseID = state.selectedExerciseIDToAdd;
       if (exerciseID == null) {
@@ -643,36 +598,7 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot add set in log mode');
       }
     }),
-  addSet: (exerciseIndex) =>
-    set((state) => {
-      if (exerciseIndex === undefined) {
-        console.error('Exercise index not provided');
-        return;
-      }
-      if (state.mode === 'edit' || state.mode === 'build') {
-        let exercise = state.workoutData[exerciseIndex] as Exercise;
-
-        const tracking = exercise.tracked;
-        let fields;
-        if (tracking.includes('reps')) {
-          fields = DEFAULT_REP_SET;
-        } else if (tracking.includes('time')) {
-          fields = DEFAULT_TIME_SET;
-        }
-
-        exercise = {
-          ...exercise,
-          sets: [
-            ...exercise.sets,
-            { ...INITIALIZED_SET, id: uuidv4(), fields: fields as SetFields },
-          ],
-        };
-        state.workoutData[exerciseIndex] = exercise;
-      } else {
-        console.error('Cannot add set in log mode');
-      }
-    }),
-  addSetUpdated: () =>
+  addSet: () =>
     set((state) => {
       if (state.mode === 'edit' || state.mode === 'build') {
         const sectionID = get().sectionIDToMod;
@@ -998,28 +924,7 @@ export const createWorkoutDraftSlice: StateCreator<
         console.error('Cannot add set in log mode');
       }
     }),
-  updateField: (exerciseIndex, updatedField) =>
-    set((state) => {
-      if (exerciseIndex === undefined) {
-        console.error('Invalid exercise index');
-        return;
-      }
-
-      const setIndex = get().selectedSetIndexToMod;
-      if (setIndex === undefined || setIndex == null) {
-        console.error('Invalid set index');
-        return;
-      }
-      let exercise = state.workoutData[exerciseIndex] as Exercise;
-
-      exercise.sets[setIndex] = {
-        ...exercise.sets[setIndex],
-        fields: { ...exercise.sets[setIndex].fields, ...updatedField },
-      };
-      state.workoutData[exerciseIndex] = exercise;
-      // };
-    }),
-  updateFieldUpdated: (updatedField) =>
+  updateField: (updatedField) =>
     set((state) => {
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
@@ -1359,25 +1264,7 @@ export const createWorkoutDraftSlice: StateCreator<
       state.setIDToMod = null;
       state.leverageOrAssistIDToMod = null;
     }),
-  toggleCompleted: (exerciseIndex, setIndex, value) =>
-    set((state) => {
-      if (state.mode === 'log') {
-        let exercise = state.workoutData[exerciseIndex] as Exercise;
-        exercise.sets[setIndex].completed = value;
-        state.workoutData[exerciseIndex] = exercise;
-        if (value === true) {
-          state.workoutData[exerciseIndex].sets[setIndex].completed_at =
-            new Date().toISOString();
-        } else {
-          state.workoutData[exerciseIndex].sets[setIndex].completed_at = null;
-        }
-      } else {
-        console.error(
-          'Cannot updated completed checkbox in edit or build mode',
-        );
-      }
-    }),
-  toggleCompletedUpdated: (value) =>
+  toggleCompleted: (value) =>
     set((state) => {
       // Toggle completed of set in exercise in root
 
