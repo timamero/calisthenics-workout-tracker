@@ -60,9 +60,9 @@ interface WorkoutDraftAction {
   reorderRootItem: (id: string, newOrder: number) => void;
   reorderNestedItem: (newOrder: number) => void;
   addSet: () => void;
-  // create addSetToSuperset
+  // TODO: create addSetToSuperset
   deleteSet: () => void;
-  // create deleteSetInSuperset
+  // TODO: create deleteSetInSuperset
   updateField: (updatedField: Partial<SetFields>) => void;
   updateLeverageOrAssistField: (
     updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
