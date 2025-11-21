@@ -774,9 +774,94 @@ export const createWorkoutDraftSlice: StateCreator<
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
 
-        // Pseudo code
-        // Add set to each exercise in superset
-        // Update superset in workoutData
+        if (!supersetID) {
+          console.error('No supersetID provided');
+          return;
+        }
+
+        // Add set to each exercise in superset at root level
+        if (!sectionID && supersetID) {
+          const superset = state.workoutData.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+
+          let updatedSuperset = superset;
+          updatedSuperset.exercises = updatedSuperset.exercises.map(
+            (exercise) => {
+              const tracking = exercise.tracked;
+              const fields = createFields(tracking, exercise.exercise_id);
+
+              return {
+                ...exercise,
+                sets: [
+                  ...exercise.sets,
+                  {
+                    ...INITIALIZED_SET,
+                    id: uuidv4(),
+                    fields: fields as SetFields,
+                  },
+                ],
+              };
+            },
+          );
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === supersetID) {
+              return updatedSuperset;
+            }
+            return item;
+          });
+          // Add set to each exercise in superset inside a section
+        } else if (sectionID && supersetID) {
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          const superset = section.items.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+
+          let updatedSuperset = superset;
+          updatedSuperset.exercises = updatedSuperset.exercises.map(
+            (exercise) => {
+              const tracking = exercise.tracked;
+              const fields = createFields(tracking, exercise.exercise_id);
+
+              return {
+                ...exercise,
+                sets: [
+                  ...exercise.sets,
+                  {
+                    ...INITIALIZED_SET,
+                    id: uuidv4(),
+                    fields: fields as SetFields,
+                  },
+                ],
+              };
+            },
+          );
+
+          let updatedSection = section;
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item) => {
+              if (item.id === supersetID) {
+                return updatedSuperset;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            }
+            return item;
+          });
+        }
+
+        // Reset state
+        state.sectionIDToMod = null;
+        state.supersetIDToMod = null;
       } else {
         console.error('Cannot add set in log mode');
       }
