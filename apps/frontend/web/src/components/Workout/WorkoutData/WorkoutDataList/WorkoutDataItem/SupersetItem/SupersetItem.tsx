@@ -78,6 +78,12 @@ export default function SupersetItem({
             </Button>
           )}
         </Group>
+        {/* TODO: Display exercises grouped by set here when in log mode */}
+
+        {/* 
+          This will be conditionally rendered. Return this when in build or edit mode 
+          TODO: Move this to an external component
+        */}
         {superset.exercises.map((exercise) => {
           return (
             <WorkoutDataItemContext.Provider
