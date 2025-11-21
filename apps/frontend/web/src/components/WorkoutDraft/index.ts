@@ -1,1 +1,3 @@
-// Export WorkoutDraft component
+import WorkoutDraft from './WorkoutDraft';
+
+export default WorkoutDraft;
