@@ -72,6 +72,7 @@ export default function ConfirmationOverlays() {
         handler={deleteNestedItemOverlayHandler!}
         onConfirmationClick={() => removeNestedItem()}
       />
+      {/* TODO: Create confirmation overlay for deleting sets in superset */}
       <ConfirmationOverlay
         title="Delete set"
         message="Delete set from this exercise?"
