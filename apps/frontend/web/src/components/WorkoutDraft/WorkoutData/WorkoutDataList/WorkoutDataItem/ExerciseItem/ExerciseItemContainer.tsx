@@ -10,6 +10,7 @@ import ExerciseItem from './ExerciseItem';
 
 export default function ExerciseItemContainer() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
@@ -24,6 +25,9 @@ export default function ExerciseItemContainer() {
     (state) => state.workoutData.length || 0,
   );
   const addSet = useWorkoutDraftStore((state) => state.addSet);
+  const addSetToSuperset = useWorkoutDraftStore(
+    (state) => state.addSetToSuperset,
+  );
   const reorderRootItem = useWorkoutDraftStore(
     (state) => state.reorderRootItem,
   );
@@ -46,8 +50,6 @@ export default function ExerciseItemContainer() {
   const name = getExerciseNameById(exercise!.exercise_id);
 
   const handleAddSetClick = () => {
-    setExerciseIDToMod(exercise!.id);
-
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
     }
@@ -55,7 +57,12 @@ export default function ExerciseItemContainer() {
       setSectionIDToMod(parentSectionID);
     }
 
-    addSet();
+    if (parentType === 'superset') {
+      addSetToSuperset();
+    } else {
+      setExerciseIDToMod(exercise!.id);
+      addSet();
+    }
   };
 
   const handleUpClick = () => {
