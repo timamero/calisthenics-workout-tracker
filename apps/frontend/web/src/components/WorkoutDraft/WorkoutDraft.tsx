@@ -25,7 +25,7 @@ import {
 } from '@cwt/content';
 
 import ConfirmationOverlay from '../../components/common/ConfirmationOverlay';
-import WorkoutData from '../../components/Workout/WorkoutData';
+import WorkoutData from './WorkoutData';
 import { WorkoutTitleContainer as WorkoutTitle } from './WorkoutTitle';
 import {
   postWorkoutBuild,
