@@ -60,7 +60,7 @@ interface WorkoutDraftAction {
   reorderRootItem: (id: string, newOrder: number) => void;
   reorderNestedItem: (newOrder: number) => void;
   addSet: () => void;
-  // TODO: create addSetToSuperset
+  addSetToSuperset: () => void;
   deleteSet: () => void;
   // TODO: create deleteSetInSuperset
   updateField: (updatedField: Partial<SetFields>) => void;
@@ -764,6 +764,19 @@ export const createWorkoutDraftSlice: StateCreator<
         state.exerciseIDToMod = null;
         state.supersetIDToMod = null;
         state.sectionIDToMod = null;
+      } else {
+        console.error('Cannot add set in log mode');
+      }
+    }),
+  addSetToSuperset: () =>
+    set((state) => {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        const sectionID = get().sectionIDToMod;
+        const supersetID = get().supersetIDToMod;
+
+        // Pseudo code
+        // Add set to each exercise in superset
+        // Update superset in workoutData
       } else {
         console.error('Cannot add set in log mode');
       }
