@@ -62,7 +62,7 @@ interface WorkoutDraftAction {
   addSet: () => void;
   addSetToSuperset: () => void;
   deleteSet: () => void;
-  // TODO: create deleteSetInSuperset
+  deleteSetInSuperset: () => void;
   updateField: (updatedField: Partial<SetFields>) => void;
   updateLeverageOrAssistField: (
     updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
@@ -1022,6 +1022,112 @@ export const createWorkoutDraftSlice: StateCreator<
         state.setIDToMod = null;
       } else {
         console.error('Cannot add set in log mode');
+      }
+    }),
+  deleteSetInSuperset: () =>
+    set((state) => {
+      if (state.mode === 'edit' || state.mode === 'build') {
+        const sectionID = get().sectionIDToMod;
+        const supersetID = get().supersetIDToMod;
+        const setID = get().setIDToMod;
+
+        if (!supersetID || !setID) {
+          console.error('No supersetID or setID provided');
+          return;
+        }
+
+        // Delete set from each exercise in superset at root level
+        if (!sectionID && supersetID) {
+          const superset = state.workoutData.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+
+          // Find the index of the set to delete
+          const firstExercise = superset.exercises[0];
+          const setIndexToDelete = firstExercise?.sets.findIndex(
+            (set) => set.id === setID,
+          );
+
+          if (setIndexToDelete === undefined || setIndexToDelete === -1) {
+            console.error('Set not found in exercises');
+            return;
+          }
+
+          let updatedSuperset = superset;
+          updatedSuperset.exercises = updatedSuperset.exercises.map(
+            (exercise) => {
+              return {
+                ...exercise,
+                sets: exercise.sets.filter(
+                  (set, index) => index !== setIndexToDelete,
+                ),
+              };
+            },
+          );
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === supersetID) {
+              return updatedSuperset;
+            }
+            return item;
+          });
+          // Delete set from each exercise in superset inside a section
+        } else if (sectionID && supersetID) {
+          const section = state.workoutData.find(
+            (section) => section.id === sectionID,
+          ) as Section;
+          const superset = section.items.find(
+            (superset) => superset.id === supersetID,
+          ) as Superset;
+
+          // Find the index of the set to delete
+          const firstExercise = superset.exercises[0];
+          const setIndexToDelete = firstExercise?.sets.findIndex(
+            (set) => set.id === setID,
+          );
+
+          if (setIndexToDelete === undefined || setIndexToDelete === -1) {
+            console.error('Set not found in exercises');
+            return;
+          }
+
+          let updatedSuperset = superset;
+          updatedSuperset.exercises = updatedSuperset.exercises.map(
+            (exercise) => {
+              return {
+                ...exercise,
+                sets: exercise.sets.filter(
+                  (set, index) => index !== setIndexToDelete,
+                ),
+              };
+            },
+          );
+
+          let updatedSection = section;
+          updatedSection = {
+            ...updatedSection,
+            items: updatedSection.items.map((item) => {
+              if (item.id === supersetID) {
+                return updatedSuperset;
+              }
+              return item;
+            }),
+          };
+
+          state.workoutData = state.workoutData.map((item) => {
+            if (item.id === sectionID) {
+              return updatedSection;
+            }
+            return item;
+          });
+        }
+
+        // Reset state
+        state.sectionIDToMod = null;
+        state.supersetIDToMod = null;
+        state.setIDToMod = null;
+      } else {
+        console.error('Cannot delete set in log mode');
       }
     }),
   updateField: (updatedField) =>
