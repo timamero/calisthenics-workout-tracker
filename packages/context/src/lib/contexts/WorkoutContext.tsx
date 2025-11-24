@@ -23,6 +23,8 @@ type WorkoutContextType = ExactlyOne<
     deleteNestedItemOverlayHandler?: UseDisclosureHandlers;
     deleteSetOverlayOpened?: boolean;
     deleteSetOverlayHandler?: UseDisclosureHandlers;
+    deleteSetInSupersetOverlayOpened?: boolean;
+    deleteSetInSupersetOverlayHandler?: UseDisclosureHandlers;
     addSupersetOverlayOpened?: boolean;
     addSupersetOverlayHandler?: UseDisclosureHandlers;
     addSectionOverlayOpened?: boolean;
