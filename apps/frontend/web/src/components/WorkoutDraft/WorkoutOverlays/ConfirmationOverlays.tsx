@@ -20,6 +20,10 @@ export default function ConfirmationOverlays() {
     useContext(WorkoutContext)?.deleteNestedItemOverlayHandler;
   const deleteSetOverlayOpened =
     useContext(WorkoutContext)?.deleteSetOverlayOpened;
+  const deleteSetInSupersetOverlayOpened =
+    useContext(WorkoutContext)?.deleteSetInSupersetOverlayOpened;
+  const deleteSetInSupersetOverlayHandler =
+    useContext(WorkoutContext)?.deleteSetInSupersetOverlayHandler;
   const deleteSetOverlayHandler =
     useContext(WorkoutContext)?.deleteSetOverlayHandler;
   const addSectionOverlayOpened =
@@ -41,6 +45,9 @@ export default function ConfirmationOverlays() {
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
   const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
+  const deleteSetInSuperset = useWorkoutDraftStore(
+    (state) => state.deleteSetInSuperset,
+  );
   const removeRootItem = useWorkoutDraftStore((state) => state.removeRootItem);
   const removeNestedItem = useWorkoutDraftStore(
     (state) => state.removeNestedItem,
@@ -73,6 +80,14 @@ export default function ConfirmationOverlays() {
         onConfirmationClick={() => removeNestedItem()}
       />
       {/* TODO: Create confirmation overlay for deleting sets in superset */}
+      <ConfirmationOverlay
+        title="Delete sets"
+        message="Delete set from each exercise in the superset?"
+        confirmButtonLabel="Delete"
+        opened={deleteSetInSupersetOverlayOpened!}
+        handler={deleteSetInSupersetOverlayHandler!}
+        onConfirmationClick={() => deleteSetInSuperset()}
+      />
       <ConfirmationOverlay
         title="Delete set"
         message="Delete set from this exercise?"
