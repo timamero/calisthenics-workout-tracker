@@ -1086,6 +1086,10 @@ export const createWorkoutDraftSlice: StateCreator<
             (set) => set.id === setID,
           );
 
+          // The following error is raised because the set Index to delete is not defined
+          // The user may select to delete set on an exercise that is not the firstExercise
+          // Create variable setIndexToMod and action setSetIndexToMod
+          // Remove finding index above
           if (setIndexToDelete === undefined || setIndexToDelete === -1) {
             console.error('Set not found in exercises');
             return;
