@@ -10,6 +10,7 @@ import Set from './Set';
 
 export default function SetContainer() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
@@ -17,6 +18,8 @@ export default function SetContainer() {
   const setIndex = useContext(SetContext)!.setIndex;
   const deleteSetOverlayHandler =
     useContext(WorkoutContext)!.deleteSetOverlayHandler;
+  const deleteSetInSupersetOverlayHandler =
+    useContext(WorkoutContext)!.deleteSetInSupersetOverlayHandler;
   const sets = exercise.sets;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
@@ -36,7 +39,7 @@ export default function SetContainer() {
 
   const handleDeleteSetClick = () => {
     setSetIDToMod(set.id);
-    setExerciseIDToMod(exercise.id);
+    // setExerciseIDToMod(exercise.id);
 
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
@@ -45,7 +48,13 @@ export default function SetContainer() {
       setSectionIDToMod(parentSectionID);
     }
 
-    if (deleteSetOverlayHandler) deleteSetOverlayHandler.open();
+    if (parentType !== 'superset') {
+      setExerciseIDToMod(exercise!.id);
+      if (deleteSetOverlayHandler) deleteSetOverlayHandler.open();
+    } else {
+      if (deleteSetInSupersetOverlayHandler)
+        deleteSetInSupersetOverlayHandler.open();
+    }
   };
 
   const handleToggleCompleted = (value: boolean) => {

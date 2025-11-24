@@ -20,6 +20,8 @@ export default function WorkoutContextProvider({
     useDisclosure(false);
   const [deleteSetOverlayOpened, deleteSetOverlayHandler] =
     useDisclosure(false);
+  const [deleteSetInSupersetOverlayOpened, deleteSetInSupersetOverlayHandler] =
+    useDisclosure(false);
   const [addSectionOverlayOpened, addSectionOverlayHandler] =
     useDisclosure(false);
   const [addSupersetOverlayOpened, addSupersetOverlayHandler] =
@@ -34,6 +36,8 @@ export default function WorkoutContextProvider({
     deleteNestedItemOverlayHandler: deleteNestedItemOverlayHandler,
     deleteSetOverlayOpened: deleteSetOverlayOpened,
     deleteSetOverlayHandler: deleteSetOverlayHandler,
+    deleteSetInSupersetOverlayOpened: deleteSetInSupersetOverlayOpened,
+    deleteSetInSupersetOverlayHandler: deleteSetInSupersetOverlayHandler,
     addSectionOverlayOpened: addSectionOverlayOpened,
     addSectionOverlayHandler: addSectionOverlayHandler,
     addSupersetOverlayOpened: addSupersetOverlayOpened,
