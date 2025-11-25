@@ -33,7 +33,7 @@ export default function SupersetItem({
   const supersetParentsSectionID = useContext(
     WorkoutDataItemContext,
   )?.parentSectionID;
-  console.log('supersetParentsSectionID', supersetParentsSectionID);
+  // console.log('supersetParentsSectionID', supersetParentsSectionID);
 
   const setSupersetIDToMod = useWorkoutDraftStore(
     (state) => state.setSupersetIDToMod,
