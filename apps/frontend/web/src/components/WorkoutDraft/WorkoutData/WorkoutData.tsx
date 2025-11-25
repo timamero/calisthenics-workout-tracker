@@ -9,7 +9,7 @@ import WorkoutDataList from './WorkoutDataList';
 
 export default function WorkoutData() {
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
-  console.log('workoutData:::', JSON.stringify(workoutData));
+  // console.log('workoutData:::', JSON.stringify(workoutData));
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
 
   const workoutExercisesLength = useWorkoutDraftStore(
