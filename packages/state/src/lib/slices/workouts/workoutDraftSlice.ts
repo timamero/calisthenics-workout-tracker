@@ -214,7 +214,7 @@ export const createWorkoutDraftSlice: StateCreator<
           type: 'exercise',
           id: uuidv4(),
         } as Exercise;
-
+        console.log('exercise', exercise);
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
 
@@ -234,7 +234,20 @@ export const createWorkoutDraftSlice: StateCreator<
           let updatedSuperset = superset;
 
           exercise.order = superset.exercises.length;
+          console.log('exercise after adding order', exercise);
+          // Add sets to exercise inside superset if existing exercises have more than one set
+          if (superset.exercises.length >= 1) {
+            const numOfSets = superset.exercises[0].sets.length;
+            console.log('numOfSets: ', numOfSets);
 
+            for (let i = 1; i < numOfSets; i++) {
+              exercise.sets = [
+                ...exercise.sets,
+                { ...INITIALIZED_SET, id: uuidv4(), fields: fields },
+              ];
+            }
+          }
+          console.log('exercise after adding sets', exercise);
           updatedSuperset.exercises.push(exercise);
           updatedSection = {
             ...updatedSection,
@@ -266,6 +279,18 @@ export const createWorkoutDraftSlice: StateCreator<
             updatedItem.items.push(exercise);
           } else if (isSuperset(updatedItem)) {
             exercise.order = updatedItem.exercises.length;
+            // Add sets to exercise inside superset if existing exercises have more than one set
+            if (updatedItem.exercises.length >= 1) {
+              const numOfSets = updatedItem.exercises[0].sets.length;
+              console.log('numOfSets: ', numOfSets);
+
+              for (let i = 1; i < numOfSets; i++) {
+                exercise.sets = [
+                  ...exercise.sets,
+                  { ...INITIALIZED_SET, id: uuidv4(), fields: fields },
+                ];
+              }
+            }
             updatedItem.exercises.push(exercise);
           }
 
