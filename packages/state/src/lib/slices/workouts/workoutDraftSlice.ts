@@ -33,6 +33,7 @@ interface WorkoutDraftState {
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
   setIDToMod: string | null;
+  setIndexToMod: number | null;
   selectedExerciseIndexToMod: number | null;
   exerciseIDToMod: string | null;
   supersetIDToMod: string | null;
@@ -48,6 +49,7 @@ interface WorkoutDraftAction {
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSetIDToMod: (id: string | null) => void;
+  setSetIndexToMod: (index: number | null) => void;
   setExerciseIDToMod: (id: string | null) => void;
   setSupersetIDToMod: (id: string | null) => void;
   setSectionIDToMod: (id: string | null) => void;
@@ -96,6 +98,7 @@ export const createWorkoutDraftSlice: StateCreator<
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
   setIDToMod: null,
+  setIndexToMod: null,
   selectedExerciseIndexToMod: null,
   exerciseIDToMod: null,
   supersetIDToMod: null,
@@ -127,6 +130,10 @@ export const createWorkoutDraftSlice: StateCreator<
   setSetIDToMod: (id) =>
     set((state) => {
       state.setIDToMod = id;
+    }),
+  setSetIndexToMod: (index) =>
+    set((state) => {
+      state.setIndexToMod = index;
     }),
   setExerciseIDToMod: (id) =>
     set((state) => {
@@ -1029,10 +1036,10 @@ export const createWorkoutDraftSlice: StateCreator<
       if (state.mode === 'edit' || state.mode === 'build') {
         const sectionID = get().sectionIDToMod;
         const supersetID = get().supersetIDToMod;
-        const setID = get().setIDToMod;
+        const setIndex = get().setIndexToMod;
 
-        if (!supersetID || !setID) {
-          console.error('No supersetID or setID provided');
+        if (!supersetID || !setIndex) {
+          console.error('No supersetID or setIndex provided');
           return;
         }
 
@@ -1042,14 +1049,9 @@ export const createWorkoutDraftSlice: StateCreator<
             (superset) => superset.id === supersetID,
           ) as Superset;
 
-          // Find the index of the set to delete
-          const firstExercise = superset.exercises[0];
-          const setIndexToDelete = firstExercise?.sets.findIndex(
-            (set) => set.id === setID,
-          );
-
-          if (setIndexToDelete === undefined || setIndexToDelete === -1) {
-            console.error('Set not found in exercises');
+          const exercisesLength = superset.exercises.length;
+          if (setIndex >= exercisesLength) {
+            console.error('setIndex is out of range');
             return;
           }
 
@@ -1058,9 +1060,7 @@ export const createWorkoutDraftSlice: StateCreator<
             (exercise) => {
               return {
                 ...exercise,
-                sets: exercise.sets.filter(
-                  (set, index) => index !== setIndexToDelete,
-                ),
+                sets: exercise.sets.filter((_, index) => index !== setIndex),
               };
             },
           );
@@ -1080,18 +1080,10 @@ export const createWorkoutDraftSlice: StateCreator<
             (superset) => superset.id === supersetID,
           ) as Superset;
 
-          // Find the index of the set to delete
-          const firstExercise = superset.exercises[0];
-          const setIndexToDelete = firstExercise?.sets.findIndex(
-            (set) => set.id === setID,
-          );
+          const exercisesLength = superset.exercises.length;
 
-          // The following error is raised because the set Index to delete is not defined
-          // The user may select to delete set on an exercise that is not the firstExercise
-          // Create variable setIndexToMod and action setSetIndexToMod
-          // Remove finding index above
-          if (setIndexToDelete === undefined || setIndexToDelete === -1) {
-            console.error('Set not found in exercises');
+          if (setIndex >= exercisesLength) {
+            console.error('setIndex is out of range');
             return;
           }
 
@@ -1100,9 +1092,7 @@ export const createWorkoutDraftSlice: StateCreator<
             (exercise) => {
               return {
                 ...exercise,
-                sets: exercise.sets.filter(
-                  (set, index) => index !== setIndexToDelete,
-                ),
+                sets: exercise.sets.filter((set, index) => index !== setIndex),
               };
             },
           );
@@ -1129,7 +1119,7 @@ export const createWorkoutDraftSlice: StateCreator<
         // Reset state
         state.sectionIDToMod = null;
         state.supersetIDToMod = null;
-        state.setIDToMod = null;
+        state.setIndexToMod = null;
       } else {
         console.error('Cannot delete set in log mode');
       }

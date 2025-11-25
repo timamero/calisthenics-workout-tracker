@@ -27,6 +27,9 @@ export default function SetContainer() {
     (state) => state.toggleCompleted,
   );
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
+  const setSetIndexToMod = useWorkoutDraftStore(
+    (state) => state.setSetIndexToMod,
+  );
   const setExerciseIDToMod = useWorkoutDraftStore(
     (state) => state.setExerciseIDToMod,
   );
@@ -38,9 +41,6 @@ export default function SetContainer() {
   );
 
   const handleDeleteSetClick = () => {
-    setSetIDToMod(set.id);
-    // setExerciseIDToMod(exercise.id);
-
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
     }
@@ -49,9 +49,11 @@ export default function SetContainer() {
     }
 
     if (parentType !== 'superset') {
+      setSetIDToMod(set.id);
       setExerciseIDToMod(exercise!.id);
       if (deleteSetOverlayHandler) deleteSetOverlayHandler.open();
     } else {
+      setSetIndexToMod(setIndex);
       if (deleteSetInSupersetOverlayHandler)
         deleteSetInSupersetOverlayHandler.open();
     }
