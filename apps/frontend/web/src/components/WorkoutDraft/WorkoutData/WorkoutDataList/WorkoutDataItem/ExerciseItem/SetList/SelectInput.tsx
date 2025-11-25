@@ -22,7 +22,7 @@ export default function SelectInput({
   const set = React.useContext(SetContext)!.set;
   const handleSetFieldChange =
     React.useContext(SetContext)!.handleSetFieldChange;
-  console.log('tracking type: ', trackingType);
+  // console.log('tracking type: ', trackingType);
   const leverageOrAssistID =
     trackingType === 'leverages'
       ? (set.fields.leverages?.find((field) => field.id === fieldID)!
@@ -30,7 +30,7 @@ export default function SelectInput({
       : (set.fields.assists?.find((field) => field.id === fieldID)!
           .leverages_assists_id as number);
 
-  console.log('leverageOrAssistID', leverageOrAssistID);
+  // console.log('leverageOrAssistID', leverageOrAssistID);
   const leverageOrAssist = useLeveragesAssistsStore((state) =>
     state.getLeverageOrAssistByID(leverageOrAssistID),
   );

@@ -1058,7 +1058,7 @@ export const createWorkoutDraftSlice: StateCreator<
         const supersetID = get().supersetIDToMod;
         const setIndex = get().setIndexToMod;
 
-        if (!supersetID || !setIndex) {
+        if (!supersetID || setIndex === null) {
           console.error('No supersetID or setIndex provided');
           return;
         }
