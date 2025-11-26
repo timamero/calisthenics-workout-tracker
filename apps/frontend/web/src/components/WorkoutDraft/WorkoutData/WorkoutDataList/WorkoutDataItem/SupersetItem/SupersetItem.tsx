@@ -99,7 +99,7 @@ export default function SupersetItem({
             );
           })
         ) : (
-          <ExerciseSetGroup />
+          <ExerciseSetGroup superset={superset} />
         )}
 
         {/* 
