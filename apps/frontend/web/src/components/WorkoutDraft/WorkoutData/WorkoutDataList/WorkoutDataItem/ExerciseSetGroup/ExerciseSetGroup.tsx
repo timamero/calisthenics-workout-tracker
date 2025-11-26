@@ -1,4 +1,5 @@
 import type { Exercise, Set, Superset } from '@cwt/schema/workouts';
+import ExerciseSetGroupItem from './ExerciseSetGroupItem';
 
 interface ExerciseSetGroupProps {
   superset: Superset;
@@ -9,19 +10,27 @@ type ExerciseInSetGroupType = Pick<
   'exercise_id' | 'id' | 'tracked'
 > & { set: Set };
 
-type ExercisesGroupedBySetsType = {
+export type ExercisesGroupedBySetsType = {
   setGroupNumber: number;
   exercises: ExerciseInSetGroupType[];
 };
 
 export default function ExerciseSetGroup({ superset }: ExerciseSetGroupProps) {
-  console.log('ExerciseSetGroup - superset', superset);
-  const exercisesGroupedBySets = groupExercisesBySet(superset);
+  const exercisesGroupedBySetsList = groupExercisesBySet(superset);
   console.log(
     'ExerciseSetGroup - exercisesGroupedBySets',
-    exercisesGroupedBySets,
+    exercisesGroupedBySetsList,
   );
-  return <div>map over ExerciseSetGroupItemContainers</div>;
+  const exercisesGroupedBySets = exercisesGroupedBySetsList.map((group) => {
+    return (
+      <ExerciseSetGroupItem
+        key={group.setGroupNumber}
+        exercisesGroupedBySets={group}
+      />
+    );
+  });
+
+  return <>{exercisesGroupedBySets}</>;
 }
 
 function groupExercisesBySet(superset: Superset): ExercisesGroupedBySetsType[] {
