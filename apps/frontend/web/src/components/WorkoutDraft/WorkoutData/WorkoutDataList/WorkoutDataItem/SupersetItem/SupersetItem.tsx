@@ -8,6 +8,7 @@ import { WorkoutDataItemContext } from '@cwt/context';
 
 import { ExerciseItemContainer } from '../ExerciseItem';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
+import ExerciseSetGroup from '../ExerciseSetGroup';
 
 interface SupersetItemProps {
   mode: Mode;
@@ -78,13 +79,34 @@ export default function SupersetItem({
             </Button>
           )}
         </Group>
-        {/* TODO: Display exercises grouped by set here when in log mode */}
+        {mode !== 'log' ? (
+          superset.exercises.map((exercise) => {
+            return (
+              <WorkoutDataItemContext.Provider
+                key={exercise.id}
+                value={{
+                  item: exercise,
+                  parentType: 'superset',
+                  parentItemsLength: superset.exercises.length,
+                  parentSectionID: supersetParentsSectionID
+                    ? supersetParentsSectionID
+                    : null,
+                  parentSupersetID: superset.id,
+                }}
+              >
+                <ExerciseItemContainer />
+              </WorkoutDataItemContext.Provider>
+            );
+          })
+        ) : (
+          <ExerciseSetGroup />
+        )}
 
         {/* 
           This will be conditionally rendered. Return this when in build or edit mode 
           TODO: Move this to an external component
         */}
-        {superset.exercises.map((exercise) => {
+        {/* {superset.exercises.map((exercise) => {
           return (
             <WorkoutDataItemContext.Provider
               key={exercise.id}
@@ -101,7 +123,7 @@ export default function SupersetItem({
               <ExerciseItemContainer />
             </WorkoutDataItemContext.Provider>
           );
-        })}
+        })} */}
         {mode !== 'log' && (
           <Button
             variant="filled"
