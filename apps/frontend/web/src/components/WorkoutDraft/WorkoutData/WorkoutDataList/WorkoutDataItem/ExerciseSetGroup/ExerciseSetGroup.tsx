@@ -1,12 +1,17 @@
-import type { Exercise, Superset } from '@cwt/schema/workouts';
+import type { Exercise, Set, Superset } from '@cwt/schema/workouts';
 
 interface ExerciseSetGroupProps {
   superset: Superset;
 }
 
+type ExerciseInSetGroupType = Pick<
+  Exercise,
+  'exercise_id' | 'id' | 'tracked'
+> & { set: Set };
+
 type ExercisesGroupedBySetsType = {
   setGroupNumber: number;
-  exercises: Exercise[];
+  exercises: ExerciseInSetGroupType[];
 };
 
 export default function ExerciseSetGroup({ superset }: ExerciseSetGroupProps) {
@@ -38,7 +43,13 @@ function groupExercisesBySet(superset: Superset): ExercisesGroupedBySetsType[] {
       exercises: [],
     };
     exercises.forEach((ex: Exercise) => {
-      group.exercises.push(ex);
+      const exerciseInSetGroup: ExerciseInSetGroupType = {
+        exercise_id: ex.exercise_id,
+        id: ex.id,
+        tracked: ex.tracked,
+        set: ex.sets[i],
+      };
+      group.exercises.push(exerciseInSetGroup);
     });
 
     exercisesGroupedBySets.push(group);
