@@ -1150,6 +1150,10 @@ export const createWorkoutDraftSlice: StateCreator<
       const supersetID = get().supersetIDToMod;
       const exerciseID = get().exerciseIDToMod;
 
+      console.log('updateField sectionID', sectionID);
+      console.log('updateField supersetID', supersetID);
+      console.log('updateField exerciseID', exerciseID);
+
       // Update field of exercise in root
       if (!sectionID && !supersetID && exerciseID) {
         const exercise = state.workoutData.find(

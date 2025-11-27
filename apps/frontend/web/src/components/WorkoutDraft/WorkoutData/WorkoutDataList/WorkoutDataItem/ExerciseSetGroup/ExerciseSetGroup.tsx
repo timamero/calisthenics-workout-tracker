@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import type { Exercise, Set, Superset } from '@cwt/schema/workouts';
+import { WorkoutDataItemContext } from '@cwt/context';
+
 import ExerciseSetGroupItem from './ExerciseSetGroupItem';
 
 interface ExerciseSetGroupProps {
@@ -17,15 +20,21 @@ export type ExercisesGroupedBySetsType = {
 
 export default function ExerciseSetGroup({ superset }: ExerciseSetGroupProps) {
   const exercisesGroupedBySetsList = groupExercisesBySet(superset);
-  console.log(
-    'ExerciseSetGroup - exercisesGroupedBySets',
-    exercisesGroupedBySetsList,
-  );
+
+  const supersetParentsSectionID = useContext(
+    WorkoutDataItemContext,
+  )?.parentSectionID;
+  // console.log(
+  //   'ExerciseSetGroup - exercisesGroupedBySets',
+  //   exercisesGroupedBySetsList,
+  // );
   const exercisesGroupedBySets = exercisesGroupedBySetsList.map((group) => {
     return (
       <ExerciseSetGroupItem
         key={group.setGroupNumber}
         exercisesGroupedBySets={group}
+        parentSupersetID={superset.id}
+        parentSectionID={supersetParentsSectionID || null}
       />
     );
   });
