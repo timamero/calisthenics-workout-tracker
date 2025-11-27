@@ -11,6 +11,7 @@ interface SetProps {
   setIndex: number;
   isCompleted: boolean;
   showDeleteButton?: boolean;
+  hasSupersetParentType?: boolean | null;
   handleToggleCompleted: (value: boolean) => void;
   handleDeleteSetClick: () => void;
 }
@@ -21,13 +22,17 @@ export default function Set({
   setIndex,
   isCompleted,
   showDeleteButton,
+  hasSupersetParentType,
   handleToggleCompleted,
   handleDeleteSetClick,
 }: SetProps) {
   return (
     <Stack gap="xs" p="sm">
       <Group>
-        <Text size="xs" fw={600}>{`Set ${setIndex + 1}`}</Text>
+        {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
+          <Text size="xs" fw={600}>{`Set ${setIndex + 1}`}</Text>
+        )}
+
         {showDeleteButton && (mode === 'build' || mode === 'edit') && (
           <Button
             color="red"
