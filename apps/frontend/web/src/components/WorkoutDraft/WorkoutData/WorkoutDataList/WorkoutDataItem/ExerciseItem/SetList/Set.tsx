@@ -7,10 +7,10 @@ import LeverageAssistFieldsList from './LeverageAssistFieldsList';
 
 interface SetProps {
   mode: Mode;
-  setsLength: number;
+  setsLength?: number;
   setIndex: number;
   isCompleted: boolean;
-  showDeleteButton: boolean;
+  showDeleteButton?: boolean;
   handleToggleCompleted: (value: boolean) => void;
   handleDeleteSetClick: () => void;
 }
@@ -52,7 +52,9 @@ export default function Set({
           />
         </Group>
       )}
-      {setsLength > 0 && setIndex !== setsLength - 1 && <Divider />}
+      {setsLength && setsLength > 0 && setIndex !== setsLength - 1 && (
+        <Divider />
+      )}
     </Stack>
   );
 }

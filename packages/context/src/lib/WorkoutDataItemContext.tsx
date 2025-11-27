@@ -1,10 +1,20 @@
-import * as React from 'react';
+import * as React from "react";
 
-import type { Exercise, Superset, Section } from '@cwt/schema/workouts';
+import type { Exercise, Superset, Section, Set } from "@cwt/schema/workouts";
+
+type ExerciseInSetGroupType = Pick<
+  Exercise,
+  "exercise_id" | "id" | "tracked"
+> & { set: Set };
+
+export type ExercisesGroupedBySetsType = {
+  setGroupNumber: number;
+  exercises: ExerciseInSetGroupType[];
+};
 
 interface WorkoutDataItemContextType {
-  item: Exercise | Superset | Section;
-  parentType: 'section' | 'superset' | null;
+  item: Exercise | Superset | Section | ExerciseInSetGroupType;
+  parentType: "section" | "superset" | null;
   parentItemsLength?: number;
   parentSectionID: string | null;
   parentSupersetID: string | null;
