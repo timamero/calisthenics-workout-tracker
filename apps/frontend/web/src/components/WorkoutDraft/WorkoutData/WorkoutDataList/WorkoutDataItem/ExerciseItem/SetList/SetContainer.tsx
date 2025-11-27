@@ -96,6 +96,7 @@ export default function SetContainer() {
       isCompleted={set.completed}
       handleToggleCompleted={handleToggleCompleted}
       // showDeleteButton={sets.length > 1}
+      hasSupersetParentType={true}
       handleDeleteSetClick={handleDeleteSetClick}
     />
   );
