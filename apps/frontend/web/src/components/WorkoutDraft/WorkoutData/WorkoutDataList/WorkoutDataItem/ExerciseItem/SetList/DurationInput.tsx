@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { TextInput } from '@mantine/core';
 
 import type { SetFields } from '@cwt/schema/workouts';
-import { SetContext } from '@cwt/context';
+import { SetContext, WorkoutDataItemContext } from '@cwt/context';
 
 import { getSecondsInDuration } from '@cwt/utils';
 
@@ -11,6 +11,8 @@ interface DurationInputProps {
 }
 
 export default function DurationInput({ label }: DurationInputProps) {
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
+  const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
   const set = useContext(SetContext)!.set;
   const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +22,11 @@ export default function DurationInput({ label }: DurationInputProps) {
       const updatedField: Partial<SetFields> = {
         [label]: '',
       };
-      handleSetFieldChange(set.id, updatedField);
+      if (parentType === 'superset') {
+        handleSetFieldChange(set.id, updatedField, exerciseID);
+      } else {
+        handleSetFieldChange(set.id, updatedField);
+      }
       return;
     }
     // Validate: only numbers, no leading zeros except for '0'
@@ -30,7 +36,11 @@ export default function DurationInput({ label }: DurationInputProps) {
         const updatedField: Partial<SetFields> = {
           [label]: 'PT' + event.currentTarget.value + 'S',
         };
-        handleSetFieldChange(set.id, updatedField);
+        if (parentType === 'superset') {
+          handleSetFieldChange(set.id, updatedField, exerciseID);
+        } else {
+          handleSetFieldChange(set.id, updatedField);
+        }
       }
     }
     // Otherwise, do not update
