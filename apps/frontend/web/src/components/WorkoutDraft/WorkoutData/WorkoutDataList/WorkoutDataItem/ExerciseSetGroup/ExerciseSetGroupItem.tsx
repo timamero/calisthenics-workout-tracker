@@ -102,8 +102,18 @@ export default function ExerciseSetGroupItem({
   });
   return (
     <Stack>
-      <Text>Set {exercisesGroupedBySets.setGroupNumber + 1}</Text>
-      {exercisesGroup}
+      <Text size="xs" fw={600}>
+        Set {exercisesGroupedBySets.setGroupNumber + 1}
+      </Text>
+      <Stack
+        bd="1px solid var(--mantine-color-default-border)"
+        p="lg"
+        w={300}
+        bg="transparent"
+        bdrs="lg"
+      >
+        {exercisesGroup}
+      </Stack>
     </Stack>
   );
 }
