@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { useContext, type ChangeEvent } from 'react';
 import { TextInput } from '@mantine/core';
 
 import type { Leverage, Assist, SetFields } from '@cwt/schema/workouts';
-import { SetContext } from '@cwt/context';
+import { SetContext, WorkoutDataItemContext } from '@cwt/context';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
@@ -19,15 +19,16 @@ export default function NumeralInput({
   fieldID,
   trackingType = null,
 }: NumeralInputProps) {
-  const set = React.useContext(SetContext)!.set;
-  const handleSetFieldChange =
-    React.useContext(SetContext)!.handleSetFieldChange;
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
+  const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
+  const set = useContext(SetContext)!.set;
+  const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
 
   const setLeverageOrAssistIDToMod = useWorkoutDraftStore(
     (state) => state.setLeverageOrAssistIDToMod,
   );
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (fieldID) {
       setLeverageOrAssistIDToMod(fieldID);
     }
@@ -38,7 +39,11 @@ export default function NumeralInput({
         | Pick<Assist, 'value'> = {
         [fieldName]: undefined,
       };
-      handleSetFieldChange(set.id, updatedField);
+      if (parentType === 'superset') {
+        handleSetFieldChange(set.id, updatedField, exerciseID);
+      } else {
+        handleSetFieldChange(set.id, updatedField);
+      }
     } else {
       const updatedField:
         | Partial<SetFields>
@@ -46,7 +51,11 @@ export default function NumeralInput({
         | Pick<Assist, 'value'> = {
         [fieldName]: Number(event.currentTarget.value),
       };
-      handleSetFieldChange(set.id, updatedField);
+      if (parentType === 'superset') {
+        handleSetFieldChange(set.id, updatedField, exerciseID);
+      } else {
+        handleSetFieldChange(set.id, updatedField);
+      }
     }
   };
 
