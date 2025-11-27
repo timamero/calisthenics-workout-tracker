@@ -17,19 +17,23 @@ import type { ExercisesGroupedBySetsType } from './ExerciseSetGroup';
 
 interface ExerciseSetGroupItemProps {
   exercisesGroupedBySets: ExercisesGroupedBySetsType;
+  parentSectionID: string | null;
+  parentSupersetID: string | null;
 }
 
 export default function ExerciseSetGroupItem({
   exercisesGroupedBySets,
+  parentSectionID,
+  parentSupersetID,
 }: ExerciseSetGroupItemProps) {
-  console.log(
-    'ExerciseSetGroupItem - exercisesGroupedBySets',
-    exercisesGroupedBySets,
-  );
+  // console.log(
+  //   'ExerciseSetGroupItem - exercisesGroupedBySets',
+  //   exercisesGroupedBySets,
+  // );
 
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
-  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
-  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+  // const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
+  // const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setExerciseIDToMod = useWorkoutDraftStore(
