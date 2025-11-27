@@ -1225,6 +1225,7 @@ export const createWorkoutDraftSlice: StateCreator<
         });
         // Update field of exercise in superset
       } else if (!sectionID && supersetID && exerciseID) {
+        console.log('updating exercise in root superset');
         const superset = state.workoutData.find(
           (superset) => superset.id === supersetID,
         ) as Superset;
@@ -1237,6 +1238,7 @@ export const createWorkoutDraftSlice: StateCreator<
           return;
         }
         let updatedExercise = exercise;
+        console.log('exercise to be updated', updatedExercise);
         updatedExercise.sets = updatedExercise.sets.map((set) => {
           if (set.id === setID) {
             return {

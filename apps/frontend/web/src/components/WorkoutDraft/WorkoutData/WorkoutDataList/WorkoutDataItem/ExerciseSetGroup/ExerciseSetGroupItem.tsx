@@ -1,9 +1,9 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { Stack, Text } from '@mantine/core';
 
 import type {
   Assist,
-  Exercise,
+  // Exercise,
   Leverage,
   SetFields,
 } from '@cwt/schema/workouts';
@@ -31,7 +31,7 @@ export default function ExerciseSetGroupItem({
   //   exercisesGroupedBySets,
   // );
 
-  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  // const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   // const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   // const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
@@ -60,9 +60,11 @@ export default function ExerciseSetGroupItem({
       | Partial<SetFields>
       | Pick<Leverage, 'value'>
       | Pick<Assist, 'value'>,
+    exerciseID?: string,
   ) => {
     setSetIDToMod(setID);
-    setExerciseIDToMod(exercise.id);
+    console.log('setting exercise id', exerciseID);
+    setExerciseIDToMod(exerciseID!);
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
     }

@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { useContext } from 'react';
 import { Select } from '@mantine/core';
 
-import { SetContext } from '@cwt/context';
+import { SetContext, WorkoutDataItemContext } from '@cwt/context';
 import {
   useLeveragesAssistsStore,
   useWorkoutDraftStore,
@@ -19,9 +19,10 @@ export default function SelectInput({
   fieldID,
   trackingType = null,
 }: NumeralInputProps) {
-  const set = React.useContext(SetContext)!.set;
-  const handleSetFieldChange =
-    React.useContext(SetContext)!.handleSetFieldChange;
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
+  const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
+  const set = useContext(SetContext)!.set;
+  const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
   // console.log('tracking type: ', trackingType);
   const leverageOrAssistID =
     trackingType === 'leverages'
@@ -41,7 +42,11 @@ export default function SelectInput({
   const handleChange = (value: string | null) => {
     setLeverageIDToMod(fieldID);
     const updatedField = { value: value };
-    handleSetFieldChange(set.id, updatedField);
+    if (parentType === 'superset') {
+      handleSetFieldChange(set.id, updatedField, exerciseID);
+    } else {
+      handleSetFieldChange(set.id, updatedField);
+    }
   };
 
   const options = leverageOrAssist.value_options;
