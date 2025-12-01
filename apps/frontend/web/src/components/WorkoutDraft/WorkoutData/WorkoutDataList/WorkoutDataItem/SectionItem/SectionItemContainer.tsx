@@ -6,6 +6,7 @@ import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import SectionItem from './SectionItem';
+import { useReorderItem } from '@cwt/hooks';
 
 export default function SectionItemContainer() {
   const section = useContext(WorkoutDataItemContext)!.item as Section;
@@ -16,19 +17,13 @@ export default function SectionItemContainer() {
   const rootWorkoutDataLength = useWorkoutDraftStore(
     (state) => state.workoutData.length || 0,
   );
-  const reorderRootItem = useWorkoutDraftStore(
-    (state) => state.reorderRootItem,
-  );
+
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod,
   );
 
-  const handleUpClick = () => {
-    reorderRootItem(section!.id, section!.order - 1);
-  };
-  const handleDownClick = () => {
-    reorderRootItem(section!.id, section!.order + 1);
-  };
+  const handleUpClick = useReorderItem(section).handleUpClick;
+  const handleDownClick = useReorderItem(section).handleDownClick;
 
   const handleDeleteSectionClick = () => {
     setSectionIDToMod(section.id);
