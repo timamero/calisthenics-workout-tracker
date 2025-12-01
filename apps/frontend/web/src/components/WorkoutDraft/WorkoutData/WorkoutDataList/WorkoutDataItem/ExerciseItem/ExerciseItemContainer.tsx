@@ -8,7 +8,6 @@ import {
   useParentItemsLength,
   useReorderItem,
 } from '@cwt/hooks';
-// import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import ExerciseItem from './ExerciseItem';
@@ -18,11 +17,6 @@ export default function ExerciseItemContainer() {
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-
-  // const deleteRootItemOverlayHandler =
-  //   useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
-  // const deleteNestedItemOverlayHandler =
-  //   useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const addSet = useWorkoutDraftStore((state) => state.addSet);
@@ -66,23 +60,6 @@ export default function ExerciseItemContainer() {
       addSet();
     }
   };
-
-  // const handleDeleteExerciseClick = () => {
-  //   setExerciseIDToMod(exercise!.id);
-
-  //   if (parentSupersetID) {
-  //     setSupersetIDToMod(parentSupersetID);
-  //   }
-  //   if (parentSectionID) {
-  //     setSectionIDToMod(parentSectionID);
-  //   }
-
-  //   if (parentSectionID || parentSupersetID) {
-  //     if (deleteNestedItemOverlayHandler) deleteNestedItemOverlayHandler.open();
-  //   } else {
-  //     if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
-  //   }
-  // };
 
   return (
     <ExerciseItem
