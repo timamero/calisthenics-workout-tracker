@@ -24,10 +24,7 @@ export default function ExerciseSetGroup({ superset }: ExerciseSetGroupProps) {
   const supersetParentsSectionID = useContext(
     WorkoutDataItemContext,
   )?.parentSectionID;
-  // console.log(
-  //   'ExerciseSetGroup - exercisesGroupedBySets',
-  //   exercisesGroupedBySetsList,
-  // );
+
   const exercisesGroupedBySets = exercisesGroupedBySetsList.map((group) => {
     return (
       <ExerciseSetGroupItem

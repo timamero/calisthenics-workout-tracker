@@ -1,12 +1,7 @@
 // import { useContext } from 'react';
 import { Stack, Text } from '@mantine/core';
 
-import type {
-  Assist,
-  // Exercise,
-  Leverage,
-  SetFields,
-} from '@cwt/schema/workouts';
+import type { Assist, Leverage, SetFields } from '@cwt/schema/workouts';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { SetContext, WorkoutDataItemContext } from '@cwt/context';
@@ -26,15 +21,6 @@ export default function ExerciseSetGroupItem({
   parentSectionID,
   parentSupersetID,
 }: ExerciseSetGroupItemProps) {
-  // console.log(
-  //   'ExerciseSetGroupItem - exercisesGroupedBySets',
-  //   exercisesGroupedBySets,
-  // );
-
-  // const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
-  // const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
-  // const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setExerciseIDToMod = useWorkoutDraftStore(
     (state) => state.setExerciseIDToMod,
@@ -88,7 +74,6 @@ export default function ExerciseSetGroupItem({
           value={{
             item: ex,
             parentType: 'superset',
-            // parentItemsLength: exercisesGroupedBySets.exercises.length,
             parentSectionID: parentSectionID!,
             parentSupersetID: parentSupersetID!,
           }}
