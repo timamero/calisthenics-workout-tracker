@@ -3,8 +3,12 @@ import { useContext } from 'react';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise } from '@cwt/schema/workouts';
-import { useParentItemsLength, useReorderItem } from '@cwt/hooks';
-import { WorkoutContext } from '@cwt/context';
+import {
+  useDeleteItem,
+  useParentItemsLength,
+  useReorderItem,
+} from '@cwt/hooks';
+// import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import ExerciseItem from './ExerciseItem';
@@ -15,10 +19,10 @@ export default function ExerciseItemContainer() {
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
-  const deleteRootItemOverlayHandler =
-    useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
-  const deleteNestedItemOverlayHandler =
-    useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
+  // const deleteRootItemOverlayHandler =
+  //   useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
+  // const deleteNestedItemOverlayHandler =
+  //   useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const addSet = useWorkoutDraftStore((state) => state.addSet);
@@ -40,6 +44,10 @@ export default function ExerciseItemContainer() {
 
   const handleUpClick = useReorderItem(exercise).handleUpClick;
   const handleDownClick = useReorderItem(exercise).handleDownClick;
+  const handleDeleteExerciseClick = useDeleteItem(
+    'exercise',
+    exercise!.id,
+  ).handleDeleteItemClick;
 
   const name = getExerciseNameById(exercise!.exercise_id);
 
@@ -59,22 +67,22 @@ export default function ExerciseItemContainer() {
     }
   };
 
-  const handleDeleteExerciseClick = () => {
-    setExerciseIDToMod(exercise!.id);
+  // const handleDeleteExerciseClick = () => {
+  //   setExerciseIDToMod(exercise!.id);
 
-    if (parentSupersetID) {
-      setSupersetIDToMod(parentSupersetID);
-    }
-    if (parentSectionID) {
-      setSectionIDToMod(parentSectionID);
-    }
+  //   if (parentSupersetID) {
+  //     setSupersetIDToMod(parentSupersetID);
+  //   }
+  //   if (parentSectionID) {
+  //     setSectionIDToMod(parentSectionID);
+  //   }
 
-    if (parentSectionID || parentSupersetID) {
-      if (deleteNestedItemOverlayHandler) deleteNestedItemOverlayHandler.open();
-    } else {
-      if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
-    }
-  };
+  //   if (parentSectionID || parentSupersetID) {
+  //     if (deleteNestedItemOverlayHandler) deleteNestedItemOverlayHandler.open();
+  //   } else {
+  //     if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
+  //   }
+  // };
 
   return (
     <ExerciseItem
