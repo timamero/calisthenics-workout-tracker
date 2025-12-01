@@ -34,7 +34,6 @@ export default function SupersetItem({
   const supersetParentsSectionID = useContext(
     WorkoutDataItemContext,
   )?.parentSectionID;
-  // console.log('supersetParentsSectionID', supersetParentsSectionID);
 
   const setSupersetIDToMod = useWorkoutDraftStore(
     (state) => state.setSupersetIDToMod,
@@ -101,29 +100,6 @@ export default function SupersetItem({
         ) : (
           <ExerciseSetGroup superset={superset} />
         )}
-
-        {/* 
-          This will be conditionally rendered. Return this when in build or edit mode 
-          TODO: Move this to an external component
-        */}
-        {/* {superset.exercises.map((exercise) => {
-          return (
-            <WorkoutDataItemContext.Provider
-              key={exercise.id}
-              value={{
-                item: exercise,
-                parentType: 'superset',
-                parentItemsLength: superset.exercises.length,
-                parentSectionID: supersetParentsSectionID
-                  ? supersetParentsSectionID
-                  : null,
-                parentSupersetID: superset.id,
-              }}
-            >
-              <ExerciseItemContainer />
-            </WorkoutDataItemContext.Provider>
-          );
-        })} */}
         {mode !== 'log' && (
           <Button
             variant="filled"

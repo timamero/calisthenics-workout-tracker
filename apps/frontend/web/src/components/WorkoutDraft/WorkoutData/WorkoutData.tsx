@@ -1,5 +1,4 @@
 import { Stack, Text } from '@mantine/core';
-// import { useDisclosure } from '@mantine/hooks';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Mode } from '@cwt/schema/workouts';

@@ -9,10 +9,8 @@ import SupersetItem from './SupersetItem';
 
 export default function SupersetItemContainer() {
   const superset = useContext(WorkoutDataItemContext)!.item as Superset;
-  // console.log('superset order', superset.order);
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
-  // const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
   const deleteNestedItemOverlayHandler =
@@ -75,7 +73,6 @@ export default function SupersetItemContainer() {
     if (!parentSectionID) {
       return rootWorkoutDataLength;
     }
-    // const length = useContext(WorkoutDataItemContext)?.parentItemsLength;
     return parentLength ? parentLength : 0;
   };
 

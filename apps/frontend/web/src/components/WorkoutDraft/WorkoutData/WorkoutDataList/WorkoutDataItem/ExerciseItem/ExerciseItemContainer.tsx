@@ -117,7 +117,6 @@ export default function ExerciseItemContainer() {
     if (!parentSectionID && !parentSupersetID) {
       return rootWorkoutDataLength;
     }
-    // const length = useContext(WorkoutDataItemContext)?.parentItemsLength;
     return parentLength ? parentLength : 0;
   };
 
