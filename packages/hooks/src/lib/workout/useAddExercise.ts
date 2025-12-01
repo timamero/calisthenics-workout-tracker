@@ -1,13 +1,13 @@
-import { useContext } from "react";
-import { ScrollView } from "react-native";
-import { type UseDisclosureHandlers } from "@mantine/hooks";
+import { useContext } from 'react';
+import { ScrollView } from 'react-native';
+import { type UseDisclosureHandlers } from '@mantine/hooks';
 
 import {
   useWorkoutDraftStore,
   useExerciseLibraryStore,
-} from "@cwt/state/stores";
-import { AppTypeSchema } from "@cwt/schema/common";
-import { WorkoutContext } from "@cwt/context";
+} from '@cwt/state/stores';
+import { AppTypeSchema } from '@cwt/schema/common';
+import { WorkoutContext } from '@cwt/context';
 
 export interface UseAddExerciseWebResult {
   opened: boolean;
@@ -24,7 +24,7 @@ export interface UseAddExerciseMobileResult {
   ) => void;
 }
 
-export function useAddExercise(
+export default function useAddExercise(
   appType: AppTypeSchema
 ): UseAddExerciseMobileResult | UseAddExerciseWebResult | undefined {
   const opened = useContext(WorkoutContext)?.addExerciseOverlayOpened;
@@ -51,24 +51,24 @@ export function useAddExercise(
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type
     );
 
-    if (appType == "web") {
+    if (appType == 'web') {
       setSelectedExerciseIDToAdd(null);
       handler!.close();
-    } else if (appType == "mobile") {
+    } else if (appType == 'mobile') {
       setSelectedExerciseIDToAdd(null);
       setIsVisible?.(false);
       workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
     }
   };
 
-  if (appType == "web") {
+  if (appType == 'web') {
     return {
       opened,
       handler,
       selectedExerciseIDToAdd,
       handleAddExerciseClick: handleAddExerciseAction,
     } as UseAddExerciseWebResult;
-  } else if (appType == "mobile") {
+  } else if (appType == 'mobile') {
     return {
       isVisible,
       setIsVisible,

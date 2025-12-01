@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { Mode } from '@cwt/schema/workouts';
 
-export function useUpdateWorkoutTitle() {
+export default function useUpdateWorkoutTitle() {
   const [isEditMode, setIsEditMode] = useState(false);
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const workoutTitle = useWorkoutDraftStore((state) => state.workoutTitle);
