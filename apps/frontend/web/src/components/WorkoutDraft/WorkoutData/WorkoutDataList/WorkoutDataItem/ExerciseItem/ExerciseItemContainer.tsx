@@ -3,9 +3,10 @@ import { useContext } from 'react';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise } from '@cwt/schema/workouts';
-
+import { useParentItemsLength } from '@cwt/hooks';
 import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
+
 import ExerciseItem from './ExerciseItem';
 
 export default function ExerciseItemContainer() {
@@ -13,7 +14,6 @@ export default function ExerciseItemContainer() {
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-  const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
 
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
@@ -21,9 +21,6 @@ export default function ExerciseItemContainer() {
     useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
-  const rootWorkoutDataLength = useWorkoutDraftStore(
-    (state) => state.workoutData.length || 0,
-  );
   const addSet = useWorkoutDraftStore((state) => state.addSet);
   const addSetToSuperset = useWorkoutDraftStore(
     (state) => state.addSetToSuperset,
@@ -111,13 +108,6 @@ export default function ExerciseItemContainer() {
     } else {
       if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
     }
-  };
-
-  const useParentItemsLength = () => {
-    if (!parentSectionID && !parentSupersetID) {
-      return rootWorkoutDataLength;
-    }
-    return parentLength ? parentLength : 0;
   };
 
   return (

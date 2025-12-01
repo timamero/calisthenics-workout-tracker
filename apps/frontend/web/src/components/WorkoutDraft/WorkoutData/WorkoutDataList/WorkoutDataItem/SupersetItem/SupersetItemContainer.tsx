@@ -2,24 +2,21 @@ import { useContext } from 'react';
 
 import type { Superset } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-
+import { useParentItemsLength } from '@cwt/hooks';
 import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
+
 import SupersetItem from './SupersetItem';
 
 export default function SupersetItemContainer() {
   const superset = useContext(WorkoutDataItemContext)!.item as Superset;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
-  const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
   const deleteRootItemOverlayHandler =
     useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
   const deleteNestedItemOverlayHandler =
     useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
-  const rootWorkoutDataLength = useWorkoutDraftStore(
-    (state) => state.workoutData.length || 0,
-  );
   const reorderRootItem = useWorkoutDraftStore(
     (state) => state.reorderRootItem,
   );
@@ -67,13 +64,6 @@ export default function SupersetItemContainer() {
     } else {
       if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
     }
-  };
-
-  const useParentItemsLength = () => {
-    if (!parentSectionID) {
-      return rootWorkoutDataLength;
-    }
-    return parentLength ? parentLength : 0;
   };
 
   return (
