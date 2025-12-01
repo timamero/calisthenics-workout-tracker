@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Exercise } from '@cwt/schema/workouts';
-import { useParentItemsLength } from '@cwt/hooks';
+import { useParentItemsLength, useReorderItem } from '@cwt/hooks';
 import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
 
@@ -25,12 +25,6 @@ export default function ExerciseItemContainer() {
   const addSetToSuperset = useWorkoutDraftStore(
     (state) => state.addSetToSuperset,
   );
-  const reorderRootItem = useWorkoutDraftStore(
-    (state) => state.reorderRootItem,
-  );
-  const reorderNestedItem = useWorkoutDraftStore(
-    (state) => state.reorderNestedItem,
-  );
   const setExerciseIDToMod = useWorkoutDraftStore(
     (state) => state.setExerciseIDToMod,
   );
@@ -43,6 +37,9 @@ export default function ExerciseItemContainer() {
   const getExerciseNameById = useExerciseLibraryStore(
     (state) => state.getExerciseNameByID,
   );
+
+  const handleUpClick = useReorderItem(exercise).handleUpClick;
+  const handleDownClick = useReorderItem(exercise).handleDownClick;
 
   const name = getExerciseNameById(exercise!.exercise_id);
 
@@ -59,37 +56,6 @@ export default function ExerciseItemContainer() {
     } else {
       setExerciseIDToMod(exercise!.id);
       addSet();
-    }
-  };
-
-  const handleUpClick = () => {
-    if (!parentSectionID && !parentSupersetID) {
-      reorderRootItem(exercise!.id, exercise!.order - 1);
-    } else {
-      setExerciseIDToMod(exercise!.id);
-
-      if (parentSupersetID) {
-        setSupersetIDToMod(parentSupersetID);
-      }
-      if (parentSectionID) {
-        setSectionIDToMod(parentSectionID);
-      }
-      reorderNestedItem(exercise!.order - 1);
-    }
-  };
-  const handleDownClick = () => {
-    if (!parentSectionID && !parentSupersetID) {
-      reorderRootItem(exercise!.id, exercise!.order + 1);
-    } else {
-      setExerciseIDToMod(exercise!.id);
-
-      if (parentSupersetID) {
-        setSupersetIDToMod(parentSupersetID);
-      }
-      if (parentSectionID) {
-        setSectionIDToMod(parentSectionID);
-      }
-      reorderNestedItem(exercise!.order + 1);
     }
   };
 

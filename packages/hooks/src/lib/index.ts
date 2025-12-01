@@ -6,6 +6,7 @@ import { useSupabaseAuth } from './useSupabaseAuth';
 import { useWorkoutSave } from './useWorkoutSave';
 import { useUpdateWorkoutTitle } from './Workout/useUpdateWorkoutTitle';
 import useParentItemsLength from './Workout/useParentItemsLength';
+import useReorderItem from './Workout/useReorderItem';
 import {
   useAddExercise,
   type UseAddExerciseMobileResult,
@@ -19,6 +20,7 @@ export {
   useWorkoutSave,
   useUpdateWorkoutTitle,
   useParentItemsLength,
+  useReorderItem,
   useAddExercise,
   UseAddExerciseMobileResult,
   UseAddExerciseWebResult,
