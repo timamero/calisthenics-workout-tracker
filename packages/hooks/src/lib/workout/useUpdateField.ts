@@ -1,8 +1,5 @@
-import { useContext } from 'react';
-
-import type { Assist, Leverage, SetFields } from '@cwt/schema/workouts';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { WorkoutDataItemContext } from '@cwt/context';
+import type { Assist, Leverage, SetFields } from "@cwt/schema/workouts";
+import { useWorkoutDraftStore } from "@cwt/state/stores";
 
 export default function useUpdateField(
   parentSectionID?: string | null,
@@ -39,8 +36,8 @@ export default function useUpdateField(
     setID: string,
     updatedField:
       | Partial<SetFields>
-      | Pick<Leverage, 'value'>
-      | Pick<Assist, 'value'>,
+      | Pick<Leverage, "value">
+      | Pick<Assist, "value">,
     exerciseID?: string
     // parentSectionID?: string,
     // parentSupersetID?: string
@@ -49,9 +46,6 @@ export default function useUpdateField(
     // const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
     setSetIDToMod(setID);
     setExerciseIDToMod(exerciseID!);
-    // if (fieldID) {
-    //   setLeverageOrAssistIDToMod(fieldID);
-    // }
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
     }
@@ -60,7 +54,7 @@ export default function useUpdateField(
     }
     if (useWorkoutDraftStore.getState().leverageOrAssistIDToMod) {
       updateLeverageOrAssistField(
-        updatedField as Pick<Leverage, 'value'> | Pick<Assist, 'value'>
+        updatedField as Pick<Leverage, "value"> | Pick<Assist, "value">
       );
     } else {
       updateField(updatedField as Partial<SetFields>);
