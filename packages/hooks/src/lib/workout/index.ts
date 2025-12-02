@@ -7,6 +7,7 @@ import useReorderItem from "./useReorderItem";
 import useDeleteItem from "./useDeleteItem";
 import useUpdateWorkoutTitle from "./useUpdateWorkoutTitle";
 import useAddExerciseOverlay from "./useAddExerciseOverlay";
+import useAddSuperset from "./useAddSuperset";
 import useWorkoutSave from "./useWorkoutSave";
 
 export {
@@ -16,6 +17,7 @@ export {
   useDeleteItem,
   useUpdateWorkoutTitle,
   useAddExerciseOverlay,
+  useAddSuperset,
   useWorkoutSave,
 };
 
