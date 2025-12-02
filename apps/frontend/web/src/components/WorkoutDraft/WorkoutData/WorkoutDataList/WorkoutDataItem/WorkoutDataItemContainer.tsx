@@ -3,7 +3,7 @@ import { WorkoutDataItemContext } from '@cwt/context';
 
 import { ExerciseItemContainer } from './ExerciseItem';
 import { SectionItemContainer } from './SectionItem';
-import { SupersetItemContainer } from './SupersetItem';
+import { SupersetItem } from './SupersetItem';
 
 interface WorkoutDataItemContainerProps {
   item: Exercise | Superset | Section;
@@ -50,7 +50,7 @@ export default function WorkoutDataItemContainer({
         parentSupersetID: null,
       }}
     >
-      <SupersetItemContainer />
+      <SupersetItem />
     </WorkoutDataItemContext.Provider>
   );
 }

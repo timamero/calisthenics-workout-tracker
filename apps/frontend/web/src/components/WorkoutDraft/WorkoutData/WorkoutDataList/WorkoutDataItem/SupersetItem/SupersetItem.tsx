@@ -12,7 +12,7 @@ import { WorkoutDataItemContext } from '@cwt/context';
 
 import SupersetItemUI from './SupersetItemUI';
 
-export default function SupersetItemContainer() {
+export default function SupersetItem() {
   const superset = useContext(WorkoutDataItemContext)!.item as Superset;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
