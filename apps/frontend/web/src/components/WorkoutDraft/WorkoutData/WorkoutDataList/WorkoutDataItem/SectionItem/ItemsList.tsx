@@ -4,7 +4,7 @@ import type { Section } from '@cwt/schema/workouts';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import { ExerciseItemContainer } from '../ExerciseItem';
-import { SupersetItem } from '../SupersetItem';
+import SupersetItem from '../SupersetItem';
 
 export default function ItemsList() {
   const section = useContext(WorkoutDataItemContext)!.item as Section;
