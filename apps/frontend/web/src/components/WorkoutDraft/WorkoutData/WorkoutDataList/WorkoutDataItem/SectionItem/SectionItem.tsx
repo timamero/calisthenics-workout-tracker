@@ -4,11 +4,9 @@ import { Stack, Group, Text, Button } from '@mantine/core';
 import type { Mode, Section } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutContext } from '@cwt/context';
-import { WorkoutDataItemContext } from '@cwt/context';
 
-import { ExerciseItemContainer } from '../ExerciseItem';
-import { SupersetItemContainer } from '../SupersetItem';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
+import ItemsList from './ItemsList';
 
 interface SectionItemProps {
   mode: Mode;
@@ -68,38 +66,7 @@ export default function SectionItem({
             </Button>
           )}
         </Group>
-        {section.items.map((item) => {
-          if (item.type === 'exercise') {
-            return (
-              <WorkoutDataItemContext.Provider
-                key={item.id}
-                value={{
-                  item: item,
-                  parentType: 'section',
-                  parentItemsLength: section.items.length,
-                  parentSectionID: section.id,
-                  parentSupersetID: null,
-                }}
-              >
-                <ExerciseItemContainer />
-              </WorkoutDataItemContext.Provider>
-            );
-          }
-          return (
-            <WorkoutDataItemContext.Provider
-              key={item.id}
-              value={{
-                item: item,
-                parentType: 'section',
-                parentItemsLength: section.items.length,
-                parentSectionID: section.id,
-                parentSupersetID: null,
-              }}
-            >
-              <SupersetItemContainer />
-            </WorkoutDataItemContext.Provider>
-          );
-        })}
+        <ItemsList />
         {mode !== 'log' && (
           <Stack>
             <Button
