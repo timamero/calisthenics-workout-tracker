@@ -22,8 +22,6 @@ export default function WorkoutContextProvider({
     useDisclosure(false);
   const [deleteSetInSupersetOverlayOpened, deleteSetInSupersetOverlayHandler] =
     useDisclosure(false);
-  const [addSectionOverlayOpened, addSectionOverlayHandler] =
-    useDisclosure(false);
 
   const webValue = {
     addExerciseOverlayOpened: addExerciseOverlayOpened,
@@ -36,8 +34,6 @@ export default function WorkoutContextProvider({
     deleteSetOverlayHandler: deleteSetOverlayHandler,
     deleteSetInSupersetOverlayOpened: deleteSetInSupersetOverlayOpened,
     deleteSetInSupersetOverlayHandler: deleteSetInSupersetOverlayHandler,
-    addSectionOverlayOpened: addSectionOverlayOpened,
-    addSectionOverlayHandler: addSectionOverlayHandler,
   };
 
   // Mobile

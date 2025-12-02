@@ -25,8 +25,6 @@ type WorkoutContextType = ExactlyOne<
     deleteSetOverlayHandler?: UseDisclosureHandlers;
     deleteSetInSupersetOverlayOpened?: boolean;
     deleteSetInSupersetOverlayHandler?: UseDisclosureHandlers;
-    addSectionOverlayOpened?: boolean;
-    addSectionOverlayHandler?: UseDisclosureHandlers;
 
     // Mobile
     isDeleteRootItemOverlayVisible?: boolean;
