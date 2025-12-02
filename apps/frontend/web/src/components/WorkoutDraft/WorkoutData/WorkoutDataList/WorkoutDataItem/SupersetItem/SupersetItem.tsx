@@ -1,10 +1,7 @@
-import { useContext } from 'react';
 import { Stack, Group, Text, Button } from '@mantine/core';
 
-import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Mode, Superset } from '@cwt/schema/workouts';
-import { WorkoutContext } from '@cwt/context';
-import { WorkoutDataItemContext } from '@cwt/context';
+import { useAddExerciseOverlay } from '@cwt/hooks';
 
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import ExerciseSetGroup from '../ExerciseSetGroup';
@@ -22,33 +19,13 @@ interface SupersetItemProps {
 
 export default function SupersetItem({
   mode,
-  superset,
   isFirst,
   isLast,
   handleUpClick,
   handleDownClick,
   handleDeleteSupersetClick,
 }: SupersetItemProps) {
-  const addExerciseOverlayHandler =
-    useContext(WorkoutContext)?.addExerciseOverlayHandler;
-  const supersetParentsSectionID = useContext(
-    WorkoutDataItemContext,
-  )?.parentSectionID;
-
-  const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod,
-  );
-  const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
-
-  const handleOpenAddExerciseOverlay = () => {
-    setSupersetIDToMod(superset.id);
-    if (supersetParentsSectionID) {
-      setSectionIDToMod(supersetParentsSectionID);
-    }
-    addExerciseOverlayHandler!.open();
-  };
+  const { handleOpenAddExerciseOverlay } = useAddExerciseOverlay('superset');
   return (
     <Group align="flex-start">
       {mode !== 'log' && (

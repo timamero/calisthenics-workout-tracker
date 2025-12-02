@@ -7,6 +7,7 @@ import { WorkoutContext } from '@cwt/context';
 
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import ItemsList from './ItemsList';
+import { useAddExerciseOverlay } from '@cwt/hooks';
 
 interface SectionItemProps {
   mode: Mode;
@@ -27,18 +28,14 @@ export default function SectionItem({
   handleDownClick,
   handleDeleteSectionClick,
 }: SectionItemProps) {
-  const addExerciseOverlayHandler =
-    useContext(WorkoutContext)?.addExerciseOverlayHandler;
   const addSupersetOverlayHandler =
     useContext(WorkoutContext)?.addSupersetOverlayHandler;
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod,
   );
 
-  const handleOpenAddExerciseOverlay = () => {
-    setSectionIDToMod(section.id);
-    addExerciseOverlayHandler!.open();
-  };
+  const { handleOpenAddExerciseOverlay } = useAddExerciseOverlay('section');
+
   const handleOpenAddSupersetOverlay = () => {
     setSectionIDToMod(section.id);
     addSupersetOverlayHandler!.open();

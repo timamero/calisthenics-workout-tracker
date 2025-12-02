@@ -2,10 +2,10 @@ import { useContext } from 'react';
 
 import { Stack, Button } from '@mantine/core';
 import { WorkoutContext } from '@cwt/context';
+import { useAddExerciseOverlay } from '@cwt/hooks';
 
 export default function AddWorkoutItemButtons() {
-  const addExerciseOverlayHandler =
-    useContext(WorkoutContext)?.addExerciseOverlayHandler;
+  const { handleOpenAddExerciseOverlay } = useAddExerciseOverlay();
   const addSectionOverlayHandler =
     useContext(WorkoutContext)?.addSectionOverlayHandler;
   const addSupersetOverlayHandler =
@@ -15,7 +15,7 @@ export default function AddWorkoutItemButtons() {
       <Button
         variant="filled"
         color="orange.9"
-        onClick={() => addExerciseOverlayHandler?.open()}
+        onClick={() => handleOpenAddExerciseOverlay()}
       >
         Add Exercise
       </Button>
