@@ -10,7 +10,7 @@ import {
 } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-import SupersetItem from './SupersetItem';
+import SupersetItemUI from './SupersetItemUI';
 
 export default function SupersetItemContainer() {
   const superset = useContext(WorkoutDataItemContext)!.item as Superset;
@@ -25,7 +25,7 @@ export default function SupersetItemContainer() {
   const handleOpenAddExerciseOverlay = useAddExerciseOverlay('superset');
 
   return (
-    <SupersetItem
+    <SupersetItemUI
       mode={mode!}
       superset={superset}
       isFirst={superset!.order === 0}

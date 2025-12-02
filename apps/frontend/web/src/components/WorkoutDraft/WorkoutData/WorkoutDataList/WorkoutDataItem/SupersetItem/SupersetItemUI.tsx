@@ -6,7 +6,7 @@ import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import ExerciseSetGroup from '../ExerciseSetGroup';
 import ExercisesList from './ExercisesList';
 
-interface SupersetItemProps {
+interface SupersetItemUIProps {
   mode: Mode;
   superset: Superset;
   isFirst: boolean;
@@ -17,7 +17,7 @@ interface SupersetItemProps {
   handleOpenAddExerciseOverlay: () => void;
 }
 
-export default function SupersetItem({
+export default function SupersetItemUI({
   mode,
   isFirst,
   isLast,
@@ -25,7 +25,7 @@ export default function SupersetItem({
   handleDownClick,
   handleDeleteSupersetClick,
   handleOpenAddExerciseOverlay,
-}: SupersetItemProps) {
+}: SupersetItemUIProps) {
   return (
     <Group align="flex-start">
       {mode !== 'log' && (
