@@ -2,7 +2,6 @@ import { useContext } from 'react';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutContext } from '@cwt/context';
-import { addSectionConfirmationContent } from '@cwt/content';
 
 import ConfirmationOverlay from '../../common/ConfirmationOverlay';
 
@@ -23,10 +22,6 @@ export default function ConfirmationOverlays() {
     useContext(WorkoutContext)?.deleteSetInSupersetOverlayHandler;
   const deleteSetOverlayHandler =
     useContext(WorkoutContext)?.deleteSetOverlayHandler;
-  const addSectionOverlayOpened =
-    useContext(WorkoutContext)?.addSectionOverlayOpened;
-  const addSectionOverlayHandler =
-    useContext(WorkoutContext)?.addSectionOverlayHandler;
 
   const exerciseIDToMod = useWorkoutDraftStore(
     (state) => state.exerciseIDToMod,
@@ -35,7 +30,6 @@ export default function ConfirmationOverlays() {
   const supersetIDToMod = useWorkoutDraftStore(
     (state) => state.supersetIDToMod,
   );
-  const addSection = useWorkoutDraftStore((state) => state.addSection);
   const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
   const deleteSetInSuperset = useWorkoutDraftStore(
     (state) => state.deleteSetInSuperset,
@@ -71,7 +65,6 @@ export default function ConfirmationOverlays() {
         handler={deleteNestedItemOverlayHandler!}
         onConfirmationClick={() => removeNestedItem()}
       />
-      {/* TODO: Create confirmation overlay for deleting sets in superset */}
       <ConfirmationOverlay
         title="Delete sets"
         message="Delete set from each exercise in the superset?"
@@ -87,14 +80,6 @@ export default function ConfirmationOverlays() {
         opened={deleteSetOverlayOpened!}
         handler={deleteSetOverlayHandler!}
         onConfirmationClick={() => deleteSet()}
-      />
-      <ConfirmationOverlay
-        title={addSectionConfirmationContent().title}
-        message={addSectionConfirmationContent().message}
-        confirmButtonLabel={addSectionConfirmationContent().confirmButtonLabel}
-        opened={addSectionOverlayOpened!}
-        handler={addSectionOverlayHandler!}
-        onConfirmationClick={addSection}
       />
     </>
   );
