@@ -6,8 +6,8 @@ import {
   useDeleteItem,
   useParentItemsLength,
   useReorderItem,
+  useAddExerciseOverlay,
 } from '@cwt/hooks';
-// import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import SupersetItem from './SupersetItem';
@@ -17,12 +17,12 @@ export default function SupersetItemContainer() {
 
   const mode = useWorkoutDraftStore((state) => state.mode);
 
-  const handleUpClick = useReorderItem(superset).handleUpClick;
-  const handleDownClick = useReorderItem(superset).handleDownClick;
+  const { handleUpClick, handleDownClick } = useReorderItem(superset);
   const handleDeleteSupersetClick = useDeleteItem(
     'superset',
     superset!.id,
   ).handleDeleteItemClick;
+  const handleOpenAddExerciseOverlay = useAddExerciseOverlay('superset');
 
   return (
     <SupersetItem
@@ -33,6 +33,7 @@ export default function SupersetItemContainer() {
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleDeleteSupersetClick={handleDeleteSupersetClick}
+      handleOpenAddExerciseOverlay={handleOpenAddExerciseOverlay}
     />
   );
 }

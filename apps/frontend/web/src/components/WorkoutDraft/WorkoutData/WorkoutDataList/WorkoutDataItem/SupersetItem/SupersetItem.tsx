@@ -1,7 +1,6 @@
 import { Stack, Group, Text, Button } from '@mantine/core';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
-import { useAddExerciseOverlay } from '@cwt/hooks';
 
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import ExerciseSetGroup from '../ExerciseSetGroup';
@@ -15,6 +14,7 @@ interface SupersetItemProps {
   handleUpClick: () => void;
   handleDownClick: () => void;
   handleDeleteSupersetClick: () => void;
+  handleOpenAddExerciseOverlay: () => void;
 }
 
 export default function SupersetItem({
@@ -24,8 +24,8 @@ export default function SupersetItem({
   handleUpClick,
   handleDownClick,
   handleDeleteSupersetClick,
+  handleOpenAddExerciseOverlay,
 }: SupersetItemProps) {
-  const handleOpenAddExerciseOverlay = useAddExerciseOverlay('superset');
   return (
     <Group align="flex-start">
       {mode !== 'log' && (
