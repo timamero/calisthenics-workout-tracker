@@ -34,7 +34,7 @@ export default function SectionItem({
     (state) => state.setSectionIDToMod,
   );
 
-  const { handleOpenAddExerciseOverlay } = useAddExerciseOverlay('section');
+  const handleOpenAddExerciseOverlay = useAddExerciseOverlay('section');
 
   const handleOpenAddSupersetOverlay = () => {
     setSectionIDToMod(section.id);

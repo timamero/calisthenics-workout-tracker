@@ -5,7 +5,7 @@ import { WorkoutContext } from '@cwt/context';
 import { useAddExerciseOverlay } from '@cwt/hooks';
 
 export default function AddWorkoutItemButtons() {
-  const { handleOpenAddExerciseOverlay } = useAddExerciseOverlay();
+  const handleOpenAddExerciseOverlay = useAddExerciseOverlay();
   const addSectionOverlayHandler =
     useContext(WorkoutContext)?.addSectionOverlayHandler;
   const addSupersetOverlayHandler =

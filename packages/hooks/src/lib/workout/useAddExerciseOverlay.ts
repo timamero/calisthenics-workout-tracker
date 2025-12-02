@@ -36,5 +36,5 @@ export default function useAddExerciseOverlay(
     addExerciseOverlayHandler!.open();
   };
 
-  return { handleOpenAddExerciseOverlay };
+  return handleOpenAddExerciseOverlay;
 }

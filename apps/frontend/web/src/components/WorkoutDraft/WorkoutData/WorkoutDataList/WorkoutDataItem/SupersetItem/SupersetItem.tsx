@@ -25,7 +25,7 @@ export default function SupersetItem({
   handleDownClick,
   handleDeleteSupersetClick,
 }: SupersetItemProps) {
-  const { handleOpenAddExerciseOverlay } = useAddExerciseOverlay('superset');
+  const handleOpenAddExerciseOverlay = useAddExerciseOverlay('superset');
   return (
     <Group align="flex-start">
       {mode !== 'log' && (
