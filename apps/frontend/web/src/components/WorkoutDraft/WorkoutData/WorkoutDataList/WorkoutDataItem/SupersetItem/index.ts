@@ -1,3 +1,3 @@
-import SupersetItemContainer from './SupersetItemContainer';
+import SupersetItem from './SupersetItem';
 
-export { SupersetItemContainer };
+export { SupersetItem };
