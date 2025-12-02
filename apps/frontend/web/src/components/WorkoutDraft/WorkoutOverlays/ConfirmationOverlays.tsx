@@ -2,10 +2,7 @@ import { useContext } from 'react';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutContext } from '@cwt/context';
-import {
-  addSectionConfirmationContent,
-  addSupersetConfirmationContent,
-} from '@cwt/content';
+import { addSectionConfirmationContent } from '@cwt/content';
 
 import ConfirmationOverlay from '../../common/ConfirmationOverlay';
 
@@ -30,10 +27,6 @@ export default function ConfirmationOverlays() {
     useContext(WorkoutContext)?.addSectionOverlayOpened;
   const addSectionOverlayHandler =
     useContext(WorkoutContext)?.addSectionOverlayHandler;
-  const addSupersetOverlayOpened =
-    useContext(WorkoutContext)?.addSupersetOverlayOpened;
-  const addSupersetOverlayHandler =
-    useContext(WorkoutContext)?.addSupersetOverlayHandler;
 
   const exerciseIDToMod = useWorkoutDraftStore(
     (state) => state.exerciseIDToMod,
@@ -43,7 +36,6 @@ export default function ConfirmationOverlays() {
     (state) => state.supersetIDToMod,
   );
   const addSection = useWorkoutDraftStore((state) => state.addSection);
-  const addSuperset = useWorkoutDraftStore((state) => state.addSuperset);
   const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
   const deleteSetInSuperset = useWorkoutDraftStore(
     (state) => state.deleteSetInSuperset,
@@ -103,14 +95,6 @@ export default function ConfirmationOverlays() {
         opened={addSectionOverlayOpened!}
         handler={addSectionOverlayHandler!}
         onConfirmationClick={addSection}
-      />
-      <ConfirmationOverlay
-        title={addSupersetConfirmationContent().title}
-        message={addSupersetConfirmationContent().message}
-        confirmButtonLabel={addSupersetConfirmationContent().confirmButtonLabel}
-        opened={addSupersetOverlayOpened!}
-        handler={addSupersetOverlayHandler!}
-        onConfirmationClick={() => addSuperset(sectionIDToMod)}
       />
     </>
   );

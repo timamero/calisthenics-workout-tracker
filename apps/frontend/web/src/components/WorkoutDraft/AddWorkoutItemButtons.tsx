@@ -2,14 +2,13 @@ import { useContext } from 'react';
 
 import { Stack, Button } from '@mantine/core';
 import { WorkoutContext } from '@cwt/context';
-import { useAddExerciseOverlay } from '@cwt/hooks';
+import { useAddExerciseOverlay, useAddSuperset } from '@cwt/hooks';
 
 export default function AddWorkoutItemButtons() {
   const handleOpenAddExerciseOverlay = useAddExerciseOverlay();
   const addSectionOverlayHandler =
     useContext(WorkoutContext)?.addSectionOverlayHandler;
-  const addSupersetOverlayHandler =
-    useContext(WorkoutContext)?.addSupersetOverlayHandler;
+  const handleAddSupersetClick = useAddSuperset();
   return (
     <Stack>
       <Button
@@ -29,7 +28,7 @@ export default function AddWorkoutItemButtons() {
       <Button
         variant="filled"
         color="orange.9"
-        onClick={() => addSupersetOverlayHandler?.open()}
+        onClick={() => handleAddSupersetClick()}
       >
         Add Superset
       </Button>

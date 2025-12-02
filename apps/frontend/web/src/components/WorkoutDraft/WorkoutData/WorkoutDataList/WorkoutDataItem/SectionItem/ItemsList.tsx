@@ -4,7 +4,7 @@ import type { Section } from '@cwt/schema/workouts';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import { ExerciseItemContainer } from '../ExerciseItem';
-import { SupersetItemContainer } from '../SupersetItem';
+import { SupersetItem } from '../SupersetItem';
 
 export default function ItemsList() {
   const section = useContext(WorkoutDataItemContext)!.item as Section;
@@ -36,7 +36,7 @@ export default function ItemsList() {
           parentSupersetID: null,
         }}
       >
-        <SupersetItemContainer />
+        <SupersetItem />
       </WorkoutDataItemContext.Provider>
     );
   });

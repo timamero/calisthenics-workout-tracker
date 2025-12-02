@@ -1,13 +1,10 @@
-import { useContext } from 'react';
 import { Stack, Group, Text, Button } from '@mantine/core';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { WorkoutContext } from '@cwt/context';
 
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import ItemsList from './ItemsList';
-import { useAddExerciseOverlay } from '@cwt/hooks';
+import { useAddExerciseOverlay, useAddSuperset } from '@cwt/hooks';
 
 interface SectionItemProps {
   mode: Mode;
@@ -28,18 +25,9 @@ export default function SectionItem({
   handleDownClick,
   handleDeleteSectionClick,
 }: SectionItemProps) {
-  const addSupersetOverlayHandler =
-    useContext(WorkoutContext)?.addSupersetOverlayHandler;
-  const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
-
   const handleOpenAddExerciseOverlay = useAddExerciseOverlay('section');
+  const handleAddSupersetClick = useAddSuperset(section.id);
 
-  const handleOpenAddSupersetOverlay = () => {
-    setSectionIDToMod(section.id);
-    addSupersetOverlayHandler!.open();
-  };
   return (
     <Group align="flex-start">
       {mode !== 'log' && (
@@ -76,7 +64,7 @@ export default function SectionItem({
             <Button
               variant="filled"
               color="orange.9"
-              onClick={() => handleOpenAddSupersetOverlay()}
+              onClick={() => handleAddSupersetClick()}
             >
               Add Superset
             </Button>
