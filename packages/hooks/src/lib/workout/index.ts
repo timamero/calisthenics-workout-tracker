@@ -1,12 +1,13 @@
 import useAddExercise, {
   UseAddExerciseMobileResult,
   UseAddExerciseWebResult,
-} from './useAddExercise';
-import useParentItemsLength from './useParentItemsLength';
-import useReorderItem from './useReorderItem';
-import useDeleteItem from './useDeleteItem';
-import useUpdateWorkoutTitle from './useUpdateWorkoutTitle';
-import useWorkoutSave from './useWorkoutSave';
+} from "./useAddExercise";
+import useParentItemsLength from "./useParentItemsLength";
+import useReorderItem from "./useReorderItem";
+import useDeleteItem from "./useDeleteItem";
+import useUpdateWorkoutTitle from "./useUpdateWorkoutTitle";
+import useAddExerciseOverlay from "./useAddExerciseOverlay";
+import useWorkoutSave from "./useWorkoutSave";
 
 export {
   useAddExercise,
@@ -14,6 +15,7 @@ export {
   useReorderItem,
   useDeleteItem,
   useUpdateWorkoutTitle,
+  useAddExerciseOverlay,
   useWorkoutSave,
 };
 
