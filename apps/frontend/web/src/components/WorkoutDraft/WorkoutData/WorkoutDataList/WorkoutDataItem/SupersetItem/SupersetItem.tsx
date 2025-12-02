@@ -6,9 +6,9 @@ import type { Mode, Superset } from '@cwt/schema/workouts';
 import { WorkoutContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-import { ExerciseItemContainer } from '../ExerciseItem';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import ExerciseSetGroup from '../ExerciseSetGroup';
+import ExercisesList from './ExercisesList';
 
 interface SupersetItemProps {
   mode: Mode;
@@ -78,28 +78,7 @@ export default function SupersetItem({
             </Button>
           )}
         </Group>
-        {mode !== 'log' ? (
-          superset.exercises.map((exercise) => {
-            return (
-              <WorkoutDataItemContext.Provider
-                key={exercise.id}
-                value={{
-                  item: exercise,
-                  parentType: 'superset',
-                  parentItemsLength: superset.exercises.length,
-                  parentSectionID: supersetParentsSectionID
-                    ? supersetParentsSectionID
-                    : null,
-                  parentSupersetID: superset.id,
-                }}
-              >
-                <ExerciseItemContainer />
-              </WorkoutDataItemContext.Provider>
-            );
-          })
-        ) : (
-          <ExerciseSetGroup superset={superset} />
-        )}
+        {mode !== 'log' ? <ExercisesList /> : <ExerciseSetGroup />}
         {mode !== 'log' && (
           <Button
             variant="filled"

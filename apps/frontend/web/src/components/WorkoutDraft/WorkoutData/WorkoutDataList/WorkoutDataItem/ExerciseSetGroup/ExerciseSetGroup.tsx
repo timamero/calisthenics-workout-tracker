@@ -4,9 +4,9 @@ import { WorkoutDataItemContext } from '@cwt/context';
 
 import ExerciseSetGroupItem from './ExerciseSetGroupItem';
 
-interface ExerciseSetGroupProps {
-  superset: Superset;
-}
+// interface ExerciseSetGroupProps {
+//   superset: Superset;
+// }
 
 type ExerciseInSetGroupType = Pick<
   Exercise,
@@ -18,7 +18,8 @@ export type ExercisesGroupedBySetsType = {
   exercises: ExerciseInSetGroupType[];
 };
 
-export default function ExerciseSetGroup({ superset }: ExerciseSetGroupProps) {
+export default function ExerciseSetGroup() {
+  const superset = useContext(WorkoutDataItemContext)!.item as Superset;
   const exercisesGroupedBySetsList = groupExercisesBySet(superset);
 
   const supersetParentsSectionID = useContext(
