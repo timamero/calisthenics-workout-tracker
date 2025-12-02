@@ -1,3 +1,3 @@
 import SupersetItem from './SupersetItem';
 
-export { SupersetItem };
+export default SupersetItem;
