@@ -12,6 +12,7 @@ import useAddSet from "./useAddSet";
 import useDeleteSet from "./useDeleteSet";
 import useToggleCompleted from "./useToggleCompleted";
 import useUpdateField from "./useUpdateField";
+import useDurationInputChange from "./useDurationInputChange";
 import useWorkoutSave from "./useWorkoutSave";
 
 export {
@@ -26,6 +27,7 @@ export {
   useDeleteSet,
   useToggleCompleted,
   useUpdateField,
+  useDurationInputChange,
   useWorkoutSave,
 };
 
