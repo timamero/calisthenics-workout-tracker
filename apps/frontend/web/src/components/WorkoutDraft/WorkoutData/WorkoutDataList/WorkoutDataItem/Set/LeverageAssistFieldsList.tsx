@@ -28,7 +28,9 @@ function LeverageOrAssistField({
         label={`${leverageOrAssist.name} (${leverageOrAssist.value_int_unit})`}
         fieldName="value"
         fieldID={leverageOrAssistField.id}
-        trackingType="leverages"
+        trackingType={
+          leverageOrAssist.type === 'leverage' ? 'leverages' : 'assists'
+        }
       />
     );
   } else {
@@ -37,7 +39,9 @@ function LeverageOrAssistField({
         key={leverageOrAssistField.id}
         label={`${leverageOrAssist.name}`}
         fieldID={leverageOrAssistField.id}
-        trackingType="leverages"
+        trackingType={
+          leverageOrAssist.type === 'leverage' ? 'leverages' : 'assists'
+        }
       />
     );
   }
