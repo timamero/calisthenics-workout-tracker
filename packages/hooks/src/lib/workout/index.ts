@@ -10,6 +10,7 @@ import useAddExerciseOverlay from "./useAddExerciseOverlay";
 import useAddSuperset from "./useAddSuperset";
 import useAddSet from "./useAddSet";
 import useDeleteSet from "./useDeleteSet";
+import useToggleCompleted from "./useToggleCompleted";
 import useUpdateField from "./useUpdateField";
 import useWorkoutSave from "./useWorkoutSave";
 
@@ -23,6 +24,7 @@ export {
   useAddSuperset,
   useAddSet,
   useDeleteSet,
+  useToggleCompleted,
   useUpdateField,
   useWorkoutSave,
 };
