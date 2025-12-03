@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { Group } from '@mantine/core';
 
 import type { Exercise } from '@cwt/schema/workouts';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import NumeralInput from './NumeralInput';
 import DurationInput from './DurationInput';
+import FieldsListUI from './FieldsListUI';
 
 export default function FieldsList() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
@@ -19,14 +19,12 @@ export default function FieldsList() {
         );
       case 'time':
         return <DurationInput key={`${field}-${i}`} label="time" />;
-      // default:
-      //   return <></>;
     }
   });
   return (
-    <Group align="center">
+    <FieldsListUI>
       {fields}
       <DurationInput label="rest" />
-    </Group>
+    </FieldsListUI>
   );
 }
