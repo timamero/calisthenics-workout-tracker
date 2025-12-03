@@ -3,13 +3,13 @@ import { SetContext, WorkoutDataItemContext } from '@cwt/context';
 import { useUpdateField } from '@cwt/hooks';
 
 import SetContainer from '../ExerciseItem/SetList/SetContainer';
+import type { ExercisesGroupedBySetsReturnType } from '@cwt/utils';
 
-import type { ExercisesGroupedBySetsType } from './ExerciseSetGroup';
 import ExerciseSetGroupItemUI from './ExerciseSetGroupItemUI';
 import ExerciseSetUI from './ExerciseSetUI';
 
 interface ExerciseSetGroupItemProps {
-  exercisesGroupedBySets: ExercisesGroupedBySetsType;
+  exercisesGroupedBySets: ExercisesGroupedBySetsReturnType;
   parentSectionID: string | null;
   parentSupersetID: string | null;
 }
