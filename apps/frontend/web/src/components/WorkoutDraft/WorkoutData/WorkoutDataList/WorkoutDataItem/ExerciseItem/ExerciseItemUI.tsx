@@ -1,7 +1,7 @@
 import { Stack, Text, Button, Group } from '@mantine/core';
 
 import type { Mode } from '@cwt/schema/workouts';
-import SetList from './SetList';
+import SetList from '../SetList';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 
 interface ExerciseItemUIProps {
