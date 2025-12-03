@@ -7,6 +7,7 @@ import {
   useDeleteItem,
   useParentItemsLength,
   useReorderItem,
+  useAddSet,
 } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
@@ -14,24 +15,8 @@ import ExerciseItemUI from './ExerciseItemUI';
 
 export default function ExerciseItem() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
-  const parentType = useContext(WorkoutDataItemContext)?.parentType;
-  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
-  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
-  const addSet = useWorkoutDraftStore((state) => state.addSet);
-  const addSetToSuperset = useWorkoutDraftStore(
-    (state) => state.addSetToSuperset,
-  );
-  const setExerciseIDToMod = useWorkoutDraftStore(
-    (state) => state.setExerciseIDToMod,
-  );
-  const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod,
-  );
-  const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
   const getExerciseNameById = useExerciseLibraryStore(
     (state) => state.getExerciseNameByID,
   );
@@ -42,24 +27,9 @@ export default function ExerciseItem() {
     'exercise',
     exercise!.id,
   ).handleDeleteItemClick;
+  const handleAddSetClick = useAddSet();
 
   const name = getExerciseNameById(exercise!.exercise_id);
-
-  const handleAddSetClick = () => {
-    if (parentSupersetID) {
-      setSupersetIDToMod(parentSupersetID);
-    }
-    if (parentSectionID) {
-      setSectionIDToMod(parentSectionID);
-    }
-
-    if (parentType === 'superset') {
-      addSetToSuperset();
-    } else {
-      setExerciseIDToMod(exercise!.id);
-      addSet();
-    }
-  };
 
   return (
     <ExerciseItemUI
