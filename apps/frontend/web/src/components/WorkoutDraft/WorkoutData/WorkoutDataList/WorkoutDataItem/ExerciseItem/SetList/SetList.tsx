@@ -1,11 +1,5 @@
 import { useContext } from 'react';
-import type {
-  // Assist,
-  Exercise,
-  // Leverage,
-  // SetFields,
-} from '@cwt/schema/workouts';
-// import { useWorkoutDraftStore } from '@cwt/state/stores';
+import type { Exercise } from '@cwt/schema/workouts';
 
 import { SetContext } from '@cwt/context';
 import { WorkoutDataItemContext } from '@cwt/context';
@@ -18,50 +12,10 @@ export default function SetList() {
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
-  // const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
-  // const setExerciseIDToMod = useWorkoutDraftStore(
-  //   (state) => state.setExerciseIDToMod,
-  // );
-  // const setSupersetIDToMod = useWorkoutDraftStore(
-  //   (state) => state.setSupersetIDToMod,
-  // );
-  // const setSectionIDToMod = useWorkoutDraftStore(
-  //   (state) => state.setSectionIDToMod,
-  // );
-  // const updateField = useWorkoutDraftStore((state) => state.updateField);
-  // const updateLeverageOrAssistField = useWorkoutDraftStore(
-  //   (state) => state.updateLeverageOrAssistField,
-  // );
-
-  // TODO: Fix field changes in root exercise items
   const handleSetFieldChange = useUpdateField(
     parentSectionID,
     parentSupersetID,
   );
-
-  // const handleSetFieldChange = (
-  //   setID: string,
-  //   updatedField:
-  //     | Partial<SetFields>
-  //     | Pick<Leverage, 'value'>
-  //     | Pick<Assist, 'value'>,
-  // ) => {
-  //   setSetIDToMod(setID);
-  //   setExerciseIDToMod(exercise.id);
-  //   if (parentSupersetID) {
-  //     setSupersetIDToMod(parentSupersetID);
-  //   }
-  //   if (parentSectionID) {
-  //     setSectionIDToMod(parentSectionID);
-  //   }
-  //   if (useWorkoutDraftStore.getState().leverageOrAssistIDToMod) {
-  //     updateLeverageOrAssistField(
-  //       updatedField as Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
-  //     );
-  //   } else {
-  //     updateField(updatedField as Partial<SetFields>);
-  //   }
-  // };
 
   const setList = exercise!.sets.map((set, i) => {
     return (
