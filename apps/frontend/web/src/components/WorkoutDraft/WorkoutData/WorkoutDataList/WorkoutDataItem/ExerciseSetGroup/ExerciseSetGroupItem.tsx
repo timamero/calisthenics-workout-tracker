@@ -2,7 +2,7 @@ import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { SetContext, WorkoutDataItemContext } from '@cwt/context';
 import { useUpdateField } from '@cwt/hooks';
 
-import SetContainer from '../SetList/SetContainer';
+import Set from '../SetList/Set';
 import type { ExercisesGroupedBySetsReturnType } from '@cwt/utils';
 
 import ExerciseSetGroupItemUI from './ExerciseSetGroupItemUI';
@@ -49,7 +49,7 @@ export default function ExerciseSetGroupItem({
               handleSetFieldChange: handleSetFieldChange,
             }}
           >
-            <SetContainer />
+            <Set />
           </SetContext.Provider>
         </WorkoutDataItemContext.Provider>
       </ExerciseSetUI>
