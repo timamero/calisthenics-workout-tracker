@@ -69,6 +69,12 @@ interface WorkoutDraftAction {
   updateLeverageOrAssistField: (
     updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
   ) => void;
+  // TODO: Create this later after refactoring this slice
+  // getFieldByID: (
+  //   id: string,
+  //   setID: string,
+  //   exerciseID: string,
+  // ) => Leverage | Assist;
   toggleCompleted: (value: boolean) => void;
   initializeWorkoutToSave: () => void;
   addUserIDToWorkoutToSave: (userID: string) => void;
