@@ -1,19 +1,19 @@
-import type { Assist, Leverage, SetFields } from "@cwt/schema/workouts";
+import { useContext } from "react";
+
+import type {
+  Assist,
+  Leverage,
+  SetFields,
+  Exercise,
+} from "@cwt/schema/workouts";
+import { WorkoutDataItemContext } from "@cwt/context";
 import { useWorkoutDraftStore } from "@cwt/state/stores";
 
 export default function useUpdateField(
   parentSectionID?: string | null,
   parentSupersetID?: string | null
 ) {
-  // setID: string,
-  // updatedField:
-  //   | Partial<SetFields>
-  //   | Pick<Leverage, 'value'>
-  //   | Pick<Assist, 'value'>,
-  // exerciseID?: string,
-  // parentSectionID?: string,
-  // parentSupersetID?: string
-  // const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
+  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setExerciseIDToMod = useWorkoutDraftStore(
     (state) => state.setExerciseIDToMod
@@ -23,9 +23,6 @@ export default function useUpdateField(
   );
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod
-  );
-  const setLeverageOrAssistIDToMod = useWorkoutDraftStore(
-    (state) => state.setLeverageOrAssistIDToMod
   );
   const updateField = useWorkoutDraftStore((state) => state.updateField);
   const updateLeverageOrAssistField = useWorkoutDraftStore(
@@ -39,13 +36,9 @@ export default function useUpdateField(
       | Pick<Leverage, "value">
       | Pick<Assist, "value">,
     exerciseID?: string
-    // parentSectionID?: string,
-    // parentSupersetID?: string
   ) => {
-    // const parentType = useContext(WorkoutDataItemContext)?.parentType;
-    // const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
     setSetIDToMod(setID);
-    setExerciseIDToMod(exerciseID!);
+    setExerciseIDToMod(exerciseID ? exerciseID! : exercise.id);
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
     }
