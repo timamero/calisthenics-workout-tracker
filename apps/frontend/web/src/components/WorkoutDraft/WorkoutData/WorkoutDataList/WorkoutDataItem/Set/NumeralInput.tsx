@@ -1,11 +1,8 @@
 import { useContext } from 'react';
 import { TextInput } from '@mantine/core';
 
-// import type { Leverage, Assist, SetFields } from '@cwt/schema/workouts';
 import { SetContext } from '@cwt/context';
 import { useFieldInputChange } from '@cwt/hooks';
-
-// import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 interface NumeralInputProps {
   label: string;
@@ -20,47 +17,9 @@ export default function NumeralInput({
   fieldID,
   trackingType = null,
 }: NumeralInputProps) {
-  // const parentType = useContext(WorkoutDataItemContext)?.parentType;
-  // const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
   const set = useContext(SetContext)!.set;
-  // const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
-
-  // const setLeverageOrAssistIDToMod = useWorkoutDraftStore(
-  //   (state) => state.setLeverageOrAssistIDToMod,
-  // );
 
   const handleChange = useFieldInputChange(fieldName, 'numeral', fieldID);
-
-  // const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   if (fieldID) {
-  //     setLeverageOrAssistIDToMod(fieldID);
-  //   }
-  //   if (event.currentTarget.value == '') {
-  //     const updatedField:
-  //       | Partial<SetFields>
-  //       | Pick<Leverage, 'value'>
-  //       | Pick<Assist, 'value'> = {
-  //       [fieldName]: undefined,
-  //     };
-  //     if (parentType === 'superset') {
-  //       handleSetFieldChange(set.id, updatedField, exerciseID);
-  //     } else {
-  //       handleSetFieldChange(set.id, updatedField);
-  //     }
-  //   } else {
-  //     const updatedField:
-  //       | Partial<SetFields>
-  //       | Pick<Leverage, 'value'>
-  //       | Pick<Assist, 'value'> = {
-  //       [fieldName]: Number(event.currentTarget.value),
-  //     };
-  //     if (parentType === 'superset') {
-  //       handleSetFieldChange(set.id, updatedField, exerciseID);
-  //     } else {
-  //       handleSetFieldChange(set.id, updatedField);
-  //     }
-  //   }
-  // };
 
   if (fieldName === 'value' && trackingType === 'leverages') {
     return (
