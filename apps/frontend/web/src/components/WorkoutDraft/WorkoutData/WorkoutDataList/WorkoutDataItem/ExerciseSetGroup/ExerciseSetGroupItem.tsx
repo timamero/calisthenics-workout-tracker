@@ -1,15 +1,12 @@
-// import { useContext } from 'react';
-import { Stack, Text } from '@mantine/core';
-
-// import type { Assist, Leverage, SetFields } from '@cwt/schema/workouts';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
-// import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { SetContext, WorkoutDataItemContext } from '@cwt/context';
 import { useUpdateField } from '@cwt/hooks';
 
 import SetContainer from '../ExerciseItem/SetList/SetContainer';
 
 import type { ExercisesGroupedBySetsType } from './ExerciseSetGroup';
+import ExerciseSetGroupItemUI from './ExerciseSetGroupItemUI';
+import ExerciseSetUI from './ExerciseSetUI';
 
 interface ExerciseSetGroupItemProps {
   exercisesGroupedBySets: ExercisesGroupedBySetsType;
@@ -33,8 +30,10 @@ export default function ExerciseSetGroupItem({
 
   const exercisesGroup = exercisesGroupedBySets.exercises.map((ex) => {
     return (
-      <Stack key={ex.id}>
-        <Text>{getExerciseNameById(ex.exercise_id)}</Text>
+      <ExerciseSetUI
+        key={ex.id}
+        exerciseName={getExerciseNameById(ex.exercise_id)}
+      >
         <WorkoutDataItemContext.Provider
           value={{
             item: ex,
@@ -53,23 +52,14 @@ export default function ExerciseSetGroupItem({
             <SetContainer />
           </SetContext.Provider>
         </WorkoutDataItemContext.Provider>
-      </Stack>
+      </ExerciseSetUI>
     );
   });
   return (
-    <Stack>
-      <Text size="xs" fw={600}>
-        Set {exercisesGroupedBySets.setGroupNumber + 1}
-      </Text>
-      <Stack
-        bd="1px solid var(--mantine-color-default-border)"
-        p="lg"
-        w={300}
-        bg="transparent"
-        bdrs="lg"
-      >
-        {exercisesGroup}
-      </Stack>
-    </Stack>
+    <ExerciseSetGroupItemUI
+      setNumber={exercisesGroupedBySets.setGroupNumber + 1}
+    >
+      {exercisesGroup}
+    </ExerciseSetGroupItemUI>
   );
 }
