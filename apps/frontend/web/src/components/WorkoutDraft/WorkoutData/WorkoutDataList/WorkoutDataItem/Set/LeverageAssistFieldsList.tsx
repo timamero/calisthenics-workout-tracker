@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, type ReactNode } from 'react';
 import { Group, Stack } from '@mantine/core';
 
 import type { Exercise, Leverage, Assist } from '@cwt/schema/workouts';
@@ -43,11 +43,19 @@ function LeverageOrAssistField({
   }
 }
 
+function LeverageOrAssistFieldUI({ children }: { children: ReactNode }) {
+  return <Group align="center">{children}</Group>;
+}
+
 export default function LeverageAssistFieldsList() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const tracked = exercise.tracked;
 
   const set = useContext(SetContext)?.set;
+
+  if (!tracked.includes('leverages') && !tracked.includes('assists')) {
+    return null;
+  }
 
   let leverageFields;
 
@@ -75,9 +83,13 @@ export default function LeverageAssistFieldsList() {
   }
 
   return (
-    <Stack>
-      <Group align="center">{leverageFields}</Group>
-      <Group align="center">{assistFields}</Group>
-    </Stack>
+    <LeverageAssistFieldsListUI>
+      <LeverageOrAssistFieldUI>{leverageFields}</LeverageOrAssistFieldUI>
+      <LeverageOrAssistFieldUI>{assistFields}</LeverageOrAssistFieldUI>
+    </LeverageAssistFieldsListUI>
   );
+}
+
+function LeverageAssistFieldsListUI({ children }: { children: ReactNode }) {
+  return <Stack>{children}</Stack>;
 }
