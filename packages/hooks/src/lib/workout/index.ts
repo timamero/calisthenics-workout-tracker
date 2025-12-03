@@ -13,7 +13,6 @@ import useDeleteSet from "./useDeleteSet";
 import useToggleCompleted from "./useToggleCompleted";
 import useUpdateField from "./useUpdateField";
 import useFieldInputChange from "./useFieldInputChange";
-import useDurationInputChange from "./useDurationInputChange";
 import useWorkoutSave from "./useWorkoutSave";
 
 export {
@@ -29,7 +28,6 @@ export {
   useToggleCompleted,
   useUpdateField,
   useFieldInputChange,
-  useDurationInputChange,
   useWorkoutSave,
 };
 
