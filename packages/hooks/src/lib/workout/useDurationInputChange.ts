@@ -6,10 +6,10 @@ import type { SetFields } from "@cwt/schema/workouts";
 /**
  * Hook to handle changes in duration input fields (rest or time) for a workout set.
  *
- * @param label - The label of the duration field, either 'rest' or 'time'.
+ * @param fieldName - The name of the duration field, either 'rest' or 'time'.
  * @returns A change handler function for the duration input field.
  */
-export default function useDurationInputChange(label: "rest" | "time") {
+export default function useDurationInputChange(fieldName: "rest" | "time") {
   const set = useContext(SetContext)!.set;
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
@@ -20,7 +20,7 @@ export default function useDurationInputChange(label: "rest" | "time") {
     // Allow empty string for controlled input
     if (value === "") {
       const updatedField: Partial<SetFields> = {
-        [label]: "",
+        [fieldName]: "",
       };
       if (parentType === "superset") {
         handleSetFieldChange(set.id, updatedField, exerciseID);
@@ -34,7 +34,7 @@ export default function useDurationInputChange(label: "rest" | "time") {
       const num = Number(value);
       if (num >= 0 && num <= 999) {
         const updatedField: Partial<SetFields> = {
-          [label]: "PT" + event.currentTarget.value + "S",
+          [fieldName]: "PT" + event.currentTarget.value + "S",
         };
         if (parentType === "superset") {
           handleSetFieldChange(set.id, updatedField, exerciseID);
