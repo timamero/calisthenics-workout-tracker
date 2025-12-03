@@ -1,7 +1,7 @@
 import type { Exercise, Superset, Section } from '@cwt/schema/workouts';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-import { ExerciseItemContainer } from './ExerciseItem';
+import ExerciseItem from './ExerciseItem';
 import SectionItem from './SectionItem';
 import SupersetItem from './SupersetItem';
 
@@ -24,7 +24,7 @@ export default function WorkoutDataItemContainer({
           parentSupersetID: null,
         }}
       >
-        <ExerciseItemContainer />
+        <ExerciseItem />
       </WorkoutDataItemContext.Provider>
     );
   } else if (itemType === 'section') {

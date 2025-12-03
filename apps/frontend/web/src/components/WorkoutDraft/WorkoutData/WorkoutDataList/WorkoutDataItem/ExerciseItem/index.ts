@@ -1,3 +1,3 @@
-import ExerciseItemContainer from './ExerciseItemContainer';
+import ExerciseItem from './ExerciseItem';
 
-export { ExerciseItemContainer };
+export default ExerciseItem;

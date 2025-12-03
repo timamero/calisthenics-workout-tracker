@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import type { Section } from '@cwt/schema/workouts';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-import { ExerciseItemContainer } from '../ExerciseItem';
+import ExerciseItem from '../ExerciseItem';
 import SupersetItem from '../SupersetItem';
 
 export default function ItemsList() {
@@ -21,7 +21,7 @@ export default function ItemsList() {
             parentSupersetID: null,
           }}
         >
-          <ExerciseItemContainer />
+          <ExerciseItem />
         </WorkoutDataItemContext.Provider>
       );
     }
