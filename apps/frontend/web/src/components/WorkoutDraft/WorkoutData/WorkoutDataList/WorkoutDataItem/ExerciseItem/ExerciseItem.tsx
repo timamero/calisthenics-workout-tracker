@@ -1,73 +1,76 @@
-import { Stack, Text, Button, Group } from '@mantine/core';
-// import { LuSquareArrowUp, LuSquareArrowDown } from 'react-icons/lu';
+import { useContext } from 'react';
 
-import type { Mode } from '@cwt/schema/workouts';
-import SetList from './SetList';
-import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
+import type { Exercise } from '@cwt/schema/workouts';
+import {
+  useDeleteItem,
+  useParentItemsLength,
+  useReorderItem,
+} from '@cwt/hooks';
+import { WorkoutDataItemContext } from '@cwt/context';
 
-interface ExerciseItemProps {
-  mode: Mode;
-  name: string;
-  isFirst: boolean;
-  isLast: boolean;
-  handleUpClick: () => void;
-  handleDownClick: () => void;
-  handleAddSetClick: () => void;
-  handleDeleteExerciseClick: () => void;
-}
+import ExerciseItemUI from './ExerciseItemUI';
 
-export default function ExerciseItem({
-  mode,
-  name,
-  isFirst,
-  isLast,
-  handleUpClick,
-  handleDownClick,
-  handleAddSetClick,
-  handleDeleteExerciseClick,
-}: ExerciseItemProps) {
+export default function ExerciseItem() {
+  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
+  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
+  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+
+  const mode = useWorkoutDraftStore((state) => state.mode);
+  const addSet = useWorkoutDraftStore((state) => state.addSet);
+  const addSetToSuperset = useWorkoutDraftStore(
+    (state) => state.addSetToSuperset,
+  );
+  const setExerciseIDToMod = useWorkoutDraftStore(
+    (state) => state.setExerciseIDToMod,
+  );
+  const setSupersetIDToMod = useWorkoutDraftStore(
+    (state) => state.setSupersetIDToMod,
+  );
+  const setSectionIDToMod = useWorkoutDraftStore(
+    (state) => state.setSectionIDToMod,
+  );
+  const getExerciseNameById = useExerciseLibraryStore(
+    (state) => state.getExerciseNameByID,
+  );
+
+  const handleUpClick = useReorderItem(exercise).handleUpClick;
+  const handleDownClick = useReorderItem(exercise).handleDownClick;
+  const handleDeleteExerciseClick = useDeleteItem(
+    'exercise',
+    exercise!.id,
+  ).handleDeleteItemClick;
+
+  const name = getExerciseNameById(exercise!.exercise_id);
+
+  const handleAddSetClick = () => {
+    if (parentSupersetID) {
+      setSupersetIDToMod(parentSupersetID);
+    }
+    if (parentSectionID) {
+      setSectionIDToMod(parentSectionID);
+    }
+
+    if (parentType === 'superset') {
+      addSetToSuperset();
+    } else {
+      setExerciseIDToMod(exercise!.id);
+      addSet();
+    }
+  };
+
   return (
-    <Group align="flex-start">
-      {mode !== 'log' && (
-        <ReorderButtonGroup
-          handleUpClick={() => handleUpClick()}
-          handleDownClick={() => handleDownClick()}
-          isFirst={isFirst}
-          isLast={isLast}
-        />
-      )}
-      <Stack
-        bd="1px solid var(--mantine-color-default-border)"
-        p="lg"
-        w={300}
-        bg="transparent"
-        bdrs="lg"
-      >
-        <Group>
-          <Text>{name}</Text>
-          {mode !== 'log' && (
-            <Button
-              color="red"
-              variant="white"
-              onClick={() => handleDeleteExerciseClick()}
-            >
-              Delete
-            </Button>
-          )}
-        </Group>
-        <Stack gap="xs">
-          <SetList />
-        </Stack>
-        {mode !== 'log' && (
-          <Button
-            variant="outline"
-            color="dark"
-            onClick={() => handleAddSetClick()}
-          >
-            Add Set
-          </Button>
-        )}
-      </Stack>
-    </Group>
+    <ExerciseItemUI
+      mode={mode!}
+      name={name}
+      isFirst={exercise!.order === 0}
+      isLast={exercise!.order === useParentItemsLength() - 1}
+      handleUpClick={handleUpClick}
+      handleDownClick={handleDownClick}
+      handleAddSetClick={handleAddSetClick}
+      handleDeleteExerciseClick={handleDeleteExerciseClick}
+    />
   );
 }
