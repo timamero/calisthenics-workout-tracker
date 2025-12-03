@@ -2,7 +2,7 @@ import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { SetContext, WorkoutDataItemContext } from '@cwt/context';
 import { useUpdateField } from '@cwt/hooks';
 
-import Set from '../SetList/Set';
+import Set from '../Set';
 import type { ExercisesGroupedBySetsReturnType } from '@cwt/utils';
 
 import ExerciseSetGroupItemUI from './ExerciseSetGroupItemUI';
