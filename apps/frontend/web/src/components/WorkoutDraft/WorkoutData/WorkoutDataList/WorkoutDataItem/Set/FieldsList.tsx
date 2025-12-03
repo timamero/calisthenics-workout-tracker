@@ -18,13 +18,19 @@ export default function FieldsList() {
           <NumeralInput key={`${field}-${i}`} label="Reps" fieldName="reps" />
         );
       case 'time':
-        return <DurationInput key={`${field}-${i}`} label="time" />;
+        return (
+          <DurationInput
+            key={`${field}-${i}`}
+            label="Time (sec)"
+            fieldName="time"
+          />
+        );
     }
   });
   return (
     <FieldsListUI>
       {fields}
-      <DurationInput label="rest" />
+      <DurationInput label="Rest (sec)" fieldName="rest" />
     </FieldsListUI>
   );
 }

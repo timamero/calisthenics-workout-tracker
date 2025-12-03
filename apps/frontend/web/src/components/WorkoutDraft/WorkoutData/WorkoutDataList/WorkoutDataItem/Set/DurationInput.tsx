@@ -7,22 +7,26 @@ import { useDurationInputChange } from '@cwt/hooks';
 import { getSecondsInDuration } from '@cwt/utils';
 
 interface DurationInputProps {
-  label: 'rest' | 'time';
+  label: string;
+  fieldName: 'rest' | 'time';
 }
 
-export default function DurationInput({ label }: DurationInputProps) {
+export default function DurationInput({
+  label,
+  fieldName,
+}: DurationInputProps) {
   const set = useContext(SetContext)!.set;
-  const handleChange = useDurationInputChange(label);
+  const handleChange = useDurationInputChange(fieldName);
   return (
     <TextInput
       w={68}
-      label={`${label[0].toUpperCase() + label.slice(1)} (sec)`}
+      label={label}
       type="text"
       inputMode="numeric"
       pattern="^(0|[1-9][0-9]{0,2})$"
       min={0}
       max={999}
-      value={getSecondsInDuration(set.fields[label]!.toString())}
+      value={getSecondsInDuration(set.fields[fieldName]!.toString())}
       onChange={handleChange}
       maxLength={3}
       placeholder="0-300"
