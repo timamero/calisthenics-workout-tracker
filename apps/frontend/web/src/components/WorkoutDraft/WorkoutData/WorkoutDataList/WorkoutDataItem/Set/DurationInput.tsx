@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { TextInput } from '@mantine/core';
 
 import { SetContext } from '@cwt/context';
-import { useDurationInputChange } from '@cwt/hooks';
+import { useFieldInputChange } from '@cwt/hooks';
 
 import { getSecondsInDuration } from '@cwt/utils';
 
@@ -16,7 +16,7 @@ export default function DurationInput({
   fieldName,
 }: DurationInputProps) {
   const set = useContext(SetContext)!.set;
-  const handleChange = useDurationInputChange(fieldName);
+  const handleChange = useFieldInputChange(fieldName, 'duration');
   return (
     <TextInput
       w={68}
@@ -29,7 +29,7 @@ export default function DurationInput({
       value={getSecondsInDuration(set.fields[fieldName]!.toString())}
       onChange={handleChange}
       maxLength={3}
-      placeholder="0-300"
+      placeholder="0-999"
       autoComplete="off"
     />
   );

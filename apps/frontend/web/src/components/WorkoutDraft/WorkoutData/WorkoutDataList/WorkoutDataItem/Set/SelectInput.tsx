@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 import { Select } from '@mantine/core';
 
-import { SetContext, WorkoutDataItemContext } from '@cwt/context';
+import { SetContext } from '@cwt/context';
 import {
   useLeveragesAssistsStore,
-  useWorkoutDraftStore,
+  // useWorkoutDraftStore,
 } from '@cwt/state/stores';
+import { useFieldInputChange } from '@cwt/hooks';
 
 interface NumeralInputProps {
   label: string;
@@ -19,10 +20,10 @@ export default function SelectInput({
   fieldID,
   trackingType = null,
 }: NumeralInputProps) {
-  const parentType = useContext(WorkoutDataItemContext)?.parentType;
-  const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
+  // const parentType = useContext(WorkoutDataItemContext)?.parentType;
+  // const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
   const set = useContext(SetContext)!.set;
-  const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
+  // const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
   // console.log('tracking type: ', trackingType);
   const leverageOrAssistID =
     trackingType === 'leverages'
@@ -35,19 +36,20 @@ export default function SelectInput({
   const leverageOrAssist = useLeveragesAssistsStore((state) =>
     state.getLeverageOrAssistByID(leverageOrAssistID),
   );
-  const setLeverageIDToMod = useWorkoutDraftStore(
-    (state) => state.setLeverageOrAssistIDToMod,
-  );
+  // const setLeverageIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setLeverageOrAssistIDToMod,
+  // );
 
-  const handleChange = (value: string | null) => {
-    setLeverageIDToMod(fieldID);
-    const updatedField = { value: value };
-    if (parentType === 'superset') {
-      handleSetFieldChange(set.id, updatedField, exerciseID);
-    } else {
-      handleSetFieldChange(set.id, updatedField);
-    }
-  };
+  const handleChange = useFieldInputChange('value', 'select', fieldID);
+  // const handleChange = (value: string | null) => {
+  //   setLeverageIDToMod(fieldID);
+  //   const updatedField = { value: value };
+  //   if (parentType === 'superset') {
+  //     handleSetFieldChange(set.id, updatedField, exerciseID);
+  //   } else {
+  //     handleSetFieldChange(set.id, updatedField);
+  //   }
+  // };
 
   const options = leverageOrAssist.value_options;
   if (trackingType === 'leverages') {
