@@ -130,12 +130,20 @@ const getStyles = (theme: CustomTheme) =>
     exerciseMetadataContainer: {
       display: 'flex',
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       gap: 12,
     },
     exerciseMetadataTitle: {
       textTransform: 'uppercase',
       color: theme.colors.grey,
     },
-    metadataPillsContainer: { display: 'flex', flexDirection: 'row', gap: 8 },
+    metadataPillsContainer: {
+      width: '80%',
+      height: 'auto',
+      display: 'flex',
+      flexDirection: 'row',
+      gap: 8,
+      flexWrap: 'wrap',
+      alignItems: 'flex-start',
+    },
   });
