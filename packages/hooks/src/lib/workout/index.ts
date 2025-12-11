@@ -9,7 +9,7 @@ import useUpdateWorkoutTitle from "./useUpdateWorkoutTitle";
 import useAddExerciseOverlay from "./useAddExerciseOverlay";
 import useAddSuperset from "./useAddSuperset";
 import useAddSet from "./useAddSet";
-import useDeleteSet from "./useDeleteSet";
+import { useDeleteSet, useDeleteSetMobile } from "./useDeleteSet";
 import useToggleCompleted from "./useToggleCompleted";
 import useUpdateField from "./useUpdateField";
 import useFieldInputChange from "./useFieldInputChange";
@@ -26,6 +26,7 @@ export {
   useAddSuperset,
   useAddSet,
   useDeleteSet,
+  useDeleteSetMobile,
   useToggleCompleted,
   useUpdateField,
   useFieldInputChange,

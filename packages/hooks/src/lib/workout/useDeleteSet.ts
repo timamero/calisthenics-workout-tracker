@@ -9,13 +9,13 @@ import { useWorkoutDraftStore } from "@cwt/state/stores";
 import type { Exercise } from "@cwt/schema/workouts";
 
 /**
- * Hook to handle deleting a set from an exercise or superset within a workout draft.
+ * Common logic for deleting a set from an exercise or superset within a workout draft.
  * It retrieves the necessary context and store functions to manage the deletion of sets,
  * ensuring that the correct exercise, superset, and section IDs are set in the draft state.
  *
  * @returns A function that, when called, initiates the deletion process for the appropriate set.
  */
-export default function useDeleteSet() {
+function useDeleteSetLogic() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const set = useContext(SetContext)!.set;
   const setIndex = useContext(SetContext)!.setIndex;
@@ -41,7 +41,7 @@ export default function useDeleteSet() {
     (state) => state.setSectionIDToMod
   );
 
-  const handleDeleteSetClick = () => {
+  return () => {
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
     }
@@ -59,5 +59,24 @@ export default function useDeleteSet() {
         deleteSetInSupersetOverlayHandler.open();
     }
   };
-  return handleDeleteSetClick;
+}
+
+/**
+ * Hook to delete a set from an exercise or superset within a workout draft for web.
+ * @returns An object containing handleDeleteSetClick function.
+ */
+export function useDeleteSet() {
+  const handleDeleteSetClick = useDeleteSetLogic();
+
+  return { handleDeleteSetClick };
+}
+
+/**
+ * Hook to delete a set from an exercise or superset within a workout draft for mobile.
+ * @returns An object containing handleDeleteSetPress function.
+ */
+export function useDeleteSetMobile() {
+  const handleDeleteSetPress = useDeleteSetLogic();
+
+  return { handleDeleteSetPress };
 }
