@@ -3,7 +3,7 @@ import useAddExercise, {
   UseAddExerciseWebResult,
 } from "./useAddExercise";
 import useParentItemsLength from "./useParentItemsLength";
-import useReorderItem from "./useReorderItem";
+import { useReorderItem, useReorderItemMobile } from "./useReorderItem";
 import useDeleteItem from "./useDeleteItem";
 import useUpdateWorkoutTitle from "./useUpdateWorkoutTitle";
 import useAddExerciseOverlay from "./useAddExerciseOverlay";
@@ -19,6 +19,7 @@ export {
   useAddExercise,
   useParentItemsLength,
   useReorderItem,
+  useReorderItemMobile,
   useDeleteItem,
   useUpdateWorkoutTitle,
   useAddExerciseOverlay,
