@@ -1,9 +1,18 @@
-import { useContext } from 'react';
-import { WorkoutContext, WorkoutDataItemContext } from '@cwt/context';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { useContext } from "react";
+import { WorkoutContext, WorkoutDataItemContext } from "@cwt/context";
+import { useWorkoutDraftStore } from "@cwt/state/stores";
 
-export default function useDeleteItem(
-  itemType: 'exercise' | 'superset' | 'section',
+/**
+ * Common logic for deleting an item (Section, Superset, or Exercise) from a workout draft.
+ * It retrieves the necessary context and store functions to manage the deletion of items,
+ * ensuring that the correct exercise, superset, and section IDs are set in the draft state.
+ *
+ * @param itemType The type of item to delete ("exercise", "superset", or "section").
+ * @param itemID The ID of the item to delete.
+ * @returns A function that, when called, initiates the deletion process for the appropriate item.
+ */
+function useDeleteItemLogic(
+  itemType: "exercise" | "superset" | "section",
   itemID: string
 ) {
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
@@ -23,15 +32,15 @@ export default function useDeleteItem(
     (state) => state.setExerciseIDToMod
   );
 
-  const handleDeleteItemClick = () => {
+  return () => {
     switch (itemType) {
-      case 'section':
+      case "section":
         setSectionIDToMod(itemID);
         break;
-      case 'superset':
+      case "superset":
         setSupersetIDToMod(itemID);
         break;
-      case 'exercise':
+      case "exercise":
         setExerciseIDToMod(itemID);
         break;
     }
@@ -49,6 +58,36 @@ export default function useDeleteItem(
       if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
     }
   };
+}
+
+/**
+ * Hook to delete an item (Section, Superset, or Exercise) from a workout draft for web.
+ *
+ * @param itemType The type of item to delete ("exercise", "superset", or "section").
+ * @param itemID The ID of the item to delete.
+ * @returns An object containing handleDeleteItemClick function.
+ */
+export function useDeleteItem(
+  itemType: "exercise" | "superset" | "section",
+  itemID: string
+) {
+  const handleDeleteItemClick = useDeleteItemLogic(itemType, itemID);
 
   return { handleDeleteItemClick };
+}
+
+/**
+ * Hook to delete an item (Section, Superset, or Exercise) from a workout draft for mobile.
+ *
+ * @param itemType The type of item to delete ("exercise", "superset", or "section").
+ * @param itemID The ID of the item to delete.
+ * @returns An object containing handleDeleteItemPress function.
+ */
+export function useDeleteItemMobile(
+  itemType: "exercise" | "superset" | "section",
+  itemID: string
+) {
+  const handleDeleteItemPress = useDeleteItemLogic(itemType, itemID);
+
+  return { handleDeleteItemPress };
 }
