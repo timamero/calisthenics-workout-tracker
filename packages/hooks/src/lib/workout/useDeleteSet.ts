@@ -3,10 +3,15 @@ import { useContext } from "react";
 import {
   WorkoutDataItemContext,
   SetContext,
-  WorkoutContext,
+  // WorkoutContext,
 } from "@cwt/context";
 import { useWorkoutDraftStore } from "@cwt/state/stores";
 import type { Exercise } from "@cwt/schema/workouts";
+
+import {
+  useWorkoutContextWeb,
+  useWorkoutContextMobile,
+} from "./useWorkoutContext";
 
 /**
  * Common logic for deleting a set from an exercise or superset within a workout draft.
@@ -23,9 +28,10 @@ function useDeleteSetLogic() {
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const deleteSetOverlayHandler =
-    useContext(WorkoutContext)!.deleteSetOverlayHandler;
+    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayHandler;
   const deleteSetInSupersetOverlayHandler =
-    useContext(WorkoutContext)!.deleteSetInSupersetOverlayHandler;
+    useWorkoutContextWeb().webOverlayHandlers
+      ?.deleteSetInSupersetOverlayHandler;
 
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setSetIndexToMod = useWorkoutDraftStore(

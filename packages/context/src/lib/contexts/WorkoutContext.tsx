@@ -1,22 +1,14 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import { type UseDisclosureHandlers } from "@mantine/hooks";
-import { ExactlyOne } from "@cwt/schema/common";
+import { AppTypeSchema } from "@cwt/schema/common";
+// import { ExactlyOne } from "@cwt/schema/common";
 
-type WorkoutContextType = ExactlyOne<
-  {
-    addExerciseOverlayOpened?: boolean; // Web only
-    isAddExerciseOverlayVisible?: boolean; // Mobile only
-  },
-  "addExerciseOverlayOpened" | "isAddExerciseOverlayVisible"
-> &
-  ExactlyOne<
-    {
-      addExerciseOverlayHandler?: UseDisclosureHandlers; // Web only
-      setIsAddExerciseOverlayVisible?: Dispatch<SetStateAction<boolean>>; //  Mobile only
-    },
-    "addExerciseOverlayHandler" | "setIsAddExerciseOverlayVisible"
-  > & {
-    // Web
+export type WorkoutContextType = {
+  appType: AppTypeSchema;
+
+  webOverlayHandlers?: {
+    addExerciseOverlayOpened?: boolean;
+    addExerciseOverlayHandler?: UseDisclosureHandlers;
     deleteRootItemOverlayOpened?: boolean;
     deleteRootItemOverlayHandler?: UseDisclosureHandlers;
     deleteNestedItemOverlayOpened?: boolean;
@@ -25,8 +17,11 @@ type WorkoutContextType = ExactlyOne<
     deleteSetOverlayHandler?: UseDisclosureHandlers;
     deleteSetInSupersetOverlayOpened?: boolean;
     deleteSetInSupersetOverlayHandler?: UseDisclosureHandlers;
+  };
 
-    // Mobile
+  mobileOverlayHandlers?: {
+    isAddExerciseOverlayVisible?: boolean;
+    setIsAddExerciseOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteRootItemOverlayVisible?: boolean;
     setIsDeleteRootItemOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteNestedItemOverlayVisible?: boolean;
@@ -38,5 +33,6 @@ type WorkoutContextType = ExactlyOne<
     isAddSectionOverlayVisible?: boolean;
     setIsAddSectionOverlayVisible?: Dispatch<SetStateAction<boolean>>;
   };
+};
 
 export const WorkoutContext = createContext<WorkoutContextType | null>(null);

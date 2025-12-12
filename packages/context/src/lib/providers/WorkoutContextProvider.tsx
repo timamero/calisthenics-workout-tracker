@@ -4,7 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { WorkoutContext } from "../contexts/WorkoutContext";
 import { AppTypeSchema } from "@cwt/schema/common";
 
-export default function WorkoutContextProvider({
+export default function WorkoutOverlaysContextProvider({
   appType,
   children,
 }: {
@@ -23,7 +23,7 @@ export default function WorkoutContextProvider({
   const [deleteSetInSupersetOverlayOpened, deleteSetInSupersetOverlayHandler] =
     useDisclosure(false);
 
-  const webValue = {
+  const webOverlayHandlers = {
     addExerciseOverlayOpened: addExerciseOverlayOpened,
     addExerciseOverlayHandler: addExerciseOverlayHandler,
     deleteRootItemOverlayOpened: deleteRootItemOverlayOpened,
@@ -52,7 +52,7 @@ export default function WorkoutContextProvider({
   const [isAddSectionOverlayVisible, setIsAddSectionOverlayVisible] =
     useState<boolean>(false);
 
-  const mobileValue = {
+  const mobileOverlayHandlers = {
     isAddExerciseOverlayVisible: isAddExerciseOverlayVisible,
     setIsAddExerciseOverlayVisible: setIsAddExerciseOverlayVisible,
     isDeleteRootItemOverlayVisible: isDeleteRootItemOverlayVisible,
@@ -68,7 +68,13 @@ export default function WorkoutContextProvider({
   };
 
   return (
-    <WorkoutContext.Provider value={appType === "web" ? webValue : mobileValue}>
+    <WorkoutContext.Provider
+      value={
+        appType === "web"
+          ? { appType, webOverlayHandlers }
+          : { appType, mobileOverlayHandlers }
+      }
+    >
       {children}
     </WorkoutContext.Provider>
   );

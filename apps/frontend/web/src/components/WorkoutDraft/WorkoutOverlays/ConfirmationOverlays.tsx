@@ -1,27 +1,29 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { WorkoutContext } from '@cwt/context';
+// import { WorkoutContext } from '@cwt/context';
+import { useWorkoutContextWeb } from '../../../../../../../packages/hooks/src/lib/workout';
 
 import ConfirmationOverlay from '../../common/ConfirmationOverlay';
 
 export default function ConfirmationOverlays() {
   const deleteRootItemOverlayOpened =
-    useContext(WorkoutContext)?.deleteRootItemOverlayOpened;
+    useWorkoutContextWeb().webOverlayHandlers?.deleteRootItemOverlayOpened;
   const deleteRootItemOverlayHandler =
-    useContext(WorkoutContext)?.deleteRootItemOverlayHandler;
+    useWorkoutContextWeb().webOverlayHandlers?.deleteRootItemOverlayHandler;
   const deleteNestedItemOverlayOpened =
-    useContext(WorkoutContext)?.deleteNestedItemOverlayOpened;
+    useWorkoutContextWeb().webOverlayHandlers?.deleteNestedItemOverlayOpened;
   const deleteNestedItemOverlayHandler =
-    useContext(WorkoutContext)?.deleteNestedItemOverlayHandler;
+    useWorkoutContextWeb().webOverlayHandlers?.deleteNestedItemOverlayHandler;
   const deleteSetOverlayOpened =
-    useContext(WorkoutContext)?.deleteSetOverlayOpened;
+    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayOpened;
   const deleteSetInSupersetOverlayOpened =
-    useContext(WorkoutContext)?.deleteSetInSupersetOverlayOpened;
+    useWorkoutContextWeb().webOverlayHandlers?.deleteSetInSupersetOverlayOpened;
   const deleteSetInSupersetOverlayHandler =
-    useContext(WorkoutContext)?.deleteSetInSupersetOverlayHandler;
+    useWorkoutContextWeb().webOverlayHandlers
+      ?.deleteSetInSupersetOverlayHandler;
   const deleteSetOverlayHandler =
-    useContext(WorkoutContext)?.deleteSetOverlayHandler;
+    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayHandler;
 
   const exerciseIDToMod = useWorkoutDraftStore(
     (state) => state.exerciseIDToMod,

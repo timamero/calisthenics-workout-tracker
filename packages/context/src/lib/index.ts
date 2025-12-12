@@ -1,5 +1,5 @@
 import WorkoutContextProvider from "./providers/WorkoutContextProvider";
-import { WorkoutContext } from "./contexts/WorkoutContext";
+import { WorkoutContext, WorkoutContextType } from "./contexts/WorkoutContext";
 
 import { ExerciseDetailContext } from "./ExerciseDetailContext";
 import { SetContext } from "./SetContext";
@@ -11,4 +11,5 @@ export {
   ExerciseDetailContext,
   SetContext,
   WorkoutDataItemContext,
+  type WorkoutContextType,
 };
