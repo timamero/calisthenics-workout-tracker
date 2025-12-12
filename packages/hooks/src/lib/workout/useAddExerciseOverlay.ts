@@ -2,14 +2,16 @@ import { useContext } from "react";
 
 import type { Section, Superset } from "@cwt/schema/workouts";
 import { useWorkoutDraftStore } from "@cwt/state/stores";
-import { WorkoutContext, WorkoutDataItemContext } from "@cwt/context";
+import { WorkoutDataItemContext } from "@cwt/context";
+
+import { useWorkoutContextWeb } from "./useWorkoutContext";
 
 export default function useAddExerciseOverlay(
   itemToAddExerciseToType?: "superset" | "section"
 ) {
   const item = useContext(WorkoutDataItemContext)?.item as Superset | Section;
   const addExerciseOverlayHandler =
-    useContext(WorkoutContext)?.addExerciseOverlayHandler;
+    useWorkoutContextWeb().webOverlayHandlers?.addExerciseOverlayHandler;
   const supersetParentsSectionID = useContext(
     WorkoutDataItemContext
   )?.parentSectionID;

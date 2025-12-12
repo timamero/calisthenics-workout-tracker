@@ -13,6 +13,11 @@ import { useDeleteSet, useDeleteSetMobile } from "./useDeleteSet";
 import useToggleCompleted from "./useToggleCompleted";
 import useUpdateField from "./useUpdateField";
 import useFieldInputChange from "./useFieldInputChange";
+import {
+  useWorkoutContext,
+  useWorkoutContextWeb,
+  useWorkoutContextMobile,
+} from "./useWorkoutContext";
 import useWorkoutSave from "./useWorkoutSave";
 
 export {
@@ -33,6 +38,9 @@ export {
   useToggleCompleted,
   useUpdateField,
   useFieldInputChange,
+  useWorkoutContext,
+  useWorkoutContextWeb,
+  useWorkoutContextMobile,
   useWorkoutSave,
 };
 
