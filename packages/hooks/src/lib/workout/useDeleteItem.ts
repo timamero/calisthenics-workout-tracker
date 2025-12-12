@@ -1,6 +1,11 @@
 import { useContext } from "react";
-import { WorkoutContext, WorkoutDataItemContext } from "@cwt/context";
+import { WorkoutDataItemContext } from "@cwt/context";
 import { useWorkoutDraftStore } from "@cwt/state/stores";
+
+import {
+  useWorkoutContextWeb,
+  useWorkoutContextMobile,
+} from "./useWorkoutContext";
 
 /**
  * Common logic for deleting an item (Section, Superset, or Exercise) from a workout draft.
@@ -18,10 +23,7 @@ function useDeleteItemLogic(
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-  const deleteRootItemOverlayHandler =
-    useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
-  const deleteNestedItemOverlayHandler =
-    useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
+
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod
   );
@@ -32,7 +34,7 @@ function useDeleteItemLogic(
     (state) => state.setExerciseIDToMod
   );
 
-  return () => {
+  const setIDs = () => {
     switch (itemType) {
       case "section":
         setSectionIDToMod(itemID);
@@ -51,12 +53,11 @@ function useDeleteItemLogic(
     if (parentSectionID) {
       setSectionIDToMod(parentSectionID);
     }
+  };
 
-    if (parentType) {
-      if (deleteNestedItemOverlayHandler) deleteNestedItemOverlayHandler.open();
-    } else {
-      if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
-    }
+  return {
+    parentType,
+    setIDs,
   };
 }
 
@@ -71,7 +72,22 @@ export function useDeleteItem(
   itemType: "exercise" | "superset" | "section",
   itemID: string
 ) {
-  const handleDeleteItemClick = useDeleteItemLogic(itemType, itemID);
+  const { parentType, setIDs } = useDeleteItemLogic(itemType, itemID);
+
+  const deleteRootItemOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteRootItemOverlayHandler;
+  const deleteNestedItemOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteNestedItemOverlayHandler;
+
+  const handleDeleteItemClick = () => {
+    setIDs();
+
+    if (parentType) {
+      if (deleteNestedItemOverlayHandler) deleteNestedItemOverlayHandler.open();
+    } else {
+      if (deleteRootItemOverlayHandler) deleteRootItemOverlayHandler.open();
+    }
+  };
 
   return { handleDeleteItemClick };
 }
@@ -87,7 +103,26 @@ export function useDeleteItemMobile(
   itemType: "exercise" | "superset" | "section",
   itemID: string
 ) {
-  const handleDeleteItemPress = useDeleteItemLogic(itemType, itemID);
+  const { parentType, setIDs } = useDeleteItemLogic(itemType, itemID);
+
+  const setIsDeleteNestedItemOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      ?.setIsDeleteNestedItemOverlayVisible;
+  const setIsDeleteRootItemOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      ?.setIsDeleteRootItemOverlayVisible;
+
+  const handleDeleteItemPress = () => {
+    setIDs();
+
+    if (parentType) {
+      if (setIsDeleteNestedItemOverlayVisible)
+        setIsDeleteNestedItemOverlayVisible(true);
+    } else {
+      if (setIsDeleteRootItemOverlayVisible)
+        setIsDeleteRootItemOverlayVisible(true);
+    }
+  };
 
   return { handleDeleteItemPress };
 }
