@@ -27,7 +27,7 @@ export default function SectionItem() {
     section!.id,
   ).handleDeleteItemClick;
   const handleOpenAddExerciseOverlay = useAddExerciseOverlay('section');
-  const handleAddSupersetClick = useAddSuperset(section.id);
+  const { handleAddSupersetClick } = useAddSuperset(section.id);
 
   return (
     <SectionItemUI
