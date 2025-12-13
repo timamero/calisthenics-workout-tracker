@@ -1,10 +1,6 @@
 import { useContext } from "react";
 
-import {
-  WorkoutDataItemContext,
-  SetContext,
-  // WorkoutContext,
-} from "@cwt/context";
+import { WorkoutDataItemContext, SetContext } from "@cwt/context";
 import { useWorkoutDraftStore } from "@cwt/state/stores";
 import type { Exercise } from "@cwt/schema/workouts";
 
@@ -27,11 +23,6 @@ function useDeleteSetLogic() {
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-  const deleteSetOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayHandler;
-  const deleteSetInSupersetOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers
-      ?.deleteSetInSupersetOverlayHandler;
 
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setSetIndexToMod = useWorkoutDraftStore(
@@ -47,7 +38,7 @@ function useDeleteSetLogic() {
     (state) => state.setSectionIDToMod
   );
 
-  return () => {
+  const setIDs = () => {
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
     }
@@ -58,13 +49,12 @@ function useDeleteSetLogic() {
     if (parentType !== "superset") {
       setSetIDToMod(set.id);
       setExerciseIDToMod(exercise!.id);
-      if (deleteSetOverlayHandler) deleteSetOverlayHandler.open();
     } else {
       setSetIndexToMod(setIndex);
-      if (deleteSetInSupersetOverlayHandler)
-        deleteSetInSupersetOverlayHandler.open();
     }
   };
+
+  return { parentType, setIDs };
 }
 
 /**
@@ -72,7 +62,24 @@ function useDeleteSetLogic() {
  * @returns An object containing handleDeleteSetClick function.
  */
 export function useDeleteSet() {
-  const handleDeleteSetClick = useDeleteSetLogic();
+  const { parentType, setIDs } = useDeleteSetLogic();
+
+  const deleteSetOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayHandler;
+  const deleteSetInSupersetOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers
+      ?.deleteSetInSupersetOverlayHandler;
+
+  const handleDeleteSetClick = () => {
+    setIDs();
+
+    if (parentType !== "superset") {
+      if (deleteSetOverlayHandler) deleteSetOverlayHandler.open();
+    } else {
+      if (deleteSetInSupersetOverlayHandler)
+        deleteSetInSupersetOverlayHandler.open();
+    }
+  };
 
   return { handleDeleteSetClick };
 }
@@ -82,7 +89,25 @@ export function useDeleteSet() {
  * @returns An object containing handleDeleteSetPress function.
  */
 export function useDeleteSetMobile() {
-  const handleDeleteSetPress = useDeleteSetLogic();
+  const { parentType, setIDs } = useDeleteSetLogic();
+
+  const setIsDeleteSetOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      .setIsDeleteSetOverlayVisible;
+  const setIsDeleteSetInSupersetOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      .setIsDeleteSetInSupersetOverlayVisible;
+
+  const handleDeleteSetPress = () => {
+    setIDs();
+
+    if (parentType !== "superset") {
+      if (setIsDeleteSetOverlayVisible) setIsDeleteSetOverlayVisible(true);
+    } else {
+      if (setIsDeleteSetInSupersetOverlayVisible)
+        setIsDeleteSetInSupersetOverlayVisible(true);
+    }
+  };
 
   return { handleDeleteSetPress };
 }
