@@ -10,6 +10,14 @@ import {
   useWorkoutContextMobile,
 } from "./useWorkoutContext";
 
+/**
+ * Common logic for adding an exercise to a workout draft.
+ * It retrieves the necessary store functions to manage the addition of exercises,
+ * including selecting the exercise to add and performing the addition based on its tracking type.
+ *
+ * @returns An object containing the selected exercise ID, a function to set it,
+ *          a function to add the exercise, and a function to get exercise details by ID.
+ */
 function useAddExerciseLogic() {
   const selectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.selectedExerciseIDToAdd
@@ -30,6 +38,10 @@ function useAddExerciseLogic() {
   };
 }
 
+/**
+ * Hook for adding an exercise to a workout draft in a web context.
+ * @returns An object containing the selected exercise ID and a function to handle adding the exercise.
+ */
 export function useAddExercise() {
   const {
     selectedExerciseIDToAdd,
@@ -56,6 +68,10 @@ export function useAddExercise() {
   };
 }
 
+/**
+ * Hook for adding an exercise to a workout draft in a mobile context.
+ * @returns An object containing the selected exercise ID and a function to handle adding the exercise.
+ */
 export function useAddExerciseMobile() {
   const {
     selectedExerciseIDToAdd,
