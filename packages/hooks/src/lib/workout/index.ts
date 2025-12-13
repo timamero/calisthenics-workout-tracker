@@ -3,7 +3,10 @@ import useParentItemsLength from "./useParentItemsLength";
 import { useReorderItem, useReorderItemMobile } from "./useReorderItem";
 import { useDeleteItem, useDeleteItemMobile } from "./useDeleteItem";
 import useUpdateWorkoutTitle from "./useUpdateWorkoutTitle";
-import useAddExerciseOverlay from "./useAddExerciseOverlay";
+import {
+  useAddExerciseOverlay,
+  useAddExerciseOverlayMobile,
+} from "./useAddExerciseOverlay";
 import { useAddSuperset, useAddSupersetMobile } from "./useAddSuperset";
 import { useAddSet, useAddSetMobile } from "./useAddSet";
 import { useDeleteSet, useDeleteSetMobile } from "./useDeleteSet";
@@ -27,6 +30,7 @@ export {
   useDeleteItemMobile,
   useUpdateWorkoutTitle,
   useAddExerciseOverlay,
+  useAddExerciseOverlayMobile,
   useAddSuperset,
   useAddSupersetMobile,
   useAddSet,
