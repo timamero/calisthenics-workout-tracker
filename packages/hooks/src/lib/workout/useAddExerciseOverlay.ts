@@ -9,6 +9,14 @@ import {
   useWorkoutContextMobile,
 } from "./useWorkoutContext";
 
+/**
+ * Common logic for adding an exercise to a workout draft when the add exercise overlay is opened.
+ * It retrieves the necessary context and store functions to manage the addition of exercises,
+ * ensuring that the correct section or superset IDs are set in the draft state.
+ *
+ * @param itemToAddExerciseToType The type of item to which the exercise will be added ("superset" or "section").
+ * @returns An object containing a function to set the appropriate IDs in the draft state.
+ */
 function useAddExerciseOverlayLogic(
   itemToAddExerciseToType?: "superset" | "section"
 ) {
@@ -42,6 +50,11 @@ function useAddExerciseOverlayLogic(
   };
 }
 
+/**
+ * Hook for adding an exercise to a workout draft overlay in a web context.
+ * @param itemToAddExerciseToType The type of item to which the exercise will be added ("superset" or "section").
+ * @returns An object containing a function to handle opening the add exercise overlay.
+ */
 export function useAddExerciseOverlay(
   itemToAddExerciseToType?: "superset" | "section"
 ) {
@@ -59,6 +72,11 @@ export function useAddExerciseOverlay(
   return { handleOpenAddExerciseOverlayClick };
 }
 
+/**
+ * Hook for adding an exercise to a workout draft overlay in a mobile context.
+ * @param itemToAddExerciseToType The type of item to which the exercise will be added ("superset" or "section").
+ * @returns An object containing a function to handle opening the add exercise overlay.
+ */
 export function useAddExerciseOverlayMobile(
   itemToAddExerciseToType?: "superset" | "section"
 ) {
