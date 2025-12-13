@@ -22,7 +22,8 @@ export default function SupersetItem() {
     'superset',
     superset!.id,
   ).handleDeleteItemClick;
-  const handleOpenAddExerciseOverlay = useAddExerciseOverlay('superset');
+  const handleOpenAddExerciseOverlayClick =
+    useAddExerciseOverlay('superset').handleOpenAddExerciseOverlayClick;
 
   return (
     <SupersetItemUI
@@ -33,7 +34,7 @@ export default function SupersetItem() {
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleDeleteSupersetClick={handleDeleteSupersetClick}
-      handleOpenAddExerciseOverlay={handleOpenAddExerciseOverlay}
+      handleOpenAddExerciseOverlay={handleOpenAddExerciseOverlayClick}
     />
   );
 }
