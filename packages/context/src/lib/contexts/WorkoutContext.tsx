@@ -1,7 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import { type UseDisclosureHandlers } from "@mantine/hooks";
 import { AppTypeSchema } from "@cwt/schema/common";
-// import { ExactlyOne } from "@cwt/schema/common";
 
 export type WorkoutContextType = {
   appType: AppTypeSchema;
@@ -28,6 +27,8 @@ export type WorkoutContextType = {
     setIsDeleteNestedItemOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteSetOverlayVisible?: boolean;
     setIsDeleteSetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
+    isDeleteSetInSuperSetOverlayVisible?: boolean;
+    setIsDeleteSetInSupersetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isAddSupersetOverlayVisible?: boolean;
     setIsAddSupersetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isAddSectionOverlayVisible?: boolean;
