@@ -1,17 +1,20 @@
 import { AddExerciseOverlayProps } from '@cwt/schema/workouts';
 
 import AddExerciseOverlayUI from './AddExerciseOverlayUI';
-import { useAddExercise, type UseAddExerciseMobileResult } from '@cwt/hooks';
+import { useAddExerciseMobile, useWorkoutContextMobile } from '@cwt/hooks';
 
 export default function AddExerciseOverlay({
   workoutDataScrollViewRef,
 }: AddExerciseOverlayProps) {
-  const {
-    isVisible,
-    setIsVisible,
-    selectedExerciseIDToAdd,
-    handleAddExercisePress,
-  } = useAddExercise('mobile') as UseAddExerciseMobileResult;
+  const { selectedExerciseIDToAdd, handleAddExercisePress } =
+    useAddExerciseMobile();
+
+  const isVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      ?.isAddExerciseOverlayVisible;
+  const setIsVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      ?.setIsAddExerciseOverlayVisible;
 
   return (
     <AddExerciseOverlayUI
