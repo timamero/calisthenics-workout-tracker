@@ -1,7 +1,4 @@
-import useAddExercise, {
-  UseAddExerciseMobileResult,
-  UseAddExerciseWebResult,
-} from "./useAddExercise";
+import { useAddExercise, useAddExerciseMobile } from "./useAddExercise";
 import useParentItemsLength from "./useParentItemsLength";
 import { useReorderItem, useReorderItemMobile } from "./useReorderItem";
 import { useDeleteItem, useDeleteItemMobile } from "./useDeleteItem";
@@ -22,6 +19,7 @@ import useWorkoutSave from "./useWorkoutSave";
 
 export {
   useAddExercise,
+  useAddExerciseMobile,
   useParentItemsLength,
   useReorderItem,
   useReorderItemMobile,
@@ -44,4 +42,4 @@ export {
   useWorkoutSave,
 };
 
-export type { UseAddExerciseMobileResult, UseAddExerciseWebResult };
+// export type { UseAddExerciseMobileResult, UseAddExerciseWebResult };
