@@ -47,6 +47,10 @@ export default function WorkoutOverlaysContextProvider({
   ] = useState<boolean>(false);
   const [isDeleteSetOverlayVisible, setIsDeleteSetOverlayVisible] =
     useState<boolean>(false);
+  const [
+    isDeleteSetInSupersetOverlayVisible,
+    setIsDeleteSetInSupersetOverlayVisible,
+  ] = useState<boolean>(false);
   const [isAddSupersetOverlayVisible, setIsAddSupersetOverlayVisible] =
     useState<boolean>(false);
   const [isAddSectionOverlayVisible, setIsAddSectionOverlayVisible] =
@@ -61,6 +65,9 @@ export default function WorkoutOverlaysContextProvider({
     setIsDeleteNestedItemOverlayVisible: setIsDeleteNestedItemOverlayVisible,
     isDeleteSetOverlayVisible: isDeleteSetOverlayVisible,
     setIsDeleteSetOverlayVisible: setIsDeleteSetOverlayVisible,
+    isDeleteSetInSupersetOverlayVisible: isDeleteSetInSupersetOverlayVisible,
+    setIsDeleteSetInSupersetOverlayVisible:
+      setIsDeleteSetInSupersetOverlayVisible,
     isAddSupersetOverlayVisible: isAddSupersetOverlayVisible,
     setIsAddSupersetOverlayVisible: setIsAddSupersetOverlayVisible,
     isAddSectionOverlayVisible: isAddSectionOverlayVisible,
