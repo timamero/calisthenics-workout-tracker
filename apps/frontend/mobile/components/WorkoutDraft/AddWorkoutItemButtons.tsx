@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTheme, FAB, Portal } from 'react-native-paper';
 
-import { WorkoutContext } from '@cwt/context';
+// import { WorkoutContext } from '@cwt/context';
+import { useAddSupersetMobile, useAddExerciseOverlayMobile } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { CustomTheme } from '../../theme';
@@ -15,14 +16,19 @@ export default function AddWorkoutItemButtons() {
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
   const { open } = state;
 
-  const setIsAddSectionOverlayVisible =
-    useContext(WorkoutContext)?.setIsAddSectionOverlayVisible;
-  const setIsAddSupersetOverlayVisible =
-    useContext(WorkoutContext)?.setIsAddSupersetOverlayVisible;
-  const setIsAddExerciseOverlayVisible =
-    useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
+  // const setIsAddSectionOverlayVisible =
+  //   useContext(WorkoutContext)?.setIsAddSectionOverlayVisible;
+  // const setIsAddSupersetOverlayVisible =
+  //   useContext(WorkoutContext)?.setIsAddSupersetOverlayVisible;
+  // const setIsAddExerciseOverlayVisible =
+  //   useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
+  const addSection = useWorkoutDraftStore((state) => state.addSection);
+
+  const handleAddSupersetPress = useAddSupersetMobile().handleAddSupersetPress;
+  const handleOpenAddExerciseOverlayPress =
+    useAddExerciseOverlayMobile().handleOpenAddExerciseOverlayPress;
 
   return (
     <Portal>
@@ -40,7 +46,7 @@ export default function AddWorkoutItemButtons() {
             labelTextColor: theme.colors.light,
             style: styles.fab,
             color: theme.colors.dark700,
-            onPress: () => setIsAddSectionOverlayVisible?.(true),
+            onPress: () => addSection(),
           },
           {
             icon: 'alpha-s-circle',
@@ -48,7 +54,7 @@ export default function AddWorkoutItemButtons() {
             labelTextColor: theme.colors.light,
             style: styles.fab,
             color: theme.colors.dark700,
-            onPress: () => setIsAddSupersetOverlayVisible?.(true),
+            onPress: () => handleAddSupersetPress(),
           },
           {
             icon: 'arm-flex',
@@ -56,7 +62,7 @@ export default function AddWorkoutItemButtons() {
             labelTextColor: theme.colors.light,
             style: styles.fab,
             color: theme.colors.dark700,
-            onPress: () => setIsAddExerciseOverlayVisible?.(true),
+            onPress: () => handleOpenAddExerciseOverlayPress(),
           },
         ]}
         onStateChange={onStateChange}
