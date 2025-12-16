@@ -3,10 +3,11 @@ import { useContext } from 'react';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import {
-  WorkoutContext,
+  // WorkoutContext,
   WorkoutDataItemContext,
   SetContext,
 } from '@cwt/context';
+import { useDeleteSetMobile, useToggleCompleted } from '@cwt/hooks';
 import { Exercise } from '@cwt/schema/workouts';
 
 import Set from './Set';
@@ -14,59 +15,61 @@ import Set from './Set';
 
 export default function SetContainer() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
-  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
-  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+  // const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
+  // const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
-  const set = useContext(SetContext)!.set;
+  // const set = useContext(SetContext)!.set;
   const setIndex = useContext(SetContext)!.setIndex;
-  const setIsDeleteSetOverlayVisible =
-    useContext(WorkoutContext)!.setIsDeleteSetOverlayVisible;
+  // const setIsDeleteSetOverlayVisible =
+  //   useContext(WorkoutContext)!.setIsDeleteSetOverlayVisible;
   const sets = exercise.sets;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
-  const toggleCompleted = useWorkoutDraftStore(
-    (state) => state.toggleCompleted,
-  );
-  const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
-  const setExerciseIDToMod = useWorkoutDraftStore(
-    (state) => state.setExerciseIDToMod,
-  );
-  const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod,
-  );
-  const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
+  // const toggleCompleted = useWorkoutDraftStore(
+  //   (state) => state.toggleCompleted,
+  // );
+  // const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
+  // const setExerciseIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setExerciseIDToMod,
+  // );
+  // const setSupersetIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setSupersetIDToMod,
+  // );
+  // const setSectionIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setSectionIDToMod,
+  // );
 
-  const onDeleteSetPress = () => {
-    setSetIDToMod(set.id);
-    setExerciseIDToMod(exercise.id);
+  const handleDeleteSetPress = useDeleteSetMobile().handleDeleteSetPress;
+  // const onDeleteSetPress = () => {
+  //   setSetIDToMod(set.id);
+  //   setExerciseIDToMod(exercise.id);
 
-    if (parentSupersetID) {
-      setSupersetIDToMod(parentSupersetID);
-    }
-    if (parentSectionID) {
-      setSectionIDToMod(parentSectionID);
-    }
+  //   if (parentSupersetID) {
+  //     setSupersetIDToMod(parentSupersetID);
+  //   }
+  //   if (parentSectionID) {
+  //     setSectionIDToMod(parentSectionID);
+  //   }
 
-    if (setIsDeleteSetOverlayVisible) setIsDeleteSetOverlayVisible(true);
-  };
+  //   if (setIsDeleteSetOverlayVisible) setIsDeleteSetOverlayVisible(true);
+  // };
 
-  const handleToggleCompleted = (value: boolean) => {
-    // console.log('delete set clicked');
-    setSetIDToMod(set.id);
-    setExerciseIDToMod(exercise.id);
+  const handleToggleCompleted = useToggleCompleted();
+  // const handleToggleCompleted = (value: boolean) => {
+  //   // console.log('delete set clicked');
+  //   setSetIDToMod(set.id);
+  //   setExerciseIDToMod(exercise.id);
 
-    if (parentSupersetID) {
-      // console.log('setting parent superset id');
-      setSupersetIDToMod(parentSupersetID);
-    }
-    if (parentSectionID) {
-      // console.log('setting parent section id');
-      setSectionIDToMod(parentSectionID);
-    }
-    toggleCompleted(value);
-  };
+  //   if (parentSupersetID) {
+  //     // console.log('setting parent superset id');
+  //     setSupersetIDToMod(parentSupersetID);
+  //   }
+  //   if (parentSectionID) {
+  //     // console.log('setting parent section id');
+  //     setSectionIDToMod(parentSectionID);
+  //   }
+  //   toggleCompleted(value);
+  // };
 
   return (
     <Set
@@ -76,7 +79,7 @@ export default function SetContainer() {
       isCompleted={sets[setIndex].completed}
       handleToggleCompleted={handleToggleCompleted}
       showDeleteButton={sets.length > 1}
-      onDeleteSetPress={onDeleteSetPress}
+      onDeleteSetPress={handleDeleteSetPress}
     />
   );
 }
