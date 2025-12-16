@@ -2,12 +2,8 @@ import { useContext } from 'react';
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
-// import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Mode, Superset } from '@cwt/schema/workouts';
-import {
-  useAddExerciseOverlayMobile,
-  // useWorkoutContextMobile,
-} from '@cwt/hooks';
+import { useAddExerciseOverlayMobile } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import { ExerciseItemContainer } from '../ExerciseItem';
@@ -36,31 +32,12 @@ export default function SupersetItem({
 }: SupersetItemProps) {
   const theme = useTheme() as CustomTheme;
 
-  // const setIsAddExerciseOverlayVisible =
-  //   useWorkoutContextMobile().mobileOverlayHandlers
-  //     .setIsAddExerciseOverlayVisible;
-  // useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
   const supersetParentsSectionID = useContext(
     WorkoutDataItemContext,
   )?.parentSectionID;
-  // console.log('supersetParentsSectionID', supersetParentsSectionID);
-
-  // const setSupersetIDToMod = useWorkoutDraftStore(
-  //   (state) => state.setSupersetIDToMod,
-  // );
-  // const setSectionIDToMod = useWorkoutDraftStore(
-  //   (state) => state.setSectionIDToMod,
-  // );
 
   const handleOpenAddExerciseOverlay =
     useAddExerciseOverlayMobile('superset').handleOpenAddExerciseOverlayPress;
-  // const handleOpenAddExerciseOverlay = () => {
-  //   setSupersetIDToMod(superset.id);
-  //   if (supersetParentsSectionID) {
-  //     setSectionIDToMod(supersetParentsSectionID);
-  //   }
-  //   if (setIsAddExerciseOverlayVisible) setIsAddExerciseOverlayVisible(true);
-  // };
   return (
     <View
       style={{

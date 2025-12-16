@@ -38,29 +38,9 @@ export default function SectionItem({
 }: SectionItemProps) {
   const theme = useTheme() as CustomTheme;
 
-  // const setIsAddExerciseOverlayVisible =
-  //   useWorkoutContextMobile().mobileOverlayHandlers
-  //     .setIsAddExerciseOverlayVisible;
-  // useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
-  // const setIsAddSupersetOverlayVisible =
-  //   useWorkoutContextMobile().mobileOverlayHandlers
-  //     .setIsAddSupersetOverlayVisible;
-  // useContext(WorkoutContext)?.setIsAddSupersetOverlayVisible;
-  // const setSectionIDToMod = useWorkoutDraftStore(
-  //   (state) => state.setSectionIDToMod,
-  // );
-
   const handleOpenAddExerciseOverlayPress =
     useAddExerciseOverlayMobile('section').handleOpenAddExerciseOverlayPress;
-  // const handleOpenAddExerciseOverlay = () => {
-  //   setSectionIDToMod(section.id);
-  //   if (setIsAddExerciseOverlayVisible) setIsAddExerciseOverlayVisible(true);
-  // };
   const handleAddSupersetPress = useAddSupersetMobile().handleAddSupersetPress;
-  // const handleOpenAddSupersetOverlay = () => {
-  //   setSectionIDToMod(section.id);
-  //   if (setIsAddSupersetOverlayVisible) setIsAddSupersetOverlayVisible(true);
-  // };
   return (
     <View
       style={{

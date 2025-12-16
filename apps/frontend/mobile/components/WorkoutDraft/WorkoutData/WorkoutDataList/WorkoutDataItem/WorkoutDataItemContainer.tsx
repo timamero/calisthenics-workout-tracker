@@ -5,8 +5,6 @@ import { ExerciseItemContainer } from './ExerciseItem';
 import { SectionItemContainer } from './SectionItem';
 import { SupersetItemContainer } from './SupersetItem';
 
-// import { Text } from '../../../../../customText';
-
 interface WorkoutDataItemContainerProps {
   item: Exercise | Superset | Section;
 }
@@ -26,7 +24,6 @@ export default function WorkoutDataItemContainer({
           parentSupersetID: null,
         }}
       >
-        {/* <Text style={{ color: 'white' }}>Exercise item</Text> */}
         <ExerciseItemContainer />
       </WorkoutDataItemContext.Provider>
     );
@@ -53,7 +50,6 @@ export default function WorkoutDataItemContainer({
         parentSupersetID: null,
       }}
     >
-      {/* <Text style={{ color: 'white' }}>Superset item</Text> */}
       <SupersetItemContainer />
     </WorkoutDataItemContext.Provider>
   );
