@@ -29,10 +29,6 @@ export type WorkoutContextType = {
     setIsDeleteSetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteSetInSuperSetOverlayVisible?: boolean;
     setIsDeleteSetInSupersetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
-    isAddSupersetOverlayVisible?: boolean;
-    setIsAddSupersetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
-    isAddSectionOverlayVisible?: boolean;
-    setIsAddSectionOverlayVisible?: Dispatch<SetStateAction<boolean>>;
   };
 };
 

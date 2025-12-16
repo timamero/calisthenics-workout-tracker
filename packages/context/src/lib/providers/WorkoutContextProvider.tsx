@@ -51,10 +51,6 @@ export default function WorkoutOverlaysContextProvider({
     isDeleteSetInSupersetOverlayVisible,
     setIsDeleteSetInSupersetOverlayVisible,
   ] = useState<boolean>(false);
-  const [isAddSupersetOverlayVisible, setIsAddSupersetOverlayVisible] =
-    useState<boolean>(false);
-  const [isAddSectionOverlayVisible, setIsAddSectionOverlayVisible] =
-    useState<boolean>(false);
 
   const mobileOverlayHandlers = {
     isAddExerciseOverlayVisible: isAddExerciseOverlayVisible,
@@ -68,10 +64,6 @@ export default function WorkoutOverlaysContextProvider({
     isDeleteSetInSupersetOverlayVisible: isDeleteSetInSupersetOverlayVisible,
     setIsDeleteSetInSupersetOverlayVisible:
       setIsDeleteSetInSupersetOverlayVisible,
-    isAddSupersetOverlayVisible: isAddSupersetOverlayVisible,
-    setIsAddSupersetOverlayVisible: setIsAddSupersetOverlayVisible,
-    isAddSectionOverlayVisible: isAddSectionOverlayVisible,
-    setIsAddSectionOverlayVisible: setIsAddSectionOverlayVisible,
   };
 
   return (
