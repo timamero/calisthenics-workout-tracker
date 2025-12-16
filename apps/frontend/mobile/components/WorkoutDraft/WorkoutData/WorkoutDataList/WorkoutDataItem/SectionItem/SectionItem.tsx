@@ -1,10 +1,15 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { WorkoutContext, WorkoutDataItemContext } from '@cwt/context';
+// import { useWorkoutDraftStore } from '@cwt/state/stores';
+import {
+  // useWorkoutContextMobile,
+  useAddExerciseOverlayMobile,
+  useAddSupersetMobile,
+} from '@cwt/hooks';
+import { WorkoutDataItemContext } from '@cwt/context';
 
 import { ExerciseItemContainer } from '../ExerciseItem';
 import { SupersetItemContainer } from '../SupersetItem';
@@ -33,22 +38,29 @@ export default function SectionItem({
 }: SectionItemProps) {
   const theme = useTheme() as CustomTheme;
 
-  const setIsAddExerciseOverlayVisible =
-    useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
-  const setIsAddSupersetOverlayVisible =
-    useContext(WorkoutContext)?.setIsAddSupersetOverlayVisible;
-  const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
+  // const setIsAddExerciseOverlayVisible =
+  //   useWorkoutContextMobile().mobileOverlayHandlers
+  //     .setIsAddExerciseOverlayVisible;
+  // useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
+  // const setIsAddSupersetOverlayVisible =
+  //   useWorkoutContextMobile().mobileOverlayHandlers
+  //     .setIsAddSupersetOverlayVisible;
+  // useContext(WorkoutContext)?.setIsAddSupersetOverlayVisible;
+  // const setSectionIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setSectionIDToMod,
+  // );
 
-  const handleOpenAddExerciseOverlay = () => {
-    setSectionIDToMod(section.id);
-    if (setIsAddExerciseOverlayVisible) setIsAddExerciseOverlayVisible(true);
-  };
-  const handleOpenAddSupersetOverlay = () => {
-    setSectionIDToMod(section.id);
-    if (setIsAddSupersetOverlayVisible) setIsAddSupersetOverlayVisible(true);
-  };
+  const handleOpenAddExerciseOverlayPress =
+    useAddExerciseOverlayMobile('section').handleOpenAddExerciseOverlayPress;
+  // const handleOpenAddExerciseOverlay = () => {
+  //   setSectionIDToMod(section.id);
+  //   if (setIsAddExerciseOverlayVisible) setIsAddExerciseOverlayVisible(true);
+  // };
+  const handleAddSupersetPress = useAddSupersetMobile().handleAddSupersetPress;
+  // const handleOpenAddSupersetOverlay = () => {
+  //   setSectionIDToMod(section.id);
+  //   if (setIsAddSupersetOverlayVisible) setIsAddSupersetOverlayVisible(true);
+  // };
   return (
     <View
       style={{
@@ -143,7 +155,7 @@ export default function SectionItem({
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
             textColor={theme.colors.primary}
             style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
-            onPress={() => handleOpenAddExerciseOverlay()}
+            onPress={() => handleOpenAddExerciseOverlayPress()}
           >
             Add Exercise
           </Button>
@@ -152,7 +164,7 @@ export default function SectionItem({
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
             textColor={theme.colors.primary}
             style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
-            onPress={() => handleOpenAddSupersetOverlay()}
+            onPress={() => handleAddSupersetPress()}
           >
             Add Superset
           </Button>

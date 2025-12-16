@@ -5,7 +5,12 @@ import {
   useExerciseLibraryStore,
   useWorkoutDraftStore,
 } from '@cwt/state/stores';
-import { WorkoutDataItemContext, WorkoutContext } from '@cwt/context';
+import {
+  useDeleteItemMobile,
+  useReorderItemMobile,
+  useAddSetMobile,
+} from '@cwt/hooks';
+import { WorkoutDataItemContext } from '@cwt/context';
 
 import ExerciseItem from './ExerciseItem';
 
@@ -15,99 +20,110 @@ export default function ExerciseItemContainer() {
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
 
-  const setIsDeleteRootItemOverlayVisible =
-    useContext(WorkoutContext)!.setIsDeleteRootItemOverlayVisible;
-  const setIsDeleteNestedItemOverlayVisible =
-    useContext(WorkoutContext)!.setIsDeleteNestedItemOverlayVisible;
+  // const setIsDeleteRootItemOverlayVisible =
+  //   useContext(WorkoutContext)!.setIsDeleteRootItemOverlayVisible;
+  // const setIsDeleteNestedItemOverlayVisible =
+  //   useContext(WorkoutContext)!.setIsDeleteNestedItemOverlayVisible;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const rootWorkoutDataLength = useWorkoutDraftStore(
     (state) => state.workoutData.length || 0,
   );
-  const addSet = useWorkoutDraftStore((state) => state.addSet);
-  const reorderRootItem = useWorkoutDraftStore(
-    (state) => state.reorderRootItem,
-  );
-  const reorderNestedItem = useWorkoutDraftStore(
-    (state) => state.reorderNestedItem,
-  );
-  const setExerciseIDToMod = useWorkoutDraftStore(
-    (state) => state.setExerciseIDToMod,
-  );
-  const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod,
-  );
-  const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
+  // const addSet = useWorkoutDraftStore((state) => state.addSet);
+  // const reorderRootItem = useWorkoutDraftStore(
+  //   (state) => state.reorderRootItem,
+  // );
+  // const reorderNestedItem = useWorkoutDraftStore(
+  //   (state) => state.reorderNestedItem,
+  // );
+  // const setExerciseIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setExerciseIDToMod,
+  // );
+  // const setSupersetIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setSupersetIDToMod,
+  // );
+  // const setSectionIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setSectionIDToMod,
+  // );
   const getExerciseNameById = useExerciseLibraryStore(
     (state) => state.getExerciseNameByID,
   );
 
   const name = getExerciseNameById(exercise!.exercise_id);
 
-  const handleAddSetPress = () => {
-    setExerciseIDToMod(exercise!.id);
+  const handleAddSetPress = useAddSetMobile().handleAddSetPress;
+  // const handleAddSetPress = () => {
+  //   setExerciseIDToMod(exercise!.id);
 
-    if (parentSupersetID) {
-      setSupersetIDToMod(parentSupersetID);
-    }
-    if (parentSectionID) {
-      setSectionIDToMod(parentSectionID);
-    }
+  //   if (parentSupersetID) {
+  //     setSupersetIDToMod(parentSupersetID);
+  //   }
+  //   if (parentSectionID) {
+  //     setSectionIDToMod(parentSectionID);
+  //   }
 
-    addSet();
-  };
+  //   addSet();
+  // };
 
-  const handleUpPress = () => {
-    if (!parentSectionID && !parentSupersetID) {
-      reorderRootItem(exercise!.id, exercise!.order - 1);
-    } else {
-      setExerciseIDToMod(exercise!.id);
+  const { handleUpPress, handleDownPress } = useReorderItemMobile(exercise);
 
-      if (parentSupersetID) {
-        setSupersetIDToMod(parentSupersetID);
-      }
-      if (parentSectionID) {
-        setSectionIDToMod(parentSectionID);
-      }
-      reorderNestedItem(exercise!.order - 1);
-    }
-  };
-  const handleDownPress = () => {
-    if (!parentSectionID && !parentSupersetID) {
-      reorderRootItem(exercise!.id, exercise!.order + 1);
-    } else {
-      setExerciseIDToMod(exercise!.id);
+  // const handleUpPress = useReorderItemMobile(exercise).handleUpPress;
+  // const handleDownPress = useReorderItemMobile(exercise).handleDownPress;
 
-      if (parentSupersetID) {
-        setSupersetIDToMod(parentSupersetID);
-      }
-      if (parentSectionID) {
-        setSectionIDToMod(parentSectionID);
-      }
-      reorderNestedItem(exercise!.order + 1);
-    }
-  };
+  // const handleUpPress = () => {
+  //   if (!parentSectionID && !parentSupersetID) {
+  //     reorderRootItem(exercise!.id, exercise!.order - 1);
+  //   } else {
+  //     setExerciseIDToMod(exercise!.id);
 
-  const handleDeleteExercisePress = () => {
-    setExerciseIDToMod(exercise!.id);
+  //     if (parentSupersetID) {
+  //       setSupersetIDToMod(parentSupersetID);
+  //     }
+  //     if (parentSectionID) {
+  //       setSectionIDToMod(parentSectionID);
+  //     }
+  //     reorderNestedItem(exercise!.order - 1);
+  //   }
+  // };
+  // const handleDownPress = () => {
+  //   if (!parentSectionID && !parentSupersetID) {
+  //     reorderRootItem(exercise!.id, exercise!.order + 1);
+  //   } else {
+  //     setExerciseIDToMod(exercise!.id);
 
-    if (parentSupersetID) {
-      setSupersetIDToMod(parentSupersetID);
-    }
-    if (parentSectionID) {
-      setSectionIDToMod(parentSectionID);
-    }
+  //     if (parentSupersetID) {
+  //       setSupersetIDToMod(parentSupersetID);
+  //     }
+  //     if (parentSectionID) {
+  //       setSectionIDToMod(parentSectionID);
+  //     }
+  //     reorderNestedItem(exercise!.order + 1);
+  //   }
+  // };
 
-    if (parentSectionID || parentSupersetID) {
-      if (setIsDeleteNestedItemOverlayVisible)
-        setIsDeleteNestedItemOverlayVisible(true);
-    } else {
-      if (setIsDeleteRootItemOverlayVisible)
-        setIsDeleteRootItemOverlayVisible(true);
-    }
-  };
+  const handleDeleteExercisePress = useDeleteItemMobile(
+    'exercise',
+    exercise.id,
+  ).handleDeleteItemPress;
+
+  // const handleDeleteExercisePress = () => {
+  //   setExerciseIDToMod(exercise!.id);
+
+  //   if (parentSupersetID) {
+  //     setSupersetIDToMod(parentSupersetID);
+  //   }
+  //   if (parentSectionID) {
+  //     setSectionIDToMod(parentSectionID);
+  //   }
+
+  //   if (parentSectionID || parentSupersetID) {
+  //     if (setIsDeleteNestedItemOverlayVisible)
+  //       setIsDeleteNestedItemOverlayVisible(true);
+  //   } else {
+  //     if (setIsDeleteRootItemOverlayVisible)
+  //       setIsDeleteRootItemOverlayVisible(true);
+  //   }
+  // };
 
   const useParentItemsLength = () => {
     if (!parentSectionID && !parentSupersetID) {
