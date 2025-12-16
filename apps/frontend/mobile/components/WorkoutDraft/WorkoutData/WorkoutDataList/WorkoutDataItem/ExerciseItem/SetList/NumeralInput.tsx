@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { TextInput } from 'react-native-paper';
 
-import type { SetFields, Leverage, Assist } from '@cwt/schema/workouts';
+// import type { SetFields, Leverage, Assist } from '@cwt/schema/workouts';
 import { SetContext } from '@cwt/context';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+// import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { useFieldInputChange } from '@cwt/hooks';
 
 interface NumeralInputProps {
   label: string;
@@ -19,38 +20,43 @@ export default function NumeralInput({
   trackingType = null,
 }: NumeralInputProps) {
   const set = React.useContext(SetContext)!.set;
-  const handleSetFieldChange =
-    React.useContext(SetContext)!.handleSetFieldChange;
-  // const setIndex = React.useContext(SetContext)!.setIndex;
+  // const handleSetFieldChange =
+  //   React.useContext(SetContext)!.handleSetFieldChange;
+  // // const setIndex = React.useContext(SetContext)!.setIndex;
 
-  const setLeverageOrAssistIDToMod = useWorkoutDraftStore(
-    (state) => state.setLeverageOrAssistIDToMod,
+  // const setLeverageOrAssistIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setLeverageOrAssistIDToMod,
+  // );
+
+  const handleNumeralFieldChange = useFieldInputChange(
+    fieldName,
+    'numeral',
+    fieldID,
   );
-
-  const handleNumeralFieldChange = (text: string) => {
-    if (fieldID) {
-      setLeverageOrAssistIDToMod(fieldID);
-    }
-    // Allow empty string for controlled input
-    if (text === '') {
-      const updatedField:
-        | Partial<SetFields>
-        | Pick<Leverage, 'value'>
-        | Pick<Assist, 'value'> = {
-        [fieldName]: undefined,
-      };
-      handleSetFieldChange(set.id, updatedField);
-      return;
-    } else {
-      const updatedField:
-        | Partial<SetFields>
-        | Pick<Leverage, 'value'>
-        | Pick<Assist, 'value'> = {
-        [fieldName]: Number(text),
-      };
-      handleSetFieldChange(set.id, updatedField);
-    }
-  };
+  // const handleNumeralFieldChange = (text: string) => {
+  //   if (fieldID) {
+  //     setLeverageOrAssistIDToMod(fieldID);
+  //   }
+  //   // Allow empty string for controlled input
+  //   if (text === '') {
+  //     const updatedField:
+  //       | Partial<SetFields>
+  //       | Pick<Leverage, 'value'>
+  //       | Pick<Assist, 'value'> = {
+  //       [fieldName]: undefined,
+  //     };
+  //     handleSetFieldChange(set.id, updatedField);
+  //     return;
+  //   } else {
+  //     const updatedField:
+  //       | Partial<SetFields>
+  //       | Pick<Leverage, 'value'>
+  //       | Pick<Assist, 'value'> = {
+  //       [fieldName]: Number(text),
+  //     };
+  //     handleSetFieldChange(set.id, updatedField);
+  //   }
+  // };
 
   if (fieldName === 'value' && trackingType === 'leverages') {
     return (

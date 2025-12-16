@@ -12,8 +12,9 @@ import { SetContext } from '@cwt/context';
 import type { CustomTheme } from '../../../../../../../theme';
 import {
   useLeveragesAssistsStore,
-  useWorkoutDraftStore,
+  // useWorkoutDraftStore,
 } from '@cwt/state/stores';
+import { useFieldInputChange } from '@cwt/hooks';
 
 interface SelectInputProps {
   label: string;
@@ -28,7 +29,7 @@ export default function SelectInput({
 }: SelectInputProps) {
   const theme = useTheme() as CustomTheme;
   const set = useContext(SetContext)!.set;
-  const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
+  // const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
 
   const leverageOrAssistID =
     trackingType === 'leverages'
@@ -40,14 +41,16 @@ export default function SelectInput({
   const leverageOrAssist = useLeveragesAssistsStore((state) =>
     state.getLeverageOrAssistByID(leverageOrAssistID),
   );
-  const setLeverageOrAssistIDToMod = useWorkoutDraftStore(
-    (state) => state.setLeverageOrAssistIDToMod,
-  );
+  // const setLeverageOrAssistIDToMod = useWorkoutDraftStore(
+  //   (state) => state.setLeverageOrAssistIDToMod,
+  // );
 
-  const handleChange = (value: string) => {
-    setLeverageOrAssistIDToMod(fieldID);
-    handleSetFieldChange(set.id, { value });
-  };
+  const handleChange = useFieldInputChange('value', 'select', fieldID);
+
+  // const handleChange = (value: string) => {
+  //   setLeverageOrAssistIDToMod(fieldID);
+  //   handleSetFieldChange(set.id, { value });
+  // };
 
   const options = leverageOrAssist.value_options.map((option: string) => ({
     key: option,
