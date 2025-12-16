@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTheme, FAB, Portal } from 'react-native-paper';
 
-// import { WorkoutContext } from '@cwt/context';
 import { useAddSupersetMobile, useAddExerciseOverlayMobile } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
@@ -15,13 +14,6 @@ export default function AddWorkoutItemButtons() {
   const [state, setState] = useState({ open: false });
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
   const { open } = state;
-
-  // const setIsAddSectionOverlayVisible =
-  //   useContext(WorkoutContext)?.setIsAddSectionOverlayVisible;
-  // const setIsAddSupersetOverlayVisible =
-  //   useContext(WorkoutContext)?.setIsAddSupersetOverlayVisible;
-  // const setIsAddExerciseOverlayVisible =
-  //   useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const addSection = useWorkoutDraftStore((state) => state.addSection);
