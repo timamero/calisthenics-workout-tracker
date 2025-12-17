@@ -18,7 +18,7 @@ export default function SetContainer() {
   // const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   // const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
-  // const set = useContext(SetContext)!.set;
+  const set = useContext(SetContext)!.set;
   const setIndex = useContext(SetContext)!.setIndex;
   // const setIsDeleteSetOverlayVisible =
   //   useContext(WorkoutContext)!.setIsDeleteSetOverlayVisible;
@@ -55,28 +55,13 @@ export default function SetContainer() {
   // };
 
   const handleToggleCompleted = useToggleCompleted();
-  // const handleToggleCompleted = (value: boolean) => {
-  //   // console.log('delete set clicked');
-  //   setSetIDToMod(set.id);
-  //   setExerciseIDToMod(exercise.id);
-
-  //   if (parentSupersetID) {
-  //     // console.log('setting parent superset id');
-  //     setSupersetIDToMod(parentSupersetID);
-  //   }
-  //   if (parentSectionID) {
-  //     // console.log('setting parent section id');
-  //     setSectionIDToMod(parentSectionID);
-  //   }
-  //   toggleCompleted(value);
-  // };
 
   return (
     <Set
       mode={mode!}
       setsLength={sets.length}
       setIndex={setIndex}
-      isCompleted={sets[setIndex].completed}
+      isCompleted={set.completed}
       handleToggleCompleted={handleToggleCompleted}
       showDeleteButton={sets.length > 1}
       onDeleteSetPress={handleDeleteSetPress}
