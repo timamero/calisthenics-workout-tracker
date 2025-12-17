@@ -3,12 +3,12 @@ import { useTheme, Button, Checkbox } from 'react-native-paper';
 
 import { Mode } from '@cwt/schema/workouts';
 
-import { Text } from '../../../../../../../customText';
-import { CustomTheme } from '../../../../../../../theme';
+import { Text } from '../../../../../../customText';
+import { CustomTheme } from '../../../../../../theme';
 import FieldsList from './FieldsList';
 import LeverageAssistFieldsList from './LeverageAssistFieldsList';
 
-interface SetProps {
+interface SetUIProps {
   mode: Mode;
   setsLength: number;
   setIndex: number;
@@ -18,14 +18,14 @@ interface SetProps {
   onDeleteSetPress: () => void;
 }
 
-export default function Set({
+export default function SetUI({
   mode,
   setIndex,
   isCompleted,
   showDeleteButton,
   handleToggleCompleted,
   onDeleteSetPress,
-}: SetProps) {
+}: SetUIProps) {
   const theme = useTheme() as CustomTheme;
 
   return (

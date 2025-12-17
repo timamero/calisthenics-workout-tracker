@@ -6,7 +6,6 @@ import { WorkoutDataItemContext, SetContext } from '@cwt/context';
 
 import NumeralInput from './NumeralInput';
 import { useLeveragesAssistsStore } from '@cwt/state/stores';
-// import { Text } from '../../../../../../../customText';
 import SelectInput from './SelectInput';
 
 export default function LeverageAssistFieldsList() {
