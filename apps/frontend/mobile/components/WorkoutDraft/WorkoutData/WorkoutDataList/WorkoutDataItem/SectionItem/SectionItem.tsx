@@ -40,7 +40,9 @@ export default function SectionItem({
 
   const handleOpenAddExerciseOverlayPress =
     useAddExerciseOverlayMobile('section').handleOpenAddExerciseOverlayPress;
-  const handleAddSupersetPress = useAddSupersetMobile().handleAddSupersetPress;
+  const handleAddSupersetPress = useAddSupersetMobile(
+    section.id,
+  ).handleAddSupersetPress;
   return (
     <View
       style={{
