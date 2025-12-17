@@ -5,7 +5,7 @@ import { Exercise } from '@cwt/schema/workouts';
 import { useUpdateField } from '@cwt/hooks';
 import { SetContext, WorkoutDataItemContext } from '@cwt/context';
 
-import SetContainer from './SetContainer';
+import Set from './Set';
 
 export default function SetList() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
@@ -27,7 +27,7 @@ export default function SetList() {
           handleSetFieldChange: handleSetFieldChange,
         }}
       >
-        <SetContainer key={set.id} />
+        <Set key={set.id} />
       </SetContext.Provider>
     );
   });
