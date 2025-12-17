@@ -68,7 +68,8 @@ export default function Set({
         <Checkbox.Item
           label="Completed"
           status={isCompleted ? 'checked' : 'unchecked'}
-          onPress={() => handleToggleCompleted(isCompleted)}
+          onPress={() => handleToggleCompleted(!isCompleted)}
+          // onPress={() => console.log('presed checkbox')}
           labelStyle={{ color: theme.colors.light }}
         />
       )}
