@@ -27,7 +27,7 @@ export type WorkoutContextType = {
     setIsDeleteNestedItemOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteSetOverlayVisible?: boolean;
     setIsDeleteSetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
-    isDeleteSetInSuperSetOverlayVisible?: boolean;
+    isDeleteSetInSupersetOverlayVisible?: boolean;
     setIsDeleteSetInSupersetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
   };
 };

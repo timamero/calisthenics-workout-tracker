@@ -21,6 +21,12 @@ export default function ConfirmationOverlays() {
   const setIsDeleteSetOverlayVisible =
     useWorkoutContextMobile().mobileOverlayHandlers
       .setIsDeleteSetOverlayVisible;
+  const isDeleteSetInSupersetOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      .isDeleteSetInSupersetOverlayVisible;
+  const setIsDeleteSetInSupersetOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      .setIsDeleteSetInSupersetOverlayVisible;
 
   const exerciseIDToMod = useWorkoutDraftStore(
     (state) => state.exerciseIDToMod,
@@ -31,6 +37,9 @@ export default function ConfirmationOverlays() {
   );
 
   const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
+  const deleteSetInSuperset = useWorkoutDraftStore(
+    (state) => state.deleteSetInSuperset,
+  );
   const removeRootItem = useWorkoutDraftStore((state) => state.removeRootItem);
   const removeNestedItem = useWorkoutDraftStore(
     (state) => state.removeNestedItem,
@@ -69,6 +78,14 @@ export default function ConfirmationOverlays() {
         isVisible={isDeleteSetOverlayVisible!}
         handleHideDialog={setIsDeleteSetOverlayVisible!}
         onConfirmationPress={() => deleteSet()}
+      />
+      <ConfirmationDialog
+        title="Delete sets"
+        message="Delete set from each exercise in the superset?"
+        confirmButtonLabel="Delete"
+        isVisible={isDeleteSetInSupersetOverlayVisible!}
+        handleHideDialog={setIsDeleteSetInSupersetOverlayVisible!}
+        onConfirmationPress={() => deleteSetInSuperset()}
       />
       {/* <ConfirmationDialog
         title={addSectionConfirmationContent().title}
