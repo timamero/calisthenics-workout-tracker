@@ -338,6 +338,9 @@ importers:
       '@cwt/state':
         specifier: workspace:*
         version: link:../state
+      '@cwt/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@supabase/supabase-js':
         specifier: ^2.51.0
         version: 2.57.4
