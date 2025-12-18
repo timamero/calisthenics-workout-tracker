@@ -11,6 +11,10 @@ export default function ExercisesList() {
     supersetParentsSectionID,
   } = useSupersetState();
 
+  if (exercises.length === 0) {
+    return null;
+  }
+
   const exercisesList = exercises.map((exercise) => {
     return (
       <WorkoutDataItemContext.Provider
