@@ -1,3 +1,3 @@
-import SectionItemContainer from './SectionItemContainer';
+import SectionItem from './SectionItem';
 
-export { SectionItemContainer };
+export default SectionItem;

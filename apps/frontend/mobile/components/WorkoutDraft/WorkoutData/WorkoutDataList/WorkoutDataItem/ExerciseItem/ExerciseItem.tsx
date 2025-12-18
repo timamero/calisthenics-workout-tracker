@@ -1,99 +1,61 @@
-import { View } from 'react-native';
-import { useTheme, Button } from 'react-native-paper';
+import { useContext } from 'react';
 
-import { Mode } from '@cwt/schema/workouts';
+import type { Exercise } from '@cwt/schema/workouts';
+import {
+  useExerciseLibraryStore,
+  useWorkoutDraftStore,
+} from '@cwt/state/stores';
+import {
+  useDeleteItemMobile,
+  useReorderItemMobile,
+  useAddSetMobile,
+} from '@cwt/hooks';
+import { WorkoutDataItemContext } from '@cwt/context';
 
-import { Text } from '../../../../../../customText';
-import { CustomTheme } from '../../../../../../theme';
-import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
-import SetList from '../SetList';
+import ExerciseItemUI from './ExerciseItemUI';
 
-interface ExerciseItemProps {
-  mode: Mode;
-  name: string;
-  isFirst: boolean;
-  isLast: boolean;
-  handleUpPress: () => void;
-  handleDownPress: () => void;
-  handleAddSetPress: () => void;
-  handleDeleteExercisePress: () => void;
-}
+export default function ExerciseItem() {
+  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
+  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+  const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
 
-export default function ExerciseItem({
-  mode,
-  name,
-  isFirst,
-  isLast,
-  handleUpPress,
-  handleDownPress,
-  handleAddSetPress,
-  handleDeleteExercisePress,
-}: ExerciseItemProps) {
-  const theme = useTheme() as CustomTheme;
+  const mode = useWorkoutDraftStore((state) => state.mode);
+  const rootWorkoutDataLength = useWorkoutDraftStore(
+    (state) => state.workoutData.length || 0,
+  );
+  const getExerciseNameById = useExerciseLibraryStore(
+    (state) => state.getExerciseNameByID,
+  );
+
+  const name = getExerciseNameById(exercise!.exercise_id);
+
+  const handleAddSetPress = useAddSetMobile().handleAddSetPress;
+
+  const { handleUpPress, handleDownPress } = useReorderItemMobile(exercise);
+
+  const handleDeleteExercisePress = useDeleteItemMobile(
+    'exercise',
+    exercise.id,
+  ).handleDeleteItemPress;
+
+  const useParentItemsLength = () => {
+    if (!parentSectionID && !parentSupersetID) {
+      return rootWorkoutDataLength;
+    }
+    return parentLength ? parentLength : 0;
+  };
 
   return (
-    <View
-      style={{
-        paddingInline: 16,
-        paddingBlock: 16,
-        marginBlock: 8,
-        marginInline: 16,
-        borderWidth: 1,
-        borderColor: theme.colors.light,
-      }}
-    >
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        {mode !== 'log' && (
-          <ReorderButtonGroup
-            handleUpPress={() => handleUpPress()}
-            handleDownPress={() => handleDownPress()}
-            isFirst={isFirst}
-            isLast={isLast}
-          />
-        )}
-        <Text
-          variant="bodyLarge"
-          style={{
-            color: theme.colors.light,
-            fontWeight: 800,
-            textAlign: 'center',
-            flexShrink: 1,
-          }}
-        >
-          {name}
-        </Text>
-        {mode !== 'log' && (
-          <Button
-            mode="outlined"
-            onPress={handleDeleteExercisePress}
-            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.grey}
-            style={{ borderColor: theme.colors.error, flexShrink: 0 }}
-          >
-            Delete Exercise
-          </Button>
-        )}
-      </View>
-      <SetList />
-      {mode !== 'log' && (
-        <View style={{ display: 'flex', alignItems: 'flex-end' }}>
-          <Button
-            mode="contained"
-            onPress={() => handleAddSetPress()}
-            buttonColor={theme.colors.grey}
-            textColor={theme.colors.dark9}
-          >
-            Add Set
-          </Button>
-        </View>
-      )}
-    </View>
+    <ExerciseItemUI
+      mode={mode!}
+      name={name}
+      isFirst={exercise!.order === 0}
+      isLast={exercise!.order === useParentItemsLength() - 1}
+      handleUpPress={handleUpPress}
+      handleDownPress={handleDownPress}
+      handleAddSetPress={handleAddSetPress}
+      handleDeleteExercisePress={handleDeleteExercisePress}
+    />
   );
 }
