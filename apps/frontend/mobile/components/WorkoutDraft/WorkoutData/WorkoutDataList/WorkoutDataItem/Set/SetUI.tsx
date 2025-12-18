@@ -69,13 +69,28 @@ export default function SetUI({
       <FieldsList />
       <LeverageAssistFieldsList />
       {mode === 'log' && (
-        <Checkbox.Item
-          label="Completed"
-          status={isCompleted ? 'checked' : 'unchecked'}
-          onPress={() => handleToggleCompleted(!isCompleted)}
-          // onPress={() => console.log('presed checkbox')}
-          labelStyle={{ color: theme.colors.light }}
-        />
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            paddingTop: 12,
+          }}
+        >
+          <Checkbox.Item
+            label="Completed"
+            status={isCompleted ? 'checked' : 'unchecked'}
+            onPress={() => handleToggleCompleted(!isCompleted)}
+            // onPress={() => console.log('presed checkbox')}
+            labelStyle={{
+              color: theme.colors.light,
+              fontSize: 16,
+            }}
+            style={{
+              width: 160,
+            }}
+          />
+        </View>
       )}
     </View>
   );

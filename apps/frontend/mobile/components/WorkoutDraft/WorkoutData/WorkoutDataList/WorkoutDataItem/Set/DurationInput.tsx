@@ -19,6 +19,7 @@ export default function DurationInput({ label }: DurationInputProps) {
       keyboardType="number-pad"
       placeholder="0"
       placeholderTextColor="grey"
+      style={{ height: 32 }}
       theme={{
         colors: {
           onSurfaceVariant: '#FFF',
