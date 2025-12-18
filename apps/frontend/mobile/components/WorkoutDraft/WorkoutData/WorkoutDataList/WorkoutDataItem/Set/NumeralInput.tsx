@@ -36,6 +36,7 @@ export default function NumeralInput({
         textColor="#fff"
         keyboardType="number-pad"
         label={label}
+        style={{ height: 32 }}
         theme={{
           colors: {
             onSurfaceVariant: '#FFF',
@@ -46,7 +47,7 @@ export default function NumeralInput({
             null ||
           set.fields.leverages!.find((field) => field.id === fieldID)!.value ===
             undefined
-            ? ''
+            ? '0'
             : set.fields
                 .leverages!.find((field) => field.id === fieldID)!
                 .value!.toString()
@@ -65,6 +66,7 @@ export default function NumeralInput({
         textColor="#fff"
         keyboardType="number-pad"
         label={label}
+        style={{ height: 32 }}
         theme={{
           colors: {
             onSurfaceVariant: '#FFF',
@@ -75,7 +77,7 @@ export default function NumeralInput({
             null ||
           set.fields.assists!.find((field) => field.id === fieldID)!.value ===
             undefined
-            ? ''
+            ? '0'
             : set.fields
                 .assists!.find((field) => field.id === fieldID)!
                 .value!.toString()
@@ -93,6 +95,7 @@ export default function NumeralInput({
       textColor="#fff"
       keyboardType="number-pad"
       label={label}
+      style={{ height: 32 }}
       theme={{
         colors: {
           onSurfaceVariant: '#FFF',
@@ -100,7 +103,7 @@ export default function NumeralInput({
       }}
       value={
         set.fields.reps === undefined || !set.fields.reps
-          ? ''
+          ? '0'
           : set.fields.reps.toString()
       }
       onChangeText={(text) => handleNumeralFieldChange(text)}

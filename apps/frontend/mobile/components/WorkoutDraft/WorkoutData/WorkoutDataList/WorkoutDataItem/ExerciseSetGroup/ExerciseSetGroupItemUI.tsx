@@ -19,30 +19,42 @@ export default function ExerciseSetGroupItemUI({
   return (
     <View
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        paddingInline: 16,
+        paddingBlock: 16,
+        marginBlock: 8,
+        marginInline: 16,
+        borderWidth: 1,
+        borderColor: theme.colors.light,
       }}
     >
-      <Text
-        variant="bodySmall"
-        style={{
-          color: theme.colors.light,
-          fontWeight: 600,
-        }}
-      >
-        Set {setNumber}
-      </Text>
       <View
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          // alignItems: 'center',
+          justifyContent: 'center',
+          gap: 12,
         }}
       >
-        {children}
+        <Text
+          style={{
+            color: theme.colors.dark200,
+            fontWeight: 600,
+          }}
+        >
+          Set {setNumber}
+        </Text>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12,
+            // alignItems: 'center',
+            // justifyContent: 'space-between',
+          }}
+        >
+          {children}
+        </View>
       </View>
     </View>
   );

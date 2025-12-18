@@ -82,6 +82,7 @@ export default function LeverageAssistFieldsList() {
         flexDirection: 'column',
         gap: 8,
         justifyContent: 'center',
+        paddingTop: 12,
       }}
     >
       <View
