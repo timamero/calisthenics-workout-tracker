@@ -10,10 +10,11 @@ import LeverageAssistFieldsList from './LeverageAssistFieldsList';
 
 interface SetUIProps {
   mode: Mode;
-  setsLength: number;
+  setsLength?: number;
   setIndex: number;
   isCompleted: boolean;
-  showDeleteButton: boolean;
+  showDeleteButton?: boolean;
+  hasSupersetParentType?: boolean | null;
   handleToggleCompleted: (value: boolean) => void;
   onDeleteSetPress: () => void;
 }
@@ -23,6 +24,7 @@ export default function SetUI({
   setIndex,
   isCompleted,
   showDeleteButton,
+  hasSupersetParentType,
   handleToggleCompleted,
   onDeleteSetPress,
 }: SetUIProps) {
@@ -47,9 +49,11 @@ export default function SetUI({
           alignItems: 'center',
         }}
       >
-        <Text
-          style={{ color: theme.colors.light }}
-        >{`Set ${setIndex + 1}`}</Text>
+        {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
+          <Text
+            style={{ color: theme.colors.light }}
+          >{`Set ${setIndex + 1}`}</Text>
+        )}
         {showDeleteButton && mode !== 'log' && (
           <Button
             mode="outlined"
