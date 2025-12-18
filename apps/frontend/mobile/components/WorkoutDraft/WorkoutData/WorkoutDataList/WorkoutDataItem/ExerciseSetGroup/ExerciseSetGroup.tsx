@@ -1,3 +1,6 @@
+import { useSupersetState } from '@cwt/hooks';
+
 export default function ExerciseSetGroup() {
-  // Exercise Set Group component
+  const { supersetID, exercisesGroupedBySetsList, supersetParentsSectionID } =
+    useSupersetState();
 }
