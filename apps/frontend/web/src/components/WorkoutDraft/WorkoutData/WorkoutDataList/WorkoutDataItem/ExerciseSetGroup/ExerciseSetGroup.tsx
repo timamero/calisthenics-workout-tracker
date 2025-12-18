@@ -6,6 +6,10 @@ export default function ExerciseSetGroup() {
   const { supersetID, exercisesGroupedBySetsList, supersetParentsSectionID } =
     useSupersetState();
 
+  if (!exercisesGroupedBySetsList) {
+    return null;
+  }
+
   const exercisesGroupedBySets = exercisesGroupedBySetsList.map((group) => {
     return (
       <ExerciseSetGroupItem

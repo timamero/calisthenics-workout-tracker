@@ -1,15 +1,17 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
 import { useAddExerciseOverlayMobile } from '@cwt/hooks';
-import { WorkoutDataItemContext } from '@cwt/context';
+// import { WorkoutDataItemContext } from '@cwt/context';
 
-import { ExerciseItemContainer } from '../ExerciseItem';
+// import { ExerciseItemContainer } from '../ExerciseItem';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import { CustomTheme } from '../../../../../../theme';
 import { Text } from '../../../../../../customText';
+import ExercisesList from './ExercisesList';
+import ExerciseSetGroup from '../ExerciseSetGroup';
 
 interface SupersetItemProps {
   mode: Mode;
@@ -32,9 +34,9 @@ export default function SupersetItem({
 }: SupersetItemProps) {
   const theme = useTheme() as CustomTheme;
 
-  const supersetParentsSectionID = useContext(
-    WorkoutDataItemContext,
-  )?.parentSectionID;
+  // const supersetParentsSectionID = useContext(
+  //   WorkoutDataItemContext,
+  // )?.parentSectionID;
 
   const handleOpenAddExerciseOverlay =
     useAddExerciseOverlayMobile('superset').handleOpenAddExerciseOverlayPress;
@@ -88,7 +90,8 @@ export default function SupersetItem({
           </Button>
         )}
       </View>
-      {superset.exercises.map((exercise) => {
+      {mode !== 'log' ? <ExercisesList /> : <ExerciseSetGroup />}
+      {/* {superset.exercises.map((exercise) => {
         return (
           <WorkoutDataItemContext.Provider
             key={exercise.id}
@@ -105,7 +108,7 @@ export default function SupersetItem({
             <ExerciseItemContainer />
           </WorkoutDataItemContext.Provider>
         );
-      })}
+      })} */}
       {mode !== 'log' && (
         <Button
           mode="outlined"
