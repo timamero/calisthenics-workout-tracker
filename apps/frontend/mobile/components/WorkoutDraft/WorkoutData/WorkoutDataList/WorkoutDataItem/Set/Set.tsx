@@ -14,7 +14,6 @@ import SetUI from './SetUI';
 
 export default function Set() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
-
   const set = useContext(SetContext)!.set;
   const setIndex = useContext(SetContext)!.setIndex;
   const sets = exercise.sets;
@@ -24,14 +23,28 @@ export default function Set() {
   const handleDeleteSetPress = useDeleteSetMobile().handleDeleteSetPress;
   const handleToggleCompleted = useToggleCompleted();
 
+  if (sets) {
+    return (
+      <SetUI
+        mode={mode!}
+        setsLength={sets.length}
+        setIndex={setIndex}
+        isCompleted={set.completed}
+        handleToggleCompleted={handleToggleCompleted}
+        showDeleteButton={sets.length > 1}
+        onDeleteSetPress={handleDeleteSetPress}
+      />
+    );
+  }
+
+  // In log mode, for single set in exercise set group in superset
   return (
     <SetUI
       mode={mode!}
-      setsLength={sets.length}
       setIndex={setIndex}
       isCompleted={set.completed}
       handleToggleCompleted={handleToggleCompleted}
-      showDeleteButton={sets.length > 1}
+      hasSupersetParentType={true}
       onDeleteSetPress={handleDeleteSetPress}
     />
   );
