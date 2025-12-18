@@ -1,7 +1,7 @@
 import { useSupersetState } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-import { ExerciseItemContainer } from '../ExerciseItem';
+import ExerciseItem from '../ExerciseItem';
 
 export default function ExercisesList() {
   const {
@@ -29,7 +29,7 @@ export default function ExercisesList() {
           parentSupersetID: supersetID,
         }}
       >
-        <ExerciseItemContainer />
+        <ExerciseItem />
       </WorkoutDataItemContext.Provider>
     );
   });
