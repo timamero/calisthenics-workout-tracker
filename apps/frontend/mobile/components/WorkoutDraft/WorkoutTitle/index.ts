@@ -1,3 +1,3 @@
-import WorkoutTitleContainer from './WorkoutTitleContainer';
+import WorkoutTitle from './WorkoutTitle';
 
-export { WorkoutTitleContainer };
+export default WorkoutTitle;
