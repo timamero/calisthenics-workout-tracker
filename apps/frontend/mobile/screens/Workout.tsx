@@ -7,7 +7,7 @@ import { WorkoutContextProvider } from '@cwt/context';
 
 import WorkoutDraft from '../components/WorkoutDraft';
 import type { CustomTheme } from '../theme';
-import { WorkoutTitleContainer as WorkoutTitle } from '../components/WorkoutDraft/WorkoutTitle';
+import WorkoutTitle from '../components/WorkoutDraft/WorkoutTitle';
 
 export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;
