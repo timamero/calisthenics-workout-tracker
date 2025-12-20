@@ -26,7 +26,7 @@ export default function WorkoutTitleUI({
   const theme = useTheme() as CustomTheme;
 
   return (
-    <>
+    <View style={{ paddingBottom: 24 }}>
       {!isEditMode && (
         <View style={{ display: 'flex', flexDirection: 'row', flexGrow: 1 }}>
           <View
@@ -84,6 +84,6 @@ export default function WorkoutTitleUI({
           </View>
         </View>
       )}
-    </>
+    </View>
   );
 }

@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { View, ScrollView } from 'react-native';
+import { useRef, useState, useEffect } from 'react';
+import { View, ScrollView, BackHandler } from 'react-native';
 import { useTheme, Button, SegmentedButtons } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -26,32 +26,19 @@ import {
 } from '../../services/workoutsService';
 import ConfirmationDialog from '../common/ConfirmationDialog';
 import WorkoutData from './WorkoutData';
-// import { WorkoutTitleContainer as WorkoutTitle } from './WorkoutTitle';
+import WorkoutTitle from './WorkoutTitle';
 import WorkoutOverlays from './WorkoutOverlays';
 import AddWorkoutItemButtons from './AddWorkoutItemButtons';
 import type { CustomTheme } from '../../theme';
 
-interface WorkoutDraftProps {
-  isCancelWorkoutDialogVisible: boolean;
-  setIsCancelWorkoutDialogVisible: React.Dispatch<
-    React.SetStateAction<boolean>
-  >;
-  workoutDataScrollViewRef?: React.RefObject<ScrollView>;
-}
-
-export default function WorkoutDraft({
-  isCancelWorkoutDialogVisible,
-  setIsCancelWorkoutDialogVisible,
-  workoutDataScrollViewRef,
-}: WorkoutDraftProps) {
-  const workoutScrollRef = useRef<ScrollView | null>(null);
-  const scrollViewRef = workoutDataScrollViewRef || workoutScrollRef;
+export default function WorkoutDraft() {
+  const scrollViewRef = useRef<ScrollView | null>(null);
 
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
-  // const [isCancelWorkoutDialogVisible, setIsCancelWorkoutDialogVisible] =
-  //   useState<boolean>(false);
+  const [isCancelWorkoutDialogVisible, setIsCancelWorkoutDialogVisible] =
+    useState<boolean>(false);
   const [isSaveWorkoutDialogVisible, setIsSaveWorkoutDialogVisible] =
     useState<boolean>(false);
 
@@ -120,6 +107,38 @@ export default function WorkoutDraft({
     navigation.navigate('App', { screen: 'WorkoutDashboard' });
   };
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Button
+          mode="text"
+          onPress={() => setIsCancelWorkoutDialogVisible(true)}
+          style={{
+            marginRight: 24,
+          }}
+          textColor={theme.colors.grey}
+        >
+          Cancel
+        </Button>
+      ),
+      headerTitle: () => null,
+    });
+  }, [navigation, theme.colors.grey]);
+
+  useEffect(() => {
+    const onBackPress = () => {
+      setIsCancelWorkoutDialogVisible(true);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   return (
     <View
       style={{
@@ -127,7 +146,7 @@ export default function WorkoutDraft({
         backgroundColor: theme.colors.background,
       }}
     >
-      {/* <WorkoutTitle /> */}
+      <WorkoutTitle />
       <WorkoutData scrollViewRef={scrollViewRef} />
       <View
         style={{
