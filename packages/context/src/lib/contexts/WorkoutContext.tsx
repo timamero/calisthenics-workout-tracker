@@ -16,6 +16,10 @@ export type WorkoutContextType = {
     deleteSetOverlayHandler?: UseDisclosureHandlers;
     deleteSetInSupersetOverlayOpened?: boolean;
     deleteSetInSupersetOverlayHandler?: UseDisclosureHandlers;
+    saveOverlayOpened?: boolean;
+    saveOverlayHandler?: UseDisclosureHandlers;
+    cancelOverlayOpened?: boolean;
+    cancelOverlayHandler?: UseDisclosureHandlers;
   };
 
   mobileOverlayHandlers?: {
@@ -29,6 +33,10 @@ export type WorkoutContextType = {
     setIsDeleteSetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteSetInSupersetOverlayVisible?: boolean;
     setIsDeleteSetInSupersetOverlayVisible?: Dispatch<SetStateAction<boolean>>;
+    isSaveWorkoutDialogVisible?: boolean;
+    setIsSaveWorkoutDialogVisible?: Dispatch<SetStateAction<boolean>>;
+    isCancelWorkoutDialogVisible?: boolean;
+    setIsCancelWorkoutDialogVisible?: Dispatch<SetStateAction<boolean>>;
   };
 };
 

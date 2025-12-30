@@ -22,6 +22,8 @@ export default function WorkoutOverlaysContextProvider({
     useDisclosure(false);
   const [deleteSetInSupersetOverlayOpened, deleteSetInSupersetOverlayHandler] =
     useDisclosure(false);
+  const [saveOverlayOpened, saveOverlayHandler] = useDisclosure(false);
+  const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
 
   const webOverlayHandlers = {
     addExerciseOverlayOpened: addExerciseOverlayOpened,
@@ -34,6 +36,10 @@ export default function WorkoutOverlaysContextProvider({
     deleteSetOverlayHandler: deleteSetOverlayHandler,
     deleteSetInSupersetOverlayOpened: deleteSetInSupersetOverlayOpened,
     deleteSetInSupersetOverlayHandler: deleteSetInSupersetOverlayHandler,
+    saveOverlayOpened: saveOverlayOpened,
+    saveOverlayHandler: saveOverlayHandler,
+    cancelOverlayOpened: cancelOverlayOpened,
+    cancelOverlayHandler: cancelOverlayHandler,
   };
 
   // Mobile
@@ -51,6 +57,10 @@ export default function WorkoutOverlaysContextProvider({
     isDeleteSetInSupersetOverlayVisible,
     setIsDeleteSetInSupersetOverlayVisible,
   ] = useState<boolean>(false);
+  const [isSaveWorkoutDialogVisible, setIsSaveWorkoutDialogVisible] =
+    useState<boolean>(false);
+  const [isCancelWorkoutDialogVisible, setIsCancelWorkoutDialogVisible] =
+    useState<boolean>(false);
 
   const mobileOverlayHandlers = {
     isAddExerciseOverlayVisible: isAddExerciseOverlayVisible,
@@ -64,6 +74,10 @@ export default function WorkoutOverlaysContextProvider({
     isDeleteSetInSupersetOverlayVisible: isDeleteSetInSupersetOverlayVisible,
     setIsDeleteSetInSupersetOverlayVisible:
       setIsDeleteSetInSupersetOverlayVisible,
+    isSaveWorkoutDialogVisible,
+    setIsSaveWorkoutDialogVisible,
+    isCancelWorkoutDialogVisible,
+    setIsCancelWorkoutDialogVisible,
   };
 
   return (
