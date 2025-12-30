@@ -1,12 +1,16 @@
-// import { useContext } from 'react';
-
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-// import { WorkoutContext } from '@cwt/context';
-import { useWorkoutContextWeb } from '../../../../../../../packages/hooks/src/lib/workout';
+import { useWorkoutContextWeb } from '@cwt/hooks';
+import {
+  saveWorkoutConfirmationContent,
+  // cancelWorkoutConfirmationContent,
+} from '@cwt/content';
+import type { Mode } from '@cwt/schema/workouts';
 
 import ConfirmationOverlay from '../../common/ConfirmationOverlay';
 
 export default function ConfirmationOverlays() {
+  const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
+
   const deleteRootItemOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.deleteRootItemOverlayOpened;
   const deleteRootItemOverlayHandler =
@@ -15,15 +19,19 @@ export default function ConfirmationOverlays() {
     useWorkoutContextWeb().webOverlayHandlers?.deleteNestedItemOverlayOpened;
   const deleteNestedItemOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.deleteNestedItemOverlayHandler;
-  const deleteSetOverlayOpened =
-    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayOpened;
   const deleteSetInSupersetOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.deleteSetInSupersetOverlayOpened;
   const deleteSetInSupersetOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers
       ?.deleteSetInSupersetOverlayHandler;
+  const deleteSetOverlayOpened =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayOpened;
   const deleteSetOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayHandler;
+  const saveOverlayOpened =
+    useWorkoutContextWeb().webOverlayHandlers?.saveOverlayOpened;
+  const saveOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
 
   const exerciseIDToMod = useWorkoutDraftStore(
     (state) => state.exerciseIDToMod,
@@ -82,6 +90,16 @@ export default function ConfirmationOverlays() {
         opened={deleteSetOverlayOpened!}
         handler={deleteSetOverlayHandler!}
         onConfirmationClick={() => deleteSet()}
+      />
+      <ConfirmationOverlay
+        title={saveWorkoutConfirmationContent(mode).title}
+        message={saveWorkoutConfirmationContent(mode).message}
+        confirmButtonLabel={
+          saveWorkoutConfirmationContent(mode).confirmButtonLabel
+        }
+        opened={saveOverlayOpened!}
+        handler={saveOverlayHandler!}
+        onConfirmationClick={() => console.log('clicked saved')}
       />
     </>
   );
