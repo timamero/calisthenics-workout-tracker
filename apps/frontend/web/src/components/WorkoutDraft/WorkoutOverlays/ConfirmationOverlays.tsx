@@ -23,31 +23,22 @@ import {
 import ConfirmationOverlay from '../../common/ConfirmationOverlay';
 
 export default function ConfirmationOverlays() {
+  // --- States
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
 
   const deleteRootItemOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.deleteRootItemOverlayOpened;
-  const deleteRootItemOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.deleteRootItemOverlayHandler;
   const deleteNestedItemOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.deleteNestedItemOverlayOpened;
-  const deleteNestedItemOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.deleteNestedItemOverlayHandler;
   const deleteSetInSupersetOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.deleteSetInSupersetOverlayOpened;
-  const deleteSetInSupersetOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers
-      ?.deleteSetInSupersetOverlayHandler;
   const deleteSetOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayOpened;
-  const deleteSetOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayHandler;
   const saveOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.saveOverlayOpened;
-  const saveOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
 
   const supabaseSession = useAuthStore((state) => state.session);
+
   const exerciseIDToMod = useWorkoutDraftStore(
     (state) => state.exerciseIDToMod,
   );
@@ -55,6 +46,9 @@ export default function ConfirmationOverlays() {
   const supersetIDToMod = useWorkoutDraftStore(
     (state) => state.supersetIDToMod,
   );
+  // --- end States
+
+  // --- Actions
   const deleteSet = useWorkoutDraftStore((state) => state.deleteSet);
   const deleteSetInSuperset = useWorkoutDraftStore(
     (state) => state.deleteSetInSuperset,
@@ -68,12 +62,31 @@ export default function ConfirmationOverlays() {
     (state) => state.completeWorkout,
   );
   const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
+  // --- end Actions
 
+  // --- Hooks
   const navigate = useNavigate();
+  // --- end Hooks
+
+  // --- Custom hooks
   const { setWorkoutToSaveWithUser, setWorkoutToSaveWithUserAndDuration } =
     useWorkoutSave();
+  // --- end Custom hooks
 
-  const onSaveWorkoutClick = async () => {
+  // --- Handlers
+  const deleteRootItemOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteRootItemOverlayHandler;
+  const deleteNestedItemOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteNestedItemOverlayHandler;
+  const deleteSetInSupersetOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers
+      ?.deleteSetInSupersetOverlayHandler;
+  const deleteSetOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayHandler;
+  const saveOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
+
+  const handleSaveWorkoutClick = async () => {
     if (mode === 'build') {
       setWorkoutToSaveWithUser();
     } else {
@@ -108,6 +121,7 @@ export default function ConfirmationOverlays() {
       to: '/workoutDashboard',
     });
   };
+  // --- end Handlers
 
   return (
     <>
@@ -159,7 +173,7 @@ export default function ConfirmationOverlays() {
         }
         opened={saveOverlayOpened!}
         handler={saveOverlayHandler!}
-        onConfirmationClick={onSaveWorkoutClick}
+        onConfirmationClick={handleSaveWorkoutClick}
       />
     </>
   );
