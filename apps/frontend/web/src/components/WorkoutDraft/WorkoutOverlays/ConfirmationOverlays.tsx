@@ -8,7 +8,7 @@ import {
 import { useWorkoutContextWeb, useWorkoutSave } from '@cwt/hooks';
 import {
   saveWorkoutConfirmationContent,
-  // cancelWorkoutConfirmationContent,
+  cancelWorkoutConfirmationContent,
 } from '@cwt/content';
 import type {
   Mode,
@@ -36,6 +36,8 @@ export default function ConfirmationOverlays() {
     useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayOpened;
   const saveOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.saveOverlayOpened;
+  const cancelOverlayOpened =
+    useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayOpened;
 
   const supabaseSession = useAuthStore((state) => state.session);
 
@@ -85,6 +87,8 @@ export default function ConfirmationOverlays() {
     useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayHandler;
   const saveOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
+  const cancelOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
 
   const handleSaveWorkoutClick = async () => {
     if (mode === 'build') {
@@ -120,6 +124,14 @@ export default function ConfirmationOverlays() {
     navigate({
       to: '/workoutDashboard',
     });
+  };
+
+  const handleCancelWorkoutClick = () => {
+    navigate({
+      to: '/workoutDashboard',
+    });
+    resetWorkout();
+    resetTimer();
   };
   // --- end Handlers
 
@@ -174,6 +186,16 @@ export default function ConfirmationOverlays() {
         opened={saveOverlayOpened!}
         handler={saveOverlayHandler!}
         onConfirmationClick={handleSaveWorkoutClick}
+      />
+      <ConfirmationOverlay
+        title={cancelWorkoutConfirmationContent(mode).title}
+        message={cancelWorkoutConfirmationContent(mode).message}
+        confirmButtonLabel={
+          cancelWorkoutConfirmationContent(mode).confirmButtonLabel
+        }
+        opened={cancelOverlayOpened!}
+        handler={cancelOverlayHandler!}
+        onConfirmationClick={handleCancelWorkoutClick}
       />
     </>
   );
