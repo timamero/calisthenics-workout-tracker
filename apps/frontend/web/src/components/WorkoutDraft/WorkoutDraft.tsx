@@ -1,6 +1,4 @@
-import { useNavigate } from '@tanstack/react-router';
 import { Stack, Button, Switch } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 
 import {
   useWorkoutDraftStore,
@@ -8,36 +6,22 @@ import {
 } from '@cwt/state/stores';
 import { useWorkoutContextWeb } from '@cwt/hooks';
 import type { Mode } from '@cwt/schema/workouts';
-import { cancelWorkoutConfirmationContent } from '@cwt/content';
 
-import ConfirmationOverlay from '../../components/common/ConfirmationOverlay';
 import WorkoutData from './WorkoutData';
 import { WorkoutTitleContainer as WorkoutTitle } from './WorkoutTitle';
 import WorkoutOverlays from './WorkoutOverlays';
 import AddWorkoutItemButtons from './AddWorkoutItemButtons';
 
 export default function WorkoutDraft() {
-  const navigate = useNavigate();
-
-  const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
-
   const saveOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
+  const cancelOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
-  const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
-  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
-
-  const onCancelWorkoutClick = () => {
-    navigate({
-      to: '/workoutDashboard',
-    });
-    resetWorkout();
-    resetTimer();
-  };
 
   const handleSetMode = () => {
     if (mode === 'edit') {
@@ -73,23 +57,13 @@ export default function WorkoutDraft() {
           <Button
             variant="subtle"
             color="gray"
-            onClick={() => cancelOverlayHandler.open()}
+            onClick={() => cancelOverlayHandler!.open()}
           >
             {`Cancel Workout ${mode === 'build' ? 'Building' : 'Logging'}`}
           </Button>
         </Stack>
       </Stack>
       <WorkoutOverlays />
-      <ConfirmationOverlay
-        title={cancelWorkoutConfirmationContent(mode).title}
-        message={cancelWorkoutConfirmationContent(mode).message}
-        confirmButtonLabel={
-          cancelWorkoutConfirmationContent(mode).confirmButtonLabel
-        }
-        opened={cancelOverlayOpened}
-        handler={cancelOverlayHandler}
-        onConfirmationClick={onCancelWorkoutClick}
-      />
     </Stack>
   );
 }
