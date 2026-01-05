@@ -1,11 +1,25 @@
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useWorkoutContextWeb } from '@cwt/hooks';
+import { useNavigate } from '@tanstack/react-router';
+import {
+  useWorkoutDraftStore,
+  useWorkoutLibraryStore,
+  useWorkoutStopwatchStore,
+  useAuthStore,
+} from '@cwt/state/stores';
+import { useWorkoutContextWeb, useWorkoutSave } from '@cwt/hooks';
 import {
   saveWorkoutConfirmationContent,
   // cancelWorkoutConfirmationContent,
 } from '@cwt/content';
-import type { Mode } from '@cwt/schema/workouts';
+import type {
+  Mode,
+  WorkoutBuildResponse,
+  WorkoutLogResponse,
+} from '@cwt/schema/workouts';
 
+import {
+  postWorkoutBuild,
+  postWorkoutLog,
+} from '../../../services/workoutsService';
 import ConfirmationOverlay from '../../common/ConfirmationOverlay';
 
 export default function ConfirmationOverlays() {
@@ -33,6 +47,7 @@ export default function ConfirmationOverlays() {
   const saveOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
 
+  const supabaseSession = useAuthStore((state) => state.session);
   const exerciseIDToMod = useWorkoutDraftStore(
     (state) => state.exerciseIDToMod,
   );
@@ -48,6 +63,51 @@ export default function ConfirmationOverlays() {
   const removeNestedItem = useWorkoutDraftStore(
     (state) => state.removeNestedItem,
   );
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+  const completeWorkout = useWorkoutLibraryStore(
+    (state) => state.completeWorkout,
+  );
+  const resetTimer = useWorkoutStopwatchStore((state) => state.reset);
+
+  const navigate = useNavigate();
+  const { setWorkoutToSaveWithUser, setWorkoutToSaveWithUserAndDuration } =
+    useWorkoutSave();
+
+  const onSaveWorkoutClick = async () => {
+    if (mode === 'build') {
+      setWorkoutToSaveWithUser();
+    } else {
+      // mode is 'edit' or 'log'
+      setWorkoutToSaveWithUserAndDuration();
+    }
+    const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
+    if (!supabaseSession || !workoutToSave) {
+      console.error('Session not found or workout data invalid');
+      return;
+    }
+
+    const body = JSON.stringify(workoutToSave);
+    let result: WorkoutBuildResponse | WorkoutLogResponse | null = null;
+    if (mode === 'build') {
+      result = await postWorkoutBuild(supabaseSession.access_token, body);
+    } else {
+      result = await postWorkoutLog(supabaseSession.access_token, body);
+    }
+    if (result) {
+      completeWorkout(workoutToSave, mode!);
+      resetWorkout();
+      resetTimer();
+    } else {
+      // TODO: Save to state called unsavedBuilds
+      resetWorkout();
+      resetTimer();
+      console.error('Workout post request failed');
+    }
+
+    navigate({
+      to: '/workoutDashboard',
+    });
+  };
 
   return (
     <>
@@ -99,7 +159,7 @@ export default function ConfirmationOverlays() {
         }
         opened={saveOverlayOpened!}
         handler={saveOverlayHandler!}
-        onConfirmationClick={() => console.log('clicked saved')}
+        onConfirmationClick={onSaveWorkoutClick}
       />
     </>
   );
