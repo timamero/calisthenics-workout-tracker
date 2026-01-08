@@ -4,3 +4,4 @@
 /apps/frontend/web
 /docs
 /__tests__
+change-env.sh
