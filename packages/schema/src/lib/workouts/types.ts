@@ -6,6 +6,7 @@ import {
   WorkoutLogRequestSchema,
   WorkoutLogResponseSchema,
   WorkoutDataSchema,
+  WorkoutLogLimitedDetailsSchema,
   ExerciseSchema,
   SupersetSchema,
   SectionSchema,
@@ -27,6 +28,9 @@ export type WorkoutBuildRequest = z.infer<typeof WorkoutBuildRequestSchema>;
 export type WorkoutLogResponse = z.infer<typeof WorkoutLogResponseSchema>;
 export type WorkoutLogRequest = z.infer<typeof WorkoutLogRequestSchema>;
 export type WorkoutData = z.infer<typeof WorkoutDataSchema>;
+export type WorkoutLogLimitedDetails = z.infer<
+  typeof WorkoutLogLimitedDetailsSchema
+>;
 export type Exercise = z.infer<typeof ExerciseSchema>;
 export type Superset = z.infer<typeof SupersetSchema>;
 export type Section = z.infer<typeof SectionSchema>;
