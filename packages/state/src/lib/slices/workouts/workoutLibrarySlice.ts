@@ -14,9 +14,15 @@ export interface WorkoutLibrarySlice {
   masterWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
   displayedWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
   displayedWorkoutLogs: Array<WorkoutLogRequest | WorkoutLogResponse>;
+  sortWorkoutLogsByDate: (
+    logs: Array<WorkoutLogResponse>,
+  ) => Array<WorkoutLogResponse>;
+  sortWorkoutBuildsByCreationDate: (
+    builds: Array<WorkoutBuildResponse>,
+  ) => Array<WorkoutBuildResponse>;
   setWorkouts: (
-    logs: Array<WorkoutLogRequest | WorkoutLogResponse>,
-    builds: Array<WorkoutBuildRequest | WorkoutBuildResponse>,
+    logs: Array<WorkoutLogResponse>,
+    builds: Array<WorkoutBuildResponse>,
   ) => void;
   addWorkout: (
     workout: WorkoutBuildRequest | WorkoutLogRequest,
@@ -38,14 +44,26 @@ export const createWorkoutLibrarySlice: StateCreator<
   masterWorkoutBuilds: [], // TODO: Check that the max number returned is 10
   displayedWorkoutBuilds: [],
   displayedWorkoutLogs: [],
-  // TODO: Create action function to sort logs by date and builds by creation date
-  setWorkouts: (logs, builds) =>
+  sortWorkoutLogsByDate: (logs) => {
+    return [...logs].sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    );
+  },
+  sortWorkoutBuildsByCreationDate: (builds) => {
+    return [...builds].sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
+    );
+  },
+  setWorkouts: (logs, builds) => {
+    const state = get();
     set(() => ({
       masterWorkoutLogs: logs,
       masterWorkoutBuilds: builds,
-      displayedWorkoutBuilds: builds,
-      displayedWorkoutLogs: logs,
-    })),
+      displayedWorkoutBuilds: state.sortWorkoutBuildsByCreationDate(builds),
+      displayedWorkoutLogs: state.sortWorkoutLogsByDate(logs),
+    }));
+  },
   addWorkout: (workout, mode) =>
     set(
       produce((state) => {
