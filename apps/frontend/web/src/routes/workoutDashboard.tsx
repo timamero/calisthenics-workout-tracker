@@ -74,11 +74,15 @@ function WorkoutDashboardView() {
   if (workouts.builds) {
     workoutBuildCards = workouts.builds.map((wo, i) => {
       const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
+      const date = wo.created_at ? wo.created_at : new Date();
+      const dateString =
+        typeof date === 'string' ? date : date.toLocaleDateString();
       return (
         <CardButton key={i}>
           <Title order={3} size="h5">
             {workoutTitle}
           </Title>
+          <Text>{dateString}</Text>
         </CardButton>
       );
     });
@@ -87,11 +91,13 @@ function WorkoutDashboardView() {
   if (workouts.logs) {
     workoutLogCards = workouts.logs.map((wo, i) => {
       const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
+      const date = wo.date;
       return (
         <CardButton key={i}>
           <Title order={3} size="h5">
             {workoutTitle}
           </Title>
+          <Text>{date}</Text>
         </CardButton>
       );
     });
