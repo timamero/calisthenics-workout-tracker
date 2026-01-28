@@ -46,22 +46,21 @@ export const createWorkoutLibrarySlice: StateCreator<
   displayedWorkoutLogs: [],
   sortWorkoutLogsByDate: (logs) => {
     return [...logs].sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
     );
   },
   sortWorkoutBuildsByCreationDate: (builds) => {
     return [...builds].sort(
       (a, b) =>
-        new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
     );
   },
   setWorkouts: (logs, builds) => {
-    const state = get();
     set(() => ({
       masterWorkoutLogs: logs,
       masterWorkoutBuilds: builds,
-      displayedWorkoutBuilds: state.sortWorkoutBuildsByCreationDate(builds),
-      displayedWorkoutLogs: state.sortWorkoutLogsByDate(logs),
+      displayedWorkoutBuilds: get().sortWorkoutBuildsByCreationDate(builds),
+      displayedWorkoutLogs: get().sortWorkoutLogsByDate(logs),
     }));
   },
   addWorkout: (workout, mode) =>
