@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import { Title, Text, Stack } from '@mantine/core';
+import { Title, Text, Stack, Pagination } from '@mantine/core';
 
 import { useWorkoutLibraryStore, useAuthStore } from '@cwt/state/stores';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
@@ -29,13 +29,17 @@ export const Route = createFileRoute('/history')({
 function HistoryView() {
   const workoutLogs: { logs: WorkoutLogResponse[] } = Route.useLoaderData();
 
+  const [activePage, setPage] = useState(1);
+
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
 
   useEffect(() => {
     setWorkouts(workoutLogs.logs, []);
   }, [workoutLogs, setWorkouts]);
 
-  const workoutLogCards = workoutLogs.logs.map((wo, i) => {
+  const data = chunk(workoutLogs.logs, 4);
+
+  const items = data[activePage - 1].map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
     const date = new Date(wo.date).toLocaleString('en-US', {
       year: 'numeric',
@@ -60,7 +64,22 @@ function HistoryView() {
   return (
     <div>
       <Title>Past Workouts</Title>
-      <Stack gap="lg">{workoutLogCards}</Stack>
+      <Stack gap="xs">{items}</Stack>
+      <Pagination
+        total={data.length}
+        value={activePage}
+        onChange={setPage}
+        mt="sm"
+      />
     </div>
   );
+}
+
+function chunk<T>(array: T[], size: number): T[][] {
+  if (!array.length) {
+    return [];
+  }
+  const head = array.slice(0, size);
+  const tail = array.slice(size);
+  return [head, ...chunk(tail, size)];
 }
