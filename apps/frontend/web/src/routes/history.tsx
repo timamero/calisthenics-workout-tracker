@@ -4,6 +4,7 @@ import { Title, Text, Stack } from '@mantine/core';
 
 import { useWorkoutLibraryStore, useAuthStore } from '@cwt/state/stores';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
+import { formatDuration } from '@cwt/utils';
 
 import { getWorkoutLogs } from '../services/workoutsService';
 import CardButton from '../components/common/CardButton';
@@ -41,6 +42,7 @@ function HistoryView() {
       month: 'long',
       day: 'numeric',
     });
+    const duration = formatDuration(wo.duration!);
     return (
       <CardButton key={i}>
         <Title order={3} size="h5">
@@ -49,7 +51,7 @@ function HistoryView() {
         <Text>{date}</Text>
         <Text>{wo.goal}</Text>
         <Text>{wo.description}</Text>
-        <Text>{wo.duration}</Text>
+        <Text>{duration}</Text>
       </CardButton>
     );
   });
