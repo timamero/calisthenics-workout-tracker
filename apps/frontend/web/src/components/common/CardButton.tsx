@@ -11,7 +11,15 @@ export default function CardButton({ children }: CardButtonProps) {
   };
   return (
     <UnstyledButton onClick={handleClick}>
-      <Paper shadow="xs" p="md" radius="lg" miw={160} h={160} withBorder>
+      <Paper
+        shadow="xs"
+        p="md"
+        radius="lg"
+        miw={160}
+        h="100%"
+        mih={160}
+        withBorder
+      >
         <Stack
           bg="var(--mantine-color-body)"
           align="center"
