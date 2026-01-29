@@ -1,4 +1,4 @@
-import { getSecondsInDuration } from "./durationUtils";
+import { getSecondsInDuration, formatDuration } from "./durationUtils";
 export * from "./workoutUtils";
 
-export { getSecondsInDuration };
+export { getSecondsInDuration, formatDuration };
