@@ -68,11 +68,11 @@ export const createWorkoutLibrarySlice: StateCreator<
       produce((state) => {
         if (mode === 'build') {
           state.displayedWorkoutBuilds = [
-            ...state.displayedWorkoutBuilds,
             workout,
+            ...state.displayedWorkoutBuilds,
           ];
         } else {
-          state.displayedWorkoutLogs = [...state.displayedWorkoutLogs, workout];
+          state.displayedWorkoutLogs = [workout, ...state.displayedWorkoutLogs];
         }
       }),
     ),
