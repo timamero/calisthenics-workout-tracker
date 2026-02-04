@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Title, Text, Stack, Pagination } from '@mantine/core';
+import { Title, Text, Pagination, SimpleGrid } from '@mantine/core';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { formatDuration, chunk } from '@cwt/utils';
@@ -12,7 +12,7 @@ export default function WorkoutLogPages() {
 
   if (logs.length === 0) return null;
 
-  const data = chunk(logs, 4);
+  const data = chunk(logs, 6);
 
   const items = data[activePage - 1].map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
@@ -36,7 +36,7 @@ export default function WorkoutLogPages() {
   });
   return (
     <>
-      <Stack gap="xs">{items}</Stack>
+      <SimpleGrid cols={{ base: 1, md: 2, xl: 3 }}>{items}</SimpleGrid>
       <Pagination
         total={data.length}
         value={activePage}
