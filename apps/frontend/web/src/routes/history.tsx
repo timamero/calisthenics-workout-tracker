@@ -4,7 +4,7 @@ import { Title, Text, Stack, Pagination } from '@mantine/core';
 
 import { useWorkoutLibraryStore, useAuthStore } from '@cwt/state/stores';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
-import { formatDuration } from '@cwt/utils';
+import { formatDuration, chunk } from '@cwt/utils';
 
 import { getWorkoutLogs } from '../services/workoutsService';
 import CardButton from '../components/common/CardButton';
@@ -73,21 +73,4 @@ function HistoryView() {
       />
     </div>
   );
-}
-
-// function chunk<T>(array: T[], size: number): T[][] {
-//   if (!array.length) {
-//     return [];
-//   }
-//   const head = array.slice(0, size);
-//   const tail = array.slice(size);
-//   return [head, ...chunk(tail, size)];
-// }
-
-function chunk<T>(array: T[], size: number): T[][] {
-  const result: T[][] = [];
-  for (let i = 0; i < array.length; i += size) {
-    result.push(array.slice(i, i + size));
-  }
-  return result;
 }
