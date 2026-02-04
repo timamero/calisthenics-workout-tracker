@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
-import { Title } from '@mantine/core';
+import { Title, Stack } from '@mantine/core';
 
 import { useWorkoutLibraryStore, useAuthStore } from '@cwt/state/stores';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
@@ -35,9 +35,9 @@ function HistoryView() {
   }, [workoutLogs, setWorkouts]);
 
   return (
-    <div>
+    <Stack mih="88vh">
       <Title>Past Workouts</Title>
       <WorkoutLogPages />
-    </div>
+    </Stack>
   );
 }
