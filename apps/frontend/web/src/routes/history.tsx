@@ -35,7 +35,7 @@ function HistoryView() {
   }, [workoutLogs, setWorkouts]);
 
   return (
-    <Stack mih="88vh">
+    <Stack h="100%" flex={1} display="flex" style={{ flexDirection: 'column' }}>
       <Title>Past Workouts</Title>
       <WorkoutLogPages />
     </Stack>

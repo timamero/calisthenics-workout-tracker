@@ -113,6 +113,7 @@ function RootComponent() {
         collapsed: { mobile: !opened },
       }}
       padding="md"
+      style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}
     >
       <AppShell.Header>
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
@@ -131,7 +132,9 @@ function RootComponent() {
         ))}
       </AppShell.Navbar>
 
-      <AppShell.Main>
+      <AppShell.Main
+        style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
+      >
         <Outlet />
         <TanStackRouterDevtools />
       </AppShell.Main>
