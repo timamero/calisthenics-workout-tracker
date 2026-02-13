@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack } from '@mantine/core';
 
 import { useWorkoutLibraryStore, useAuthStore } from '@cwt/state/stores';
+import { WorkoutLogDetailContextProvider } from '@cwt/context';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import { getWorkoutLogs } from '../services/workoutsService';
@@ -35,9 +36,16 @@ function HistoryView() {
   }, [workoutLogs, setWorkouts]);
 
   return (
-    <Stack h="100%" flex={1} display="flex" style={{ flexDirection: 'column' }}>
-      <Title>Past Workouts</Title>
-      <WorkoutLogPages />
-    </Stack>
+    <WorkoutLogDetailContextProvider>
+      <Stack
+        h="100%"
+        flex={1}
+        display="flex"
+        style={{ flexDirection: 'column' }}
+      >
+        <Title>Past Workouts</Title>
+        <WorkoutLogPages />
+      </Stack>
+    </WorkoutLogDetailContextProvider>
   );
 }
