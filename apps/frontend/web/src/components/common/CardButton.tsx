@@ -2,13 +2,17 @@ import { Paper, Stack, UnstyledButton } from '@mantine/core';
 import type { ReactNode } from 'react';
 
 interface CardButtonProps {
+  handleClick?: () => void;
   children: ReactNode;
 }
 
-export default function CardButton({ children }: CardButtonProps) {
-  const handleClick = () => {
-    console.log('clicked item');
-  };
+export default function CardButton({
+  handleClick = () => console.log('clicked item'),
+  children,
+}: CardButtonProps) {
+  // const handleClick = () => {
+  //   console.log('clicked item');
+  // };
   return (
     <UnstyledButton onClick={handleClick}>
       <Paper
