@@ -5,6 +5,7 @@ import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { formatDuration, chunk } from '@cwt/utils';
 
 import CardButton from '../components/common/CardButton';
+import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 
 export default function WorkoutLogPages() {
   const [activePage, setPage] = useState(1);
@@ -47,6 +48,7 @@ export default function WorkoutLogPages() {
         onChange={setPage}
         mt="sm"
       />
+      <WorkoutLogDetailOverlay />
     </Stack>
   );
 }
