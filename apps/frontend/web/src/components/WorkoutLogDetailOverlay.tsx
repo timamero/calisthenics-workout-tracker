@@ -1,4 +1,4 @@
-// import { useContext } from 'react';
+import { useContext } from 'react';
 import {
   Modal,
   Stack,
@@ -11,12 +11,13 @@ import {
 } from '@mantine/core';
 
 // import { ExerciseDetailContext } from '@cwt/context';
+import { WorkoutLogDetailContext } from '@cwt/context';
 // import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
 export default function WorkoutLogDetailOverlay() {
   // const exerciseDetail = useContext(ExerciseDetailContext)?.exercise;
-  // const detailHandlers = useContext(ExerciseDetailContext)?.handlers;
-  // const detailOpened = useContext(ExerciseDetailContext)?.opened;
+  const detailHandlers = useContext(WorkoutLogDetailContext)?.handlers;
+  const detailOpened = useContext(WorkoutLogDetailContext)?.opened;
 
   // const difficultyColor =
   //   exerciseDetail?.difficulty == 'beginner'
@@ -25,11 +26,11 @@ export default function WorkoutLogDetailOverlay() {
   //       ? 'yellow'
   //       : 'red';
 
-  // const handleCloseModal = () => {
-  //   if (detailHandlers) {
-  //     detailHandlers.close();
-  //   }
-  // };
+  const handleCloseModal = () => {
+    if (detailHandlers) {
+      detailHandlers.close();
+    }
+  };
   // const muscleMetadata = exerciseDetail?.target_muscles.map(
   //   (muscle: Muscle, i: number) => {
   //     return (
@@ -74,19 +75,15 @@ export default function WorkoutLogDetailOverlay() {
   // );
   return (
     <Modal
-      opened={false}
-      onClose={() => console.log('close details')}
+      opened={detailOpened || false}
+      onClose={handleCloseModal}
       size="xl"
       withCloseButton={false}
     >
       <Group justify="center">
         <Stack mb="lg" maw={580}>
           <Group justify="flex-end">
-            <Button
-              variant="outline"
-              color="dark"
-              onClick={() => console.log('close details')}
-            >
+            <Button variant="outline" color="dark" onClick={handleCloseModal}>
               Back to Workouts
             </Button>
           </Group>

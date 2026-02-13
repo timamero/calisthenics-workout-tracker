@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Title, Text, Pagination, SimpleGrid, Stack, Box } from '@mantine/core';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
+import { WorkoutLogDetailContext } from '@cwt/context';
 import { formatDuration, chunk } from '@cwt/utils';
 
 import CardButton from '../components/common/CardButton';
@@ -9,6 +10,8 @@ import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 
 export default function WorkoutLogPages() {
   const [activePage, setPage] = useState(1);
+
+  const detailHandlers = useContext(WorkoutLogDetailContext)?.handlers;
   const logs = useWorkoutLibraryStore((state) => state.displayedWorkoutLogs);
 
   if (logs.length === 0) return null;
@@ -24,10 +27,7 @@ export default function WorkoutLogPages() {
     });
     const duration = formatDuration(wo.duration!);
     return (
-      <CardButton
-        key={i}
-        handleClick={() => console.log('clicked workout detail')}
-      >
+      <CardButton key={i} handleClick={() => detailHandlers!.open()}>
         <Title order={3} size="h5">
           {workoutTitle}
         </Title>
