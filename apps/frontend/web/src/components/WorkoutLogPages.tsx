@@ -24,7 +24,10 @@ export default function WorkoutLogPages() {
     });
     const duration = formatDuration(wo.duration!);
     return (
-      <CardButton key={i}>
+      <CardButton
+        key={i}
+        handleClick={() => console.log('clicked workout detail')}
+      >
         <Title order={3} size="h5">
           {workoutTitle}
         </Title>
