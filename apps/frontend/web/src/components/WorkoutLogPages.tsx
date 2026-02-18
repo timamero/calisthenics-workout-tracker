@@ -7,16 +7,26 @@ import { formatDuration, chunk } from '@cwt/utils';
 
 import CardButton from '../components/common/CardButton';
 import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
+import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 export default function WorkoutLogPages() {
   const [activePage, setPage] = useState(1);
 
   const detailHandlers = useContext(WorkoutLogDetailContext)?.handlers;
+  const setDetailWorkout = useContext(WorkoutLogDetailContext)?.setWorkout;
+
   const logs = useWorkoutLibraryStore((state) => state.displayedWorkoutLogs);
 
   if (logs.length === 0) return null;
 
   const data = chunk(logs, 6);
+
+  const handleWorkoutLogClick = (workoutLog: WorkoutLogResponse) => {
+    if (setDetailWorkout && detailHandlers) {
+      setDetailWorkout(workoutLog);
+      detailHandlers.open();
+    }
+  };
 
   const items = data[activePage - 1].map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
@@ -27,7 +37,10 @@ export default function WorkoutLogPages() {
     });
     const duration = formatDuration(wo.duration!);
     return (
-      <CardButton key={i} handleClick={() => detailHandlers!.open()}>
+      <CardButton
+        key={i}
+        handleClick={() => handleWorkoutLogClick(wo as WorkoutLogResponse)}
+      >
         <Title order={3} size="h5">
           {workoutTitle}
         </Title>
