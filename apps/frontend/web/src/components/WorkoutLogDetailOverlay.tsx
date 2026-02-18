@@ -15,16 +15,11 @@ import { WorkoutLogDetailContext } from '@cwt/context';
 // import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
 export default function WorkoutLogDetailOverlay() {
-  // const exerciseDetail = useContext(ExerciseDetailContext)?.exercise;
+  const workoutLogDetail = useContext(WorkoutLogDetailContext)?.workout;
   const detailHandlers = useContext(WorkoutLogDetailContext)?.handlers;
   const detailOpened = useContext(WorkoutLogDetailContext)?.opened;
 
-  // const difficultyColor =
-  //   exerciseDetail?.difficulty == 'beginner'
-  //     ? 'blue'
-  //     : exerciseDetail?.difficulty == 'intermediate'
-  //       ? 'yellow'
-  //       : 'red';
+  console.log('workout log details', workoutLogDetail);
 
   const handleCloseModal = () => {
     if (detailHandlers) {
