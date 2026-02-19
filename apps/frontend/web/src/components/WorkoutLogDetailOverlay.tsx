@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import {
   Modal,
   Stack,
-  // Text,
+  Text,
   // Badge,
   // Flex,
   Group,
@@ -12,14 +12,24 @@ import {
 
 // import { ExerciseDetailContext } from '@cwt/context';
 import { WorkoutLogDetailContext } from '@cwt/context';
+import { formatDuration } from '@cwt/utils';
+import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 // import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
 export default function WorkoutLogDetailOverlay() {
-  const workoutLogDetail = useContext(WorkoutLogDetailContext)?.workout;
+  const workoutLogDetail = useContext(WorkoutLogDetailContext)!
+    .workout as WorkoutLogResponse;
   const detailHandlers = useContext(WorkoutLogDetailContext)?.handlers;
   const detailOpened = useContext(WorkoutLogDetailContext)?.opened;
 
   console.log('workout log details', workoutLogDetail);
+
+  const duration = formatDuration(workoutLogDetail.duration!);
+  const date = new Date(workoutLogDetail.date).toLocaleString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
   const handleCloseModal = () => {
     if (detailHandlers) {
@@ -87,59 +97,32 @@ export default function WorkoutLogDetailOverlay() {
               {workoutLogDetail?.title}
             </Title>
           </Group>
-          {/* <Flex direction="row" wrap="wrap" gap="xl" justify="flex-start">
-            <Stack>
-              <Text tt="uppercase" size="md" c="gray.7">
-                Difficulty
+          <Stack gap="md" justify="flex-start">
+            <Stack gap="xs">
+              <Text tt="uppercase" size="xs" c="gray.7">
+                Date
               </Text>
-              <Badge size="lg" color={difficultyColor}>
-                {exerciseDetail?.difficulty}
-              </Badge>
+              <Text size="md">{date}</Text>
             </Stack>
-            <Stack>
-              <Text tt="uppercase" size="md" c="gray.7">
-                Emphasis
+            <Stack gap="xs">
+              <Text tt="uppercase" size="xs" c="gray.7">
+                Description
               </Text>
-              <Badge size="lg" color="dark" variant="outline" bg="gray.1">
-                {exerciseDetail?.emphasis}
-              </Badge>
+              <Text size="md">{workoutLogDetail?.description}</Text>
             </Stack>
-            <Stack>
-              <Text tt="uppercase" size="md" c="gray.7">
-                Target Muscles
+            <Stack gap="xs">
+              <Text tt="uppercase" size="xs" c="gray.7">
+                Goal
               </Text>
-              <Flex
-                gap="md"
-                justify="flex-start"
-                align="flex-start"
-                direction="row"
-                wrap="wrap"
-              >
-                {muscleMetadata}
-              </Flex>
+              <Text size="md">{workoutLogDetail?.goal}</Text>
             </Stack>
-            <Stack>
-              <Text tt="uppercase" size="md" c="gray.7">
-                Required Equipment
+            <Stack gap="xs">
+              <Text tt="uppercase" size="xs" c="gray.7">
+                Duration
               </Text>
-              <Flex
-                gap="md"
-                justify="flex-start"
-                align="flex-start"
-                direction="row"
-                wrap="wrap"
-              >
-                {exerciseDetail?.required_equipment == null ||
-                exerciseDetail.required_equipment.length == 0 ? (
-                  <Badge color="dark" variant="transparent">
-                    ---
-                  </Badge>
-                ) : (
-                  equipmentMetadata
-                )}
-              </Flex>
+              <Text size="md">{duration}</Text>
             </Stack>
-          </Flex> */}
+          </Stack>
           {/* <Stack mt="sm">
             <Title order={3} size="h4" tt="uppercase">
               Instructions
