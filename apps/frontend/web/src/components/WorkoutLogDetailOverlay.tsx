@@ -84,7 +84,7 @@ export default function WorkoutLogDetailOverlay() {
           </Group>
           <Group justify="flex-start" mt="sm">
             <Title order={2} size="h2">
-              Workout Name
+              {workoutLogDetail?.title}
             </Title>
           </Group>
           {/* <Flex direction="row" wrap="wrap" gap="xl" justify="flex-start">
