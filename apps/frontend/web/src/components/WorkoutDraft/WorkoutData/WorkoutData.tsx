@@ -15,9 +15,9 @@ export default function WorkoutData() {
     (state) => state.workoutData,
   ).length;
 
-  if (mode === 'read') {
-    return <Text>Workout Log Read Mode</Text>;
-  }
+  // if (mode === 'read') {
+  //   return <Text>Workout Log Read Mode</Text>;
+  // }
 
   if (!workoutData) {
     return <Text>Loading</Text>;
