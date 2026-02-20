@@ -21,8 +21,10 @@ export default function WorkoutLogDetailOverlay() {
     .workout as WorkoutLogResponse;
   const detailHandlers = useContext(WorkoutLogDetailContext)?.handlers;
   const detailOpened = useContext(WorkoutLogDetailContext)?.opened;
+  const setDetailWorkout = useContext(WorkoutLogDetailContext)?.setWorkout;
 
   console.log('workout log details', workoutLogDetail);
+  if (!workoutLogDetail) return null;
 
   const duration = formatDuration(workoutLogDetail.duration!);
   const date = new Date(workoutLogDetail.date).toLocaleString('en-US', {
@@ -32,8 +34,9 @@ export default function WorkoutLogDetailOverlay() {
   });
 
   const handleCloseModal = () => {
-    if (detailHandlers) {
+    if (detailHandlers && setDetailWorkout) {
       detailHandlers.close();
+      setDetailWorkout(null);
     }
   };
   // const muscleMetadata = exerciseDetail?.target_muscles.map(
