@@ -4,6 +4,7 @@ import { Title, Text, Pagination, SimpleGrid, Stack, Box } from '@mantine/core';
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { WorkoutLogDetailContext } from '@cwt/context';
 import { formatDuration, chunk } from '@cwt/utils';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import CardButton from '../components/common/CardButton';
 import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
@@ -16,6 +17,7 @@ export default function WorkoutLogPages() {
   const setDetailWorkout = useContext(WorkoutLogDetailContext)?.setWorkout;
 
   const logs = useWorkoutLibraryStore((state) => state.displayedWorkoutLogs);
+  const setMode = useWorkoutDraftStore((state) => state.setMode);
 
   if (logs.length === 0) return null;
 
@@ -24,6 +26,7 @@ export default function WorkoutLogPages() {
   const handleWorkoutLogClick = (workoutLog: WorkoutLogResponse) => {
     if (setDetailWorkout && detailHandlers) {
       setDetailWorkout(workoutLog);
+      setMode('read');
       detailHandlers.open();
     }
   };
