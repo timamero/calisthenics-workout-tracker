@@ -28,7 +28,7 @@ export default function SupersetItemUI({
 }: SupersetItemUIProps) {
   return (
     <Group align="flex-start">
-      {mode !== 'log' && (
+      {(mode === 'edit' || mode === 'build') && (
         <ReorderButtonGroup
           handleUpClick={() => handleUpClick()}
           handleDownClick={() => handleDownClick()}
