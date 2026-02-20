@@ -30,7 +30,7 @@ export default function WorkoutLogDetailOverlay() {
   // const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
-  console.log('workout log data', workoutData);
+  console.log('workout log data', JSON.stringify(workoutData));
   if (!workoutLogDetail) return null;
 
   const duration = formatDuration(workoutLogDetail.duration!);
