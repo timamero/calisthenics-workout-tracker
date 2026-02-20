@@ -81,7 +81,7 @@ function RootComponent() {
   }
 
   // TODO: Update implementation of hiding navigation during workout
-  if (mode) {
+  if (mode === 'build' || mode === 'log' || mode === 'edit') {
     return (
       <AppShell
         header={{ height: 60 }}
