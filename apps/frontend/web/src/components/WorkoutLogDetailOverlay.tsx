@@ -14,6 +14,7 @@ import {
 import { WorkoutLogDetailContext } from '@cwt/context';
 import { formatDuration } from '@cwt/utils';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 // import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
 import WorkoutData from './WorkoutDraft/WorkoutData';
@@ -25,7 +26,10 @@ export default function WorkoutLogDetailOverlay() {
   const detailOpened = useContext(WorkoutLogDetailContext)?.opened;
   const setDetailWorkout = useContext(WorkoutLogDetailContext)?.setWorkout;
 
-  console.log('workout log details', workoutLogDetail);
+  const workoutData = useWorkoutDraftStore((state) => state.workoutData);
+  const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
+
+  console.log('workout log data', workoutData);
   if (!workoutLogDetail) return null;
 
   const duration = formatDuration(workoutLogDetail.duration!);
@@ -39,6 +43,7 @@ export default function WorkoutLogDetailOverlay() {
     if (detailHandlers && setDetailWorkout) {
       detailHandlers.close();
       setDetailWorkout(null);
+      setWorkoutData(null);
     }
   };
 

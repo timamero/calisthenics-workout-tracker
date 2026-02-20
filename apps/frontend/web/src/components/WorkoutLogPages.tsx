@@ -18,6 +18,7 @@ export default function WorkoutLogPages() {
 
   const logs = useWorkoutLibraryStore((state) => state.displayedWorkoutLogs);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
+  const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
 
   if (logs.length === 0) return null;
 
@@ -27,6 +28,7 @@ export default function WorkoutLogPages() {
     if (setDetailWorkout && detailHandlers) {
       setDetailWorkout(workoutLog);
       setMode('read');
+      setWorkoutData(workoutLog.workout_data.data);
       detailHandlers.open();
     }
   };
