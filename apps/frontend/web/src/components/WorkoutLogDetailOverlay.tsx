@@ -27,7 +27,8 @@ export default function WorkoutLogDetailOverlay() {
   const setDetailWorkout = useContext(WorkoutLogDetailContext)?.setWorkout;
 
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
-  const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
+  // const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   console.log('workout log data', workoutData);
   if (!workoutLogDetail) return null;
@@ -43,7 +44,7 @@ export default function WorkoutLogDetailOverlay() {
     if (detailHandlers && setDetailWorkout) {
       detailHandlers.close();
       setDetailWorkout(null);
-      setWorkoutData(null);
+      resetWorkout();
     }
   };
 
