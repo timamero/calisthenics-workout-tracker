@@ -12,6 +12,7 @@ import {
   useLeveragesAssistsStore,
   useExerciseLibraryStore,
 } from '@cwt/state/stores';
+import { WorkoutContextProvider } from '@cwt/context';
 
 import { supabase } from '../services/supabaseClient';
 import { getExercises } from '../services/exercisesService';
@@ -97,7 +98,9 @@ function RootComponent() {
           <div>Logo</div>
         </AppShell.Header>
         <AppShell.Main>
-          <Outlet />
+          <WorkoutContextProvider appType="web">
+            <Outlet />
+          </WorkoutContextProvider>
           <TanStackRouterDevtools />
         </AppShell.Main>
       </AppShell>
@@ -135,7 +138,9 @@ function RootComponent() {
       <AppShell.Main
         style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
       >
-        <Outlet />
+        <WorkoutContextProvider appType="web">
+          <Outlet />
+        </WorkoutContextProvider>
         <TanStackRouterDevtools />
       </AppShell.Main>
     </AppShell>
