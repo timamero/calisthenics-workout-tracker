@@ -45,7 +45,7 @@ export default function SupersetItemUI({
       >
         <Group>
           <Text>Superset</Text>
-          {mode !== 'log' && (
+          {(mode === 'edit' || mode === 'build') && (
             <Button
               color="red"
               variant="white"
@@ -55,8 +55,12 @@ export default function SupersetItemUI({
             </Button>
           )}
         </Group>
-        {mode !== 'log' ? <ExercisesList /> : <ExerciseSetGroup />}
-        {mode !== 'log' && (
+        {mode === 'edit' || mode === 'build' ? (
+          <ExercisesList />
+        ) : (
+          <ExerciseSetGroup />
+        )}
+        {(mode === 'edit' || mode === 'build') && (
           <Button
             variant="filled"
             color="orange.9"
