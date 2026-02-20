@@ -16,6 +16,8 @@ import { formatDuration } from '@cwt/utils';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 // import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
+import WorkoutData from './WorkoutDraft/WorkoutData';
+
 export default function WorkoutLogDetailOverlay() {
   const workoutLogDetail = useContext(WorkoutLogDetailContext)!
     .workout as WorkoutLogResponse;
@@ -39,48 +41,7 @@ export default function WorkoutLogDetailOverlay() {
       setDetailWorkout(null);
     }
   };
-  // const muscleMetadata = exerciseDetail?.target_muscles.map(
-  //   (muscle: Muscle, i: number) => {
-  //     return (
-  //       <Badge size="lg" variant="light" color="grape" key={i}>
-  //         {muscle}
-  //       </Badge>
-  //     );
-  //   },
-  // );
-  // const equipmentMetadata = exerciseDetail?.required_equipment
-  //   ?.filter(
-  //     (equipment): equipment is NonNullable<Equipment> =>
-  //       equipment !== undefined,
-  //   )
-  //   .map((equipment: Equipment, i: number) => {
-  //     return (
-  //       <Badge size="lg" color="dark" variant="outline" key={i}>
-  //         {equipment}
-  //       </Badge>
-  //     );
-  //   });
-  // const instructions = exerciseDetail?.instructions.map(
-  //   (instruction: string, i: number) => {
-  //     const regex = /\d\. /g;
-  //     return (
-  //       <Group key={i} wrap="nowrap" align="flex-start">
-  //         <Text
-  //           size="xl"
-  //           fw={700}
-  //           style={{
-  //             borderBottom: `1px solid var(--mantine-color-dark-6)`,
-  //             borderRight: `1px solid var(--mantine-color-dark-6)`,
-  //             paddingInline: 8,
-  //           }}
-  //         >
-  //           {i + 1}
-  //         </Text>
-  //         <Text>{instruction.split(regex)[1]}</Text>
-  //       </Group>
-  //     );
-  //   },
-  // );
+
   return (
     <Modal
       opened={detailOpened || false}
@@ -126,12 +87,8 @@ export default function WorkoutLogDetailOverlay() {
               <Text size="md">{duration}</Text>
             </Stack>
           </Stack>
-          {/* <Stack mt="sm">
-            <Title order={3} size="h4" tt="uppercase">
-              Instructions
-            </Title>
-            <Stack>{instructions}</Stack>
-          </Stack> */}
+
+          <WorkoutData />
         </Stack>
       </Group>
     </Modal>
