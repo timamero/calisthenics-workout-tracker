@@ -20,10 +20,13 @@ export default function DurationInput({
   const handleChange = useFieldInputChange(fieldName, 'duration');
   const mode = useWorkoutDraftStore((state) => state.mode);
   if (mode === 'read') {
+    const value = set.fields[fieldName]
+      ? set.fields[fieldName]!.toString()
+      : '00:00';
     return (
       <Stack>
         <Text>{label}</Text>
-        <Text>{getSecondsInDuration(set.fields[fieldName]!.toString())}</Text>
+        <Text>{value}</Text>
       </Stack>
     );
   }
