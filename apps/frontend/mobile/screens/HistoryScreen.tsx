@@ -1,8 +1,15 @@
 import { View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
+import { useWorkoutLibraryStore } from '@cwt/state/stores';
+
 export default function HistoryScreen() {
   const theme = useTheme();
+
+  const workoutLogs = useWorkoutLibraryStore(
+    (state) => state.displayedWorkoutLogs,
+  );
+  console.log('workout logs', workoutLogs);
 
   return (
     <View
