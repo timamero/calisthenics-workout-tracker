@@ -1,11 +1,11 @@
-import { WorkoutContextProvider } from '@cwt/context';
+// import { WorkoutContextProvider } from '@cwt/context';
 
 import WorkoutDraft from '../components/WorkoutDraft';
 
 export default function WorkoutScreen() {
   return (
-    <WorkoutContextProvider appType="mobile">
-      <WorkoutDraft />
-    </WorkoutContextProvider>
+    // <WorkoutContextProvider appType="mobile">
+    <WorkoutDraft />
+    // </WorkoutContextProvider>
   );
 }
