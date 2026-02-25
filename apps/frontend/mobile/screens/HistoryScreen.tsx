@@ -1,10 +1,13 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
 
+import { CustomTheme } from '../theme';
+import { Text } from '../customText';
+
 export default function HistoryScreen() {
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
 
   const workoutLogs = useWorkoutLibraryStore(
     (state) => state.displayedWorkoutLogs,
@@ -17,11 +20,12 @@ export default function HistoryScreen() {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.background,
       }}
     >
-      <Text>History Screen</Text>
-      <Text>This page will display the user&apos;s past workout logs.</Text>
+      <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
+        Workout placeholder
+      </Text>
     </View>
   );
 }
