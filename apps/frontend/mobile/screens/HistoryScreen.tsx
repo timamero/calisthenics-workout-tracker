@@ -23,9 +23,18 @@ export default function HistoryScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
-        Workout placeholder
-      </Text>
+      {workoutLogs.map((log) => {
+        return (
+          <View>
+            <Text
+              variant="headlineMedium"
+              style={{ color: theme.colors.light }}
+            >
+              {log.title}
+            </Text>
+          </View>
+        );
+      })}
     </View>
   );
 }
