@@ -2,6 +2,7 @@ import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
+import { formatDuration } from '@cwt/utils';
 
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
@@ -25,14 +26,32 @@ export default function HistoryScreen() {
       }}
     >
       <ScrollView>
-        {workoutLogs.map((log) => {
+        {workoutLogs.map((wo) => {
+          const date = new Date(wo.date).toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+          const duration = formatDuration(wo.duration!);
           return (
-            <CardButton key={log.workout_build_id}>
+            <CardButton key={wo.workout_build_id}>
               <Text
                 variant="headlineMedium"
                 style={{ color: theme.colors.light }}
               >
-                {log.title}
+                {wo.title}
+              </Text>
+              <Text variant="bodyMedium" style={{ color: theme.colors.light }}>
+                {date}
+              </Text>
+              <Text variant="bodyMedium" style={{ color: theme.colors.light }}>
+                {wo.goal}
+              </Text>
+              <Text variant="bodyMedium" style={{ color: theme.colors.light }}>
+                {wo.description}
+              </Text>
+              <Text variant="bodyMedium" style={{ color: theme.colors.light }}>
+                {duration}
               </Text>
             </CardButton>
           );

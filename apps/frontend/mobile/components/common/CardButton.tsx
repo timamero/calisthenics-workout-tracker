@@ -15,7 +15,8 @@ export default function CardButton({ children }: CardButtonProps) {
   return (
     <Card style={styles.card} onPress={() => console.log('clicked on card')}>
       <Card.Content style={styles.cardContent}>
-        <View style={styles.titleContainer}>{children}</View>
+        {/* <View style={styles.titleContainer}>{children}</View> */}
+        {children}
       </Card.Content>
     </Card>
   );
