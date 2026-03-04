@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
@@ -24,18 +24,20 @@ export default function HistoryScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      {workoutLogs.map((log) => {
-        return (
-          <CardButton key={log.workout_build_id}>
-            <Text
-              variant="headlineMedium"
-              style={{ color: theme.colors.light }}
-            >
-              {log.title}
-            </Text>
-          </CardButton>
-        );
-      })}
+      <ScrollView>
+        {workoutLogs.map((log) => {
+          return (
+            <CardButton key={log.workout_build_id}>
+              <Text
+                variant="headlineMedium"
+                style={{ color: theme.colors.light }}
+              >
+                {log.title}
+              </Text>
+            </CardButton>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 }
