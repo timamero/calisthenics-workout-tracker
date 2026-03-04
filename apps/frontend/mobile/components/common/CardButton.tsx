@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Card, useTheme } from 'react-native-paper';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { CustomTheme } from '../../theme';
 
@@ -14,10 +14,7 @@ export default function CardButton({ children }: CardButtonProps) {
 
   return (
     <Card style={styles.card} onPress={() => console.log('clicked on card')}>
-      <Card.Content style={styles.cardContent}>
-        {/* <View style={styles.titleContainer}>{children}</View> */}
-        {children}
-      </Card.Content>
+      <Card.Content style={styles.cardContent}>{children}</Card.Content>
     </Card>
   );
 }
@@ -33,7 +30,8 @@ const getStyles = (theme: CustomTheme) =>
       borderColor: theme.colors.light,
       borderWidth: 1,
       minWidth: 160,
-      height: 160,
+      minHeight: 160,
+      height: 'auto',
     },
     cardContent: {
       paddingHorizontal: 0,
