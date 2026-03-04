@@ -5,6 +5,7 @@ import { useWorkoutLibraryStore } from '@cwt/state/stores';
 
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
+import CardButton from '../components/common/CardButton';
 
 export default function HistoryScreen() {
   const theme = useTheme() as CustomTheme;
@@ -12,7 +13,7 @@ export default function HistoryScreen() {
   const workoutLogs = useWorkoutLibraryStore(
     (state) => state.displayedWorkoutLogs,
   );
-  console.log('workout logs', workoutLogs);
+  // console.log('workout logs', workoutLogs);
 
   return (
     <View
@@ -25,14 +26,14 @@ export default function HistoryScreen() {
     >
       {workoutLogs.map((log) => {
         return (
-          <View>
+          <CardButton key={log.workout_build_id}>
             <Text
               variant="headlineMedium"
               style={{ color: theme.colors.light }}
             >
               {log.title}
             </Text>
-          </View>
+          </CardButton>
         );
       })}
     </View>
