@@ -59,17 +59,24 @@ export default function WorkoutLogPages() {
   return (
     <ScrollView>
       <DataTable>
-        <DataTable.Header>
+        {/* <DataTable.Header>
           <DataTable.Title>Dessert</DataTable.Title>
           <DataTable.Title numeric>Calories</DataTable.Title>
           <DataTable.Title numeric>Fat</DataTable.Title>
-        </DataTable.Header>
+        </DataTable.Header> */}
 
         {items.slice(from, to).map((item) => (
           <DataTable.Row key={item.key}>
-            <DataTable.Cell>{item.name}</DataTable.Cell>
-            <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-            <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+            <DataTable.Cell>
+              <CardButton key={item.key}>
+                <Text
+                  variant="headlineMedium"
+                  style={{ color: theme.colors.light }}
+                >
+                  {item.name}
+                </Text>
+              </CardButton>
+            </DataTable.Cell>
           </DataTable.Row>
         ))}
 
