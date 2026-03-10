@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 import { useTheme, DataTable } from 'react-native-paper';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
-import { formatDuration } from '@cwt/utils';
+import { formatDuration, chunk } from '@cwt/utils';
 
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
@@ -16,7 +16,7 @@ export default function WorkoutLogPages() {
     (state) => state.displayedWorkoutLogs,
   );
   // console.log('workout logs', workoutLogs);
-  const [page, setPage] = useState<number>(0);
+  const [examplePage, setExamplePage] = useState<number>(0);
   const [numberOfItemsPerPageList] = useState([1, 2, 3]);
   const [itemsPerPage, onItemsPerPageChange] = useState(
     numberOfItemsPerPageList[0],
@@ -49,11 +49,13 @@ export default function WorkoutLogPages() {
     },
   ]);
 
-  const from = page * itemsPerPage;
-  const to = Math.min((page + 1) * itemsPerPage, exampleItems.length);
+  const data = chunk(workoutLogs, 6);
+
+  const from = examplePage * itemsPerPage;
+  const to = Math.min((examplePage + 1) * itemsPerPage, exampleItems.length);
 
   useEffect(() => {
-    setPage(0);
+    setExamplePage(0);
   }, [itemsPerPage]);
 
   return (
@@ -81,9 +83,9 @@ export default function WorkoutLogPages() {
         ))}
 
         <DataTable.Pagination
-          page={page}
+          page={examplePage}
           numberOfPages={Math.ceil(exampleItems.length / itemsPerPage)}
-          onPageChange={(page) => setPage(page)}
+          onPageChange={(page) => setExamplePage(page)}
           label={`${from + 1}-${to} of ${exampleItems.length}`}
           numberOfItemsPerPageList={numberOfItemsPerPageList}
           numberOfItemsPerPage={itemsPerPage}
