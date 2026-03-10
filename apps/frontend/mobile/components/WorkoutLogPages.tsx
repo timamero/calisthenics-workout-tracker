@@ -17,12 +17,12 @@ export default function WorkoutLogPages() {
   );
   // console.log('workout logs', workoutLogs);
   const [page, setPage] = useState<number>(0);
-  const [numberOfItemsPerPageList] = useState([2, 3, 4]);
+  const [numberOfItemsPerPageList] = useState([1, 2, 3]);
   const [itemsPerPage, onItemsPerPageChange] = useState(
     numberOfItemsPerPageList[0],
   );
 
-  const [items] = useState([
+  const [exampleItems] = useState([
     {
       key: 1,
       name: 'Cupcake',
@@ -50,7 +50,7 @@ export default function WorkoutLogPages() {
   ]);
 
   const from = page * itemsPerPage;
-  const to = Math.min((page + 1) * itemsPerPage, items.length);
+  const to = Math.min((page + 1) * itemsPerPage, exampleItems.length);
 
   useEffect(() => {
     setPage(0);
@@ -65,7 +65,7 @@ export default function WorkoutLogPages() {
           <DataTable.Title numeric>Fat</DataTable.Title>
         </DataTable.Header> */}
 
-        {items.slice(from, to).map((item) => (
+        {exampleItems.slice(from, to).map((item) => (
           <DataTable.Row key={item.key}>
             <DataTable.Cell>
               <CardButton key={item.key}>
@@ -82,9 +82,9 @@ export default function WorkoutLogPages() {
 
         <DataTable.Pagination
           page={page}
-          numberOfPages={Math.ceil(items.length / itemsPerPage)}
+          numberOfPages={Math.ceil(exampleItems.length / itemsPerPage)}
           onPageChange={(page) => setPage(page)}
-          label={`${from + 1}-${to} of ${items.length}`}
+          label={`${from + 1}-${to} of ${exampleItems.length}`}
           numberOfItemsPerPageList={numberOfItemsPerPageList}
           numberOfItemsPerPage={itemsPerPage}
           onItemsPerPageChange={onItemsPerPageChange}
