@@ -18,7 +18,7 @@ export default function WorkoutLogPages() {
   // console.log('workout logs', workoutLogs);
   const [activePage, setPage] = useState<number>(0);
   // const [examplePage, setExamplePage] = useState<number>(0);
-  const [numberOfItemsPerPageList] = useState([6, 6, 3]);
+  const [numberOfItemsPerPageList] = useState([6, 4, 3]);
   const [itemsPerPage, onItemsPerPageChange] = useState(
     numberOfItemsPerPageList[0],
   );
