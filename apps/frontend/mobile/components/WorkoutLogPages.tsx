@@ -61,7 +61,12 @@ export default function WorkoutLogPages() {
     });
     const duration = formatDuration(wo.duration!);
     return (
-      <DataTable.Row key={wo.workout_build_id}>
+      <DataTable.Row
+        key={wo.workout_build_id}
+        style={{
+          borderBottomWidth: 0,
+        }}
+      >
         <DataTable.Cell>
           <CardButton>
             <Text
@@ -145,6 +150,14 @@ export default function WorkoutLogPages() {
           onItemsPerPageChange={onItemsPerPageChange}
           showFastPaginationControls
           selectPageDropdownLabel={'Rows per page'}
+          // style={{
+          //   borderBottomWidth: 10,
+          // }}
+          theme={{
+            colors: {
+              onSurface: theme.colors.light,
+            },
+          }}
         />
       </DataTable>
       {/* {workoutLogs.map((wo) => {
