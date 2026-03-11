@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ScrollView } from 'react-native';
 import { useTheme, DataTable } from 'react-native-paper';
 
@@ -12,6 +12,8 @@ import CardButton from '../components/common/CardButton';
 export default function WorkoutLogPages() {
   const theme = useTheme() as CustomTheme;
 
+  const scrollRef = useRef<ScrollView>(null);
+
   const workoutLogs = useWorkoutLibraryStore(
     (state) => state.displayedWorkoutLogs,
   );
@@ -22,6 +24,12 @@ export default function WorkoutLogPages() {
   );
 
   const data = chunk(workoutLogs, itemsPerPage);
+
+  const handlePageChangePress = (page: number) => {
+    setPage(page);
+
+    scrollRef.current?.scrollTo({ y: 0, animated: true });
+  };
 
   const items = data[activePage - 0].map((wo, i) => {
     const date = new Date(wo.date).toLocaleString('en-US', {
@@ -69,6 +77,7 @@ export default function WorkoutLogPages() {
   return (
     <>
       <ScrollView
+        ref={scrollRef}
         style={{
           width: '100%',
           flex: 1,
@@ -80,7 +89,8 @@ export default function WorkoutLogPages() {
       <DataTable.Pagination
         page={activePage}
         numberOfPages={Math.ceil(workoutLogs.length / itemsPerPage)}
-        onPageChange={(page) => setPage(page)}
+        // onPageChange={(page) => setPage(page)}
+        onPageChange={(page) => handlePageChangePress(page)}
         label={`${from + 1}-${to} of ${workoutLogs.length}`}
         numberOfItemsPerPageList={numberOfItemsPerPageList}
         numberOfItemsPerPage={itemsPerPage}
