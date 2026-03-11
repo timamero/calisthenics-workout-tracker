@@ -81,7 +81,7 @@ export default function WorkoutLogPages() {
         style={{
           width: '100%',
           flex: 1,
-          backgroundColor: theme.colors.dark700,
+          backgroundColor: theme.colors.dark900,
         }}
       >
         <DataTable>{items}</DataTable>
@@ -95,11 +95,16 @@ export default function WorkoutLogPages() {
         numberOfItemsPerPageList={numberOfItemsPerPageList}
         numberOfItemsPerPage={itemsPerPage}
         onItemsPerPageChange={onItemsPerPageChange}
-        showFastPaginationControls
+        showFastPaginationControls={false}
         selectPageDropdownLabel={'Rows per page'}
+        style={{ borderTopColor: theme.colors.light, borderTopWidth: 1 }}
         theme={{
           colors: {
             onSurface: theme.colors.light,
+            // surface: theme.colors.dark800,
+            elevation: {
+              level2: theme.colors.dark800,
+            },
           },
         }}
       />
