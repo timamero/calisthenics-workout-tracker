@@ -18,7 +18,7 @@ export default function WorkoutLogPages() {
   // console.log('workout logs', workoutLogs);
   const [activePage, setPage] = useState<number>(1);
   // const [examplePage, setExamplePage] = useState<number>(0);
-  const [numberOfItemsPerPageList] = useState([1, 2, 3]);
+  const [numberOfItemsPerPageList] = useState([6, 6, 3]);
   // const [itemsPerPage, onItemsPerPageChange] = useState(
   //   numberOfItemsPerPageList[0],
   // );
@@ -146,7 +146,7 @@ export default function WorkoutLogPages() {
           selectPageDropdownLabel={'Rows per page'}
         />
       </DataTable>
-      {workoutLogs.map((wo) => {
+      {/* {workoutLogs.map((wo) => {
         const date = new Date(wo.date).toLocaleString('en-US', {
           year: 'numeric',
           month: 'long',
@@ -175,7 +175,7 @@ export default function WorkoutLogPages() {
             </Text>
           </CardButton>
         );
-      })}
+      })} */}
     </ScrollView>
   );
 }
