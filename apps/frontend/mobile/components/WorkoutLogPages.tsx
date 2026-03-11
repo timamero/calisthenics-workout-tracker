@@ -16,12 +16,13 @@ export default function WorkoutLogPages() {
     (state) => state.displayedWorkoutLogs,
   );
   // console.log('workout logs', workoutLogs);
-  const [activePage, setPage] = useState<number>(1);
+  const [activePage, setPage] = useState<number>(0);
   // const [examplePage, setExamplePage] = useState<number>(0);
   const [numberOfItemsPerPageList] = useState([6, 6, 3]);
-  // const [itemsPerPage, onItemsPerPageChange] = useState(
-  //   numberOfItemsPerPageList[0],
-  // );
+  const [itemsPerPage, onItemsPerPageChange] = useState(
+    numberOfItemsPerPageList[0],
+  );
+  // const itemsPerPage = 6;
 
   // const [exampleItems] = useState([
   //   {
@@ -50,9 +51,9 @@ export default function WorkoutLogPages() {
   //   },
   // ]);
 
-  const data = chunk(workoutLogs, 6);
+  const data = chunk(workoutLogs, itemsPerPage);
 
-  const items = data[activePage - 1].map((wo, i) => {
+  const items = data[activePage - 0].map((wo, i) => {
     const date = new Date(wo.date).toLocaleString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -89,8 +90,8 @@ export default function WorkoutLogPages() {
 
   // const from = examplePage * itemsPerPage;
   // const to = Math.min((examplePage + 1) * itemsPerPage, exampleItems.length);
-  const from = activePage * 6;
-  const to = Math.min((activePage + 1) * 6, workoutLogs.length);
+  const from = activePage * itemsPerPage;
+  const to = Math.min((activePage + 1) * itemsPerPage, workoutLogs.length);
 
   // useEffect(() => {
   //   // setExamplePage(0);
@@ -136,12 +137,12 @@ export default function WorkoutLogPages() {
         {/* Need to fix the pagination parameters */}
         <DataTable.Pagination
           page={activePage}
-          numberOfPages={Math.ceil(workoutLogs.length / 6)}
+          numberOfPages={Math.ceil(workoutLogs.length / itemsPerPage)}
           onPageChange={(page) => setPage(page)}
           label={`${from + 1}-${to} of ${workoutLogs.length}`}
           numberOfItemsPerPageList={numberOfItemsPerPageList}
-          numberOfItemsPerPage={6}
-          // onItemsPerPageChange={onItemsPerPageChange}
+          numberOfItemsPerPage={itemsPerPage}
+          onItemsPerPageChange={onItemsPerPageChange}
           showFastPaginationControls
           selectPageDropdownLabel={'Rows per page'}
         />
