@@ -22,6 +22,10 @@
       "types": "./dist/lib/exercises/schemas.index.d.ts",
       "default": "./dist/lib/exercises/schemas/index.js"
     },
+    "./forms": {
+      "types": "./dist/lib/forms/types.d.ts",
+      "default": "./dist/lib/forms/types.js"
+    },
     "./workouts": {
       "types": "./dist/lib/workouts/types.d.ts",
       "default": "./dist/lib/workouts/types.js"
