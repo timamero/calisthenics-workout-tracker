@@ -48,17 +48,17 @@ function LoginView() {
           placeholder="Enter your email"
           size="md"
           mb="md"
+          error={errors?.email?.message}
           {...register('email')}
         />
-        {errors?.email?.message && <p>{errors.email.message}</p>}
         <PasswordInput
           label="Password"
           placeholder="Enter your password"
           size="md"
           mb="md"
+          error={errors?.password?.message}
           {...register('password')}
         />
-        {errors?.password?.message && <p>{errors.password.message}</p>}
         <Group mt="md" right="0">
           <Button type="submit" size="md">
             Log In
