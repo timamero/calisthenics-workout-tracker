@@ -26,6 +26,7 @@ function SignUpView() {
     formState: { errors },
   } = useForm<AuthSignUp>({
     resolver: zodResolver(AuthSignUpSchema),
+    mode: 'onBlur',
     defaultValues: {
       email: '',
       password: '',
