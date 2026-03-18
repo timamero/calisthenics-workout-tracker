@@ -12,10 +12,6 @@ import { CustomTheme } from '../theme';
 import { supabase } from '../services/supabaseClient';
 
 export default function SignupScreen() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [confirmPassword, setConfirmPassword] = useState('');
-
   const theme = useTheme() as CustomTheme;
 
   const {
@@ -51,12 +47,11 @@ export default function SignupScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displaySmall">Sign Up</Text>
+      <Text variant="displaySmall" style={{ color: theme.colors.light }}>
+        Sign Up
+      </Text>
       <Controller
         control={control}
-        // rules={{
-        //   required: true,
-        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Email"
@@ -75,18 +70,8 @@ export default function SignupScreen() {
           {errors?.email?.message}
         </Text>
       )}
-      {/* <TextInput
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        keyboardType="email-address"
-      /> */}
       <Controller
         control={control}
-        // rules={{
-        //   required: true,
-        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Password"
@@ -104,17 +89,8 @@ export default function SignupScreen() {
           {errors?.password?.message}
         </Text>
       )}
-      {/* <TextInput
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      /> */}
       <Controller
         control={control}
-        // rules={{
-        //   required: true,
-        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Confirm Password"
@@ -132,12 +108,6 @@ export default function SignupScreen() {
           {errors?.confirmPassword?.message}
         </Text>
       )}
-      {/* <TextInput
-        label="Confirm Password"
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-        secureTextEntry
-      /> */}
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
