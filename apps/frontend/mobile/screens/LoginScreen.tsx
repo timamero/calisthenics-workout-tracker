@@ -11,9 +11,6 @@ import { CustomTheme } from '../theme';
 import { supabase } from '../services/supabaseClient';
 
 export default function LoginScreen() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
   const theme = useTheme() as CustomTheme;
 
   const {
@@ -33,7 +30,6 @@ export default function LoginScreen() {
     console.log('User:', user);
   };
 
-  console.log('errors: ', errors);
   return (
     <View
       style={{
@@ -51,10 +47,6 @@ export default function LoginScreen() {
         Log In
       </Text>
       <Controller
-        control={control}
-        // rules={{
-        //   required: true,
-        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Email"
@@ -71,19 +63,8 @@ export default function LoginScreen() {
           {errors?.email?.message}
         </Text>
       )}
-      {/* <TextInput
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        keyboardType="email-address"
-        error={typeof errors?.email?.message === 'string'}
-      /> */}
       <Controller
         control={control}
-        // rules={{
-        //   required: true,
-        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Password"
@@ -101,13 +82,6 @@ export default function LoginScreen() {
           {errors?.password?.message}
         </Text>
       )}
-      {/* <TextInput
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        error={typeof errors?.password?.message === 'string'}
-      /> */}
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
