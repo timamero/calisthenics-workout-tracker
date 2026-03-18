@@ -7,6 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createUser } from '@cwt/auth/createUser';
 import { AuthSignUpSchema, type AuthSignUp } from '@cwt/schema/forms';
 
+import { CustomTheme } from '../theme';
+
 import { supabase } from '../services/supabaseClient';
 
 export default function SignupScreen() {
@@ -14,7 +16,7 @@ export default function SignupScreen() {
   // const [password, setPassword] = useState('');
   // const [confirmPassword, setConfirmPassword] = useState('');
 
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
 
   const {
     control,
@@ -52,9 +54,9 @@ export default function SignupScreen() {
       <Text variant="displaySmall">Sign Up</Text>
       <Controller
         control={control}
-        rules={{
-          required: true,
-        }}
+        // rules={{
+        //   required: true,
+        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Email"
@@ -68,7 +70,11 @@ export default function SignupScreen() {
         )}
         name="email"
       />
-      {errors.email && <Text>{errors?.email?.message}</Text>}
+      {errors.email && (
+        <Text style={{ color: theme.colors.errorLight }}>
+          {errors?.email?.message}
+        </Text>
+      )}
       {/* <TextInput
         label="Email"
         value={email}
@@ -78,9 +84,9 @@ export default function SignupScreen() {
       /> */}
       <Controller
         control={control}
-        rules={{
-          required: true,
-        }}
+        // rules={{
+        //   required: true,
+        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Password"
@@ -93,7 +99,11 @@ export default function SignupScreen() {
         )}
         name="password"
       />
-      {errors.email && <Text>{errors?.password?.message}</Text>}
+      {errors.password && (
+        <Text style={{ color: theme.colors.errorLight }}>
+          {errors?.password?.message}
+        </Text>
+      )}
       {/* <TextInput
         label="Password"
         value={password}
@@ -102,9 +112,9 @@ export default function SignupScreen() {
       /> */}
       <Controller
         control={control}
-        rules={{
-          required: true,
-        }}
+        // rules={{
+        //   required: true,
+        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Confirm Password"
@@ -117,7 +127,11 @@ export default function SignupScreen() {
         )}
         name="confirmPassword"
       />
-      {errors.email && <Text>{errors?.password?.message}</Text>}
+      {errors.confirmPassword && (
+        <Text style={{ color: theme.colors.errorLight }}>
+          {errors?.confirmPassword?.message}
+        </Text>
+      )}
       {/* <TextInput
         label="Confirm Password"
         value={confirmPassword}
@@ -127,7 +141,7 @@ export default function SignupScreen() {
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
-        onPress={() => handleSubmit((d) => handleSignUp(d))}
+        onPress={handleSubmit((d) => handleSignUp(d))}
       >
         Sign Up
       </Button>
