@@ -7,13 +7,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from '@cwt/auth/signIn';
 import { AuthSchema, type Auth } from '@cwt/schema/forms';
 
+import { CustomTheme } from '../theme';
 import { supabase } from '../services/supabaseClient';
 
 export default function LoginScreen() {
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
 
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
 
   const {
     control,
@@ -32,6 +33,7 @@ export default function LoginScreen() {
     console.log('User:', user);
   };
 
+  console.log('errors: ', errors);
   return (
     <View
       style={{
@@ -45,12 +47,14 @@ export default function LoginScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displaySmall">Log In</Text>
+      <Text variant="displaySmall" style={{ color: theme.colors.light }}>
+        Log In
+      </Text>
       <Controller
         control={control}
-        rules={{
-          required: true,
-        }}
+        // rules={{
+        //   required: true,
+        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Email"
@@ -62,7 +66,11 @@ export default function LoginScreen() {
         )}
         name="email"
       />
-      {errors.email && <Text>{errors?.email?.message}</Text>}
+      {errors.email && (
+        <Text style={{ color: theme.colors.errorLight }}>
+          {errors?.email?.message}
+        </Text>
+      )}
       {/* <TextInput
         label="Email"
         value={email}
@@ -73,9 +81,9 @@ export default function LoginScreen() {
       /> */}
       <Controller
         control={control}
-        rules={{
-          required: true,
-        }}
+        // rules={{
+        //   required: true,
+        // }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Password"
@@ -88,7 +96,11 @@ export default function LoginScreen() {
         )}
         name="password"
       />
-      {errors.email && <Text>{errors?.password?.message}</Text>}
+      {errors.password && (
+        <Text style={{ color: theme.colors.errorLight }}>
+          {errors?.password?.message}
+        </Text>
+      )}
       {/* <TextInput
         label="Password"
         value={password}
@@ -99,7 +111,7 @@ export default function LoginScreen() {
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
-        onPress={() => handleSubmit((d) => handleLogin(d))}
+        onPress={handleSubmit((d) => handleLogin(d))}
       >
         Log In
       </Button>

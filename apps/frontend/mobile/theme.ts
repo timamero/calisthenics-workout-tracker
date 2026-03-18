@@ -18,6 +18,8 @@ export type CustomTheme = typeof DefaultTheme & {
     orange1: string;
     light: string;
 
+    errorLight: string;
+
     orange50: string;
     orange100: string;
     orange200: string;
@@ -127,6 +129,8 @@ const theme: CustomTheme = {
     dark9: 'rgb(20 20 20)', // mantine: dark.9
     orange1: 'rgb(255 232 204)', // mantine: orange.1
     light: 'rgb(255 244 230)', // mantine: orange.0
+
+    errorLight: '#FFA07A',
 
     orange50: '#fff0ef',
     orange100: '#ffe1df',
