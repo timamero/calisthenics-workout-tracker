@@ -32,18 +32,8 @@ function useAuthFormLogic(supabase: SupabaseClient, appType: AppTypeSchema) {
 }
 
 export function useAuthLogin(supabase: SupabaseClient) {
-  const { handleLogin, handleSubmit, errors, register } = useAuthFormLogic(
-    supabase,
-    "web",
-  );
-
-  return { handleLogin, handleSubmit, errors, register };
+  return useAuthFormLogic(supabase, "web");
 }
 export function useAuthLoginMobile(supabase: SupabaseClient) {
-  const { handleLogin, handleSubmit, errors, control } = useAuthFormLogic(
-    supabase,
-    "mobile",
-  );
-
-  return { handleLogin, handleSubmit, errors, control };
+  return useAuthFormLogic(supabase, "mobile");
 }
