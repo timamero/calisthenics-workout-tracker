@@ -15,6 +15,14 @@ export default function LoginScreen() {
 
   const auth = useAuthLoginMobile(supabase);
 
+  const handleSubmitPress = (e: React.BaseSyntheticEvent) => {
+    if (auth.authError) {
+      auth.clearError();
+    }
+
+    auth.handleSubmit(e);
+  };
+
   return (
     <View
       style={{
@@ -74,10 +82,15 @@ export default function LoginScreen() {
           {auth.errors?.password?.message}
         </Text>
       )}
+      {auth.authError && (
+        <Text style={{ color: theme.colors.errorLight }}>{auth.authError}</Text>
+      )}
+      {/* TODO: Style disabled button */}
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
-        onPress={auth.handleSubmit}
+        onPress={handleSubmitPress}
+        disabled={auth.isLoading ? true : false}
       >
         Log In
       </Button>
