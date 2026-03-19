@@ -1,3 +1,8 @@
-import { useAuthLogin } from "./useAuthForm";
+import {
+  useAuthLogin,
+  useAuthSignUp,
+  useAuthLoginMobile,
+  useAuthSignUpMobile,
+} from "./useAuthForm";
 
-export { useAuthLogin };
+export { useAuthLogin, useAuthSignUp, useAuthLoginMobile, useAuthSignUpMobile };
