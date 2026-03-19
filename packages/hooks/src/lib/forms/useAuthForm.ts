@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type SupabaseClient } from "@supabase/supabase-js";
@@ -10,69 +11,155 @@ import {
   type Auth,
   type AuthSignUp,
 } from "@cwt/schema/forms";
-import { AppTypeSchema } from "@cwt/schema/common";
 
-function useAuthFormLogic(
-  supabase: SupabaseClient,
-  appType: AppTypeSchema,
-  authType: "login" | "signup",
-) {
-  const defaultLoginValues = {
-    email: "",
-    password: "",
-  };
-
-  const defaultSignUpValues = {
-    ...defaultLoginValues,
-    confirmPassword: "",
-  };
-
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Auth | AuthSignUp>({
-    resolver: zodResolver(authType === "login" ? AuthSchema : AuthSignUpSchema),
-    defaultValues:
-      authType === "login" ? defaultLoginValues : defaultSignUpValues,
-  });
+function useAuth(supabase: SupabaseClient) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   const handleLogin = async ({ email, password }: Auth) => {
-    const user = await signIn(supabase, email, password);
-    console.log("User:", user);
-  };
+    setIsLoading(true);
+    setAuthError(null);
 
-  const handleSignUp = async ({
-    email,
-    password,
-  }: Pick<AuthSignUp, "email" | "password">) => {
-    const user = createUser(supabase, email, password);
-    console.log("User:", user);
-  };
-
-  if (appType === "web") {
-    if (authType === "login") {
-      return { handleLogin, handleSubmit, errors, register };
+    try {
+      const user = await signIn(supabase, email, password);
+      if (!user) {
+        setAuthError("Failed to sign in. Please check your credentials.");
+        return null;
+      }
+      return user;
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "An error occurred";
+      setAuthError(message);
+      return null;
+    } finally {
+      setIsLoading(false);
     }
-    return { handleSignUp, handleSubmit, errors, register };
-  }
+  };
 
-  if (authType === "login") {
-    return { handleLogin, handleSubmit, errors, control };
-  }
-  return { handleSignUp, handleSubmit, errors, control };
+  const handleSignUp = async ({ email, password }: Auth) => {
+    setIsLoading(true);
+    setAuthError(null);
+
+    try {
+      const user = await createUser(supabase, email, password);
+      if (!user) {
+        setAuthError("Failed to create account. Please try again.");
+        return null;
+      }
+      return user;
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "An error occurred";
+      setAuthError(message);
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const clearError = () => setAuthError(null);
+
+  return { handleLogin, handleSignUp, isLoading, authError, clearError };
 }
 
 export function useAuthLogin(supabase: SupabaseClient) {
-  return useAuthFormLogic(supabase, "web", "login");
-}
-export function useAuthLoginMobile(supabase: SupabaseClient) {
-  return useAuthFormLogic(supabase, "mobile", "login");
+  const auth = useAuth(supabase);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Auth>({
+    resolver: zodResolver(AuthSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  // const onSubmit = async (data: Auth) => {
+  //   return auth.handleLogin(data);
+  // };
+
+  return {
+    isLoading: auth.isLoading,
+    authError: auth.authError,
+    clearError: auth.clearError,
+    register,
+    handleSubmit: handleSubmit(auth.handleLogin),
+    errors,
+  };
 }
 export function useAuthSignUp(supabase: SupabaseClient) {
-  return useAuthFormLogic(supabase, "web", "signup");
+  const auth = useAuth(supabase);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthSignUp>({
+    resolver: zodResolver(AuthSignUpSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  return {
+    isLoading: auth.isLoading,
+    authError: auth.authError,
+    clearError: auth.clearError,
+    register,
+    handleSubmit: handleSubmit(auth.handleSignUp),
+    errors,
+  };
+}
+export function useAuthLoginMobile(supabase: SupabaseClient) {
+  const auth = useAuth(supabase);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Auth>({
+    resolver: zodResolver(AuthSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  return {
+    isLoading: auth.isLoading,
+    authError: auth.authError,
+    clearError: auth.clearError,
+    control,
+    handleSubmit: handleSubmit(auth.handleLogin),
+    errors,
+  };
 }
 export function useAuthSignUpMobile(supabase: SupabaseClient) {
-  return useAuthFormLogic(supabase, "mobile", "signup");
+  const auth = useAuth(supabase);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthSignUp>({
+    resolver: zodResolver(AuthSignUpSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  return {
+    isLoading: auth.isLoading,
+    authError: auth.authError,
+    clearError: auth.clearError,
+    control,
+    handleSubmit: handleSubmit(auth.handleSignUp),
+    errors,
+  };
 }
