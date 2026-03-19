@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useTheme, TextInput, Text, Button } from 'react-native-paper';
 import { Controller } from 'react-hook-form';
@@ -10,6 +10,10 @@ import { supabase } from '../services/supabaseClient';
 
 export default function SignupScreen() {
   const theme = useTheme() as CustomTheme;
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState<boolean>(false);
 
   const auth = useAuthSignUpMobile(supabase);
 
@@ -54,10 +58,16 @@ export default function SignupScreen() {
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Password"
+            right={
+              <TextInput.Icon
+                icon="eye"
+                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+              />
+            }
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
-            secureTextEntry
+            secureTextEntry={!isPasswordVisible}
             error={typeof auth.errors?.password?.message === 'string'}
           />
         )}
@@ -73,10 +83,18 @@ export default function SignupScreen() {
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Confirm Password"
+            right={
+              <TextInput.Icon
+                icon="eye"
+                onPress={() =>
+                  setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
+                }
+              />
+            }
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
-            secureTextEntry
+            secureTextEntry={!isConfirmPasswordVisible}
             error={typeof auth.errors?.confirmPassword?.message === 'string'}
           />
         )}
