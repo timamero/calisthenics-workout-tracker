@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useTheme, TextInput, Text, Button } from 'react-native-paper';
 import { Controller } from 'react-hook-form';
+
 import { useAuthLoginMobile } from '@cwt/hooks';
 
 import { CustomTheme } from '../theme';
@@ -9,6 +10,8 @@ import { supabase } from '../services/supabaseClient';
 
 export default function LoginScreen() {
   const theme = useTheme() as CustomTheme;
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   const auth = useAuthLoginMobile(supabase);
 
@@ -51,10 +54,16 @@ export default function LoginScreen() {
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             label="Password"
+            right={
+              <TextInput.Icon
+                icon="eye"
+                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+              />
+            }
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
-            secureTextEntry
+            secureTextEntry={!isPasswordVisible}
             error={typeof auth.errors?.password?.message === 'string'}
           />
         )}
