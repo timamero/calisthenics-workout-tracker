@@ -7,11 +7,7 @@ import {
   Box,
   Title,
 } from '@mantine/core';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-
-import { createUser } from '@cwt/auth/createUser';
-import { AuthSignUpSchema, type AuthSignUp } from '@cwt/schema/forms';
+import { useAuthSignUp } from '@cwt/hooks';
 
 import { supabase } from '../services/supabaseClient';
 
@@ -20,56 +16,37 @@ export const Route = createFileRoute('/signup')({
 });
 
 function SignUpView() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<AuthSignUp>({
-    resolver: zodResolver(AuthSignUpSchema),
-    mode: 'onBlur',
-    defaultValues: {
-      email: '',
-      password: '',
-      confirmPassword: '',
-    },
-  });
+  const auth = useAuthSignUp(supabase);
 
-  const handleSignUp = async ({
-    email,
-    password,
-  }: Pick<AuthSignUp, 'email' | 'password'>) => {
-    const user = createUser(supabase, email, password);
-    console.log('User:', user);
-  };
   return (
     <Box maw={400} mx="auto" mt="xl">
       <Title order={2} mb="md">
         Create A New Account
       </Title>
-      <form onSubmit={handleSubmit((d) => handleSignUp(d))}>
+      <form onSubmit={auth.handleSubmit}>
         <TextInput
           label="Email"
           placeholder="Enter your email"
           size="md"
           mb="md"
-          error={errors?.email?.message}
-          {...register('email')}
+          error={auth.errors?.email?.message}
+          {...auth.register('email')}
         />
         <PasswordInput
           label="Password"
           placeholder="Enter your password"
           size="md"
           mb="md"
-          error={errors?.password?.message}
-          {...register('password')}
+          error={auth.errors?.password?.message}
+          {...auth.register('password')}
         />
         <PasswordInput
           label="Confirm Password"
           placeholder="Enter your password"
           size="md"
           mb="md"
-          error={errors?.confirmPassword?.message}
-          {...register('confirmPassword')}
+          error={auth.errors?.confirmPassword?.message}
+          {...auth.register('confirmPassword')}
         />
         <Group mt="md" right="0">
           <Button type="submit" size="md">
