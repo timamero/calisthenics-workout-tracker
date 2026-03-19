@@ -56,7 +56,7 @@ export default function LoginScreen() {
             label="Password"
             right={
               <TextInput.Icon
-                icon="eye"
+                icon={isPasswordVisible ? 'eye' : 'eye-off'}
                 onPress={() => setIsPasswordVisible(!isPasswordVisible)}
               />
             }

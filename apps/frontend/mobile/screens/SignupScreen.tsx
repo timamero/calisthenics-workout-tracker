@@ -60,7 +60,7 @@ export default function SignupScreen() {
             label="Password"
             right={
               <TextInput.Icon
-                icon="eye"
+                icon={isPasswordVisible ? 'eye' : 'eye-off'}
                 onPress={() => setIsPasswordVisible(!isPasswordVisible)}
               />
             }
@@ -85,7 +85,7 @@ export default function SignupScreen() {
             label="Confirm Password"
             right={
               <TextInput.Icon
-                icon="eye"
+                icon={isConfirmPasswordVisible ? 'eye' : 'eye-off'}
                 onPress={() =>
                   setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
                 }
