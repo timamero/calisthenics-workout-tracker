@@ -17,6 +17,14 @@ export default function SignupScreen() {
 
   const auth = useAuthSignUpMobile(supabase);
 
+  const handleSubmitPress = (e: React.BaseSyntheticEvent) => {
+    if (auth.authError) {
+      auth.clearError();
+    }
+
+    auth.handleSubmit(e);
+  };
+
   return (
     <View
       style={{
@@ -105,10 +113,15 @@ export default function SignupScreen() {
           {auth.errors?.confirmPassword?.message}
         </Text>
       )}
+      {auth.authError && (
+        <Text style={{ color: theme.colors.errorLight }}>{auth.authError}</Text>
+      )}
+      {/* TODO: Style disabled button */}
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
-        onPress={auth.handleSubmit}
+        onPress={handleSubmitPress}
+        disabled={auth.isLoading ? true : false}
       >
         Sign Up
       </Button>

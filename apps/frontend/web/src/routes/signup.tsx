@@ -6,6 +6,7 @@ import {
   Group,
   Box,
   Title,
+  Text,
 } from '@mantine/core';
 import { useAuthSignUp } from '@cwt/hooks';
 
@@ -17,6 +18,12 @@ export const Route = createFileRoute('/signup')({
 
 function SignUpView() {
   const auth = useAuthSignUp(supabase);
+
+  const handleSubmitClick = () => {
+    if (auth.authError) {
+      auth.clearError();
+    }
+  };
 
   return (
     <Box maw={400} mx="auto" mt="xl">
@@ -48,8 +55,14 @@ function SignUpView() {
           error={auth.errors?.confirmPassword?.message}
           {...auth.register('confirmPassword')}
         />
+        {auth.authError && <Text c="red">{auth.authError}</Text>}
         <Group mt="md" right="0">
-          <Button type="submit" size="md">
+          <Button
+            type="submit"
+            size="md"
+            onClick={handleSubmitClick}
+            disabled={auth.isLoading ? true : false}
+          >
             Sign Up
           </Button>
           <Button type="button" size="md" variant="subtle">
