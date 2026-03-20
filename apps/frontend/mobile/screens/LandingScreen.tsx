@@ -2,8 +2,10 @@ import { View } from 'react-native';
 import { useTheme, Text, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
+import { CustomTheme } from '../theme';
+
 export default function LandingScreen() {
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
   return (
@@ -19,7 +21,9 @@ export default function LandingScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displaySmall">Sign Up or Log In</Text>
+      <Text variant="displaySmall" style={{ color: theme.colors.light }}>
+        Sign Up or Log In
+      </Text>
       <Button
         mode="contained"
         buttonColor="tomato"

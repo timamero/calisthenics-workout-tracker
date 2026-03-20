@@ -83,14 +83,41 @@ const MyTabs = createBottomTabNavigator({
   initialRouteName: 'Home',
 });
 
+const authScreenOptions = {
+  title: '',
+  headerStyle: {
+    backgroundColor: 'rgb(20 20 20)',
+  },
+  headerTitleStyle: {
+    color: 'rgb(255 244 230)',
+  },
+  headerTintColor: 'white',
+};
+
 // Auth Stack Navigator
 const AuthStack = createNativeStackNavigator({
   screens: {
-    Landing: LandingScreen,
-    Login: LoginScreen,
-    Signup: SignupScreen,
-    Onboarding: OnboardingScreen,
-    OnboardingComplete: OnboardingComplete,
+    // Landing: LandingScreen,
+    Landing: {
+      screen: LandingScreen,
+      options: { headerShown: false },
+    },
+    Login: {
+      screen: LoginScreen,
+      options: authScreenOptions,
+    },
+    Signup: {
+      screen: SignupScreen,
+      options: authScreenOptions,
+    },
+    Onboarding: {
+      screen: OnboardingScreen,
+      options: authScreenOptions,
+    },
+    OnboardingComplete: {
+      screen: OnboardingComplete,
+      options: authScreenOptions,
+    },
   },
   initialRouteName: 'Landing',
 });
@@ -117,8 +144,13 @@ const RootStack = createNativeStackNavigator({
   groups: {
     SignedOut: {
       if: useIsSignedOut,
-      screens: { screen: AuthStack },
-      options: { headerShown: false },
+      screens: {
+        AuthStack: {
+          screen: AuthStack,
+          options: { headerShown: false },
+        },
+      },
+      // options: { headerShown: false },
     },
     SignedIn: {
       if: useIsSignedIn,
