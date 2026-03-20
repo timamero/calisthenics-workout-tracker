@@ -1,11 +1,7 @@
 import * as React from 'react';
-import {
-  createStaticNavigation,
-  // getFocusedRouteNameFromRoute,
-} from '@react-navigation/native';
+import { createStaticNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from '../screens/Home';
@@ -97,7 +93,6 @@ const authScreenOptions = {
 // Auth Stack Navigator
 const AuthStack = createNativeStackNavigator({
   screens: {
-    // Landing: LandingScreen,
     Landing: {
       screen: LandingScreen,
       options: { headerShown: false },
@@ -150,7 +145,6 @@ const RootStack = createNativeStackNavigator({
           options: { headerShown: false },
         },
       },
-      // options: { headerShown: false },
     },
     SignedIn: {
       if: useIsSignedIn,
