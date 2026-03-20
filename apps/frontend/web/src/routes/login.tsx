@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import {
   TextInput,
@@ -8,8 +9,10 @@ import {
   Title,
   Text,
 } from '@mantine/core';
+import { useNavigate } from '@tanstack/react-router';
 
 import { useAuthLogin } from '@cwt/hooks';
+import { useAuthStore } from '@cwt/state/stores';
 
 import { supabase } from '../services/supabaseClient';
 
@@ -18,13 +21,23 @@ export const Route = createFileRoute('/login')({
 });
 
 function LoginView() {
+  const navigate = useNavigate();
   const auth = useAuthLogin(supabase);
+  const user = useAuthStore((state) => state.user);
 
   const handleSubmitClick = () => {
     if (auth.authError) {
       auth.clearError();
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate({
+        to: '/',
+      });
+    }
+  }, [user, navigate]);
 
   return (
     <Box maw={400} mx="auto" mt="xl">
