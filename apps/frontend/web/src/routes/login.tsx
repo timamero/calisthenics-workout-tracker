@@ -37,7 +37,7 @@ function LoginView() {
           placeholder="Enter your email"
           size="md"
           mb="md"
-          error={auth.errors?.email?.message}
+          error={auth.errors.email?.message}
           {...auth.register('email')}
         />
         <PasswordInput
@@ -45,7 +45,7 @@ function LoginView() {
           placeholder="Enter your password"
           size="md"
           mb="md"
-          error={auth.errors?.password?.message}
+          error={auth.errors.password?.message}
           {...auth.register('password')}
         />
         {auth.authError && <Text c="red">{auth.authError}</Text>}
@@ -54,7 +54,11 @@ function LoginView() {
             type="submit"
             size="md"
             onClick={handleSubmitClick}
-            disabled={auth.isLoading ? true : false}
+            disabled={
+              auth.isLoading || auth.errors.email || auth.errors.password
+                ? true
+                : false
+            }
           >
             Log In
           </Button>
