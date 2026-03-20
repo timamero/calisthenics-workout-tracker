@@ -51,14 +51,14 @@ export default function SignupScreen() {
             autoCapitalize="none"
             keyboardType="email-address"
             value={value}
-            error={typeof auth.errors?.email?.message === 'string'}
+            error={typeof auth.errors.email?.message === 'string'}
           />
         )}
         name="email"
       />
       {auth.errors.email && (
         <Text style={{ color: theme.colors.errorLight }}>
-          {auth.errors?.email?.message}
+          {auth.errors.email?.message}
         </Text>
       )}
       <Controller
@@ -76,14 +76,14 @@ export default function SignupScreen() {
             onChangeText={onChange}
             value={value}
             secureTextEntry={!isPasswordVisible}
-            error={typeof auth.errors?.password?.message === 'string'}
+            error={typeof auth.errors.password?.message === 'string'}
           />
         )}
         name="password"
       />
       {auth.errors.password && (
         <Text style={{ color: theme.colors.errorLight }}>
-          {auth.errors?.password?.message}
+          {auth.errors.password?.message}
         </Text>
       )}
       <Controller
@@ -103,14 +103,14 @@ export default function SignupScreen() {
             onChangeText={onChange}
             value={value}
             secureTextEntry={!isConfirmPasswordVisible}
-            error={typeof auth.errors?.confirmPassword?.message === 'string'}
+            error={typeof auth.errors.confirmPassword?.message === 'string'}
           />
         )}
         name="confirmPassword"
       />
       {auth.errors.confirmPassword && (
         <Text style={{ color: theme.colors.errorLight }}>
-          {auth.errors?.confirmPassword?.message}
+          {auth.errors.confirmPassword?.message}
         </Text>
       )}
       {auth.authError && (
@@ -121,7 +121,14 @@ export default function SignupScreen() {
         mode="contained"
         buttonColor={theme.colors.primary}
         onPress={handleSubmitPress}
-        disabled={auth.isLoading ? true : false}
+        disabled={
+          auth.isLoading ||
+          auth.errors.email ||
+          auth.errors.password ||
+          auth.errors.confirmPassword
+            ? true
+            : false
+        }
       >
         Sign Up
       </Button>

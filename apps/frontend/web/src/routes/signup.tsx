@@ -36,7 +36,7 @@ function SignUpView() {
           placeholder="Enter your email"
           size="md"
           mb="md"
-          error={auth.errors?.email?.message}
+          error={auth.errors.email?.message}
           {...auth.register('email')}
         />
         <PasswordInput
@@ -44,7 +44,7 @@ function SignUpView() {
           placeholder="Enter your password"
           size="md"
           mb="md"
-          error={auth.errors?.password?.message}
+          error={auth.errors.password?.message}
           {...auth.register('password')}
         />
         <PasswordInput
@@ -52,7 +52,7 @@ function SignUpView() {
           placeholder="Enter your password"
           size="md"
           mb="md"
-          error={auth.errors?.confirmPassword?.message}
+          error={auth.errors.confirmPassword?.message}
           {...auth.register('confirmPassword')}
         />
         {auth.authError && <Text c="red">{auth.authError}</Text>}
@@ -61,7 +61,14 @@ function SignUpView() {
             type="submit"
             size="md"
             onClick={handleSubmitClick}
-            disabled={auth.isLoading ? true : false}
+            disabled={
+              auth.isLoading ||
+              auth.errors.email ||
+              auth.errors.password ||
+              auth.errors.confirmPassword
+                ? true
+                : false
+            }
           >
             Sign Up
           </Button>
