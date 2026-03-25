@@ -2,13 +2,19 @@ import * as React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
+import { useWorkoutLogDetailContextMobile } from '@cwt/hooks';
+
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
 export default function ExerciseDetailOverlay() {
-  const hideModal = React.useContext(ExerciseDetailContext)?.hideModal;
-  const visible = React.useContext(ExerciseDetailContext)?.visible;
+  const workoutLogDetail = useWorkoutLogDetailContextMobile().workout;
+  const visible =
+    useWorkoutLogDetailContextMobile().mobileOverlayHandlers.isOverlayVisible;
+  const setVisible =
+    useWorkoutLogDetailContextMobile().mobileOverlayHandlers
+      .setIsOverlayVisible!;
   const exercise = React.useContext(ExerciseDetailContext)?.exercise;
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
@@ -23,7 +29,7 @@ export default function ExerciseDetailOverlay() {
     <Portal>
       <Modal
         visible={visible || false}
-        onDismiss={hideModal}
+        onDismiss={() => setVisible(!visible)}
         contentContainerStyle={containerStyle}
       >
         <View style={{ paddingInline: 16 }}>
@@ -38,7 +44,7 @@ export default function ExerciseDetailOverlay() {
             <Button
               mode="outlined"
               textColor={theme.colors.light}
-              onPress={hideModal}
+              onPress={() => setVisible(!visible)}
             >
               Back to Exercises
             </Button>
@@ -57,7 +63,7 @@ export default function ExerciseDetailOverlay() {
             >
               <View>
                 <Text variant="bodyLarge" style={styles.metadataTitle}>
-                  Target Muscles
+                  {workoutLogDetail?.title}
                 </Text>
               </View>
             </View>
