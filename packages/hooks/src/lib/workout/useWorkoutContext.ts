@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { WorkoutContext, WorkoutContextType } from "@cwt/context";
+import { WorkoutContext } from "@cwt/context";
 
 export function useWorkoutContext() {
   const context = useContext(WorkoutContext);
   if (!context) {
     throw new Error(
-      "useWorkoutContext must be used within WorkoutContextProvider"
+      "useWorkoutContext must be used within WorkoutContextProvider",
     );
   }
 
@@ -16,7 +16,7 @@ export function useWorkoutContextWeb() {
   const context = useWorkoutContext();
   if (!context.webOverlayHandlers) {
     throw new Error(
-      "useWorkoutContextWeb must be used in web app with webOverlayHandlers provided"
+      "useWorkoutContextWeb must be used in web app with webOverlayHandlers provided",
     );
   }
 
@@ -29,7 +29,7 @@ export function useWorkoutContextMobile() {
   const context = useWorkoutContext();
   if (!context.mobileOverlayHandlers) {
     throw new Error(
-      "useWorkoutContextMobile must be used in mobile app with mobileOverlayHandlers provided"
+      "useWorkoutContextMobile must be used in mobile app with mobileOverlayHandlers provided",
     );
   }
 

@@ -1,19 +1,22 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { Modal, Stack, Text, Group, Button, Title } from '@mantine/core';
 
-import { WorkoutLogDetailContext } from '@cwt/context';
+// import { WorkoutLogDetailContext } from '@cwt/context';
 import { formatDuration } from '@cwt/utils';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 
 import WorkoutData from './WorkoutDraft/WorkoutData';
 
 export default function WorkoutLogDetailOverlay() {
-  const workoutLogDetail = useContext(WorkoutLogDetailContext)!
+  const workoutLogDetail = useWorkoutLogDetailContextWeb()
     .workout as WorkoutLogResponse;
-  const detailHandlers = useContext(WorkoutLogDetailContext)?.handlers;
-  const detailOpened = useContext(WorkoutLogDetailContext)?.opened;
-  const setDetailWorkout = useContext(WorkoutLogDetailContext)?.setWorkout;
+  const detailHandlers =
+    useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
+  const detailOpened =
+    useWorkoutLogDetailContextWeb().webOverlayHandlers?.opened;
+  const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
 
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
