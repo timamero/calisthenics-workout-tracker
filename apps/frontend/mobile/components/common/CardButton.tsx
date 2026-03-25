@@ -5,15 +5,16 @@ import { StyleSheet } from 'react-native';
 import { CustomTheme } from '../../theme';
 
 interface CardButtonProps {
+  handlePress: () => void;
   children: ReactNode;
 }
 
-export default function CardButton({ children }: CardButtonProps) {
+export default function CardButton({ handlePress, children }: CardButtonProps) {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
   return (
-    <Card style={styles.card} onPress={() => console.log('clicked on card')}>
+    <Card style={styles.card} onPress={() => handlePress()}>
       <Card.Content style={styles.cardContent}>{children}</Card.Content>
     </Card>
   );
