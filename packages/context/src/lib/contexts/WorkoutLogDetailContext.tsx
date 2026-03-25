@@ -4,7 +4,6 @@ import { WorkoutLogResponse } from "@cwt/schema/workouts";
 import { AppTypeSchema } from "@cwt/schema/common";
 
 export type WorkoutLogDetailContextType = {
-  appType: AppTypeSchema;
   workout: WorkoutLogResponse | null;
   setWorkout: React.Dispatch<React.SetStateAction<WorkoutLogResponse | null>>;
 

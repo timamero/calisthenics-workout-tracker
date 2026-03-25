@@ -2,15 +2,12 @@ import { useState, type ReactNode } from "react";
 import { useDisclosure } from "@mantine/hooks";
 
 import { WorkoutLogResponse } from "@cwt/schema/workouts";
-import { AppTypeSchema } from "@cwt/schema/common";
 
 import { WorkoutLogDetailContext } from "../contexts/WorkoutLogDetailContext";
 
 export default function WorkoutLogDetailContextProvider({
-  appType,
   children,
 }: {
-  appType: AppTypeSchema;
   children: ReactNode;
 }) {
   const [workout, setWorkout] = useState<WorkoutLogResponse | null>(null);
@@ -31,16 +28,12 @@ export default function WorkoutLogDetailContextProvider({
 
   return (
     <WorkoutLogDetailContext.Provider
-      value={
-        appType === "web"
-          ? {
-              appType,
-              workout,
-              setWorkout,
-              ...webOverlayHandlers,
-            }
-          : { appType, workout, setWorkout, ...mobileOverlayHandlers }
-      }
+      value={{
+        workout,
+        setWorkout,
+        webOverlayHandlers,
+        mobileOverlayHandlers,
+      }}
     >
       {children}
     </WorkoutLogDetailContext.Provider>
