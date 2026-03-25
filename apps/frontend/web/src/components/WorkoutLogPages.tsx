@@ -1,10 +1,11 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Title, Text, Pagination, SimpleGrid, Stack, Box } from '@mantine/core';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
-import { WorkoutLogDetailContext } from '@cwt/context';
+// import { WorkoutLogDetailContext } from '@cwt/context';
 import { formatDuration, chunk } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 
 import CardButton from '../components/common/CardButton';
 import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
@@ -13,8 +14,9 @@ import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 export default function WorkoutLogPages() {
   const [activePage, setPage] = useState(1);
 
-  const detailHandlers = useContext(WorkoutLogDetailContext)?.handlers;
-  const setDetailWorkout = useContext(WorkoutLogDetailContext)?.setWorkout;
+  const detailHandlers =
+    useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
+  const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
 
   const logs = useWorkoutLibraryStore((state) => state.displayedWorkoutLogs);
   const setMode = useWorkoutDraftStore((state) => state.setMode);
