@@ -4,6 +4,7 @@ import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
 import { useWorkoutLogDetailContextMobile } from '@cwt/hooks';
 import { formatDuration } from '@cwt/utils';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
@@ -19,6 +20,9 @@ export default function ExerciseDetailOverlay() {
   const setVisible =
     useWorkoutLogDetailContextMobile().mobileOverlayHandlers
       .setIsOverlayVisible!;
+  const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
+
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   if (!workoutLogDetail) return null;
 
@@ -39,11 +43,17 @@ export default function ExerciseDetailOverlay() {
     day: 'numeric',
   });
 
+  const handleCloseModal = () => {
+    setVisible(false);
+    setDetailWorkout(null);
+    resetWorkout();
+  };
+
   return (
     <Portal>
       <Modal
         visible={visible || false}
-        onDismiss={() => setVisible(!visible)}
+        onDismiss={handleCloseModal}
         contentContainerStyle={containerStyle}
       >
         <View style={{ paddingInline: 16 }}>
@@ -58,7 +68,7 @@ export default function ExerciseDetailOverlay() {
             <Button
               mode="outlined"
               textColor={theme.colors.light}
-              onPress={() => setVisible(!visible)}
+              onPress={handleCloseModal}
             >
               Back to Workouts
             </Button>
