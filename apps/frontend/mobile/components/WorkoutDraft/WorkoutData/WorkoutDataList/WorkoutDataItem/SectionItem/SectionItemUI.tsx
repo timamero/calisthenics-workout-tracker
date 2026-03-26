@@ -64,7 +64,7 @@ export default function SectionItemUI({
             justifyContent: 'flex-start',
           }}
         >
-          {mode !== 'log' && (
+          {(mode === 'build' || mode === 'edit') && (
             <ReorderButtonGroup
               handleUpPress={() => handleUpPress()}
               handleDownPress={() => handleDownPress()}
@@ -74,7 +74,7 @@ export default function SectionItemUI({
           )}
           <Text style={{ color: theme.colors.light }}>Section</Text>
         </View>
-        {mode !== 'log' && (
+        {(mode === 'build' || mode === 'edit') && (
           <Button
             mode="outlined"
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}

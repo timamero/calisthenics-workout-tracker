@@ -54,7 +54,7 @@ export default function SetUI({
             style={{ color: theme.colors.light }}
           >{`Set ${setIndex + 1}`}</Text>
         )}
-        {showDeleteButton && mode !== 'log' && (
+        {showDeleteButton && (mode === 'build' || mode === 'edit') && (
           <Button
             mode="outlined"
             onPress={() => onDeleteSetPress()}
