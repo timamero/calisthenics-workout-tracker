@@ -3,20 +3,25 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
 import { useWorkoutLogDetailContextMobile } from '@cwt/hooks';
+import { formatDuration } from '@cwt/utils';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
-import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
+import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 export default function ExerciseDetailOverlay() {
-  const workoutLogDetail = useWorkoutLogDetailContextMobile().workout;
+  const theme = useTheme() as CustomTheme;
+
+  const workoutLogDetail = useWorkoutLogDetailContextMobile()
+    .workout as WorkoutLogResponse;
   const visible =
     useWorkoutLogDetailContextMobile().mobileOverlayHandlers.isOverlayVisible;
   const setVisible =
     useWorkoutLogDetailContextMobile().mobileOverlayHandlers
       .setIsOverlayVisible!;
-  const exercise = React.useContext(ExerciseDetailContext)?.exercise;
-  const theme = useTheme() as CustomTheme;
+
+  if (!workoutLogDetail) return null;
+
   const styles = getStyles(theme);
 
   const containerStyle = {
@@ -24,6 +29,15 @@ export default function ExerciseDetailOverlay() {
     paddingBlock: 20,
     marginInline: 16,
   };
+
+  const duration = workoutLogDetail.duration
+    ? formatDuration(workoutLogDetail.duration)
+    : null;
+  const date = new Date(workoutLogDetail.date).toLocaleString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
   return (
     <Portal>
@@ -46,11 +60,11 @@ export default function ExerciseDetailOverlay() {
               textColor={theme.colors.light}
               onPress={() => setVisible(!visible)}
             >
-              Back to Exercises
+              Back to Workouts
             </Button>
           </View>
           <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
-            {exercise?.name}
+            {workoutLogDetail?.title}
           </Text>
           <ScrollView style={{ height: 660 }}>
             <View
@@ -63,8 +77,19 @@ export default function ExerciseDetailOverlay() {
             >
               <View>
                 <Text variant="bodyLarge" style={styles.metadataTitle}>
-                  {workoutLogDetail?.title}
+                  {date}
                 </Text>
+                <Text variant="bodyLarge" style={styles.metadataTitle}>
+                  {workoutLogDetail?.description}
+                </Text>
+                <Text variant="bodyLarge" style={styles.metadataTitle}>
+                  {workoutLogDetail?.goal}
+                </Text>
+                {duration && (
+                  <Text variant="bodyLarge" style={styles.metadataTitle}>
+                    {duration}
+                  </Text>
+                )}
               </View>
             </View>
           </ScrollView>
@@ -78,8 +103,9 @@ const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     metadataTitle: {
       fontWeight: 700,
-      textTransform: 'uppercase',
-      color: theme.colors.grey,
+      // textTransform: 'uppercase',
+      // color: theme.colors.grey,
+      color: theme.colors.light,
       marginBottom: 4,
     },
     flexRowStart: {
