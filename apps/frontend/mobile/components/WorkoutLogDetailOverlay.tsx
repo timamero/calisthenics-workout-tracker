@@ -1,16 +1,18 @@
-import * as React from 'react';
+import { useRef } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
 import { useWorkoutLogDetailContextMobile } from '@cwt/hooks';
 import { formatDuration } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
-import { WorkoutLogResponse } from '@cwt/schema/workouts';
+import WorkoutData from './WorkoutDraft/WorkoutData';
 
-export default function ExerciseDetailOverlay() {
+export default function WorkoutLogDetailOverlay() {
+  const scrollViewRef = useRef<ScrollView | null>(null);
   const theme = useTheme() as CustomTheme;
 
   const workoutLogDetail = useWorkoutLogDetailContextMobile()
@@ -102,6 +104,7 @@ export default function ExerciseDetailOverlay() {
                 )}
               </View>
             </View>
+            <WorkoutData scrollViewRef={scrollViewRef} />
           </ScrollView>
         </View>
       </Modal>
