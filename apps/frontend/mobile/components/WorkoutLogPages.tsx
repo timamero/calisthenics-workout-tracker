@@ -13,7 +13,7 @@ import { WorkoutLogResponse } from '@cwt/schema/workouts';
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 import CardButton from '../components/common/CardButton';
-import WorkoutLogDetailOverlay from '../components/WorkoutLogDetailOverlay';
+import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 
 export default function WorkoutLogPages() {
   const theme = useTheme() as CustomTheme;
