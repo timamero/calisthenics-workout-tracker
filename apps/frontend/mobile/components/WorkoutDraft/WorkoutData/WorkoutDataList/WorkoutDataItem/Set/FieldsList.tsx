@@ -19,7 +19,9 @@ export default function FieldsList() {
           <NumeralInput key={`${field}-${i}`} label="Reps" fieldName="reps" />
         );
       case 'time':
-        return <DurationInput key={`${field}-${i}`} label="time" />;
+        return (
+          <DurationInput key={`${field}-${i}`} label="Time" fieldName="time" />
+        );
     }
   });
   return (
@@ -32,7 +34,7 @@ export default function FieldsList() {
       }}
     >
       {fields}
-      <DurationInput label="rest" />
+      <DurationInput label="Rest" fieldName="rest" />
     </View>
   );
 }
