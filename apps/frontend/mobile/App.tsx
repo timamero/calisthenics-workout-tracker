@@ -60,33 +60,35 @@ export default function App() {
 
   if (loading) {
     return (
-      <PaperProvider theme={theme}>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            flex: 1,
-            gap: 16,
-            paddingHorizontal: 16,
-            alignItems: 'stretch',
-            justifyContent: 'center',
-            backgroundColor: theme.colors.background,
-          }}
-        >
-          <ActivityIndicator size="large" color="#0000ff" />
-          <Text style={{ textAlign: 'center', marginTop: 10 }}>
-            Loading authentication state...
-          </Text>
-        </View>
-      </PaperProvider>
+      <WorkoutContextProvider appType="mobile">
+        <PaperProvider theme={theme}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              flex: 1,
+              gap: 16,
+              paddingHorizontal: 16,
+              alignItems: 'stretch',
+              justifyContent: 'center',
+              backgroundColor: theme.colors.background,
+            }}
+          >
+            <ActivityIndicator size="large" color="#0000ff" />
+            <Text style={{ textAlign: 'center', marginTop: 10 }}>
+              Loading authentication state...
+            </Text>
+          </View>
+        </PaperProvider>
+      </WorkoutContextProvider>
     );
   }
 
   return (
-    <PaperProvider theme={theme}>
-      <WorkoutContextProvider appType="mobile">
+    <WorkoutContextProvider appType="mobile">
+      <PaperProvider theme={theme}>
         <Navigation />
-      </WorkoutContextProvider>
-    </PaperProvider>
+      </PaperProvider>
+    </WorkoutContextProvider>
   );
 }
