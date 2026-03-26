@@ -69,7 +69,7 @@ export default function ExerciseItemUI({
         >
           {name}
         </Text>
-        {mode !== 'log' && (
+        {(mode === 'build' || mode === 'edit') && (
           <Button
             mode="outlined"
             onPress={handleDeleteExercisePress}
@@ -82,7 +82,7 @@ export default function ExerciseItemUI({
         )}
       </View>
       <SetList />
-      {mode !== 'log' && (
+      {(mode === 'build' || mode === 'edit') && (
         <View style={{ display: 'flex', alignItems: 'flex-end' }}>
           <Button
             mode="contained"
