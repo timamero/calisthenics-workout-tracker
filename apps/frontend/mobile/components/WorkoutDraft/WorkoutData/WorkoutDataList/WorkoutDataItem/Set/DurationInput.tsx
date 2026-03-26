@@ -1,17 +1,40 @@
-import * as React from 'react';
-import { TextInput } from 'react-native-paper';
+import { useContext } from 'react';
+import { View } from 'react-native';
+import { TextInput, useTheme } from 'react-native-paper';
 
 import { getSecondsInDuration } from '@cwt/utils';
 import { SetContext } from '@cwt/context';
 import { useFieldInputChange } from '@cwt/hooks';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
+
+import { CustomTheme } from '../../../../../../theme';
+import { Text } from '../../../../../../customText';
 
 interface DurationInputProps {
-  label: 'time' | 'rest';
+  label: string;
+  fieldName: 'time' | 'rest';
 }
 
-export default function DurationInput({ label }: DurationInputProps) {
-  const set = React.useContext(SetContext)!.set;
-  const handleRestFieldChange = useFieldInputChange(label, 'duration');
+export default function DurationInput({
+  label,
+  fieldName,
+}: DurationInputProps) {
+  const theme = useTheme() as CustomTheme;
+
+  const set = useContext(SetContext)!.set;
+  const handleRestFieldChange = useFieldInputChange(fieldName, 'duration');
+  const mode = useWorkoutDraftStore((state) => state.mode);
+  if (mode === 'read') {
+    const value = set.fields[fieldName]
+      ? set.fields[fieldName]!.toString()
+      : '00:00';
+    return (
+      <View>
+        <Text style={{ color: theme.colors.light }}>{label}</Text>
+        <Text style={{ color: theme.colors.light }}>{value}</Text>
+      </View>
+    );
+  }
 
   return (
     <TextInput
@@ -27,7 +50,7 @@ export default function DurationInput({ label }: DurationInputProps) {
       }}
       textColor="#fff"
       label={label[0].toUpperCase() + label.slice(1)}
-      value={getSecondsInDuration(set.fields[label]!.toString())}
+      value={getSecondsInDuration(set.fields[fieldName]!.toString())}
       onChangeText={(text) => handleRestFieldChange(text)}
     />
   );
