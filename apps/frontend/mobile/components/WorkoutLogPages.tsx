@@ -46,7 +46,6 @@ export default function WorkoutLogPages() {
   };
 
   const handleWorkoutLogPress = (workoutLog: WorkoutLogResponse) => {
-    console.log('pressed card');
     setDetailWorkout(workoutLog);
     setMode('read');
     setWorkoutData(workoutLog.workout_data.data);
