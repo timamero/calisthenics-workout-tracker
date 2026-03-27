@@ -35,10 +35,12 @@ export default function SetUI({
       key={`set-${setIndex}`}
       style={{
         borderWidth: 1,
-        borderColor: theme.colors.darkGrey,
+        borderColor: theme.colors.dark800,
         paddingInline: 8,
         paddingBlock: 16,
         marginBlock: 8,
+        borderRadius: 20,
+        backgroundColor: theme.colors.dark950,
       }}
     >
       <View
