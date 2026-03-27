@@ -40,7 +40,7 @@ export default function StartWorkoutScreen() {
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
     return (
-      <CardButton key={i}>
+      <CardButton handlePress={() => console.log('clicked card')} key={i}>
         <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
           {workoutTitle}
         </Text>
@@ -51,7 +51,7 @@ export default function StartWorkoutScreen() {
   const workoutLogCards = workoutLogs.map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
     return (
-      <CardButton key={i}>
+      <CardButton handlePress={() => console.log('clicked card')} key={i}>
         <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
           {workoutTitle}
         </Text>
