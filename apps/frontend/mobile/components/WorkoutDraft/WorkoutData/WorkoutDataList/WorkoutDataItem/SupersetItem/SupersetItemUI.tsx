@@ -64,7 +64,7 @@ export default function SupersetItemUI({
             justifyContent: 'flex-start',
           }}
         >
-          {mode !== 'log' && (
+          {(mode === 'build' || mode === 'edit') && (
             <ReorderButtonGroup
               handleUpPress={() => handleUpPress()}
               handleDownPress={() => handleDownPress()}
@@ -74,7 +74,7 @@ export default function SupersetItemUI({
           )}
           <Text style={{ color: theme.colors.light }}>Superset</Text>
         </View>
-        {mode !== 'log' && (
+        {(mode === 'build' || mode === 'edit') && (
           <Button
             mode="outlined"
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
@@ -86,8 +86,12 @@ export default function SupersetItemUI({
           </Button>
         )}
       </View>
-      {mode !== 'log' ? <ExercisesList /> : <ExerciseSetGroup />}
-      {mode !== 'log' && (
+      {mode === 'build' || mode === 'edit' ? (
+        <ExercisesList />
+      ) : (
+        <ExerciseSetGroup />
+      )}
+      {(mode === 'build' || mode === 'edit') && (
         <Button
           mode="outlined"
           labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
