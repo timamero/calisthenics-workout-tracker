@@ -93,18 +93,26 @@ export default function WorkoutLogDetailOverlay() {
                   Date
                 </Text>
                 <Text style={styles.metadataValue}>{date}</Text>
-                <Text variant="bodySmall" style={styles.metadataTitle}>
-                  Description
-                </Text>
-                <Text variant="bodyLarge" style={styles.metadataValue}>
-                  {workoutLogDetail?.description}
-                </Text>
-                <Text variant="bodySmall" style={styles.metadataTitle}>
-                  Goal
-                </Text>
-                <Text variant="bodyLarge" style={styles.metadataValue}>
-                  {workoutLogDetail?.goal}
-                </Text>
+                {workoutLogDetail?.description && (
+                  <>
+                    <Text variant="bodySmall" style={styles.metadataTitle}>
+                      Description
+                    </Text>
+                    <Text variant="bodyLarge" style={styles.metadataValue}>
+                      {workoutLogDetail?.description}
+                    </Text>
+                  </>
+                )}
+                {workoutLogDetail?.goal && (
+                  <>
+                    <Text variant="bodySmall" style={styles.metadataTitle}>
+                      Goal
+                    </Text>
+                    <Text variant="bodyLarge" style={styles.metadataValue}>
+                      {workoutLogDetail?.goal}
+                    </Text>
+                  </>
+                )}
                 {duration && (
                   <>
                     <Text variant="bodySmall" style={styles.metadataTitle}>
