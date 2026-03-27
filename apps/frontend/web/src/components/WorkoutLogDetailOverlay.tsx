@@ -63,24 +63,30 @@ export default function WorkoutLogDetailOverlay() {
               </Text>
               <Text size="md">{date}</Text>
             </Stack>
-            <Stack gap="xs">
-              <Text tt="uppercase" size="xs" c="gray.7">
-                Description
-              </Text>
-              <Text size="md">{workoutLogDetail?.description}</Text>
-            </Stack>
-            <Stack gap="xs">
-              <Text tt="uppercase" size="xs" c="gray.7">
-                Goal
-              </Text>
-              <Text size="md">{workoutLogDetail?.goal}</Text>
-            </Stack>
-            <Stack gap="xs">
-              <Text tt="uppercase" size="xs" c="gray.7">
-                Duration
-              </Text>
-              <Text size="md">{duration}</Text>
-            </Stack>
+            {workoutLogDetail?.description && (
+              <Stack gap="xs">
+                <Text tt="uppercase" size="xs" c="gray.7">
+                  Description
+                </Text>
+                <Text size="md">{workoutLogDetail?.description}</Text>
+              </Stack>
+            )}
+            {workoutLogDetail?.goal && (
+              <Stack gap="xs">
+                <Text tt="uppercase" size="xs" c="gray.7">
+                  Goal
+                </Text>
+                <Text size="md">{workoutLogDetail?.goal}</Text>
+              </Stack>
+            )}
+            {duration && (
+              <Stack gap="xs">
+                <Text tt="uppercase" size="xs" c="gray.7">
+                  Duration
+                </Text>
+                <Text size="md">{duration}</Text>
+              </Stack>
+            )}
           </Stack>
 
           <WorkoutData />
