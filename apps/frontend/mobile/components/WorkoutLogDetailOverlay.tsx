@@ -9,6 +9,7 @@ import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
+import Pill from './Pill';
 import WorkoutData from './WorkoutDraft/WorkoutData';
 
 export default function WorkoutLogDetailOverlay() {
@@ -88,19 +89,31 @@ export default function WorkoutLogDetailOverlay() {
               }}
             >
               <View>
-                <Text variant="bodyLarge" style={styles.metadataTitle}>
-                  {date}
+                <Text variant="bodySmall" style={styles.metadataTitle}>
+                  Date
                 </Text>
-                <Text variant="bodyLarge" style={styles.metadataTitle}>
+                <Text style={styles.metadataValue}>{date}</Text>
+                <Text variant="bodySmall" style={styles.metadataTitle}>
+                  Description
+                </Text>
+                <Text variant="bodyLarge" style={styles.metadataValue}>
                   {workoutLogDetail?.description}
                 </Text>
-                <Text variant="bodyLarge" style={styles.metadataTitle}>
+                <Text variant="bodySmall" style={styles.metadataTitle}>
+                  Goal
+                </Text>
+                <Text variant="bodyLarge" style={styles.metadataValue}>
                   {workoutLogDetail?.goal}
                 </Text>
                 {duration && (
-                  <Text variant="bodyLarge" style={styles.metadataTitle}>
-                    {duration}
-                  </Text>
+                  <>
+                    <Text variant="bodySmall" style={styles.metadataTitle}>
+                      Duration
+                    </Text>
+                    <Text variant="bodyLarge" style={styles.metadataValue}>
+                      {duration}
+                    </Text>
+                  </>
                 )}
               </View>
             </View>
@@ -116,10 +129,14 @@ const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     metadataTitle: {
       fontWeight: 700,
-      // textTransform: 'uppercase',
-      // color: theme.colors.grey,
+      textTransform: 'uppercase',
+      color: theme.colors.dark200,
+      marginBottom: 2,
+    },
+    metadataValue: {
+      fontWeight: 700,
       color: theme.colors.light,
-      marginBottom: 4,
+      marginBottom: 8,
     },
     flexRowStart: {
       display: 'flex',
