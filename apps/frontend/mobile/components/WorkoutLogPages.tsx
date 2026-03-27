@@ -61,7 +61,7 @@ export default function WorkoutLogPages() {
     const duration = formatDuration(wo.duration!);
     return (
       <DataTable.Row
-        key={wo.workout_build_id}
+        key={`${wo.date}-${i}`}
         style={{
           borderBottomWidth: 0,
         }}
@@ -112,7 +112,6 @@ export default function WorkoutLogPages() {
       <DataTable.Pagination
         page={activePage}
         numberOfPages={Math.ceil(workoutLogs.length / itemsPerPage)}
-        // onPageChange={(page) => setPage(page)}
         onPageChange={(page) => handlePageChangePress(page)}
         label={`${from + 1}-${to} of ${workoutLogs.length}`}
         numberOfItemsPerPageList={numberOfItemsPerPageList}
@@ -124,7 +123,6 @@ export default function WorkoutLogPages() {
         theme={{
           colors: {
             onSurface: theme.colors.light,
-            // surface: theme.colors.dark800,
             elevation: {
               level2: theme.colors.dark800,
             },
