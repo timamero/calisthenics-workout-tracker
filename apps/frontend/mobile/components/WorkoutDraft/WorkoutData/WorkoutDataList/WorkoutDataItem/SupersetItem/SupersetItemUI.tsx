@@ -40,13 +40,14 @@ export default function SupersetItemUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        // backgroundColor: theme.colors.orange950,
-        borderColor: theme.colors.orange500,
-        borderWidth: 2,
-        paddingInline: 16,
+        backgroundColor: theme.colors.dark700,
+        borderColor: theme.colors.dark500,
+        borderWidth: 1,
+        paddingInline: 4,
         paddingBlock: 16,
         marginBlock: 8,
-        marginInline: 16,
+        marginInline: 4,
+        borderRadius: 8,
       }}
     >
       <View
