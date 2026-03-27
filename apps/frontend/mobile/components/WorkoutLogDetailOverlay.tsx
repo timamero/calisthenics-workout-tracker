@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
 import { useWorkoutLogDetailContextMobile } from '@cwt/hooks';
@@ -9,7 +9,6 @@ import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
-import Pill from './Pill';
 import WorkoutData from './WorkoutDraft/WorkoutData';
 
 export default function WorkoutLogDetailOverlay() {
@@ -31,10 +30,14 @@ export default function WorkoutLogDetailOverlay() {
 
   const styles = getStyles(theme);
 
+  const windowHeight = Dimensions.get('window').height;
+
   const containerStyle = {
     backgroundColor: theme.colors.background,
-    paddingBlock: 20,
-    marginInline: 16,
+    paddingBlock: 8,
+    // marginTop: 80,
+    // height: windowHeight,
+    // marginInline: 16,
   };
 
   const duration = workoutLogDetail.duration
@@ -59,13 +62,19 @@ export default function WorkoutLogDetailOverlay() {
         onDismiss={handleCloseModal}
         contentContainerStyle={containerStyle}
       >
-        <View style={{ paddingInline: 16 }}>
+        <View
+          style={{
+            paddingTop: 16,
+            paddingInline: 16,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           <View
             style={{
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'flex-end',
-              marginBottom: 12,
             }}
           >
             <Button
@@ -79,7 +88,7 @@ export default function WorkoutLogDetailOverlay() {
           <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
             {workoutLogDetail?.title}
           </Text>
-          <ScrollView style={{ height: 660 }}>
+          <ScrollView style={{ height: windowHeight - 200 }}>
             <View
               style={{
                 display: 'flex',
