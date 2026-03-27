@@ -22,9 +22,11 @@ export default function ExerciseSetGroupItemUI({
         paddingInline: 16,
         paddingBlock: 16,
         marginBlock: 8,
-        marginInline: 16,
-        borderWidth: 1,
-        borderColor: theme.colors.light,
+        marginInline: 4,
+        // borderWidth: 1,
+        // borderColor: theme.colors.dark700,
+        backgroundColor: theme.colors.dark900,
+        borderRadius: 8,
       }}
     >
       <View
