@@ -121,7 +121,7 @@ export default function SectionItemUI({
           </WorkoutDataItemContext.Provider>
         );
       })}
-      {mode !== 'log' && (
+      {(mode === 'build' || mode === 'edit') && (
         <View
           style={{
             display: 'flex',

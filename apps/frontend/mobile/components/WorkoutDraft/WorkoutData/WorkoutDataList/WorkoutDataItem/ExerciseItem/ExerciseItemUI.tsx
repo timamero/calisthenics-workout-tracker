@@ -52,7 +52,7 @@ export default function ExerciseItemUI({
           justifyContent: 'space-between',
         }}
       >
-        {mode !== 'log' && (
+        {(mode === 'build' || mode === 'edit') && (
           <ReorderButtonGroup
             handleUpPress={() => handleUpPress()}
             handleDownPress={() => handleDownPress()}
