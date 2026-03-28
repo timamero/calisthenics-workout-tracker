@@ -24,7 +24,7 @@ const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     card: {
       marginBlock: 12,
-      marginInline: 8,
+      // marginInline: 8,
       backgroundColor: theme.colors.background,
       boxShadow: `${theme.colors.light} 1px 3px 9px -6px`,
       padding: 16,
@@ -32,8 +32,11 @@ const getStyles = (theme: CustomTheme) =>
       borderWidth: 1,
       minWidth: 160,
       width: '100%',
+      // maxWidth: 160,
       minHeight: 160,
       height: 'auto',
+      // flexGrow: 0,
+      flexShrink: 1,
     },
     cardContent: {
       paddingHorizontal: 0,
