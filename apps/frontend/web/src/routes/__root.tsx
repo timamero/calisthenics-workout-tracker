@@ -52,8 +52,10 @@ function RootComponent() {
   useEffect(() => {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token) {
+        console.time('exercises');
         const exercises = await getExercises(supabaseSession.access_token);
         setExercises(exercises);
+        console.timeEnd('exercises');
 
         const leveragesAssists = await getLeveragesAssists(
           supabaseSession.access_token,
