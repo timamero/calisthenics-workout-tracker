@@ -11,6 +11,8 @@ import {
 export interface ExerciseLibrarySlice {
   masterExercises: ExerciseResponse[];
   displayedExercises: ExerciseResponse[];
+  isExercisesFetched: boolean;
+  setIsExercisesFetched: (isFetched: boolean) => void;
   setExercises: (exercises: ExerciseResponse[]) => void;
   refreshDisplayedExercises: (
     appliedFilterSelections: FilterCheckbox[],
@@ -29,6 +31,11 @@ export const createExerciseLibrarySlice: StateCreator<
 > = (set, get) => ({
   masterExercises: [],
   displayedExercises: [],
+  isExercisesFetched: false,
+  setIsExercisesFetched: (isFetched) =>
+    set((state) => {
+      state.isExercisesFetched = isFetched;
+    }),
   setExercises: (exercises) =>
     set((state) => {
       state.masterExercises = sortExercises(exercises);
