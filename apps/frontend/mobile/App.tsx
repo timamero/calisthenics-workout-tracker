@@ -23,6 +23,12 @@ export default function App() {
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
 
+  const isExercisesFetched = useExerciseLibraryStore(
+    (state) => state.isExercisesFetched,
+  );
+  const setIsExercisesFetched = useExerciseLibraryStore(
+    (state) => state.setIsExercisesFetched,
+  );
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
   const setLeveragesAssists = useLeveragesAssistsStore(
@@ -33,10 +39,11 @@ export default function App() {
 
   useEffect(() => {
     const asyncFetchData = async () => {
-      if (supabaseSession?.access_token) {
+      if (supabaseSession?.access_token && !isExercisesFetched) {
         const exercises = await getExercises(supabaseSession.access_token);
         if (exercises) {
           setExercises(exercises);
+          setIsExercisesFetched(true);
         }
 
         const workoutBuilds = await getWorkoutBuilds(

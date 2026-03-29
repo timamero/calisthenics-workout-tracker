@@ -27,6 +27,12 @@ function RootComponent() {
   const isWorkoutSavePending = useWorkoutDraftStore(
     (state) => state.isWorkoutSavePending,
   );
+  const isExercisesFetched = useExerciseLibraryStore(
+    (state) => state.isExercisesFetched,
+  );
+  const setIsExercisesFetched = useExerciseLibraryStore(
+    (state) => state.setIsExercisesFetched,
+  );
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setLeveragesAssists = useLeveragesAssistsStore(
     (state) => state.setLeveragesAssists,
@@ -51,11 +57,12 @@ function RootComponent() {
 
   useEffect(() => {
     const asyncFetchData = async () => {
-      if (supabaseSession?.access_token) {
+      if (supabaseSession?.access_token && !isExercisesFetched) {
         console.time('exercises');
         const exercises = await getExercises(supabaseSession.access_token);
         setExercises(exercises);
         console.timeEnd('exercises');
+        setIsExercisesFetched(true);
 
         const leveragesAssists = await getLeveragesAssists(
           supabaseSession.access_token,
