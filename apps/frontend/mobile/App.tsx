@@ -40,12 +40,6 @@ export default function App() {
   useEffect(() => {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token && !isExercisesFetched) {
-        const exercises = await getExercises(supabaseSession.access_token);
-        if (exercises) {
-          setExercises(exercises);
-          setIsExercisesFetched(true);
-        }
-
         const workoutBuilds = await getWorkoutBuilds(
           supabaseSession.access_token,
         );
@@ -53,17 +47,28 @@ export default function App() {
         if (workoutBuilds) {
           setWorkouts(workoutLogs, workoutBuilds);
         }
-
         const leveragesAssists = await getLeveragesAssists(
           supabaseSession.access_token,
         );
         if (leveragesAssists) {
           setLeveragesAssists(leveragesAssists);
         }
+        const exercises = await getExercises(supabaseSession.access_token);
+        if (exercises) {
+          setExercises(exercises);
+          setIsExercisesFetched(true);
+        }
       }
     };
     asyncFetchData();
-  }, [setExercises, supabaseSession, setWorkouts, setLeveragesAssists]);
+  }, [
+    setExercises,
+    supabaseSession,
+    setWorkouts,
+    setLeveragesAssists,
+    isExercisesFetched,
+    setIsExercisesFetched,
+  ]);
 
   if (loading) {
     return (

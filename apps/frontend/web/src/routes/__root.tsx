@@ -58,20 +58,25 @@ function RootComponent() {
   useEffect(() => {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token && !isExercisesFetched) {
+        const leveragesAssists = await getLeveragesAssists(
+          supabaseSession.access_token,
+        );
+        setLeveragesAssists(leveragesAssists);
         console.time('exercises');
         const exercises = await getExercises(supabaseSession.access_token);
         setExercises(exercises);
         console.timeEnd('exercises');
         setIsExercisesFetched(true);
-
-        const leveragesAssists = await getLeveragesAssists(
-          supabaseSession.access_token,
-        );
-        setLeveragesAssists(leveragesAssists);
       }
     };
     asyncFetchData();
-  }, [supabaseSession, setExercises, setLeveragesAssists]);
+  }, [
+    supabaseSession,
+    setExercises,
+    setLeveragesAssists,
+    isExercisesFetched,
+    setIsExercisesFetched,
+  ]);
 
   if (loading || isWorkoutSavePending) {
     return (
