@@ -3,43 +3,26 @@ import 'react-native-get-random-values';
 import { View } from 'react-native';
 import { PaperProvider, ActivityIndicator, Text } from 'react-native-paper';
 
-import {
-  useExerciseLibraryStore,
-  useAuthStore,
-  useWorkoutLibraryStore,
-  useLeveragesAssistsStore,
-} from '@cwt/state/stores';
+import { useAuthStore, useWorkoutLibraryStore } from '@cwt/state/stores';
 import { WorkoutContextProvider } from '@cwt/context';
 import { useSupabaseAuth } from '@cwt/hooks';
 
 import theme from './theme';
 import { supabase } from './services/supabaseClient';
 import Navigation from './navigation';
-import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
-import { getLeveragesAssists } from './services/leveragesAssistsService';
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
 
-  const isExercisesFetched = useExerciseLibraryStore(
-    (state) => state.isExercisesFetched,
-  );
-  const setIsExercisesFetched = useExerciseLibraryStore(
-    (state) => state.setIsExercisesFetched,
-  );
-  const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
-  const setLeveragesAssists = useLeveragesAssistsStore(
-    (state) => state.setLeveragesAssists,
-  );
 
   useSupabaseAuth(supabase);
 
   useEffect(() => {
     const asyncFetchData = async () => {
-      if (supabaseSession?.access_token && !isExercisesFetched) {
+      if (supabaseSession?.access_token) {
         const workoutBuilds = await getWorkoutBuilds(
           supabaseSession.access_token,
         );
@@ -47,28 +30,10 @@ export default function App() {
         if (workoutBuilds) {
           setWorkouts(workoutLogs, workoutBuilds);
         }
-        const leveragesAssists = await getLeveragesAssists(
-          supabaseSession.access_token,
-        );
-        if (leveragesAssists) {
-          setLeveragesAssists(leveragesAssists);
-        }
-        const exercises = await getExercises(supabaseSession.access_token);
-        if (exercises) {
-          setExercises(exercises);
-          setIsExercisesFetched(true);
-        }
       }
     };
     asyncFetchData();
-  }, [
-    setExercises,
-    supabaseSession,
-    setWorkouts,
-    setLeveragesAssists,
-    isExercisesFetched,
-    setIsExercisesFetched,
-  ]);
+  }, [supabaseSession, setWorkouts]);
 
   if (loading) {
     return (
