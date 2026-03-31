@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
+import { Title, Stack } from '@mantine/core';
 
 import { useAuthStore, useExerciseLibraryStore } from '@cwt/state/stores';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
@@ -13,10 +14,8 @@ export const Route = createFileRoute('/workout')({
     console.log('loading exercises in workout route');
     const displayedExercises =
       useExerciseLibraryStore.getState().displayedExercises;
-    const isExercisesFetched =
-      useExerciseLibraryStore.getState().isExercisesFetched;
 
-    if (isExercisesFetched) {
+    if (displayedExercises) {
       console.log('exercises alreaded fetched');
       return displayedExercises;
     }
@@ -35,20 +34,32 @@ export const Route = createFileRoute('/workout')({
 function WorkoutView() {
   const exercises: ExerciseResponse[] = Route.useLoaderData();
 
-  const isExercisesFetched = useExerciseLibraryStore(
-    (state) => state.isExercisesFetched,
-  );
+  const loading = useExerciseLibraryStore((state) => state.loading);
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
-  const setIsExercisesFetched = useExerciseLibraryStore(
-    (state) => state.setIsExercisesFetched,
+  const setLoading = useExerciseLibraryStore((state) => state.setLoading);
+  const isExercisesSet = useExerciseLibraryStore((state) =>
+    state.displayedExercises === null ? false : true,
   );
 
   useEffect(() => {
-    if (!isExercisesFetched) {
+    if (!isExercisesSet) {
       console.log('setting exercises in useEffect');
       setExercises(exercises);
-      setIsExercisesFetched(true);
     }
-  }, [exercises, isExercisesFetched, setExercises, setIsExercisesFetched]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (isExercisesSet) {
+      setLoading(false);
+    }
+  }, [isExercisesSet, setLoading]);
+
+  if (!isExercisesSet || loading) {
+    return (
+      <Stack>
+        <Title size="h6">Loading</Title>
+      </Stack>
+    );
+  }
   return <WorkoutDraft />;
 }
