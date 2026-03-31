@@ -27,7 +27,7 @@ export default function useSupabaseAuth(client: SupabaseClient) {
         switch (_event) {
           case "SIGNED_IN":
             // In mobile, this auth event is not running when it should
-            console.log("User signed in");
+            console.log("onAuthStateChange SIGNED_IN: User signed in");
             setSession(session);
             setUser(session!.user);
             break;
