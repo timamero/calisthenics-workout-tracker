@@ -15,7 +15,7 @@ import {
 import { WorkoutContextProvider } from '@cwt/context';
 
 import { supabase } from '../services/supabaseClient';
-import { getExercises } from '../services/exercisesService';
+// import { getExercises } from '../services/exercisesService';
 import { getLeveragesAssists } from '../services/leveragesAssistsService';
 
 export const Route = createRootRoute({
@@ -57,16 +57,16 @@ function RootComponent() {
 
   useEffect(() => {
     const asyncFetchData = async () => {
-      if (supabaseSession?.access_token && !isExercisesFetched) {
+      if (supabaseSession?.access_token) {
         const leveragesAssists = await getLeveragesAssists(
           supabaseSession.access_token,
         );
         setLeveragesAssists(leveragesAssists);
-        console.time('exercises');
-        const exercises = await getExercises(supabaseSession.access_token);
-        setExercises(exercises);
-        console.timeEnd('exercises');
-        setIsExercisesFetched(true);
+        // console.time('exercises');
+        // const exercises = await getExercises(supabaseSession.access_token);
+        // setExercises(exercises);
+        // console.timeEnd('exercises');
+        // setIsExercisesFetched(true);
       }
     };
     asyncFetchData();
