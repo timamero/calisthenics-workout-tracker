@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { SupabaseClient, type JwtPayload } from "@supabase/supabase-js";
-import { useAuthStore } from "@cwt/state/stores";
+import { useEffect, useState } from 'react';
+import { SupabaseClient, type JwtPayload } from '@supabase/supabase-js';
+import { useAuthStore } from '@cwt/state/stores';
 
 /**
  *
@@ -24,29 +24,33 @@ export default function useSupabaseAuth(client: SupabaseClient) {
       if (mounted) {
         setLoading(true);
         switch (_event) {
-          case "SIGNED_IN":
-            console.log("User signed in");
+          case 'SIGNED_IN':
+            console.log('User signed in');
             setSession(session);
             setUser(session!.user);
             break;
-          case "INITIAL_SESSION":
-          case "TOKEN_REFRESHED":
-          case "MFA_CHALLENGE_VERIFIED":
+          case 'INITIAL_SESSION':
+          case 'TOKEN_REFRESHED':
+          case 'MFA_CHALLENGE_VERIFIED':
             console.log(
-              "onAuthStateChange INITIAL_SESSION, TOKEN_REFRESHED, MFA_CHALLENGE_VERIFIED: session = ",
+              'onAuthStateChange INITIAL_SESSION, TOKEN_REFRESHED, MFA_CHALLENGE_VERIFIED: session = ',
               session,
             );
+            if (session) {
+              setSession(session);
+              setUser(session.user);
+            }
             break;
-          case "USER_UPDATED":
+          case 'USER_UPDATED':
             // TODO: Handle user update
             break;
-          case "SIGNED_OUT":
+          case 'SIGNED_OUT':
             setSession(null);
             setUser(null);
-            console.log("onAuthStateChange: User signed out, session cleared.");
+            console.log('onAuthStateChange: User signed out, session cleared.');
             break;
-          case "PASSWORD_RECOVERY":
-            console.log("onAuthStateChange: Password recovery initiated.");
+          case 'PASSWORD_RECOVERY':
+            console.log('onAuthStateChange: Password recovery initiated.');
             // TODO: Initiate password recovery here
             break;
           default:
