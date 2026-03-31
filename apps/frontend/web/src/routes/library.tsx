@@ -20,10 +20,8 @@ export const Route = createFileRoute('/library')({
     console.log('loading exercises in library route');
     const displayedExercises =
       useExerciseLibraryStore.getState().displayedExercises;
-    const isExercisesFetched =
-      useExerciseLibraryStore.getState().isExercisesFetched;
 
-    if (isExercisesFetched) {
+    if (displayedExercises) {
       console.log('exercises alreaded fetched');
       return displayedExercises;
     }
@@ -49,12 +47,11 @@ function LibraryView() {
   const [filterOpened, filterHandler] = useDisclosure(false);
   const [detailOpened, detailHandlers] = useDisclosure(false);
 
-  const isExercisesFetched = useExerciseLibraryStore(
-    (state) => state.isExercisesFetched,
-  );
+  const loading = useExerciseLibraryStore((state) => state.loading);
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
-  const setIsExercisesFetched = useExerciseLibraryStore(
-    (state) => state.setIsExercisesFetched,
+  const setLoading = useExerciseLibraryStore((state) => state.setLoading);
+  const isExercisesSet = useExerciseLibraryStore((state) =>
+    state.displayedExercises === null ? false : true,
   );
 
   const handleClickFilter = () => {
@@ -62,13 +59,25 @@ function LibraryView() {
   };
 
   useEffect(() => {
-    if (!isExercisesFetched) {
+    if (!isExercisesSet) {
       console.log('setting exercises in useEffect');
       setExercises(exercises);
-      setIsExercisesFetched(true);
     }
-  }, [exercises, isExercisesFetched, setExercises, setIsExercisesFetched]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (isExercisesSet) {
+      setLoading(false);
+    }
+  }, [isExercisesSet, setLoading]);
 
+  if (!isExercisesSet || loading) {
+    return (
+      <Stack>
+        <Title size="h6">Loading</Title>
+      </Stack>
+    );
+  }
   return (
     <ExerciseDetailContext.Provider
       value={{
