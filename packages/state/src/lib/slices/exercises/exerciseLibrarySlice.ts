@@ -12,9 +12,7 @@ export interface ExerciseLibrarySlice {
   masterExercises: ExerciseResponse[] | null;
   displayedExercises: ExerciseResponse[] | null;
   loading: boolean;
-  isExercisesFetched: boolean;
   setLoading: (loading: boolean) => void;
-  setIsExercisesFetched: (isFetched: boolean) => void;
   setExercises: (exercises: ExerciseResponse[]) => void;
   refreshDisplayedExercises: (
     appliedFilterSelections: FilterCheckbox[],
@@ -34,12 +32,7 @@ export const createExerciseLibrarySlice: StateCreator<
   masterExercises: null,
   displayedExercises: null,
   loading: false,
-  isExercisesFetched: false,
   setLoading: (loading) => set({ loading }),
-  setIsExercisesFetched: (isFetched) =>
-    set((state) => {
-      state.isExercisesFetched = isFetched;
-    }),
   setExercises: (exercises) =>
     set((state) => {
       state.masterExercises = sortExercises(exercises);
