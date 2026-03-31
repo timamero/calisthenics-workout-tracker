@@ -27,12 +27,6 @@ function RootComponent() {
   const isWorkoutSavePending = useWorkoutDraftStore(
     (state) => state.isWorkoutSavePending,
   );
-  const isExercisesFetched = useExerciseLibraryStore(
-    (state) => state.isExercisesFetched,
-  );
-  const setIsExercisesFetched = useExerciseLibraryStore(
-    (state) => state.setIsExercisesFetched,
-  );
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setLeveragesAssists = useLeveragesAssistsStore(
     (state) => state.setLeveragesAssists,
@@ -62,23 +56,13 @@ function RootComponent() {
           supabaseSession.access_token,
         );
         setLeveragesAssists(leveragesAssists);
-        // console.time('exercises');
-        // const exercises = await getExercises(supabaseSession.access_token);
-        // setExercises(exercises);
-        // console.timeEnd('exercises');
-        // setIsExercisesFetched(true);
       }
     };
     asyncFetchData();
-  }, [
-    supabaseSession,
-    setExercises,
-    setLeveragesAssists,
-    isExercisesFetched,
-    setIsExercisesFetched,
-  ]);
+  }, [supabaseSession, setExercises, setLeveragesAssists]);
 
   if (loading || isWorkoutSavePending) {
+    console.log('_root: rendering loader');
     return (
       <Stack h="100vh" w="100vw" display="flex" justify="center" align="center">
         <Loader color="blue" />
@@ -87,6 +71,7 @@ function RootComponent() {
   }
 
   if (!supabaseSession) {
+    console.log('_root: rendering screen for no supabase session');
     return (
       <div>
         <Outlet />
