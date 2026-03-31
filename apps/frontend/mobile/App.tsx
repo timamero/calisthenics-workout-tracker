@@ -22,7 +22,12 @@ export default function App() {
 
   useEffect(() => {
     const asyncFetchData = async () => {
+      console.log(
+        'App fetching data with access token = ',
+        supabaseSession?.access_token,
+      );
       if (supabaseSession?.access_token) {
+        console.log('App setting workout logs and builds');
         const workoutBuilds = await getWorkoutBuilds(
           supabaseSession.access_token,
         );
@@ -35,7 +40,14 @@ export default function App() {
     asyncFetchData();
   }, [supabaseSession, setWorkouts]);
 
+  console.log('App - loading = ', loading);
+  console.log(
+    'App - supabaseSession set = ',
+    supabaseSession ? 'set' : 'not set',
+  );
+
   if (loading) {
+    console.log('App - displaying loader');
     return (
       <WorkoutContextProvider appType="mobile">
         <PaperProvider theme={theme}>
@@ -61,6 +73,7 @@ export default function App() {
     );
   }
 
+  console.log('App - displaying app');
   return (
     <WorkoutContextProvider appType="mobile">
       <PaperProvider theme={theme}>

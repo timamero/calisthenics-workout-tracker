@@ -98,7 +98,7 @@ const AuthStack = createNativeStackNavigator({
 function useIsSignedIn() {
   const supabaseSession = useAuthStore((state) => state.session);
   if (supabaseSession) {
-    console.log('User is signed in:');
+    console.log('AppNavigator: User is signed in:');
     return true;
   }
   return false;
@@ -106,7 +106,7 @@ function useIsSignedIn() {
 function useIsSignedOut() {
   const supabaseSession = useAuthStore((state) => state.session);
   if (supabaseSession) {
-    console.log('User is signed out:');
+    console.log('AppNavigator: User is signed out:');
     return false;
   }
   return true;
