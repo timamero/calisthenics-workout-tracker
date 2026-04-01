@@ -1,18 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { ExerciseResponse } from '@cwt/schema/exercises';
-import {
-  useExerciseLibraryStore,
-  useAuthStore,
-  useLeveragesAssistsStore,
-} from '@cwt/state/stores';
+import { useExerciseLibraryStore } from '@cwt/state/stores';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
-
-import { getExercises } from '../services/exercisesService';
-import { getLeveragesAssists } from '../services/leveragesAssistsService';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
@@ -22,25 +15,14 @@ import SearchBar from '../components/SearchBar';
 import Filter from '../components/Filter';
 import FilterOverlay from '../components/FilterOverlay';
 import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
+import { useFetchExercises } from '../hooks/useFetchExercises';
 
 export default function LibraryScreen() {
   const theme = useTheme() as CustomTheme;
 
-  const supabaseSession = useAuthStore((state) => state.session);
   const loading = useExerciseLibraryStore((state) => state.loading);
-  const setLoading = useExerciseLibraryStore((state) => state.setLoading);
-  // const isExercisesFetched = useExerciseLibraryStore(
-  //   (state) => state.isExercisesFetched,
-  // );
-  // const setIsExercisesFetched = useExerciseLibraryStore(
-  //   (state) => state.setIsExercisesFetched,
-  // );
-  const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const isExercisesSet = useExerciseLibraryStore((state) =>
     state.displayedExercises === null ? false : true,
-  );
-  const setLeveragesAssists = useLeveragesAssistsStore(
-    (state) => state.setLeveragesAssists,
   );
 
   const [visible, setVisible] = useState(false);
@@ -54,33 +36,7 @@ export default function LibraryScreen() {
   const showExerciseDetailModal = () => setVisibleExerciseDetail(true);
   const hideExerciseDetailModal = () => setVisibleExerciseDetail(false);
 
-  useEffect(() => {
-    const asyncFetchData = async () => {
-      if (supabaseSession?.access_token && !isExercisesSet) {
-        const leveragesAssists = await getLeveragesAssists(
-          supabaseSession.access_token,
-        );
-        if (leveragesAssists) {
-          setLeveragesAssists(leveragesAssists);
-        }
-        const exercises = await getExercises(supabaseSession.access_token);
-        if (exercises) {
-          setExercises(exercises);
-          setLoading(false);
-        }
-      }
-    };
-    if (!isExercisesSet) {
-      console.log('fetching and setting the data');
-      asyncFetchData();
-    }
-  }, [
-    setExercises,
-    supabaseSession,
-    setLeveragesAssists,
-    isExercisesSet,
-    setLoading,
-  ]);
+  useFetchExercises();
 
   if (!isExercisesSet || loading) {
     return (
