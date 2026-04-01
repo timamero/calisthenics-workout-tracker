@@ -7,8 +7,9 @@ import { IoFilterOutline } from 'react-icons/io5';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
 import { ExerciseDetailContext } from '@cwt/context';
 import { useAuthStore, useExerciseLibraryStore } from '@cwt/state/stores';
-import { useSetExercisesData } from '@cwt/hooks';
+// import { useSetExercisesData } from '@cwt/hooks';
 
+import { useSetExercisesData } from '../hooks/useSetExercisesData';
 import { getExercises } from '../services/exercisesService';
 
 import ExercisesList from '../components/ExercisesList';
