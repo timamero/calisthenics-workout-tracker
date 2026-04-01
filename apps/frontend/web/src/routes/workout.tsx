@@ -3,7 +3,6 @@ import { Title, Stack } from '@mantine/core';
 
 import { useAuthStore, useExerciseLibraryStore } from '@cwt/state/stores';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
-// import { useSetExercisesData } from '@cwt/hooks';
 
 import { useSetExercisesData } from '../hooks/useSetExercisesData';
 import { getExercises } from '../services/exercisesService';
@@ -12,12 +11,10 @@ import WorkoutDraft from '../components/WorkoutDraft';
 
 export const Route = createFileRoute('/workout')({
   loader: async () => {
-    console.log('loading exercises in workout route');
     const displayedExercises =
       useExerciseLibraryStore.getState().displayedExercises;
 
     if (displayedExercises) {
-      console.log('exercises alreaded fetched');
       return displayedExercises;
     }
 
