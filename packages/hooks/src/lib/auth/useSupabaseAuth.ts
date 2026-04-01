@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SupabaseClient, type JwtPayload } from "@supabase/supabase-js";
+import { SupabaseClient, type Session } from "@supabase/supabase-js";
 import { useAuthStore } from "@cwt/state/stores";
 
 /**
@@ -10,10 +10,17 @@ import { useAuthStore } from "@cwt/state/stores";
  * It listens for authentication state changes and updates the global auth store accordingly.
  */
 export default function useSupabaseAuth(client: SupabaseClient) {
-  // const supabaseSession = useAuthStore((state) => state.session);
+  const supabaseSession = useAuthStore((state) => state.session);
   const setLoading = useAuthStore((state) => state.setLoading);
   const setSession = useAuthStore((state) => state.setSession);
   const setUser = useAuthStore((state) => state.setUser);
+
+  const setAuthStates = (session: Session | null) => {
+    if (session && !supabaseSession) {
+      setSession(session);
+      setUser(session.user);
+    }
+  };
 
   useEffect(() => {
     // Use mounted flag to prevent state updates after unmount
@@ -28,28 +35,50 @@ export default function useSupabaseAuth(client: SupabaseClient) {
           case "SIGNED_IN":
             // In mobile, this auth event is not running when it should
             console.log("onAuthStateChange SIGNED_IN: User signed in");
-            setSession(session);
-            setUser(session!.user);
+            setAuthStates(session);
+            // setSession(session);
+            // setUser(session!.user);
             break;
           case "INITIAL_SESSION":
             console.log(
               "onAuthStateChange INITIAL_SESSION: session = ",
               session,
             );
-            if (session) {
-              setSession(session);
-              setUser(session.user);
-            }
+            setAuthStates(session);
+            // if (session) {
+            //   setSession(session);
+            //   setUser(session.user);
+            // }
             break;
           case "TOKEN_REFRESHED":
+            console.log(
+              "onAuthStateChange TOKEN_REFRESHED: session = ",
+              session,
+            );
+            setAuthStates(session);
+            // if (session) {
+            //   setSession(session);
+            //   setUser(session.user);
+            // }
+            break;
           case "MFA_CHALLENGE_VERIFIED":
             console.log(
               "onAuthStateChange TOKEN_REFRESHED, MFA_CHALLENGE_VERIFIED: session = ",
               session,
             );
+            setAuthStates(session);
+            // if (session) {
+            //   setSession(session);
+            //   setUser(session.user);
+            // }
             break;
           case "USER_UPDATED":
             // TODO: Handle user update
+            console.log("onAuthStateChange USE_UPDATED");
+            if (session) {
+              setSession(session);
+              setUser(session.user);
+            }
             break;
           case "SIGNED_OUT":
             setSession(null);
