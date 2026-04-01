@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 import type { LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
 
 export interface LeveragesAssistsSlice {
-  leveragesAssists: LeveragesAssistsResponse[];
+  leveragesAssists: LeveragesAssistsResponse[] | null;
   setLeveragesAssists: (leveragesAssists: LeveragesAssistsResponse[]) => void;
   getLeverageOrAssistByID: (id: number) => LeveragesAssistsResponse;
 }
@@ -13,13 +13,13 @@ export const createLeveragesAssistsSlice: StateCreator<
   [],
   LeveragesAssistsSlice
 > = (set, get) => ({
-  leveragesAssists: [],
+  leveragesAssists: null,
   setLeveragesAssists: (leveragesAssists) =>
     set((state) => {
       state.leveragesAssists = leveragesAssists;
     }),
   getLeverageOrAssistByID: (id) => {
-    return get().leveragesAssists.find(
+    return get().leveragesAssists!.find(
       (item) => item.id === id,
     ) as LeveragesAssistsResponse;
   },
