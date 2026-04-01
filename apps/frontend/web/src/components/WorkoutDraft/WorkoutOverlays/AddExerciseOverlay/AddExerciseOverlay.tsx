@@ -1,10 +1,15 @@
-import { useAddExercise, type UseAddExerciseWebResult } from '@cwt/hooks';
+import { useAddExercise } from '@cwt/hooks';
+import { useWorkoutContextWeb } from '@cwt/hooks';
 
 import AddExerciseOverlayUI from './AddExerciseOverlayUI';
 
 export default function AddExerciseOverlay() {
-  const { opened, handler, selectedExerciseIDToAdd, handleAddExerciseClick } =
-    useAddExercise('web') as UseAddExerciseWebResult;
+  const { selectedExerciseIDToAdd, handleAddExerciseClick } = useAddExercise();
+
+  const opened =
+    useWorkoutContextWeb().webOverlayHandlers?.addExerciseOverlayOpened;
+  const handler =
+    useWorkoutContextWeb().webOverlayHandlers?.addExerciseOverlayHandler;
 
   return (
     <AddExerciseOverlayUI

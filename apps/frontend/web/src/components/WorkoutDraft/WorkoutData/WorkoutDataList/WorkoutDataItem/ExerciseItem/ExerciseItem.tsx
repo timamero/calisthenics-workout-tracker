@@ -27,7 +27,7 @@ export default function ExerciseItem() {
     'exercise',
     exercise!.id,
   ).handleDeleteItemClick;
-  const handleAddSetClick = useAddSet();
+  const { handleAddSetClick } = useAddSet();
 
   const name = getExerciseNameById(exercise!.exercise_id);
 

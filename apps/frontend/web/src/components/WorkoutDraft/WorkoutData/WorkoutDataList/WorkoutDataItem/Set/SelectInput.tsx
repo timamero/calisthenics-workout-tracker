@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { Select } from '@mantine/core';
+import { Select, Text, Stack } from '@mantine/core';
 
 import { SetContext } from '@cwt/context';
 import { useLeveragesAssistsStore } from '@cwt/state/stores';
 import { useFieldInputChange } from '@cwt/hooks';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 interface NumeralInputProps {
   label: string;
@@ -27,11 +28,25 @@ export default function SelectInput({
   const leverageOrAssist = useLeveragesAssistsStore((state) =>
     state.getLeverageOrAssistByID(leverageOrAssistID),
   );
+  const mode = useWorkoutDraftStore((state) => state.mode);
 
   const handleChange = useFieldInputChange('value', 'select', fieldID);
 
   const options = leverageOrAssist.value_options;
   if (trackingType === 'leverages') {
+    if (mode === 'read') {
+      return (
+        <Stack>
+          <Text>{label}</Text>
+          <Text>
+            {set.fields.leverages?.find((field) => field.id === fieldID)?.value
+              ? (set.fields.leverages.find((field) => field.id === fieldID)!
+                  .value as string)
+              : null}
+          </Text>
+        </Stack>
+      );
+    }
     return (
       <Select
         label={label}
@@ -46,6 +61,19 @@ export default function SelectInput({
       />
     );
   } else if (trackingType === 'assists') {
+    if (mode === 'read') {
+      return (
+        <Stack>
+          <Text>{label}</Text>
+          <Text>
+            {set.fields.assists?.find((field) => field.id === fieldID)?.value
+              ? (set.fields.assists.find((field) => field.id === fieldID)!
+                  .value as string)
+              : null}
+          </Text>
+        </Stack>
+      );
+    }
     return (
       <Select
         label={label}

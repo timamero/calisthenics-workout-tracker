@@ -1,9 +1,14 @@
-import { useContext } from 'react';
-import { Section, Superset, Exercise } from '@cwt/schema/workouts';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { WorkoutDataItemContext } from '@cwt/context';
+import { useContext } from "react";
+import { Section, Superset, Exercise } from "@cwt/schema/workouts";
+import { useWorkoutDraftStore } from "@cwt/state/stores";
+import { WorkoutDataItemContext } from "@cwt/context";
 
-export default function useReorderItem(item: Section | Superset | Exercise) {
+/**
+ * Common logic for reordering items in a workout draft. Used by both web and mobile hooks.
+ * @param item The item to reorder (Section, Superset, or Exercise)
+ * @returns An object containing moveUp and moveDown functions.
+ */
+function useReorderItemLogic(item: Section | Superset | Exercise) {
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
@@ -25,10 +30,10 @@ export default function useReorderItem(item: Section | Superset | Exercise) {
   );
 
   const setIDs = () => {
-    if (item.type === 'exercise') {
+    if (item.type === "exercise") {
       setExerciseIDToMod(item!.id);
     }
-    if (item.type === 'superset') {
+    if (item.type === "superset") {
       setSupersetIDToMod(item!.id);
     }
 
@@ -40,24 +45,50 @@ export default function useReorderItem(item: Section | Superset | Exercise) {
     }
   };
 
-  const handleUpClick = () => {
-    if (!parentType) {
-      reorderRootItem(item!.id, item!.order - 1);
-    } else {
-      setIDs();
-      reorderNestedItem(item!.order - 1);
-    }
-  };
-  const handleDownClick = () => {
-    if (!parentType) {
-      reorderRootItem(item!.id, item!.order + 1);
-    } else {
-      setIDs();
-      reorderNestedItem(item!.order + 1);
-    }
-  };
   return {
-    handleUpClick,
-    handleDownClick,
+    moveUp: () => {
+      if (!parentType) {
+        reorderRootItem(item!.id, item!.order - 1);
+      } else {
+        setIDs();
+        reorderNestedItem(item!.order - 1);
+      }
+    },
+    moveDown: () => {
+      if (!parentType) {
+        reorderRootItem(item!.id, item!.order + 1);
+      } else {
+        setIDs();
+        reorderNestedItem(item!.order + 1);
+      }
+    },
+  };
+}
+
+/**
+ * Hook to reorder an item (Section, Superset, or Exercise) in a workout draft for web.
+ * @param item The item to reorder.
+ * @returns An object containing handleUpClick and handleDownClick functions.
+ */
+export function useReorderItem(item: Section | Superset | Exercise) {
+  const { moveUp, moveDown } = useReorderItemLogic(item);
+
+  return {
+    handleUpClick: moveUp,
+    handleDownClick: moveDown,
+  };
+}
+
+/**
+ * Hook to reorder an item (Section, Superset, or Exercise) in a workout draft for mobile.
+ * @param item The item to reorder.
+ * @returns An object containing handleUpPress and handleDownPress functions.
+ */
+export function useReorderItemMobile(item: Section | Superset | Exercise) {
+  const { moveUp, moveDown } = useReorderItemLogic(item);
+
+  return {
+    handleUpPress: moveUp,
+    handleDownPress: moveDown,
   };
 }

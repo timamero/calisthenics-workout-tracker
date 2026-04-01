@@ -10,11 +10,10 @@ import {
   useWorkoutDraftStore,
   useAuthStore,
   useLeveragesAssistsStore,
-  useExerciseLibraryStore,
 } from '@cwt/state/stores';
+import { WorkoutContextProvider } from '@cwt/context';
 
 import { supabase } from '../services/supabaseClient';
-import { getExercises } from '../services/exercisesService';
 import { getLeveragesAssists } from '../services/leveragesAssistsService';
 
 export const Route = createRootRoute({
@@ -26,7 +25,6 @@ function RootComponent() {
   const isWorkoutSavePending = useWorkoutDraftStore(
     (state) => state.isWorkoutSavePending,
   );
-  const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setLeveragesAssists = useLeveragesAssistsStore(
     (state) => state.setLeveragesAssists,
   );
@@ -51,19 +49,19 @@ function RootComponent() {
   useEffect(() => {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token) {
-        const exercises = await getExercises(supabaseSession.access_token);
-        setExercises(exercises);
-
+        console.time('fetching LeveragesAssists');
         const leveragesAssists = await getLeveragesAssists(
           supabaseSession.access_token,
         );
+        console.timeEnd('fetching LeveragesAssists');
         setLeveragesAssists(leveragesAssists);
       }
     };
     asyncFetchData();
-  }, [supabaseSession, setExercises, setLeveragesAssists]);
+  }, [supabaseSession, setLeveragesAssists]);
 
   if (loading || isWorkoutSavePending) {
+    console.log('_root: rendering loader');
     return (
       <Stack h="100vh" w="100vw" display="flex" justify="center" align="center">
         <Loader color="blue" />
@@ -72,6 +70,7 @@ function RootComponent() {
   }
 
   if (!supabaseSession) {
+    console.log('_root: rendering screen for no supabase session');
     return (
       <div>
         <Outlet />
@@ -81,7 +80,7 @@ function RootComponent() {
   }
 
   // TODO: Update implementation of hiding navigation during workout
-  if (mode) {
+  if (mode === 'build' || mode === 'log' || mode === 'edit') {
     return (
       <AppShell
         header={{ height: 60 }}
@@ -97,7 +96,9 @@ function RootComponent() {
           <div>Logo</div>
         </AppShell.Header>
         <AppShell.Main>
-          <Outlet />
+          <WorkoutContextProvider appType="web">
+            <Outlet />
+          </WorkoutContextProvider>
           <TanStackRouterDevtools />
         </AppShell.Main>
       </AppShell>
@@ -113,6 +114,7 @@ function RootComponent() {
         collapsed: { mobile: !opened },
       }}
       padding="md"
+      style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}
     >
       <AppShell.Header>
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
@@ -131,8 +133,12 @@ function RootComponent() {
         ))}
       </AppShell.Navbar>
 
-      <AppShell.Main>
-        <Outlet />
+      <AppShell.Main
+        style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
+      >
+        <WorkoutContextProvider appType="web">
+          <Outlet />
+        </WorkoutContextProvider>
         <TanStackRouterDevtools />
       </AppShell.Main>
     </AppShell>

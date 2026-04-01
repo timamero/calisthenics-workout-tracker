@@ -1,18 +1,29 @@
-import { useContext } from 'react';
-import { WorkoutContext, WorkoutDataItemContext } from '@cwt/context';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { useContext } from "react";
+import { WorkoutDataItemContext } from "@cwt/context";
+import { useWorkoutDraftStore } from "@cwt/state/stores";
 
-export default function useDeleteItem(
-  itemType: 'exercise' | 'superset' | 'section',
+import {
+  useWorkoutContextWeb,
+  useWorkoutContextMobile,
+} from "./useWorkoutContext";
+
+/**
+ * Common logic for deleting an item (Section, Superset, or Exercise) from a workout draft.
+ * It retrieves the necessary context and store functions to manage the deletion of items,
+ * ensuring that the correct exercise, superset, and section IDs are set in the draft state.
+ *
+ * @param itemType The type of item to delete ("exercise", "superset", or "section").
+ * @param itemID The ID of the item to delete.
+ * @returns A function that, when called, initiates the deletion process for the appropriate item.
+ */
+function useDeleteItemLogic(
+  itemType: "exercise" | "superset" | "section",
   itemID: string
 ) {
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-  const deleteRootItemOverlayHandler =
-    useContext(WorkoutContext)!.deleteRootItemOverlayHandler;
-  const deleteNestedItemOverlayHandler =
-    useContext(WorkoutContext)!.deleteNestedItemOverlayHandler;
+
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod
   );
@@ -23,15 +34,15 @@ export default function useDeleteItem(
     (state) => state.setExerciseIDToMod
   );
 
-  const handleDeleteItemClick = () => {
+  const setIDs = () => {
     switch (itemType) {
-      case 'section':
+      case "section":
         setSectionIDToMod(itemID);
         break;
-      case 'superset':
+      case "superset":
         setSupersetIDToMod(itemID);
         break;
-      case 'exercise':
+      case "exercise":
         setExerciseIDToMod(itemID);
         break;
     }
@@ -42,6 +53,34 @@ export default function useDeleteItem(
     if (parentSectionID) {
       setSectionIDToMod(parentSectionID);
     }
+  };
+
+  return {
+    parentType,
+    setIDs,
+  };
+}
+
+/**
+ * Hook to delete an item (Section, Superset, or Exercise) from a workout draft for web.
+ *
+ * @param itemType The type of item to delete ("exercise", "superset", or "section").
+ * @param itemID The ID of the item to delete.
+ * @returns An object containing handleDeleteItemClick function.
+ */
+export function useDeleteItem(
+  itemType: "exercise" | "superset" | "section",
+  itemID: string
+) {
+  const { parentType, setIDs } = useDeleteItemLogic(itemType, itemID);
+
+  const deleteRootItemOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteRootItemOverlayHandler;
+  const deleteNestedItemOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteNestedItemOverlayHandler;
+
+  const handleDeleteItemClick = () => {
+    setIDs();
 
     if (parentType) {
       if (deleteNestedItemOverlayHandler) deleteNestedItemOverlayHandler.open();
@@ -51,4 +90,39 @@ export default function useDeleteItem(
   };
 
   return { handleDeleteItemClick };
+}
+
+/**
+ * Hook to delete an item (Section, Superset, or Exercise) from a workout draft for mobile.
+ *
+ * @param itemType The type of item to delete ("exercise", "superset", or "section").
+ * @param itemID The ID of the item to delete.
+ * @returns An object containing handleDeleteItemPress function.
+ */
+export function useDeleteItemMobile(
+  itemType: "exercise" | "superset" | "section",
+  itemID: string
+) {
+  const { parentType, setIDs } = useDeleteItemLogic(itemType, itemID);
+
+  const setIsDeleteNestedItemOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      ?.setIsDeleteNestedItemOverlayVisible;
+  const setIsDeleteRootItemOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      ?.setIsDeleteRootItemOverlayVisible;
+
+  const handleDeleteItemPress = () => {
+    setIDs();
+
+    if (parentType) {
+      if (setIsDeleteNestedItemOverlayVisible)
+        setIsDeleteNestedItemOverlayVisible(true);
+    } else {
+      if (setIsDeleteRootItemOverlayVisible)
+        setIsDeleteRootItemOverlayVisible(true);
+    }
+  };
+
+  return { handleDeleteItemPress };
 }

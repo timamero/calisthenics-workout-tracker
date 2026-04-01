@@ -1,22 +1,21 @@
 import { ReactNode } from 'react';
 import { Card, useTheme } from 'react-native-paper';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { CustomTheme } from '../../theme';
 
 interface CardButtonProps {
+  handlePress: () => void;
   children: ReactNode;
 }
 
-export default function CardButton({ children }: CardButtonProps) {
+export default function CardButton({ handlePress, children }: CardButtonProps) {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
   return (
-    <Card style={styles.card} onPress={() => console.log('clicked on card')}>
-      <Card.Content style={styles.cardContent}>
-        <View style={styles.titleContainer}>{children}</View>
-      </Card.Content>
+    <Card style={styles.card} onPress={() => handlePress()}>
+      <Card.Content style={styles.cardContent}>{children}</Card.Content>
     </Card>
   );
 }
@@ -25,14 +24,19 @@ const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     card: {
       marginBlock: 12,
-      marginInline: 8,
+      // marginInline: 8,
       backgroundColor: theme.colors.background,
-      boxShadow: 'rgba(222, 226, 230, 0.25) 1px 3px 17px -1px',
+      boxShadow: `${theme.colors.light} 1px 3px 9px -6px`,
       padding: 16,
       borderColor: theme.colors.light,
       borderWidth: 1,
       minWidth: 160,
-      height: 160,
+      width: '100%',
+      // maxWidth: 160,
+      minHeight: 160,
+      height: 'auto',
+      // flexGrow: 0,
+      flexShrink: 1,
     },
     cardContent: {
       paddingHorizontal: 0,
