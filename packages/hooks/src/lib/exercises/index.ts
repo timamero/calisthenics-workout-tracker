@@ -1,6 +1,7 @@
+import { useSetExercisesData } from "./useSetExercisesData";
 import {
   useFilterSelectors,
   useSearchSelectors,
-} from './useFiltersAndSearchStatus';
+} from "./useFiltersAndSearchStatus";
 
-export { useFilterSelectors, useSearchSelectors };
+export { useFilterSelectors, useSearchSelectors, useSetExercisesData };
