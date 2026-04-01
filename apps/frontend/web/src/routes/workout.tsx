@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack } from '@mantine/core';
 
 import { useAuthStore, useExerciseLibraryStore } from '@cwt/state/stores';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
+import { useSetExercisesData } from '@cwt/hooks';
 
 import { getExercises } from '../services/exercisesService';
 
@@ -35,24 +35,11 @@ function WorkoutView() {
   const exercises: ExerciseResponse[] = Route.useLoaderData();
 
   const loading = useExerciseLibraryStore((state) => state.loading);
-  const setExercises = useExerciseLibraryStore((state) => state.setExercises);
-  const setLoading = useExerciseLibraryStore((state) => state.setLoading);
   const isExercisesSet = useExerciseLibraryStore((state) =>
     state.displayedExercises === null ? false : true,
   );
 
-  useEffect(() => {
-    if (!isExercisesSet) {
-      console.log('setting exercises in useEffect');
-      setExercises(exercises);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    if (isExercisesSet) {
-      setLoading(false);
-    }
-  }, [isExercisesSet, setLoading]);
+  useSetExercisesData(exercises);
 
   if (!isExercisesSet || loading) {
     return (
