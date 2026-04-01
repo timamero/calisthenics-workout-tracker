@@ -5,13 +5,13 @@ import { useWorkoutDraftStore } from "@cwt/state/stores";
 import type { Exercise } from "@cwt/schema/workouts";
 
 /**
- * Hook to handle adding a new set to an exercise or superset within a workout draft.
+ * Common logic for adding a new set to an exercise or superset within a workout draft.
  * It retrieves the necessary context and store functions to manage the addition of sets,
  * ensuring that the correct exercise, superset, and section IDs are set in the draft state.
  *
  * @returns A function that, when called, adds a new set to the appropriate exercise or superset.
  */
-export default function useAddSet() {
+function useAddSetLogic() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
@@ -31,7 +31,7 @@ export default function useAddSet() {
     (state) => state.setSectionIDToMod
   );
 
-  const handleAddSetClick = () => {
+  return () => {
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
     }
@@ -46,5 +46,24 @@ export default function useAddSet() {
       addSet();
     }
   };
-  return handleAddSetClick;
+}
+
+/**
+ * Hook to add a new set to an exercise or superset within a workout draft for web.
+ * @returns An object containing handleAddSetClick function.
+ */
+export function useAddSet() {
+  const handleAddSetClick = useAddSetLogic();
+
+  return { handleAddSetClick };
+}
+
+/**
+ * Hook to add a new set to an exercise or superset within a workout draft for mobile.
+ * @returns An object containing handleAddSetPress function.
+ */
+export function useAddSetMobile() {
+  const handleAddSetPress = useAddSetLogic();
+
+  return { handleAddSetPress };
 }

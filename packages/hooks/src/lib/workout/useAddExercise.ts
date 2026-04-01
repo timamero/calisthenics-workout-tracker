@@ -1,39 +1,24 @@
-import { useContext } from 'react';
-import { ScrollView } from 'react-native';
-import { type UseDisclosureHandlers } from '@mantine/hooks';
+import { ScrollView } from "react-native";
 
 import {
   useWorkoutDraftStore,
   useExerciseLibraryStore,
-} from '@cwt/state/stores';
-import { AppTypeSchema } from '@cwt/schema/common';
-import { WorkoutContext } from '@cwt/context';
+} from "@cwt/state/stores";
 
-export interface UseAddExerciseWebResult {
-  opened: boolean;
-  handler: UseDisclosureHandlers;
-  selectedExerciseIDToAdd: number | null;
-  handleAddExerciseClick: () => void;
-}
-export interface UseAddExerciseMobileResult {
-  isVisible: boolean;
-  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedExerciseIDToAdd: number | null;
-  handleAddExercisePress: (
-    workoutDataScrollViewRef: null | React.RefObject<ScrollView | null>
-  ) => void;
-}
+import {
+  useWorkoutContextWeb,
+  useWorkoutContextMobile,
+} from "./useWorkoutContext";
 
-export default function useAddExercise(
-  appType: AppTypeSchema
-): UseAddExerciseMobileResult | UseAddExerciseWebResult | undefined {
-  const opened = useContext(WorkoutContext)?.addExerciseOverlayOpened;
-  const handler = useContext(WorkoutContext)?.addExerciseOverlayHandler;
-
-  const isVisible = useContext(WorkoutContext)?.isAddExerciseOverlayVisible;
-  const setIsVisible =
-    useContext(WorkoutContext)?.setIsAddExerciseOverlayVisible;
-
+/**
+ * Common logic for adding an exercise to a workout draft.
+ * It retrieves the necessary store functions to manage the addition of exercises,
+ * including selecting the exercise to add and performing the addition based on its tracking type.
+ *
+ * @returns An object containing the selected exercise ID, a function to set it,
+ *          a function to add the exercise, and a function to get exercise details by ID.
+ */
+function useAddExerciseLogic() {
   const selectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.selectedExerciseIDToAdd
   );
@@ -44,36 +29,75 @@ export default function useAddExercise(
   const getExerciseById = useExerciseLibraryStore(
     (state) => state.getExerciseByID
   );
-  const handleAddExerciseAction = (
+
+  return {
+    selectedExerciseIDToAdd,
+    setSelectedExerciseIDToAdd,
+    addExercise,
+    getExerciseById,
+  };
+}
+
+/**
+ * Hook for adding an exercise to a workout draft in a web context.
+ * @returns An object containing the selected exercise ID and a function to handle adding the exercise.
+ */
+export function useAddExercise() {
+  const {
+    selectedExerciseIDToAdd,
+    setSelectedExerciseIDToAdd,
+    addExercise,
+    getExerciseById,
+  } = useAddExerciseLogic();
+
+  const handler =
+    useWorkoutContextWeb().webOverlayHandlers?.addExerciseOverlayHandler;
+
+  const handleAddExerciseClick = () => {
+    addExercise(
+      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type
+    );
+
+    setSelectedExerciseIDToAdd(null);
+    handler!.close();
+  };
+
+  return {
+    selectedExerciseIDToAdd,
+    handleAddExerciseClick,
+  };
+}
+
+/**
+ * Hook for adding an exercise to a workout draft in a mobile context.
+ * @returns An object containing the selected exercise ID and a function to handle adding the exercise.
+ */
+export function useAddExerciseMobile() {
+  const {
+    selectedExerciseIDToAdd,
+    setSelectedExerciseIDToAdd,
+    addExercise,
+    getExerciseById,
+  } = useAddExerciseLogic();
+
+  const setIsVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      ?.setIsAddExerciseOverlayVisible;
+
+  const handleAddExercisePress = (
     workoutDataScrollViewRef: null | React.RefObject<ScrollView | null>
   ) => {
     addExercise(
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type
     );
 
-    if (appType == 'web') {
-      setSelectedExerciseIDToAdd(null);
-      handler!.close();
-    } else if (appType == 'mobile') {
-      setSelectedExerciseIDToAdd(null);
-      setIsVisible?.(false);
-      workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
-    }
+    setSelectedExerciseIDToAdd(null);
+    setIsVisible?.(false);
+    workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
   };
 
-  if (appType == 'web') {
-    return {
-      opened,
-      handler,
-      selectedExerciseIDToAdd,
-      handleAddExerciseClick: handleAddExerciseAction,
-    } as UseAddExerciseWebResult;
-  } else if (appType == 'mobile') {
-    return {
-      isVisible,
-      setIsVisible,
-      selectedExerciseIDToAdd,
-      handleAddExercisePress: handleAddExerciseAction,
-    } as UseAddExerciseMobileResult;
-  }
+  return {
+    selectedExerciseIDToAdd,
+    handleAddExercisePress,
+  };
 }

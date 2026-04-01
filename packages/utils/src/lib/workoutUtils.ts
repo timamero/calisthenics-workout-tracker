@@ -12,8 +12,12 @@ export type ExercisesGroupedBySetsReturnType = {
 
 export function groupExercisesBySet(
   superset: Superset
-): ExercisesGroupedBySetsReturnType[] {
+): ExercisesGroupedBySetsReturnType[] | null {
   const exercises = superset.exercises;
+
+  if (exercises.length === 0) {
+    return null;
+  }
 
   // Check that all exercises have the same number of sets
   if (

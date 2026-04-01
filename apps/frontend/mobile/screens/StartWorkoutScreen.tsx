@@ -40,7 +40,7 @@ export default function StartWorkoutScreen() {
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
     return (
-      <CardButton key={i}>
+      <CardButton handlePress={() => console.log('clicked card')} key={i}>
         <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
           {workoutTitle}
         </Text>
@@ -51,7 +51,7 @@ export default function StartWorkoutScreen() {
   const workoutLogCards = workoutLogs.map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
     return (
-      <CardButton key={i}>
+      <CardButton handlePress={() => console.log('clicked card')} key={i}>
         <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
           {workoutTitle}
         </Text>
@@ -76,14 +76,52 @@ export default function StartWorkoutScreen() {
       <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
         {startWorkoutContent().workoutBuildListHeading}
       </Text>
-      <View>
-        <ScrollView horizontal>{workoutBuildCards}</ScrollView>
+      <View
+        style={{
+          backgroundColor: theme.colors.dark800,
+          marginBlock: 8,
+        }}
+      >
+        <ScrollView horizontal showsHorizontalScrollIndicator>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 16,
+              justifyContent: 'flex-start',
+              width: '100%',
+              paddingInline: 8,
+              paddingBlock: 16,
+            }}
+          >
+            {workoutBuildCards}
+          </View>
+        </ScrollView>
       </View>
       <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
         {startWorkoutContent().workoutLogListHeading}
       </Text>
-      <View>
-        <ScrollView horizontal>{workoutLogCards}</ScrollView>
+      <View
+        style={{
+          backgroundColor: theme.colors.dark800,
+          marginBlock: 8,
+        }}
+      >
+        <ScrollView horizontal showsHorizontalScrollIndicator>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 16,
+              justifyContent: 'flex-start',
+              width: '100%',
+              paddingInline: 8,
+              paddingBlock: 16,
+            }}
+          >
+            {workoutLogCards}
+          </View>
+        </ScrollView>
       </View>
     </View>
   );

@@ -5,3 +5,4 @@ export * from './api/workoutLog.schema';
 export * from './api/workoutData.schema';
 
 export * from './ui/addExerciseOverlay';
+export * from './ui/workoutLogLimitedDetails.schema';

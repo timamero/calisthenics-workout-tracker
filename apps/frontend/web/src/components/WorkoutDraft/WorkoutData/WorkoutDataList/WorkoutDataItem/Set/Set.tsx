@@ -18,7 +18,7 @@ export default function Set() {
 
   const mode = useWorkoutDraftStore((state) => state.mode);
 
-  const handleDeleteSetClick = useDeleteSet();
+  const { handleDeleteSetClick } = useDeleteSet();
   const handleToggleCompleted = useToggleCompleted();
 
   if (sets) {

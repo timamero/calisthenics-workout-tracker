@@ -4,7 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { WorkoutContext } from "../contexts/WorkoutContext";
 import { AppTypeSchema } from "@cwt/schema/common";
 
-export default function WorkoutContextProvider({
+export default function WorkoutOverlaysContextProvider({
   appType,
   children,
 }: {
@@ -22,8 +22,10 @@ export default function WorkoutContextProvider({
     useDisclosure(false);
   const [deleteSetInSupersetOverlayOpened, deleteSetInSupersetOverlayHandler] =
     useDisclosure(false);
+  const [saveOverlayOpened, saveOverlayHandler] = useDisclosure(false);
+  const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
 
-  const webValue = {
+  const webOverlayHandlers = {
     addExerciseOverlayOpened: addExerciseOverlayOpened,
     addExerciseOverlayHandler: addExerciseOverlayHandler,
     deleteRootItemOverlayOpened: deleteRootItemOverlayOpened,
@@ -34,6 +36,10 @@ export default function WorkoutContextProvider({
     deleteSetOverlayHandler: deleteSetOverlayHandler,
     deleteSetInSupersetOverlayOpened: deleteSetInSupersetOverlayOpened,
     deleteSetInSupersetOverlayHandler: deleteSetInSupersetOverlayHandler,
+    saveOverlayOpened: saveOverlayOpened,
+    saveOverlayHandler: saveOverlayHandler,
+    cancelOverlayOpened: cancelOverlayOpened,
+    cancelOverlayHandler: cancelOverlayHandler,
   };
 
   // Mobile
@@ -47,12 +53,16 @@ export default function WorkoutContextProvider({
   ] = useState<boolean>(false);
   const [isDeleteSetOverlayVisible, setIsDeleteSetOverlayVisible] =
     useState<boolean>(false);
-  const [isAddSupersetOverlayVisible, setIsAddSupersetOverlayVisible] =
+  const [
+    isDeleteSetInSupersetOverlayVisible,
+    setIsDeleteSetInSupersetOverlayVisible,
+  ] = useState<boolean>(false);
+  const [isSaveWorkoutDialogVisible, setIsSaveWorkoutDialogVisible] =
     useState<boolean>(false);
-  const [isAddSectionOverlayVisible, setIsAddSectionOverlayVisible] =
+  const [isCancelWorkoutDialogVisible, setIsCancelWorkoutDialogVisible] =
     useState<boolean>(false);
 
-  const mobileValue = {
+  const mobileOverlayHandlers = {
     isAddExerciseOverlayVisible: isAddExerciseOverlayVisible,
     setIsAddExerciseOverlayVisible: setIsAddExerciseOverlayVisible,
     isDeleteRootItemOverlayVisible: isDeleteRootItemOverlayVisible,
@@ -61,14 +71,23 @@ export default function WorkoutContextProvider({
     setIsDeleteNestedItemOverlayVisible: setIsDeleteNestedItemOverlayVisible,
     isDeleteSetOverlayVisible: isDeleteSetOverlayVisible,
     setIsDeleteSetOverlayVisible: setIsDeleteSetOverlayVisible,
-    isAddSupersetOverlayVisible: isAddSupersetOverlayVisible,
-    setIsAddSupersetOverlayVisible: setIsAddSupersetOverlayVisible,
-    isAddSectionOverlayVisible: isAddSectionOverlayVisible,
-    setIsAddSectionOverlayVisible: setIsAddSectionOverlayVisible,
+    isDeleteSetInSupersetOverlayVisible: isDeleteSetInSupersetOverlayVisible,
+    setIsDeleteSetInSupersetOverlayVisible:
+      setIsDeleteSetInSupersetOverlayVisible,
+    isSaveWorkoutDialogVisible,
+    setIsSaveWorkoutDialogVisible,
+    isCancelWorkoutDialogVisible,
+    setIsCancelWorkoutDialogVisible,
   };
 
   return (
-    <WorkoutContext.Provider value={appType === "web" ? webValue : mobileValue}>
+    <WorkoutContext.Provider
+      value={
+        appType === "web"
+          ? { appType, webOverlayHandlers }
+          : { appType, mobileOverlayHandlers }
+      }
+    >
       {children}
     </WorkoutContext.Provider>
   );

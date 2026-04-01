@@ -1,11 +1,7 @@
 import * as React from 'react';
-import {
-  createStaticNavigation,
-  // getFocusedRouteNameFromRoute,
-} from '@react-navigation/native';
+import { createStaticNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from '../screens/Home';
@@ -98,7 +94,7 @@ const AuthStack = createNativeStackNavigator({
 function useIsSignedIn() {
   const supabaseSession = useAuthStore((state) => state.session);
   if (supabaseSession) {
-    console.log('User is signed in:');
+    console.log('AppNavigator: User is signed in:');
     return true;
   }
   return false;
@@ -106,7 +102,7 @@ function useIsSignedIn() {
 function useIsSignedOut() {
   const supabaseSession = useAuthStore((state) => state.session);
   if (supabaseSession) {
-    console.log('User is signed out:');
+    console.log('AppNavigator: User is signed out:');
     return false;
   }
   return true;
