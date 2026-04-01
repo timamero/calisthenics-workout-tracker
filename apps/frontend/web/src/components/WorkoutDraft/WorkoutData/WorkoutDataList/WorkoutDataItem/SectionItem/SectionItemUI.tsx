@@ -28,7 +28,7 @@ export default function SectionItemUI({
 }: SectionItemUIProps) {
   return (
     <Group align="flex-start">
-      {mode !== 'log' && (
+      {(mode === 'edit' || mode === 'build') && (
         <ReorderButtonGroup
           handleUpClick={() => handleUpClick()}
           handleDownClick={() => handleDownClick()}
@@ -39,7 +39,7 @@ export default function SectionItemUI({
       <Stack bg="gray.1" p="xl" bdrs="sm">
         <Group>
           <Text>Section</Text>
-          {mode !== 'log' && (
+          {(mode === 'edit' || mode === 'build') && (
             <Button
               color="red"
               variant="white"
@@ -50,7 +50,7 @@ export default function SectionItemUI({
           )}
         </Group>
         <ItemsList />
-        {mode !== 'log' && (
+        {(mode === 'edit' || mode === 'build') && (
           <Stack>
             <Button
               variant="filled"

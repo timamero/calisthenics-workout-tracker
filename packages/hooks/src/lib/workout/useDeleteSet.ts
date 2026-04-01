@@ -1,31 +1,28 @@
 import { useContext } from "react";
 
-import {
-  WorkoutDataItemContext,
-  SetContext,
-  WorkoutContext,
-} from "@cwt/context";
+import { WorkoutDataItemContext, SetContext } from "@cwt/context";
 import { useWorkoutDraftStore } from "@cwt/state/stores";
 import type { Exercise } from "@cwt/schema/workouts";
 
+import {
+  useWorkoutContextWeb,
+  useWorkoutContextMobile,
+} from "./useWorkoutContext";
+
 /**
- * Hook to handle deleting a set from an exercise or superset within a workout draft.
+ * Common logic for deleting a set from an exercise or superset within a workout draft.
  * It retrieves the necessary context and store functions to manage the deletion of sets,
  * ensuring that the correct exercise, superset, and section IDs are set in the draft state.
  *
  * @returns A function that, when called, initiates the deletion process for the appropriate set.
  */
-export default function useDeleteSet() {
+function useDeleteSetLogic() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const set = useContext(SetContext)!.set;
   const setIndex = useContext(SetContext)!.setIndex;
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-  const deleteSetOverlayHandler =
-    useContext(WorkoutContext)!.deleteSetOverlayHandler;
-  const deleteSetInSupersetOverlayHandler =
-    useContext(WorkoutContext)!.deleteSetInSupersetOverlayHandler;
 
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setSetIndexToMod = useWorkoutDraftStore(
@@ -41,7 +38,7 @@ export default function useDeleteSet() {
     (state) => state.setSectionIDToMod
   );
 
-  const handleDeleteSetClick = () => {
+  const setIDs = () => {
     if (parentSupersetID) {
       setSupersetIDToMod(parentSupersetID);
     }
@@ -52,12 +49,65 @@ export default function useDeleteSet() {
     if (parentType !== "superset") {
       setSetIDToMod(set.id);
       setExerciseIDToMod(exercise!.id);
-      if (deleteSetOverlayHandler) deleteSetOverlayHandler.open();
     } else {
       setSetIndexToMod(setIndex);
+    }
+  };
+
+  return { parentType, setIDs };
+}
+
+/**
+ * Hook to delete a set from an exercise or superset within a workout draft for web.
+ * @returns An object containing handleDeleteSetClick function.
+ */
+export function useDeleteSet() {
+  const { parentType, setIDs } = useDeleteSetLogic();
+
+  const deleteSetOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteSetOverlayHandler;
+  const deleteSetInSupersetOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers
+      ?.deleteSetInSupersetOverlayHandler;
+
+  const handleDeleteSetClick = () => {
+    setIDs();
+
+    if (parentType !== "superset") {
+      if (deleteSetOverlayHandler) deleteSetOverlayHandler.open();
+    } else {
       if (deleteSetInSupersetOverlayHandler)
         deleteSetInSupersetOverlayHandler.open();
     }
   };
-  return handleDeleteSetClick;
+
+  return { handleDeleteSetClick };
+}
+
+/**
+ * Hook to delete a set from an exercise or superset within a workout draft for mobile.
+ * @returns An object containing handleDeleteSetPress function.
+ */
+export function useDeleteSetMobile() {
+  const { parentType, setIDs } = useDeleteSetLogic();
+
+  const setIsDeleteSetOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      .setIsDeleteSetOverlayVisible;
+  const setIsDeleteSetInSupersetOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      .setIsDeleteSetInSupersetOverlayVisible;
+
+  const handleDeleteSetPress = () => {
+    setIDs();
+
+    if (parentType !== "superset") {
+      if (setIsDeleteSetOverlayVisible) setIsDeleteSetOverlayVisible(true);
+    } else {
+      if (setIsDeleteSetInSupersetOverlayVisible)
+        setIsDeleteSetInSupersetOverlayVisible(true);
+    }
+  };
+
+  return { handleDeleteSetPress };
 }

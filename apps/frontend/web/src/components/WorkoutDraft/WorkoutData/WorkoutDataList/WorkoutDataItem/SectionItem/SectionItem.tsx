@@ -20,14 +20,16 @@ export default function SectionItem() {
     (state) => state.workoutData.length || 0,
   );
 
-  const handleUpClick = useReorderItem(section).handleUpClick;
-  const handleDownClick = useReorderItem(section).handleDownClick;
+  const { handleUpClick, handleDownClick } = useReorderItem(section);
   const handleDeleteSectionClick = useDeleteItem(
     'section',
     section!.id,
   ).handleDeleteItemClick;
-  const handleOpenAddExerciseOverlay = useAddExerciseOverlay('section');
-  const handleAddSupersetClick = useAddSuperset(section.id);
+  const handleOpenAddExerciseOverlayClick =
+    useAddExerciseOverlay('section').handleOpenAddExerciseOverlayClick;
+  const handleAddSupersetClick = useAddSuperset(
+    section.id,
+  ).handleAddSupersetClick;
 
   return (
     <SectionItemUI
@@ -37,7 +39,7 @@ export default function SectionItem() {
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleDeleteSectionClick={handleDeleteSectionClick}
-      handleOpenAddExerciseOverlay={handleOpenAddExerciseOverlay}
+      handleOpenAddExerciseOverlay={handleOpenAddExerciseOverlayClick}
       handleAddSupersetClick={handleAddSupersetClick}
     />
   );

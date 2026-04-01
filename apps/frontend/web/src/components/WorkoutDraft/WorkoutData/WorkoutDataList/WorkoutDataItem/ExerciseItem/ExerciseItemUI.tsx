@@ -27,7 +27,7 @@ export default function ExerciseItemUI({
 }: ExerciseItemUIProps) {
   return (
     <Group align="flex-start">
-      {mode !== 'log' && (
+      {(mode === 'edit' || mode === 'build') && (
         <ReorderButtonGroup
           handleUpClick={() => handleUpClick()}
           handleDownClick={() => handleDownClick()}
@@ -44,7 +44,7 @@ export default function ExerciseItemUI({
       >
         <Group>
           <Text>{name}</Text>
-          {mode !== 'log' && (
+          {(mode === 'edit' || mode === 'build') && (
             <Button
               color="red"
               variant="white"
@@ -57,7 +57,7 @@ export default function ExerciseItemUI({
         <Stack gap="xs">
           <SetList />
         </Stack>
-        {mode !== 'log' && (
+        {(mode === 'edit' || mode === 'build') && (
           <Button
             variant="outline"
             color="dark"

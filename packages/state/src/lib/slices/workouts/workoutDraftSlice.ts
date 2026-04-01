@@ -46,6 +46,9 @@ interface WorkoutDraftState {
 interface WorkoutDraftAction {
   initializeWorkout: (mode: Mode) => void;
   setMode: (mode: Mode) => void;
+  setWorkoutData: (
+    workoutData: Array<Exercise | Section | Superset> | null,
+  ) => void;
   setWorkoutTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSetIDToMod: (id: string | null) => void;
@@ -124,6 +127,12 @@ export const createWorkoutDraftSlice: StateCreator<
   setMode: (mode) =>
     set((state) => {
       state.mode = mode;
+    }),
+  setWorkoutData: (workoutData) =>
+    set((state) => {
+      if (workoutData) {
+        state.workoutData = workoutData;
+      }
     }),
   setWorkoutTitle: (title) =>
     set((state) => {
