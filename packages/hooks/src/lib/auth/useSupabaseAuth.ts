@@ -40,10 +40,7 @@ export default function useSupabaseAuth(client: SupabaseClient) {
             // setUser(session!.user);
             break;
           case "INITIAL_SESSION":
-            console.log(
-              "onAuthStateChange INITIAL_SESSION: session = ",
-              session,
-            );
+            console.log("onAuthStateChange INITIAL_SESSION");
             setAuthStates(session);
             // if (session) {
             //   setSession(session);
@@ -51,10 +48,7 @@ export default function useSupabaseAuth(client: SupabaseClient) {
             // }
             break;
           case "TOKEN_REFRESHED":
-            console.log(
-              "onAuthStateChange TOKEN_REFRESHED: session = ",
-              session,
-            );
+            console.log("onAuthStateChange TOKEN_REFRESHED");
             setAuthStates(session);
             // if (session) {
             //   setSession(session);
@@ -63,8 +57,7 @@ export default function useSupabaseAuth(client: SupabaseClient) {
             break;
           case "MFA_CHALLENGE_VERIFIED":
             console.log(
-              "onAuthStateChange TOKEN_REFRESHED, MFA_CHALLENGE_VERIFIED: session = ",
-              session,
+              "onAuthStateChange TOKEN_REFRESHED, MFA_CHALLENGE_VERIFIED",
             );
             setAuthStates(session);
             // if (session) {

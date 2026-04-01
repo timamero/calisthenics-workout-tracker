@@ -5,7 +5,6 @@ import { useAuthStore, useLeveragesAssistsStore } from '@cwt/state/stores';
 import { getLeveragesAssists } from '../services/leveragesAssistsService';
 
 export function useFetchLeveragesAssists() {
-  console.log('useFetchLeveragesAssists called');
   const supabaseSession = useAuthStore((state) => state.session);
 
   const isLeveragesAndAssistsSet = useLeveragesAssistsStore((state) =>
@@ -15,15 +14,13 @@ export function useFetchLeveragesAssists() {
     (state) => state.setLeveragesAssists,
   );
   useEffect(() => {
-    console.log('useFetchLeveragesAssists useEffect called');
-
     const asyncFetchData = async () => {
-      console.log('useFetchLeveragesAssists');
       if (supabaseSession?.access_token && !isLeveragesAndAssistsSet) {
-        console.log('fetching leverages and assists');
+        console.time('fetch leverages and assists');
         const leveragesAssists = await getLeveragesAssists(
           supabaseSession.access_token,
         );
+        console.timeEnd('fetch leverages and assists');
         if (leveragesAssists) {
           setLeveragesAssists(leveragesAssists);
         }
@@ -31,9 +28,6 @@ export function useFetchLeveragesAssists() {
     };
 
     if (!isLeveragesAndAssistsSet) {
-      console.log(
-        'calling asyn func for fetching and setting the leverages and assists',
-      );
       asyncFetchData();
     }
   }, [setLeveragesAssists, supabaseSession, isLeveragesAndAssistsSet]);

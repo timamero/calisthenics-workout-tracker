@@ -10,12 +10,10 @@ import {
   useWorkoutDraftStore,
   useAuthStore,
   useLeveragesAssistsStore,
-  useExerciseLibraryStore,
 } from '@cwt/state/stores';
 import { WorkoutContextProvider } from '@cwt/context';
 
 import { supabase } from '../services/supabaseClient';
-// import { getExercises } from '../services/exercisesService';
 import { getLeveragesAssists } from '../services/leveragesAssistsService';
 
 export const Route = createRootRoute({
@@ -27,7 +25,6 @@ function RootComponent() {
   const isWorkoutSavePending = useWorkoutDraftStore(
     (state) => state.isWorkoutSavePending,
   );
-  const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setLeveragesAssists = useLeveragesAssistsStore(
     (state) => state.setLeveragesAssists,
   );
@@ -52,14 +49,16 @@ function RootComponent() {
   useEffect(() => {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token) {
+        console.time('fetching LeveragesAssists');
         const leveragesAssists = await getLeveragesAssists(
           supabaseSession.access_token,
         );
+        console.timeEnd('fetching LeveragesAssists');
         setLeveragesAssists(leveragesAssists);
       }
     };
     asyncFetchData();
-  }, [supabaseSession, setExercises, setLeveragesAssists]);
+  }, [supabaseSession, setLeveragesAssists]);
 
   if (loading || isWorkoutSavePending) {
     console.log('_root: rendering loader');
