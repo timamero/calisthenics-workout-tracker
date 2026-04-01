@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Group, ActionIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -7,6 +7,7 @@ import { IoFilterOutline } from 'react-icons/io5';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
 import { ExerciseDetailContext } from '@cwt/context';
 import { useAuthStore, useExerciseLibraryStore } from '@cwt/state/stores';
+import { useSetExercisesData } from '@cwt/hooks';
 
 import { getExercises } from '../services/exercisesService';
 
@@ -48,8 +49,6 @@ function LibraryView() {
   const [detailOpened, detailHandlers] = useDisclosure(false);
 
   const loading = useExerciseLibraryStore((state) => state.loading);
-  const setExercises = useExerciseLibraryStore((state) => state.setExercises);
-  const setLoading = useExerciseLibraryStore((state) => state.setLoading);
   const isExercisesSet = useExerciseLibraryStore((state) =>
     state.displayedExercises === null ? false : true,
   );
@@ -58,18 +57,7 @@ function LibraryView() {
     filterHandler.open();
   };
 
-  useEffect(() => {
-    if (!isExercisesSet) {
-      console.log('setting exercises in useEffect');
-      setExercises(exercises);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    if (isExercisesSet) {
-      setLoading(false);
-    }
-  }, [isExercisesSet, setLoading]);
+  useSetExercisesData(exercises);
 
   if (!isExercisesSet || loading) {
     return (
