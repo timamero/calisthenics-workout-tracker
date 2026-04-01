@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { useExerciseLibraryStore } from "@cwt/state/stores";
-import { ExerciseResponse } from "@cwt/schema/exercises";
+import { useExerciseLibraryStore } from '@cwt/state/stores';
+import type { ExerciseResponse } from '@cwt/schema/exercises';
 
 export function useSetExercisesData(exercises: ExerciseResponse[]) {
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
@@ -9,12 +9,12 @@ export function useSetExercisesData(exercises: ExerciseResponse[]) {
   const isExercisesSet = useExerciseLibraryStore((state) =>
     state.displayedExercises === null ? false : true,
   );
-  console.log("useSetExercisesData hook called");
+  console.log('useSetExercisesData hook called');
   useEffect(() => {
     if (!isExercisesSet) {
-      console.log("setting exercises in useEffect");
+      console.log('setting exercises in useEffect');
       setExercises(exercises);
       setLoading(false);
     }
-  }, [exercises]);
+  }, [exercises, isExercisesSet, setExercises, setLoading]);
 }
