@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Title, Text, Pagination, SimpleGrid, Stack, Box } from '@mantine/core';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
-// import { WorkoutLogDetailContext } from '@cwt/context';
 import { formatDuration, chunk } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';

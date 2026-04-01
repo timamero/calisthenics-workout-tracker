@@ -9,10 +9,8 @@ export function useSetExercisesData(exercises: ExerciseResponse[]) {
   const isExercisesSet = useExerciseLibraryStore((state) =>
     state.displayedExercises === null ? false : true,
   );
-  console.log('useSetExercisesData hook called');
   useEffect(() => {
     if (!isExercisesSet) {
-      console.log('setting exercises in useEffect');
       setExercises(exercises);
       setLoading(false);
     }

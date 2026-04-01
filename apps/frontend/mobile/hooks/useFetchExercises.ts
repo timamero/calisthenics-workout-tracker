@@ -14,8 +14,9 @@ export function useFetchExercises() {
   useEffect(() => {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token && !isExercisesSet) {
-        console.log('fetching exercises');
+        console.time('fetch exercises');
         const exercises = await getExercises(supabaseSession.access_token);
+        console.timeEnd('fetch exercises');
         if (exercises) {
           setExercises(exercises);
           setLoading(false);
@@ -24,7 +25,6 @@ export function useFetchExercises() {
     };
 
     if (!isExercisesSet) {
-      console.log('calling async func for fetching and setting the exercises');
       asyncFetchData();
     }
   }, [setExercises, supabaseSession, isExercisesSet, setLoading]);
