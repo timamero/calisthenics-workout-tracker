@@ -12,8 +12,8 @@ export default function LoginScreen() {
   const theme = useTheme();
 
   const handleLogin = async () => {
-    const user = await signIn(supabase, email, password);
-    console.log('User:', user);
+    // add error handling
+    await signIn(supabase, email, password);
   };
 
   return (
