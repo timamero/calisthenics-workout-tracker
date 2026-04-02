@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useTheme, TextInput, Text, Button } from 'react-native-paper';
 
-// eslint-disable-next-line import/no-unresolved
 import { createUser } from '@cwt/auth/createUser';
 import { supabase } from '../services/supabaseClient';
 
@@ -14,8 +13,8 @@ export default function SignupScreen() {
   const theme = useTheme();
 
   const handleSignUp = async () => {
-    const user = await createUser(supabase, email, password);
-    console.log('User:', user);
+    // Add error handling
+    await createUser(supabase, email, password);
   };
 
   return (

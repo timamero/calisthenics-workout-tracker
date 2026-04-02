@@ -20,10 +20,8 @@ function LoginView() {
     const email = (event.target as HTMLFormElement).email.value;
     const password = (event.target as HTMLFormElement).password.value;
 
-    // TODO: Validate
-
-    const user = await signIn(supabase, email, password);
-    console.log('User:', user);
+    // Add error handling
+    await signIn(supabase, email, password);
   };
 
   return (

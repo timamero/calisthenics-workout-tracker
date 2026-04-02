@@ -20,10 +20,8 @@ function SignUpView() {
     const email = (event.target as HTMLFormElement).email.value;
     const password = (event.target as HTMLFormElement).password.value;
 
-    // TODO: Validate
-
-    const user = createUser(supabase, email, password);
-    console.log('User:', user);
+    // Add error handling
+    createUser(supabase, email, password);
   };
   return (
     <Box maw={400} mx="auto" mt="xl">
