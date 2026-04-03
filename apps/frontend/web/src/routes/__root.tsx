@@ -58,7 +58,7 @@ function RootComponent() {
       }
     };
     asyncFetchData();
-  }, [supabaseSession, setLeveragesAssists]);
+  }, [supabaseSession]);
 
   if (loading || isWorkoutSavePending) {
     console.log('_root: rendering loader');
