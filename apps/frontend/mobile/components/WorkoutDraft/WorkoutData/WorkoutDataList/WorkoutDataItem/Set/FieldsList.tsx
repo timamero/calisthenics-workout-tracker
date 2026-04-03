@@ -30,7 +30,7 @@ export default function FieldsList() {
         display: 'flex',
         flexDirection: 'row',
         gap: 24,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
       }}
     >
       {fields}
