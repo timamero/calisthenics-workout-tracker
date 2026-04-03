@@ -3,60 +3,42 @@ import 'react-native-get-random-values';
 import { View } from 'react-native';
 import { PaperProvider, ActivityIndicator, Text } from 'react-native-paper';
 
-import {
-  useExerciseLibraryStore,
-  useAuthStore,
-  useWorkoutLibraryStore,
-  useLeveragesAssistsStore,
-} from '@cwt/state/stores';
+import { useAuthStore, useWorkoutLibraryStore } from '@cwt/state/stores';
 import { WorkoutContextProvider } from '@cwt/context';
 import { useSupabaseAuth } from '@cwt/hooks';
 
 import theme from './theme';
 import { supabase } from './services/supabaseClient';
 import Navigation from './navigation';
-import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
-import { getLeveragesAssists } from './services/leveragesAssistsService';
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
 
-  const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
-  const setLeveragesAssists = useLeveragesAssistsStore(
-    (state) => state.setLeveragesAssists,
-  );
 
   useSupabaseAuth(supabase);
 
   useEffect(() => {
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token) {
-        const exercises = await getExercises(supabaseSession.access_token);
-        if (exercises) {
-          setExercises(exercises);
-        }
-
+        console.time('fetch workout builds');
         const workoutBuilds = await getWorkoutBuilds(
           supabaseSession.access_token,
         );
+        console.timeEnd('fetch workout builds');
+
+        console.time('fetch workout logs');
         const workoutLogs = await getWorkoutLogs(supabaseSession.access_token);
+        console.time('fetch workout logs');
         if (workoutBuilds) {
           setWorkouts(workoutLogs, workoutBuilds);
-        }
-
-        const leveragesAssists = await getLeveragesAssists(
-          supabaseSession.access_token,
-        );
-        if (leveragesAssists) {
-          setLeveragesAssists(leveragesAssists);
         }
       }
     };
     asyncFetchData();
-  }, [setExercises, supabaseSession, setWorkouts, setLeveragesAssists]);
+  }, [supabaseSession, setWorkouts]);
 
   if (loading) {
     return (

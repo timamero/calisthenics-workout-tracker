@@ -3,7 +3,7 @@
   "version": "0.1.0-alpha.1",
   "main": "index.ts",
   "scripts": {
-    "dev": "expo start --tunnel",
+    "dev": "EXPO_TUNNEL_SUBDOMAIN=cal-workout-app expo start --tunnel",
     "web": "expo start --web",
     "dev-build": "eas build --platform android --profile development",
     "preview-build": "eas build --platform android --profile preview",
