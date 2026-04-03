@@ -25,18 +25,18 @@ export default function ExerciseSearchBar() {
   const { hasSearch } = useSearchSelectors();
   const combobox = useCombobox();
 
-  const shouldFilterOptions = !exercises.some(
+  const shouldFilterOptions = !exercises!.some(
     (exercise) => exercise.name === exerciseSearch,
   );
   const filteredOptions = shouldFilterOptions
-    ? exercises
+    ? exercises!
         .filter((exercise) =>
           exercise.name
             .toLowerCase()
             .includes(exerciseSearch.toLowerCase().trim()),
         )
         .map((ex) => ex.name)
-    : exercises.map((ex) => ex.name);
+    : exercises!.map((ex) => ex.name);
 
   const options = filteredOptions.map((item) => (
     <Combobox.Option value={item} key={item}>

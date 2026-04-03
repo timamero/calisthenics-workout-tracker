@@ -7,7 +7,7 @@ export interface AuthSlice {
   user: User | null;
   loading: boolean;
   setSession: (session: Session | null) => void;
-  setUser: (user: User) => void;
+  setUser: (user: User | null) => void;
   setLoading: (loading: boolean) => void;
 }
 
