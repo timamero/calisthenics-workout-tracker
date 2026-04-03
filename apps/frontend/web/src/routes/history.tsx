@@ -2,38 +2,75 @@ import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack } from '@mantine/core';
 
-import { useWorkoutLibraryStore, useAuthStore } from '@cwt/state/stores';
+import {
+  useWorkoutLibraryStore,
+  useAuthStore,
+  useExerciseLibraryStore,
+} from '@cwt/state/stores';
 import { WorkoutLogDetailContextProvider } from '@cwt/context';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
+import type { ExerciseResponse } from '@cwt/schema/exercises';
 
 import { getWorkoutLogs } from '../services/workoutsService';
+import { getExercises } from '../services/exercisesService';
+
 import WorkoutLogPages from '../components/WorkoutLogPages';
+import { useSetExercisesData } from '../hooks/useSetExercisesData';
 
 export const Route = createFileRoute('/history')({
   loader: async () => {
+    let logs: WorkoutLogResponse[] | null = null;
+    let exercises: ExerciseResponse[] | null = null;
+
+    const displayedExercises =
+      useExerciseLibraryStore.getState().displayedExercises;
+    if (displayedExercises) {
+      exercises = displayedExercises;
+    }
+
     const displayedWorkoutLogs =
       useWorkoutLibraryStore.getState().displayedWorkoutLogs;
+
     if (displayedWorkoutLogs && displayedWorkoutLogs.length > 0) {
-      return { logs: displayedWorkoutLogs };
+      logs = displayedWorkoutLogs as WorkoutLogResponse[];
     }
     const supabaseSession = useAuthStore.getState().session;
     if (supabaseSession?.access_token) {
-      const workoutLogs = await getWorkoutLogs(supabaseSession.access_token);
-      return { logs: workoutLogs };
+      if (!logs) {
+        console.time('fetch workout logs in history');
+        const fetchedWorkoutLogs = await getWorkoutLogs(
+          supabaseSession.access_token,
+        );
+        console.timeEnd('fetch workout logs in history');
+        logs = fetchedWorkoutLogs;
+      }
+      if (!exercises) {
+        console.time('fetch exercises in history');
+        const fetchedExercises = await getExercises(
+          supabaseSession.access_token,
+        );
+        console.timeEnd('fetch exercises in history');
+        exercises = fetchedExercises;
+      }
     }
-    return [];
+    return { logs, exercises };
   },
   component: HistoryView,
 });
 
 function HistoryView() {
-  const workoutLogs: { logs: WorkoutLogResponse[] } = Route.useLoaderData();
+  const data: {
+    logs: WorkoutLogResponse[];
+    exercises: ExerciseResponse[];
+  } = Route.useLoaderData();
 
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
 
+  useSetExercisesData(data.exercises);
+
   useEffect(() => {
-    setWorkouts(workoutLogs.logs, []);
-  }, [workoutLogs, setWorkouts]);
+    setWorkouts(data.logs, []);
+  }, [data, setWorkouts]);
 
   return (
     <WorkoutLogDetailContextProvider>
