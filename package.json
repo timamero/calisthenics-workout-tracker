@@ -30,8 +30,8 @@
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "supabase": "^2.34.3",
-    "turbo": "^2.7.3"
+    "supabase": "^2.84.7",
+    "turbo": "^2.9.3"
   },
   "pnpm": {
     "overrides": {
