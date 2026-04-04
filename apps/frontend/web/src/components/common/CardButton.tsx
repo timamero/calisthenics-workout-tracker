@@ -10,9 +10,6 @@ export default function CardButton({
   handleClick = () => console.log('clicked item'),
   children,
 }: CardButtonProps) {
-  // const handleClick = () => {
-  //   console.log('clicked item');
-  // };
   return (
     <UnstyledButton onClick={handleClick}>
       <Paper

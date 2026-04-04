@@ -37,9 +37,11 @@ export default function ExerciseItemUI({
         paddingInline: 16,
         paddingBlock: 16,
         marginBlock: 8,
-        marginInline: 16,
+        marginInline: 4,
         borderWidth: 1,
-        borderColor: theme.colors.light,
+        borderColor: theme.colors.dark200,
+        backgroundColor: theme.colors.dark900,
+        borderRadius: 8,
       }}
     >
       <View
@@ -50,7 +52,7 @@ export default function ExerciseItemUI({
           justifyContent: 'space-between',
         }}
       >
-        {mode !== 'log' && (
+        {(mode === 'build' || mode === 'edit') && (
           <ReorderButtonGroup
             handleUpPress={() => handleUpPress()}
             handleDownPress={() => handleDownPress()}
@@ -69,7 +71,7 @@ export default function ExerciseItemUI({
         >
           {name}
         </Text>
-        {mode !== 'log' && (
+        {(mode === 'build' || mode === 'edit') && (
           <Button
             mode="outlined"
             onPress={handleDeleteExercisePress}
@@ -82,7 +84,7 @@ export default function ExerciseItemUI({
         )}
       </View>
       <SetList />
-      {mode !== 'log' && (
+      {(mode === 'build' || mode === 'edit') && (
         <View style={{ display: 'flex', alignItems: 'flex-end' }}>
           <Button
             mode="contained"

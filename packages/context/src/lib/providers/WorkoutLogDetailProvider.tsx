@@ -12,15 +12,27 @@ export default function WorkoutLogDetailContextProvider({
 }) {
   const [workout, setWorkout] = useState<WorkoutLogResponse | null>(null);
 
+  // Web
   const [opened, handlers] = useDisclosure(false);
+  const webOverlayHandlers = {
+    opened,
+    handlers,
+  };
+
+  // Mobile
+  const [isOverlayVisible, setIsOverlayVisible] = useState<boolean>(false);
+  const mobileOverlayHandlers = {
+    isOverlayVisible,
+    setIsOverlayVisible,
+  };
 
   return (
     <WorkoutLogDetailContext.Provider
       value={{
         workout,
         setWorkout,
-        opened,
-        handlers,
+        webOverlayHandlers,
+        mobileOverlayHandlers,
       }}
     >
       {children}

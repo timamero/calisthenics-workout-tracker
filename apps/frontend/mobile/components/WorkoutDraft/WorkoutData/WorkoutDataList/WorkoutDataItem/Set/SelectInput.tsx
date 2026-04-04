@@ -10,7 +10,10 @@ import {
 import { useTheme } from 'react-native-paper';
 import { SetContext } from '@cwt/context';
 import type { CustomTheme } from '../../../../../../theme';
-import { useLeveragesAssistsStore } from '@cwt/state/stores';
+import {
+  useLeveragesAssistsStore,
+  useWorkoutDraftStore,
+} from '@cwt/state/stores';
 import { useFieldInputChange } from '@cwt/hooks';
 
 interface SelectInputProps {
@@ -25,7 +28,9 @@ export default function SelectInput({
   trackingType = null,
 }: SelectInputProps) {
   const theme = useTheme() as CustomTheme;
+
   const set = useContext(SetContext)!.set;
+  const mode = useWorkoutDraftStore((state) => state.mode);
 
   const leverageOrAssistID =
     trackingType === 'leverages'
@@ -87,6 +92,15 @@ export default function SelectInput({
       color: theme.colors.light,
     },
   });
+
+  if (mode === 'read') {
+    return (
+      <View>
+        <Text style={{ color: theme.colors.light }}>{label}</Text>
+        <Text style={{ color: theme.colors.light }}>{selectedValue}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
