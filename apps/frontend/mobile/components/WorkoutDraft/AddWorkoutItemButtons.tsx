@@ -58,11 +58,6 @@ export default function AddWorkoutItemButtons() {
           },
         ]}
         onStateChange={onStateChange}
-        onPress={() => {
-          if (open) {
-            console.log('speed dial open');
-          }
-        }}
       />
     </Portal>
   );

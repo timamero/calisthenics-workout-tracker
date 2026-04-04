@@ -1,10 +1,13 @@
-import * as React from 'react';
-import { TextInput } from 'react-native-paper';
+import { useContext } from 'react';
+import { View } from 'react-native';
+import { TextInput, useTheme } from 'react-native-paper';
 
-// import type { SetFields, Leverage, Assist } from '@cwt/schema/workouts';
 import { SetContext } from '@cwt/context';
-// import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useFieldInputChange } from '@cwt/hooks';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
+
+import { CustomTheme } from '../../../../../../theme';
+import { Text } from '../../../../../../customText';
 
 interface NumeralInputProps {
   label: string;
@@ -19,15 +22,34 @@ export default function NumeralInput({
   fieldID,
   trackingType = null,
 }: NumeralInputProps) {
-  const set = React.useContext(SetContext)!.set;
+  const theme = useTheme() as CustomTheme;
+  const set = useContext(SetContext)!.set;
 
   const handleNumeralFieldChange = useFieldInputChange(
     fieldName,
     'numeral',
     fieldID,
   );
+  const mode = useWorkoutDraftStore((state) => state.mode);
 
   if (fieldName === 'value' && trackingType === 'leverages') {
+    if (mode === 'read') {
+      return (
+        <View>
+          <Text style={{ color: theme.colors.light }}>{label}</Text>
+          <Text style={{ color: theme.colors.light }}>
+            {set.fields.leverages!.find((field) => field.id === fieldID)!
+              .value === null ||
+            set.fields.leverages!.find((field) => field.id === fieldID)!
+              .value === undefined
+              ? ''
+              : set.fields
+                  .leverages!.find((field) => field.id === fieldID)!
+                  .value!.toString()}
+          </Text>
+        </View>
+      );
+    }
     return (
       <TextInput
         mode="outlined"
@@ -58,6 +80,23 @@ export default function NumeralInput({
   }
 
   if (fieldName === 'value' && trackingType === 'assists') {
+    if (mode === 'read') {
+      return (
+        <View>
+          <Text style={{ color: theme.colors.light }}>{label}</Text>
+          <Text style={{ color: theme.colors.light }}>
+            {set.fields.assists!.find((field) => field.id === fieldID)!
+              .value === null ||
+            set.fields.assists!.find((field) => field.id === fieldID)!.value ===
+              undefined
+              ? ''
+              : set.fields
+                  .assists!.find((field) => field.id === fieldID)!
+                  .value!.toString()}
+          </Text>
+        </View>
+      );
+    }
     return (
       <TextInput
         mode="outlined"
@@ -84,6 +123,19 @@ export default function NumeralInput({
         }
         onChangeText={(text) => handleNumeralFieldChange(text)}
       />
+    );
+  }
+
+  if (mode === 'read') {
+    return (
+      <View>
+        <Text style={{ color: theme.colors.light }}>{label}</Text>
+        <Text style={{ color: theme.colors.light }}>
+          {set.fields.reps === undefined || !set.fields.reps
+            ? '0'
+            : set.fields.reps.toString()}
+        </Text>
+      </View>
     );
   }
 

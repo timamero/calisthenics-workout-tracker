@@ -1,4 +1,5 @@
 from typing import List, Annotated
+import time
 
 from fastapi import APIRouter, Request, HTTPException, Query
 
@@ -19,6 +20,7 @@ def read_filtered_exercises(
     """
     Retrieve a list of exercises.
     """
+    startTime = time.perf_counter()
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
         if environment == "local":
@@ -33,6 +35,8 @@ def read_filtered_exercises(
     if not exercises:
         raise HTTPException(status_code=400, detail="Invalid request")
 
+    endTime = time.perf_counter()
+    print(f"Retrieved exercises from supabase in {endTime - startTime:0.4f} seconds")
     return exercises
 
 

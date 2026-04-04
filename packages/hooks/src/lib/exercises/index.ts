@@ -1,6 +1,6 @@
 import {
   useFilterSelectors,
   useSearchSelectors,
-} from './useFiltersAndSearchStatus';
+} from "./useFiltersAndSearchStatus";
 
 export { useFilterSelectors, useSearchSelectors };

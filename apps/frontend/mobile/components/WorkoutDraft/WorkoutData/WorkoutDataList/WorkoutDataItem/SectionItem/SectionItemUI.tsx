@@ -43,11 +43,14 @@ export default function SectionItemUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
+        borderWidth: 1,
+        borderColor: theme.colors.dark600,
         backgroundColor: theme.colors.dark800,
-        paddingInline: 16,
+        paddingInline: 4,
         paddingBlock: 16,
         marginBlock: 8,
-        marginInline: 16,
+        marginInline: 4,
+        borderRadius: 8,
       }}
     >
       <View
@@ -64,7 +67,7 @@ export default function SectionItemUI({
             justifyContent: 'flex-start',
           }}
         >
-          {mode !== 'log' && (
+          {(mode === 'build' || mode === 'edit') && (
             <ReorderButtonGroup
               handleUpPress={() => handleUpPress()}
               handleDownPress={() => handleDownPress()}
@@ -74,7 +77,7 @@ export default function SectionItemUI({
           )}
           <Text style={{ color: theme.colors.light }}>Section</Text>
         </View>
-        {mode !== 'log' && (
+        {(mode === 'build' || mode === 'edit') && (
           <Button
             mode="outlined"
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
@@ -118,7 +121,7 @@ export default function SectionItemUI({
           </WorkoutDataItemContext.Provider>
         );
       })}
-      {mode !== 'log' && (
+      {(mode === 'build' || mode === 'edit') && (
         <View
           style={{
             display: 'flex',

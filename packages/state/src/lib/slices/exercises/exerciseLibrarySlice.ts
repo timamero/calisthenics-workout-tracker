@@ -9,8 +9,10 @@ import {
 } from './exercisesActions';
 
 export interface ExerciseLibrarySlice {
-  masterExercises: ExerciseResponse[];
-  displayedExercises: ExerciseResponse[];
+  masterExercises: ExerciseResponse[] | null;
+  displayedExercises: ExerciseResponse[] | null;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
   setExercises: (exercises: ExerciseResponse[]) => void;
   refreshDisplayedExercises: (
     appliedFilterSelections: FilterCheckbox[],
@@ -27,8 +29,10 @@ export const createExerciseLibrarySlice: StateCreator<
   [],
   ExerciseLibrarySlice
 > = (set, get) => ({
-  masterExercises: [],
-  displayedExercises: [],
+  masterExercises: null,
+  displayedExercises: null,
+  loading: false,
+  setLoading: (loading) => set({ loading }),
   setExercises: (exercises) =>
     set((state) => {
       state.masterExercises = sortExercises(exercises);
@@ -40,7 +44,7 @@ export const createExerciseLibrarySlice: StateCreator<
     exerciseSearch,
   ) =>
     set((state) => {
-      let result = state.masterExercises;
+      let result = state.masterExercises as ExerciseResponse[];
 
       if (appliedFilterSelections.length > 0) {
         result = filterExercises(result, appliedFilterSelections);
@@ -53,12 +57,12 @@ export const createExerciseLibrarySlice: StateCreator<
       state.displayedExercises = result;
     }),
   getExerciseByID: (id) => {
-    return get().masterExercises.find(
+    return get().masterExercises!.find(
       (exercise) => exercise.id === id,
     ) as ExerciseResponse;
   },
   getExerciseNameByID: (id) => {
-    return get().masterExercises.find((exercise) => exercise.id === id)
+    return get().masterExercises!.find((exercise) => exercise.id === id)
       ?.name as string;
   },
 });

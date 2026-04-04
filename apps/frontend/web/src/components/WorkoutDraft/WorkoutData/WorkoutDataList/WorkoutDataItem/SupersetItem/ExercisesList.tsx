@@ -4,7 +4,6 @@ import { WorkoutDataItemContext } from '@cwt/context';
 import ExerciseItem from '../ExerciseItem';
 
 export default function ExercisesList() {
-  console.log('rendering ExercisesList');
   const {
     supersetID,
     exercises,
