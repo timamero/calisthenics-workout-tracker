@@ -19,7 +19,9 @@ export default function FieldsList() {
           <NumeralInput key={`${field}-${i}`} label="Reps" fieldName="reps" />
         );
       case 'time':
-        return <DurationInput key={`${field}-${i}`} label="time" />;
+        return (
+          <DurationInput key={`${field}-${i}`} label="Time" fieldName="time" />
+        );
     }
   });
   return (
@@ -28,11 +30,11 @@ export default function FieldsList() {
         display: 'flex',
         flexDirection: 'row',
         gap: 24,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
       }}
     >
       {fields}
-      <DurationInput label="rest" />
+      <DurationInput label="Rest" fieldName="rest" />
     </View>
   );
 }
