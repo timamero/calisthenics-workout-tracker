@@ -10,6 +10,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "experiments": {
+      "autolinkingModuleResolution": true
+    },
     "android": {
       "edgeToEdgeEnabled": true
     },
