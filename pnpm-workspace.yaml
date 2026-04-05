@@ -3,3 +3,4 @@ packages:
   - apps/frontend/web
   - apps/frontend/mobile
   - packages/*
+nodeLinker: hoisted
