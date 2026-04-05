@@ -26,6 +26,8 @@
     "prepare": "husky",
     "setup-backend": "turbo run install --filter=@cwt/backend",
     "supabase-login": "supabase login",
+    "expo-build:development": "eas build --platform android --profile development --project apps/frontend/mobile",
+    "expo-build:preview": "eas build --platform android --profile preview --project apps/frontend/mobile",
     "generate-schema-types": "supabase gen types --project-id ocdfgrsizsxyltygfpje --schema public > packages/schema/src/lib/common/database.types.ts"
   },
   "devDependencies": {
