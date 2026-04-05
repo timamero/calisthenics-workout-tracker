@@ -5,3 +5,70 @@
 /docs
 /__tests__
 change-env.sh
+
+
+# Node.js
+node_modules/
+*/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.env
+.env
+.env.*
+.pytest_cache
+
+# Poetry
+poetry.lock
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+coverage/
+*.egg-info/
+.eggs/
+
+# Turborepo
+.turbo
+
+# Docker
+*.pid
+*.sock
+*.db
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# Misc
+.idea/
+*.swp
+*.swo
+*.bak
+*.bak*
+*.tmp
+.cache/
+.backup/
+.secrets.baseline
