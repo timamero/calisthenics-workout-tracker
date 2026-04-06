@@ -13,14 +13,20 @@ import Navigation from './navigation';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
 
 export default function App() {
-  const loading = useAuthStore((state) => state.loading);
+  // const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
 
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
 
   useSupabaseAuth(supabase);
 
+  console.log(
+    'App.tsx || supabaseSession.access_token: ',
+    supabaseSession?.access_token,
+  );
+
   useEffect(() => {
+    console.log('App.tsx || useEffect called');
     const asyncFetchData = async () => {
       if (supabaseSession?.access_token) {
         console.time('fetch workout builds');
@@ -40,31 +46,31 @@ export default function App() {
     asyncFetchData();
   }, [supabaseSession, setWorkouts]);
 
-  if (loading) {
-    return (
-      <WorkoutContextProvider appType="mobile">
-        <PaperProvider theme={theme}>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              flex: 1,
-              gap: 16,
-              paddingHorizontal: 16,
-              alignItems: 'stretch',
-              justifyContent: 'center',
-              backgroundColor: theme.colors.background,
-            }}
-          >
-            <ActivityIndicator size="large" color="#0000ff" />
-            <Text style={{ textAlign: 'center', marginTop: 10 }}>
-              Loading authentication state...
-            </Text>
-          </View>
-        </PaperProvider>
-      </WorkoutContextProvider>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <WorkoutContextProvider appType="mobile">
+  //       <PaperProvider theme={theme}>
+  //         <View
+  //           style={{
+  //             display: 'flex',
+  //             flexDirection: 'column',
+  //             flex: 1,
+  //             gap: 16,
+  //             paddingHorizontal: 16,
+  //             alignItems: 'stretch',
+  //             justifyContent: 'center',
+  //             backgroundColor: theme.colors.background,
+  //           }}
+  //         >
+  //           <ActivityIndicator size="large" color="#0000ff" />
+  //           <Text style={{ textAlign: 'center', marginTop: 10 }}>
+  //             Loading authentication state...
+  //           </Text>
+  //         </View>
+  //       </PaperProvider>
+  //     </WorkoutContextProvider>
+  //   );
+  // }
 
   return (
     <WorkoutContextProvider appType="mobile">
