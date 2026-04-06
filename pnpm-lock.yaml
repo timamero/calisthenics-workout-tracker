@@ -345,6 +345,9 @@ importers:
       '@cwt/schema':
         specifier: workspace:*
         version: link:../schema
+      '@mantine/hooks':
+        specifier: ^8.3.18
+        version: 8.3.18(react@19.0.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -393,6 +396,9 @@ importers:
 
   packages/schema:
     dependencies:
+      '@mantine/hooks':
+        specifier: ^8.3.18
+        version: 8.3.18(react@19.0.0)
       react:
         specifier: 19.0.0
         version: 19.0.0

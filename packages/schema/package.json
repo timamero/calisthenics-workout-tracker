@@ -40,7 +40,8 @@
     }
   },
   "dependencies": {
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "@mantine/hooks": "^8.3.18"
   },
   "devDependencies": {
     "prettier": "3.6.2",
@@ -51,9 +52,6 @@
   },
   "peerDependenciesMeta": {
     "react-native": {
-      "optional": true
-    },
-    "@mantine/hooks": {
       "optional": true
     }
   }
