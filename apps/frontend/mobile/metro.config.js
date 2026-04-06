@@ -23,7 +23,11 @@ const monorepoPackages = {
 
 // 1. Watch the local app directory, and only the shared packages (limiting the scope and speeding it up)
 // Note how we change this from `monorepoRoot` to `projectRoot`. This is part of the optimization!
-config.watchFolders = [projectRoot, ...Object.values(monorepoPackages)];
+config.watchFolders = [
+  ...config.watchFolders,
+  projectRoot,
+  ...Object.values(monorepoPackages),
+];
 
 // Add the monorepo workspaces as `extraNodeModules` to Metro.
 // If your monorepo tooling creates workspace symlinks in the `node_modules` directory,
