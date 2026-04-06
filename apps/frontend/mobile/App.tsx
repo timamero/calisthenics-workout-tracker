@@ -31,7 +31,7 @@ export default function App() {
 
         console.time('fetch workout logs');
         const workoutLogs = await getWorkoutLogs(supabaseSession.access_token);
-        console.time('fetch workout logs');
+        console.timeEnd('fetch workout logs');
         if (workoutBuilds) {
           setWorkouts(workoutLogs, workoutBuilds);
         }
