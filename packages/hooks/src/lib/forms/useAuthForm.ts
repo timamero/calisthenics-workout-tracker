@@ -21,6 +21,7 @@ function useAuth(supabase: SupabaseClient) {
     setAuthError(null);
 
     try {
+      console.log("useAuthForm || signIn called");
       const user = await signIn(supabase, email, password);
       if (!user) {
         setAuthError("Failed to sign in. Please check your credentials.");
@@ -33,6 +34,7 @@ function useAuth(supabase: SupabaseClient) {
       setAuthError(message);
       return null;
     } finally {
+      console.log("useAuthForm || set loading to false");
       setIsLoading(false);
     }
   };
@@ -42,6 +44,7 @@ function useAuth(supabase: SupabaseClient) {
     setAuthError(null);
 
     try {
+      console.log("useAuthForm || createUser called");
       const user = await createUser(supabase, email, password);
       if (!user) {
         setAuthError("Failed to create account. Please try again.");
@@ -54,6 +57,7 @@ function useAuth(supabase: SupabaseClient) {
       setAuthError(message);
       return null;
     } finally {
+      console.log("useAuthForm || set Loading to false");
       setIsLoading(false);
     }
   };
