@@ -6,7 +6,6 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export const signOut = async (supabase: SupabaseClient) => {
-  console.log("signOut || calling supabase.auth.signOut");
   const { error } = await supabase.auth.signOut();
 
   if (error) {

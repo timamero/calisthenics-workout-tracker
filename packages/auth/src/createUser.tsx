@@ -11,7 +11,6 @@ export const createUser = async (
   email: string,
   password: string,
 ) => {
-  console.log("createUser || calling supabase.auth.signUp");
   const { data, error } = await supabase.auth.signUp({
     email: email,
     password: password,
