@@ -3,7 +3,7 @@ import { useTheme, Button } from 'react-native-paper';
 import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { useFetchLeveragesAssists } from '../hooks/useFetchLeveragesAssists';
+// import { useFetchLeveragesAssists } from '../hooks/useFetchLeveragesAssists';
 import { CustomTheme } from '../theme';
 
 export default function HomeScreen() {
@@ -15,7 +15,7 @@ export default function HomeScreen() {
     xp: 90,
   };
 
-  useFetchLeveragesAssists();
+  // useFetchLeveragesAssists();
 
   React.useEffect(() => {
     navigation.setOptions({
