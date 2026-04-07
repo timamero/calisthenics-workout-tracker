@@ -4,7 +4,7 @@ import { useTheme } from 'react-native-paper';
 
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 
-import { useFetchExercises } from '../hooks/useFetchExercises';
+// import { useFetchExercises } from '../hooks/useFetchExercises';
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
 
@@ -18,7 +18,7 @@ export default function WorkoutScreen() {
     state.displayedExercises === null ? false : true,
   );
 
-  useFetchExercises();
+  // useFetchExercises();
 
   if (!isExercisesSet || loading) {
     return (
