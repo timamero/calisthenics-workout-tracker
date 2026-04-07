@@ -5,12 +5,12 @@ import { WorkoutLogDetailContextProvider } from '@cwt/context';
 
 import { CustomTheme } from '../theme';
 import WorkoutLogPages from '../components/WorkoutLogPages';
-import { useFetchExercises } from '../hooks/useFetchExercises';
+// import { useFetchExercises } from '../hooks/useFetchExercises';
 
 export default function HistoryScreen() {
   const theme = useTheme() as CustomTheme;
 
-  useFetchExercises();
+  // useFetchExercises();
 
   return (
     <WorkoutLogDetailContextProvider>
