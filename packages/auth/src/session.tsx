@@ -7,7 +7,6 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export const session = async (supabase: SupabaseClient) => {
-  console.log("session || calling supabase.auth.getSession");
   const { data, error } = await supabase.auth.getSession();
 
   if (error) {

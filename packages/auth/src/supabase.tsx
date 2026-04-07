@@ -14,10 +14,8 @@ export const supabaseClient = (
 
   try {
     if (options) {
-      console.log("supabase || creating supabase client with options");
       return createClient(supabaseUrl, supabaseAnonKey, options);
     }
-    console.log("supabase || creating supabase client without options");
     return createClient(supabaseUrl, supabaseAnonKey);
   } catch (error) {
     console.error("Error creating Supabase client:", error);

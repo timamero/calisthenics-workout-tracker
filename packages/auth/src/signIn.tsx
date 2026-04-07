@@ -11,7 +11,6 @@ export const signIn = async (
   email: string,
   password: string,
 ) => {
-  console.log("signIn || calling supabase.auth.ignInWithPassword");
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
