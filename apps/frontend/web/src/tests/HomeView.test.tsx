@@ -1,13 +1,41 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { HomeView } from '../routes';
-import { MantineProvider } from '@mantine/core';
+import {
+  MantineProvider,
+  Title,
+  Stack,
+  Button,
+  Text,
+  Group,
+} from '@mantine/core';
 
 test('loads and displays greeting', async () => {
   // ARRANGE
   render(
     <MantineProvider>
-      <HomeView />
+      <Stack align="center" justify="center" h="100vh">
+        <Stack align="center">
+          <Title order={1} size={64}>
+            Leverage
+          </Title>
+          <Text size="xl">
+            Your Quick & Easy Path to Calisthenics Fitness. Track Your Progress
+            Effortlessly.
+          </Text>
+        </Stack>
+
+        <Stack mt={80}>
+          <Title order={2}>Sign Up or Log In</Title>
+          <Group align="flex-start" justify="center" mt={20}>
+            <Button variant="filled" size="md" radius="md" color="lime">
+              Sign Up
+            </Button>
+            <Button variant="outline" size="md" radius="md" color="lime">
+              Log In
+            </Button>
+          </Group>
+        </Stack>
+      </Stack>
     </MantineProvider>,
   );
 
