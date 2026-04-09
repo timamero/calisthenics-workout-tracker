@@ -21,7 +21,9 @@ import { Route as LibraryRouteImport } from './routes/library'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 
 const WorkoutDashboardRoute = WorkoutDashboardRouteImport.update({
   id: '/workoutDashboard',
@@ -83,10 +85,19 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthDashboardRoute = AuthDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -103,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
+  '/dashboard': typeof AuthDashboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,10 +130,12 @@ export interface FileRoutesByTo {
   '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
+  '/dashboard': typeof AuthDashboardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteWithChildren
   '/about': typeof AboutRoute
   '/app': typeof AppRoute
   '/history': typeof HistoryRoute
@@ -134,6 +148,7 @@ export interface FileRoutesById {
   '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
+  '/_auth/dashboard': typeof AuthDashboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +166,7 @@ export interface FileRouteTypes {
     | '/user'
     | '/workout'
     | '/workoutDashboard'
+    | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,9 +182,11 @@ export interface FileRouteTypes {
     | '/user'
     | '/workout'
     | '/workoutDashboard'
+    | '/dashboard'
   id:
     | '__root__'
     | '/'
+    | '/_auth'
     | '/about'
     | '/app'
     | '/history'
@@ -181,10 +199,12 @@ export interface FileRouteTypes {
     | '/user'
     | '/workout'
     | '/workoutDashboard'
+    | '/_auth/dashboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
   AboutRoute: typeof AboutRoute
   AppRoute: typeof AppRoute
   HistoryRoute: typeof HistoryRoute
@@ -285,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -292,11 +319,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_auth/dashboard': {
+      id: '/_auth/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthDashboardRouteImport
+      parentRoute: typeof AuthRoute
+    }
   }
 }
 
+interface AuthRouteChildren {
+  AuthDashboardRoute: typeof AuthDashboardRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthDashboardRoute: AuthDashboardRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRouteWithChildren,
   AboutRoute: AboutRoute,
   AppRoute: AppRoute,
   HistoryRoute: HistoryRoute,
