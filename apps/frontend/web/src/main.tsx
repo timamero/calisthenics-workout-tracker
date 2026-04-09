@@ -1,6 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { RouterProvider, createRouter } from '@tanstack/react-router';
+import {
+  RouterProvider,
+  createRouter,
+  ErrorComponent,
+} from '@tanstack/react-router';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
@@ -9,7 +13,12 @@ import { createTheme, MantineProvider } from '@mantine/core';
 import { routeTree } from './routeTree.gen';
 
 // Create a new router instance
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
+  defaultPreload: 'intent',
+  scrollRestoration: true,
+});
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
