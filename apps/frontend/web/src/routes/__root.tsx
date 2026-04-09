@@ -36,8 +36,8 @@ function RootComponent() {
   const [opened, { toggle }] = useDisclosure();
 
   const navLinks = [
-    { label: 'Home', to: '/' },
-    { label: 'Workout', to: '/workoutDashboard' },
+    { label: 'Home', to: '/app' },
+    // { label: 'Workout', to: '/workoutDashboard' },
     { label: 'Library', to: '/library' },
     { label: 'Past Workouts', to: '/history' },
     { label: 'Profile', to: '/user' },
