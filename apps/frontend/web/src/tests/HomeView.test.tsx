@@ -13,18 +13,17 @@ test('loads and displays greeting', async () => {
 
   // ASSERT
   const heading = await screen.findByRole('heading', {
-    name: /Welcome Home Jane Doe!/i,
+    name: /Leverage/i,
   });
-  const para1 = screen.getByText('xp = 100');
-  const para2 = screen.getByText('0 bears around here');
+  const para1 = screen.getByText(
+    'Your Quick & Easy Path to Calisthenics Fitness. Track Your Progress Effortlessly.',
+  );
+  const para2 = screen.getByText('Sign Up or Log In');
   expect(heading).toBeInTheDocument();
-  expect(heading).toHaveTextContent('Welcome Home Jane Doe!');
+  expect(heading).toHaveTextContent('Leverage');
   expect(para1).toBeInTheDocument();
   expect(para2).toBeInTheDocument();
 
-  const button = screen.getByRole('button', { name: /one up/i });
+  const button = screen.getByRole('button', { name: /Sign Up/i });
   expect(button).toBeInTheDocument();
-
-  await button.click();
-  expect(screen.getByText('1 bears around here')).toBeInTheDocument();
 });
