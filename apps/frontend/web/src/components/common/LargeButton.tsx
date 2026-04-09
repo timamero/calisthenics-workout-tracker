@@ -22,8 +22,8 @@ export default function LargeButton({
       component={Link}
       to={to}
     >
-      <Paper p="md" radius="sm" bg="none">
-        <Stack align="center" justify="center" gap="sm">
+      <Paper p="md" radius="sm" bg="lime.2" h={240} w={240}>
+        <Stack align="center" justify="center" gap="sm" h="100%">
           {children}
         </Stack>
       </Paper>
