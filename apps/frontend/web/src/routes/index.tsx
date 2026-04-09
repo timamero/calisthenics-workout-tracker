@@ -1,27 +1,34 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title } from '@mantine/core';
-
-import { useBearStore } from '@cwt/state/counter';
-import { User } from '@cwt/schema/sampleSchema';
+import { Title, Stack, Button, Text, Group } from '@mantine/core';
 
 export const Route = createFileRoute('/')({
   component: HomeView,
 });
 
 export function HomeView() {
-  const bears = useBearStore((state) => state.bears);
-  const increase = useBearStore((state) => state.increase);
-  const user: User = {
-    name: 'Jane Doe',
-    xp: 100,
-  };
-
   return (
-    <div>
-      <Title>Welcome Home {user.name}!</Title>
-      <p>xp = {user.xp}</p>
-      <p>{bears} bears around here</p>
-      <button onClick={() => increase(1)}>one up</button>
-    </div>
+    <Stack align="center" justify="center" h="100vh">
+      <Stack align="center">
+        <Title order={1} size={64}>
+          Leverage
+        </Title>
+        <Text size="xl">
+          Your Quick & Easy Path to Calisthenics Fitness. Track Your Progress
+          Effortlessly.
+        </Text>
+      </Stack>
+
+      <Stack mt={80}>
+        <Title order={2}>Sign Up or Log In</Title>
+        <Group align="flex-start" justify="center" mt={20}>
+          <Button variant="filled" size="md" radius="md" color="lime">
+            Sign Up
+          </Button>
+          <Button variant="outline" size="md" radius="md" color="lime">
+            Log In
+          </Button>
+        </Group>
+      </Stack>
+    </Stack>
   );
 }
