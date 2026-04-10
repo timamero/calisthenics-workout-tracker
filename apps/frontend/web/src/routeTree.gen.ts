@@ -19,12 +19,13 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LibraryRouteImport } from './routes/library'
 import { Route as HistoryRouteImport } from './routes/history'
-import { Route as AppRouteImport } from './routes/app'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
-import { Route as AuthDashboardSettingsRouteImport } from './routes/_auth.dashboard.settings'
+import { Route as AuthDashboardRouteImport } from './routes/_auth/dashboard'
+import { Route as AuthAppRouteImport } from './routes/_auth/app'
+import { Route as AuthAppIndexRouteImport } from './routes/_auth/app.index'
+import { Route as AuthDashboardSettingsRouteImport } from './routes/_auth/dashboard.settings'
 
 const WorkoutDashboardRoute = WorkoutDashboardRouteImport.update({
   id: '/workoutDashboard',
@@ -76,11 +77,6 @@ const HistoryRoute = HistoryRouteImport.update({
   path: '/history',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppRoute = AppRouteImport.update({
-  id: '/app',
-  path: '/app',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -100,6 +96,16 @@ const AuthDashboardRoute = AuthDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthAppRoute = AuthAppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthAppIndexRoute = AuthAppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthAppRoute,
+} as any)
 const AuthDashboardSettingsRoute = AuthDashboardSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -109,7 +115,6 @@ const AuthDashboardSettingsRoute = AuthDashboardSettingsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/app': typeof AppRoute
   '/history': typeof HistoryRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
@@ -120,13 +125,14 @@ export interface FileRoutesByFullPath {
   '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
+  '/app': typeof AuthAppRouteWithChildren
   '/dashboard': typeof AuthDashboardRouteWithChildren
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
+  '/app/': typeof AuthAppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/app': typeof AppRoute
   '/history': typeof HistoryRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
@@ -139,13 +145,13 @@ export interface FileRoutesByTo {
   '/workoutDashboard': typeof WorkoutDashboardRoute
   '/dashboard': typeof AuthDashboardRouteWithChildren
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
+  '/app': typeof AuthAppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/about': typeof AboutRoute
-  '/app': typeof AppRoute
   '/history': typeof HistoryRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
@@ -156,15 +162,16 @@ export interface FileRoutesById {
   '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
+  '/_auth/app': typeof AuthAppRouteWithChildren
   '/_auth/dashboard': typeof AuthDashboardRouteWithChildren
   '/_auth/dashboard/settings': typeof AuthDashboardSettingsRoute
+  '/_auth/app/': typeof AuthAppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/app'
     | '/history'
     | '/library'
     | '/login'
@@ -175,13 +182,14 @@ export interface FileRouteTypes {
     | '/user'
     | '/workout'
     | '/workoutDashboard'
+    | '/app'
     | '/dashboard'
     | '/dashboard/settings'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/app'
     | '/history'
     | '/library'
     | '/login'
@@ -194,12 +202,12 @@ export interface FileRouteTypes {
     | '/workoutDashboard'
     | '/dashboard'
     | '/dashboard/settings'
+    | '/app'
   id:
     | '__root__'
     | '/'
     | '/_auth'
     | '/about'
-    | '/app'
     | '/history'
     | '/library'
     | '/login'
@@ -210,15 +218,16 @@ export interface FileRouteTypes {
     | '/user'
     | '/workout'
     | '/workoutDashboard'
+    | '/_auth/app'
     | '/_auth/dashboard'
     | '/_auth/dashboard/settings'
+    | '/_auth/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
   AboutRoute: typeof AboutRoute
-  AppRoute: typeof AppRoute
   HistoryRoute: typeof HistoryRoute
   LibraryRoute: typeof LibraryRoute
   LoginRoute: typeof LoginRoute
@@ -303,13 +312,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HistoryRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app': {
-      id: '/app'
-      path: '/app'
-      fullPath: '/app'
-      preLoaderRoute: typeof AppRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -338,6 +340,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthDashboardRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/app': {
+      id: '/_auth/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AuthAppRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/app/': {
+      id: '/_auth/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AuthAppIndexRouteImport
+      parentRoute: typeof AuthAppRoute
+    }
     '/_auth/dashboard/settings': {
       id: '/_auth/dashboard/settings'
       path: '/settings'
@@ -347,6 +363,17 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthAppRouteChildren {
+  AuthAppIndexRoute: typeof AuthAppIndexRoute
+}
+
+const AuthAppRouteChildren: AuthAppRouteChildren = {
+  AuthAppIndexRoute: AuthAppIndexRoute,
+}
+
+const AuthAppRouteWithChildren =
+  AuthAppRoute._addFileChildren(AuthAppRouteChildren)
 
 interface AuthDashboardRouteChildren {
   AuthDashboardSettingsRoute: typeof AuthDashboardSettingsRoute
@@ -361,10 +388,12 @@ const AuthDashboardRouteWithChildren = AuthDashboardRoute._addFileChildren(
 )
 
 interface AuthRouteChildren {
+  AuthAppRoute: typeof AuthAppRouteWithChildren
   AuthDashboardRoute: typeof AuthDashboardRouteWithChildren
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthAppRoute: AuthAppRouteWithChildren,
   AuthDashboardRoute: AuthDashboardRouteWithChildren,
 }
 
@@ -374,7 +403,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
   AboutRoute: AboutRoute,
-  AppRoute: AppRoute,
   HistoryRoute: HistoryRoute,
   LibraryRoute: LibraryRoute,
   LoginRoute: LoginRoute,

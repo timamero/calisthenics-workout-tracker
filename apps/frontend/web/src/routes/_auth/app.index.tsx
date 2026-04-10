@@ -12,12 +12,15 @@ import type {
   WorkoutLogResponse,
 } from '@cwt/schema/workouts';
 
-import { getWorkoutBuilds, getWorkoutLogs } from '../services/workoutsService';
+import {
+  getWorkoutBuilds,
+  getWorkoutLogs,
+} from '../../services/workoutsService';
 
-import CardButton from '../components/common/CardButton';
-import LargeButton from '../components/common/LargeButton';
+import CardButton from '../../components/common/CardButton';
+import LargeButton from '../../components/common/LargeButton';
 
-export const Route = createFileRoute('/app')({
+export const Route = createFileRoute('/_auth/app/')({
   loader: async () => {
     const displayedWorkoutBuilds =
       useWorkoutLibraryStore.getState().displayedWorkoutBuilds;
