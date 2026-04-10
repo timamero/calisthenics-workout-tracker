@@ -34,7 +34,7 @@ function LoginView() {
   useEffect(() => {
     if (user && !auth.isLoading) {
       navigate({
-        to: '/app',
+        to: '/dashboard',
       });
     }
   }, [user, navigate, auth.isLoading]);

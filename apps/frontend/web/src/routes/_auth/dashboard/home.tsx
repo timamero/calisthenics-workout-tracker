@@ -20,7 +20,7 @@ import {
 import CardButton from '../../../components/common/CardButton';
 import LargeButton from '../../../components/common/LargeButton';
 
-export const Route = createFileRoute('/_auth/app/dashboard')({
+export const Route = createFileRoute('/_auth/dashboard/home')({
   loader: async () => {
     const displayedWorkoutBuilds =
       useWorkoutLibraryStore.getState().displayedWorkoutBuilds;
