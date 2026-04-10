@@ -32,12 +32,12 @@ function LoginView() {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && !auth.isLoading) {
       navigate({
-        to: '/',
+        to: '/dashboard/settings',
       });
     }
-  }, [user, navigate]);
+  }, [user, navigate, auth.isLoading]);
 
   return (
     <Box maw={400} mx="auto" mt="xl">
