@@ -16,7 +16,7 @@ import ExercisesFilterOverlay from '../../../components/ExercisesFilterOverlay';
 import ExerciseDetailOverlay from '../../../components/ExerciseDetailOverlay';
 import ExerciseSearchBar from '../../../components/ExerciseSearchBar';
 
-export const Route = createFileRoute('/_auth/app/library')({
+export const Route = createFileRoute('/_auth/dashboard/library')({
   loader: async () => {
     const displayedExercises =
       useExerciseLibraryStore.getState().displayedExercises;

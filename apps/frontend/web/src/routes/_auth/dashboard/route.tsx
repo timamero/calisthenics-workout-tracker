@@ -13,7 +13,7 @@ import type { LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
 
 import { getLeveragesAssists } from '../../../services/leveragesAssistsService';
 
-export const Route = createFileRoute('/_auth/app')({
+export const Route = createFileRoute('/_auth/dashboard')({
   loader: async () => {
     let leveragesAssists: LeveragesAssistsResponse[] | null = null;
 
@@ -50,11 +50,11 @@ function RouteComponent() {
   );
 
   const navLinks = [
-    linkOptions({ label: 'Home', to: '/app/dashboard' }),
-    linkOptions({ label: 'Library', to: '/app/library' }),
-    linkOptions({ label: 'Past Workouts', to: '/app/history' }),
-    linkOptions({ label: 'Profile', to: '/app/user' }),
-    linkOptions({ label: 'Settings', to: '/app/settings' }),
+    linkOptions({ label: 'Home', to: '/dashboard/home' }),
+    linkOptions({ label: 'Library', to: '/dashboard/library' }),
+    linkOptions({ label: 'Past Workouts', to: '/dashboard/history' }),
+    linkOptions({ label: 'Profile', to: '/dashboard/user' }),
+    linkOptions({ label: 'Settings', to: '/dashboard/settings' }),
   ];
   useEffect(() => {
     setLeveragesAssists(data.leveragesAssists);
