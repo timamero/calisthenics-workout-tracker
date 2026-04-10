@@ -11,21 +11,27 @@ import {
   type Auth,
   type AuthSignUp,
 } from "@cwt/schema/forms";
+import { useAuthStore } from "@cwt/state/stores";
 
 function useAuth(supabase: SupabaseClient) {
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
+
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleLogin = async ({ email, password }: Auth) => {
     setIsLoading(true);
     setAuthError(null);
 
     try {
+      console.log("useAuthForm || calling signIn");
       const user = await signIn(supabase, email, password);
+      console.log("useAuthForm || user after await = ", user);
       if (!user) {
         setAuthError("Failed to sign in. Please check your credentials.");
         return null;
       }
+      setUser(user);
       return user;
     } catch (error) {
       const message =
@@ -33,6 +39,7 @@ function useAuth(supabase: SupabaseClient) {
       setAuthError(message);
       return null;
     } finally {
+      console.log("useAuthForm || setIsLoading to false");
       setIsLoading(false);
     }
   };
@@ -47,6 +54,7 @@ function useAuth(supabase: SupabaseClient) {
         setAuthError("Failed to create account. Please try again.");
         return null;
       }
+      setUser(user);
       return user;
     } catch (error) {
       const message =
