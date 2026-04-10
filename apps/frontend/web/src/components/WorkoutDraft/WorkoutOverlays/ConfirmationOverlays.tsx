@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, linkOptions } from '@tanstack/react-router';
 import {
   useWorkoutDraftStore,
   useWorkoutLibraryStore,
@@ -90,6 +90,10 @@ export default function ConfirmationOverlays() {
   const cancelOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
 
+  const dashboardLinkOptions = linkOptions({
+    to: '/dashboard',
+  });
+
   const handleSaveWorkoutClick = async () => {
     if (mode === 'build') {
       setWorkoutToSaveWithUser();
@@ -121,15 +125,11 @@ export default function ConfirmationOverlays() {
       console.error('Workout post request failed');
     }
 
-    navigate({
-      to: '/dashboard',
-    });
+    navigate(dashboardLinkOptions);
   };
 
   const handleCancelWorkoutClick = () => {
-    navigate({
-      to: '/dashboard',
-    });
+    navigate(dashboardLinkOptions);
     resetWorkout();
     resetTimer();
   };
