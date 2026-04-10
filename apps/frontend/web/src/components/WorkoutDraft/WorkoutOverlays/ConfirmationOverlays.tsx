@@ -122,13 +122,13 @@ export default function ConfirmationOverlays() {
     }
 
     navigate({
-      to: '/workoutDashboard',
+      to: '/dashboard',
     });
   };
 
   const handleCancelWorkoutClick = () => {
     navigate({
-      to: '/workoutDashboard',
+      to: '/dashboard',
     });
     resetWorkout();
     resetTimer();

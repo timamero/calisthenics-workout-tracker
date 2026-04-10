@@ -9,8 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkoutSupersededRouteImport } from './routes/workoutSuperseded'
 import { Route as WorkoutDashboardRouteImport } from './routes/workoutDashboard'
-import { Route as WorkoutRouteImport } from './routes/workout'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as OnboardingCompleteRouteImport } from './routes/onboardingComplete'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
@@ -18,7 +18,9 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthWorkoutRouteRouteImport } from './routes/_auth/workout/route'
 import { Route as AuthDashboardRouteRouteImport } from './routes/_auth/dashboard/route'
+import { Route as AuthWorkoutIndexRouteImport } from './routes/_auth/workout/index'
 import { Route as AuthDashboardIndexRouteImport } from './routes/_auth/dashboard/index'
 import { Route as AuthDashboardUserRouteImport } from './routes/_auth/dashboard/user'
 import { Route as AuthDashboardSettingsRouteImport } from './routes/_auth/dashboard/settings'
@@ -26,14 +28,14 @@ import { Route as AuthDashboardLibraryRouteImport } from './routes/_auth/dashboa
 import { Route as AuthDashboardHomeRouteImport } from './routes/_auth/dashboard/home'
 import { Route as AuthDashboardHistoryRouteImport } from './routes/_auth/dashboard/history'
 
+const WorkoutSupersededRoute = WorkoutSupersededRouteImport.update({
+  id: '/workoutSuperseded',
+  path: '/workoutSuperseded',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkoutDashboardRoute = WorkoutDashboardRouteImport.update({
   id: '/workoutDashboard',
   path: '/workoutDashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WorkoutRoute = WorkoutRouteImport.update({
-  id: '/workout',
-  path: '/workout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -70,10 +72,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthWorkoutRouteRoute = AuthWorkoutRouteRouteImport.update({
+  id: '/workout',
+  path: '/workout',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AuthDashboardRouteRoute = AuthDashboardRouteRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthRoute,
+} as any)
+const AuthWorkoutIndexRoute = AuthWorkoutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthWorkoutRouteRoute,
 } as any)
 const AuthDashboardIndexRoute = AuthDashboardIndexRouteImport.update({
   id: '/',
@@ -113,15 +125,17 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/onboardingComplete': typeof OnboardingCompleteRoute
   '/signup': typeof SignupRoute
-  '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
+  '/workoutSuperseded': typeof WorkoutSupersededRoute
   '/dashboard': typeof AuthDashboardRouteRouteWithChildren
+  '/workout': typeof AuthWorkoutRouteRouteWithChildren
   '/dashboard/history': typeof AuthDashboardHistoryRoute
   '/dashboard/home': typeof AuthDashboardHomeRoute
   '/dashboard/library': typeof AuthDashboardLibraryRoute
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/dashboard/user': typeof AuthDashboardUserRoute
   '/dashboard/': typeof AuthDashboardIndexRoute
+  '/workout/': typeof AuthWorkoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -130,14 +144,15 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/onboardingComplete': typeof OnboardingCompleteRoute
   '/signup': typeof SignupRoute
-  '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
+  '/workoutSuperseded': typeof WorkoutSupersededRoute
   '/dashboard/history': typeof AuthDashboardHistoryRoute
   '/dashboard/home': typeof AuthDashboardHomeRoute
   '/dashboard/library': typeof AuthDashboardLibraryRoute
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/dashboard/user': typeof AuthDashboardUserRoute
   '/dashboard': typeof AuthDashboardIndexRoute
+  '/workout': typeof AuthWorkoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -148,15 +163,17 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/onboardingComplete': typeof OnboardingCompleteRoute
   '/signup': typeof SignupRoute
-  '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
+  '/workoutSuperseded': typeof WorkoutSupersededRoute
   '/_auth/dashboard': typeof AuthDashboardRouteRouteWithChildren
+  '/_auth/workout': typeof AuthWorkoutRouteRouteWithChildren
   '/_auth/dashboard/history': typeof AuthDashboardHistoryRoute
   '/_auth/dashboard/home': typeof AuthDashboardHomeRoute
   '/_auth/dashboard/library': typeof AuthDashboardLibraryRoute
   '/_auth/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/_auth/dashboard/user': typeof AuthDashboardUserRoute
   '/_auth/dashboard/': typeof AuthDashboardIndexRoute
+  '/_auth/workout/': typeof AuthWorkoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -167,15 +184,17 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/onboardingComplete'
     | '/signup'
-    | '/workout'
     | '/workoutDashboard'
+    | '/workoutSuperseded'
     | '/dashboard'
+    | '/workout'
     | '/dashboard/history'
     | '/dashboard/home'
     | '/dashboard/library'
     | '/dashboard/settings'
     | '/dashboard/user'
     | '/dashboard/'
+    | '/workout/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -184,14 +203,15 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/onboardingComplete'
     | '/signup'
-    | '/workout'
     | '/workoutDashboard'
+    | '/workoutSuperseded'
     | '/dashboard/history'
     | '/dashboard/home'
     | '/dashboard/library'
     | '/dashboard/settings'
     | '/dashboard/user'
     | '/dashboard'
+    | '/workout'
   id:
     | '__root__'
     | '/'
@@ -201,15 +221,17 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/onboardingComplete'
     | '/signup'
-    | '/workout'
     | '/workoutDashboard'
+    | '/workoutSuperseded'
     | '/_auth/dashboard'
+    | '/_auth/workout'
     | '/_auth/dashboard/history'
     | '/_auth/dashboard/home'
     | '/_auth/dashboard/library'
     | '/_auth/dashboard/settings'
     | '/_auth/dashboard/user'
     | '/_auth/dashboard/'
+    | '/_auth/workout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -220,24 +242,24 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   OnboardingCompleteRoute: typeof OnboardingCompleteRoute
   SignupRoute: typeof SignupRoute
-  WorkoutRoute: typeof WorkoutRoute
   WorkoutDashboardRoute: typeof WorkoutDashboardRoute
+  WorkoutSupersededRoute: typeof WorkoutSupersededRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/workoutSuperseded': {
+      id: '/workoutSuperseded'
+      path: '/workoutSuperseded'
+      fullPath: '/workoutSuperseded'
+      preLoaderRoute: typeof WorkoutSupersededRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/workoutDashboard': {
       id: '/workoutDashboard'
       path: '/workoutDashboard'
       fullPath: '/workoutDashboard'
       preLoaderRoute: typeof WorkoutDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/workout': {
-      id: '/workout'
-      path: '/workout'
-      fullPath: '/workout'
-      preLoaderRoute: typeof WorkoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -289,12 +311,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_auth/workout': {
+      id: '/_auth/workout'
+      path: '/workout'
+      fullPath: '/workout'
+      preLoaderRoute: typeof AuthWorkoutRouteRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/dashboard': {
       id: '/_auth/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthDashboardRouteRouteImport
       parentRoute: typeof AuthRoute
+    }
+    '/_auth/workout/': {
+      id: '/_auth/workout/'
+      path: '/'
+      fullPath: '/workout/'
+      preLoaderRoute: typeof AuthWorkoutIndexRouteImport
+      parentRoute: typeof AuthWorkoutRouteRoute
     }
     '/_auth/dashboard/': {
       id: '/_auth/dashboard/'
@@ -362,12 +398,25 @@ const AuthDashboardRouteRouteChildren: AuthDashboardRouteRouteChildren = {
 const AuthDashboardRouteRouteWithChildren =
   AuthDashboardRouteRoute._addFileChildren(AuthDashboardRouteRouteChildren)
 
+interface AuthWorkoutRouteRouteChildren {
+  AuthWorkoutIndexRoute: typeof AuthWorkoutIndexRoute
+}
+
+const AuthWorkoutRouteRouteChildren: AuthWorkoutRouteRouteChildren = {
+  AuthWorkoutIndexRoute: AuthWorkoutIndexRoute,
+}
+
+const AuthWorkoutRouteRouteWithChildren =
+  AuthWorkoutRouteRoute._addFileChildren(AuthWorkoutRouteRouteChildren)
+
 interface AuthRouteChildren {
   AuthDashboardRouteRoute: typeof AuthDashboardRouteRouteWithChildren
+  AuthWorkoutRouteRoute: typeof AuthWorkoutRouteRouteWithChildren
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthDashboardRouteRoute: AuthDashboardRouteRouteWithChildren,
+  AuthWorkoutRouteRoute: AuthWorkoutRouteRouteWithChildren,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -380,8 +429,8 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   OnboardingCompleteRoute: OnboardingCompleteRoute,
   SignupRoute: SignupRoute,
-  WorkoutRoute: WorkoutRoute,
   WorkoutDashboardRoute: WorkoutDashboardRoute,
+  WorkoutSupersededRoute: WorkoutSupersededRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
