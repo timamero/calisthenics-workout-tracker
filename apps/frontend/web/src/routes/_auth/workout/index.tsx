@@ -4,12 +4,12 @@ import { Title, Stack } from '@mantine/core';
 import { useAuthStore, useExerciseLibraryStore } from '@cwt/state/stores';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
 
-import { useSetExercisesData } from '../hooks/useSetExercisesData';
-import { getExercises } from '../services/exercisesService';
+import { useSetExercisesData } from '../../../hooks/useSetExercisesData';
+import { getExercises } from '../../../services/exercisesService';
 
-import WorkoutDraft from '../components/WorkoutDraft';
+import WorkoutDraft from '../../../components/WorkoutDraft';
 
-export const Route = createFileRoute('/workout')({
+export const Route = createFileRoute('/_auth/workout/')({
   loader: async () => {
     const displayedExercises =
       useExerciseLibraryStore.getState().displayedExercises;
