@@ -17,7 +17,7 @@ import { getExercises } from '../../../services/exercisesService';
 import WorkoutLogPages from '../../../components/WorkoutLogPages';
 import { useSetExercisesData } from '../../../hooks/useSetExercisesData';
 
-export const Route = createFileRoute('/_auth/app/history')({
+export const Route = createFileRoute('/_auth/dashboard/history')({
   loader: async () => {
     let logs: WorkoutLogResponse[] | null = null;
     let exercises: ExerciseResponse[] | null = null;

@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Title } from '@mantine/core';
 
-export const Route = createFileRoute('/_auth/app/user')({
+export const Route = createFileRoute('/_auth/dashboard/user')({
   component: UserView,
 });
 

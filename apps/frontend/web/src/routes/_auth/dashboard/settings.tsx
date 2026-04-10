@@ -3,7 +3,7 @@ import { Title, Button } from '@mantine/core';
 import { signOut } from '@cwt/auth/signOut';
 import { supabase } from '../../../services/supabaseClient';
 
-export const Route = createFileRoute('/_auth/app/settings')({
+export const Route = createFileRoute('/_auth/dashboard/settings')({
   component: SettingsView,
 });
 
