@@ -9,6 +9,9 @@ import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
 
+import { useSupabaseAuth } from '@cwt/hooks';
+import { supabase } from './services/supabaseClient';
+
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
 
@@ -36,6 +39,11 @@ const theme = createTheme({
   },
 });
 
+export const App = () => {
+  useSupabaseAuth(supabase);
+  return <RouterProvider router={router} />;
+};
+
 // Render the app
 const rootElement = document.getElementById('root')!;
 if (!rootElement.innerHTML) {
@@ -43,7 +51,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <MantineProvider theme={theme}>
-        <RouterProvider router={router} />
+        <App />
       </MantineProvider>
     </StrictMode>,
   );
