@@ -50,7 +50,7 @@ function RouteComponent() {
   );
 
   const navLinks = [
-    linkOptions({ label: 'Home', to: '/app' }),
+    linkOptions({ label: 'Home', to: '/app/dashboard' }),
     linkOptions({ label: 'Library', to: '/app/library' }),
     linkOptions({ label: 'Past Workouts', to: '/app/history' }),
     linkOptions({ label: 'Profile', to: '/app/user' }),
@@ -75,15 +75,17 @@ function RouteComponent() {
         <div>Logo</div>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        {navLinks.map((link) => (
-          <NavLink
-            key={link.to}
-            label={link.label}
-            component={Link}
-            to={link.to}
-            onClick={() => opened && toggle()}
-          />
-        ))}
+        {navLinks.map((link) => {
+          return (
+            <NavLink
+              key={link.to}
+              label={link.label}
+              component={Link}
+              to={link.to}
+              onClick={() => opened && toggle()}
+            />
+          );
+        })}
       </AppShell.Navbar>
       <AppShell.Main
         style={{ display: 'flex', flexDirection: 'column', flex: 1 }}

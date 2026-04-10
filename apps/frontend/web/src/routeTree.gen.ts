@@ -24,6 +24,7 @@ import { Route as AuthAppUserRouteImport } from './routes/_auth/app/user'
 import { Route as AuthAppSettingsRouteImport } from './routes/_auth/app/settings'
 import { Route as AuthAppLibraryRouteImport } from './routes/_auth/app/library'
 import { Route as AuthAppHistoryRouteImport } from './routes/_auth/app/history'
+import { Route as AuthAppDashboardRouteImport } from './routes/_auth/app/dashboard'
 
 const WorkoutDashboardRoute = WorkoutDashboardRouteImport.update({
   id: '/workoutDashboard',
@@ -99,6 +100,11 @@ const AuthAppHistoryRoute = AuthAppHistoryRouteImport.update({
   path: '/history',
   getParentRoute: () => AuthAppRouteRoute,
 } as any)
+const AuthAppDashboardRoute = AuthAppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthAppRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -110,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
   '/app': typeof AuthAppRouteRouteWithChildren
+  '/app/dashboard': typeof AuthAppDashboardRoute
   '/app/history': typeof AuthAppHistoryRoute
   '/app/library': typeof AuthAppLibraryRoute
   '/app/settings': typeof AuthAppSettingsRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
+  '/app/dashboard': typeof AuthAppDashboardRoute
   '/app/history': typeof AuthAppHistoryRoute
   '/app/library': typeof AuthAppLibraryRoute
   '/app/settings': typeof AuthAppSettingsRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
   '/_auth/app': typeof AuthAppRouteRouteWithChildren
+  '/_auth/app/dashboard': typeof AuthAppDashboardRoute
   '/_auth/app/history': typeof AuthAppHistoryRoute
   '/_auth/app/library': typeof AuthAppLibraryRoute
   '/_auth/app/settings': typeof AuthAppSettingsRoute
@@ -161,6 +170,7 @@ export interface FileRouteTypes {
     | '/workout'
     | '/workoutDashboard'
     | '/app'
+    | '/app/dashboard'
     | '/app/history'
     | '/app/library'
     | '/app/settings'
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/workout'
     | '/workoutDashboard'
+    | '/app/dashboard'
     | '/app/history'
     | '/app/library'
     | '/app/settings'
@@ -193,6 +204,7 @@ export interface FileRouteTypes {
     | '/workout'
     | '/workoutDashboard'
     | '/_auth/app'
+    | '/_auth/app/dashboard'
     | '/_auth/app/history'
     | '/_auth/app/library'
     | '/_auth/app/settings'
@@ -319,10 +331,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAppHistoryRouteImport
       parentRoute: typeof AuthAppRouteRoute
     }
+    '/_auth/app/dashboard': {
+      id: '/_auth/app/dashboard'
+      path: '/dashboard'
+      fullPath: '/app/dashboard'
+      preLoaderRoute: typeof AuthAppDashboardRouteImport
+      parentRoute: typeof AuthAppRouteRoute
+    }
   }
 }
 
 interface AuthAppRouteRouteChildren {
+  AuthAppDashboardRoute: typeof AuthAppDashboardRoute
   AuthAppHistoryRoute: typeof AuthAppHistoryRoute
   AuthAppLibraryRoute: typeof AuthAppLibraryRoute
   AuthAppSettingsRoute: typeof AuthAppSettingsRoute
@@ -331,6 +351,7 @@ interface AuthAppRouteRouteChildren {
 }
 
 const AuthAppRouteRouteChildren: AuthAppRouteRouteChildren = {
+  AuthAppDashboardRoute: AuthAppDashboardRoute,
   AuthAppHistoryRoute: AuthAppHistoryRoute,
   AuthAppLibraryRoute: AuthAppLibraryRoute,
   AuthAppSettingsRoute: AuthAppSettingsRoute,
