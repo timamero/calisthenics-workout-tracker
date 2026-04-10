@@ -11,21 +11,21 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkoutDashboardRouteImport } from './routes/workoutDashboard'
 import { Route as WorkoutRouteImport } from './routes/workout'
-import { Route as UserRouteImport } from './routes/user'
 import { Route as SignupRouteImport } from './routes/signup'
-import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as OnboardingCompleteRouteImport } from './routes/onboardingComplete'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as LibraryRouteImport } from './routes/library'
-import { Route as HistoryRouteImport } from './routes/history'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthDashboardRouteImport } from './routes/_auth/dashboard'
-import { Route as AuthAppRouteImport } from './routes/_auth/app'
-import { Route as AuthAppIndexRouteImport } from './routes/_auth/app.index'
+import { Route as AuthAppRouteRouteImport } from './routes/_auth/app/route'
+import { Route as AuthAppIndexRouteImport } from './routes/_auth/app/index'
 import { Route as AuthDashboardSettingsRouteImport } from './routes/_auth/dashboard.settings'
+import { Route as AuthAppUserRouteImport } from './routes/_auth/app/user'
+import { Route as AuthAppSettingsRouteImport } from './routes/_auth/app/settings'
+import { Route as AuthAppLibraryRouteImport } from './routes/_auth/app/library'
+import { Route as AuthAppHistoryRouteImport } from './routes/_auth/app/history'
 
 const WorkoutDashboardRoute = WorkoutDashboardRouteImport.update({
   id: '/workoutDashboard',
@@ -37,19 +37,9 @@ const WorkoutRoute = WorkoutRouteImport.update({
   path: '/workout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const UserRoute = UserRouteImport.update({
-  id: '/user',
-  path: '/user',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingCompleteRoute = OnboardingCompleteRouteImport.update({
@@ -65,16 +55,6 @@ const OnboardingRoute = OnboardingRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LibraryRoute = LibraryRouteImport.update({
-  id: '/library',
-  path: '/library',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HistoryRoute = HistoryRouteImport.update({
-  id: '/history',
-  path: '/history',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -96,7 +76,7 @@ const AuthDashboardRoute = AuthDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthRoute,
 } as any)
-const AuthAppRoute = AuthAppRouteImport.update({
+const AuthAppRouteRoute = AuthAppRouteRouteImport.update({
   id: '/app',
   path: '/app',
   getParentRoute: () => AuthRoute,
@@ -104,46 +84,66 @@ const AuthAppRoute = AuthAppRouteImport.update({
 const AuthAppIndexRoute = AuthAppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthAppRoute,
+  getParentRoute: () => AuthAppRouteRoute,
 } as any)
 const AuthDashboardSettingsRoute = AuthDashboardSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => AuthDashboardRoute,
 } as any)
+const AuthAppUserRoute = AuthAppUserRouteImport.update({
+  id: '/user',
+  path: '/user',
+  getParentRoute: () => AuthAppRouteRoute,
+} as any)
+const AuthAppSettingsRoute = AuthAppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthAppRouteRoute,
+} as any)
+const AuthAppLibraryRoute = AuthAppLibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => AuthAppRouteRoute,
+} as any)
+const AuthAppHistoryRoute = AuthAppHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AuthAppRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/history': typeof HistoryRoute
-  '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/onboardingComplete': typeof OnboardingCompleteRoute
-  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
-  '/app': typeof AuthAppRouteWithChildren
+  '/app': typeof AuthAppRouteRouteWithChildren
   '/dashboard': typeof AuthDashboardRouteWithChildren
+  '/app/history': typeof AuthAppHistoryRoute
+  '/app/library': typeof AuthAppLibraryRoute
+  '/app/settings': typeof AuthAppSettingsRoute
+  '/app/user': typeof AuthAppUserRoute
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/app/': typeof AuthAppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/history': typeof HistoryRoute
-  '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/onboardingComplete': typeof OnboardingCompleteRoute
-  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
   '/dashboard': typeof AuthDashboardRouteWithChildren
+  '/app/history': typeof AuthAppHistoryRoute
+  '/app/library': typeof AuthAppLibraryRoute
+  '/app/settings': typeof AuthAppSettingsRoute
+  '/app/user': typeof AuthAppUserRoute
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/app': typeof AuthAppIndexRoute
 }
@@ -152,18 +152,18 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/about': typeof AboutRoute
-  '/history': typeof HistoryRoute
-  '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/onboardingComplete': typeof OnboardingCompleteRoute
-  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
-  '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
-  '/_auth/app': typeof AuthAppRouteWithChildren
+  '/_auth/app': typeof AuthAppRouteRouteWithChildren
   '/_auth/dashboard': typeof AuthDashboardRouteWithChildren
+  '/_auth/app/history': typeof AuthAppHistoryRoute
+  '/_auth/app/library': typeof AuthAppLibraryRoute
+  '/_auth/app/settings': typeof AuthAppSettingsRoute
+  '/_auth/app/user': typeof AuthAppUserRoute
   '/_auth/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/_auth/app/': typeof AuthAppIndexRoute
 }
@@ -172,35 +172,35 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/history'
-    | '/library'
     | '/login'
     | '/onboarding'
     | '/onboardingComplete'
-    | '/settings'
     | '/signup'
-    | '/user'
     | '/workout'
     | '/workoutDashboard'
     | '/app'
     | '/dashboard'
+    | '/app/history'
+    | '/app/library'
+    | '/app/settings'
+    | '/app/user'
     | '/dashboard/settings'
     | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/history'
-    | '/library'
     | '/login'
     | '/onboarding'
     | '/onboardingComplete'
-    | '/settings'
     | '/signup'
-    | '/user'
     | '/workout'
     | '/workoutDashboard'
     | '/dashboard'
+    | '/app/history'
+    | '/app/library'
+    | '/app/settings'
+    | '/app/user'
     | '/dashboard/settings'
     | '/app'
   id:
@@ -208,18 +208,18 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/about'
-    | '/history'
-    | '/library'
     | '/login'
     | '/onboarding'
     | '/onboardingComplete'
-    | '/settings'
     | '/signup'
-    | '/user'
     | '/workout'
     | '/workoutDashboard'
     | '/_auth/app'
     | '/_auth/dashboard'
+    | '/_auth/app/history'
+    | '/_auth/app/library'
+    | '/_auth/app/settings'
+    | '/_auth/app/user'
     | '/_auth/dashboard/settings'
     | '/_auth/app/'
   fileRoutesById: FileRoutesById
@@ -228,14 +228,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
   AboutRoute: typeof AboutRoute
-  HistoryRoute: typeof HistoryRoute
-  LibraryRoute: typeof LibraryRoute
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
   OnboardingCompleteRoute: typeof OnboardingCompleteRoute
-  SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
-  UserRoute: typeof UserRoute
   WorkoutRoute: typeof WorkoutRoute
   WorkoutDashboardRoute: typeof WorkoutDashboardRoute
 }
@@ -256,25 +252,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/user': {
-      id: '/user'
-      path: '/user'
-      fullPath: '/user'
-      preLoaderRoute: typeof UserRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/signup': {
       id: '/signup'
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboardingComplete': {
@@ -296,20 +278,6 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/library': {
-      id: '/library'
-      path: '/library'
-      fullPath: '/library'
-      preLoaderRoute: typeof LibraryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/history': {
-      id: '/history'
-      path: '/history'
-      fullPath: '/history'
-      preLoaderRoute: typeof HistoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -344,7 +312,7 @@ declare module '@tanstack/react-router' {
       id: '/_auth/app'
       path: '/app'
       fullPath: '/app'
-      preLoaderRoute: typeof AuthAppRouteImport
+      preLoaderRoute: typeof AuthAppRouteRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_auth/app/': {
@@ -352,7 +320,7 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/app/'
       preLoaderRoute: typeof AuthAppIndexRouteImport
-      parentRoute: typeof AuthAppRoute
+      parentRoute: typeof AuthAppRouteRoute
     }
     '/_auth/dashboard/settings': {
       id: '/_auth/dashboard/settings'
@@ -361,19 +329,56 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthDashboardSettingsRouteImport
       parentRoute: typeof AuthDashboardRoute
     }
+    '/_auth/app/user': {
+      id: '/_auth/app/user'
+      path: '/user'
+      fullPath: '/app/user'
+      preLoaderRoute: typeof AuthAppUserRouteImport
+      parentRoute: typeof AuthAppRouteRoute
+    }
+    '/_auth/app/settings': {
+      id: '/_auth/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AuthAppSettingsRouteImport
+      parentRoute: typeof AuthAppRouteRoute
+    }
+    '/_auth/app/library': {
+      id: '/_auth/app/library'
+      path: '/library'
+      fullPath: '/app/library'
+      preLoaderRoute: typeof AuthAppLibraryRouteImport
+      parentRoute: typeof AuthAppRouteRoute
+    }
+    '/_auth/app/history': {
+      id: '/_auth/app/history'
+      path: '/history'
+      fullPath: '/app/history'
+      preLoaderRoute: typeof AuthAppHistoryRouteImport
+      parentRoute: typeof AuthAppRouteRoute
+    }
   }
 }
 
-interface AuthAppRouteChildren {
+interface AuthAppRouteRouteChildren {
+  AuthAppHistoryRoute: typeof AuthAppHistoryRoute
+  AuthAppLibraryRoute: typeof AuthAppLibraryRoute
+  AuthAppSettingsRoute: typeof AuthAppSettingsRoute
+  AuthAppUserRoute: typeof AuthAppUserRoute
   AuthAppIndexRoute: typeof AuthAppIndexRoute
 }
 
-const AuthAppRouteChildren: AuthAppRouteChildren = {
+const AuthAppRouteRouteChildren: AuthAppRouteRouteChildren = {
+  AuthAppHistoryRoute: AuthAppHistoryRoute,
+  AuthAppLibraryRoute: AuthAppLibraryRoute,
+  AuthAppSettingsRoute: AuthAppSettingsRoute,
+  AuthAppUserRoute: AuthAppUserRoute,
   AuthAppIndexRoute: AuthAppIndexRoute,
 }
 
-const AuthAppRouteWithChildren =
-  AuthAppRoute._addFileChildren(AuthAppRouteChildren)
+const AuthAppRouteRouteWithChildren = AuthAppRouteRoute._addFileChildren(
+  AuthAppRouteRouteChildren,
+)
 
 interface AuthDashboardRouteChildren {
   AuthDashboardSettingsRoute: typeof AuthDashboardSettingsRoute
@@ -388,12 +393,12 @@ const AuthDashboardRouteWithChildren = AuthDashboardRoute._addFileChildren(
 )
 
 interface AuthRouteChildren {
-  AuthAppRoute: typeof AuthAppRouteWithChildren
+  AuthAppRouteRoute: typeof AuthAppRouteRouteWithChildren
   AuthDashboardRoute: typeof AuthDashboardRouteWithChildren
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
-  AuthAppRoute: AuthAppRouteWithChildren,
+  AuthAppRouteRoute: AuthAppRouteRouteWithChildren,
   AuthDashboardRoute: AuthDashboardRouteWithChildren,
 }
 
@@ -403,14 +408,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
   AboutRoute: AboutRoute,
-  HistoryRoute: HistoryRoute,
-  LibraryRoute: LibraryRoute,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
   OnboardingCompleteRoute: OnboardingCompleteRoute,
-  SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
-  UserRoute: UserRoute,
   WorkoutRoute: WorkoutRoute,
   WorkoutDashboardRoute: WorkoutDashboardRoute,
 }

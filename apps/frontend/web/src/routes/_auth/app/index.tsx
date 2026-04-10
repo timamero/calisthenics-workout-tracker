@@ -15,10 +15,10 @@ import type {
 import {
   getWorkoutBuilds,
   getWorkoutLogs,
-} from '../../services/workoutsService';
+} from '../../../services/workoutsService';
 
-import CardButton from '../../components/common/CardButton';
-import LargeButton from '../../components/common/LargeButton';
+import CardButton from '../../../components/common/CardButton';
+import LargeButton from '../../../components/common/LargeButton';
 
 export const Route = createFileRoute('/_auth/app/')({
   loader: async () => {
