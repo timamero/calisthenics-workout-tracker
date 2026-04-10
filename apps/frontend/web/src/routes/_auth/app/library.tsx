@@ -8,15 +8,15 @@ import type { ExerciseResponse } from '@cwt/schema/exercises';
 import { ExerciseDetailContext } from '@cwt/context';
 import { useAuthStore, useExerciseLibraryStore } from '@cwt/state/stores';
 
-import { useSetExercisesData } from '../hooks/useSetExercisesData';
-import { getExercises } from '../services/exercisesService';
+import { useSetExercisesData } from '../../../hooks/useSetExercisesData';
+import { getExercises } from '../../../services/exercisesService';
 
-import ExercisesList from '../components/ExercisesList';
-import ExercisesFilterOverlay from '../components/ExercisesFilterOverlay';
-import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
-import ExerciseSearchBar from '../components/ExerciseSearchBar';
+import ExercisesList from '../../../components/ExercisesList';
+import ExercisesFilterOverlay from '../../../components/ExercisesFilterOverlay';
+import ExerciseDetailOverlay from '../../../components/ExerciseDetailOverlay';
+import ExerciseSearchBar from '../../../components/ExerciseSearchBar';
 
-export const Route = createFileRoute('/library')({
+export const Route = createFileRoute('/_auth/app/library')({
   loader: async () => {
     const displayedExercises =
       useExerciseLibraryStore.getState().displayedExercises;
