@@ -24,6 +24,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
+import { Route as AuthDashboardSettingsRouteImport } from './routes/_auth.dashboard.settings'
 
 const WorkoutDashboardRoute = WorkoutDashboardRouteImport.update({
   id: '/workoutDashboard',
@@ -99,6 +100,11 @@ const AuthDashboardRoute = AuthDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthDashboardSettingsRoute = AuthDashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthDashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -114,7 +120,8 @@ export interface FileRoutesByFullPath {
   '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
-  '/dashboard': typeof AuthDashboardRoute
+  '/dashboard': typeof AuthDashboardRouteWithChildren
+  '/dashboard/settings': typeof AuthDashboardSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -130,7 +137,8 @@ export interface FileRoutesByTo {
   '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
-  '/dashboard': typeof AuthDashboardRoute
+  '/dashboard': typeof AuthDashboardRouteWithChildren
+  '/dashboard/settings': typeof AuthDashboardSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -148,7 +156,8 @@ export interface FileRoutesById {
   '/user': typeof UserRoute
   '/workout': typeof WorkoutRoute
   '/workoutDashboard': typeof WorkoutDashboardRoute
-  '/_auth/dashboard': typeof AuthDashboardRoute
+  '/_auth/dashboard': typeof AuthDashboardRouteWithChildren
+  '/_auth/dashboard/settings': typeof AuthDashboardSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/workout'
     | '/workoutDashboard'
     | '/dashboard'
+    | '/dashboard/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
     | '/workout'
     | '/workoutDashboard'
     | '/dashboard'
+    | '/dashboard/settings'
   id:
     | '__root__'
     | '/'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/workout'
     | '/workoutDashboard'
     | '/_auth/dashboard'
+    | '/_auth/dashboard/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -326,15 +338,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthDashboardRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/dashboard/settings': {
+      id: '/_auth/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof AuthDashboardSettingsRouteImport
+      parentRoute: typeof AuthDashboardRoute
+    }
   }
 }
 
+interface AuthDashboardRouteChildren {
+  AuthDashboardSettingsRoute: typeof AuthDashboardSettingsRoute
+}
+
+const AuthDashboardRouteChildren: AuthDashboardRouteChildren = {
+  AuthDashboardSettingsRoute: AuthDashboardSettingsRoute,
+}
+
+const AuthDashboardRouteWithChildren = AuthDashboardRoute._addFileChildren(
+  AuthDashboardRouteChildren,
+)
+
 interface AuthRouteChildren {
-  AuthDashboardRoute: typeof AuthDashboardRoute
+  AuthDashboardRoute: typeof AuthDashboardRouteWithChildren
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
-  AuthDashboardRoute: AuthDashboardRoute,
+  AuthDashboardRoute: AuthDashboardRouteWithChildren,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
