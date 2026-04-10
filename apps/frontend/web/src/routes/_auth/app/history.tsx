@@ -11,13 +11,13 @@ import { WorkoutLogDetailContextProvider } from '@cwt/context';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
 
-import { getWorkoutLogs } from '../services/workoutsService';
-import { getExercises } from '../services/exercisesService';
+import { getWorkoutLogs } from '../../../services/workoutsService';
+import { getExercises } from '../../../services/exercisesService';
 
-import WorkoutLogPages from '../components/WorkoutLogPages';
-import { useSetExercisesData } from '../hooks/useSetExercisesData';
+import WorkoutLogPages from '../../../components/WorkoutLogPages';
+import { useSetExercisesData } from '../../../hooks/useSetExercisesData';
 
-export const Route = createFileRoute('/history')({
+export const Route = createFileRoute('/_auth/app/history')({
   loader: async () => {
     let logs: WorkoutLogResponse[] | null = null;
     let exercises: ExerciseResponse[] | null = null;
