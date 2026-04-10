@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { Title, Stack } from '@mantine/core';
 
 export const Route = createFileRoute('/_auth/dashboard')({
@@ -23,6 +23,7 @@ export function DashboardView() {
         <Title order={1} size={64}>
           This is an authenticated view
         </Title>
+        <Outlet />
       </Stack>
     </Stack>
   );
