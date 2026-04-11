@@ -1,4 +1,3 @@
-// import { useEffect } from 'react';
 import {
   createFileRoute,
   Outlet,
@@ -10,49 +9,13 @@ import { AppShell, Burger, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { WorkoutContextProvider } from '@cwt/context';
-// import { useAuthStore, useLeveragesAssistsStore } from '@cwt/state/stores';
-// import type { LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
-
-// import { getLeveragesAssists } from '../../../services/leveragesAssistsService';
 
 export const Route = createFileRoute('/_auth/dashboard')({
-  // loader: async () => {
-  //   let leveragesAssists: LeveragesAssistsResponse[] | null = null;
-
-  //   const leveragesAssistsState =
-  //     useLeveragesAssistsStore.getState().leveragesAssists;
-  //   if (leveragesAssistsState) {
-  //     leveragesAssists = leveragesAssistsState;
-  //   }
-
-  //   const supabaseSession = useAuthStore.getState().session;
-  //   if (supabaseSession?.access_token) {
-  //     if (!leveragesAssists) {
-  //       console.time('fetching LeveragesAssists');
-  //       const fetchedLeveragesAssists = await getLeveragesAssists(
-  //         supabaseSession.access_token,
-  //       );
-  //       console.timeEnd('fetching LeveragesAssists');
-  //       leveragesAssists = fetchedLeveragesAssists;
-  //     }
-  //   }
-  //   return { leveragesAssists };
-  // },
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  // const data: {
-  //   leveragesAssists: LeveragesAssistsResponse[];
-  // } = Route.useLoaderData();
   const [opened, { toggle }] = useDisclosure();
-
-  // const leveragesAssists = useLeveragesAssistsStore(
-  //   (state) => state.leveragesAssists,
-  // );
-  // const setLeveragesAssists = useLeveragesAssistsStore(
-  //   (state) => state.setLeveragesAssists,
-  // );
 
   const navLinks = [
     linkOptions({ label: 'Home', to: '/dashboard/home' }),
@@ -61,13 +24,6 @@ function RouteComponent() {
     linkOptions({ label: 'Profile', to: '/dashboard/user' }),
     linkOptions({ label: 'Settings', to: '/dashboard/settings' }),
   ];
-  // useEffect(() => {
-  //   setLeveragesAssists(data.leveragesAssists);
-  // }, [data, setLeveragesAssists]);
-
-  // if (!leveragesAssists) {
-  //   return <div>loading leverages and assists</div>;
-  // }
 
   return (
     <AppShell
