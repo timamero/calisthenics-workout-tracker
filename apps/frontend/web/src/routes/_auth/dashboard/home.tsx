@@ -6,22 +6,47 @@ import {
   useWorkoutDraftStore,
   useWorkoutLibraryStore,
   useAuthStore,
+  useLeveragesAssistsStore,
 } from '@cwt/state/stores';
 import type {
   WorkoutBuildResponse,
   WorkoutLogResponse,
 } from '@cwt/schema/workouts';
+import type { LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
 
 import {
   getWorkoutBuilds,
   getWorkoutLogs,
 } from '../../../services/workoutsService';
+import { getLeveragesAssists } from '../../../services/leveragesAssistsService';
 
 import CardButton from '../../../components/common/CardButton';
 import LargeButton from '../../../components/common/LargeButton';
 
 export const Route = createFileRoute('/_auth/dashboard/home')({
   loader: async () => {
+    console.log('home || loader called');
+    let leveragesAssists: LeveragesAssistsResponse[] | null = null;
+
+    const leveragesAssistsState =
+      useLeveragesAssistsStore.getState().leveragesAssists;
+    if (leveragesAssistsState) {
+      console.log('home || leveragesAssists already exists');
+      leveragesAssists = leveragesAssistsState;
+    }
+
+    const supabaseSession = useAuthStore.getState().session;
+    if (supabaseSession?.access_token) {
+      if (!leveragesAssists) {
+        console.time('fetching LeveragesAssists');
+        const fetchedLeveragesAssists = await getLeveragesAssists(
+          supabaseSession.access_token,
+        );
+        console.timeEnd('fetching LeveragesAssists');
+        leveragesAssists = fetchedLeveragesAssists;
+      }
+    }
+
     const displayedWorkoutBuilds =
       useWorkoutLibraryStore.getState().displayedWorkoutBuilds;
     const displayedWorkoutLogs =
@@ -32,15 +57,22 @@ export const Route = createFileRoute('/_auth/dashboard/home')({
       displayedWorkoutLogs &&
       displayedWorkoutLogs.length > 0
     ) {
-      return { logs: displayedWorkoutLogs, builds: displayedWorkoutBuilds };
+      console.log('home || workout logs and builds already esists');
+      return {
+        logs: displayedWorkoutLogs,
+        builds: displayedWorkoutBuilds,
+        leveragesAssists,
+      };
     }
-    const supabaseSession = useAuthStore.getState().session;
+    // const supabaseSession = useAuthStore.getState().session;
     if (supabaseSession?.access_token) {
+      console.time('fetching workouts');
       const workoutBuilds = await getWorkoutBuilds(
         supabaseSession.access_token,
       );
+      console.timeEnd('fetching workouts');
       const workoutLogs = await getWorkoutLogs(supabaseSession.access_token);
-      return { logs: workoutLogs, builds: workoutBuilds };
+      return { logs: workoutLogs, builds: workoutBuilds, leveragesAssists };
     }
     return [];
   },
@@ -53,17 +85,25 @@ export const Route = createFileRoute('/_auth/dashboard/home')({
 });
 
 function AppView() {
-  const workouts: {
+  const data: {
     logs: WorkoutLogResponse[];
     builds: WorkoutBuildResponse[];
+    leveragesAssists: LeveragesAssistsResponse[];
   } = Route.useLoaderData();
 
+  const leveragesAssists = useLeveragesAssistsStore(
+    (state) => state.leveragesAssists,
+  );
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
+  const setLeveragesAssists = useLeveragesAssistsStore(
+    (state) => state.setLeveragesAssists,
+  );
 
   // On initial load, set the workout builds in the store
   useEffect(() => {
-    setWorkouts(workouts.logs, workouts.builds);
-  }, [workouts, setWorkouts]);
+    setLeveragesAssists(data.leveragesAssists);
+    setWorkouts(data.logs, data.builds);
+  }, [data, setWorkouts, setLeveragesAssists]);
 
   const initializeWorkout = useWorkoutDraftStore(
     (state) => state.initializeWorkout,
@@ -79,8 +119,8 @@ function AppView() {
   let workoutBuildCards = null;
   let workoutLogCards = null;
 
-  if (workouts.builds) {
-    workoutBuildCards = workouts.builds.map((wo, i) => {
+  if (data.builds && leveragesAssists) {
+    workoutBuildCards = data.builds.map((wo, i) => {
       const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
       const date = wo.created_at ? wo.created_at : new Date();
       const dateString =
@@ -96,8 +136,8 @@ function AppView() {
     });
   }
 
-  if (workouts.logs) {
-    workoutLogCards = workouts.logs.map((wo, i) => {
+  if (data.logs && leveragesAssists) {
+    workoutLogCards = data.logs.map((wo, i) => {
       const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
       const date = wo.date;
       return (
