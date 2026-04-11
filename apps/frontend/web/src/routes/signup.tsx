@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import {
   TextInput,
@@ -8,6 +8,8 @@ import {
   Box,
   Title,
   Text,
+  Stack,
+  Loader,
 } from '@mantine/core';
 
 import { useNavigate } from '@tanstack/react-router';
@@ -25,6 +27,8 @@ function SignUpView() {
   const auth = useAuthSignUp(supabase);
   const user = useAuthStore((state) => state.user);
 
+  const [loading, setLoading] = useState(true);
+
   const handleSubmitClick = () => {
     if (auth.authError) {
       auth.clearError();
@@ -34,10 +38,28 @@ function SignUpView() {
   useEffect(() => {
     if (user) {
       navigate({
-        to: '/',
+        to: '/dashboard',
       });
     }
+    setLoading(false);
   }, [user, navigate]);
+
+  if (loading || user) {
+    return (
+      <Stack align="center" justify="center" h="100vh">
+        <Stack align="center">
+          <Title order={1} size={32}>
+            Thank you for waiting!
+          </Title>
+          <Text size="xl">Checking your credentials.</Text>
+        </Stack>
+
+        <Stack mt={40}>
+          <Loader color="lime" />;
+        </Stack>
+      </Stack>
+    );
+  }
 
   return (
     <Box maw={400} mx="auto" mt="xl">
