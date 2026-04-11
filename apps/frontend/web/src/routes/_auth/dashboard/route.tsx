@@ -90,7 +90,9 @@ function RouteComponent() {
       <AppShell.Main
         style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
       >
-        <Outlet />
+        <WorkoutContextProvider appType="web">
+          <Outlet />
+        </WorkoutContextProvider>
       </AppShell.Main>
     </AppShell>
   );
