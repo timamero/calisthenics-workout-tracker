@@ -25,13 +25,11 @@ import LargeButton from '../../../components/common/LargeButton';
 
 export const Route = createFileRoute('/_auth/dashboard/home')({
   loader: async () => {
-    console.log('home || loader called');
     let leveragesAssists: LeveragesAssistsResponse[] | null = null;
 
     const leveragesAssistsState =
       useLeveragesAssistsStore.getState().leveragesAssists;
     if (leveragesAssistsState) {
-      console.log('home || leveragesAssists already exists');
       leveragesAssists = leveragesAssistsState;
     }
 
@@ -57,7 +55,6 @@ export const Route = createFileRoute('/_auth/dashboard/home')({
       displayedWorkoutLogs &&
       displayedWorkoutLogs.length > 0
     ) {
-      console.log('home || workout logs and builds already esists');
       return {
         logs: displayedWorkoutLogs,
         builds: displayedWorkoutBuilds,
