@@ -8,8 +8,6 @@ import {
 import { AppShell, Burger, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { WorkoutContextProvider } from '@cwt/context';
-
 export const Route = createFileRoute('/_auth/dashboard')({
   component: RouteComponent,
 });
@@ -56,9 +54,7 @@ function RouteComponent() {
       <AppShell.Main
         style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
       >
-        <WorkoutContextProvider appType="web">
-          <Outlet />
-        </WorkoutContextProvider>
+        <Outlet />
       </AppShell.Main>
     </AppShell>
   );
