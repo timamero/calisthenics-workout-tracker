@@ -24,9 +24,7 @@ function useAuth(supabase: SupabaseClient) {
     setAuthError(null);
 
     try {
-      console.log("useAuthForm || calling signIn");
       const user = await signIn(supabase, email, password);
-      console.log("useAuthForm || user after await = ", user);
       if (!user) {
         setAuthError("Failed to sign in. Please check your credentials.");
         return null;
@@ -39,7 +37,6 @@ function useAuth(supabase: SupabaseClient) {
       setAuthError(message);
       return null;
     } finally {
-      console.log("useAuthForm || setIsLoading to false");
       setIsLoading(false);
     }
   };
