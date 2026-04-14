@@ -15,7 +15,7 @@ const SearchBar = () => {
   const styles = getStyles();
 
   const exerciseSearch = useExercisesSearchStore(
-    (state) => state.exerciseSearch,
+    (state) => state.appliedExerciseSearch,
   );
   const refreshDisplayedExercises = useExerciseLibraryStore(
     (state) => state.refreshDisplayedExercises,
@@ -36,9 +36,19 @@ const SearchBar = () => {
   };
 
   const onChange = (text: string) => {
+    console.log('SearchBar || onChange called with text: ', text);
     if (text.length < exerciseSearch.length) {
+      console.log(
+        'SearchBar || onchange - in conditional for text.length < exerciseSearch.length and clearning search',
+      );
       handleClearSearch();
     }
+
+    console.log(
+      'SearchBar || onchange - setting setAppliedExerciseSearch with text: ',
+      text,
+    );
+    // setAppliedExerciseSearch(text);
     setAppliedExerciseSearch(text);
     refreshDisplayedExercises(
       useExercisesFilterStore.getState().appliedFilterSelections,
@@ -47,9 +57,14 @@ const SearchBar = () => {
     );
 
     if (text === '') {
+      console.log(
+        "SearchBar || onchange - in conditional for text === '' and clearning search",
+      );
       handleClearSearch();
     }
   };
+
+  console.log('SearchBar || exerciseSearch: ', exerciseSearch);
 
   return (
     <View style={styles.container}>
