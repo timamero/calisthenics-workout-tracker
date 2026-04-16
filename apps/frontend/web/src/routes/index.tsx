@@ -5,7 +5,7 @@ export const Route = createFileRoute('/')({
   component: HomeView,
 });
 
-export function HomeView() {
+function HomeView() {
   return (
     <Stack align="center" justify="center" h="100vh">
       <Stack align="center">
