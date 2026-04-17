@@ -38,10 +38,10 @@
       "default": "./dist/supabaseTypes.js"
     }
   },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.52.0"
+  },
   "devDependencies": {
     "typescript": "~5.8.3"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.51.0"
   }
 }
