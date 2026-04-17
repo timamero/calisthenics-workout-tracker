@@ -1,1 +1,1 @@
-export * from './ui/auth.schema';
+export { AuthSchema, AuthSignUpSchema } from './ui/auth.schema';

@@ -1,3 +1,8 @@
-export * from './enums.schema';
+export {
+  LeverageAssistSchema,
+  LeverageAssistValueTypeSchema,
+  UnitSchema,
+  SortDirectionSchema,
+} from './enums.schema';
 
-export * from './api/leveragesAssists.schema';
+export { LeveragesAssistsResponseSchema } from './api/leveragesAssists.schema';
