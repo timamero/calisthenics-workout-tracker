@@ -11,12 +11,6 @@ import type { ExerciseResponse } from '@cwt/schema/exercises';
 import type { LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
 
 import {
-  useWorkoutDraftStore,
-  useExerciseLibraryStore,
-  useLeveragesAssistsStore,
-} from '../../stores';
-
-import {
   DEFAULT_FIELDS,
   DEFAULT_REP_SET,
   DEFAULT_TIME_SET,
@@ -27,20 +21,17 @@ export function addLeveragesOrAssistsField(
   fields: SetFields,
   selectedExerciseID: number,
   tracking: string[],
+  selectedExercise: ExerciseResponse,
+  getLeverageOrAssist: (id: number) => LeveragesAssistsResponse,
 ): SetFields {
   let updatedFields = fields;
-  const selectedExercise: ExerciseResponse = useExerciseLibraryStore
-    .getState()
-    .getExerciseByID(selectedExerciseID);
 
   if (tracking.includes('leverages')) {
     if (!selectedExercise.default_leverage_id) {
       console.error('This exercise does not have a default_leverage_id');
     }
     const leverageID: number = selectedExercise.default_leverage_id!;
-    const leverage: LeveragesAssistsResponse = useLeveragesAssistsStore
-      .getState()
-      .getLeverageOrAssistByID(leverageID);
+    const leverage: LeveragesAssistsResponse = getLeverageOrAssist(leverageID);
     const valueType = leverage.value_type;
 
     let leverageField: Leverage;
@@ -67,9 +58,7 @@ export function addLeveragesOrAssistsField(
       console.error('This exercise does not have a default_assist_id');
     }
     const assistID: number = selectedExercise.default_assist_id!;
-    const assist: LeveragesAssistsResponse = useLeveragesAssistsStore
-      .getState()
-      .getLeverageOrAssistByID(assistID);
+    const assist: LeveragesAssistsResponse = getLeverageOrAssist(assistID);
     const valueType = assist.value_type;
 
     let assistField: Assist;
@@ -101,11 +90,15 @@ export function addLeveragesOrAssistsField(
 export function updateLeverageOrAssistFieldInSets(
   sets: Set[],
   updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
+  setID: string | null,
+  leverageOrAssistID: string | null,
 ): Set[] {
+  if (!setID || !leverageOrAssistID) {
+    console.error('setID and leverageOrAssistID are required');
+    return sets;
+  }
+
   let trackingTypeUpdated: 'leverages' | 'assists';
-  const setID = useWorkoutDraftStore.getState().setIDToMod;
-  const leverageOrAssistID =
-    useWorkoutDraftStore.getState().leverageOrAssistIDToMod;
 
   const updatedSets = sets.map((set) => {
     if (set.id === setID) {
@@ -173,7 +166,12 @@ export function updateLeverageOrAssistFieldInSets(
   return updatedSets;
 }
 
-export function createFields(tracking: string[], exerciseID: number) {
+export function createFields(
+  tracking: string[],
+  exerciseID: number,
+  selectedExercise: ExerciseResponse,
+  getLeverageOrAssist: (id: number) => LeveragesAssistsResponse,
+) {
   let fields = DEFAULT_FIELDS;
   if (tracking.includes('reps')) {
     fields = { ...fields, ...DEFAULT_REP_SET };
@@ -183,7 +181,13 @@ export function createFields(tracking: string[], exerciseID: number) {
   }
 
   if (tracking.includes('leverages') || tracking.includes('assists')) {
-    fields = addLeveragesOrAssistsField(fields, exerciseID, tracking);
+    fields = addLeveragesOrAssistsField(
+      fields,
+      exerciseID,
+      tracking,
+      selectedExercise,
+      getLeverageOrAssist,
+    );
   }
 
   fields = { ...fields, ...DEFAULT_REST_SET };
