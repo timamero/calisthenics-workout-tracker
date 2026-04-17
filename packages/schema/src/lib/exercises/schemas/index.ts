@@ -1,5 +1,18 @@
-export * from './enums.schema';
+export {
+  MuscleSchema,
+  EquipmentSchema,
+  EmphasisSchema,
+  DifficultySchema,
+  TrackingSchema,
+  LeverageAssistSchema,
+  LeveragesAssistValueTypeSchema,
+  SortDirectionSchema,
+  UnitSchema,
+} from './enums.schema';
 
-export * from './api/exercise.schema';
-export * from './ui/attributes.schema';
-export * from './ui/filterCheckbox.schema';
+export { ExerciseResponseSchema } from './api/exercise.schema';
+export { AttributesSchema } from './ui/attributes.schema';
+export {
+  FilterCheckboxKeySchema,
+  FilterCheckboxSchema,
+} from './ui/filterCheckbox.schema';

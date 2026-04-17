@@ -1,6 +1,7 @@
-import { getSecondsInDuration, formatDuration } from "./durationUtils";
+export { getSecondsInDuration, formatDuration } from "./durationUtils";
 
-export * from "./arrayUtils";
-export * from "./workoutUtils";
+export { chunk } from "./arrayUtils";
+export { type ExercisesGroupedBySetsReturnType } from "./workoutUtils";
+export { groupExercisesBySet } from "./workoutUtils";
 
-export { getSecondsInDuration, formatDuration };
+// export { getSecondsInDuration, formatDuration };
