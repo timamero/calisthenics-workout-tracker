@@ -25,6 +25,8 @@ import {
   createFields,
   updateLeverageOrAssistFieldInSets,
 } from './workoutDraftActions';
+import { useExerciseLibraryStore } from '../../stores/exercises/exerciseLibraryStore';
+import { useLeveragesAssistsStore } from '../../stores/leveragesAssistsStore';
 
 interface WorkoutDraftState {
   mode: Mode | null;
@@ -220,7 +222,18 @@ export const createWorkoutDraftSlice: StateCreator<
       }
 
       if (state.mode === 'edit' || state.mode === 'build') {
-        const fields = createFields(tracking, exerciseID);
+        const selectedExercise = useExerciseLibraryStore
+          .getState()
+          .getExerciseByID(exerciseID);
+        const getLeverageOrAssist = (id: number) =>
+          useLeveragesAssistsStore.getState().getLeverageOrAssistByID(id);
+
+        const fields = createFields(
+          tracking,
+          exerciseID,
+          selectedExercise,
+          getLeverageOrAssist,
+        );
 
         const exercise = {
           sets: [{ ...INITIALIZED_SET, id: uuidv4(), fields: fields }],
@@ -649,6 +662,10 @@ export const createWorkoutDraftSlice: StateCreator<
         const supersetID = get().supersetIDToMod;
         const exerciseID = get().exerciseIDToMod;
 
+        // Prepare helper for creating fields
+        const getLeverageOrAssist = (id: number) =>
+          useLeveragesAssistsStore.getState().getLeverageOrAssistByID(id);
+
         // Add set to exercise in root
         if (!sectionID && !supersetID && exerciseID) {
           const exercise = state.workoutData.find(
@@ -657,7 +674,15 @@ export const createWorkoutDraftSlice: StateCreator<
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
 
-          const fields = createFields(tracking, updatedExercise.exercise_id);
+          const selectedExercise = useExerciseLibraryStore
+            .getState()
+            .getExerciseByID(updatedExercise.exercise_id);
+          const fields = createFields(
+            tracking,
+            updatedExercise.exercise_id,
+            selectedExercise,
+            getLeverageOrAssist,
+          );
 
           updatedExercise = {
             ...updatedExercise,
@@ -684,7 +709,15 @@ export const createWorkoutDraftSlice: StateCreator<
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
 
-          const fields = createFields(tracking, updatedExercise.exercise_id);
+          const selectedExercise = useExerciseLibraryStore
+            .getState()
+            .getExerciseByID(updatedExercise.exercise_id);
+          const fields = createFields(
+            tracking,
+            updatedExercise.exercise_id,
+            selectedExercise,
+            getLeverageOrAssist,
+          );
 
           updatedExercise = {
             ...updatedExercise,
@@ -722,7 +755,15 @@ export const createWorkoutDraftSlice: StateCreator<
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
 
-          const fields = createFields(tracking, updatedExercise.exercise_id);
+          const selectedExercise = useExerciseLibraryStore
+            .getState()
+            .getExerciseByID(updatedExercise.exercise_id);
+          const fields = createFields(
+            tracking,
+            updatedExercise.exercise_id,
+            selectedExercise,
+            getLeverageOrAssist,
+          );
 
           updatedExercise = {
             ...updatedExercise,
@@ -763,7 +804,15 @@ export const createWorkoutDraftSlice: StateCreator<
           let updatedExercise = exercise as Exercise;
           const tracking = updatedExercise.tracked;
 
-          const fields = createFields(tracking, updatedExercise.exercise_id);
+          const selectedExercise = useExerciseLibraryStore
+            .getState()
+            .getExerciseByID(updatedExercise.exercise_id);
+          const fields = createFields(
+            tracking,
+            updatedExercise.exercise_id,
+            selectedExercise,
+            getLeverageOrAssist,
+          );
 
           updatedExercise = {
             ...updatedExercise,
@@ -827,11 +876,22 @@ export const createWorkoutDraftSlice: StateCreator<
             (superset) => superset.id === supersetID,
           ) as Superset;
 
+          const getLeverageOrAssist = (id: number) =>
+            useLeveragesAssistsStore.getState().getLeverageOrAssistByID(id);
+
           let updatedSuperset = superset;
           updatedSuperset.exercises = updatedSuperset.exercises.map(
             (exercise) => {
               const tracking = exercise.tracked;
-              const fields = createFields(tracking, exercise.exercise_id);
+              const selectedExercise = useExerciseLibraryStore
+                .getState()
+                .getExerciseByID(exercise.exercise_id);
+              const fields = createFields(
+                tracking,
+                exercise.exercise_id,
+                selectedExercise,
+                getLeverageOrAssist,
+              );
 
               return {
                 ...exercise,
@@ -862,11 +922,22 @@ export const createWorkoutDraftSlice: StateCreator<
             (superset) => superset.id === supersetID,
           ) as Superset;
 
+          const getLeverageOrAssist = (id: number) =>
+            useLeveragesAssistsStore.getState().getLeverageOrAssistByID(id);
+
           let updatedSuperset = superset;
           updatedSuperset.exercises = updatedSuperset.exercises.map(
             (exercise) => {
               const tracking = exercise.tracked;
-              const fields = createFields(tracking, exercise.exercise_id);
+              const selectedExercise = useExerciseLibraryStore
+                .getState()
+                .getExerciseByID(exercise.exercise_id);
+              const fields = createFields(
+                tracking,
+                exercise.exercise_id,
+                selectedExercise,
+                getLeverageOrAssist,
+              );
 
               return {
                 ...exercise,
@@ -1344,13 +1415,13 @@ export const createWorkoutDraftSlice: StateCreator<
       const supersetID = get().supersetIDToMod;
       const exerciseID = get().exerciseIDToMod;
       const leverageOrAssistID = get().leverageOrAssistIDToMod;
+      const setID = get().setIDToMod;
 
       // Update field of exercise in root
       if (!sectionID && !supersetID && exerciseID) {
         const exercise = state.workoutData.find(
           (item) => item.id === exerciseID,
         ) as Exercise;
-        const setID = get().setIDToMod;
         if (setID == null) {
           console.error('No setID provided');
           return;
@@ -1360,6 +1431,8 @@ export const createWorkoutDraftSlice: StateCreator<
         updatedExercise.sets = updateLeverageOrAssistFieldInSets(
           updatedExercise.sets,
           updatedField,
+          setID,
+          leverageOrAssistID,
         );
 
         state.workoutData = state.workoutData.map((item) => {
@@ -1376,7 +1449,6 @@ export const createWorkoutDraftSlice: StateCreator<
         const exercise = section.items.find(
           (item) => item.id === exerciseID,
         ) as Exercise;
-        const setID = state.setIDToMod;
         if (setID == null) {
           console.error('No setID provided');
           return;
@@ -1385,6 +1457,8 @@ export const createWorkoutDraftSlice: StateCreator<
         updatedExercise.sets = updateLeverageOrAssistFieldInSets(
           updatedExercise.sets,
           updatedField,
+          setID,
+          leverageOrAssistID,
         );
 
         let updatedSection = section;
@@ -1412,7 +1486,6 @@ export const createWorkoutDraftSlice: StateCreator<
         const exercise = superset.exercises.find(
           (item) => item.id === exerciseID,
         ) as Exercise;
-        const setID = state.setIDToMod;
         if (setID == null) {
           console.error('No setID provided');
           return;
@@ -1421,6 +1494,8 @@ export const createWorkoutDraftSlice: StateCreator<
         updatedExercise.sets = updateLeverageOrAssistFieldInSets(
           updatedExercise.sets,
           updatedField,
+          setID,
+          leverageOrAssistID,
         );
 
         let updatedSuperset = superset;
@@ -1451,7 +1526,6 @@ export const createWorkoutDraftSlice: StateCreator<
         const exercise = superset.exercises.find(
           (item) => item.id === exerciseID,
         ) as Exercise;
-        const setID = state.setIDToMod;
         if (setID == null) {
           console.error('No setID provided');
           return;
@@ -1460,6 +1534,8 @@ export const createWorkoutDraftSlice: StateCreator<
         updatedExercise.sets = updateLeverageOrAssistFieldInSets(
           updatedExercise.sets,
           updatedField,
+          setID,
+          leverageOrAssistID,
         );
 
         let updatedSuperset = superset;
