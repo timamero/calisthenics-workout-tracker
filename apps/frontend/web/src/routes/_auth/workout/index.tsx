@@ -13,11 +13,12 @@ export const Route = createFileRoute('/_auth/workout/')({
   loader: async () => {
     const displayedExercises =
       useExerciseLibraryStore.getState().displayedExercises;
-
     if (displayedExercises) {
+      console.log('workout index :: returning displayedExercises');
       return displayedExercises;
     }
 
+    console.log('workout index :: fetching exercises from database');
     const supabaseSession = useAuthStore.getState().session;
     if (supabaseSession?.access_token) {
       console.time('fetch exercises in workout');
