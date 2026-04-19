@@ -1,79 +1,85 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Group, ScrollArea, Text } from '@mantine/core';
 
 import {
   useWorkoutDraftStore,
   useWorkoutLibraryStore,
-  useAuthStore,
-  useLeveragesAssistsStore,
+  // useAuthStore,
+  // useLeveragesAssistsStore,
 } from '@cwt/state/stores';
-import type {
-  WorkoutBuildResponse,
-  WorkoutLogResponse,
-} from '@cwt/schema/workouts';
+// import type {
+//   WorkoutBuildResponse,
+//   WorkoutLogResponse,
+// } from '@cwt/schema/workouts';
 
-import {
-  getWorkoutBuilds,
-  getWorkoutLogs,
-} from '../../../services/workoutsService';
+// import {
+//   getWorkoutBuilds,
+//   getWorkoutLogs,
+// } from '../../../services/workoutsService';
 
 import CardButton from '../../../components/common/CardButton';
 import LargeButton from '../../../components/common/LargeButton';
 
 export const Route = createFileRoute('/_auth/dashboard/home')({
-  loader: async () => {
-    const supabaseSession = useAuthStore.getState().session;
+  // loader: async () => {
+  //   const supabaseSession = useAuthStore.getState().session;
 
-    const displayedWorkoutBuilds =
-      useWorkoutLibraryStore.getState().displayedWorkoutBuilds;
-    const displayedWorkoutLogs =
-      useWorkoutLibraryStore.getState().displayedWorkoutLogs;
-    if (
-      displayedWorkoutBuilds &&
-      displayedWorkoutBuilds.length > 0 &&
-      displayedWorkoutLogs &&
-      displayedWorkoutLogs.length > 0
-    ) {
-      return {
-        logs: displayedWorkoutLogs,
-        builds: displayedWorkoutBuilds,
-      };
-    }
-    if (supabaseSession?.access_token) {
-      console.time('fetching workouts');
-      const workoutBuilds = await getWorkoutBuilds(
-        supabaseSession.access_token,
-      );
-      console.timeEnd('fetching workouts');
-      const workoutLogs = await getWorkoutLogs(supabaseSession.access_token);
-      return { logs: workoutLogs, builds: workoutBuilds };
-    }
-    return [];
-  },
-  pendingComponent: () => (
-    <div>
-      <p>Loading</p>
-    </div>
-  ),
+  //   const displayedWorkoutBuilds =
+  //     useWorkoutLibraryStore.getState().displayedWorkoutBuilds;
+  //   const displayedWorkoutLogs =
+  //     useWorkoutLibraryStore.getState().displayedWorkoutLogs;
+  //   if (
+  //     displayedWorkoutBuilds &&
+  //     displayedWorkoutBuilds.length > 0 &&
+  //     displayedWorkoutLogs &&
+  //     displayedWorkoutLogs.length > 0
+  //   ) {
+  //     return {
+  //       logs: displayedWorkoutLogs,
+  //       builds: displayedWorkoutBuilds,
+  //     };
+  //   }
+  //   if (supabaseSession?.access_token) {
+  //     console.time('fetching workouts');
+  //     const workoutBuilds = await getWorkoutBuilds(
+  //       supabaseSession.access_token,
+  //     );
+  //     console.timeEnd('fetching workouts');
+  //     const workoutLogs = await getWorkoutLogs(supabaseSession.access_token);
+  //     return { logs: workoutLogs, builds: workoutBuilds };
+  //   }
+  //   return [];
+  // },
+  // pendingComponent: () => (
+  //   <div>
+  //     <p>Loading</p>
+  //   </div>
+  // ),
   component: AppView,
 });
 
 function AppView() {
-  const data: {
-    logs: WorkoutLogResponse[];
-    builds: WorkoutBuildResponse[];
-  } = Route.useLoaderData();
+  // const data: {
+  //   logs: WorkoutLogResponse[];
+  //   builds: WorkoutBuildResponse[];
+  // } = Route.useLoaderData();
 
-  const leveragesAssists = useLeveragesAssistsStore(
-    (state) => state.leveragesAssists,
-  );
-  const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
+  // const leveragesAssists = useLeveragesAssistsStore(
+  //   (state) => state.leveragesAssists,
+  // );
+  // const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
 
   // On initial load, set the workout builds in the store
-  useEffect(() => {
-    setWorkouts(data.logs, data.builds);
-  }, [data, setWorkouts]);
+  // useEffect(() => {
+  //   setWorkouts(data.logs, data.builds);
+  // }, [data, setWorkouts]);
+  const workoutLogs = useWorkoutLibraryStore(
+    (state) => state.displayedWorkoutLogs,
+  );
+  const workoutBuilds = useWorkoutLibraryStore(
+    (state) => state.displayedWorkoutBuilds,
+  );
 
   const initializeWorkout = useWorkoutDraftStore(
     (state) => state.initializeWorkout,
@@ -86,40 +92,40 @@ function AppView() {
     initializeWorkout('edit');
   };
 
-  let workoutBuildCards = null;
-  let workoutLogCards = null;
+  // let workoutBuildCards = null;
+  // let workoutLogCards = null;
 
-  if (data.builds && leveragesAssists) {
-    workoutBuildCards = data.builds.map((wo, i) => {
-      const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
-      const date = wo.created_at ? wo.created_at : new Date();
-      const dateString =
-        typeof date === 'string' ? date : date.toLocaleDateString();
-      return (
-        <CardButton key={i}>
-          <Title order={3} size="h5">
-            {workoutTitle}
-          </Title>
-          <Text>{dateString}</Text>
-        </CardButton>
-      );
-    });
-  }
+  // if (data.builds && leveragesAssists) {
+  const workoutBuildCards = workoutBuilds.map((wo, i) => {
+    const workoutTitle = 'title' in wo ? wo.title : `Workout Template ${i + 1}`;
+    const date = 'created_at' in wo ? wo.created_at : new Date();
+    const dateString =
+      typeof date === 'string' ? date : date.toLocaleDateString();
+    return (
+      <CardButton key={i}>
+        <Title order={3} size="h5">
+          {workoutTitle}
+        </Title>
+        <Text>{dateString}</Text>
+      </CardButton>
+    );
+  });
+  // }
 
-  if (data.logs && leveragesAssists) {
-    workoutLogCards = data.logs.map((wo, i) => {
-      const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
-      const date = wo.date;
-      return (
-        <CardButton key={i}>
-          <Title order={3} size="h5">
-            {workoutTitle}
-          </Title>
-          <Text>{date}</Text>
-        </CardButton>
-      );
-    });
-  }
+  // if (data.logs && leveragesAssists) {
+  const workoutLogCards = workoutLogs.map((wo, i) => {
+    const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
+    const date = wo.date;
+    return (
+      <CardButton key={i}>
+        <Title order={3} size="h5">
+          {workoutTitle}
+        </Title>
+        <Text>{date}</Text>
+      </CardButton>
+    );
+  });
+  // }
   return (
     <Stack align="center" justify="flex-start">
       <Title order={1}>Welcome Back</Title>

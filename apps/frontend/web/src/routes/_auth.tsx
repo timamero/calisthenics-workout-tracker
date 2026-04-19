@@ -7,12 +7,18 @@ import {
   useAuthStore,
   useExerciseLibraryStore,
   useLeveragesAssistsStore,
+  useWorkoutLibraryStore,
 } from '@cwt/state/stores';
 import { type ExerciseResponse } from '@cwt/schema/exercises';
 import { type LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
+import type {
+  WorkoutBuildResponse,
+  WorkoutLogResponse,
+} from '@cwt/schema/workouts';
 
 import { getExercises } from '../services/exercisesService';
 import { getLeveragesAssists } from '../services/leveragesAssistsService';
+import { getWorkoutLogs, getWorkoutBuilds } from '../services/workoutsService';
 
 export const Route = createFileRoute('/_auth')({
   beforeLoad: () => {
@@ -25,6 +31,8 @@ export const Route = createFileRoute('/_auth')({
   },
   loader: async () => {
     let leveragesAssists: LeveragesAssistsResponse[] | null = null;
+    let logs: WorkoutLogResponse[] | null = null;
+    let builds: WorkoutBuildResponse[] | null = null;
     let exercises: ExerciseResponse[] | null = null;
 
     const leveragesAssistsState =
@@ -32,9 +40,19 @@ export const Route = createFileRoute('/_auth')({
     if (leveragesAssistsState) {
       leveragesAssists = leveragesAssistsState;
     }
+    const displayedWorkoutLogs =
+      useWorkoutLibraryStore.getState().displayedWorkoutLogs;
+    if (displayedWorkoutLogs && displayedWorkoutLogs.length > 0) {
+      logs = displayedWorkoutLogs as WorkoutLogResponse[];
+    }
+    const displayedWorkoutBuilds =
+      useWorkoutLibraryStore.getState().displayedWorkoutBuilds;
+    if (displayedWorkoutBuilds && displayedWorkoutBuilds.length > 0) {
+      builds = displayedWorkoutBuilds as WorkoutBuildResponse[];
+    }
     const displayedExercises =
       useExerciseLibraryStore.getState().displayedExercises;
-    if (exercises) {
+    if (displayedExercises) {
       exercises = displayedExercises;
     }
 
@@ -52,6 +70,20 @@ export const Route = createFileRoute('/_auth')({
         console.timeEnd('fetching LeveragesAssists');
         leveragesAssists = fetchedLeveragesAssists;
       }
+      if (!logs) {
+        console.time('fetching workout logs');
+        const fetchedLogs = await getWorkoutLogs(supabaseSession.access_token);
+        console.timeEnd('fetching workout logs');
+        logs = fetchedLogs;
+      }
+      if (!builds) {
+        console.time('fetching workout builds');
+        const fetchedBuilds = await getWorkoutBuilds(
+          supabaseSession.access_token,
+        );
+        console.timeEnd('fetching workout builds');
+        builds = fetchedBuilds;
+      }
       if (!exercises) {
         console.time('fetch exercises in auth');
         const fetchedExercises = await getExercises(
@@ -60,8 +92,9 @@ export const Route = createFileRoute('/_auth')({
         console.timeEnd('fetch exercises in auth');
         exercises = fetchedExercises;
       }
-      return { exercises, leveragesAssists };
     }
+
+    return { exercises, leveragesAssists, logs, builds };
   },
   component: AuthLayout,
 });
@@ -73,11 +106,14 @@ function AuthLayout() {
   const data: {
     exercises: ExerciseResponse[];
     leveragesAssists: LeveragesAssistsResponse[];
+    logs: WorkoutLogResponse[];
+    builds: WorkoutBuildResponse[];
   } = Route.useLoaderData();
 
   const setLeveragesAssists = useLeveragesAssistsStore(
     (state) => state.setLeveragesAssists,
   );
+  const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
   const setLoading = useExerciseLibraryStore((state) => state.setLoading);
   const loading = useExerciseLibraryStore((state) => state.loading);
@@ -94,12 +130,20 @@ function AuthLayout() {
   }, [user, navigate]);
 
   useEffect(() => {
-    console.log('_auth :: useEffect called');
-    console.log('_auth :: setting data and loading');
     setLeveragesAssists(data.leveragesAssists);
+    setWorkouts(data.logs, data.builds);
     setExercises(data.exercises);
     setLoading(false);
-  }, [data.exercises, setExercises, setLoading]);
+  }, [
+    data.exercises,
+    data.leveragesAssists,
+    data.logs,
+    data.builds,
+    setExercises,
+    setLoading,
+    setLeveragesAssists,
+    setWorkouts,
+  ]);
 
   if (!isExercisesSet || loading) {
     console.log('displaying exercises loading');
