@@ -56,8 +56,8 @@ export const Route = createFileRoute('/_auth')({
       exercises = displayedExercises;
     }
 
-    if (exercises && leveragesAssists) {
-      return { exercises, leveragesAssists };
+    if (exercises && leveragesAssists && logs && builds) {
+      return { exercises, leveragesAssists, logs, builds };
     }
 
     const supabaseSession = useAuthStore.getState().session;

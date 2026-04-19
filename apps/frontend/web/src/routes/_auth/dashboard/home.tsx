@@ -1,79 +1,19 @@
-// import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Group, ScrollArea, Text } from '@mantine/core';
 
 import {
   useWorkoutDraftStore,
   useWorkoutLibraryStore,
-  // useAuthStore,
-  // useLeveragesAssistsStore,
 } from '@cwt/state/stores';
-// import type {
-//   WorkoutBuildResponse,
-//   WorkoutLogResponse,
-// } from '@cwt/schema/workouts';
-
-// import {
-//   getWorkoutBuilds,
-//   getWorkoutLogs,
-// } from '../../../services/workoutsService';
 
 import CardButton from '../../../components/common/CardButton';
 import LargeButton from '../../../components/common/LargeButton';
 
 export const Route = createFileRoute('/_auth/dashboard/home')({
-  // loader: async () => {
-  //   const supabaseSession = useAuthStore.getState().session;
-
-  //   const displayedWorkoutBuilds =
-  //     useWorkoutLibraryStore.getState().displayedWorkoutBuilds;
-  //   const displayedWorkoutLogs =
-  //     useWorkoutLibraryStore.getState().displayedWorkoutLogs;
-  //   if (
-  //     displayedWorkoutBuilds &&
-  //     displayedWorkoutBuilds.length > 0 &&
-  //     displayedWorkoutLogs &&
-  //     displayedWorkoutLogs.length > 0
-  //   ) {
-  //     return {
-  //       logs: displayedWorkoutLogs,
-  //       builds: displayedWorkoutBuilds,
-  //     };
-  //   }
-  //   if (supabaseSession?.access_token) {
-  //     console.time('fetching workouts');
-  //     const workoutBuilds = await getWorkoutBuilds(
-  //       supabaseSession.access_token,
-  //     );
-  //     console.timeEnd('fetching workouts');
-  //     const workoutLogs = await getWorkoutLogs(supabaseSession.access_token);
-  //     return { logs: workoutLogs, builds: workoutBuilds };
-  //   }
-  //   return [];
-  // },
-  // pendingComponent: () => (
-  //   <div>
-  //     <p>Loading</p>
-  //   </div>
-  // ),
   component: AppView,
 });
 
 function AppView() {
-  // const data: {
-  //   logs: WorkoutLogResponse[];
-  //   builds: WorkoutBuildResponse[];
-  // } = Route.useLoaderData();
-
-  // const leveragesAssists = useLeveragesAssistsStore(
-  //   (state) => state.leveragesAssists,
-  // );
-  // const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
-
-  // On initial load, set the workout builds in the store
-  // useEffect(() => {
-  //   setWorkouts(data.logs, data.builds);
-  // }, [data, setWorkouts]);
   const workoutLogs = useWorkoutLibraryStore(
     (state) => state.displayedWorkoutLogs,
   );
@@ -92,10 +32,6 @@ function AppView() {
     initializeWorkout('edit');
   };
 
-  // let workoutBuildCards = null;
-  // let workoutLogCards = null;
-
-  // if (data.builds && leveragesAssists) {
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
     const workoutTitle = 'title' in wo ? wo.title : `Workout Template ${i + 1}`;
     const date = 'created_at' in wo ? wo.created_at : new Date();
@@ -110,9 +46,7 @@ function AppView() {
       </CardButton>
     );
   });
-  // }
 
-  // if (data.logs && leveragesAssists) {
   const workoutLogCards = workoutLogs.map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
     const date = wo.date;
@@ -125,7 +59,7 @@ function AppView() {
       </CardButton>
     );
   });
-  // }
+
   return (
     <Stack align="center" justify="flex-start">
       <Title order={1}>Welcome Back</Title>
