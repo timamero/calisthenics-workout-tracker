@@ -12,38 +12,18 @@ import type {
   WorkoutBuildResponse,
   WorkoutLogResponse,
 } from '@cwt/schema/workouts';
-// import type { LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
 
 import {
   getWorkoutBuilds,
   getWorkoutLogs,
 } from '../../../services/workoutsService';
-// import { getLeveragesAssists } from '../../../services/leveragesAssistsService';
 
 import CardButton from '../../../components/common/CardButton';
 import LargeButton from '../../../components/common/LargeButton';
 
 export const Route = createFileRoute('/_auth/dashboard/home')({
   loader: async () => {
-    // let leveragesAssists: LeveragesAssistsResponse[] | null = null;
-
-    // const leveragesAssistsState =
-    //   useLeveragesAssistsStore.getState().leveragesAssists;
-    // if (leveragesAssistsState) {
-    //   leveragesAssists = leveragesAssistsState;
-    // }
-
     const supabaseSession = useAuthStore.getState().session;
-    // if (supabaseSession?.access_token) {
-    //   if (!leveragesAssists) {
-    //     console.time('fetching LeveragesAssists');
-    //     const fetchedLeveragesAssists = await getLeveragesAssists(
-    //       supabaseSession.access_token,
-    //     );
-    //     console.timeEnd('fetching LeveragesAssists');
-    //     leveragesAssists = fetchedLeveragesAssists;
-    //   }
-    // }
 
     const displayedWorkoutBuilds =
       useWorkoutLibraryStore.getState().displayedWorkoutBuilds;
@@ -58,10 +38,8 @@ export const Route = createFileRoute('/_auth/dashboard/home')({
       return {
         logs: displayedWorkoutLogs,
         builds: displayedWorkoutBuilds,
-        // leveragesAssists,
       };
     }
-    // const supabaseSession = useAuthStore.getState().session;
     if (supabaseSession?.access_token) {
       console.time('fetching workouts');
       const workoutBuilds = await getWorkoutBuilds(
@@ -85,20 +63,15 @@ function AppView() {
   const data: {
     logs: WorkoutLogResponse[];
     builds: WorkoutBuildResponse[];
-    // leveragesAssists: LeveragesAssistsResponse[];
   } = Route.useLoaderData();
 
   const leveragesAssists = useLeveragesAssistsStore(
     (state) => state.leveragesAssists,
   );
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
-  // const setLeveragesAssists = useLeveragesAssistsStore(
-  //   (state) => state.setLeveragesAssists,
-  // );
 
   // On initial load, set the workout builds in the store
   useEffect(() => {
-    // setLeveragesAssists(data.leveragesAssists);
     setWorkouts(data.logs, data.builds);
   }, [data, setWorkouts]);
 
