@@ -20,7 +20,7 @@ import { routeTree } from './routeTree.gen';
 const router = createRouter({
   routeTree,
   defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
-  defaultPreload: 'intent',
+  // defaultPreload: 'intent',
   scrollRestoration: true,
 });
 
