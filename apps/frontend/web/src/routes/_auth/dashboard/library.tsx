@@ -22,9 +22,11 @@ export const Route = createFileRoute('/_auth/dashboard/library')({
       useExerciseLibraryStore.getState().displayedExercises;
 
     if (displayedExercises) {
+      console.log('library :: returning displayedExercises');
       return displayedExercises;
     }
 
+    console.log('library :: fetching exercises from database');
     const supabaseSession = useAuthStore.getState().session;
     if (supabaseSession?.access_token) {
       console.time('fetch exercises in library');

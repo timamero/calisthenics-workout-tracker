@@ -25,6 +25,7 @@ export const Route = createFileRoute('/_auth/dashboard/history')({
     const displayedExercises =
       useExerciseLibraryStore.getState().displayedExercises;
     if (displayedExercises) {
+      console.log('history :: setting exercises to displayedExercises');
       exercises = displayedExercises;
     }
 
