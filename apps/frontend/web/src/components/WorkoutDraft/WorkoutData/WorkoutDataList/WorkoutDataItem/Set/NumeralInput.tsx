@@ -32,8 +32,11 @@ export default function NumeralInput({
             {set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.leverages!.find((field) => field.id === fieldID)!
-              .value === undefined
-              ? ''
+              .value === undefined ||
+            set.fields
+              .leverages!.find((field) => field.id === fieldID)!
+              .value!.toString() === ''
+              ? '0'
               : set.fields
                   .leverages!.find((field) => field.id === fieldID)!
                   .value!.toString()}
@@ -69,8 +72,11 @@ export default function NumeralInput({
             {set.fields.assists!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-              undefined
-              ? ''
+              undefined ||
+            set.fields
+              .assists!.find((field) => field.id === fieldID)!
+              .value!.toString() === ''
+              ? '0'
               : set.fields
                   .assists!.find((field) => field.id === fieldID)!
                   .value!.toString()}
@@ -103,8 +109,9 @@ export default function NumeralInput({
         <Stack>
           <Text>{label}</Text>
           <Text>
-            {set.fields[fieldName] === undefined
-              ? ''
+            {set.fields[fieldName] === undefined ||
+            set.fields[fieldName]?.toString() === ''
+              ? '0'
               : set.fields[fieldName]!.toString()}
           </Text>
         </Stack>
@@ -117,7 +124,7 @@ export default function NumeralInput({
         placeholder={'0'}
         value={
           set.fields[fieldName] === undefined
-            ? ''
+            ? '0'
             : set.fields[fieldName]!.toString()
         }
         onChange={handleChange}
