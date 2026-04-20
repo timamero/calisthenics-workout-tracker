@@ -41,8 +41,11 @@ export default function NumeralInput({
             {set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.leverages!.find((field) => field.id === fieldID)!
-              .value === undefined
-              ? ''
+              .value === undefined ||
+            set.fields
+              .leverages!.find((field) => field.id === fieldID)!
+              .value?.toString() === ''
+              ? '0'
               : set.fields
                   .leverages!.find((field) => field.id === fieldID)!
                   .value!.toString()}
@@ -88,8 +91,11 @@ export default function NumeralInput({
             {set.fields.assists!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-              undefined
-              ? ''
+              undefined ||
+            set.fields
+              .assists!.find((field) => field.id === fieldID)!
+              .value?.toString() === ''
+              ? '0'
               : set.fields
                   .assists!.find((field) => field.id === fieldID)!
                   .value!.toString()}
@@ -131,7 +137,9 @@ export default function NumeralInput({
       <View>
         <Text style={{ color: theme.colors.light }}>{label}</Text>
         <Text style={{ color: theme.colors.light }}>
-          {set.fields.reps === undefined || !set.fields.reps
+          {set.fields.reps === undefined ||
+          set.fields.reps === null ||
+          set.fields.reps.toString() === ''
             ? '0'
             : set.fields.reps.toString()}
         </Text>
@@ -154,7 +162,7 @@ export default function NumeralInput({
         },
       }}
       value={
-        set.fields.reps === undefined || !set.fields.reps
+        set.fields.reps === undefined || set.fields.reps === null
           ? '0'
           : set.fields.reps.toString()
       }
