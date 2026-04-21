@@ -66,12 +66,12 @@ export default function WorkoutLogPages() {
     );
   });
   return (
-    <Stack justify="space-between" h="100%" flex={1}>
-      <ScrollArea h="100%" bg="red.1">
+    <Stack justify="stretch" flex={1}>
+      <ScrollArea.Autosize mah="min-content" h="100%" bg="red.1" flex={1}>
         <SimpleGrid cols={{ base: 1, md: 2, xl: 3 }}>{items}</SimpleGrid>
-      </ScrollArea>
+      </ScrollArea.Autosize>
       <Pagination
-        flex={1}
+        flex={0}
         h="100%"
         total={data.length}
         value={activePage}
