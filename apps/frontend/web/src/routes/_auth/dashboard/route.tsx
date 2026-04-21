@@ -51,9 +51,6 @@ function RouteComponent() {
           );
         })}
       </AppShell.Navbar>
-      {/* <AppShell.Main
-        style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
-      > */}
       <AppShell.Main>
         <Outlet />
       </AppShell.Main>
