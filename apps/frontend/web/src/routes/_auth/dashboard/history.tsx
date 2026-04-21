@@ -16,6 +16,7 @@ function HistoryView() {
         // h="100%"
         // mah={1200}
         mih="100%"
+        pb="lg"
         flex={1}
         display="flex"
         bg="grape.6"
