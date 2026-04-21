@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { Title, Text, Pagination, SimpleGrid, Stack, Box } from '@mantine/core';
+import {
+  Title,
+  Text,
+  Pagination,
+  SimpleGrid,
+  Stack,
+  // Box,
+  ScrollArea,
+} from '@mantine/core';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { formatDuration, chunk } from '@cwt/utils';
@@ -59,9 +67,9 @@ export default function WorkoutLogPages() {
   });
   return (
     <Stack justify="space-between" h="100%" flex={1}>
-      <Box h="100%">
+      <ScrollArea h="100%" bg="red.1">
         <SimpleGrid cols={{ base: 1, md: 2, xl: 3 }}>{items}</SimpleGrid>
-      </Box>
+      </ScrollArea>
       <Pagination
         flex={1}
         h="100%"
