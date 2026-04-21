@@ -13,9 +13,12 @@ function HistoryView() {
   return (
     <WorkoutLogDetailContextProvider>
       <Stack
-        h="100%"
+        // h="100%"
+        // mah={1200}
+        mih="100%"
         flex={1}
         display="flex"
+        bg="grape.6"
         style={{ flexDirection: 'column' }}
       >
         <Title>Past Workouts</Title>
