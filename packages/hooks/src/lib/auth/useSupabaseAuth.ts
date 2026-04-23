@@ -95,7 +95,7 @@ export default function useSupabaseAuth(client: SupabaseClient) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, []);
+  }, [supabaseSession, setAuthStates, client.auth]);
 
   // original
   // const setLoading = useAuthStore((state) => state.setLoading);
