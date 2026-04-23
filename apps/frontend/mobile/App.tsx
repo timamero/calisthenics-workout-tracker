@@ -19,8 +19,10 @@ import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
 import { getLeveragesAssists } from './services/leveragesAssistsService';
 
+import SplashScreen from './components/common/SplashScreen';
+
 export default function App() {
-  // const loading = useAuthStore((state) => state.loading);
+  const loading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
 
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
@@ -57,38 +59,10 @@ export default function App() {
     };
     asyncFetchData();
   }, [setExercises, supabaseSession, setWorkouts, setLeveragesAssists]);
-  // const loading = useAuthStore((state) => state.loading);
-  // const supabaseSession = useAuthStore((state) => state.session);
 
-  // const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
-
-  // useSupabaseAuth(supabase);
-
-  // console.log(
-  //   'App.tsx || supabaseSession.access_token: ',
-  //   supabaseSession?.access_token,
-  // );
-
-  // useEffect(() => {
-  //   console.log('App.tsx || useEffect called');
-  //   const asyncFetchData = async () => {
-  //     if (supabaseSession?.access_token) {
-  //       console.time('fetch workout builds');
-  //       const workoutBuilds = await getWorkoutBuilds(
-  //         supabaseSession.access_token,
-  //       );
-  //       console.timeEnd('fetch workout builds');
-
-  //       console.time('fetch workout logs');
-  //       const workoutLogs = await getWorkoutLogs(supabaseSession.access_token);
-  //       console.timeEnd('fetch workout logs');
-  //       if (workoutBuilds) {
-  //         setWorkouts(workoutLogs, workoutBuilds);
-  //       }
-  //     }
-  //   };
-  //   asyncFetchData();
-  // }, [supabaseSession, setWorkouts]);
+  if (loading) {
+    return <SplashScreen />;
+  }
 
   return (
     <WorkoutContextProvider appType="mobile">
