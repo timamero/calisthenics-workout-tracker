@@ -61,7 +61,11 @@ export default function App() {
   }, [setExercises, supabaseSession, setWorkouts, setLeveragesAssists]);
 
   if (loading) {
-    return <SplashScreen />;
+    return (
+      <PaperProvider theme={theme}>
+        <SplashScreen />
+      </PaperProvider>
+    );
   }
 
   return (
