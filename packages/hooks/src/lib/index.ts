@@ -1,11 +1,15 @@
-export { useSupabaseAuth } from './auth';
-export { useFilterSelectors, useSearchSelectors } from './exercises';
+export { useSupabaseAuth } from "./auth";
+export {
+  useFilterSelectors,
+  useSearchSelectors,
+  useClearExerciseSearchAndFilters,
+} from "./exercises";
 export {
   useAuthLogin,
   useAuthLoginMobile,
   useAuthSignUp,
   useAuthSignUpMobile,
-} from './forms';
+} from "./forms";
 export {
   useAddExercise,
   useAddExerciseMobile,
@@ -31,8 +35,8 @@ export {
   useWorkoutContextWeb,
   useWorkoutContextMobile,
   useWorkoutSave,
-} from './workout';
+} from "./workout";
 export {
   useWorkoutLogDetailContextWeb,
   useWorkoutLogDetailContextMobile,
-} from './history';
+} from "./history";
