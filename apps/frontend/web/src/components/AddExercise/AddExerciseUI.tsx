@@ -1,8 +1,12 @@
-import { Group, Button, Stack } from '@mantine/core';
+import { Group, Button, Stack, ActionIcon } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IoFilterOutline } from 'react-icons/io5';
 
 // import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
 
 import ExercisesList from './ExercisesList';
+import ExerciseSearchBar from '../ExerciseSearchBar';
+import ExercisesFilterOverlay from '../ExercisesFilterOverlay';
 
 interface AddExerciseUIProps {
   selectedExerciseIDToAdd: number | null;
@@ -15,9 +19,25 @@ export default function AddExerciseOverlayUI({
   // handler,
   handleAddExerciseClick,
 }: AddExerciseUIProps) {
+  const [filterOpened, filterHandler] = useDisclosure(false);
+
+  const handleClickFilter = () => {
+    filterHandler.open();
+  };
   return (
     <Stack gap="xl">
       {/* <ScrollArea h="90vh" style={{ paddingBottom: 40 }}> */}
+      <Group>
+        <ExerciseSearchBar />
+        <ActionIcon
+          variant="outline"
+          color="gray.5"
+          aria-label="Exercise filter"
+          onClick={handleClickFilter}
+        >
+          <IoFilterOutline />
+        </ActionIcon>
+      </Group>
       <Stack gap="lg" align="center">
         <ExercisesList />
       </Stack>
@@ -50,6 +70,7 @@ export default function AddExerciseOverlayUI({
           Add Exercise
         </Button>
       </Group>
+      <ExercisesFilterOverlay opened={filterOpened} handler={filterHandler} />
     </Stack>
   );
 }
