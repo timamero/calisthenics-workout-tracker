@@ -1,8 +1,10 @@
 import { Group, Button, Stack, ActionIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IoFilterOutline } from 'react-icons/io5';
+import { Link } from '@tanstack/react-router';
 
 // import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import ExercisesList from './ExercisesList';
 import ExerciseSearchBar from '../ExerciseSearchBar';
@@ -21,8 +23,24 @@ export default function AddExerciseOverlayUI({
 }: AddExerciseUIProps) {
   const [filterOpened, filterHandler] = useDisclosure(false);
 
+  const setSupersetIDToMod = useWorkoutDraftStore(
+    (state) => state.setSupersetIDToMod,
+  );
+  const setSectionIDToMod = useWorkoutDraftStore(
+    (state) => state.setSectionIDToMod,
+  );
+  const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
+    (state) => state.setSelectedExerciseIDToAdd,
+  );
+
   const handleClickFilter = () => {
     filterHandler.open();
+  };
+
+  const handleCancelClick = () => {
+    setSupersetIDToMod(null);
+    setSectionIDToMod(null);
+    setSelectedExerciseIDToAdd(null);
   };
   return (
     <Stack gap="xl">
@@ -58,7 +76,9 @@ export default function AddExerciseOverlayUI({
         <Button
           color="gray"
           variant="outline"
-          onClick={() => console.log('clicked close')}
+          component={Link}
+          to="/workout"
+          onClick={() => handleCancelClick()}
         >
           Cancel
         </Button>
