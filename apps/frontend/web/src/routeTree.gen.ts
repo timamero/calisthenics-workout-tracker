@@ -20,6 +20,7 @@ import { Route as AuthWorkoutRouteRouteImport } from './routes/_auth/workout/rou
 import { Route as AuthDashboardRouteRouteImport } from './routes/_auth/dashboard/route'
 import { Route as AuthWorkoutIndexRouteImport } from './routes/_auth/workout/index'
 import { Route as AuthDashboardIndexRouteImport } from './routes/_auth/dashboard/index'
+import { Route as AuthWorkoutAddExerciseRouteImport } from './routes/_auth/workout/add-exercise'
 import { Route as AuthDashboardUserRouteImport } from './routes/_auth/dashboard/user'
 import { Route as AuthDashboardSettingsRouteImport } from './routes/_auth/dashboard/settings'
 import { Route as AuthDashboardLibraryRouteImport } from './routes/_auth/dashboard/library'
@@ -80,6 +81,11 @@ const AuthDashboardIndexRoute = AuthDashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthDashboardRouteRoute,
 } as any)
+const AuthWorkoutAddExerciseRoute = AuthWorkoutAddExerciseRouteImport.update({
+  id: '/add-exercise',
+  path: '/add-exercise',
+  getParentRoute: () => AuthWorkoutRouteRoute,
+} as any)
 const AuthDashboardUserRoute = AuthDashboardUserRouteImport.update({
   id: '/user',
   path: '/user',
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/library': typeof AuthDashboardLibraryRoute
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/dashboard/user': typeof AuthDashboardUserRoute
+  '/workout/add-exercise': typeof AuthWorkoutAddExerciseRoute
   '/dashboard/': typeof AuthDashboardIndexRoute
   '/workout/': typeof AuthWorkoutIndexRoute
 }
@@ -135,6 +142,7 @@ export interface FileRoutesByTo {
   '/dashboard/library': typeof AuthDashboardLibraryRoute
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/dashboard/user': typeof AuthDashboardUserRoute
+  '/workout/add-exercise': typeof AuthWorkoutAddExerciseRoute
   '/dashboard': typeof AuthDashboardIndexRoute
   '/workout': typeof AuthWorkoutIndexRoute
 }
@@ -154,6 +162,7 @@ export interface FileRoutesById {
   '/_auth/dashboard/library': typeof AuthDashboardLibraryRoute
   '/_auth/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/_auth/dashboard/user': typeof AuthDashboardUserRoute
+  '/_auth/workout/add-exercise': typeof AuthWorkoutAddExerciseRoute
   '/_auth/dashboard/': typeof AuthDashboardIndexRoute
   '/_auth/workout/': typeof AuthWorkoutIndexRoute
 }
@@ -173,6 +182,7 @@ export interface FileRouteTypes {
     | '/dashboard/library'
     | '/dashboard/settings'
     | '/dashboard/user'
+    | '/workout/add-exercise'
     | '/dashboard/'
     | '/workout/'
   fileRoutesByTo: FileRoutesByTo
@@ -188,6 +198,7 @@ export interface FileRouteTypes {
     | '/dashboard/library'
     | '/dashboard/settings'
     | '/dashboard/user'
+    | '/workout/add-exercise'
     | '/dashboard'
     | '/workout'
   id:
@@ -206,6 +217,7 @@ export interface FileRouteTypes {
     | '/_auth/dashboard/library'
     | '/_auth/dashboard/settings'
     | '/_auth/dashboard/user'
+    | '/_auth/workout/add-exercise'
     | '/_auth/dashboard/'
     | '/_auth/workout/'
   fileRoutesById: FileRoutesById
@@ -299,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthDashboardIndexRouteImport
       parentRoute: typeof AuthDashboardRouteRoute
     }
+    '/_auth/workout/add-exercise': {
+      id: '/_auth/workout/add-exercise'
+      path: '/add-exercise'
+      fullPath: '/workout/add-exercise'
+      preLoaderRoute: typeof AuthWorkoutAddExerciseRouteImport
+      parentRoute: typeof AuthWorkoutRouteRoute
+    }
     '/_auth/dashboard/user': {
       id: '/_auth/dashboard/user'
       path: '/user'
@@ -359,10 +378,12 @@ const AuthDashboardRouteRouteWithChildren =
   AuthDashboardRouteRoute._addFileChildren(AuthDashboardRouteRouteChildren)
 
 interface AuthWorkoutRouteRouteChildren {
+  AuthWorkoutAddExerciseRoute: typeof AuthWorkoutAddExerciseRoute
   AuthWorkoutIndexRoute: typeof AuthWorkoutIndexRoute
 }
 
 const AuthWorkoutRouteRouteChildren: AuthWorkoutRouteRouteChildren = {
+  AuthWorkoutAddExerciseRoute: AuthWorkoutAddExerciseRoute,
   AuthWorkoutIndexRoute: AuthWorkoutIndexRoute,
 }
 

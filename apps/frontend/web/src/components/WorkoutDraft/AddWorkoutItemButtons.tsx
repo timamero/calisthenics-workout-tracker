@@ -1,18 +1,24 @@
 import { Stack, Button } from '@mantine/core';
-import { useAddExerciseOverlay, useAddSuperset } from '@cwt/hooks';
+import { Link } from '@tanstack/react-router';
+
+import { useAddSuperset } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 export default function AddWorkoutItemButtons() {
-  const handleOpenAddExerciseOverlayClick =
-    useAddExerciseOverlay().handleOpenAddExerciseOverlayClick;
+  // const handleOpenAddExerciseOverlayClick =
+  //   useAddExerciseOverlay().handleOpenAddExerciseOverlayClick;
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const handleAddSupersetClick = useAddSuperset().handleAddSupersetClick;
+
+  // const handleAddExerciseClick = () => {};
   return (
     <Stack>
       <Button
         variant="filled"
         color="orange.9"
-        onClick={() => handleOpenAddExerciseOverlayClick()}
+        component={Link}
+        to="/workout/add-exercise"
+        // onClick={() => handleOpenAddExerciseOverlayClick()}
       >
         Add Exercise
       </Button>
