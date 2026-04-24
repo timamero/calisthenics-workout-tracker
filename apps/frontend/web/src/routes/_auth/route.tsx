@@ -16,9 +16,12 @@ import type {
   WorkoutLogResponse,
 } from '@cwt/schema/workouts';
 
-import { getExercises } from '../services/exercisesService';
-import { getLeveragesAssists } from '../services/leveragesAssistsService';
-import { getWorkoutLogs, getWorkoutBuilds } from '../services/workoutsService';
+import { getExercises } from '../../services/exercisesService';
+import { getLeveragesAssists } from '../../services/leveragesAssistsService';
+import {
+  getWorkoutLogs,
+  getWorkoutBuilds,
+} from '../../services/workoutsService';
 
 export const Route = createFileRoute('/_auth')({
   beforeLoad: () => {
