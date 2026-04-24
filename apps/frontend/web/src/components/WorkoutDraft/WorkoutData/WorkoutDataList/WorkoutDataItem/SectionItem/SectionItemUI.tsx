@@ -1,4 +1,5 @@
 import { Stack, Group, Text, Button } from '@mantine/core';
+import { Link } from '@tanstack/react-router';
 
 import type { Mode } from '@cwt/schema/workouts';
 
@@ -12,7 +13,7 @@ interface SectionItemUIProps {
   handleUpClick: () => void;
   handleDownClick: () => void;
   handleDeleteSectionClick: () => void;
-  handleOpenAddExerciseOverlay: () => void;
+  handleOpenAddExerciseClick: () => void;
   handleAddSupersetClick: () => void;
 }
 
@@ -23,7 +24,7 @@ export default function SectionItemUI({
   handleUpClick,
   handleDownClick,
   handleDeleteSectionClick,
-  handleOpenAddExerciseOverlay,
+  handleOpenAddExerciseClick,
   handleAddSupersetClick,
 }: SectionItemUIProps) {
   return (
@@ -55,7 +56,9 @@ export default function SectionItemUI({
             <Button
               variant="filled"
               color="orange.9"
-              onClick={() => handleOpenAddExerciseOverlay()}
+              component={Link}
+              to="/workout/add-exercise"
+              onClick={() => handleOpenAddExerciseClick()}
             >
               Add Exercise
             </Button>
