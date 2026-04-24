@@ -53,7 +53,7 @@ export function useAddExercise() {
   // const handler =
   //   useWorkoutContextWeb().webOverlayHandlers?.addExerciseOverlayHandler;
 
-  const handleAddExerciseClick = () => {
+  const handleAddExercise = () => {
     addExercise(
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
@@ -64,7 +64,7 @@ export function useAddExercise() {
 
   return {
     selectedExerciseIDToAdd,
-    handleAddExerciseClick,
+    handleAddExercise,
   };
 }
 
