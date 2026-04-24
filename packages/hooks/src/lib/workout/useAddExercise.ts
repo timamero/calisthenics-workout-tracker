@@ -20,14 +20,14 @@ import {
  */
 function useAddExerciseLogic() {
   const selectedExerciseIDToAdd = useWorkoutDraftStore(
-    (state) => state.selectedExerciseIDToAdd
+    (state) => state.selectedExerciseIDToAdd,
   );
   const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
-    (state) => state.setSelectedExerciseIDToAdd
+    (state) => state.setSelectedExerciseIDToAdd,
   );
   const addExercise = useWorkoutDraftStore((state) => state.addExercise);
   const getExerciseById = useExerciseLibraryStore(
-    (state) => state.getExerciseByID
+    (state) => state.getExerciseByID,
   );
 
   return {
@@ -50,16 +50,16 @@ export function useAddExercise() {
     getExerciseById,
   } = useAddExerciseLogic();
 
-  const handler =
-    useWorkoutContextWeb().webOverlayHandlers?.addExerciseOverlayHandler;
+  // const handler =
+  //   useWorkoutContextWeb().webOverlayHandlers?.addExerciseOverlayHandler;
 
   const handleAddExerciseClick = () => {
     addExercise(
-      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type
+      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
 
     setSelectedExerciseIDToAdd(null);
-    handler!.close();
+    // handler!.close();
   };
 
   return {
@@ -85,10 +85,10 @@ export function useAddExerciseMobile() {
       ?.setIsAddExerciseOverlayVisible;
 
   const handleAddExercisePress = (
-    workoutDataScrollViewRef: null | React.RefObject<ScrollView | null>
+    workoutDataScrollViewRef: null | React.RefObject<ScrollView | null>,
   ) => {
     addExercise(
-      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type
+      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
 
     setSelectedExerciseIDToAdd(null);
