@@ -1,3 +1,3 @@
-import AddExerciseOverlay from './AddExerciseOverlay';
+import AddExercise from './AddExercise';
 
-export default AddExerciseOverlay;
+export default AddExercise;
