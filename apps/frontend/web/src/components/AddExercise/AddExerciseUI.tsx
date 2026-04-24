@@ -1,15 +1,20 @@
 import { Group, Button, Stack, ScrollArea } from '@mantine/core';
 
-import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
+// import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
 
 import ExercisesList from './ExercisesList';
+
+interface AddExerciseUIProps {
+  selectedExerciseIDToAdd: number | null;
+  handleAddExerciseClick?: () => void;
+}
 
 export default function AddExerciseOverlayUI({
   // opened,
   selectedExerciseIDToAdd,
   // handler,
   handleAddExerciseClick,
-}: AddExerciseOverlayUIProps) {
+}: AddExerciseUIProps) {
   return (
     // <Modal
     //   opened={opened!}
