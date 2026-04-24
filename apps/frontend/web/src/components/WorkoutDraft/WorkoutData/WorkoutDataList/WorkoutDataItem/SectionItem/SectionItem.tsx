@@ -8,7 +8,7 @@ import SectionItemUI from './SectionItemUI';
 import {
   useDeleteItem,
   useReorderItem,
-  useAddExerciseOverlay,
+  // useAddExerciseOverlay,
   useAddSuperset,
 } from '@cwt/hooks';
 
@@ -20,16 +20,24 @@ export default function SectionItem() {
     (state) => state.workoutData.length || 0,
   );
 
+  const setSectionIDToMod = useWorkoutDraftStore(
+    (state) => state.setSectionIDToMod,
+  );
+
   const { handleUpClick, handleDownClick } = useReorderItem(section);
   const handleDeleteSectionClick = useDeleteItem(
     'section',
     section!.id,
   ).handleDeleteItemClick;
-  const handleOpenAddExerciseOverlayClick =
-    useAddExerciseOverlay('section').handleOpenAddExerciseOverlayClick;
+  // const handleOpenAddExerciseClick =
+  //   useAddExerciseOverlay('section').handleOpenAddExerciseOverlayClick;
   const handleAddSupersetClick = useAddSuperset(
     section.id,
   ).handleAddSupersetClick;
+
+  const handleOpenAddExerciseClick = () => {
+    setSectionIDToMod(section!.id);
+  };
 
   return (
     <SectionItemUI
@@ -39,7 +47,7 @@ export default function SectionItem() {
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleDeleteSectionClick={handleDeleteSectionClick}
-      handleOpenAddExerciseOverlay={handleOpenAddExerciseOverlayClick}
+      handleOpenAddExerciseClick={handleOpenAddExerciseClick}
       handleAddSupersetClick={handleAddSupersetClick}
     />
   );

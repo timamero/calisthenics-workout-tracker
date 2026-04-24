@@ -1,4 +1,5 @@
 import { Stack, Group, Text, Button } from '@mantine/core';
+import { Link } from '@tanstack/react-router';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
 
@@ -14,7 +15,7 @@ interface SupersetItemUIProps {
   handleUpClick: () => void;
   handleDownClick: () => void;
   handleDeleteSupersetClick: () => void;
-  handleOpenAddExerciseOverlay: () => void;
+  handleOpenAddExerciseClick: () => void;
 }
 
 export default function SupersetItemUI({
@@ -24,7 +25,7 @@ export default function SupersetItemUI({
   handleUpClick,
   handleDownClick,
   handleDeleteSupersetClick,
-  handleOpenAddExerciseOverlay,
+  handleOpenAddExerciseClick,
 }: SupersetItemUIProps) {
   return (
     <Group align="flex-start">
@@ -64,7 +65,9 @@ export default function SupersetItemUI({
           <Button
             variant="filled"
             color="orange.9"
-            onClick={() => handleOpenAddExerciseOverlay()}
+            component={Link}
+            to="/workout/add-exercise"
+            onClick={() => handleOpenAddExerciseClick()}
           >
             Add Exercise
           </Button>
