@@ -5,6 +5,7 @@ import { Link } from '@tanstack/react-router';
 
 // import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { useClearExerciseSearchAndFilters } from '@cwt/hooks';
 
 import ExercisesList from './ExercisesList';
 import ExerciseSearchBar from '../ExerciseSearchBar';
@@ -33,6 +34,9 @@ export default function AddExerciseOverlayUI({
     (state) => state.setSelectedExerciseIDToAdd,
   );
 
+  const { clearExerciseSearch, clearExerciseFilters } =
+    useClearExerciseSearchAndFilters();
+
   const handleClickFilter = () => {
     filterHandler.open();
   };
@@ -41,6 +45,9 @@ export default function AddExerciseOverlayUI({
     setSupersetIDToMod(null);
     setSectionIDToMod(null);
     setSelectedExerciseIDToAdd(null);
+
+    clearExerciseFilters();
+    clearExerciseSearch();
   };
   return (
     <Stack gap="xl">
