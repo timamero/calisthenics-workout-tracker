@@ -1,14 +1,15 @@
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import WorkoutScreen from '../screens/Workout';
-import AddExerciseScreen from '../screens/AddExercise';
+// import WorkoutScreen from '../screens/Workout';
+// import AddExerciseScreen from '../screens/AddExercise';
 import UserScreen from '../screens/UserScreen';
 
 import { useAuthStore } from '@cwt/state/stores';
 
 import { MainTabs } from './MainTabs';
 import { AuthStack } from './AuthStack';
+import WorkoutStack from './WorkoutStack';
 
 function useIsSignedIn() {
   const supabaseSession = useAuthStore((state) => state.session);
@@ -58,30 +59,33 @@ const RootStack = createNativeStackNavigator({
             headerTintColor: 'white',
           },
         },
-        Workout: {
-          screen: WorkoutScreen,
-          options: {
-            headerStyle: {
-              backgroundColor: 'rgb(20 20 20)', // 👈 header background
-            },
-            headerTitleStyle: {
-              color: 'rgb(255 244 230)',
-            },
-            headerTintColor: 'white',
-          },
+        WorkoutStack: {
+          screen: WorkoutStack,
         },
-        AddExercise: {
-          screen: AddExerciseScreen,
-          options: {
-            headerStyle: {
-              backgroundColor: 'rgb(20 20 20)', // 👈 header background
-            },
-            headerTitleStyle: {
-              color: 'rgb(255 244 230)',
-            },
-            headerTintColor: 'white',
-          },
-        },
+        // Workout: {
+        //   screen: WorkoutScreen,
+        //   options: {
+        //     headerStyle: {
+        //       backgroundColor: 'rgb(20 20 20)', // 👈 header background
+        //     },
+        //     headerTitleStyle: {
+        //       color: 'rgb(255 244 230)',
+        //     },
+        //     headerTintColor: 'white',
+        //   },
+        // },
+        // AddExercise: {
+        //   screen: AddExerciseScreen,
+        //   options: {
+        //     headerStyle: {
+        //       backgroundColor: 'rgb(20 20 20)', // 👈 header background
+        //     },
+        //     headerTitleStyle: {
+        //       color: 'rgb(255 244 230)',
+        //     },
+        //     headerTintColor: 'white',
+        //   },
+        // },
       },
     },
   },
