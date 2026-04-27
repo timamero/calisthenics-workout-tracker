@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTheme, FAB, Portal } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
-import { useAddSupersetMobile, useAddExerciseOverlayMobile } from '@cwt/hooks';
+import { useAddSupersetMobile } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { CustomTheme } from '../../theme';
 
 export default function AddWorkoutItemButtons() {
+  const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
@@ -19,8 +21,8 @@ export default function AddWorkoutItemButtons() {
   const addSection = useWorkoutDraftStore((state) => state.addSection);
 
   const handleAddSupersetPress = useAddSupersetMobile().handleAddSupersetPress;
-  const handleOpenAddExerciseOverlayPress =
-    useAddExerciseOverlayMobile().handleOpenAddExerciseOverlayPress;
+  // const handleOpenAddExerciseOverlayPress =
+  //   useAddExerciseOverlayMobile().handleOpenAddExerciseOverlayPress;
 
   return (
     <Portal>
@@ -54,7 +56,8 @@ export default function AddWorkoutItemButtons() {
             labelTextColor: theme.colors.light,
             style: styles.fab,
             color: theme.colors.dark700,
-            onPress: () => handleOpenAddExerciseOverlayPress(),
+            onPress: () => navigation.navigate('AddExercise'),
+            // onPress: () => handleOpenAddExerciseOverlayPress(),
           },
         ]}
         onStateChange={onStateChange}
