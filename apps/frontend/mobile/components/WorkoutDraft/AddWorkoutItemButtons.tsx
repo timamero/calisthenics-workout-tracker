@@ -56,7 +56,9 @@ export default function AddWorkoutItemButtons() {
             labelTextColor: theme.colors.light,
             style: styles.fab,
             color: theme.colors.dark700,
-            onPress: () => navigation.navigate('AddExercise'),
+            onPress: () =>
+              navigation.navigate('WorkoutStack', { screen: 'AddExercise' }),
+            // onPress: () => navigation.navigate('AddExercise'),
             // onPress: () => handleOpenAddExerciseOverlayPress(),
           },
         ]}
