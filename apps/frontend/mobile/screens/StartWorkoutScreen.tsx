@@ -29,12 +29,13 @@ export default function StartWorkoutScreen() {
 
   const onBuildNewWorkoutPress = () => {
     initializeWorkout('build');
-    navigation.navigate('Workout');
+    // navigation.navigate('Workout');
+    navigation.navigate('WorkoutStack', { screen: 'Workout' });
   };
 
   const onLogNewWorkoutPress = () => {
     initializeWorkout('edit');
-    navigation.navigate('Workout');
+    navigation.navigate('WorkoutStack', { screen: 'Workout' });
   };
 
   const workoutBuildCards = workoutBuilds.map((wo, i) => {
