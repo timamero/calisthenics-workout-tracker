@@ -1,11 +1,15 @@
-import { AddExerciseOverlayProps } from '@cwt/schema/workouts';
+// import { AddExerciseOverlayProps } from '@cwt/schema/workouts';
+import { RefObject } from 'react';
+import { ScrollView } from 'react-native';
 
 import AddExerciseUI from './AddExerciseUI';
 import { useAddExerciseMobile } from '@cwt/hooks';
 
 export default function AddExercise({
   workoutDataScrollViewRef,
-}: AddExerciseOverlayProps) {
+}: {
+  workoutDataScrollViewRef?: RefObject<ScrollView | null>;
+}) {
   const { selectedExerciseIDToAdd, handleAddExercisePress } =
     useAddExerciseMobile();
 

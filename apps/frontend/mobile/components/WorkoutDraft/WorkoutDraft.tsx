@@ -1,5 +1,5 @@
-import { useRef, useEffect, useContext } from 'react';
-import { View, ScrollView, BackHandler } from 'react-native';
+import { useEffect, useContext } from 'react';
+import { View, BackHandler } from 'react-native';
 import { useTheme, Button, SegmentedButtons } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,7 +18,7 @@ import AddWorkoutItemButtons from './AddWorkoutItemButtons';
 import type { CustomTheme } from '../../theme';
 
 export default function WorkoutDraft() {
-  const scrollViewRef = useRef<ScrollView | null>(null);
+  // const scrollViewRef = useRef<ScrollView | null>(null);
 
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
@@ -32,6 +32,8 @@ export default function WorkoutDraft() {
 
   const setIsAddWorkoutItemButtonsVisible =
     useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
+  const workoutDataScrollViewRef =
+    useContext(WorkoutDraftContext)?.workoutDataScrollViewRef!;
 
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
@@ -90,7 +92,7 @@ export default function WorkoutDraft() {
       }}
     >
       <WorkoutTitle />
-      <WorkoutData scrollViewRef={scrollViewRef} />
+      <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
       <View
         style={{
           position: 'absolute',
@@ -159,7 +161,7 @@ export default function WorkoutDraft() {
           </Button>
         </View>
       </View>
-      <WorkoutOverlays workoutDataScrollViewRef={scrollViewRef} />
+      <WorkoutOverlays workoutDataScrollViewRef={workoutDataScrollViewRef} />
     </View>
   );
 }
