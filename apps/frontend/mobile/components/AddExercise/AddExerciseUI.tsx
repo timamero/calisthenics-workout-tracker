@@ -12,11 +12,13 @@ import FilterOverlay from '../FilterOverlay';
 interface AddExerciseUIProps {
   selectedExerciseIDToAdd: number | null;
   handleAddExercisePress: () => void;
+  handleCancelPress: () => void;
 }
 
 export default function AddExerciseUI({
   selectedExerciseIDToAdd,
   handleAddExercisePress,
+  handleCancelPress,
 }: AddExerciseUIProps) {
   const theme = useTheme() as CustomTheme;
 
@@ -54,7 +56,7 @@ export default function AddExerciseUI({
         <Button
           mode="outlined"
           textColor={theme.colors.light}
-          onPress={() => console.log('pressed cancel')}
+          onPress={() => handleCancelPress()}
           style={{
             borderColor: 'rgb(134, 142, 150)',
             borderRadius: 4,
