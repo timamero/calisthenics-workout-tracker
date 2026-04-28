@@ -57,7 +57,7 @@ export default function AddExerciseScreen() {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.background,
       }}
     >
       <AddExercise />
