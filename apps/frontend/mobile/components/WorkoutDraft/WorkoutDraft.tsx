@@ -18,8 +18,6 @@ import AddWorkoutItemButtons from './AddWorkoutItemButtons';
 import type { CustomTheme } from '../../theme';
 
 export default function WorkoutDraft() {
-  // const scrollViewRef = useRef<ScrollView | null>(null);
-
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 

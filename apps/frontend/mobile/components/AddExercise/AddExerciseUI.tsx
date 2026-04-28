@@ -2,11 +2,8 @@ import * as React from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
-// import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
-
 import { CustomTheme } from '../../theme';
 
-// import FullScreenModal from '../common/FullScreenModal';
 import ExerciseList from './ExerciseList';
 
 interface AddExerciseUIProps {
@@ -15,9 +12,7 @@ interface AddExerciseUIProps {
 }
 
 export default function AddExerciseUI({
-  // isVisible,
   selectedExerciseIDToAdd,
-  // setIsVisible,
   handleAddExercisePress,
 }: AddExerciseUIProps) {
   const theme = useTheme() as CustomTheme;
