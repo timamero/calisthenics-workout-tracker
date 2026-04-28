@@ -1,8 +1,6 @@
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// import WorkoutScreen from '../screens/Workout';
-// import AddExerciseScreen from '../screens/AddExercise';
 import UserScreen from '../screens/UserScreen';
 
 import { useAuthStore } from '@cwt/state/stores';
@@ -63,30 +61,6 @@ const RootStack = createNativeStackNavigator({
           screen: WorkoutStack,
           options: { headerShown: false },
         },
-        // Workout: {
-        //   screen: WorkoutScreen,
-        //   options: {
-        //     headerStyle: {
-        //       backgroundColor: 'rgb(20 20 20)', // 👈 header background
-        //     },
-        //     headerTitleStyle: {
-        //       color: 'rgb(255 244 230)',
-        //     },
-        //     headerTintColor: 'white',
-        //   },
-        // },
-        // AddExercise: {
-        //   screen: AddExerciseScreen,
-        //   options: {
-        //     headerStyle: {
-        //       backgroundColor: 'rgb(20 20 20)', // 👈 header background
-        //     },
-        //     headerTitleStyle: {
-        //       color: 'rgb(255 244 230)',
-        //     },
-        //     headerTintColor: 'white',
-        //   },
-        // },
       },
     },
   },
