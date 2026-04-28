@@ -31,14 +31,17 @@ export default function AddExerciseUI({
           paddingBlock: 16,
         }}
       >
-        <ExerciseList />
+        <View style={{ paddingBottom: 40 }}>
+          <ExerciseList />
+        </View>
       </ScrollView>
       <View
         style={{
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-evenly',
-          paddingTop: 20,
+          width: '100%',
+          paddingBlock: 20,
           borderTopWidth: 2,
           borderTopColor: theme.colors.orange1,
         }}
