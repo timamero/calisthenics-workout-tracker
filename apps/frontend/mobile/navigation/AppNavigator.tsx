@@ -61,6 +61,7 @@ const RootStack = createNativeStackNavigator({
         },
         WorkoutStack: {
           screen: WorkoutStack,
+          options: { headerShown: false },
         },
         // Workout: {
         //   screen: WorkoutScreen,
