@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useContext } from 'react';
 import { View, ScrollView, BackHandler } from 'react-native';
 import { useTheme, Button, SegmentedButtons } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,8 @@ import {
   useWorkoutStopwatchStore,
 } from '@cwt/state/stores';
 import { useWorkoutContextMobile } from '@cwt/hooks';
+
+import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 import WorkoutData from './WorkoutData';
 import WorkoutTitle from './WorkoutTitle';
 import WorkoutOverlays from './WorkoutOverlays';
@@ -28,6 +30,9 @@ export default function WorkoutDraft() {
     useWorkoutContextMobile().mobileOverlayHandlers
       .setIsSaveWorkoutDialogVisible!;
 
+  const setIsAddWorkoutItemButtonsVisible =
+    useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
+
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
@@ -36,9 +41,11 @@ export default function WorkoutDraft() {
   const handleSetMode = (modeValue: Mode) => {
     if (modeValue === 'log') {
       setMode('log');
+      setIsAddWorkoutItemButtonsVisible(false);
       startTimer();
     } else if (modeValue === 'edit') {
       setMode('edit');
+      setIsAddWorkoutItemButtonsVisible(true);
       stopTimer();
     }
   };

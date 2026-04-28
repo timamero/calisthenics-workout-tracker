@@ -1,8 +1,54 @@
-import { View, Text } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useEffect, useContext, useCallback } from 'react';
+import { View, Text, BackHandler } from 'react-native';
+import { useTheme, Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+
+import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
+import { CustomTheme } from '../theme';
 
 export default function AddExerciseScreen() {
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
+  const navigation = useNavigation<any>();
+
+  const setIsAddWorkoutItemButtonsVisible =
+    useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
+
+  const handleBackPress = useCallback(() => {
+    setIsAddWorkoutItemButtonsVisible(true);
+    navigation.goBack();
+  }, [setIsAddWorkoutItemButtonsVisible, navigation]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Button
+          mode="text"
+          onPress={() => handleBackPress()}
+          style={{
+            marginRight: 24,
+          }}
+          textColor={theme.colors.grey}
+        >
+          Cancel
+        </Button>
+      ),
+      headerTitle: () => null,
+    });
+  }, [navigation, theme.colors.grey, handleBackPress]);
+
+  useEffect(() => {
+    const onBackPress = () => {
+      handleBackPress();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
+
+    return () => backHandler.remove();
+  }, [handleBackPress]);
 
   return (
     <View
