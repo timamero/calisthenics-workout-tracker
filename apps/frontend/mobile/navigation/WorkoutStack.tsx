@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import WorkoutScreen from '../screens/Workout';
-import AddExerciseScreen from '../screens/AddExercise';
+import AddExerciseScreen from '../screens/AddExerciseScreen';
 
 const WorkoutStack = createNativeStackNavigator({
   screens: {

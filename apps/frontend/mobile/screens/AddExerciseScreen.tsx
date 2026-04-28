@@ -1,10 +1,11 @@
 import { useEffect, useContext, useCallback } from 'react';
-import { View, Text, BackHandler } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
 import { CustomTheme } from '../theme';
+import AddExercise from '../components/AddExercise';
 
 export default function AddExerciseScreen() {
   const theme = useTheme() as CustomTheme;
@@ -59,8 +60,7 @@ export default function AddExerciseScreen() {
         backgroundColor: theme.colors.primary,
       }}
     >
-      <Text>Add Exercise Screen</Text>
-      <Text>This page will display the Add Exercise content.</Text>
+      <AddExercise />
     </View>
   );
 }
