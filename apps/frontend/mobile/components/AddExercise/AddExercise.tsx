@@ -1,4 +1,3 @@
-// import { AddExerciseOverlayProps } from '@cwt/schema/workouts';
 import { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,13 +17,6 @@ export default function AddExercise() {
   const workoutDataScrollViewRef =
     useContext(WorkoutDraftContext)?.workoutDataScrollViewRef!;
 
-  // const isVisible =
-  //   useWorkoutContextMobile().mobileOverlayHandlers
-  //     ?.isAddExerciseOverlayVisible;
-  // const setIsVisible =
-  //   useWorkoutContextMobile().mobileOverlayHandlers
-  //     ?.setIsAddExerciseOverlayVisible;
-
   const handleAddExercise = () => {
     handleAddExercisePress(workoutDataScrollViewRef!);
     setIsAddWorkoutItemButtonsVisible(true);
@@ -34,9 +26,7 @@ export default function AddExercise() {
 
   return (
     <AddExerciseUI
-      // isVisible={isVisible!}
       selectedExerciseIDToAdd={selectedExerciseIDToAdd}
-      // setIsVisible={setIsVisible!}
       handleAddExercisePress={() => handleAddExercise()}
     />
   );
