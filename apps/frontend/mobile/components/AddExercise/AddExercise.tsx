@@ -1,17 +1,22 @@
 // import { AddExerciseOverlayProps } from '@cwt/schema/workouts';
-import { RefObject } from 'react';
-import { ScrollView } from 'react-native';
+import { useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-import AddExerciseUI from './AddExerciseUI';
 import { useAddExerciseMobile } from '@cwt/hooks';
 
-export default function AddExercise({
-  workoutDataScrollViewRef,
-}: {
-  workoutDataScrollViewRef?: RefObject<ScrollView | null>;
-}) {
+import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
+import AddExerciseUI from './AddExerciseUI';
+
+export default function AddExercise() {
+  const navigation = useNavigation<any>();
+
   const { selectedExerciseIDToAdd, handleAddExercisePress } =
     useAddExerciseMobile();
+
+  const setIsAddWorkoutItemButtonsVisible =
+    useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
+  const workoutDataScrollViewRef =
+    useContext(WorkoutDraftContext)?.workoutDataScrollViewRef!;
 
   // const isVisible =
   //   useWorkoutContextMobile().mobileOverlayHandlers
@@ -20,14 +25,19 @@ export default function AddExercise({
   //   useWorkoutContextMobile().mobileOverlayHandlers
   //     ?.setIsAddExerciseOverlayVisible;
 
+  const handleAddExercise = () => {
+    handleAddExercisePress(workoutDataScrollViewRef!);
+    setIsAddWorkoutItemButtonsVisible(true);
+
+    navigation.goBack();
+  };
+
   return (
     <AddExerciseUI
       // isVisible={isVisible!}
       selectedExerciseIDToAdd={selectedExerciseIDToAdd}
       // setIsVisible={setIsVisible!}
-      handleAddExercisePress={() =>
-        handleAddExercisePress(workoutDataScrollViewRef!)
-      }
+      handleAddExercisePress={() => handleAddExercise()}
     />
   );
 }

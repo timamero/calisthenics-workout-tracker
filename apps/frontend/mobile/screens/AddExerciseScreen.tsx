@@ -13,8 +13,6 @@ export default function AddExerciseScreen() {
 
   const setIsAddWorkoutItemButtonsVisible =
     useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
-  const workoutDataScrollViewRef =
-    useContext(WorkoutDraftContext)?.workoutDataScrollViewRef!;
 
   const handleBackPress = useCallback(() => {
     setIsAddWorkoutItemButtonsVisible(true);
@@ -62,7 +60,7 @@ export default function AddExerciseScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <AddExercise workoutDataScrollViewRef={workoutDataScrollViewRef} />
+      <AddExercise />
     </View>
   );
 }
