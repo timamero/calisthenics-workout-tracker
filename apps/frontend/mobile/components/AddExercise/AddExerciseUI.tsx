@@ -1,10 +1,13 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
 import { CustomTheme } from '../../theme';
 
 import ExerciseList from './ExerciseList';
+import Filter from '../Filter';
+import SearchBar from '../SearchBar';
+import FilterOverlay from '../FilterOverlay';
 
 interface AddExerciseUIProps {
   selectedExerciseIDToAdd: number | null;
@@ -17,6 +20,10 @@ export default function AddExerciseUI({
 }: AddExerciseUIProps) {
   const theme = useTheme() as CustomTheme;
 
+  const [visible, setVisible] = useState(false);
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+
   return (
     <>
       <ScrollView
@@ -27,6 +34,8 @@ export default function AddExerciseUI({
         }}
       >
         <View style={{ paddingBottom: 40 }}>
+          <SearchBar />
+          <Filter handleShowModal={showModal} />
           <ExerciseList />
         </View>
       </ScrollView>
@@ -69,6 +78,7 @@ export default function AddExerciseUI({
           Add Exercise
         </Button>
       </View>
+      <FilterOverlay visible={visible} handleHideModal={hideModal} />
     </>
   );
 }
