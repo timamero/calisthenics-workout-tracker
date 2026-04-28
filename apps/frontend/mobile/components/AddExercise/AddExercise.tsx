@@ -24,10 +24,17 @@ export default function AddExercise() {
     navigation.goBack();
   };
 
+  const handleCancelPress = () => {
+    setIsAddWorkoutItemButtonsVisible(true);
+
+    navigation.goBack();
+  };
+
   return (
     <AddExerciseUI
       selectedExerciseIDToAdd={selectedExerciseIDToAdd}
-      handleAddExercisePress={() => handleAddExercise()}
+      handleAddExercisePress={handleAddExercise}
+      handleCancelPress={handleCancelPress}
     />
   );
 }
