@@ -1,5 +1,4 @@
 import { ScrollView } from 'react-native';
-import AddExerciseOverlay from './AddExerciseOverlay';
 import ConfirmationOverlays from './ConfirmationOverlays';
 
 interface WorkoutOverlaysProps {
@@ -11,7 +10,6 @@ export default function WorkoutOverlays({
 }: WorkoutOverlaysProps) {
   return (
     <>
-      <AddExerciseOverlay workoutDataScrollViewRef={workoutDataScrollViewRef} />
       <ConfirmationOverlays />
     </>
   );
