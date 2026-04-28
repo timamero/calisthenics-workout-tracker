@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import type {
   WorkoutBuildResponse,
@@ -16,6 +17,7 @@ import {
   cancelWorkoutConfirmationContent,
 } from '@cwt/content';
 
+import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 import {
   postWorkoutBuild,
   postWorkoutLog,
@@ -88,10 +90,14 @@ export default function ConfirmationOverlays() {
   const { setWorkoutToSaveWithUser, setWorkoutToSaveWithUserAndDuration } =
     useWorkoutSave();
 
+  const setIsAddWorkoutItemButtonsVisible =
+    useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
+
   const navigation = useNavigation<any>();
 
   const onCancelWorkoutPress = () => {
     navigation.navigate('App', { screen: 'WorkoutDashboard' });
+    setIsAddWorkoutItemButtonsVisible(false);
     resetWorkout();
     resetTimer();
   };
@@ -127,6 +133,7 @@ export default function ConfirmationOverlays() {
       console.error('Workout post request failed');
     }
 
+    setIsAddWorkoutItemButtonsVisible(false);
     setIsSaveWorkoutDialogVisible!(false);
     navigation.navigate('App', { screen: 'WorkoutDashboard' });
   };
