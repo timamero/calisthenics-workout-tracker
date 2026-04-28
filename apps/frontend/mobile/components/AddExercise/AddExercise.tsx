@@ -1,7 +1,11 @@
 import { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import { useAddExerciseMobile } from '@cwt/hooks';
+import {
+  useAddExerciseMobile,
+  useClearExerciseSearchAndFilters,
+} from '@cwt/hooks';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 import AddExerciseUI from './AddExerciseUI';
@@ -17,6 +21,19 @@ export default function AddExercise() {
   const workoutDataScrollViewRef =
     useContext(WorkoutDraftContext)?.workoutDataScrollViewRef!;
 
+  const setSupersetIDToMod = useWorkoutDraftStore(
+    (state) => state.setSupersetIDToMod,
+  );
+  const setSectionIDToMod = useWorkoutDraftStore(
+    (state) => state.setSectionIDToMod,
+  );
+  const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
+    (state) => state.setSelectedExerciseIDToAdd,
+  );
+
+  const { clearExerciseSearch, clearExerciseFilters } =
+    useClearExerciseSearchAndFilters();
+
   const handleAddExercise = () => {
     handleAddExercisePress(workoutDataScrollViewRef!);
     setIsAddWorkoutItemButtonsVisible(true);
@@ -26,6 +43,13 @@ export default function AddExercise() {
 
   const handleCancelPress = () => {
     setIsAddWorkoutItemButtonsVisible(true);
+
+    setSupersetIDToMod(null);
+    setSectionIDToMod(null);
+    setSelectedExerciseIDToAdd(null);
+
+    clearExerciseFilters();
+    clearExerciseSearch();
 
     navigation.goBack();
   };

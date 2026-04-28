@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
-import { useAddExerciseOverlayMobile } from '@cwt/hooks';
+// import { useAddExerciseOverlayMobile } from '@cwt/hooks';
 // import { WorkoutDataItemContext } from '@cwt/context';
 
 // import { ExerciseItemContainer } from '../ExerciseItem';
@@ -21,6 +21,7 @@ interface SupersetItemUIProps {
   handleUpPress: () => void;
   handleDownPress: () => void;
   handleDeleteSupersetPress: () => void;
+  handleOpenAddExercisePress: () => void;
 }
 
 export default function SupersetItemUI({
@@ -30,11 +31,12 @@ export default function SupersetItemUI({
   handleUpPress,
   handleDownPress,
   handleDeleteSupersetPress,
+  handleOpenAddExercisePress,
 }: SupersetItemUIProps) {
   const theme = useTheme() as CustomTheme;
 
-  const handleOpenAddExerciseOverlay =
-    useAddExerciseOverlayMobile('superset').handleOpenAddExerciseOverlayPress;
+  // const handleOpenAddExerciseOverlay =
+  //   useAddExerciseOverlayMobile('superset').handleOpenAddExerciseOverlayPress;
   return (
     <View
       style={{
@@ -97,7 +99,7 @@ export default function SupersetItemUI({
           labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
           textColor={theme.colors.primary}
           style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
-          onPress={() => handleOpenAddExerciseOverlay()}
+          onPress={() => handleOpenAddExercisePress()}
         >
           Add Exercise
         </Button>
