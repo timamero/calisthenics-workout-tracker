@@ -58,7 +58,7 @@ export const MainTabs = createBottomTabNavigator({
     WorkoutDashboard: {
       screen: StartWorkoutScreen,
       options: {
-        title: 'Create or Begin A Workout',
+        title: 'Workout',
       },
     },
     History: HistoryScreen,
