@@ -31,6 +31,7 @@ export default function AddExerciseUI({
           backgroundColor: theme.colors.background,
           paddingInline: 16,
           paddingBlock: 16,
+          width: '100%',
         }}
       >
         <View style={{ paddingBottom: 40 }}>
