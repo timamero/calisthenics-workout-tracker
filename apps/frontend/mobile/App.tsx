@@ -20,6 +20,7 @@ import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
 import { getLeveragesAssists } from './services/leveragesAssistsService';
 
 import SplashScreen from './components/common/SplashScreen';
+import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
@@ -70,9 +71,11 @@ export default function App() {
 
   return (
     <WorkoutContextProvider appType="mobile">
-      <PaperProvider theme={theme}>
-        <Navigation />
-      </PaperProvider>
+      <WorkoutDraftProvider>
+        <PaperProvider theme={theme}>
+          <Navigation />
+        </PaperProvider>
+      </WorkoutDraftProvider>
     </WorkoutContextProvider>
   );
 }
