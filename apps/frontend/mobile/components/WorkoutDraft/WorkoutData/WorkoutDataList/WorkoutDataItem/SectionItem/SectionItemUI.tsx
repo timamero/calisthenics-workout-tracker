@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
-import { useAddExerciseOverlayMobile, useAddSupersetMobile } from '@cwt/hooks';
+import { useAddSupersetMobile } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import ExerciseItem from '../ExerciseItem';
@@ -20,6 +20,7 @@ interface SectionItemUIProps {
   handleUpPress: () => void;
   handleDownPress: () => void;
   handleDeleteSectionPress: () => void;
+  handleOpenAddExercisePress: () => void;
 }
 
 export default function SectionItemUI({
@@ -30,11 +31,12 @@ export default function SectionItemUI({
   handleUpPress,
   handleDownPress,
   handleDeleteSectionPress,
+  handleOpenAddExercisePress,
 }: SectionItemUIProps) {
   const theme = useTheme() as CustomTheme;
 
-  const handleOpenAddExerciseOverlayPress =
-    useAddExerciseOverlayMobile('section').handleOpenAddExerciseOverlayPress;
+  // const handleOpenAddExerciseOverlayPress =
+  //   useAddExerciseOverlayMobile('section').handleOpenAddExerciseOverlayPress;
   const handleAddSupersetPress = useAddSupersetMobile(
     section.id,
   ).handleAddSupersetPress;
@@ -135,7 +137,7 @@ export default function SectionItemUI({
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
             textColor={theme.colors.primary}
             style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
-            onPress={() => handleOpenAddExerciseOverlayPress()}
+            onPress={() => handleOpenAddExercisePress()}
           >
             Add Exercise
           </Button>
