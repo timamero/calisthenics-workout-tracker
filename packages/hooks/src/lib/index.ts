@@ -3,7 +3,7 @@ export {
   useFilterSelectors,
   useSearchSelectors,
   useClearExerciseSearchAndFilters,
-} from "./exercises";
+} from "./exerciseSearchAndFiltering";
 export {
   useAuthLogin,
   useAuthLoginMobile,
