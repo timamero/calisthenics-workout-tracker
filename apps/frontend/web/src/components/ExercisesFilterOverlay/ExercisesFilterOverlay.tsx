@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Group, Modal, Button, Stack } from '@mantine/core';
 
 import { useExercisesFilterStore } from '@cwt/state/stores';
@@ -5,17 +6,20 @@ import { useExercisesSearchStore } from '@cwt/state/stores';
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { useFilterSelectors } from '@cwt/hooks';
 
+import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 import FilterSelections from './FilterSelections';
 
-interface ExercisesFilterOverlayProps {
-  opened: boolean;
-  handler: { close: () => void };
-}
+// interface ExercisesFilterOverlayProps {
+//   opened: boolean;
+//   handler: { close: () => void };
+// }
 
-export default function ExercisesFilterOverlay({
-  opened,
-  handler,
-}: ExercisesFilterOverlayProps) {
+export default function ExercisesFilterOverlay() {
+  const exerciseFilterOverlayOpened =
+    useContext(WorkoutDraftContext)?.exerciseFilterOverlayOpened;
+  const exerciseFilterOverlayHandler =
+    useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
+
   const { hasFilters } = useFilterSelectors();
   const clearFilterCheckboxSelections = useExercisesFilterStore(
     (state) => state.clearFilterCheckboxSelections,
@@ -40,7 +44,8 @@ export default function ExercisesFilterOverlay({
       useExercisesSearchStore.getState().appliedExerciseSearch,
       useExercisesSearchStore.getState().exerciseSearch,
     );
-    handler.close();
+
+    exerciseFilterOverlayHandler?.close();
   };
 
   const handleClearFiltersClick = () => {
@@ -51,13 +56,15 @@ export default function ExercisesFilterOverlay({
       useExercisesSearchStore.getState().appliedExerciseSearch,
       useExercisesSearchStore.getState().exerciseSearch,
     );
-    handler.close();
+
+    exerciseFilterOverlayHandler?.close();
   };
 
   // Called when overlay closes from clicking outside of modal
   // or clicking the close button
   const onFilterOverlayClose = () => {
-    handler.close();
+    exerciseFilterOverlayHandler?.close();
+
     if (!hasFilters) {
       // Do not clear the filter selection if there are currently filters applied
       clearFilterCheckboxSelections();
@@ -69,7 +76,7 @@ export default function ExercisesFilterOverlay({
 
   return (
     <Modal
-      opened={opened}
+      opened={exerciseFilterOverlayOpened!}
       onClose={onFilterOverlayClose}
       title="Filter Exercises"
       styles={{
