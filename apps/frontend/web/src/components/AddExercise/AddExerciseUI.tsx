@@ -3,7 +3,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { IoFilterOutline } from 'react-icons/io5';
 import { Link } from '@tanstack/react-router';
 
-// import type { AddExerciseOverlayUIProps } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useClearExerciseSearchAndFilters } from '@cwt/hooks';
 
@@ -17,9 +16,7 @@ interface AddExerciseUIProps {
 }
 
 export default function AddExerciseOverlayUI({
-  // opened,
   selectedExerciseIDToAdd,
-  // handler,
   handleAddExerciseClick,
 }: AddExerciseUIProps) {
   const [filterOpened, filterHandler] = useDisclosure(false);
@@ -51,7 +48,6 @@ export default function AddExerciseOverlayUI({
   };
   return (
     <Stack gap="xl">
-      {/* <ScrollArea h="90vh" style={{ paddingBottom: 40 }}> */}
       <Group>
         <ExerciseSearchBar />
         <ActionIcon
@@ -66,7 +62,6 @@ export default function AddExerciseOverlayUI({
       <Stack gap="lg" align="center">
         <ExercisesList />
       </Stack>
-      {/* </ScrollArea> */}
       <Group
         mt="lg"
         justify="center"
