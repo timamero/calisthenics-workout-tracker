@@ -1,8 +1,11 @@
 import { useContext } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 
-import { useClearExerciseSearchAndFilters, useAddExercise } from '@cwt/hooks';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+import {
+  useClearExerciseSearchAndFilters,
+  useAddExercise,
+  useResetSelectedIDs,
+} from '@cwt/hooks';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 
@@ -17,16 +20,7 @@ export default function AddExercise() {
   const { clearExerciseSearch, clearExerciseFilters } =
     useClearExerciseSearchAndFilters();
 
-  // --- State ---
-  const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod,
-  );
-  const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
-  const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
-    (state) => state.setSelectedExerciseIDToAdd,
-  );
+  const resetSelectedIDs = useResetSelectedIDs();
 
   // --- Context ---
   const exerciseFilterOverlayHandler =
@@ -38,10 +32,7 @@ export default function AddExercise() {
   };
 
   const handleCancelClick = () => {
-    setSupersetIDToMod(null);
-    setSectionIDToMod(null);
-    setSelectedExerciseIDToAdd(null);
-
+    resetSelectedIDs();
     clearExerciseFilters();
     clearExerciseSearch();
   };
