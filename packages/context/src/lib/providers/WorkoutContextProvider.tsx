@@ -12,8 +12,6 @@ export default function WorkoutOverlaysContextProvider({
   children: ReactNode;
 }) {
   // Web
-  const [addExerciseOverlayOpened, addExerciseOverlayHandler] =
-    useDisclosure(false);
   const [deleteRootItemOverlayOpened, deleteRootItemOverlayHandler] =
     useDisclosure(false);
   const [deleteNestedItemOverlayOpened, deleteNestedItemOverlayHandler] =
@@ -26,8 +24,6 @@ export default function WorkoutOverlaysContextProvider({
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
 
   const webOverlayHandlers = {
-    addExerciseOverlayOpened: addExerciseOverlayOpened,
-    addExerciseOverlayHandler: addExerciseOverlayHandler,
     deleteRootItemOverlayOpened: deleteRootItemOverlayOpened,
     deleteRootItemOverlayHandler: deleteRootItemOverlayHandler,
     deleteNestedItemOverlayOpened: deleteNestedItemOverlayOpened,
@@ -43,8 +39,6 @@ export default function WorkoutOverlaysContextProvider({
   };
 
   // Mobile
-  const [isAddExerciseOverlayVisible, setIsAddExerciseOverlayVisible] =
-    useState<boolean>(false);
   const [isDeleteRootItemOverlayVisible, setIsDeleteRootItemOverlayVisible] =
     useState<boolean>(false);
   const [
@@ -63,8 +57,6 @@ export default function WorkoutOverlaysContextProvider({
     useState<boolean>(false);
 
   const mobileOverlayHandlers = {
-    isAddExerciseOverlayVisible: isAddExerciseOverlayVisible,
-    setIsAddExerciseOverlayVisible: setIsAddExerciseOverlayVisible,
     isDeleteRootItemOverlayVisible: isDeleteRootItemOverlayVisible,
     setIsDeleteRootItemOverlayVisible: setIsDeleteRootItemOverlayVisible,
     isDeleteNestedItemOverlayVisible: isDeleteNestedItemOverlayVisible,
