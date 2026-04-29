@@ -1,21 +1,22 @@
 import { useContext } from 'react';
 import { Group, Modal, Button, Stack } from '@mantine/core';
 
-import { useExercisesFilterStore } from '@cwt/state/stores';
-import { useExercisesSearchStore } from '@cwt/state/stores';
-import { useExerciseLibraryStore } from '@cwt/state/stores';
+import {
+  useExercisesFilterStore,
+  useExerciseLibraryStore,
+  useExercisesSearchStore,
+} from '@cwt/state/stores';
 import { useFilterSelectors } from '@cwt/hooks';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
+
 import FilterSelections from './FilterSelections';
 
 export default function ExercisesFilterOverlay() {
-  const exerciseFilterOverlayOpened =
-    useContext(WorkoutDraftContext)?.exerciseFilterOverlayOpened;
-  const exerciseFilterOverlayHandler =
-    useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
-
+  // --- Hooks ---
   const { hasFilters } = useFilterSelectors();
+
+  // --- State ---
   const clearFilterCheckboxSelections = useExercisesFilterStore(
     (state) => state.clearFilterCheckboxSelections,
   );
@@ -32,6 +33,13 @@ export default function ExercisesFilterOverlay() {
     (state) => state.refreshDisplayedExercises,
   );
 
+  // --- Context ---
+  const exerciseFilterOverlayOpened =
+    useContext(WorkoutDraftContext)?.exerciseFilterOverlayOpened;
+  const exerciseFilterOverlayHandler =
+    useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
+
+  // --- Handlers ---
   const handleApplyFiltersClick = () => {
     setAppliedFilterSelections();
     refreshDisplayedExercises(
