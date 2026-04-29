@@ -8,19 +8,20 @@ import {
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
+
 import AddExerciseUI from './AddExerciseUI';
 
 export default function AddExercise() {
   const navigation = useNavigation<any>();
 
+  // --- Hooks ---
   const { selectedExerciseIDToAdd, handleAddExercisePress } =
     useAddExerciseMobile();
 
-  const setIsAddWorkoutItemButtonsVisible =
-    useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
-  const workoutDataScrollViewRef =
-    useContext(WorkoutDraftContext)?.workoutDataScrollViewRef!;
+  const { clearExerciseSearch, clearExerciseFilters } =
+    useClearExerciseSearchAndFilters();
 
+  // --- State ---
   const setSupersetIDToMod = useWorkoutDraftStore(
     (state) => state.setSupersetIDToMod,
   );
@@ -31,9 +32,13 @@ export default function AddExercise() {
     (state) => state.setSelectedExerciseIDToAdd,
   );
 
-  const { clearExerciseSearch, clearExerciseFilters } =
-    useClearExerciseSearchAndFilters();
+  // --- Context ---
+  const setIsAddWorkoutItemButtonsVisible =
+    useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
+  const workoutDataScrollViewRef =
+    useContext(WorkoutDraftContext)?.workoutDataScrollViewRef!;
 
+  // --- Handlers ---
   const handleAddExercise = () => {
     handleAddExercisePress(workoutDataScrollViewRef!);
     setIsAddWorkoutItemButtonsVisible(true);

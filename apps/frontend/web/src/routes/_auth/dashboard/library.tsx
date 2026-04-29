@@ -8,6 +8,7 @@ import type { ExerciseResponse } from '@cwt/schema/exercises';
 import { ExerciseDetailContext } from '@cwt/context';
 
 import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
+
 import ExercisesList from '../../../components/ExercisesList';
 import ExercisesFilterOverlay from '../../../components/ExercisesFilterOverlay';
 import ExerciseDetailOverlay from '../../../components/ExerciseDetailOverlay';

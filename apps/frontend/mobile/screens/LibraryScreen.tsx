@@ -19,15 +19,18 @@ import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
 export default function LibraryScreen() {
   const theme = useTheme() as CustomTheme;
 
+  // --- State ---
+  const [exerciseDetail, setExerciseDetail] = useState<ExerciseResponse | null>(
+    null,
+  );
+  const [visibleExerciseDetail, setVisibleExerciseDetail] = useState(false);
+
   const loading = useExerciseLibraryStore((state) => state.loading);
   const isExercisesSet = useExerciseLibraryStore((state) =>
     state.displayedExercises === null ? false : true,
   );
 
-  const [exerciseDetail, setExerciseDetail] = useState<ExerciseResponse | null>(
-    null,
-  );
-  const [visibleExerciseDetail, setVisibleExerciseDetail] = useState(false);
+  // --- Handlers ---
   const showExerciseDetailModal = () => setVisibleExerciseDetail(true);
   const hideExerciseDetailModal = () => setVisibleExerciseDetail(false);
 
