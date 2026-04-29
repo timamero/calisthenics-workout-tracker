@@ -7,7 +7,6 @@ import {
   useExerciseLibraryStore,
   useExercisesSearchStore,
 } from '@cwt/state/stores';
-
 import { useFilterSelectors } from '@cwt/hooks';
 
 import { Text } from '../../customText';
@@ -26,13 +25,10 @@ export default function FilterOverlay() {
     borderColor: theme.colors.orange1,
   };
 
+  // --- Hooks ---
   const { hasFilters } = useFilterSelectors();
 
-  const isExerciseFilterVisible =
-    useContext(WorkoutDraftContext)?.isExerciseFilterVisible!;
-  const setIsExerciseFilterVisible =
-    useContext(WorkoutDraftContext)?.setIsExerciseFilterVisible!;
-
+  // --- State ---
   const clearFilterCheckboxSelections = useExercisesFilterStore(
     (state) => state.clearFilterCheckboxSelections,
   );
@@ -49,6 +45,13 @@ export default function FilterOverlay() {
     (state) => state.refreshDisplayedExercises,
   );
 
+  // --- Context ---
+  const isExerciseFilterVisible =
+    useContext(WorkoutDraftContext)?.isExerciseFilterVisible!;
+  const setIsExerciseFilterVisible =
+    useContext(WorkoutDraftContext)?.setIsExerciseFilterVisible!;
+
+  // --- Handlers ---
   const handleApplyFiltersPress = () => {
     setAppliedFilterSelections();
     refreshDisplayedExercises(

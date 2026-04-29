@@ -1,21 +1,23 @@
 import { useContext } from 'react';
-import { useAddExercise } from '@cwt/hooks';
 import { useNavigate } from '@tanstack/react-router';
 
+import { useClearExerciseSearchAndFilters, useAddExercise } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useClearExerciseSearchAndFilters } from '@cwt/hooks';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
+
 import AddExerciseUI from './AddExerciseUI';
 
 export default function AddExercise() {
   const navigate = useNavigate();
 
+  // --- Hooks ---
   const { selectedExerciseIDToAdd, handleAddExercise } = useAddExercise();
 
-  const exerciseFilterOverlayHandler =
-    useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
+  const { clearExerciseSearch, clearExerciseFilters } =
+    useClearExerciseSearchAndFilters();
 
+  // --- State ---
   const setSupersetIDToMod = useWorkoutDraftStore(
     (state) => state.setSupersetIDToMod,
   );
@@ -26,9 +28,11 @@ export default function AddExercise() {
     (state) => state.setSelectedExerciseIDToAdd,
   );
 
-  const { clearExerciseSearch, clearExerciseFilters } =
-    useClearExerciseSearchAndFilters();
+  // --- Context ---
+  const exerciseFilterOverlayHandler =
+    useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
 
+  // --- Handlers ---
   const handleOpenFilterOverlayClick = () => {
     exerciseFilterOverlayHandler?.open();
   };
