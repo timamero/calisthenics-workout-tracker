@@ -15,6 +15,7 @@ import { supabase } from './services/supabaseClient';
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
+import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
 
 // Create a new router instance
 const router = createRouter({
@@ -51,9 +52,11 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <MantineProvider theme={theme}>
-        <WorkoutContextProvider appType="web">
-          <App />
-        </WorkoutContextProvider>
+        <WorkoutDraftProvider>
+          <WorkoutContextProvider appType="web">
+            <App />
+          </WorkoutContextProvider>
+        </WorkoutDraftProvider>
       </MantineProvider>
     </StrictMode>,
   );

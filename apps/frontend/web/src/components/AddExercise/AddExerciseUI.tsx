@@ -1,5 +1,6 @@
+import { useContext } from 'react';
 import { Group, Button, Stack, ActionIcon } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+// import { useDisclosure } from '@mantine/hooks';
 import { IoFilterOutline } from 'react-icons/io5';
 import { Link } from '@tanstack/react-router';
 
@@ -9,6 +10,7 @@ import { useClearExerciseSearchAndFilters } from '@cwt/hooks';
 import ExercisesList from './ExercisesList';
 import ExerciseSearchBar from '../ExerciseSearchBar';
 import ExercisesFilterOverlay from '../ExercisesFilterOverlay';
+import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 
 interface AddExerciseUIProps {
   selectedExerciseIDToAdd: number | null;
@@ -19,7 +21,9 @@ export default function AddExerciseOverlayUI({
   selectedExerciseIDToAdd,
   handleAddExerciseClick,
 }: AddExerciseUIProps) {
-  const [filterOpened, filterHandler] = useDisclosure(false);
+  // const [filterOpened, filterHandler] = useDisclosure(false);
+  const exerciseFilterOverlayHandler =
+    useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
 
   const setSupersetIDToMod = useWorkoutDraftStore(
     (state) => state.setSupersetIDToMod,
@@ -34,9 +38,9 @@ export default function AddExerciseOverlayUI({
   const { clearExerciseSearch, clearExerciseFilters } =
     useClearExerciseSearchAndFilters();
 
-  const handleClickFilter = () => {
-    filterHandler.open();
-  };
+  // const handleClickFilter = () => {
+  //   filterHandler.open();
+  // };
 
   const handleCancelClick = () => {
     setSupersetIDToMod(null);
@@ -54,7 +58,7 @@ export default function AddExerciseOverlayUI({
           variant="outline"
           color="gray.5"
           aria-label="Exercise filter"
-          onClick={handleClickFilter}
+          onClick={() => exerciseFilterOverlayHandler?.open()}
         >
           <IoFilterOutline />
         </ActionIcon>
@@ -92,7 +96,7 @@ export default function AddExerciseOverlayUI({
           Add Exercise
         </Button>
       </Group>
-      <ExercisesFilterOverlay opened={filterOpened} handler={filterHandler} />
+      <ExercisesFilterOverlay />
     </Stack>
   );
 }
