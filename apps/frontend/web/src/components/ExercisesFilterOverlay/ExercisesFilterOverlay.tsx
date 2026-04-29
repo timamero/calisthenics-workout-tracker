@@ -9,11 +9,6 @@ import { useFilterSelectors } from '@cwt/hooks';
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 import FilterSelections from './FilterSelections';
 
-// interface ExercisesFilterOverlayProps {
-//   opened: boolean;
-//   handler: { close: () => void };
-// }
-
 export default function ExercisesFilterOverlay() {
   const exerciseFilterOverlayOpened =
     useContext(WorkoutDraftContext)?.exerciseFilterOverlayOpened;
