@@ -21,10 +21,6 @@ export default function AddExerciseUI({
 }: AddExerciseUIProps) {
   const theme = useTheme() as CustomTheme;
 
-  // const [visible, setVisible] = useState(false);
-  // const showModal = () => setVisible(true);
-  // const hideModal = () => setVisible(false);
-
   return (
     <>
       <ScrollView

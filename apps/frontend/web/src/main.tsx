@@ -13,11 +13,9 @@ import { WorkoutContextProvider } from '@cwt/context';
 import { useSupabaseAuth } from '@cwt/hooks';
 import { supabase } from './services/supabaseClient';
 
-// Import the generated route tree
 import { routeTree } from './routeTree.gen';
 import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
 
-// Create a new router instance
 const router = createRouter({
   routeTree,
   defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
@@ -45,7 +43,6 @@ export const App = () => {
   return <RouterProvider router={router} />;
 };
 
-// Render the app
 const rootElement = document.getElementById('root')!;
 if (!rootElement.innerHTML) {
   const root = createRoot(rootElement);

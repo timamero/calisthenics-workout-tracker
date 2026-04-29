@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Group, Button, Stack, ActionIcon } from '@mantine/core';
-// import { useDisclosure } from '@mantine/hooks';
 import { IoFilterOutline } from 'react-icons/io5';
 import { Link } from '@tanstack/react-router';
 
@@ -21,7 +20,6 @@ export default function AddExerciseOverlayUI({
   selectedExerciseIDToAdd,
   handleAddExerciseClick,
 }: AddExerciseUIProps) {
-  // const [filterOpened, filterHandler] = useDisclosure(false);
   const exerciseFilterOverlayHandler =
     useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
 
@@ -37,10 +35,6 @@ export default function AddExerciseOverlayUI({
 
   const { clearExerciseSearch, clearExerciseFilters } =
     useClearExerciseSearchAndFilters();
-
-  // const handleClickFilter = () => {
-  //   filterHandler.open();
-  // };
 
   const handleCancelClick = () => {
     setSupersetIDToMod(null);

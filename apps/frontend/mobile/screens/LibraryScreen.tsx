@@ -15,7 +15,6 @@ import SearchBar from '../components/SearchBar';
 import Filter from '../components/Filter';
 import FilterOverlay from '../components/FilterOverlay';
 import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
-// import { useFetchExercises } from '../hooks/useFetchExercises';
 
 export default function LibraryScreen() {
   const theme = useTheme() as CustomTheme;
@@ -25,18 +24,12 @@ export default function LibraryScreen() {
     state.displayedExercises === null ? false : true,
   );
 
-  // const [visible, setVisible] = useState(false);
-  // const showModal = () => setVisible(true);
-  // const hideModal = () => setVisible(false);
-
   const [exerciseDetail, setExerciseDetail] = useState<ExerciseResponse | null>(
     null,
   );
   const [visibleExerciseDetail, setVisibleExerciseDetail] = useState(false);
   const showExerciseDetailModal = () => setVisibleExerciseDetail(true);
   const hideExerciseDetailModal = () => setVisibleExerciseDetail(false);
-
-  // useFetchExercises();
 
   if (!isExercisesSet || loading) {
     return (
