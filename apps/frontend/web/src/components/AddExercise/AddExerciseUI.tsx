@@ -1,49 +1,24 @@
-import { useContext } from 'react';
 import { Group, Button, Stack, ActionIcon } from '@mantine/core';
 import { IoFilterOutline } from 'react-icons/io5';
 import { Link } from '@tanstack/react-router';
 
-import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useClearExerciseSearchAndFilters } from '@cwt/hooks';
-
 import ExercisesList from './ExercisesList';
 import ExerciseSearchBar from '../ExerciseSearchBar';
 import ExercisesFilterOverlay from '../ExercisesFilterOverlay';
-import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 
 interface AddExerciseUIProps {
   selectedExerciseIDToAdd: number | null;
-  handleAddExerciseClick?: () => void;
+  handleAddExerciseClick: () => void;
+  handleOpenFilterOverlayClick: () => void;
+  handleCancelClick: () => void;
 }
 
 export default function AddExerciseOverlayUI({
   selectedExerciseIDToAdd,
   handleAddExerciseClick,
+  handleOpenFilterOverlayClick,
+  handleCancelClick,
 }: AddExerciseUIProps) {
-  const exerciseFilterOverlayHandler =
-    useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
-
-  const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod,
-  );
-  const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
-  const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
-    (state) => state.setSelectedExerciseIDToAdd,
-  );
-
-  const { clearExerciseSearch, clearExerciseFilters } =
-    useClearExerciseSearchAndFilters();
-
-  const handleCancelClick = () => {
-    setSupersetIDToMod(null);
-    setSectionIDToMod(null);
-    setSelectedExerciseIDToAdd(null);
-
-    clearExerciseFilters();
-    clearExerciseSearch();
-  };
   return (
     <Stack gap="xl">
       <Group>
@@ -52,7 +27,7 @@ export default function AddExerciseOverlayUI({
           variant="outline"
           color="gray.5"
           aria-label="Exercise filter"
-          onClick={() => exerciseFilterOverlayHandler?.open()}
+          onClick={() => handleOpenFilterOverlayClick()}
         >
           <IoFilterOutline />
         </ActionIcon>
@@ -84,7 +59,7 @@ export default function AddExerciseOverlayUI({
         </Button>
         <Button
           color="orange"
-          onClick={() => handleAddExerciseClick?.()}
+          onClick={() => handleAddExerciseClick()}
           data-disabled={selectedExerciseIDToAdd === null}
         >
           Add Exercise
