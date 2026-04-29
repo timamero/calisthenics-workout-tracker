@@ -5,12 +5,9 @@ import { useAddSuperset } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 export default function AddWorkoutItemButtons() {
-  // const handleOpenAddExerciseOverlayClick =
-  //   useAddExerciseOverlay().handleOpenAddExerciseOverlayClick;
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const handleAddSupersetClick = useAddSuperset().handleAddSupersetClick;
 
-  // const handleAddExerciseClick = () => {};
   return (
     <Stack>
       <Button
@@ -18,7 +15,6 @@ export default function AddWorkoutItemButtons() {
         color="orange.9"
         component={Link}
         to="/workout/add-exercise"
-        // onClick={() => handleOpenAddExerciseOverlayClick()}
       >
         Add Exercise
       </Button>

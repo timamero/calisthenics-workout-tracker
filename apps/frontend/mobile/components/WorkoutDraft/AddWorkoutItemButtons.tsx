@@ -23,12 +23,9 @@ export default function AddWorkoutItemButtons() {
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
   const { open } = state;
 
-  // const mode = useWorkoutDraftStore((state) => state.mode);
   const addSection = useWorkoutDraftStore((state) => state.addSection);
 
   const handleAddSupersetPress = useAddSupersetMobile().handleAddSupersetPress;
-  // const handleOpenAddExerciseOverlayPress =
-  //   useAddExerciseOverlayMobile().handleOpenAddExerciseOverlayPress;
 
   const handleAddExercisePress = () => {
     setIsAddWorkoutItemButtonsVisible(false);
@@ -68,8 +65,6 @@ export default function AddWorkoutItemButtons() {
             style: styles.fab,
             color: theme.colors.dark700,
             onPress: () => handleAddExercisePress(),
-            // onPress: () => navigation.navigate('AddExercise'),
-            // onPress: () => handleOpenAddExerciseOverlayPress(),
           },
         ]}
         onStateChange={onStateChange}
