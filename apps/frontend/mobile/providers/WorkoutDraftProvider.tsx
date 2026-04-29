@@ -10,6 +10,10 @@ export default function WorkoutDraftProvider({
 }) {
   const [isAddWorkoutItemButtonsVisible, setIsAddWorkoutItemButtonsVisible] =
     useState<boolean>(false);
+
+  const [isExerciseFilterVisible, setIsExerciseFilterVisible] =
+    useState<boolean>(false);
+
   const scrollViewRef = useRef<ScrollView | null>(null);
 
   return (
@@ -17,6 +21,8 @@ export default function WorkoutDraftProvider({
       value={{
         isAddWorkoutItemButtonsVisible,
         setIsAddWorkoutItemButtonsVisible,
+        isExerciseFilterVisible,
+        setIsExerciseFilterVisible,
         workoutDataScrollViewRef: scrollViewRef,
       }}
     >

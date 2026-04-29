@@ -4,6 +4,10 @@ import { ScrollView } from 'react-native';
 interface WorkoutDraftContextType {
   isAddWorkoutItemButtonsVisible: boolean;
   setIsAddWorkoutItemButtonsVisible: Dispatch<SetStateAction<boolean>>;
+
+  isExerciseFilterVisible: boolean;
+  setIsExerciseFilterVisible: Dispatch<SetStateAction<boolean>>;
+
   workoutDataScrollViewRef?: RefObject<ScrollView | null>;
 }
 

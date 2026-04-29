@@ -25,9 +25,9 @@ export default function LibraryScreen() {
     state.displayedExercises === null ? false : true,
   );
 
-  const [visible, setVisible] = useState(false);
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  // const [visible, setVisible] = useState(false);
+  // const showModal = () => setVisible(true);
+  // const hideModal = () => setVisible(false);
 
   const [exerciseDetail, setExerciseDetail] = useState<ExerciseResponse | null>(
     null,
@@ -72,10 +72,10 @@ export default function LibraryScreen() {
       >
         <ScrollView>
           <SearchBar />
-          <Filter handleShowModal={showModal} />
+          <Filter />
           <ExerciseList />
         </ScrollView>
-        <FilterOverlay visible={visible} handleHideModal={hideModal} />
+        <FilterOverlay />
         <ExerciseDetailOverlay />
       </View>
     </ExerciseDetailContext.Provider>
