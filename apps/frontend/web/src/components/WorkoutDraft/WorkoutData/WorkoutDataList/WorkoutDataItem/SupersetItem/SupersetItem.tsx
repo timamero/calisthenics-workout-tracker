@@ -6,7 +6,6 @@ import {
   useDeleteItem,
   useParentItemsLength,
   useReorderItem,
-  // useAddExerciseOverlay,
 } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
@@ -31,8 +30,6 @@ export default function SupersetItem() {
     'superset',
     superset!.id,
   ).handleDeleteItemClick;
-  // const handleOpenAddExerciseOverlayClick =
-  //   useAddExerciseOverlay('superset').handleOpenAddExerciseOverlayClick;
   const handleOpenAddExerciseClick = () => {
     setSupersetIDToMod(superset!.id);
     if (supersetParentsSectionID) {

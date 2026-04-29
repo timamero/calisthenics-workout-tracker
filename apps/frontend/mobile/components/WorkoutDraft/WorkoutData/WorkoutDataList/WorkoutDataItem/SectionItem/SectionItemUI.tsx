@@ -1,4 +1,3 @@
-// import { useContext } from 'react';
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
@@ -35,8 +34,6 @@ export default function SectionItemUI({
 }: SectionItemUIProps) {
   const theme = useTheme() as CustomTheme;
 
-  // const handleOpenAddExerciseOverlayPress =
-  //   useAddExerciseOverlayMobile('section').handleOpenAddExerciseOverlayPress;
   const handleAddSupersetPress = useAddSupersetMobile(
     section.id,
   ).handleAddSupersetPress;

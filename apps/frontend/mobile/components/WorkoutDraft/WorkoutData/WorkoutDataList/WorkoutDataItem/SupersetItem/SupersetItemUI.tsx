@@ -1,9 +1,7 @@
-// import { useContext } from 'react';
 import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
-// import { useAddExerciseOverlayMobile } from '@cwt/hooks';
 // import { WorkoutDataItemContext } from '@cwt/context';
 
 // import { ExerciseItemContainer } from '../ExerciseItem';
@@ -35,8 +33,6 @@ export default function SupersetItemUI({
 }: SupersetItemUIProps) {
   const theme = useTheme() as CustomTheme;
 
-  // const handleOpenAddExerciseOverlay =
-  //   useAddExerciseOverlayMobile('superset').handleOpenAddExerciseOverlayPress;
   return (
     <View
       style={{

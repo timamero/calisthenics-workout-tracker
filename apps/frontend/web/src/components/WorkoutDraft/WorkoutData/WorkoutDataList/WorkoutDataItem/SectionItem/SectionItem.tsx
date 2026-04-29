@@ -5,12 +5,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutDataItemContext } from '@cwt/context';
 
 import SectionItemUI from './SectionItemUI';
-import {
-  useDeleteItem,
-  useReorderItem,
-  // useAddExerciseOverlay,
-  useAddSuperset,
-} from '@cwt/hooks';
+import { useDeleteItem, useReorderItem, useAddSuperset } from '@cwt/hooks';
 
 export default function SectionItem() {
   const section = useContext(WorkoutDataItemContext)!.item as Section;
@@ -29,8 +24,6 @@ export default function SectionItem() {
     'section',
     section!.id,
   ).handleDeleteItemClick;
-  // const handleOpenAddExerciseClick =
-  //   useAddExerciseOverlay('section').handleOpenAddExerciseOverlayClick;
   const handleAddSupersetClick = useAddSuperset(
     section.id,
   ).handleAddSupersetClick;
