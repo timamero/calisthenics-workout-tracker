@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext } from 'react';
 import { View } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
@@ -13,17 +13,10 @@ import { useFilterSelectors } from '@cwt/hooks';
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
 
+import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 import FilterSelections from './FilterSelections';
 
-export type FilterOverlayProps = {
-  visible: boolean;
-  handleHideModal: () => void;
-};
-
-export default function FilterOverlay({
-  visible,
-  handleHideModal,
-}: FilterOverlayProps) {
+export default function FilterOverlay() {
   const theme = useTheme() as CustomTheme;
   const containerStyle = {
     backgroundColor: theme.colors.background,
@@ -34,6 +27,11 @@ export default function FilterOverlay({
   };
 
   const { hasFilters } = useFilterSelectors();
+
+  const isExerciseFilterVisible =
+    useContext(WorkoutDraftContext)?.isExerciseFilterVisible!;
+  const setIsExerciseFilterVisible =
+    useContext(WorkoutDraftContext)?.setIsExerciseFilterVisible!;
 
   const clearFilterCheckboxSelections = useExercisesFilterStore(
     (state) => state.clearFilterCheckboxSelections,
@@ -59,7 +57,7 @@ export default function FilterOverlay({
       useExercisesSearchStore.getState().exerciseSearch,
     );
 
-    handleHideModal();
+    setIsExerciseFilterVisible(false);
   };
 
   const handleClearFiltersPress = () => {
@@ -71,11 +69,11 @@ export default function FilterOverlay({
       useExercisesSearchStore.getState().exerciseSearch,
     );
 
-    handleHideModal();
+    setIsExerciseFilterVisible(false);
   };
 
   const onModalClose = () => {
-    handleHideModal();
+    setIsExerciseFilterVisible(false);
     if (!hasFilters) {
       // Do not clear the filter selection if there are currently filters applied
       clearFilterCheckboxSelections();
@@ -88,7 +86,7 @@ export default function FilterOverlay({
   return (
     <Portal>
       <Modal
-        visible={visible}
+        visible={isExerciseFilterVisible}
         onDismiss={onModalClose}
         contentContainerStyle={containerStyle}
       >

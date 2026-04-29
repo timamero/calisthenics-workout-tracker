@@ -1,15 +1,16 @@
-import * as React from 'react';
+import { useContext } from 'react';
 import { Button, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
 import { CustomTheme } from '../theme';
+import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
 
-interface FilterProps {
-  handleShowModal: () => void;
-}
-
-const Filter = ({ handleShowModal }: FilterProps) => {
+const Filter = () => {
   const theme = useTheme() as CustomTheme;
+
+  const setIsExerciseFilterVisible =
+    useContext(WorkoutDraftContext)?.setIsExerciseFilterVisible!;
+
   return (
     <View
       style={{
@@ -30,7 +31,7 @@ const Filter = ({ handleShowModal }: FilterProps) => {
         style={{
           borderColor: theme.colors.light,
         }}
-        onPress={handleShowModal}
+        onPress={() => setIsExerciseFilterVisible(true)}
       >
         Filter
       </Button>
