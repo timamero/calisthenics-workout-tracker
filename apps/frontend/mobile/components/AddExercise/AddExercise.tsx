@@ -4,8 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import {
   useAddExerciseMobile,
   useClearExerciseSearchAndFilters,
+  useResetSelectedIDs,
 } from '@cwt/hooks';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 
@@ -21,16 +21,7 @@ export default function AddExercise() {
   const { clearExerciseSearch, clearExerciseFilters } =
     useClearExerciseSearchAndFilters();
 
-  // --- State ---
-  const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod,
-  );
-  const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod,
-  );
-  const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
-    (state) => state.setSelectedExerciseIDToAdd,
-  );
+  const resetSelectedIDs = useResetSelectedIDs();
 
   // --- Context ---
   const setIsAddWorkoutItemButtonsVisible =
@@ -49,9 +40,7 @@ export default function AddExercise() {
   const handleCancelPress = () => {
     setIsAddWorkoutItemButtonsVisible(true);
 
-    setSupersetIDToMod(null);
-    setSectionIDToMod(null);
-    setSelectedExerciseIDToAdd(null);
+    resetSelectedIDs();
 
     clearExerciseFilters();
     clearExerciseSearch();

@@ -14,6 +14,7 @@ export {
   useAddExercise,
   useAddExerciseMobile,
   useParentItemsLength,
+  useResetSelectedIDs,
   useReorderItem,
   useReorderItemMobile,
   useDeleteItem,
