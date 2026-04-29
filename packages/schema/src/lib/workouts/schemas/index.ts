@@ -25,5 +25,4 @@ export {
   WorkoutDataSchema,
 } from './api/workoutData.schema';
 
-export * from './ui/addExerciseOverlay';
 export * from './ui/workoutLogLimitedDetails.schema';
