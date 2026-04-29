@@ -22,15 +22,10 @@ function LibraryView() {
     null,
   );
 
-  // const [filterOpened, filterHandler] = useDisclosure(false);
   const [detailOpened, detailHandlers] = useDisclosure(false);
 
   const exerciseFilterOverlayHandler =
     useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
-
-  // const handleClickFilter = () => {
-  //   filterHandler.open();
-  // };
 
   return (
     <ExerciseDetailContext.Provider
