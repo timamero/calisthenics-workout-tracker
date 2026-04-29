@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Group, ActionIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -7,6 +7,7 @@ import { IoFilterOutline } from 'react-icons/io5';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
 import { ExerciseDetailContext } from '@cwt/context';
 
+import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 import ExercisesList from '../../../components/ExercisesList';
 import ExercisesFilterOverlay from '../../../components/ExercisesFilterOverlay';
 import ExerciseDetailOverlay from '../../../components/ExerciseDetailOverlay';
@@ -21,12 +22,15 @@ function LibraryView() {
     null,
   );
 
-  const [filterOpened, filterHandler] = useDisclosure(false);
+  // const [filterOpened, filterHandler] = useDisclosure(false);
   const [detailOpened, detailHandlers] = useDisclosure(false);
 
-  const handleClickFilter = () => {
-    filterHandler.open();
-  };
+  const exerciseFilterOverlayHandler =
+    useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
+
+  // const handleClickFilter = () => {
+  //   filterHandler.open();
+  // };
 
   return (
     <ExerciseDetailContext.Provider
@@ -45,7 +49,7 @@ function LibraryView() {
             variant="outline"
             color="gray.5"
             aria-label="Exercise filter"
-            onClick={handleClickFilter}
+            onClick={() => exerciseFilterOverlayHandler?.open()}
           >
             <IoFilterOutline />
           </ActionIcon>
@@ -53,7 +57,7 @@ function LibraryView() {
         <Stack align="center">
           <ExercisesList />
         </Stack>
-        <ExercisesFilterOverlay opened={filterOpened} handler={filterHandler} />
+        <ExercisesFilterOverlay />
         <ExerciseDetailOverlay />
       </Stack>
     </ExerciseDetailContext.Provider>
