@@ -19,8 +19,6 @@ export {
   useDeleteItem,
   useDeleteItemMobile,
   useUpdateWorkoutTitle,
-  useAddExerciseOverlay,
-  useAddExerciseOverlayMobile,
   useAddSuperset,
   useAddSupersetMobile,
   useAddSet,
