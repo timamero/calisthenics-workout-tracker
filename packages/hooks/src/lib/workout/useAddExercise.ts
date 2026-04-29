@@ -5,10 +5,7 @@ import {
   useExerciseLibraryStore,
 } from "@cwt/state/stores";
 
-import {
-  useWorkoutContextWeb,
-  useWorkoutContextMobile,
-} from "./useWorkoutContext";
+import { useWorkoutContextMobile } from "./useWorkoutContext";
 
 /**
  * Common logic for adding an exercise to a workout draft.
@@ -50,16 +47,12 @@ export function useAddExercise() {
     getExerciseById,
   } = useAddExerciseLogic();
 
-  // const handler =
-  //   useWorkoutContextWeb().webOverlayHandlers?.addExerciseOverlayHandler;
-
   const handleAddExercise = () => {
     addExercise(
       getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
     );
 
     setSelectedExerciseIDToAdd(null);
-    // handler!.close();
   };
 
   return {
@@ -80,10 +73,6 @@ export function useAddExerciseMobile() {
     getExerciseById,
   } = useAddExerciseLogic();
 
-  const setIsVisible =
-    useWorkoutContextMobile().mobileOverlayHandlers
-      ?.setIsAddExerciseOverlayVisible;
-
   const handleAddExercisePress = (
     workoutDataScrollViewRef: null | React.RefObject<ScrollView | null>,
   ) => {
@@ -92,7 +81,6 @@ export function useAddExerciseMobile() {
     );
 
     setSelectedExerciseIDToAdd(null);
-    setIsVisible?.(false);
     workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
   };
 
