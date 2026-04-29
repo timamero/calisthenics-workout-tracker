@@ -34,6 +34,9 @@ export default function AddExercise() {
     handleAddExercisePress(workoutDataScrollViewRef!);
     setIsAddWorkoutItemButtonsVisible(true);
 
+    clearExerciseFilters();
+    clearExerciseSearch();
+
     navigation.goBack();
   };
 

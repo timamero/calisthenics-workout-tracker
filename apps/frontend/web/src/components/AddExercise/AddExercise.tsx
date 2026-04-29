@@ -39,6 +39,10 @@ export default function AddExercise() {
 
   const handleAddExerciseClick = () => {
     handleAddExercise();
+
+    clearExerciseFilters();
+    clearExerciseSearch();
+
     navigate({
       to: '/workout',
     });
