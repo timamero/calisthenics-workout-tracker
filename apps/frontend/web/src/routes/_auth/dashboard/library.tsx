@@ -24,15 +24,13 @@ export const Route = createFileRoute('/_auth/dashboard/library')({
 });
 
 function LibraryView() {
-  const [exerciseDetail, setExerciseDetail] = useState<ExerciseResponse | null>(
-    null,
-  );
-
+  // --- UI Hooks ---
   const [detailOpened, detailHandlers] = useDisclosure(false);
 
   const { clearExerciseSearch, clearExerciseFilters } =
     useClearExerciseSearchAndFilters();
 
+  // --- State Management ---
   const filters = useExercisesFilterStore(
     (state) => state.appliedFilterSelections,
   );
@@ -40,9 +38,16 @@ function LibraryView() {
     (state) => state.appliedExerciseSearch,
   );
 
+  // --- Local State ---
+  const [exerciseDetail, setExerciseDetail] = useState<ExerciseResponse | null>(
+    null,
+  );
+
+  // --- Context ---
   const exerciseFilterOverlayHandler =
     useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
 
+  // --- Effects ---
   useBlocker({
     shouldBlockFn: () => {
       if ((filters.length === 0 || filters === undefined) && !search) {
