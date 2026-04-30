@@ -1,11 +1,19 @@
-import { useState, useContext } from 'react';
-import { createFileRoute } from '@tanstack/react-router';
+import { useState, useContext, useEffect } from 'react';
+import {
+  createFileRoute,
+  // useBlocker,
+} from '@tanstack/react-router';
 import { Title, Stack, Group, ActionIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import type { ExerciseResponse } from '@cwt/schema/exercises';
 import { ExerciseDetailContext } from '@cwt/context';
+import {
+  useExercisesFilterStore,
+  useExercisesSearchStore,
+} from '@cwt/state/stores';
+import { useClearExerciseSearchAndFilters } from '@cwt/hooks';
 
 import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 
@@ -25,8 +33,48 @@ function LibraryView() {
 
   const [detailOpened, detailHandlers] = useDisclosure(false);
 
+  const { clearExerciseSearch, clearExerciseFilters } =
+    useClearExerciseSearchAndFilters();
+
+  const filters = useExercisesFilterStore(
+    (state) => state.appliedFilterSelections,
+  );
+  const search = useExercisesSearchStore(
+    (state) => state.appliedExerciseSearch,
+  );
+
   const exerciseFilterOverlayHandler =
     useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
+
+  // useBlocker({
+  //   shouldBlockFn: () => {
+  //     if ((filters.length === 0 || filters === undefined) && !search) {
+  //       console.log('no need to clear');
+  //       return false;
+  //     }
+
+  //     clearExerciseFilters();
+  //     clearExerciseSearch();
+  //     proceed();
+  //     // return true;
+  //   },
+  // });
+
+  useEffect(() => {
+    function clearSearchAndFilters() {
+      console.log('clearing');
+      clearExerciseFilters();
+      clearExerciseSearch();
+    }
+    return () => {
+      console.log('Component is unmounting');
+      if ((filters.length === 0 || filters === undefined) && !search) {
+        console.log('no need to clear');
+        return;
+      }
+      clearSearchAndFilters();
+    };
+  }, [clearExerciseFilters, clearExerciseSearch, filters, search]);
 
   return (
     <ExerciseDetailContext.Provider
