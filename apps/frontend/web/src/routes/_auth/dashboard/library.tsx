@@ -1,8 +1,5 @@
-import { useState, useContext, useEffect } from 'react';
-import {
-  createFileRoute,
-  // useBlocker,
-} from '@tanstack/react-router';
+import { useState, useContext } from 'react';
+import { createFileRoute, useBlocker } from '@tanstack/react-router';
 import { Title, Stack, Group, ActionIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IoFilterOutline } from 'react-icons/io5';
@@ -46,35 +43,17 @@ function LibraryView() {
   const exerciseFilterOverlayHandler =
     useContext(WorkoutDraftContext)?.exerciseFilterOverlayHandler;
 
-  // useBlocker({
-  //   shouldBlockFn: () => {
-  //     if ((filters.length === 0 || filters === undefined) && !search) {
-  //       console.log('no need to clear');
-  //       return false;
-  //     }
+  useBlocker({
+    shouldBlockFn: () => {
+      if ((filters.length === 0 || filters === undefined) && !search) {
+        return false;
+      }
 
-  //     clearExerciseFilters();
-  //     clearExerciseSearch();
-  //     proceed();
-  //     // return true;
-  //   },
-  // });
-
-  useEffect(() => {
-    function clearSearchAndFilters() {
-      console.log('clearing');
       clearExerciseFilters();
       clearExerciseSearch();
-    }
-    return () => {
-      console.log('Component is unmounting');
-      if ((filters.length === 0 || filters === undefined) && !search) {
-        console.log('no need to clear');
-        return;
-      }
-      clearSearchAndFilters();
-    };
-  }, [clearExerciseFilters, clearExerciseSearch, filters, search]);
+      return false;
+    },
+  });
 
   return (
     <ExerciseDetailContext.Provider
