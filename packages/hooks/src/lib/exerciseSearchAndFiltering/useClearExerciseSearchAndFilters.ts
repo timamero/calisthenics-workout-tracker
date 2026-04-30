@@ -24,10 +24,17 @@ export function useClearExerciseSearchAndFilters() {
   const clearExerciseSearch = () => {
     setSearch("");
     setAppliedExerciseSearch("");
+
+    refreshDisplayedExercises(
+      useExercisesFilterStore.getState().appliedFilterSelections,
+      useExercisesSearchStore.getState().appliedExerciseSearch,
+      useExercisesSearchStore.getState().exerciseSearch,
+    );
   };
   const clearExerciseFilters = () => {
     clearFilterCheckboxSelections();
     clearAppliedFilterCheckboxSelections();
+
     refreshDisplayedExercises(
       useExercisesFilterStore.getState().appliedFilterSelections,
       useExercisesSearchStore.getState().appliedExerciseSearch,
