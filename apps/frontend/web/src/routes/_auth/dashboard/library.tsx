@@ -27,6 +27,7 @@ function LibraryView() {
   // --- UI Hooks ---
   const [detailOpened, detailHandlers] = useDisclosure(false);
 
+  // --- Logic Hooks ---
   const { clearExerciseSearch, clearExerciseFilters } =
     useClearExerciseSearchAndFilters();
 
