@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 import { ExerciseResponse } from '@cwt/schema/exercises';
-import { useExerciseLibraryStore } from '@cwt/state/stores';
+import {
+  useExerciseLibraryStore,
+  useExercisesFilterStore,
+  useExercisesSearchStore,
+} from '@cwt/state/stores';
+import { useClearExerciseSearchAndFilters } from '@cwt/hooks';
 
 import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
@@ -18,6 +24,11 @@ import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
 
 export default function LibraryScreen() {
   const theme = useTheme() as CustomTheme;
+  const navigation = useNavigation<any>();
+
+  // --- Hooks ---
+  const { clearExerciseSearch, clearExerciseFilters } =
+    useClearExerciseSearchAndFilters();
 
   // --- State ---
   const [exerciseDetail, setExerciseDetail] = useState<ExerciseResponse | null>(
@@ -30,9 +41,29 @@ export default function LibraryScreen() {
     state.displayedExercises === null ? false : true,
   );
 
+  const filters = useExercisesFilterStore(
+    (state) => state.appliedFilterSelections,
+  );
+  const search = useExercisesSearchStore(
+    (state) => state.appliedExerciseSearch,
+  );
+
   // --- Handlers ---
   const showExerciseDetailModal = () => setVisibleExerciseDetail(true);
   const hideExerciseDetailModal = () => setVisibleExerciseDetail(false);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      if ((filters.length === 0 || filters === undefined) && !search) {
+        console.log('no need to clear');
+        return;
+      }
+
+      clearExerciseFilters();
+      clearExerciseSearch();
+    });
+    return unsubscribe;
+  }, [navigation, filters, search, clearExerciseFilters, clearExerciseSearch]);
 
   if (!isExercisesSet || loading) {
     return (
