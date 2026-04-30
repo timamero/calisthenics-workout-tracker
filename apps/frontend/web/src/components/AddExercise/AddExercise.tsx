@@ -12,9 +12,9 @@ import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 import AddExerciseUI from './AddExerciseUI';
 
 export default function AddExercise() {
+  // --- Logic Hooks ---
   const navigate = useNavigate();
 
-  // --- Hooks ---
   const { selectedExerciseIDToAdd, handleAddExercise } = useAddExercise();
 
   const { clearExerciseSearch, clearExerciseFilters } =
