@@ -19,7 +19,7 @@ function RouteComponent() {
     linkOptions({ label: 'Home', to: '/dashboard/home' }),
     linkOptions({ label: 'Library', to: '/dashboard/library' }),
     linkOptions({ label: 'Past Workouts', to: '/dashboard/history' }),
-    linkOptions({ label: 'Profile', to: '/dashboard/user' }),
+    // linkOptions({ label: 'Profile', to: '/dashboard/user' }), // temporarily disabled until v0.1.0-alpha.2
     linkOptions({ label: 'Settings', to: '/dashboard/settings' }),
   ];
 
