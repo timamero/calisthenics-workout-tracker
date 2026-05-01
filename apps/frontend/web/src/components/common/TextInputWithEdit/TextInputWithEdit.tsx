@@ -1,25 +1,23 @@
-import { useUpdateWorkoutTitle } from '@cwt/hooks';
+import { useUpdateTextInput } from '@cwt/hooks';
 
-import WorkoutTitle from './WorkoutTitle';
+import TextInputWithEditUI from './TextInputWithEditUI';
 
 export default function TextInputWithEdit() {
   const {
-    mode,
     isEditMode,
-    workoutTitle,
+    text,
     handleEditClick,
     handleSaveClick,
-    handleTitleChange,
-  } = useUpdateWorkoutTitle();
+    handleTextChange,
+  } = useUpdateTextInput();
 
   return (
-    <WorkoutTitle
-      mode={mode!}
+    <TextInputWithEditUI
       isEditMode={isEditMode}
-      workoutTitle={workoutTitle || ''}
+      text={text}
       onEditClick={handleEditClick}
       onSaveClick={handleSaveClick}
-      onTitleChange={handleTitleChange}
+      onTextChange={handleTextChange}
     />
   );
 }
