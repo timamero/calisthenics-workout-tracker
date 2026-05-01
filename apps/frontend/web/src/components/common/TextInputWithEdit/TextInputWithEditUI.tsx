@@ -1,6 +1,6 @@
 import { Title, TextInput, Button, Group } from '@mantine/core';
 
-interface TextInputWithEditProps {
+interface TextInputWithEditUIProps {
   isEditMode: boolean;
   text: string;
   onEditClick: () => void;
@@ -14,7 +14,7 @@ export default function TextInputWithEditUI({
   onEditClick,
   onSaveClick,
   onTextChange,
-}: TextInputWithEditProps) {
+}: TextInputWithEditUIProps) {
   return (
     <>
       {!isEditMode && (
