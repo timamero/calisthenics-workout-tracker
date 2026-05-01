@@ -1,41 +1,35 @@
 import { Title, TextInput, Button, Group } from '@mantine/core';
 
-import type { Mode } from '@cwt/schema/workouts';
-
 interface TextInputWithEditProps {
-  mode: Mode;
   isEditMode: boolean;
-  workoutTitle: string;
+  text: string;
   onEditClick: () => void;
   onSaveClick: () => void;
-  onTitleChange: (value: string) => void;
+  onTextChange: (value: string) => void;
 }
 
-export default function TextInputWithEdit({
-  mode,
+export default function TextInputWithEditUI({
   isEditMode,
-  workoutTitle,
+  text,
   onEditClick,
   onSaveClick,
-  onTitleChange,
+  onTextChange,
 }: TextInputWithEditProps) {
   return (
     <>
       {!isEditMode && (
         <Group>
-          <Title size="h6">{workoutTitle}</Title>
-          {mode !== 'log' && (
-            <Button onClick={onEditClick} variant="outline" color="dark">
-              Edit Title
-            </Button>
-          )}
+          <Title size="h6">{text}</Title>
+          <Button onClick={onEditClick} variant="outline" color="dark">
+            Edit Title
+          </Button>
         </Group>
       )}
       {isEditMode && (
         <Group>
           <TextInput
-            value={workoutTitle}
-            onChange={(event) => onTitleChange(event.currentTarget.value)}
+            value={text}
+            onChange={(event) => onTextChange(event.currentTarget.value)}
           />
           <Button onClick={onSaveClick} variant="outline" color="dark">
             Save
