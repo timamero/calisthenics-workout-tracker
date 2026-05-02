@@ -7,7 +7,6 @@ import { useUser } from '@cwt/hooks';
 import { supabase } from '../../../services/supabaseClient';
 
 import { TextInputWithEdit } from '../../../components/common/TextInputWithEdit';
-// import { useAuthStore } from '@cwt/state/stores';
 
 export const Route = createFileRoute('/_auth/dashboard/settings')({
   component: SettingsView,
@@ -15,8 +14,6 @@ export const Route = createFileRoute('/_auth/dashboard/settings')({
 
 function SettingsView() {
   const name = useUser().name;
-
-  // const supabaseSession = useAuthStore((state) => state)!;
 
   const handleSignOut = () => {
     signOut(supabase);
