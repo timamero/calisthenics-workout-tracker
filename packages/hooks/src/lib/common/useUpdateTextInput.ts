@@ -5,7 +5,12 @@ export default function useUpdateTextInput() {
   const [text, setText] = useState<string>("");
 
   const handleEditClick = () => setIsEditMode(true);
-  const handleSaveClick = () => setIsEditMode(false);
+  const handleSaveClick = (onSave: null | (() => void) = null) => {
+    if (onSave) {
+      onSave();
+    }
+    setIsEditMode(false);
+  };
   const handleTextChange = (value: string) => setText(value);
 
   return {
