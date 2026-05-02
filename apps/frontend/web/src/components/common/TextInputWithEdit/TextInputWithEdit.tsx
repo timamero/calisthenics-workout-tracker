@@ -31,7 +31,9 @@ export default function TextInputWithEdit({
       isEditMode={isEditMode}
       text={text}
       onEditClick={handleEditClick}
-      onSaveClick={() => handleSaveClick(() => onSave(text))}
+      onSaveClick={() =>
+        handleSaveClick(() => (text === initialValue ? null : onSave(text)))
+      }
       onTextChange={handleTextChange}
     />
   );
