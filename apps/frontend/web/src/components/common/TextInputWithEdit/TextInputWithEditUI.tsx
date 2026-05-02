@@ -20,8 +20,13 @@ export default function TextInputWithEditUI({
       {!isEditMode && (
         <Group>
           <Title size="h6">{text}</Title>
-          <Button onClick={onEditClick} variant="outline" color="dark">
-            Edit Title
+          <Button
+            size="compact-sm"
+            onClick={onEditClick}
+            variant="outline"
+            color="dark"
+          >
+            Edit
           </Button>
         </Group>
       )}
@@ -33,6 +38,7 @@ export default function TextInputWithEditUI({
           />
           <Button
             onClick={() => onSaveClick(text)}
+            size="compact-sm"
             variant="outline"
             color="dark"
           >
