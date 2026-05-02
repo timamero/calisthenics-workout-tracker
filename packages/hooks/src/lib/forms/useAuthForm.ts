@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type SupabaseClient } from "@supabase/supabase-js";
 
-import { signIn } from "@cwt/auth/signIn";
-import { createUser } from "@cwt/auth/createUser";
+import { signIn } from "@cwt/auth";
+import { createUser } from "@cwt/auth";
 import {
   AuthSchema,
   AuthSignUpSchema,

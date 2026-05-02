@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand';
 
-import type { Session, User } from '@cwt/auth/types';
+import type { Session, User } from '@cwt/auth';
 
 export interface AuthSlice {
   session: Session | null;
