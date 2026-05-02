@@ -9,33 +9,9 @@
     "build": "tsc"
   },
   "exports": {
-    "./supabase": {
-      "types": "./dist/supabase.d.ts",
-      "default": "./dist/supabase.js"
-    },
-    "./createUser": {
-      "types": "./dist/createUser.d.ts",
-      "default": "./dist/createUser.js"
-    },
-    "./session": {
-      "types": "./dist/session.d.ts",
-      "default": "./dist/session.js"
-    },
-    "./signIn": {
-      "types": "./dist/signIn.d.ts",
-      "default": "./dist/signIn.js"
-    },
-    "./signOut": {
-      "types": "./dist/signOut.d.ts",
-      "default": "./dist/signOut.js"
-    },
-    "./user": {
-      "types": "./dist/user.d.ts",
-      "default": "./dist/user.js"
-    },
-    "./types": {
-      "types": "./dist/supabaseTypes.d.ts",
-      "default": "./dist/supabaseTypes.js"
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "default": "./dist/lib/index.js"
     }
   },
   "dependencies": {
