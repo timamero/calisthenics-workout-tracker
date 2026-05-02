@@ -4,11 +4,15 @@ import { useUpdateTextInput } from '@cwt/hooks';
 
 import TextInputWithEditUI from './TextInputWithEditUI';
 
+interface TextInputWithEditProps {
+  initialValue: string;
+  onSave?: () => void | null;
+}
+
 export default function TextInputWithEdit({
   initialValue,
-}: {
-  initialValue: string;
-}) {
+  onSave,
+}: TextInputWithEditProps) {
   const {
     isEditMode,
     text,
@@ -27,7 +31,7 @@ export default function TextInputWithEdit({
       isEditMode={isEditMode}
       text={text}
       onEditClick={handleEditClick}
-      onSaveClick={handleSaveClick}
+      onSaveClick={() => handleSaveClick(onSave)}
       onTextChange={handleTextChange}
     />
   );
