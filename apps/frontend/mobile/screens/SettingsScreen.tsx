@@ -1,14 +1,16 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
 import { signOut, updateUserName } from '@cwt/auth';
 import { useUser } from '@cwt/hooks';
 
+import { CustomTheme } from '../theme';
+import { Text } from '../customText';
 import { supabase } from '../services/supabaseClient';
 import TextInputWithEdit from '../components/common/TextInputWithEdit';
 
 export default function SettingsScreen() {
-  const theme = useTheme();
+  const theme = useTheme() as CustomTheme;
 
   const name = useUser().name;
 
@@ -24,24 +26,45 @@ export default function SettingsScreen() {
     <View
       style={{
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
         backgroundColor: theme.colors.background,
+        paddingBlock: 40,
       }}
     >
-      <Text>Settings</Text>
-      <Text>Name</Text>
-      <TextInputWithEdit
-        initialValue={name ? name : ''}
-        onSave={handleOnSave}
-      />
-      <Button
-        mode="outlined"
-        textColor={theme.colors.outline}
-        onPress={() => handleLogOut()}
+      <View
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-start',
+          flex: 1,
+          paddingInline: 24,
+        }}
       >
-        Log out
-      </Button>
+        <Text
+          variant="headlineMedium"
+          style={{
+            color: theme.colors.light,
+          }}
+        >
+          Name
+        </Text>
+        <TextInputWithEdit
+          initialValue={name ? name : ''}
+          onSave={handleOnSave}
+        />
+      </View>
+      <View style={{ display: 'flex', alignItems: 'center' }}>
+        <Button
+          mode="outlined"
+          theme={{
+            colors: {
+              primary: theme.colors.errorLight,
+              outline: theme.colors.errorLight,
+            },
+          }}
+          onPress={() => handleLogOut()}
+        >
+          Log out
+        </Button>
+      </View>
     </View>
   );
 }

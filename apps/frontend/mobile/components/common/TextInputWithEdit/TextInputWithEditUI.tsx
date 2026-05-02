@@ -26,13 +26,23 @@ export default function TextInputWithEditUI({
   return (
     <View style={{ paddingBottom: 24 }}>
       {!isEditMode && (
-        <View style={{ display: 'flex', flexDirection: 'row', flexGrow: 1 }}>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexGrow: 1,
+            backgroundColor: theme.colors.dark700,
+            paddingInline: 16,
+            paddingBlock: 32,
+            borderRadius: 8,
+          }}
+        >
           <View
             style={{
               flexGrow: 1,
               display: 'flex',
               flexDirection: 'row',
-              justifyContent: 'flex-end',
+              justifyContent: 'space-between',
               alignItems: 'center',
             }}
           >
@@ -48,19 +58,30 @@ export default function TextInputWithEditUI({
             >
               {text}
             </Text>
-            <Button onPress={onEditClick}>Edit</Button>
+            <Button mode="contained" onPress={onEditClick}>
+              Edit
+            </Button>
           </View>
         </View>
       )}
       {isEditMode && (
-        <View style={{ display: 'flex', flexDirection: 'row', flexGrow: 1 }}>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexGrow: 1,
+            backgroundColor: theme.colors.dark700,
+            paddingInline: 16,
+            paddingBlock: 32,
+            borderRadius: 8,
+          }}
+        >
           <View
             style={{
               flexGrow: 1,
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
             }}
           >
             <TextInput
@@ -76,8 +97,29 @@ export default function TextInputWithEditUI({
               value={text}
               onChangeText={(text) => onTextChange(text)}
             />
-            <Button onPress={() => onCancelClick()}>Cancel</Button>
-            <Button onPress={() => onSaveClick()}>Save</Button>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                gap: 16,
+                paddingTop: 16,
+              }}
+            >
+              <Button
+                theme={{
+                  colors: {
+                    primary: theme.colors.dark200,
+                  },
+                }}
+                onPress={() => onCancelClick()}
+              >
+                Cancel
+              </Button>
+              <Button mode="contained" onPress={() => onSaveClick()}>
+                Save
+              </Button>
+            </View>
           </View>
         </View>
       )}
