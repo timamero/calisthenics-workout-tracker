@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Button } from '@mantine/core';
 
-import { signOut } from '@cwt/auth/signOut';
+import { signOut } from '@cwt/auth';
 import { useUser } from '@cwt/hooks';
 
 import { supabase } from '../../../services/supabaseClient';

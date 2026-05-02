@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { supabaseClient } from '@cwt/auth/supabase';
+import { supabaseClient } from '@cwt/auth';
 
 let supabase: SupabaseClient;
 try {

@@ -1,8 +1,7 @@
 import { View, Text } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 
-// eslint-disable-next-line import/no-unresolved
-import { signOut } from '@cwt/auth/signOut';
+import { signOut } from '@cwt/auth';
 
 import { supabase } from '../services/supabaseClient';
 

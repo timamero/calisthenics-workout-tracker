@@ -1,5 +1,5 @@
-import { supabaseClient } from '@cwt/auth/supabase';
-import type { SupabaseClient } from '@cwt/auth/types';
+import { supabaseClient } from '@cwt/auth';
+import type { SupabaseClient } from '@cwt/auth';
 
 let supabase: SupabaseClient;
 try {
