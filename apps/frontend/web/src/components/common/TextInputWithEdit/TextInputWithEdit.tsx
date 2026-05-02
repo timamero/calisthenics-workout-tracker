@@ -6,7 +6,7 @@ import TextInputWithEditUI from './TextInputWithEditUI';
 
 interface TextInputWithEditProps {
   initialValue: string;
-  onSave?: () => void | null;
+  onSave: (text: string) => void | Promise<void>;
 }
 
 export default function TextInputWithEdit({
@@ -31,7 +31,7 @@ export default function TextInputWithEdit({
       isEditMode={isEditMode}
       text={text}
       onEditClick={handleEditClick}
-      onSaveClick={() => handleSaveClick(onSave)}
+      onSaveClick={() => handleSaveClick(() => onSave(text))}
       onTextChange={handleTextChange}
     />
   );
