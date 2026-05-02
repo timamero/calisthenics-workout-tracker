@@ -18,9 +18,10 @@ export default function TextInputWithEdit({
     text,
     setText,
     handleEditClick,
+    handleCancelClick,
     handleSaveClick,
     handleTextChange,
-  } = useUpdateTextInput();
+  } = useUpdateTextInput(initialValue);
 
   useEffect(() => {
     setText(initialValue);
@@ -31,6 +32,7 @@ export default function TextInputWithEdit({
       isEditMode={isEditMode}
       text={text}
       onEditClick={handleEditClick}
+      onCancelClick={handleCancelClick}
       onSaveClick={() =>
         handleSaveClick(() => (text === initialValue ? null : onSave(text)))
       }
