@@ -23,7 +23,10 @@ function SettingsView() {
     <div>
       <Title>Settings</Title>
       <p>Name</p>
-      <TextInputWithEdit initialValue={name ? name : ''} />
+      <TextInputWithEdit
+        initialValue={name ? name : ''}
+        onSave={() => console.log('pressed save')}
+      />
       <Button onClick={handleSignOut} size="md">
         Log Out
       </Button>
