@@ -1,4 +1,4 @@
-export { useSupabaseAuth } from "./auth";
+export { useSupabaseAuth, useUser } from "./auth";
 export { useUpdateTextInput } from "./common";
 export {
   useFilterSelectors,
