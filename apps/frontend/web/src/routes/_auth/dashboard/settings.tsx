@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Title, Button } from '@mantine/core';
 
 import { signOut } from '@cwt/auth/signOut';
+import { useUser } from '@cwt/hooks';
 
 import { supabase } from '../../../services/supabaseClient';
 
@@ -12,6 +13,8 @@ export const Route = createFileRoute('/_auth/dashboard/settings')({
 });
 
 function SettingsView() {
+  const name = useUser().name;
+
   const handleSignOut = () => {
     signOut(supabase);
   };
@@ -20,7 +23,7 @@ function SettingsView() {
     <div>
       <Title>Settings</Title>
       <p>Name</p>
-      <TextInputWithEdit />
+      <TextInputWithEdit initialValue={name ? name : ''} />
       <Button onClick={handleSignOut} size="md">
         Log Out
       </Button>
