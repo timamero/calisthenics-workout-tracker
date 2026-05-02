@@ -11,6 +11,7 @@ export default function useUpdateTextInput() {
   return {
     isEditMode,
     text,
+    setText,
     handleEditClick,
     handleSaveClick,
     handleTextChange,
