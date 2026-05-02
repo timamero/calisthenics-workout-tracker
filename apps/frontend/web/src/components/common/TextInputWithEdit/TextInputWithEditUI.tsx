@@ -4,7 +4,8 @@ interface TextInputWithEditUIProps {
   isEditMode: boolean;
   text: string;
   onEditClick: () => void;
-  onSaveClick: (text: string) => void;
+  onCancelClick: () => void;
+  onSaveClick: () => void;
   onTextChange: (value: string) => void;
 }
 
@@ -12,6 +13,7 @@ export default function TextInputWithEditUI({
   isEditMode,
   text,
   onEditClick,
+  onCancelClick,
   onSaveClick,
   onTextChange,
 }: TextInputWithEditUIProps) {
@@ -33,11 +35,20 @@ export default function TextInputWithEditUI({
       {isEditMode && (
         <Group>
           <TextInput
+            w="100%"
             value={text}
             onChange={(event) => onTextChange(event.currentTarget.value)}
           />
           <Button
-            onClick={() => onSaveClick(text)}
+            onClick={() => onCancelClick()}
+            size="compact-sm"
+            variant="subtle"
+            color="dark"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={() => onSaveClick()}
             size="compact-sm"
             variant="outline"
             color="dark"
