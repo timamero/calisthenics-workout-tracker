@@ -1,3 +1,4 @@
-import useSupabaseAuth from './useSupabaseAuth';
+import useSupabaseAuth from "./useSupabaseAuth";
+import useUser from "./useUser";
 
-export { useSupabaseAuth };
+export { useSupabaseAuth, useUser };
