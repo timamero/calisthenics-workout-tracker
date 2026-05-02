@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title, Button } from '@mantine/core';
+import { Stack, Title, Button, Text } from '@mantine/core';
 
 import { signOut, updateUserName } from '@cwt/auth';
 import { useUser } from '@cwt/hooks';
@@ -24,16 +24,18 @@ function SettingsView() {
   };
 
   return (
-    <div>
+    <Stack align="center" gap="lg">
       <Title>Settings</Title>
-      <p>Name</p>
-      <TextInputWithEdit
-        initialValue={name ? name : ''}
-        onSave={handleOnSave}
-      />
-      <Button onClick={handleSignOut} size="md">
+      <Stack align="center" gap="xs" bg="gray.0" bdrs="xs" p="lg" w="100%">
+        <Text fw="bold">Name</Text>
+        <TextInputWithEdit
+          initialValue={name ? name : ''}
+          onSave={handleOnSave}
+        />
+      </Stack>
+      <Button color="red" onClick={handleSignOut} size="md">
         Log Out
       </Button>
-    </div>
+    </Stack>
   );
 }
