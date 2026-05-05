@@ -7,12 +7,17 @@ import {
 } from '@tanstack/react-router';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
-import { createTheme, MantineProvider, Box } from '@mantine/core';
+import {
+  createTheme,
+  MantineProvider,
+  defaultVariantColorsResolver,
+} from '@mantine/core';
 
 import { WorkoutContextProvider } from '@cwt/context';
 import { useSupabaseAuth } from '@cwt/hooks';
-import { supabase } from './services/supabaseClient';
 
+import './styles/global.css';
+import { supabase } from './services/supabaseClient';
 import { routeTree } from './routeTree.gen';
 import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
 
@@ -39,17 +44,35 @@ const theme = createTheme({
     fontFamily:
       'Elms Sans, Seravek, Gill Sans Nova, Ubuntu, Calibri, DejaVu Sans, source-sans-pro, sans-serif',
   },
+  autoContrast: true,
+  luminanceThreshold: 0.3,
   primaryColor: 'lime',
   white: '#FAF9F6',
+
+  variantColorResolver: (input) => {
+    const defaultResolvedColors = defaultVariantColorsResolver(input);
+    // const parsedColor = parseThemeColor({
+    //   color: input.color || input.theme.primaryColor,
+    //   theme: input.theme,
+    // });
+
+    if (input.variant === 'outline') {
+      return {
+        ...defaultResolvedColors,
+        background: 'var(--mantine-color-white)',
+        hover: 'var(--mantine-color-lime-0)',
+        color: 'var(--mantine-color-dark-7)',
+        border: `1px solid var(--mantine-color-dark-7)`,
+      };
+    }
+
+    return defaultResolvedColors;
+  },
 });
 
 export const App = () => {
   useSupabaseAuth(supabase);
-  return (
-    <Box bg="white" c="dark.7" style={{ minHeight: '100vh' }}>
-      <RouterProvider router={router} />
-    </Box>
-  );
+  return <RouterProvider router={router} />;
 };
 
 const rootElement = document.getElementById('root')!;

@@ -27,7 +27,6 @@ function HomeView() {
             variant="filled"
             size="md"
             radius="md"
-            color="lime"
           >
             Sign Up
           </Button>
@@ -37,7 +36,6 @@ function HomeView() {
             variant="outline"
             size="md"
             radius="md"
-            color="lime"
           >
             Log In
           </Button>
