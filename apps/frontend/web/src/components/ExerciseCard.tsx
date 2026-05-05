@@ -44,7 +44,9 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           gap="sm"
         >
           <Group justify="flex-end">
-            <Badge color={difficultyColor}>{exercise.difficulty}</Badge>
+            <Badge ff="monospace" color={difficultyColor}>
+              {exercise.difficulty}
+            </Badge>
           </Group>
           <Group justify="space-between" mb="sm">
             <Title order={2} size="h5">
@@ -58,7 +60,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             <Group gap={8}>
               {exercise.target_muscles.map((muscle, i) => {
                 return (
-                  <Badge variant="light" color="grape" key={i}>
+                  <Badge ff="monospace" variant="light" color="grape" key={i}>
                     {muscle}
                   </Badge>
                 );
@@ -72,12 +74,12 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             <Group gap={8}>
               {exercise.required_equipment == null ||
               exercise.required_equipment.length == 0 ? (
-                <Badge color="dark" variant="transparent">
+                <Badge ff="monospace" color="dark" variant="transparent">
                   ---
                 </Badge>
               ) : (
                 exercise.required_equipment.map((equipment, i) => (
-                  <Badge color="dark" variant="outline" key={i}>
+                  <Badge ff="monospace" color="dark" variant="outline" key={i}>
                     {equipment}
                   </Badge>
                 ))
