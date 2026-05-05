@@ -22,9 +22,10 @@ function AppView() {
     (state) => state.initializeWorkout,
   );
 
-  const handleCreateWorkoutBuildClick = () => {
-    initializeWorkout('build');
-  };
+  // Creating workout template disabled until v.0.1.0-alpha.1.1
+  // const handleCreateWorkoutBuildClick = () => {
+  //   initializeWorkout('build');
+  // };
   const handleCreateWorkoutLogClick = () => {
     initializeWorkout('edit');
   };
@@ -76,14 +77,14 @@ function AppView() {
               Start Blank Workout
             </Text>
           </LargeButton>
-          <LargeButton
+          {/* <LargeButton
             to="/workout"
             onButtonClick={handleCreateWorkoutBuildClick}
           >
             <Text fw={700} ta="center">
               Create a Workout Template
             </Text>
-          </LargeButton>
+          </LargeButton> */}
         </Group>
         {/* {workoutBuildCards && workoutBuildCards.length > 0 && (
           <Stack>
