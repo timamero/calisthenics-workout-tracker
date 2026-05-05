@@ -28,12 +28,12 @@ export default function StartWorkoutScreen() {
     (state) => state.initializeWorkout,
   );
 
-  const onBuildNewWorkoutPress = () => {
-    initializeWorkout('build');
-    setIsAddWorkoutItemButtonsVisible(true);
-    // navigation.navigate('Workout');
-    navigation.navigate('WorkoutStack', { screen: 'Workout' });
-  };
+  // Disable start workout template until v.0.1.0-alpha.1.1
+  // const onBuildNewWorkoutPress = () => {
+  //   initializeWorkout('build');
+  //   setIsAddWorkoutItemButtonsVisible(true);
+  //   navigation.navigate('WorkoutStack', { screen: 'Workout' });
+  // };
 
   const onLogNewWorkoutPress = () => {
     initializeWorkout('edit');
@@ -89,9 +89,9 @@ export default function StartWorkoutScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <LargeButton handlePress={onBuildNewWorkoutPress}>
+      {/* <LargeButton handlePress={onBuildNewWorkoutPress}>
         {startWorkoutContent().createNewBuildButton}
-      </LargeButton>
+      </LargeButton> */}
       <LargeButton handlePress={onLogNewWorkoutPress}>
         {startWorkoutContent().createNewLogButton}
       </LargeButton>
