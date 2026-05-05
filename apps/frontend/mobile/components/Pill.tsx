@@ -44,7 +44,7 @@ export default function Pill({
 
   return (
     <View style={styles.container}>
-      <Text variant="bodySmall" style={styles.pill}>
+      <Text variant="labelSmall" style={styles.pill}>
         {children}
       </Text>
     </View>
@@ -53,8 +53,6 @@ export default function Pill({
 
 const getPillBaseStyles = (theme: CustomTheme) => {
   return {
-    fontSize: 11,
-    fontWeight: '700' as '700',
     textTransform: 'uppercase' as 'uppercase',
   };
 };
