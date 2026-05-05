@@ -1,18 +1,13 @@
 import { useContext } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-import {
-  useWorkoutLibraryStore,
-  useWorkoutDraftStore,
-} from '@cwt/state/stores';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { startWorkoutContent } from '@cwt/content';
 
 import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
 import { CustomTheme } from '../theme';
-import { Text } from '../customText';
-import CardButton from '../components/common/CardButton';
 import LargeButton from '../components/common/LargeButton';
 
 export default function StartWorkoutScreen() {
@@ -22,12 +17,13 @@ export default function StartWorkoutScreen() {
   const setIsAddWorkoutItemButtonsVisible =
     useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
 
-  const workoutBuilds = useWorkoutLibraryStore(
-    (state) => state.displayedWorkoutBuilds,
-  );
-  const workoutLogs = useWorkoutLibraryStore(
-    (state) => state.displayedWorkoutLogs,
-  );
+  // Disable displaying workout logs and templates until v.0.1.0-alpha.1.1
+  // const workoutBuilds = useWorkoutLibraryStore(
+  //   (state) => state.displayedWorkoutBuilds,
+  // );
+  // const workoutLogs = useWorkoutLibraryStore(
+  //   (state) => state.displayedWorkoutLogs,
+  // );
   const initializeWorkout = useWorkoutDraftStore(
     (state) => state.initializeWorkout,
   );
@@ -45,27 +41,27 @@ export default function StartWorkoutScreen() {
     navigation.navigate('WorkoutStack', { screen: 'Workout' });
   };
 
-  const workoutBuildCards = workoutBuilds.map((wo, i) => {
-    const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
-    return (
-      <CardButton handlePress={() => console.log('clicked card')} key={i}>
-        <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
-          {workoutTitle}
-        </Text>
-      </CardButton>
-    );
-  });
+  // const workoutBuildCards = workoutBuilds.map((wo, i) => {
+  //   const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
+  //   return (
+  //     <CardButton handlePress={() => console.log('clicked card')} key={i}>
+  //       <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
+  //         {workoutTitle}
+  //       </Text>
+  //     </CardButton>
+  //   );
+  // });
 
-  const workoutLogCards = workoutLogs.map((wo, i) => {
-    const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
-    return (
-      <CardButton handlePress={() => console.log('clicked card')} key={i}>
-        <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
-          {workoutTitle}
-        </Text>
-      </CardButton>
-    );
-  });
+  // const workoutLogCards = workoutLogs.map((wo, i) => {
+  //   const workoutTitle = wo.title ? wo.title : `Workout Template ${i + 1}`;
+  //   return (
+  //     <CardButton handlePress={() => console.log('clicked card')} key={i}>
+  //       <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
+  //         {workoutTitle}
+  //       </Text>
+  //     </CardButton>
+  //   );
+  // });
 
   // temporarily disabled until v0.1.0-alpha.2
   // React.useEffect(() => {
@@ -99,7 +95,7 @@ export default function StartWorkoutScreen() {
       <LargeButton handlePress={onLogNewWorkoutPress}>
         {startWorkoutContent().createNewLogButton}
       </LargeButton>
-
+      {/* 
       <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
         {startWorkoutContent().workoutBuildListHeading}
       </Text>
@@ -124,8 +120,8 @@ export default function StartWorkoutScreen() {
             {workoutBuildCards}
           </View>
         </ScrollView>
-      </View>
-      <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
+      </View> */}
+      {/* <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
         {startWorkoutContent().workoutLogListHeading}
       </Text>
       <View
@@ -149,7 +145,7 @@ export default function StartWorkoutScreen() {
             {workoutLogCards}
           </View>
         </ScrollView>
-      </View>
+      </View> */}
     </View>
   );
 }
