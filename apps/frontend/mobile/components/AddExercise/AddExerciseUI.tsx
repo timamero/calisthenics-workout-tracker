@@ -45,12 +45,12 @@ export default function AddExerciseUI({
           width: '100%',
           paddingBlock: 20,
           borderTopWidth: 2,
-          borderTopColor: theme.colors.orange1,
+          // borderTopColor: theme.colors.orange1,
         }}
       >
         <Button
           mode="outlined"
-          textColor={theme.colors.light}
+          // textColor={theme.colors.light}
           onPress={() => handleCancelPress()}
           style={{
             borderColor: 'rgb(134, 142, 150)',
@@ -66,12 +66,12 @@ export default function AddExerciseUI({
           style={{
             borderRadius: 4,
           }}
-          theme={{
-            colors: {
-              surfaceDisabled: theme.colors.dark400,
-              onSurfaceDisabled: theme.colors.dark700,
-            },
-          }}
+          // theme={{
+          //   colors: {
+          //     surfaceDisabled: theme.colors.dark400,
+          //     onSurfaceDisabled: theme.colors.dark700,
+          //   },
+          // }}
         >
           Add Exercise
         </Button>

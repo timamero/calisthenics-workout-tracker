@@ -64,13 +64,13 @@ export default function SelectInput({
     },
     button: {
       borderWidth: 1,
-      borderColor: theme.colors.darkGrey,
+      borderColor: theme.colors.outline,
       backgroundColor: 'transparent',
       padding: 12,
       borderRadius: 4,
     },
     buttonText: {
-      color: theme.colors.light,
+      color: theme.colors.onBackground,
     },
     modal: {
       margin: 0,
@@ -79,25 +79,27 @@ export default function SelectInput({
     dropdown: {
       maxHeight: 200,
       backgroundColor: theme.colors.background,
-      borderColor: theme.colors.darkGrey,
+      borderColor: theme.colors.outline,
       borderWidth: 1,
       borderRadius: 4,
     },
     option: {
       padding: 12,
       borderBottomWidth: 1,
-      borderBottomColor: theme.colors.darkGrey,
+      borderBottomColor: theme.colors.outline,
     },
     optionText: {
-      color: theme.colors.light,
+      color: theme.colors.onBackground,
     },
   });
 
   if (mode === 'read') {
     return (
       <View>
-        <Text style={{ color: theme.colors.light }}>{label}</Text>
-        <Text style={{ color: theme.colors.light }}>{selectedValue}</Text>
+        <Text style={{ color: theme.colors.onBackground }}>{label}</Text>
+        <Text style={{ color: theme.colors.onBackground }}>
+          {selectedValue}
+        </Text>
       </View>
     );
   }

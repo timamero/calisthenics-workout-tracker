@@ -54,7 +54,7 @@ export default function FilterCheckbox({
         uncheckedColor="rgb(222, 226, 230)"
         labelStyle={{
           textTransform: 'uppercase',
-          color: theme.colors.light,
+          color: theme.colors.onBackground,
           fontWeight: labelFontWeight,
         }}
         status={isSelected ? 'checked' : 'unchecked'}

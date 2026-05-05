@@ -61,7 +61,7 @@ export default function FilterSelections() {
               style={{
                 textTransform: 'uppercase',
                 fontWeight: 400,
-                color: theme.colors.light,
+                color: theme.colors.onBackground,
               }}
               variant="headlineMedium"
               key={i}

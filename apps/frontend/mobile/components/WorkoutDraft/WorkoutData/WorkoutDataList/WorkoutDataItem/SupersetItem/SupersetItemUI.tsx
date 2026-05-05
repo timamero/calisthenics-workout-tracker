@@ -38,8 +38,8 @@ export default function SupersetItemUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: theme.colors.dark700,
-        borderColor: theme.colors.dark500,
+        backgroundColor: theme.colors.background,
+        borderColor: theme.colors.outline,
         borderWidth: 1,
         paddingInline: 4,
         paddingBlock: 16,
@@ -70,13 +70,13 @@ export default function SupersetItemUI({
               isLast={isLast}
             />
           )}
-          <Text style={{ color: theme.colors.light }}>Superset</Text>
+          <Text style={{ color: theme.colors.onBackground }}>Superset</Text>
         </View>
         {(mode === 'build' || mode === 'edit') && (
           <Button
             mode="outlined"
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.grey}
+            textColor={theme.colors.onBackground}
             style={{ borderColor: theme.colors.error, flexShrink: 0 }}
             onPress={() => handleDeleteSupersetPress()}
           >

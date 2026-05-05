@@ -30,8 +30,8 @@ export default function DurationInput({
       : '00:00';
     return (
       <View>
-        <Text style={{ color: theme.colors.light }}>{label}</Text>
-        <Text style={{ color: theme.colors.light }}>{value}</Text>
+        <Text style={{ color: theme.colors.onBackground }}>{label}</Text>
+        <Text style={{ color: theme.colors.onBackground }}>{value}</Text>
       </View>
     );
   }

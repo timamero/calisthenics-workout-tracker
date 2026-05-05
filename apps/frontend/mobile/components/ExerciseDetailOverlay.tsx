@@ -47,8 +47,8 @@ export default function ExerciseDetailOverlay() {
         <View key={i} style={styles.flexRowStart}>
           <Pill
             backgroundColor={theme.colors.background}
-            textColor={theme.colors.light}
-            borderColor={theme.colors.light}
+            textColor={theme.colors.onBackground}
+            borderColor={theme.colors.onBackground}
           >
             {equipment as Equipment}
           </Pill>
@@ -70,7 +70,7 @@ export default function ExerciseDetailOverlay() {
             style={{
               display: 'flex',
               justifyContent: 'flex-start',
-              borderColor: theme.colors.light,
+              borderColor: theme.colors.onBackground,
               borderBottomWidth: 1,
               borderRightWidth: 1,
               paddingInline: 8,
@@ -80,7 +80,7 @@ export default function ExerciseDetailOverlay() {
               style={{
                 fontSize: 20,
                 fontWeight: 700,
-                color: theme.colors.light,
+                color: theme.colors.onBackground,
               }}
             >
               {i + 1}
@@ -88,7 +88,7 @@ export default function ExerciseDetailOverlay() {
           </View>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={{ color: theme.colors.light }}>
+          <Text style={{ color: theme.colors.onBackground }}>
             {instruction.split(regex)[1]}
           </Text>
         </View>
@@ -114,13 +114,16 @@ export default function ExerciseDetailOverlay() {
           >
             <Button
               mode="outlined"
-              textColor={theme.colors.light}
+              textColor={theme.colors.onBackground}
               onPress={hideModal}
             >
               Back to Exercises
             </Button>
           </View>
-          <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
+          <Text
+            variant="headlineLarge"
+            style={{ color: theme.colors.onBackground }}
+          >
             {exercise?.name}
           </Text>
           <ScrollView style={{ height: 660 }}>
@@ -139,7 +142,7 @@ export default function ExerciseDetailOverlay() {
                 <View style={styles.flexRowStart}>
                   <Pill
                     backgroundColor={difficultyColor}
-                    textColor={theme.colors.light}
+                    textColor={theme.colors.onBackground}
                   >
                     {(exercise?.difficulty as Difficulty) || ''}
                   </Pill>
@@ -151,8 +154,8 @@ export default function ExerciseDetailOverlay() {
                 </Text>
                 <View style={styles.flexRowStart}>
                   <Pill
-                    backgroundColor={theme.colors.darkGrey}
-                    textColor={theme.colors.light}
+                    backgroundColor={theme.colors.background}
+                    textColor={theme.colors.onBackground}
                   >
                     {(exercise?.emphasis as Emphasis) || ''}
                   </Pill>
@@ -173,7 +176,7 @@ export default function ExerciseDetailOverlay() {
                   exercise.required_equipment.length === 0 ? (
                     <Pill
                       backgroundColor={theme.colors.background}
-                      textColor={theme.colors.light}
+                      textColor={theme.colors.onBackground}
                     >
                       {'---' as '---'}
                     </Pill>
@@ -186,7 +189,7 @@ export default function ExerciseDetailOverlay() {
             <View>
               <Text
                 variant="headlineMedium"
-                style={{ color: theme.colors.light }}
+                style={{ color: theme.colors.onBackground }}
               >
                 Instructions
               </Text>
@@ -213,7 +216,7 @@ const getStyles = (theme: CustomTheme) =>
     metadataTitle: {
       fontWeight: 700,
       textTransform: 'uppercase',
-      color: theme.colors.grey,
+      color: theme.colors.onBackground,
       marginBottom: 4,
     },
     flexRowStart: {

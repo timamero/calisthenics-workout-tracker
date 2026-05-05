@@ -72,20 +72,32 @@ export default function WorkoutLogPages() {
           >
             <Text
               variant="headlineMedium"
-              style={{ color: theme.colors.light }}
+              style={{ color: theme.colors.onBackground }}
             >
               {wo.title}
             </Text>
-            <Text variant="bodyMedium" style={{ color: theme.colors.light }}>
+            <Text
+              variant="bodyMedium"
+              style={{ color: theme.colors.onBackground }}
+            >
               {date}
             </Text>
-            <Text variant="bodyMedium" style={{ color: theme.colors.light }}>
+            <Text
+              variant="bodyMedium"
+              style={{ color: theme.colors.onBackground }}
+            >
               {wo.goal}
             </Text>
-            <Text variant="bodyMedium" style={{ color: theme.colors.light }}>
+            <Text
+              variant="bodyMedium"
+              style={{ color: theme.colors.onBackground }}
+            >
               {wo.description}
             </Text>
-            <Text variant="bodyMedium" style={{ color: theme.colors.light }}>
+            <Text
+              variant="bodyMedium"
+              style={{ color: theme.colors.onBackground }}
+            >
               {duration}
             </Text>
           </CardButton>
@@ -104,7 +116,7 @@ export default function WorkoutLogPages() {
         style={{
           width: '100%',
           flex: 1,
-          backgroundColor: theme.colors.dark900,
+          backgroundColor: theme.colors.background,
         }}
       >
         <DataTable>{items}</DataTable>
@@ -119,13 +131,13 @@ export default function WorkoutLogPages() {
         onItemsPerPageChange={onItemsPerPageChange}
         showFastPaginationControls={false}
         selectPageDropdownLabel={'Rows per page'}
-        style={{ borderTopColor: theme.colors.light, borderTopWidth: 1 }}
+        style={{ borderTopColor: theme.colors.onBackground, borderTopWidth: 1 }}
         theme={{
           colors: {
-            onSurface: theme.colors.light,
-            elevation: {
-              level2: theme.colors.dark800,
-            },
+            onSurface: theme.colors.onBackground,
+            // elevation: {
+            //   level2: theme.colors.dark800,
+            // },
           },
         }}
       />

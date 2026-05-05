@@ -36,7 +36,7 @@ export default function LoginScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displaySmall" style={{ color: theme.colors.light }}>
+      <Text variant="displaySmall" style={{ color: theme.colors.onPrimary }}>
         Log In
       </Text>
       <Controller
@@ -53,7 +53,7 @@ export default function LoginScreen() {
         name="email"
       />
       {auth.errors.email && (
-        <Text style={{ color: theme.colors.errorLight }}>
+        <Text style={{ color: theme.colors.error }}>
           {auth.errors.email?.message}
         </Text>
       )}
@@ -78,12 +78,12 @@ export default function LoginScreen() {
         name="password"
       />
       {auth.errors.password && (
-        <Text style={{ color: theme.colors.errorLight }}>
+        <Text style={{ color: theme.colors.error }}>
           {auth.errors.password?.message}
         </Text>
       )}
       {auth.authError && (
-        <Text style={{ color: theme.colors.errorLight }}>{auth.authError}</Text>
+        <Text style={{ color: theme.colors.error }}>{auth.authError}</Text>
       )}
       {/* TODO: Style disabled button */}
       <Button

@@ -24,7 +24,7 @@ export default function ExerciseSetUI({
     >
       <Text
         style={{
-          color: theme.colors.light,
+          color: theme.colors.onBackground,
           fontWeight: 800,
           // textAlign: 'center',
         }}

@@ -28,14 +28,14 @@ export default function AddExerciseScreen() {
           style={{
             marginRight: 24,
           }}
-          textColor={theme.colors.grey}
+          textColor={theme.colors.onBackground}
         >
           Cancel
         </Button>
       ),
       headerTitle: () => null,
     });
-  }, [navigation, theme.colors.grey, handleBackPress]);
+  }, [navigation, theme.colors.onBackground, handleBackPress]);
 
   useEffect(() => {
     const onBackPress = () => {

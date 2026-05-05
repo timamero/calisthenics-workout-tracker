@@ -21,7 +21,10 @@ export default function LargeButton({
     <Card style={styles.card} onPress={() => handlePress()}>
       <Card.Content style={styles.cardContent}>
         <View style={styles.titleContainer}>
-          <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
+          <Text
+            variant="headlineMedium"
+            style={{ color: theme.colors.onBackground }}
+          >
             {children}
           </Text>
         </View>
@@ -38,7 +41,7 @@ const getStyles = (theme: CustomTheme) =>
       backgroundColor: theme.colors.primary,
       boxShadow: 'rgba(222, 226, 230, 0.25) 1px 3px 17px -1px',
       padding: 16,
-      borderColor: theme.colors.light,
+      borderColor: theme.colors.onBackground,
       borderWidth: 1,
       height: 80,
       display: 'flex',

@@ -25,7 +25,10 @@ export default function WorkoutScreen() {
           backgroundColor: theme.colors.background,
         }}
       >
-        <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
+        <Text
+          variant="headlineMedium"
+          style={{ color: theme.colors.onBackground }}
+        >
           Loading
         </Text>
       </View>

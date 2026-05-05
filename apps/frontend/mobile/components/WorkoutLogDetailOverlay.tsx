@@ -79,13 +79,16 @@ export default function WorkoutLogDetailOverlay() {
           >
             <Button
               mode="outlined"
-              textColor={theme.colors.light}
+              textColor={theme.colors.onBackground}
               onPress={handleCloseModal}
             >
               Back to Workouts
             </Button>
           </View>
-          <Text variant="headlineLarge" style={{ color: theme.colors.light }}>
+          <Text
+            variant="headlineLarge"
+            style={{ color: theme.colors.onBackground }}
+          >
             {workoutLogDetail?.title}
           </Text>
           <ScrollView style={{ height: windowHeight - 200 }}>
@@ -147,12 +150,12 @@ const getStyles = (theme: CustomTheme) =>
     metadataTitle: {
       fontWeight: 700,
       textTransform: 'uppercase',
-      color: theme.colors.dark200,
+      color: theme.colors.onBackground,
       marginBottom: 2,
     },
     metadataValue: {
       fontWeight: 700,
-      color: theme.colors.light,
+      color: theme.colors.onBackground,
       marginBottom: 8,
     },
     flexRowStart: {

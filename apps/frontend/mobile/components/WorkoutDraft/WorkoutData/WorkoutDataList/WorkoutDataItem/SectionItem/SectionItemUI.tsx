@@ -43,8 +43,8 @@ export default function SectionItemUI({
         display: 'flex',
         flexDirection: 'column',
         borderWidth: 1,
-        borderColor: theme.colors.dark600,
-        backgroundColor: theme.colors.dark800,
+        borderColor: theme.colors.outline,
+        backgroundColor: theme.colors.background,
         paddingInline: 4,
         paddingBlock: 16,
         marginBlock: 8,
@@ -74,13 +74,13 @@ export default function SectionItemUI({
               isLast={isLast}
             />
           )}
-          <Text style={{ color: theme.colors.light }}>Section</Text>
+          <Text style={{ color: theme.colors.onBackground }}>Section</Text>
         </View>
         {(mode === 'build' || mode === 'edit') && (
           <Button
             mode="outlined"
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.grey}
+            textColor={theme.colors.onBackground}
             style={{ borderColor: theme.colors.error, flexShrink: 0 }}
             onPress={() => handleDeleteSectionPress()}
           >

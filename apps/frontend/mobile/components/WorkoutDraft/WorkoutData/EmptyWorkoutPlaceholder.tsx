@@ -13,7 +13,7 @@ export default function EmptyWorkoutPlaceholder({ mode }: { mode: Mode }) {
   return (
     <View
       style={{
-        borderColor: theme.colors.grey,
+        borderColor: theme.colors.outline,
         borderWidth: 2,
         borderStyle: 'dashed',
         display: 'flex',
@@ -26,14 +26,14 @@ export default function EmptyWorkoutPlaceholder({ mode }: { mode: Mode }) {
       <Text
         variant="bodyLarge"
         style={{
-          color: theme.colors.light,
+          color: theme.colors.onBackground,
           fontWeight: 800,
           textAlign: 'center',
         }}
       >
         {emptyWorkoutPlaceholderContent(mode).heading}
       </Text>
-      <Text style={{ color: theme.colors.light, textAlign: 'center' }}>
+      <Text style={{ color: theme.colors.onBackground, textAlign: 'center' }}>
         {emptyWorkoutPlaceholderContent(mode).message}
       </Text>
     </View>
