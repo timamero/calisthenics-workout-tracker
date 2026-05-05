@@ -11,36 +11,36 @@ export type CustomTheme = typeof DefaultTheme & {
     advancedPillColor: string;
     musclePillColor: string;
     musclePillBgColor: string;
-    grey: string;
-    darkGrey: string;
-    orange1: string;
-    light: string;
+    // grey: string;
+    // darkGrey: string;
+    // orange1: string;
+    // light: string;
 
-    errorLight: string;
+    // errorLight: string;
 
-    orange50: string;
-    orange100: string;
-    orange200: string;
-    orange300: string;
-    orange400: string;
-    orange500: string;
-    orange600: string;
-    orange700: string;
-    orange800: string;
-    orange900: string;
-    orange950: string;
+    // orange50: string;
+    // orange100: string;
+    // orange200: string;
+    // orange300: string;
+    // orange400: string;
+    // orange500: string;
+    // orange600: string;
+    // orange700: string;
+    // orange800: string;
+    // orange900: string;
+    // orange950: string;
 
-    dark50: string;
-    dark100: string;
-    dark200: string;
-    dark300: string;
-    dark400: string;
-    dark500: string;
-    dark600: string;
-    dark700: string;
-    dark800: string;
-    dark900: string;
-    dark950: string;
+    // dark50: string;
+    // dark100: string;
+    // dark200: string;
+    // dark300: string;
+    // dark400: string;
+    // dark500: string;
+    // dark600: string;
+    // dark700: string;
+    // dark800: string;
+    // dark900: string;
+    // dark950: string;
 
     // Color shades (mantine colors to match web)
     white: string;
@@ -55,6 +55,17 @@ export type CustomTheme = typeof DefaultTheme & {
     dark7: string;
     dark8: string;
     dark9: string;
+
+    gray0: string;
+    gray1: string;
+    gray2: string;
+    gray3: string;
+    gray4: string;
+    gray5: string;
+    gray6: string;
+    gray7: string;
+    gray8: string;
+    gray9: string;
 
     lime0: string;
     lime1: string;
@@ -176,45 +187,85 @@ const theme: CustomTheme = {
   fonts: configureFonts({ config: fontConfig }),
   colors: {
     ...DefaultTheme.colors,
-    primary: 'rgb(247 103 7)',
-    secondary: 'rgb(219, 100, 50)',
-    background: 'rgb(20 20 20)',
+    primary: '#94d82d', // lime.5
+    onPrimary: '#424242', // dark.4
+    primaryContainer: '#e9fac8', // lime.1
+    onPrimaryContainer: '#242424', // dark.7
+
+    secondary: '#3b3b3b', // dark.5
+    onSecondary: '#a9e34b', // lime.4
+    secondaryContainer: '#f4fce3', // lime.0
+    onSecondaryContainer: '#5c940d', // lime.9
+    tertiary: '5f3dc4', // violet.9
+    onTertiary: '#f8f9fa', // gray.0
+    tertiaryContainer: '#b197fc', // violet.3
+    onTertiaryContainer: '#141414', // dark.9
+    error: '#C92A2A', // red.9
+    onError: '#f8f9fa', // gray.0
+    errorContainer: '#fff5f5', // red.1
+    onErrorContainer: '#C92A2A', // red.9
+    background: '#FAF9F6', // white
+    onBackground: '#242424', // dark.7
+    surface: '#FAF9F6', // white
+    onSurface: '#242424', // dark.7
+    surfaceVariant: '#E9ECEF', // gray.2
+    onSurfaceVariant: '#424242', // dark.4
+    outline: '#424242', // dark.4
+    outlineVariant: '#E9ECEF', // gray.2
+    shadow: '#141414', // dark.9
+    scrim: '#141414', // dark.9
+    inverseSurface: '#424242', // dark.4
+    inverseOnSurface: '#E9ECEF', // gray.2
+    inversePrimary: '#f4fce3', // lime.0
+    elevation: {
+      // tints of lightest lime
+      level0: 'transparent',
+      level1: '#FEFEFB',
+      level2: '#FCFEF7',
+      level3: '#FBFDF3',
+      level4: '#F9FDEF',
+      level5: '#F8FCEB',
+    },
+    surfaceDisabled: '#E9ECEF', // gray.2
+    onSurfaceDisabled: '#424242', // dark.4
+    backdrop: '#E9ECEF', // gray.2
+
     // Semantic colors
     beginnerPillColor: 'rgb(34, 139, 230)',
     intermediatePillColor: 'rgb(250, 176, 5)',
     advancedPillColor: 'rgb(250, 82, 82)',
     musclePillColor: 'rgb(190, 75, 219)', // mantine: grape.6
     musclePillBgColor: 'rgb(248 240 252)', // mantine: grape.0
-    grey: 'rgb(206 212 218)',
-    darkGrey: 'rgb(33 37 41)', // mantine: gray.9
-    orange1: 'rgb(255 232 204)', // mantine: orange.1
-    light: 'rgb(255 244 230)', // mantine: orange.0
+    // grey: 'rgb(206 212 218)',
+    // darkGrey: 'rgb(33 37 41)', // mantine: gray.9
+    // orange1: 'rgb(255 232 204)', // mantine: orange.1
+    // light: 'rgb(255 244 230)', // mantine: orange.0
 
-    errorLight: '#FFA07A',
+    // errorLight: '#FFA07A',
 
-    orange50: '#fff0ef',
-    orange100: '#ffe1df',
-    orange200: '#ffbfba',
-    orange300: '#ff9f96',
-    orange400: '#ff7766',
-    orange500: '#ff4500',
-    orange600: '#cb3500',
-    orange700: '#9c2600',
-    orange800: '#6c1800',
-    orange900: '#420b00',
-    orange950: '#2d0500',
+    // orange50: '#fff0ef',
+    // orange100: '#ffe1df',
+    // orange200: '#ffbfba',
+    // orange300: '#ff9f96',
+    // orange400: '#ff7766',
+    // orange500: '#ff4500',
+    // orange600: '#cb3500',
+    // orange700: '#9c2600',
+    // orange800: '#6c1800',
+    // orange900: '#420b00',
+    // orange950: '#2d0500',
 
-    dark50: '#f1f1f1',
-    dark100: '#e2e2e2',
-    dark200: '#c4c4c4',
-    dark300: '#a8a8a8',
-    dark400: '#8b8b8b',
-    dark500: '#727272',
-    dark600: '#595959',
-    dark700: '#404040',
-    dark800: '#2a2a2a',
-    dark900: '#141414',
-    dark950: '#0b0b0b',
+    // dark50: '#f1f1f1',
+    // dark100: '#e2e2e2',
+    // dark200: '#c4c4c4',
+    // dark300: '#a8a8a8',
+    // dark400: '#8b8b8b',
+    // dark500: '#727272',
+    // dark600: '#595959',
+    // dark700: '#404040',
+    // dark800: '#2a2a2a',
+    // dark900: '#141414',
+    // dark950: '#0b0b0b',
 
     // Color shades (mantine colors to match web)
     white: '#FAF9F6',
@@ -229,6 +280,17 @@ const theme: CustomTheme = {
     dark7: '#242424',
     dark8: '#1f1f1f',
     dark9: '#141414',
+
+    gray0: '#f8f9fa',
+    gray1: '#f1f3f5',
+    gray2: '#e9ecef',
+    gray3: '#dee2e6',
+    gray4: '#ced4da',
+    gray5: '#adb5bd',
+    gray6: '#868e96',
+    gray7: '#495057',
+    gray8: '#343a40',
+    gray9: '#212529',
 
     lime0: '#f4fce3',
     lime1: '#e9fac8',

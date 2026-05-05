@@ -31,7 +31,7 @@ export default function TextInputWithEditUI({
             display: 'flex',
             flexDirection: 'row',
             flexGrow: 1,
-            backgroundColor: theme.colors.dark700,
+            backgroundColor: theme.colors.background,
             paddingInline: 16,
             paddingBlock: 32,
             borderRadius: 8,
@@ -50,7 +50,7 @@ export default function TextInputWithEditUI({
               variant="bodyLarge"
               numberOfLines={2}
               style={{
-                color: theme.colors.light,
+                color: theme.colors.onBackground,
                 fontWeight: 800,
                 minWidth: 200,
                 flexShrink: 1,
@@ -70,7 +70,7 @@ export default function TextInputWithEditUI({
             display: 'flex',
             flexDirection: 'row',
             flexGrow: 1,
-            backgroundColor: theme.colors.dark700,
+            backgroundColor: theme.colors.background,
             paddingInline: 16,
             paddingBlock: 32,
             borderRadius: 8,
@@ -86,7 +86,7 @@ export default function TextInputWithEditUI({
           >
             <TextInput
               mode="outlined"
-              textColor={theme.colors.grey}
+              textColor={theme.colors.dark5}
               style={{
                 height: 40,
                 fontWeight: 800,
@@ -109,7 +109,7 @@ export default function TextInputWithEditUI({
               <Button
                 theme={{
                   colors: {
-                    primary: theme.colors.dark200,
+                    primary: theme.colors.dark1,
                   },
                 }}
                 onPress={() => onCancelClick()}

@@ -36,8 +36,8 @@ export default function NumeralInput({
     if (mode === 'read') {
       return (
         <View>
-          <Text style={{ color: theme.colors.light }}>{label}</Text>
-          <Text style={{ color: theme.colors.light }}>
+          <Text style={{ color: theme.colors.onBackground }}>{label}</Text>
+          <Text style={{ color: theme.colors.onBackground }}>
             {set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.leverages!.find((field) => field.id === fieldID)!
@@ -86,8 +86,8 @@ export default function NumeralInput({
     if (mode === 'read') {
       return (
         <View>
-          <Text style={{ color: theme.colors.light }}>{label}</Text>
-          <Text style={{ color: theme.colors.light }}>
+          <Text style={{ color: theme.colors.onBackground }}>{label}</Text>
+          <Text style={{ color: theme.colors.onBackground }}>
             {set.fields.assists!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.assists!.find((field) => field.id === fieldID)!.value ===
@@ -135,8 +135,8 @@ export default function NumeralInput({
   if (mode === 'read') {
     return (
       <View>
-        <Text style={{ color: theme.colors.light }}>{label}</Text>
-        <Text style={{ color: theme.colors.light }}>
+        <Text style={{ color: theme.colors.onBackground }}>{label}</Text>
+        <Text style={{ color: theme.colors.onBackground }}>
           {set.fields.reps === undefined ||
           set.fields.reps === null ||
           set.fields.reps.toString() === ''

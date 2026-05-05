@@ -41,7 +41,7 @@ export default function SettingsScreen() {
         <Text
           variant="headlineMedium"
           style={{
-            color: theme.colors.light,
+            color: theme.colors.onBackground,
           }}
         >
           Name
@@ -56,8 +56,8 @@ export default function SettingsScreen() {
           mode="outlined"
           theme={{
             colors: {
-              primary: theme.colors.errorLight,
-              outline: theme.colors.errorLight,
+              primary: theme.colors.error,
+              outline: theme.colors.error,
             },
           }}
           onPress={() => handleLogOut()}

@@ -49,12 +49,12 @@ const RootStack = createNativeStackNavigator({
           screen: UserScreen,
           options: {
             headerStyle: {
-              backgroundColor: 'rgb(20 20 20)',
+              backgroundColor: '#f1f3f5',
             },
             headerTitleStyle: {
-              color: 'rgb(255 244 230)',
+              color: '#242424',
             },
-            headerTintColor: 'white',
+            headerTintColor: '#242424',
           },
         },
         WorkoutStack: {

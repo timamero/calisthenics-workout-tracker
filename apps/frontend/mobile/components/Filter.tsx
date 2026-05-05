@@ -24,12 +24,12 @@ const Filter = () => {
       <Button
         icon="filter-variant"
         mode="outlined"
-        textColor={theme.colors.light}
+        textColor={theme.colors.onBackground}
         contentStyle={{
           flexDirection: 'row-reverse',
         }}
         style={{
-          borderColor: theme.colors.light,
+          borderColor: theme.colors.onBackground,
         }}
         onPress={() => setIsExerciseFilterVisible(true)}
       >

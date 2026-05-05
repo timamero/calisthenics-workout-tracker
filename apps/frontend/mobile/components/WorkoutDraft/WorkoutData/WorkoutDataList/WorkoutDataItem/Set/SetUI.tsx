@@ -35,12 +35,12 @@ export default function SetUI({
       key={`set-${setIndex}`}
       style={{
         borderWidth: 1,
-        borderColor: theme.colors.dark800,
+        borderColor: theme.colors.outline,
         paddingInline: 8,
         paddingBlock: 16,
         marginBlock: 8,
         borderRadius: 20,
-        backgroundColor: theme.colors.dark950,
+        backgroundColor: theme.colors.background,
       }}
     >
       <View
@@ -53,7 +53,7 @@ export default function SetUI({
       >
         {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
           <Text
-            style={{ color: theme.colors.light }}
+            style={{ color: theme.colors.onBackground }}
           >{`Set ${setIndex + 1}`}</Text>
         )}
         {showDeleteButton && (mode === 'build' || mode === 'edit') && (
@@ -61,7 +61,7 @@ export default function SetUI({
             mode="outlined"
             onPress={() => onDeleteSetPress()}
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.grey}
+            textColor={theme.colors.onBackground}
             style={{ borderColor: theme.colors.error }}
           >
             Delete Set
@@ -84,7 +84,7 @@ export default function SetUI({
             status={isCompleted ? 'checked' : 'unchecked'}
             onPress={() => handleToggleCompleted(!isCompleted)}
             labelStyle={{
-              color: theme.colors.light,
+              color: theme.colors.onBackground,
               fontSize: 16,
             }}
             style={{

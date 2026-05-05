@@ -59,14 +59,14 @@ export default function WorkoutDraft() {
           style={{
             marginRight: 24,
           }}
-          textColor={theme.colors.grey}
+          textColor={theme.colors.onBackground}
         >
           Cancel
         </Button>
       ),
       headerTitle: () => null,
     });
-  }, [navigation, theme.colors.grey, setIsCancelWorkoutDialogVisible]);
+  }, [navigation, theme.colors.onBackground, setIsCancelWorkoutDialogVisible]);
 
   useEffect(() => {
     const onBackPress = () => {
@@ -130,12 +130,12 @@ export default function WorkoutDraft() {
                 {
                   value: 'edit',
                   label: 'Edit',
-                  uncheckedColor: theme.colors.light,
+                  uncheckedColor: theme.colors.onBackground,
                 },
                 {
                   value: 'log',
                   label: 'Log',
-                  uncheckedColor: theme.colors.light,
+                  uncheckedColor: theme.colors.onBackground,
                 },
               ]}
             />
@@ -146,7 +146,7 @@ export default function WorkoutDraft() {
             theme={{
               colors: {
                 primaryContainer: theme.colors.background,
-                onPrimaryContainer: theme.colors.light,
+                onPrimaryContainer: theme.colors.onBackground,
               },
             }}
             style={{

@@ -22,7 +22,7 @@ export default function FilterOverlay() {
     paddingBlock: 20,
     marginInline: 16,
     borderWidth: 2,
-    borderColor: theme.colors.orange1,
+    borderColor: theme.colors.outline,
   };
 
   // --- Hooks ---
@@ -98,12 +98,12 @@ export default function FilterOverlay() {
             paddingLeft: 20,
             paddingBottom: 16,
             borderBottomWidth: 2,
-            borderBottomColor: theme.colors.orange1,
+            borderBottomColor: theme.colors.outline,
           }}
         >
           <Text
             variant="headlineMedium"
-            style={{ color: theme.colors.light, opacity: 0.9 }}
+            style={{ color: theme.colors.onBackground, opacity: 0.9 }}
           >
             Filter Exercises
           </Text>
@@ -116,7 +116,7 @@ export default function FilterOverlay() {
             justifyContent: 'space-evenly',
             paddingTop: 20,
             borderTopWidth: 2,
-            borderTopColor: theme.colors.orange1,
+            borderTopColor: theme.colors.outline,
           }}
         >
           <Button

@@ -16,7 +16,7 @@ export default function ExerciseList() {
         flexDirection: 'column',
       }}
     >
-      {exercises.map((exercise) => (
+      {exercises!.map((exercise) => (
         <ExerciseCard exercise={exercise} key={exercise.id} />
       ))}
     </ScrollView>
