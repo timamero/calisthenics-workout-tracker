@@ -13,8 +13,6 @@ export type CustomTheme = typeof DefaultTheme & {
     musclePillBgColor: string;
     grey: string;
     darkGrey: string;
-    dark8: string;
-    dark9: string;
     orange1: string;
     light: string;
 
@@ -43,6 +41,64 @@ export type CustomTheme = typeof DefaultTheme & {
     dark800: string;
     dark900: string;
     dark950: string;
+
+    // Color shades (mantine colors to match web)
+    white: string;
+
+    dark0: string;
+    dark1: string;
+    dark2: string;
+    dark3: string;
+    dark4: string;
+    dark5: string;
+    dark6: string;
+    dark7: string;
+    dark8: string;
+    dark9: string;
+
+    lime0: string;
+    lime1: string;
+    lime2: string;
+    lime3: string;
+    lime4: string;
+    lime5: string;
+    lime6: string;
+    lime7: string;
+    lime8: string;
+    lime9: string;
+
+    teal0: string;
+    teal1: string;
+    teal2: string;
+    teal3: string;
+    teal4: string;
+    teal5: string;
+    teal6: string;
+    teal7: string;
+    teal8: string;
+    teal9: string;
+
+    violet0: string;
+    violet1: string;
+    violet2: string;
+    violet3: string;
+    violet4: string;
+    violet5: string;
+    violet6: string;
+    violet7: string;
+    violet8: string;
+    violet9: string;
+
+    red0: string;
+    red1: string;
+    red2: string;
+    red3: string;
+    red4: string;
+    red5: string;
+    red6: string;
+    red7: string;
+    red8: string;
+    red9: string;
   };
 };
 
@@ -125,8 +181,6 @@ const theme: CustomTheme = {
     musclePillBgColor: 'rgb(248 240 252)', // mantine: grape.0
     grey: 'rgb(206 212 218)',
     darkGrey: 'rgb(33 37 41)', // mantine: gray.9
-    dark8: 'rgb(31 31 31)', // mantin: dark.8
-    dark9: 'rgb(20 20 20)', // mantine: dark.9
     orange1: 'rgb(255 232 204)', // mantine: orange.1
     light: 'rgb(255 244 230)', // mantine: orange.0
 
@@ -155,6 +209,64 @@ const theme: CustomTheme = {
     dark800: '#2a2a2a',
     dark900: '#141414',
     dark950: '#0b0b0b',
+
+    // Color shades (mantine colors to match web)
+    white: '#FAF9F6',
+
+    dark0: '#C9C9C9',
+    dark1: '#b8b8b8',
+    dark2: '#828282',
+    dark3: '#696969',
+    dark4: '#424242',
+    dark5: '#3b3b3b',
+    dark6: '#2E2E2E',
+    dark7: '#242424',
+    dark8: '#1f1f1f',
+    dark9: '#141414',
+
+    lime0: '#f4fce3',
+    lime1: '#e9fac8',
+    lime2: '#d8f5a2',
+    lime3: '#c0eb75',
+    lime4: '#a9e34b',
+    lime5: '#94d82d',
+    lime6: '#82c91e',
+    lime7: '#74b816',
+    lime8: '#66a80f',
+    lime9: '#5c940d',
+
+    teal0: '#e6fcf5',
+    teal1: '#c3fae8',
+    teal2: '#96f2d7',
+    teal3: '#63e6be',
+    teal4: '#38d9a9',
+    teal5: '#20c997',
+    teal6: '#12b886',
+    teal7: '#0ca678',
+    teal8: '#099268',
+    teal9: '#087f5b',
+
+    violet0: '#f3f0ff',
+    violet1: '#e5dbff',
+    violet2: '#d0bfff',
+    violet3: '#b197fc',
+    violet4: '#9775fa',
+    violet5: '#845ef7',
+    violet6: '#7950f2',
+    violet7: '#7048e8',
+    violet8: '#6741d9',
+    violet9: '#5f3dc4',
+
+    red0: '#fff5f5',
+    red1: '#ffe3e3',
+    red2: '#ffc9c9',
+    red3: '#ffa8a8',
+    red4: '#ff8787',
+    red5: '#ff6b6b',
+    red6: '#fa5252',
+    red7: '#f03e3e',
+    red8: '#e03131',
+    red9: '#c92a2a',
   },
 };
 
