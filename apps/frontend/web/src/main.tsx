@@ -11,12 +11,15 @@ import {
   createTheme,
   MantineProvider,
   defaultVariantColorsResolver,
+  NavLink,
 } from '@mantine/core';
 
 import { WorkoutContextProvider } from '@cwt/context';
 import { useSupabaseAuth } from '@cwt/hooks';
 
 import './styles/global.css';
+import navLinkClasses from './styles/NavLink.module.css';
+
 import { supabase } from './services/supabaseClient';
 import { routeTree } from './routeTree.gen';
 import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
@@ -67,6 +70,12 @@ const theme = createTheme({
     }
 
     return defaultResolvedColors;
+  },
+
+  components: {
+    NavLink: NavLink.extend({
+      classNames: navLinkClasses,
+    }),
   },
 });
 
