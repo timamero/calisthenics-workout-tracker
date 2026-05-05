@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-import HomeScreen from '../screens/Home';
+// import HomeScreen from '../screens/Home';
 import StartWorkoutScreen from '../screens/StartWorkoutScreen';
 import LibraryScreen from '../screens/LibraryScreen';
 import HistoryScreen from '../screens/HistoryScreen';
@@ -28,8 +28,8 @@ export const MainTabs = createBottomTabNavigator({
             : 'information-circle-outline';
         } else if (route.name === 'Library') {
           iconName = focused ? 'library' : 'library-outline';
-        } else if (route.name === 'WorkoutDashboard') {
-          iconName = focused ? 'fitness' : 'fitness-outline';
+          // } else if (route.name === 'WorkoutDashboard') {
+          //   iconName = focused ? 'fitness' : 'fitness-outline';
         } else if (route.name === 'History') {
           iconName = focused ? 'file-tray-full' : 'file-tray-outline';
         } else if (route.name === 'Settings') {
@@ -48,17 +48,17 @@ export const MainTabs = createBottomTabNavigator({
   },
 
   screens: {
-    Home: HomeScreen,
+    // Home: HomeScreen,
+    Home: {
+      screen: StartWorkoutScreen,
+      options: {
+        title: 'Workout',
+      },
+    },
     Library: {
       screen: LibraryScreen,
       options: {
         title: 'Exercise Library',
-      },
-    },
-    WorkoutDashboard: {
-      screen: StartWorkoutScreen,
-      options: {
-        title: 'Workout',
       },
     },
     History: HistoryScreen,
