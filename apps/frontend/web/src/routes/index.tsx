@@ -10,7 +10,7 @@ function HomeView() {
     <Stack align="center" justify="center" h="100vh">
       <Stack align="center">
         <Title order={1} size={64}>
-          Leverage
+          Torque
         </Title>
         <Text size="xl">
           Your Quick & Easy Path to Calisthenics Fitness. Track Your Progress

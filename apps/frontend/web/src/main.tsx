@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-router';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
-import { createTheme, MantineProvider } from '@mantine/core';
+import { createTheme, MantineProvider, Box } from '@mantine/core';
 
 import { WorkoutContextProvider } from '@cwt/context';
 import { useSupabaseAuth } from '@cwt/hooks';
@@ -39,11 +39,17 @@ const theme = createTheme({
     fontFamily:
       'Elms Sans, Seravek, Gill Sans Nova, Ubuntu, Calibri, DejaVu Sans, source-sans-pro, sans-serif',
   },
+  primaryColor: 'lime',
+  white: '#FAF9F6',
 });
 
 export const App = () => {
   useSupabaseAuth(supabase);
-  return <RouterProvider router={router} />;
+  return (
+    <Box bg="white" c="dark.7" style={{ minHeight: '100vh' }}>
+      <RouterProvider router={router} />
+    </Box>
+  );
 };
 
 const rootElement = document.getElementById('root')!;
