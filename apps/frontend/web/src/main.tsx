@@ -31,10 +31,13 @@ declare module '@tanstack/react-router' {
 
 const theme = createTheme({
   cursorType: 'pointer',
-  fontFamily: 'Optima, Candara, Noto Sans, source-sans-pro, sans-serif',
+  fontFamily:
+    'Manrope, Avenir, Montserrat, Corbel, URW Gothic, source-sans-pro, sans-serif',
+  fontFamilyMonospace:
+    'Source Code Pro, ui-monospace, Cascadia Code, Source Code Pro, Menlo, Consolas, DejaVu Sans Mono, monospace',
   headings: {
     fontFamily:
-      'ui-monospace, Cascadia Code, Source Code Pro, Menlo, Consolas, DejaVu Sans Mono, monospace',
+      'Elms Sans, Seravek, Gill Sans Nova, Ubuntu, Calibri, DejaVu Sans, source-sans-pro, sans-serif',
   },
 });
 
