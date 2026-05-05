@@ -59,15 +59,15 @@ const SearchBar = () => {
         onChangeText={onChange}
         value={exerciseSearch}
         onClearIconPress={handleClearSearch}
-        iconColor={theme.colors.light}
-        placeholderTextColor={theme.colors.grey}
+        iconColor={theme.colors.onBackground}
+        placeholderTextColor={theme.colors.gray5}
         inputStyle={{
-          color: theme.colors.light,
+          color: theme.colors.onBackground,
         }}
         style={{
           backgroundColor: theme.colors.background,
           borderWidth: 1,
-          borderColor: theme.colors.light,
+          borderColor: theme.colors.onBackground,
         }}
       />
     </View>

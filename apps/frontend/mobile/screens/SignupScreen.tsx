@@ -38,7 +38,7 @@ export default function SignupScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displaySmall" style={{ color: theme.colors.light }}>
+      <Text variant="displaySmall" style={{ color: theme.colors.onBackground }}>
         Sign Up
       </Text>
       <Controller
@@ -57,7 +57,7 @@ export default function SignupScreen() {
         name="email"
       />
       {auth.errors.email && (
-        <Text style={{ color: theme.colors.errorLight }}>
+        <Text style={{ color: theme.colors.error }}>
           {auth.errors.email?.message}
         </Text>
       )}
@@ -82,7 +82,7 @@ export default function SignupScreen() {
         name="password"
       />
       {auth.errors.password && (
-        <Text style={{ color: theme.colors.errorLight }}>
+        <Text style={{ color: theme.colors.error }}>
           {auth.errors.password?.message}
         </Text>
       )}
@@ -109,12 +109,12 @@ export default function SignupScreen() {
         name="confirmPassword"
       />
       {auth.errors.confirmPassword && (
-        <Text style={{ color: theme.colors.errorLight }}>
+        <Text style={{ color: theme.colors.error }}>
           {auth.errors.confirmPassword?.message}
         </Text>
       )}
       {auth.authError && (
-        <Text style={{ color: theme.colors.errorLight }}>{auth.authError}</Text>
+        <Text style={{ color: theme.colors.error }}>{auth.authError}</Text>
       )}
       {/* TODO: Style disabled button */}
       <Button

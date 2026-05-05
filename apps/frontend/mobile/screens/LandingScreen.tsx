@@ -21,12 +21,12 @@ export default function LandingScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displaySmall" style={{ color: theme.colors.light }}>
+      <Text variant="displaySmall" style={{ color: theme.colors.onBackground }}>
         Sign Up or Log In
       </Text>
       <Button
         mode="contained"
-        buttonColor="tomato"
+        buttonColor={theme.colors.primary}
         onPress={() => navigation.navigate('Signup')}
       >
         Sign Up

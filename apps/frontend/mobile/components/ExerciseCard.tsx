@@ -43,7 +43,10 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           </Pill>
         </View>
         <View style={styles.titleContainer}>
-          <Text variant="headlineMedium" style={{ color: theme.colors.light }}>
+          <Text
+            variant="headlineMedium"
+            style={{ color: theme.colors.onBackground }}
+          >
             {exercise.name}
           </Text>
         </View>
@@ -74,7 +77,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             exercise.required_equipment.length === 0 ? (
               <Pill
                 backgroundColor={theme.colors.background}
-                textColor={theme.colors.light}
+                textColor={theme.colors.onBackground}
               >
                 {`---` as '---'}
               </Pill>
@@ -82,8 +85,8 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
               exercise.required_equipment.map((equipment, i) => (
                 <Pill
                   backgroundColor={theme.colors.background}
-                  textColor={theme.colors.light}
-                  borderColor={theme.colors.light}
+                  textColor={theme.colors.onBackground}
+                  borderColor={theme.colors.onBackground}
                   key={i}
                 >
                   {equipment as Attributes}
@@ -106,7 +109,7 @@ const getStyles = (theme: CustomTheme) =>
       boxShadow:
         'rgba(222, 226, 230, 0.05) 0px 1px 3px 0px, rgba(222, 226, 230, 0.05) 0px 28px 23px -7px, rgba(222, 226, 230, 0.04) 0px 12px 12px -7px',
       padding: 16,
-      borderColor: theme.colors.light,
+      borderColor: theme.colors.onBackground,
       borderWidth: 1,
     },
     cardContent: {
@@ -135,7 +138,7 @@ const getStyles = (theme: CustomTheme) =>
     },
     exerciseMetadataTitle: {
       textTransform: 'uppercase',
-      color: theme.colors.grey,
+      color: theme.colors.dark5,
     },
     metadataPillsContainer: {
       width: '80%',

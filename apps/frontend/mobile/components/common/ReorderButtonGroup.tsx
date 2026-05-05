@@ -25,7 +25,7 @@ export default function ReorderButtonGroup({
         <IconButton
           onPress={() => handleUpPress()}
           icon="arrow-up"
-          iconColor={theme.colors.light}
+          iconColor={theme.colors.onBackground}
           size={16}
           style={{ margin: 0 }}
         />
@@ -34,7 +34,7 @@ export default function ReorderButtonGroup({
         <IconButton
           onPress={handleDownPress}
           icon="arrow-down"
-          iconColor={theme.colors.light}
+          iconColor={theme.colors.onBackground}
           size={16}
           style={{ margin: 0 }}
         />

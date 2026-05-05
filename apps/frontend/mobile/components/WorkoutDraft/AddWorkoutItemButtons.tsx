@@ -39,31 +39,31 @@ export default function AddWorkoutItemButtons() {
         visible={isAddWorkoutItemButtonsVisible}
         icon={open ? 'close' : 'plus'}
         style={styles.fabGroup}
-        fabStyle={styles.fab}
-        color={theme.colors.dark700}
+        // fabStyle={styles.fab}
+        // color={theme.colors.onBackground}
         actions={[
           {
             icon: 'application',
             label: 'Add Section',
-            labelTextColor: theme.colors.light,
-            style: styles.fab,
-            color: theme.colors.dark700,
+            // labelTextColor: theme.colors.light,
+            // style: styles.fab,
+            // color: theme.colors.dark700,
             onPress: () => addSection(),
           },
           {
             icon: 'alpha-s-circle',
             label: 'Add Superset',
-            labelTextColor: theme.colors.light,
-            style: styles.fab,
-            color: theme.colors.dark700,
+            // labelTextColor: theme.colors.light,
+            // style: styles.fab,
+            // color: theme.colors.dark700,
             onPress: () => handleAddSupersetPress(),
           },
           {
             icon: 'arm-flex',
             label: 'Add Exercise',
-            labelTextColor: theme.colors.light,
-            style: styles.fab,
-            color: theme.colors.dark700,
+            // labelTextColor: theme.colors.light,
+            // style: styles.fab,
+            // color: theme.colors.dark700,
             onPress: () => handleAddExercisePress(),
           },
         ]}
@@ -82,7 +82,7 @@ const getStyles = (theme: CustomTheme) =>
       right: 0,
       bottom: 0,
     },
-    fab: {
-      backgroundColor: theme.colors.dark100,
-    },
+    // fab: {
+    //   backgroundColor: theme.colors.dark100,
+    // },
   });

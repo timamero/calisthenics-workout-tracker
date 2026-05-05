@@ -42,7 +42,7 @@ export default function WorkoutTitleUI({
               variant="bodyLarge"
               numberOfLines={2}
               style={{
-                color: theme.colors.light,
+                color: theme.colors.onBackground,
                 fontWeight: 800,
                 minWidth: 200,
                 flexShrink: 1,
@@ -69,7 +69,7 @@ export default function WorkoutTitleUI({
           >
             <TextInput
               mode="outlined"
-              textColor={theme.colors.grey}
+              textColor={theme.colors.onBackground}
               style={{
                 height: 40,
                 fontWeight: 800,

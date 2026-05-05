@@ -24,8 +24,8 @@ export default function ExerciseSetGroupItemUI({
         marginBlock: 8,
         marginInline: 4,
         borderWidth: 1,
-        borderColor: theme.colors.dark200,
-        backgroundColor: theme.colors.dark900,
+        borderColor: theme.colors.outline,
+        backgroundColor: theme.colors.background,
         borderRadius: 8,
       }}
     >
@@ -40,7 +40,7 @@ export default function ExerciseSetGroupItemUI({
       >
         <Text
           style={{
-            color: theme.colors.dark200,
+            color: theme.colors.onBackground,
             fontWeight: 600,
           }}
         >

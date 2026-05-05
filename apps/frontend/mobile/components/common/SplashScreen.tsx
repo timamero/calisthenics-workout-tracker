@@ -16,8 +16,10 @@ export default function SplashScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text style={{ color: theme.colors.light }}>Checking Credentials</Text>
-      <ActivityIndicator animating={true} color={theme.colors.orange400} />
+      <Text style={{ color: theme.colors.onBackground }}>
+        Checking Credentials
+      </Text>
+      <ActivityIndicator animating={true} color={theme.colors.primary} />
     </View>
   );
 }

@@ -39,8 +39,8 @@ export default function ExerciseItemUI({
         marginBlock: 8,
         marginInline: 4,
         borderWidth: 1,
-        borderColor: theme.colors.dark200,
-        backgroundColor: theme.colors.dark900,
+        borderColor: theme.colors.outline,
+        backgroundColor: theme.colors.onBackground,
         borderRadius: 8,
       }}
     >
@@ -63,7 +63,7 @@ export default function ExerciseItemUI({
         <Text
           variant="bodyLarge"
           style={{
-            color: theme.colors.light,
+            color: theme.colors.onBackground,
             fontWeight: 800,
             textAlign: 'center',
             flexShrink: 1,
@@ -76,7 +76,7 @@ export default function ExerciseItemUI({
             mode="outlined"
             onPress={handleDeleteExercisePress}
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.grey}
+            textColor={theme.colors.onBackground}
             style={{ borderColor: theme.colors.error, flexShrink: 0 }}
           >
             Delete Exercise
@@ -89,7 +89,7 @@ export default function ExerciseItemUI({
           <Button
             mode="contained"
             onPress={() => handleAddSetPress()}
-            buttonColor={theme.colors.grey}
+            buttonColor={theme.colors.onBackground}
             textColor={theme.colors.dark9}
           >
             Add Set
