@@ -96,7 +96,7 @@ export default function ConfirmationOverlays() {
   const navigation = useNavigation<any>();
 
   const onCancelWorkoutPress = () => {
-    navigation.navigate('App', { screen: 'WorkoutDashboard' });
+    navigation.navigate('App', { screen: 'Home' });
     setIsAddWorkoutItemButtonsVisible(false);
     resetWorkout();
     resetTimer();
@@ -135,7 +135,7 @@ export default function ConfirmationOverlays() {
 
     setIsAddWorkoutItemButtonsVisible(false);
     setIsSaveWorkoutDialogVisible!(false);
-    navigation.navigate('App', { screen: 'WorkoutDashboard' });
+    navigation.navigate('App', { screen: 'Home' });
   };
 
   return (

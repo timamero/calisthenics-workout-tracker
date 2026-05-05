@@ -49,7 +49,7 @@ export default function HomeScreen() {
         Welcome Home {user.name}!
       </Text>
       <Text>xp = {user.xp}</Text>
-      <Button onPress={() => navigation.navigate('WorkoutDashboard')}>
+      <Button onPress={() => navigation.navigate('Home')}>
         Start a workout
       </Button>
     </View>
