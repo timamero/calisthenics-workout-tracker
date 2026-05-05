@@ -67,6 +67,25 @@ export default function StartWorkoutScreen() {
     );
   });
 
+  // temporarily disabled until v0.1.0-alpha.2
+  // React.useEffect(() => {
+  //   navigation.setOptions({
+  //     headerRight: () => (
+  //       <Button
+  //         mode="text"
+  //         icon="account"
+  //         onPress={() => navigation.navigate('Profile')}
+  //         style={{
+  //           marginRight: 24,
+  //         }}
+  //         textColor={theme.colors.grey}
+  //       >
+  //         Profile
+  //       </Button>
+  //     ),
+  //   });
+  // }, [navigation, theme.colors.grey]);
+
   return (
     <View
       style={{
