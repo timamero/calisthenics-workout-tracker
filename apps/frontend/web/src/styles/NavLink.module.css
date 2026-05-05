@@ -1,0 +1,20 @@
+.root {
+  border-radius: var(--mantine-radius-xl);
+  &:hover {
+    background-color: var(--mantine-color-lime-2);
+  }
+
+  &[data-active] {
+    background-color: var(--mantine-color-lime-1);
+
+    .label {
+      color: var(--mantine-color-lime-9);
+    }
+  }
+}
+
+.label {
+  color: var(--mantine-color-dark-7);
+  text-transform: uppercase;
+  font-weight: 600;
+}
