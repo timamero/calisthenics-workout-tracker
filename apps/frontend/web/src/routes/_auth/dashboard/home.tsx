@@ -1,12 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title, Stack, Group, ScrollArea, Text } from '@mantine/core';
+import { Title, Stack, Group, Text } from '@mantine/core';
 
-import {
-  useWorkoutDraftStore,
-  useWorkoutLibraryStore,
-} from '@cwt/state/stores';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import CardButton from '../../../components/common/CardButton';
 import LargeButton from '../../../components/common/LargeButton';
 
 export const Route = createFileRoute('/_auth/dashboard/home')({
@@ -14,12 +10,13 @@ export const Route = createFileRoute('/_auth/dashboard/home')({
 });
 
 function AppView() {
-  const workoutLogs = useWorkoutLibraryStore(
-    (state) => state.displayedWorkoutLogs,
-  );
-  const workoutBuilds = useWorkoutLibraryStore(
-    (state) => state.displayedWorkoutBuilds,
-  );
+  // Displaying workout logs and build disabled until v.0.1.0-alpha.1.1
+  // const workoutLogs = useWorkoutLibraryStore(
+  //   (state) => state.displayedWorkoutLogs,
+  // );
+  // const workoutBuilds = useWorkoutLibraryStore(
+  //   (state) => state.displayedWorkoutBuilds,
+  // );
 
   const initializeWorkout = useWorkoutDraftStore(
     (state) => state.initializeWorkout,
@@ -32,33 +29,33 @@ function AppView() {
     initializeWorkout('edit');
   };
 
-  const workoutBuildCards = workoutBuilds.map((wo, i) => {
-    const workoutTitle = 'title' in wo ? wo.title : `Workout Template ${i + 1}`;
-    const date = 'created_at' in wo ? wo.created_at : new Date();
-    const dateString =
-      typeof date === 'string' ? date : date.toLocaleDateString();
-    return (
-      <CardButton key={i}>
-        <Title order={3} size="h5">
-          {workoutTitle}
-        </Title>
-        <Text>{dateString}</Text>
-      </CardButton>
-    );
-  });
+  // const workoutBuildCards = workoutBuilds.map((wo, i) => {
+  //   const workoutTitle = 'title' in wo ? wo.title : `Workout Template ${i + 1}`;
+  //   const date = 'created_at' in wo ? wo.created_at : new Date();
+  //   const dateString =
+  //     typeof date === 'string' ? date : date.toLocaleDateString();
+  //   return (
+  //     <CardButton key={i}>
+  //       <Title order={3} size="h5">
+  //         {workoutTitle}
+  //       </Title>
+  //       <Text>{dateString}</Text>
+  //     </CardButton>
+  //   );
+  // });
 
-  const workoutLogCards = workoutLogs.map((wo, i) => {
-    const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
-    const date = wo.date;
-    return (
-      <CardButton key={i}>
-        <Title order={3} size="h5">
-          {workoutTitle}
-        </Title>
-        <Text>{date}</Text>
-      </CardButton>
-    );
-  });
+  // const workoutLogCards = workoutLogs.map((wo, i) => {
+  //   const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
+  //   const date = wo.date;
+  //   return (
+  //     <CardButton key={i}>
+  //       <Title order={3} size="h5">
+  //         {workoutTitle}
+  //       </Title>
+  //       <Text>{date}</Text>
+  //     </CardButton>
+  //   );
+  // });
 
   return (
     <Stack align="center" justify="flex-start">
@@ -88,7 +85,7 @@ function AppView() {
             </Text>
           </LargeButton>
         </Group>
-        {workoutBuildCards && workoutBuildCards.length > 0 && (
+        {/* {workoutBuildCards && workoutBuildCards.length > 0 && (
           <Stack>
             <Text fw={700} size="xl">
               Start Workout From Template
@@ -97,9 +94,9 @@ function AppView() {
               <Group wrap="nowrap">{workoutBuildCards}</Group>
             </ScrollArea>
           </Stack>
-        )}
+        )} */}
 
-        {workoutLogCards && workoutLogCards.length > 0 && (
+        {/* {workoutLogCards && workoutLogCards.length > 0 && (
           <Stack>
             <Text fw={700} size="xl">
               Start Workout From Recent Workout
@@ -108,7 +105,7 @@ function AppView() {
               <Group wrap="nowrap">{workoutLogCards}</Group>
             </ScrollArea>
           </Stack>
-        )}
+        )} */}
       </Stack>
     </Stack>
   );
