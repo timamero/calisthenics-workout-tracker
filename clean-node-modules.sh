@@ -16,7 +16,7 @@ fi
 
 # Delete node_modules in apps
 if [ -d "apps" ]; then
-    for app_dir in apps/*/; do
+    for app_dir in apps/frontend/*/; do
         if [ -d "${app_dir}node_modules" ]; then
             echo -e "${RED}Removing ${app_dir}node_modules${NC}"
             rm -rf "${app_dir}node_modules"
