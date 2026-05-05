@@ -23,7 +23,49 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/*"]
+          "fonts": [
+            "./assets/fonts/ElmsSans-Black.ttf",
+            "./assets/fonts/ElmsSans-BlackItalic.ttf",
+            "./assets/fonts/ElmsSans-Bold.ttf",
+            "./assets/fonts/ElmsSans-BoldItalic.ttf",
+            "./assets/fonts/ElmsSans-ExtraBold.ttf",
+            "./assets/fonts/ElmsSans-ExtraBoldItalic.ttf",
+            "./assets/fonts/ElmsSans-ExtraLight.ttf",
+            "./assets/fonts/ElmsSans-ExtraLightItalic.ttf",
+            "./assets/fonts/ElmsSans-Italic.ttf",
+            "./assets/fonts/ElmsSans-Light.ttf",
+            "./assets/fonts/ElmsSans-LightItalic.ttf",
+            "./assets/fonts/ElmsSans-Medium.ttf",
+            "./assets/fonts/ElmsSans-MediumItalic.ttf",
+            "./assets/fonts/ElmsSans-Regular.ttf",
+            "./assets/fonts/ElmsSans-SemiBold.ttf",
+            "./assets/fonts/ElmsSans-SemiBoldItalic.ttf",
+            "./assets/fonts/ElmsSans-Thin.ttf",
+            "./assets/fonts/ElmsSans-ThinItalic.ttf",
+            "./assets/fonts/Manrope-Bold.ttf",
+            "./assets/fonts/Manrope-ExtraBold.ttf",
+            "./assets/fonts/Manrope-ExtraLight.ttf",
+            "./assets/fonts/Manrope-Light.ttf",
+            "./assets/fonts/Manrope-Medium.ttf",
+            "./assets/fonts/Manrope-Regular.ttf",
+            "./assets/fonts/Manrope-SemiBold.ttf",
+            "./assets/fonts/SourceCodePro-Black.ttf",
+            "./assets/fonts/SourceCodePro-BlackItalic.ttf",
+            "./assets/fonts/SourceCodePro-Bold.ttf",
+            "./assets/fonts/SourceCodePro-BoldItalic.ttf",
+            "./assets/fonts/SourceCodePro-ExtraBold.ttf",
+            "./assets/fonts/SourceCodePro-ExtraBoldItalic.ttf",
+            "./assets/fonts/SourceCodePro-ExtraLight.ttf",
+            "./assets/fonts/SourceCodePro-ExtraLightItalic.ttf",
+            "./assets/fonts/SourceCodePro-Italic.ttf",
+            "./assets/fonts/SourceCodePro-Light.ttf",
+            "./assets/fonts/SourceCodePro-LightItalic.ttf",
+            "./assets/fonts/SourceCodePro-Medium.ttf",
+            "./assets/fonts/SourceCodePro-MediumItalic.ttf",
+            "./assets/fonts/SourceCodePro-Regular.ttf",
+            "./assets/fonts/SourceCodePro-SemiBold.ttf",
+            "./assets/fonts/SourceCodePro-SemiBoldItalic.ttf"
+          ]
         }
       ]
     ]
