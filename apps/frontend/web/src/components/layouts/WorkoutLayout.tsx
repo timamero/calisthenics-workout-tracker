@@ -77,7 +77,7 @@ export default function WorkoutLayout() {
 
             onClick={() => saveOverlayHandler!.open()}
           >
-            Save Workout
+            Finish
           </Button>
         </Group>
       </AppShell.Header>
