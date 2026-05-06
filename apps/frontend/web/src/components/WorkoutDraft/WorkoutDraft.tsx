@@ -1,4 +1,4 @@
-import { Stack, Button, SegmentedControl, Center } from '@mantine/core';
+import { Stack, Button, SegmentedControl, Center, Affix } from '@mantine/core';
 import { IoCreateOutline, IoPlayOutline } from 'react-icons/io5';
 
 import {
@@ -36,30 +36,33 @@ export default function WorkoutDraft() {
   return (
     <Stack gap="xl" align="center">
       {mode !== 'build' && (
-        <SegmentedControl
-          value={mode as 'edit' | 'log'}
-          onChange={() => handleSetMode()}
-          data={[
-            {
-              value: 'edit',
-              label: (
-                <Center style={{ gap: 10 }}>
-                  <IoCreateOutline size={16} />
-                  <span>Edit</span>
-                </Center>
-              ),
-            },
-            {
-              value: 'log',
-              label: (
-                <Center style={{ gap: 10 }}>
-                  <IoPlayOutline size={16} />
-                  <span>Log</span>
-                </Center>
-              ),
-            },
-          ]}
-        />
+        <Affix position={{ top: 72, right: 20 }}>
+          <SegmentedControl
+            value={mode as 'edit' | 'log'}
+            onChange={() => handleSetMode()}
+            color="lime.2"
+            data={[
+              {
+                value: 'edit',
+                label: (
+                  <Center style={{ gap: 10 }}>
+                    <IoCreateOutline size={16} />
+                    <span>Edit</span>
+                  </Center>
+                ),
+              },
+              {
+                value: 'log',
+                label: (
+                  <Center style={{ gap: 10 }}>
+                    <IoPlayOutline size={16} />
+                    <span>Log</span>
+                  </Center>
+                ),
+              },
+            ]}
+          />
+        </Affix>
       )}
       <WorkoutTitle />
       <Stack gap="xl" align="center">
