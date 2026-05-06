@@ -11,7 +11,7 @@ import type { Mode } from '@cwt/schema/workouts';
 import WorkoutData from './WorkoutData';
 import { WorkoutTitleContainer as WorkoutTitle } from './WorkoutTitle';
 import WorkoutOverlays from './WorkoutOverlays';
-import AddWorkoutItemMenu from './AddWorkoutItemMenu';
+// import AddWorkoutItemMenu from './AddWorkoutItemMenu';
 
 export default function WorkoutDraft() {
   const saveOverlayHandler =
@@ -68,14 +68,14 @@ export default function WorkoutDraft() {
       <Stack gap="xl" align="center">
         <WorkoutData />
         <Stack justify="center">
-          {mode !== 'log' && (
+          {/* {mode !== 'log' && (
             <Affix
               position={{ bottom: 72, right: '50%' }}
               style={{ transform: 'translateX(50%)' }}
             >
               <AddWorkoutItemMenu />
             </Affix>
-          )}
+          )} */}
 
           <Button
             variant="filled"
