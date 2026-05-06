@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Button } from '@mantine/core';
 import { Link } from '@tanstack/react-router';
 import { Menu, ActionIcon } from '@mantine/core';
@@ -19,13 +19,15 @@ export default function AddWorkoutItemMenu() {
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const handleAddSupersetClick = useAddSuperset().handleAddSupersetClick;
 
+  const [menuOpened, setMenuOpened] = useState(false);
+
   return (
-    <Menu shadow="md" width={200}>
+    <Menu opened={menuOpened} shadow="md" width={200}>
       <Menu.Target>
         <ActionIcon
           size="xxl"
           w="min-content"
-          onClick={(event) => event.preventDefault()}
+          onClick={() => setMenuOpened(!menuOpened)}
         >
           <IoAddOutline size={60} />
         </ActionIcon>
@@ -48,7 +50,10 @@ export default function AddWorkoutItemMenu() {
             variant="subtle"
             color="dark"
             mx="auto"
-            onClick={() => addSection()}
+            onClick={() => {
+              addSection();
+              setMenuOpened(false);
+            }}
           >
             Add Section
           </Button>
@@ -58,7 +63,10 @@ export default function AddWorkoutItemMenu() {
             variant="subtle"
             color="dark"
             mx="auto"
-            onClick={() => handleAddSupersetClick()}
+            onClick={() => {
+              handleAddSupersetClick();
+              setMenuOpened(false);
+            }}
           >
             Add Superset
           </Button>
