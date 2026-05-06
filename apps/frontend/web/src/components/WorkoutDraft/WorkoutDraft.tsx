@@ -1,4 +1,5 @@
-import { Stack, Button, SegmentedControl } from '@mantine/core';
+import { Stack, Button, SegmentedControl, Center } from '@mantine/core';
+import { IoCreateOutline, IoPlayOutline } from 'react-icons/io5';
 
 import {
   useWorkoutDraftStore,
@@ -39,15 +40,26 @@ export default function WorkoutDraft() {
           value={mode as 'edit' | 'log'}
           onChange={() => handleSetMode()}
           data={[
-            { label: 'Edit', value: 'edit' },
-            { label: 'Log', value: 'log' },
+            {
+              value: 'edit',
+              label: (
+                <Center style={{ gap: 10 }}>
+                  <IoCreateOutline size={16} />
+                  <span>Edit</span>
+                </Center>
+              ),
+            },
+            {
+              value: 'log',
+              label: (
+                <Center style={{ gap: 10 }}>
+                  <IoPlayOutline size={16} />
+                  <span>Log</span>
+                </Center>
+              ),
+            },
           ]}
         />
-        // <Switch
-        //   checked={mode === 'edit' ? true : false}
-        //   onChange={() => handleSetMode()}
-        //   label="Edit mode"
-        // />
       )}
       <WorkoutTitle />
       <Stack gap="xl" align="center">
