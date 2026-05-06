@@ -11,7 +11,7 @@ export const MainTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => {
     return {
       headerStyle: {
-        backgroundColor: '#f1f3f5',
+        backgroundColor: '#FAF9F6',
       },
       headerTitleStyle: {
         color: '#242424',
@@ -40,7 +40,7 @@ export const MainTabs = createBottomTabNavigator({
       },
       tabBarActiveTintColor: '#94d82d',
       tabBarInactiveTintColor: '#242424',
-      tabBarStyle: { backgroundColor: '#f1f3f5' },
+      tabBarStyle: { backgroundColor: '#FAF9F6' },
     };
   },
 

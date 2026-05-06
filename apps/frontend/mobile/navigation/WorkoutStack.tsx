@@ -9,10 +9,10 @@ const WorkoutStack = createNativeStackNavigator({
       screen: WorkoutScreen,
       options: {
         headerStyle: {
-          backgroundColor: '#f1f3f5',
+          backgroundColor: '#FAF9F6',
         },
         headerTitleStyle: {
-          color: 'rgb(255 244 230)',
+          color: '#242424',
         },
         headerTintColor: '#242424',
       },
@@ -21,7 +21,7 @@ const WorkoutStack = createNativeStackNavigator({
       screen: AddExerciseScreen,
       options: {
         headerStyle: {
-          backgroundColor: '#f1f3f5',
+          backgroundColor: '#FAF9F6',
         },
         headerTitleStyle: {
           color: '#242424',
