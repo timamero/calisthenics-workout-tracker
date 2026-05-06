@@ -16,8 +16,8 @@ import AddWorkoutItemMenu from './AddWorkoutItemMenu';
 export default function WorkoutDraft() {
   const saveOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
-  const cancelOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
+  // const cancelOverlayHandler =
+  //   useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
@@ -84,13 +84,13 @@ export default function WorkoutDraft() {
           >
             Save Workout
           </Button>
-          <Button
+          {/* <Button
             variant="subtle"
             color="gray"
             onClick={() => cancelOverlayHandler!.open()}
           >
             {`Cancel Workout ${mode === 'build' ? 'Building' : 'Logging'}`}
-          </Button>
+          </Button> */}
         </Stack>
       </Stack>
       <WorkoutOverlays />
