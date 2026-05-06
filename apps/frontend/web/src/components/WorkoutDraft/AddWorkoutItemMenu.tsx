@@ -25,6 +25,7 @@ export default function AddWorkoutItemMenu() {
     <Menu opened={menuOpened} shadow="md" width={200}>
       <Menu.Target>
         <ActionIcon
+          variant="filled"
           size="xxl"
           w="min-content"
           onClick={() => setMenuOpened(!menuOpened)}
