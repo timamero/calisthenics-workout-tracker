@@ -12,6 +12,7 @@ import {
   MantineProvider,
   defaultVariantColorsResolver,
   NavLink,
+  ActionIcon,
 } from '@mantine/core';
 
 import { WorkoutContextProvider } from '@cwt/context';
@@ -19,6 +20,7 @@ import { useSupabaseAuth } from '@cwt/hooks';
 
 import './styles/global.css';
 import navLinkClasses from './styles/NavLink.module.css';
+import actionIconClasses from './styles/ActionIcon.module.css';
 
 import { supabase } from './services/supabaseClient';
 import { routeTree } from './routeTree.gen';
@@ -75,6 +77,9 @@ const theme = createTheme({
   components: {
     NavLink: NavLink.extend({
       classNames: navLinkClasses,
+    }),
+    ActionIcon: ActionIcon.extend({
+      classNames: actionIconClasses,
     }),
   },
 });
