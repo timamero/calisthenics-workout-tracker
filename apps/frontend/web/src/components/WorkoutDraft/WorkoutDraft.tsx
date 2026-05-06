@@ -1,4 +1,4 @@
-import { Stack, Button, Switch } from '@mantine/core';
+import { Stack, Button, SegmentedControl } from '@mantine/core';
 
 import {
   useWorkoutDraftStore,
@@ -35,11 +35,19 @@ export default function WorkoutDraft() {
   return (
     <Stack gap="xl" align="center">
       {mode !== 'build' && (
-        <Switch
-          checked={mode === 'edit' ? true : false}
+        <SegmentedControl
+          value={mode as 'edit' | 'log'}
           onChange={() => handleSetMode()}
-          label="Edit mode"
+          data={[
+            { label: 'Edit', value: 'edit' },
+            { label: 'Log', value: 'log' },
+          ]}
         />
+        // <Switch
+        //   checked={mode === 'edit' ? true : false}
+        //   onChange={() => handleSetMode()}
+        //   label="Edit mode"
+        // />
       )}
       <WorkoutTitle />
       <Stack gap="xl" align="center">
