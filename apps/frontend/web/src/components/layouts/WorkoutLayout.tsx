@@ -5,6 +5,7 @@ import {
   Stack,
   SegmentedControl,
   Center,
+  Group,
 } from '@mantine/core';
 import { IoCreateOutline, IoPlayOutline } from 'react-icons/io5';
 
@@ -57,22 +58,28 @@ export default function WorkoutLayout() {
       }}
       padding="md"
     >
-      <AppShell.Header style={{ display: 'flex', alignItems: 'center' }}>
-        <Button
-          variant="outline"
-          color="gray"
-          ml={16}
-          onClick={() => cancelOverlayHandler!.open()}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant="filled"
-          color="orange"
-          onClick={() => saveOverlayHandler!.open()}
-        >
-          Save Workout
-        </Button>
+      <AppShell.Header>
+        <Group justify="space-between" h="100%" px="md">
+          <Button
+            variant="outline"
+            size="md"
+            radius="md"
+            // color="gray"
+            onClick={() => cancelOverlayHandler!.open()}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="filled"
+            size="md"
+            radius="md"
+            // color="orange"
+
+            onClick={() => saveOverlayHandler!.open()}
+          >
+            Save Workout
+          </Button>
+        </Group>
       </AppShell.Header>
       <AppShell.Main>
         <Outlet />
