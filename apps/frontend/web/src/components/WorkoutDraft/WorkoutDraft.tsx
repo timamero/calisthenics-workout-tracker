@@ -68,8 +68,14 @@ export default function WorkoutDraft() {
       <Stack gap="xl" align="center">
         <WorkoutData />
         <Stack justify="center">
-          {/* {mode !== 'log' && <AddWorkoutItemButtons />} */}
-          {mode !== 'log' && <AddWorkoutItemMenu />}
+          {mode !== 'log' && (
+            <Affix
+              position={{ bottom: 72, right: '50%' }}
+              style={{ transform: 'translateX(50%)' }}
+            >
+              <AddWorkoutItemMenu />
+            </Affix>
+          )}
 
           <Button
             variant="filled"
