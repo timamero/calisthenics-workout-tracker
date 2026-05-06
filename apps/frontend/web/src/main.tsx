@@ -63,11 +63,20 @@ const theme = createTheme({
 
     if (input.variant === 'outline') {
       return {
-        ...defaultResolvedColors,
+        // ...defaultResolvedColors,
         background: 'var(--mantine-color-white)',
-        hover: 'var(--mantine-color-lime-0)',
+        hover: 'var(--mantine-color-lime-1)',
         color: 'var(--mantine-color-dark-7)',
-        border: `1px solid var(--mantine-color-dark-7)`,
+        border: '1px solid var(--mantine-color-dark-7)',
+      };
+    }
+    if (input.variant === 'filled') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'var(--mantine-color-lime-5)',
+        hover: 'var(--mantine-color-lime-3)',
+        color: 'var(--mantine-color-dark-4)',
+        border: 'none',
       };
     }
 
