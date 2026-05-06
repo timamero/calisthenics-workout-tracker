@@ -1,12 +1,12 @@
-import { Stack, Button, SegmentedControl, Center, Affix } from '@mantine/core';
-import { IoCreateOutline, IoPlayOutline } from 'react-icons/io5';
+import { Stack, Button } from '@mantine/core';
+// import { IoCreateOutline, IoPlayOutline } from 'react-icons/io5';
 
-import {
-  useWorkoutDraftStore,
-  useWorkoutStopwatchStore,
-} from '@cwt/state/stores';
+// import {
+//   useWorkoutDraftStore,
+//   useWorkoutStopwatchStore,
+// } from '@cwt/state/stores';
 import { useWorkoutContextWeb } from '@cwt/hooks';
-import type { Mode } from '@cwt/schema/workouts';
+// import type { Mode } from '@cwt/schema/workouts';
 
 import WorkoutData from './WorkoutData';
 import { WorkoutTitleContainer as WorkoutTitle } from './WorkoutTitle';
@@ -19,23 +19,23 @@ export default function WorkoutDraft() {
   // const cancelOverlayHandler =
   //   useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
 
-  const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
-  const startTimer = useWorkoutStopwatchStore((state) => state.start);
-  const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
-  const setMode = useWorkoutDraftStore((state) => state.setMode);
+  // const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
+  // const startTimer = useWorkoutStopwatchStore((state) => state.start);
+  // const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
+  // const setMode = useWorkoutDraftStore((state) => state.setMode);
 
-  const handleSetMode = () => {
-    if (mode === 'edit') {
-      setMode('log');
-      startTimer();
-    } else if (mode === 'log') {
-      setMode('edit');
-      stopTimer();
-    }
-  };
+  // const handleSetMode = () => {
+  //   if (mode === 'edit') {
+  //     setMode('log');
+  //     startTimer();
+  //   } else if (mode === 'log') {
+  //     setMode('edit');
+  //     stopTimer();
+  //   }
+  // };
   return (
     <Stack gap="xl" align="center">
-      {mode !== 'build' && (
+      {/* {mode !== 'build' && (
         <Affix position={{ top: 72, right: 20 }}>
           <SegmentedControl
             value={mode as 'edit' | 'log'}
@@ -63,7 +63,7 @@ export default function WorkoutDraft() {
             ]}
           />
         </Affix>
-      )}
+      )} */}
       <WorkoutTitle />
       <Stack gap="xl" align="center">
         <WorkoutData />
