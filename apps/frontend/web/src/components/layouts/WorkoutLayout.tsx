@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from '@tanstack/react-router';
-import { AppShell, Button } from '@mantine/core';
+import { AppShell, Button, Stack } from '@mantine/core';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutContextWeb } from '@cwt/hooks';
@@ -26,7 +26,7 @@ export default function WorkoutLayout() {
         collapsed: { mobile: true, desktop: true },
       }}
       footer={{
-        height: 100,
+        height: 160,
         collapsed:
           mode === 'log' || location.pathname === '/workout' ? false : true,
       }}
@@ -46,7 +46,9 @@ export default function WorkoutLayout() {
         <Outlet />
       </AppShell.Main>
       <AppShell.Footer>
-        <AddWorkoutItemMenu />
+        <Stack h="100%" justify="center" align="center">
+          <AddWorkoutItemMenu />
+        </Stack>
       </AppShell.Footer>
     </AppShell>
   );
