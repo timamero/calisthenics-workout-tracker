@@ -62,11 +62,6 @@ export default function NumeralInput({
         keyboardType="number-pad"
         label={label}
         style={{ height: 32 }}
-        theme={{
-          colors: {
-            onSurfaceVariant: '#FFF',
-          },
-        }}
         value={
           set.fields.leverages!.find((field) => field.id === fieldID)!.value ===
             null ||
