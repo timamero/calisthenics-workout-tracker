@@ -58,7 +58,7 @@ export default function NumeralInput({
         mode="outlined"
         placeholder="0"
         placeholderTextColor="grey"
-        textColor="#fff"
+        textColor={theme.colors.onBackground}
         keyboardType="number-pad"
         label={label}
         style={{ height: 32 }}
@@ -108,15 +108,10 @@ export default function NumeralInput({
         mode="outlined"
         placeholder="0"
         placeholderTextColor="grey"
-        textColor="#fff"
+        textColor={theme.colors.onBackground}
         keyboardType="number-pad"
         label={label}
         style={{ height: 32 }}
-        theme={{
-          colors: {
-            onSurfaceVariant: '#FFF',
-          },
-        }}
         value={
           set.fields.assists!.find((field) => field.id === fieldID)!.value ===
             null ||
@@ -152,15 +147,10 @@ export default function NumeralInput({
       mode="outlined"
       placeholder="0"
       placeholderTextColor="grey"
-      textColor="#fff"
+      textColor={theme.colors.onBackground}
       keyboardType="number-pad"
       label={label}
       style={{ height: 32 }}
-      theme={{
-        colors: {
-          onSurfaceVariant: '#FFF',
-        },
-      }}
       value={
         set.fields.reps === undefined || set.fields.reps === null
           ? '0'
