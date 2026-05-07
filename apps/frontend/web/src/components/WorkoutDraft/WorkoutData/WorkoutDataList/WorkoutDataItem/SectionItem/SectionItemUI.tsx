@@ -72,6 +72,7 @@ export default function SectionItemUI({
         {(mode === 'edit' || mode === 'build') && (
           <Box p="md">
             <WorkoutItemMenu
+              itemType="section"
               handleUpClick={handleUpClick}
               handleDownClick={handleDownClick}
               handleDeleteClick={handleDeleteSectionClick}
