@@ -34,6 +34,7 @@ export default function SupersetItemUI({
       bd="4px solid var(--mantine-color-default-border)"
       bdrs="md"
       w="100%"
+      maw={400}
     >
       <Group>
         {(mode === 'edit' || mode === 'build') && (

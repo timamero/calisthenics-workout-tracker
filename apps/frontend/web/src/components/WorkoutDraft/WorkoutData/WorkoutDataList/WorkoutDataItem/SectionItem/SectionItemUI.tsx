@@ -33,7 +33,14 @@ export default function SectionItemUI({
   handleSetSectionTitle,
 }: SectionItemUIProps) {
   return (
-    <Stack bg="lime.0" p="xl" bdrs="sm" bd="2px solid dark.4" w="100%">
+    <Stack
+      bg="lime.0"
+      p="xl"
+      bdrs="sm"
+      bd="2px solid dark.4"
+      w="100%"
+      maw={800}
+    >
       <Group>
         {(mode === 'edit' || mode === 'build') && (
           <ReorderButtonGroup

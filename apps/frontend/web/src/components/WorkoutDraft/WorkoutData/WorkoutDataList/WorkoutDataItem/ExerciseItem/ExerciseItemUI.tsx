@@ -30,6 +30,7 @@ export default function ExerciseItemUI({
       bd="1px solid var(--mantine-color-default-border)"
       p="lg"
       w="100%"
+      maw={400}
       bg="transparent"
       bdrs="lg"
     >
