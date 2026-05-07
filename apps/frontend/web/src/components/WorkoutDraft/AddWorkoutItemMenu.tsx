@@ -40,6 +40,7 @@ export default function AddWorkoutItemMenu() {
             variant="subtle"
             color="dark"
             component={Link}
+            onClick={() => setMenuOpened(false)}
             to="/workout/add-exercise"
           >
             Add Exercise
@@ -52,8 +53,8 @@ export default function AddWorkoutItemMenu() {
             color="dark"
             mx="auto"
             onClick={() => {
-              addSection();
               setMenuOpened(false);
+              addSection();
             }}
           >
             Add Section
@@ -65,8 +66,8 @@ export default function AddWorkoutItemMenu() {
             color="dark"
             mx="auto"
             onClick={() => {
-              handleAddSupersetClick();
               setMenuOpened(false);
+              handleAddSupersetClick();
             }}
           >
             Add Superset
