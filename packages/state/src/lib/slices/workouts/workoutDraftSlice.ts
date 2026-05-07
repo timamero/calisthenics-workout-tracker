@@ -52,6 +52,7 @@ interface WorkoutDraftAction {
     workoutData: Array<Exercise | Section | Superset> | null,
   ) => void;
   setWorkoutTitle: (title: string) => void;
+  setSectionTitle: (title: string) => void;
   setSelectedExerciseIDToAdd: (exerciseID: number | null) => void;
   setSetIDToMod: (id: string | null) => void;
   setSetIndexToMod: (index: number | null) => void;
@@ -140,6 +141,41 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       state.workoutTitle = title;
     }),
+  setSectionTitle: (title) =>
+    set((state) => {
+      const sectionID = state.sectionIDToMod;
+
+      if (sectionID == null) {
+        console.error('No sectionID provided');
+        return;
+      }
+
+      if (state.mode === 'edit' || state.mode === 'build') {
+        console.error('Cannot update section in log mode');
+        return;
+      }
+
+      const section = state.workoutData.find(
+        (section) => section.id === sectionID,
+      ) as Section;
+
+      let updatedSection: Section = section;
+      updatedSection = {
+        ...section,
+        name: title,
+      };
+
+      state.workoutData = state.workoutData.map((item) => {
+        if (item.id === sectionID) {
+          return section;
+        } else {
+          return item;
+        }
+      });
+
+      // Reset state
+      state.sectionIDToMod = null;
+    }),
   setSelectedExerciseIDToAdd: (exerciseID) =>
     set((state) => {
       state.selectedExerciseIDToAdd = exerciseID;
@@ -172,7 +208,7 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       state.workoutData.push({
         id: uuidv4(),
-        name: null,
+        name: 'New Section',
         order: state.workoutData.length,
         type: 'section',
         items: [],
