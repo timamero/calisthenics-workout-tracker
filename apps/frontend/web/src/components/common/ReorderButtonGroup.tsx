@@ -1,5 +1,8 @@
 import { Button } from '@mantine/core';
-import { LuSquareArrowUp, LuSquareArrowDown } from 'react-icons/lu';
+import {
+  IoChevronUpCircleOutline,
+  IoChevronDownCircleOutline,
+} from 'react-icons/io5';
 
 interface ReorderButtonProps {
   isFirst: boolean;
@@ -18,17 +21,19 @@ export default function ReorderButtonGroup({
     <Button.Group orientation="vertical">
       {!isFirst && (
         <Button
+          // color="dark"
           onClick={() => handleUpClick()}
           variant="transparent"
           p={1}
-          my={2}
+          // my={1}
+          bdrs="sm"
         >
-          <LuSquareArrowUp size={24} />
+          <IoChevronUpCircleOutline size={24} />
         </Button>
       )}
       {!isLast && (
-        <Button onClick={handleDownClick} variant="transparent" p={1} my={2}>
-          <LuSquareArrowDown size={24} />
+        <Button onClick={handleDownClick} variant="transparent" p={1}>
+          <IoChevronDownCircleOutline size={24} />
         </Button>
       )}
     </Button.Group>
