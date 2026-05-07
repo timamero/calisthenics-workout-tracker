@@ -46,18 +46,9 @@ export default function ExerciseItemUI({
               isLast={isLast}
             />
           )}
-          <Group flex={1} h={104} align="center" justify="center">
+          <Group flex={1} align="center" justify="center">
             <Text>{name}</Text>
           </Group>
-          {/* {(mode === 'edit' || mode === 'build') && (
-          <Button
-          color="red"
-            variant="white"
-            onClick={() => handleDeleteExerciseClick()}
-            >
-            Delete
-            </Button>
-            )} */}
         </Group>
         {(mode === 'edit' || mode === 'build') && (
           <Box p="md">
