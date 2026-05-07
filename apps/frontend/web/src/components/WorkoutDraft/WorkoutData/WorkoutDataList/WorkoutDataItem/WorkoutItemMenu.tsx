@@ -8,6 +8,7 @@ import {
 } from 'react-icons/io5';
 
 interface WorkoutItemMenuProps {
+  itemType: 'superset' | 'section' | 'exercise';
   isFirst: boolean;
   isLast: boolean;
   handleUpClick: () => void;
@@ -16,6 +17,7 @@ interface WorkoutItemMenuProps {
 }
 
 export default function WorkoutItemMenu({
+  itemType,
   isFirst = false,
   isLast = false,
   handleUpClick,
@@ -65,7 +67,7 @@ export default function WorkoutItemMenu({
           }}
           leftSection={<IoTrashBin size={18} />}
         >
-          Delete Section
+          {`Delete ${itemType === 'section' ? 'Section' : itemType === 'superset' ? 'Superset' : 'Exercise'}`}
         </Menu.Item>
         {!isFirst && (
           <Menu.Item
