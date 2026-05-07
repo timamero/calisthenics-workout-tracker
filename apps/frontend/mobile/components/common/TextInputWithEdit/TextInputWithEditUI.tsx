@@ -55,7 +55,6 @@ export default function TextInputWithEditUI({
               numberOfLines={2}
               style={{
                 color: theme.colors.onBackground,
-                fontWeight: 800,
                 minWidth: 200,
                 flexShrink: 1,
               }}
@@ -95,7 +94,6 @@ export default function TextInputWithEditUI({
               textColor={theme.colors.dark5}
               style={{
                 height: 40,
-                fontWeight: 800,
                 minWidth: 240,
                 flexShrink: 1,
                 fontSize: 18,
