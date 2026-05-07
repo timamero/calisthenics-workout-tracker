@@ -18,6 +18,9 @@ export default function SectionItem() {
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod,
   );
+  const setSectionTitle = useWorkoutDraftStore(
+    (state) => state.setSectionTitle,
+  );
 
   const { handleUpClick, handleDownClick } = useReorderItem(section);
   const handleDeleteSectionClick = useDeleteItem(
@@ -32,10 +35,15 @@ export default function SectionItem() {
     setSectionIDToMod(section!.id);
   };
 
+  const handleSetSectionTitle = (title: string) => {
+    setSectionIDToMod(section!.id);
+    setSectionTitle(title);
+  };
+
   return (
     <SectionItemUI
       mode={mode!}
-      title={section.name}
+      title={section.name!}
       isFirst={section!.order === 0}
       isLast={section!.order === rootWorkoutDataLength - 1}
       handleUpClick={handleUpClick}
@@ -43,6 +51,7 @@ export default function SectionItem() {
       handleDeleteSectionClick={handleDeleteSectionClick}
       handleOpenAddExerciseClick={handleOpenAddExerciseClick}
       handleAddSupersetClick={handleAddSupersetClick}
+      handleSetSectionTitle={handleSetSectionTitle}
     />
   );
 }

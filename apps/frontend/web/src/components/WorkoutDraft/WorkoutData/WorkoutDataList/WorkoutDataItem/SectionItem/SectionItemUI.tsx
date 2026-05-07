@@ -1,10 +1,11 @@
-import { Stack, Group, Button, Title } from '@mantine/core';
+import { Stack, Group, Button } from '@mantine/core';
 import { Link } from '@tanstack/react-router';
 
 import type { Mode } from '@cwt/schema/workouts';
 
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import ItemsList from './ItemsList';
+import { TextInputWithEdit } from '../../../../../common/TextInputWithEdit';
 
 interface SectionItemUIProps {
   mode: Mode;
@@ -16,6 +17,7 @@ interface SectionItemUIProps {
   handleDeleteSectionClick: () => void;
   handleOpenAddExerciseClick: () => void;
   handleAddSupersetClick: () => void;
+  handleSetSectionTitle: (title: string) => void;
 }
 
 export default function SectionItemUI({
@@ -28,6 +30,7 @@ export default function SectionItemUI({
   handleDeleteSectionClick,
   handleOpenAddExerciseClick,
   handleAddSupersetClick,
+  handleSetSectionTitle,
 }: SectionItemUIProps) {
   return (
     <Group align="flex-start">
@@ -41,7 +44,13 @@ export default function SectionItemUI({
       )}
       <Stack bg="lime.0" p="xl" bdrs="sm" bd="2px solid dark.4">
         <Group>
-          <Title size="h4">{title}</Title>
+          <TextInputWithEdit
+            initialValue={title}
+            onSave={handleSetSectionTitle}
+            hideEdit={mode === 'log' ? true : false}
+            variant={'title'}
+            maxLength={70}
+          />
           {(mode === 'edit' || mode === 'build') && (
             <Button
               color="red"

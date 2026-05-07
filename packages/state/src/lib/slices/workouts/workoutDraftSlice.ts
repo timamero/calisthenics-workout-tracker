@@ -150,8 +150,8 @@ export const createWorkoutDraftSlice: StateCreator<
         return;
       }
 
-      if (state.mode === 'edit' || state.mode === 'build') {
-        console.error('Cannot update section in log mode');
+      if (state.mode === 'log' || state.mode === 'read') {
+        console.error('Cannot update section in log or read mode');
         return;
       }
 
@@ -167,7 +167,7 @@ export const createWorkoutDraftSlice: StateCreator<
 
       state.workoutData = state.workoutData.map((item) => {
         if (item.id === sectionID) {
-          return section;
+          return updatedSection;
         } else {
           return item;
         }
