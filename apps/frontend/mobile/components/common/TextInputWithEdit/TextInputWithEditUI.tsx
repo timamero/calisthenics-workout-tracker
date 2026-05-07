@@ -11,6 +11,8 @@ interface TextInputWithEditUIProps {
   onCancelClick: () => void;
   onSaveClick: () => void;
   onTextChange: (value: string) => void;
+  hideEdit: boolean;
+  variant: 'title' | 'body';
 }
 
 export default function TextInputWithEditUI({
@@ -20,6 +22,8 @@ export default function TextInputWithEditUI({
   onCancelClick,
   onSaveClick,
   onTextChange,
+  hideEdit,
+  variant,
 }: TextInputWithEditUIProps) {
   const theme = useTheme() as CustomTheme;
 
@@ -47,7 +51,7 @@ export default function TextInputWithEditUI({
             }}
           >
             <Text
-              variant="bodyLarge"
+              variant={variant === 'title' ? 'headlineLarge' : 'bodyLarge'}
               numberOfLines={2}
               style={{
                 color: theme.colors.onBackground,
@@ -58,9 +62,11 @@ export default function TextInputWithEditUI({
             >
               {text}
             </Text>
-            <Button mode="contained" onPress={onEditClick}>
-              Edit
-            </Button>
+            {!hideEdit && (
+              <Button mode="contained" onPress={onEditClick}>
+                Edit
+              </Button>
+            )}
           </View>
         </View>
       )}

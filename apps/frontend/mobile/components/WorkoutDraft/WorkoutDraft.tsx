@@ -97,6 +97,8 @@ export default function WorkoutDraft() {
       <TextInputWithEdit
         initialValue={workoutTitle!}
         onSave={setWorkoutTitle}
+        variant="title"
+        hideEdit={mode === 'log' ? true : false}
       />
       <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
       <View

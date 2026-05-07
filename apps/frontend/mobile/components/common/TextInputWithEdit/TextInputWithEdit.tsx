@@ -7,11 +7,17 @@ import TextInputWithEditUI from './TextInputWithEditUI';
 interface TextInputWithEditProps {
   initialValue: string;
   onSave: (text: string) => void | Promise<void>;
+  hideEdit?: boolean;
+  variant?: 'title' | 'body';
+  maxLength?: number;
 }
 
 export default function TextInputWithEdit({
   initialValue,
   onSave,
+  hideEdit = false,
+  variant = 'body',
+  maxLength = 40,
 }: TextInputWithEditProps) {
   const {
     isEditMode,
@@ -22,6 +28,12 @@ export default function TextInputWithEdit({
     handleSaveClick,
     handleTextChange,
   } = useUpdateTextInput(initialValue);
+
+  const onTextChange = (text: string) => {
+    if (text.length <= maxLength) {
+      handleTextChange(text);
+    }
+  };
 
   useEffect(() => {
     setText(initialValue);
@@ -36,7 +48,9 @@ export default function TextInputWithEdit({
       onSaveClick={() =>
         handleSaveClick(() => (text === initialValue ? null : onSave(text)))
       }
-      onTextChange={handleTextChange}
+      onTextChange={onTextChange}
+      hideEdit={hideEdit}
+      variant={variant}
     />
   );
 }
