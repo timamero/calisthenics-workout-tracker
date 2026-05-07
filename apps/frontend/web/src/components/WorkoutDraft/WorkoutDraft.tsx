@@ -22,7 +22,7 @@ export default function WorkoutDraft() {
           variant={'title'}
           maxLength={70}
         />
-        <Stack gap="xl" align="center">
+        <Stack gap="xl" align="center" w="100%">
           <WorkoutData />
         </Stack>
         <WorkoutOverlays />
