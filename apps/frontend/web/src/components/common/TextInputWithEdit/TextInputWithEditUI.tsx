@@ -1,4 +1,4 @@
-import { Title, TextInput, Button, Group } from '@mantine/core';
+import { Title, TextInput, Button, Group, Text } from '@mantine/core';
 
 interface TextInputWithEditUIProps {
   isEditMode: boolean;
@@ -8,6 +8,7 @@ interface TextInputWithEditUIProps {
   onSaveClick: () => void;
   onTextChange: (value: string) => void;
   hideEdit: boolean;
+  variant: 'title' | 'body';
 }
 
 export default function TextInputWithEditUI({
@@ -18,12 +19,18 @@ export default function TextInputWithEditUI({
   onSaveClick,
   onTextChange,
   hideEdit,
+  variant,
 }: TextInputWithEditUIProps) {
   return (
     <>
       {!isEditMode && (
         <Group>
-          <Title size="h6">{text}</Title>
+          {variant === 'title' ? (
+            <Title size="h3">{text}</Title>
+          ) : (
+            <Text>{text}</Text>
+          )}
+
           {!hideEdit && (
             <Button
               size="compact-sm"
