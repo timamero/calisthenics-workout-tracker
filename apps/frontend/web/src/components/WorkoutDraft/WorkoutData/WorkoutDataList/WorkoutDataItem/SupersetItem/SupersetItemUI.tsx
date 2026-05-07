@@ -28,51 +28,49 @@ export default function SupersetItemUI({
   handleOpenAddExerciseClick,
 }: SupersetItemUIProps) {
   return (
-    <Group align="flex-start">
-      {(mode === 'edit' || mode === 'build') && (
-        <ReorderButtonGroup
-          handleUpClick={() => handleUpClick()}
-          handleDownClick={() => handleDownClick()}
-          isFirst={isFirst}
-          isLast={isLast}
-        />
-      )}
-
-      <Stack
-        bg="transparent"
-        p="xs"
-        bd="4px solid var(--mantine-color-default-border)"
-        bdrs="md"
-      >
-        <Group>
-          <Text>Superset</Text>
-          {(mode === 'edit' || mode === 'build') && (
-            <Button
-              color="red"
-              variant="white"
-              onClick={() => handleDeleteSupersetClick()}
-            >
-              Delete
-            </Button>
-          )}
-        </Group>
-        {mode === 'edit' || mode === 'build' ? (
-          <ExercisesList />
-        ) : (
-          <ExerciseSetGroup />
+    <Stack
+      bg="transparent"
+      p="xs"
+      bd="4px solid var(--mantine-color-default-border)"
+      bdrs="md"
+      w="100%"
+    >
+      <Group>
+        {(mode === 'edit' || mode === 'build') && (
+          <ReorderButtonGroup
+            handleUpClick={() => handleUpClick()}
+            handleDownClick={() => handleDownClick()}
+            isFirst={isFirst}
+            isLast={isLast}
+          />
         )}
+        <Text>Superset</Text>
         {(mode === 'edit' || mode === 'build') && (
           <Button
-            variant="filled"
-            color="orange.9"
-            component={Link}
-            to="/workout/add-exercise"
-            onClick={() => handleOpenAddExerciseClick()}
+            color="red"
+            variant="white"
+            onClick={() => handleDeleteSupersetClick()}
           >
-            Add Exercise
+            Delete
           </Button>
         )}
-      </Stack>
-    </Group>
+      </Group>
+      {mode === 'edit' || mode === 'build' ? (
+        <ExercisesList />
+      ) : (
+        <ExerciseSetGroup />
+      )}
+      {(mode === 'edit' || mode === 'build') && (
+        <Button
+          variant="filled"
+          color="orange.9"
+          component={Link}
+          to="/workout/add-exercise"
+          onClick={() => handleOpenAddExerciseClick()}
+        >
+          Add Exercise
+        </Button>
+      )}
+    </Stack>
   );
 }
