@@ -79,6 +79,15 @@ const theme = createTheme({
         border: 'none',
       };
     }
+    if (input.variant === 'transparent') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'none',
+        hover: 'var(--mantine-color-lime-3)',
+        color: 'var(--mantine-color-dark-7)',
+        border: 'none',
+      };
+    }
 
     return defaultResolvedColors;
   },
