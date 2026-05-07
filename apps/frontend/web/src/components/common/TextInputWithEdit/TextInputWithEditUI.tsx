@@ -7,6 +7,7 @@ interface TextInputWithEditUIProps {
   onCancelClick: () => void;
   onSaveClick: () => void;
   onTextChange: (value: string) => void;
+  hideEdit: boolean;
 }
 
 export default function TextInputWithEditUI({
@@ -16,20 +17,23 @@ export default function TextInputWithEditUI({
   onCancelClick,
   onSaveClick,
   onTextChange,
+  hideEdit,
 }: TextInputWithEditUIProps) {
   return (
     <>
       {!isEditMode && (
         <Group>
           <Title size="h6">{text}</Title>
-          <Button
-            size="compact-sm"
-            onClick={onEditClick}
-            variant="outline"
-            color="dark"
-          >
-            Edit
-          </Button>
+          {!hideEdit && (
+            <Button
+              size="compact-sm"
+              onClick={onEditClick}
+              variant="outline"
+              color="dark"
+            >
+              Edit
+            </Button>
+          )}
         </Group>
       )}
       {isEditMode && (

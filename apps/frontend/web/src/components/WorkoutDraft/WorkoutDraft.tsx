@@ -18,6 +18,7 @@ export default function WorkoutDraft() {
         <TextInputWithEdit
           initialValue={workoutTitle!}
           onSave={setWorkoutTitle}
+          hideEdit={mode === 'log' ? true : false}
         />
         <Stack gap="xl" align="center">
           <WorkoutData />
