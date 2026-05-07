@@ -1,4 +1,12 @@
-import { Stack, Text, Group, Button, Checkbox, Divider } from '@mantine/core';
+import {
+  Stack,
+  Text,
+  Group,
+  ActionIcon,
+  Checkbox,
+  Divider,
+} from '@mantine/core';
+import { IoTrashBin } from 'react-icons/io5';
 
 import type { Mode } from '@cwt/schema/workouts';
 
@@ -27,20 +35,21 @@ export default function SetUI({
   handleDeleteSetClick,
 }: SetUIProps) {
   return (
-    <Stack gap="xs" p="sm">
-      <Group>
+    <Stack gap="xs" p="sm" w={200}>
+      <Group w="100%" justify="space-between">
         {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
           <Text size="xs" fw={600}>{`Set ${setIndex + 1}`}</Text>
         )}
 
         {showDeleteButton && (mode === 'build' || mode === 'edit') && (
-          <Button
-            color="red"
-            variant="white"
+          <ActionIcon
+            variant="subtle"
+            size="sm"
+            c="red"
             onClick={() => handleDeleteSetClick()}
           >
-            Delete
-          </Button>
+            <IoTrashBin size={18} />
+          </ActionIcon>
         )}
       </Group>
       <FieldsList />
