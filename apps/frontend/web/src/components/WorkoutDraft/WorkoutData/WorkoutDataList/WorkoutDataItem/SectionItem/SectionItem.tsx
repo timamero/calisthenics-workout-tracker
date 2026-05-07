@@ -35,6 +35,7 @@ export default function SectionItem() {
   return (
     <SectionItemUI
       mode={mode!}
+      title={section.name}
       isFirst={section!.order === 0}
       isLast={section!.order === rootWorkoutDataLength - 1}
       handleUpClick={handleUpClick}

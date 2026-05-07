@@ -1,4 +1,4 @@
-import { Stack, Group, Text, Button } from '@mantine/core';
+import { Stack, Group, Button, Title } from '@mantine/core';
 import { Link } from '@tanstack/react-router';
 
 import type { Mode } from '@cwt/schema/workouts';
@@ -10,6 +10,7 @@ interface SectionItemUIProps {
   mode: Mode;
   isFirst: boolean;
   isLast: boolean;
+  title: string;
   handleUpClick: () => void;
   handleDownClick: () => void;
   handleDeleteSectionClick: () => void;
@@ -21,6 +22,7 @@ export default function SectionItemUI({
   mode,
   isFirst,
   isLast,
+  title,
   handleUpClick,
   handleDownClick,
   handleDeleteSectionClick,
@@ -37,9 +39,9 @@ export default function SectionItemUI({
           isLast={isLast}
         />
       )}
-      <Stack bg="gray.1" p="xl" bdrs="sm">
+      <Stack bg="lime.0" p="xl" bdrs="sm" bd="2px solid dark.4">
         <Group>
-          <Text>Section</Text>
+          <Title size="h4">{title}</Title>
           {(mode === 'edit' || mode === 'build') && (
             <Button
               color="red"
