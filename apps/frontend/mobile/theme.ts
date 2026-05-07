@@ -133,7 +133,7 @@ const fontConfig = {
       default: 'sans-serif',
     }),
     fontSize: 26,
-    letterSpaorangecing: 0,
+    letterSpacing: 0,
     lineHeight: 40,
   },
   headlineMedium: {
@@ -150,7 +150,7 @@ const fontConfig = {
   bodyLarge: {
     fontFamily: Platform.select({
       web: 'Manrope-Regular, source-sans-pro, sans-serif',
-      ios: 'Manrope-Regularf',
+      ios: 'Manrope-Regular',
       android: 'Manrope-Regular',
       default: 'sans-serif',
     }),
