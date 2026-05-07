@@ -25,11 +25,13 @@ export default function TextInputWithEditUI({
   return (
     <>
       {!isEditMode && (
-        <Group>
+        <Group wrap="nowrap" justify="center">
           {variant === 'title' ? (
-            <Title size="h3">{text}</Title>
+            <Title size="h3" maw={400}>
+              {text}
+            </Title>
           ) : (
-            <Text>{text}</Text>
+            <Text maw={400}>{text}</Text>
           )}
 
           {!hideEdit && (
