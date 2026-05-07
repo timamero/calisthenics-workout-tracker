@@ -12,7 +12,7 @@ export default function ExerciseSetGroupItemUI({
   children,
 }: ExerciseSetGroupItemUIProps) {
   return (
-    <Stack w="100%" maw={400}>
+    <Stack w="100%" maw={600} miw={280}>
       <Text size="xs" fw={600}>
         Set {setNumber}
       </Text>
