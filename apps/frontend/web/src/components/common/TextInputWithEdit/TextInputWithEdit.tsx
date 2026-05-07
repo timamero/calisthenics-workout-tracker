@@ -8,12 +8,14 @@ interface TextInputWithEditProps {
   initialValue: string;
   onSave: (text: string) => void | Promise<void>;
   hideEdit?: boolean;
+  variant?: 'title' | 'body';
 }
 
 export default function TextInputWithEdit({
   initialValue,
   onSave,
   hideEdit = false,
+  variant = 'body',
 }: TextInputWithEditProps) {
   const {
     isEditMode,
@@ -40,6 +42,7 @@ export default function TextInputWithEdit({
       }
       onTextChange={handleTextChange}
       hideEdit={hideEdit}
+      variant={variant}
     />
   );
 }

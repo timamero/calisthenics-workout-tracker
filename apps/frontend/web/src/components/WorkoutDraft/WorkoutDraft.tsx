@@ -19,6 +19,7 @@ export default function WorkoutDraft() {
           initialValue={workoutTitle!}
           onSave={setWorkoutTitle}
           hideEdit={mode === 'log' ? true : false}
+          variant={'title'}
         />
         <Stack gap="xl" align="center">
           <WorkoutData />
