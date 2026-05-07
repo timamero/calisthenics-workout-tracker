@@ -40,6 +40,7 @@ export default function SectionItemUI({
       bd="2px solid dark.4"
       w="100%"
       maw={800}
+      align="center"
     >
       <Group>
         {(mode === 'edit' || mode === 'build') && (
