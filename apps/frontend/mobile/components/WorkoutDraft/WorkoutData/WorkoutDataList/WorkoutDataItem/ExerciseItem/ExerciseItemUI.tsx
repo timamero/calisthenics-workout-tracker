@@ -40,7 +40,7 @@ export default function ExerciseItemUI({
         marginInline: 4,
         borderWidth: 1,
         borderColor: theme.colors.outline,
-        backgroundColor: theme.colors.onBackground,
+        backgroundColor: theme.colors.background,
         borderRadius: 8,
       }}
     >
@@ -89,8 +89,8 @@ export default function ExerciseItemUI({
           <Button
             mode="contained"
             onPress={() => handleAddSetPress()}
-            buttonColor={theme.colors.onBackground}
-            textColor={theme.colors.dark9}
+            buttonColor={theme.colors.secondaryContainer}
+            textColor={theme.colors.onSecondaryContainer}
           >
             Add Set
           </Button>
