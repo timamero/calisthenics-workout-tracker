@@ -5,7 +5,7 @@ import {
   IoChevronUpCircle,
   IoChevronDownCircle,
 } from 'react-icons/io5';
-import { Stack, Group, Button, Menu, ActionIcon } from '@mantine/core';
+import { Stack, Group, Button, Menu, ActionIcon, Box } from '@mantine/core';
 import { Link } from '@tanstack/react-router';
 
 import type { Mode } from '@cwt/schema/workouts';
@@ -78,66 +78,75 @@ export default function SectionItemUI({
         align="flex-start"
         justify="space-between"
         w="100%"
-        p="md"
+        wrap="nowrap"
+        // p="md"
         style={{ borderBottom: '1px solid var(--mantine-color-dark-7)' }}
       >
+        <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
+          {(mode === 'edit' || mode === 'build') && (
+            <ReorderButtonGroup
+              handleUpClick={() => handleUpClick()}
+              handleDownClick={() => handleDownClick()}
+              isFirst={isFirst}
+              isLast={isLast}
+            />
+          )}
+          <Group flex={1} h={104} align="center" justify="center">
+            <TextInputWithEdit
+              initialValue={title}
+              onSave={handleSetSectionTitle}
+              hideEdit={mode === 'log' ? true : false}
+              variant={'title'}
+              maxLength={70}
+            />
+          </Group>
+        </Group>
         {(mode === 'edit' || mode === 'build') && (
-          <ReorderButtonGroup
-            handleUpClick={() => handleUpClick()}
-            handleDownClick={() => handleDownClick()}
-            isFirst={isFirst}
-            isLast={isLast}
-          />
-        )}
-        <TextInputWithEdit
-          initialValue={title}
-          onSave={handleSetSectionTitle}
-          hideEdit={mode === 'log' ? true : false}
-          variant={'title'}
-          maxLength={70}
-        />
-        {(mode === 'edit' || mode === 'build') && (
-          <Menu opened={menuOpened} shadow="md" width={200}>
-            <Menu.Target>
-              <ActionIcon
-                variant="transparent"
-                size="md"
-                w="min-content"
-                onClick={() => setMenuOpened(!menuOpened)}
-              >
-                <IoEllipsisVertical size={30} />
-              </ActionIcon>
-            </Menu.Target>
+          <Box p="md">
+            <Menu opened={menuOpened} shadow="md" width={200}>
+              <Menu.Target>
+                <ActionIcon
+                  variant="transparent"
+                  size="md"
+                  p="xs"
+                  w="min-content"
+                  h="min-content"
+                  onClick={() => setMenuOpened(!menuOpened)}
+                >
+                  <IoEllipsisVertical size={24} />
+                </ActionIcon>
+              </Menu.Target>
 
-            <Menu.Dropdown bg="gray.2">
-              <Menu.Item
-                c="red"
-                onClick={() => {
-                  setMenuOpened(false);
-                  handleDeleteSectionClick();
-                }}
-                leftSection={<IoTrashBin size={18} />}
-              >
-                Delete Section
-              </Menu.Item>
-              {!isFirst && (
+              <Menu.Dropdown bg="gray.2">
                 <Menu.Item
-                  onClick={() => onUpClick()}
-                  leftSection={<IoChevronUpCircle size={18} />}
+                  c="red"
+                  onClick={() => {
+                    setMenuOpened(false);
+                    handleDeleteSectionClick();
+                  }}
+                  leftSection={<IoTrashBin size={18} />}
                 >
-                  Move Up
+                  Delete Section
                 </Menu.Item>
-              )}
-              {!isLast && (
-                <Menu.Item
-                  onClick={() => onDownClick()}
-                  leftSection={<IoChevronDownCircle size={18} />}
-                >
-                  Move Down
-                </Menu.Item>
-              )}
-            </Menu.Dropdown>
-          </Menu>
+                {!isFirst && (
+                  <Menu.Item
+                    onClick={() => onUpClick()}
+                    leftSection={<IoChevronUpCircle size={18} />}
+                  >
+                    Move Up
+                  </Menu.Item>
+                )}
+                {!isLast && (
+                  <Menu.Item
+                    onClick={() => onDownClick()}
+                    leftSection={<IoChevronDownCircle size={18} />}
+                  >
+                    Move Down
+                  </Menu.Item>
+                )}
+              </Menu.Dropdown>
+            </Menu>
+          </Box>
         )}
       </Group>
       <ItemsList />
