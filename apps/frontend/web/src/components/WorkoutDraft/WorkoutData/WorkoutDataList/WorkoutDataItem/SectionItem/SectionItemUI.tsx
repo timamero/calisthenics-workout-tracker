@@ -12,6 +12,7 @@ import type { Mode } from '@cwt/schema/workouts';
 
 import ItemsList from './ItemsList';
 import { TextInputWithEdit } from '../../../../../common/TextInputWithEdit';
+import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 
 interface SectionItemUIProps {
   mode: Mode;
@@ -67,14 +68,27 @@ export default function SectionItemUI({
   return (
     <Stack
       bg="lime.0"
-      p="xl"
       bdrs="sm"
       bd="2px solid dark.4"
       w="100%"
       maw={1200}
       align="center"
     >
-      <Group>
+      <Group
+        align="flex-start"
+        justify="space-between"
+        w="100%"
+        p="md"
+        style={{ borderBottom: '1px solid var(--mantine-color-dark-7)' }}
+      >
+        {(mode === 'edit' || mode === 'build') && (
+          <ReorderButtonGroup
+            handleUpClick={() => handleUpClick()}
+            handleDownClick={() => handleDownClick()}
+            isFirst={isFirst}
+            isLast={isLast}
+          />
+        )}
         <TextInputWithEdit
           initialValue={title}
           onSave={handleSetSectionTitle}
