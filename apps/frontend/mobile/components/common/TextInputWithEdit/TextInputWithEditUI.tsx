@@ -3,6 +3,7 @@ import { Button, TextInput, useTheme } from 'react-native-paper';
 
 import { CustomTheme } from '../../../theme';
 import { Text } from '../../../customText';
+import CustomButton from '../CustomButton';
 
 interface TextInputWithEditUIProps {
   isEditMode: boolean;
@@ -62,9 +63,14 @@ export default function TextInputWithEditUI({
               {text}
             </Text>
             {!hideEdit && (
-              <Button mode="contained" onPress={onEditClick}>
-                Edit
-              </Button>
+              <CustomButton>Edit</CustomButton>
+              // <Button
+              //   mode="contained"
+              //   onPress={onEditClick}
+              //   labelStyle={{ fontFamily: 'Manrope-SemiBold' }}
+              // >
+              //   Edit
+              // </Button>
             )}
           </View>
         </View>
