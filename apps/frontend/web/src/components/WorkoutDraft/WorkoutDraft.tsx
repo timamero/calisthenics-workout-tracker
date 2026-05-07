@@ -20,6 +20,7 @@ export default function WorkoutDraft() {
           onSave={setWorkoutTitle}
           hideEdit={mode === 'log' ? true : false}
           variant={'title'}
+          maxLength={70}
         />
         <Stack gap="xl" align="center">
           <WorkoutData />
