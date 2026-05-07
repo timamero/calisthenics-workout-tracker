@@ -1,3 +1,4 @@
+import type { ChangeEvent } from 'react';
 import { Title, TextInput, Button, Group, Text } from '@mantine/core';
 
 interface TextInputWithEditUIProps {
@@ -6,7 +7,7 @@ interface TextInputWithEditUIProps {
   onEditClick: () => void;
   onCancelClick: () => void;
   onSaveClick: () => void;
-  onTextChange: (value: string) => void;
+  onTextChange: (event: ChangeEvent<HTMLInputElement>) => void;
   hideEdit: boolean;
   variant: 'title' | 'body';
 }
@@ -45,11 +46,7 @@ export default function TextInputWithEditUI({
       )}
       {isEditMode && (
         <Group>
-          <TextInput
-            w="100%"
-            value={text}
-            onChange={(event) => onTextChange(event.currentTarget.value)}
-          />
+          <TextInput w="100%" value={text} onChange={onTextChange} />
           <Button
             onClick={() => onCancelClick()}
             size="compact-sm"

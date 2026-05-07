@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type ChangeEvent } from 'react';
 
 import { useUpdateTextInput } from '@cwt/hooks';
 
@@ -9,6 +9,7 @@ interface TextInputWithEditProps {
   onSave: (text: string) => void | Promise<void>;
   hideEdit?: boolean;
   variant?: 'title' | 'body';
+  maxLength?: number;
 }
 
 export default function TextInputWithEdit({
@@ -16,6 +17,7 @@ export default function TextInputWithEdit({
   onSave,
   hideEdit = false,
   variant = 'body',
+  maxLength = 40,
 }: TextInputWithEditProps) {
   const {
     isEditMode,
@@ -26,6 +28,12 @@ export default function TextInputWithEdit({
     handleSaveClick,
     handleTextChange,
   } = useUpdateTextInput(initialValue);
+
+  const onTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.currentTarget.value.length <= maxLength) {
+      handleTextChange(event.currentTarget.value);
+    }
+  };
 
   useEffect(() => {
     setText(initialValue);
@@ -40,7 +48,7 @@ export default function TextInputWithEdit({
       onSaveClick={() =>
         handleSaveClick(() => (text === initialValue ? null : onSave(text)))
       }
-      onTextChange={handleTextChange}
+      onTextChange={onTextChange}
       hideEdit={hideEdit}
       variant={variant}
     />
