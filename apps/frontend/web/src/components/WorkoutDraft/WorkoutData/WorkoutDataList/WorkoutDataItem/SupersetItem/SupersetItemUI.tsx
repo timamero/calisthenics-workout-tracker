@@ -45,7 +45,7 @@ export default function SupersetItemUI({
               isLast={isLast}
             />
           )}
-          <Group flex={1} h={104} align="center" justify="center">
+          <Group flex={1} align="center" justify="center">
             <Text>Superset</Text>
           </Group>
         </Group>
