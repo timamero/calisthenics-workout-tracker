@@ -39,7 +39,7 @@ export default function SectionItemUI({
       bdrs="sm"
       bd="2px solid dark.4"
       w="100%"
-      maw={800}
+      maw={1200}
       align="center"
     >
       <Group>
