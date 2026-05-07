@@ -56,7 +56,7 @@ export default function WorkoutLayout() {
         collapsed:
           mode === 'log' || location.pathname === '/workout' ? false : true,
       }}
-      padding="md"
+      padding="0"
     >
       <AppShell.Header>
         <Group justify="space-between" h="100%" px="md">
@@ -81,8 +81,10 @@ export default function WorkoutLayout() {
           </Button>
         </Group>
       </AppShell.Header>
-      <AppShell.Main>
+      <AppShell.Main style={{ display: 'flex' }}>
+        {/* <Stack> */}
         <Outlet />
+        {/* </Stack> */}
       </AppShell.Main>
       <AppShell.Footer>
         <Stack h="100%" justify="center" align="center">

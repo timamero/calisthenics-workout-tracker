@@ -20,7 +20,7 @@ export default function AddExerciseOverlayUI({
   handleCancelClick,
 }: AddExerciseUIProps) {
   return (
-    <Stack gap="xl">
+    <Stack gap="xl" w="100%" p="md">
       <Group>
         <ExerciseSearchBar />
         <ActionIcon
