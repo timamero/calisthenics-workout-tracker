@@ -12,10 +12,10 @@ import { useWorkoutContextMobile } from '@cwt/hooks';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 import WorkoutData from './WorkoutData';
-import WorkoutTitle from './WorkoutTitle';
 import WorkoutOverlays from './WorkoutOverlays';
 import AddWorkoutItemButtons from './AddWorkoutItemButtons';
 import type { CustomTheme } from '../../theme';
+import TextInputWithEdit from '../common/TextInputWithEdit';
 
 export default function WorkoutDraft() {
   const theme = useTheme() as CustomTheme;
@@ -32,6 +32,11 @@ export default function WorkoutDraft() {
     useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
   const workoutDataScrollViewRef =
     useContext(WorkoutDraftContext)?.workoutDataScrollViewRef!;
+
+  const workoutTitle = useWorkoutDraftStore((state) => state.workoutTitle);
+  const setWorkoutTitle = useWorkoutDraftStore(
+    (state) => state.setWorkoutTitle,
+  );
 
   const startTimer = useWorkoutStopwatchStore((state) => state.start);
   const stopTimer = useWorkoutStopwatchStore((state) => state.stop);
@@ -89,7 +94,10 @@ export default function WorkoutDraft() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <WorkoutTitle />
+      <TextInputWithEdit
+        initialValue={workoutTitle!}
+        onSave={setWorkoutTitle}
+      />
       <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
       <View
         style={{
