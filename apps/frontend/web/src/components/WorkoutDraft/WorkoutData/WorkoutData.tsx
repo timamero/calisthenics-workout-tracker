@@ -21,7 +21,7 @@ export default function WorkoutData() {
   }
 
   return (
-    <Stack gap="xl" align="center">
+    <Stack gap="xl" align="center" w="100%">
       {workoutExercisesLength === 0 && <EmptyWorkoutPlaceholder mode={mode} />}
       <WorkoutDataList />
     </Stack>

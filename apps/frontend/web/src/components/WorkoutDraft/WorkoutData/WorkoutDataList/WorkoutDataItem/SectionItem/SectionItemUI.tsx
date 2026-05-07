@@ -33,56 +33,54 @@ export default function SectionItemUI({
   handleSetSectionTitle,
 }: SectionItemUIProps) {
   return (
-    <Group align="flex-start">
-      {(mode === 'edit' || mode === 'build') && (
-        <ReorderButtonGroup
-          handleUpClick={() => handleUpClick()}
-          handleDownClick={() => handleDownClick()}
-          isFirst={isFirst}
-          isLast={isLast}
-        />
-      )}
-      <Stack bg="lime.0" p="xl" bdrs="sm" bd="2px solid dark.4">
-        <Group>
-          <TextInputWithEdit
-            initialValue={title}
-            onSave={handleSetSectionTitle}
-            hideEdit={mode === 'log' ? true : false}
-            variant={'title'}
-            maxLength={70}
-          />
-          {(mode === 'edit' || mode === 'build') && (
-            <Button
-              color="red"
-              variant="white"
-              onClick={() => handleDeleteSectionClick()}
-            >
-              Delete
-            </Button>
-          )}
-        </Group>
-        <ItemsList />
+    <Stack bg="lime.0" p="xl" bdrs="sm" bd="2px solid dark.4" w="100%">
+      <Group>
         {(mode === 'edit' || mode === 'build') && (
-          <Stack>
-            <Button
-              variant="filled"
-              color="orange.9"
-              component={Link}
-              to="/workout/add-exercise"
-              onClick={() => handleOpenAddExerciseClick()}
-            >
-              Add Exercise
-            </Button>
-            <Button
-              variant="filled"
-              color="orange.9"
-              onClick={() => handleAddSupersetClick()}
-            >
-              Add Superset
-            </Button>
-          </Stack>
+          <ReorderButtonGroup
+            handleUpClick={() => handleUpClick()}
+            handleDownClick={() => handleDownClick()}
+            isFirst={isFirst}
+            isLast={isLast}
+          />
         )}
-      </Stack>
-    </Group>
+        <TextInputWithEdit
+          initialValue={title}
+          onSave={handleSetSectionTitle}
+          hideEdit={mode === 'log' ? true : false}
+          variant={'title'}
+          maxLength={70}
+        />
+        {(mode === 'edit' || mode === 'build') && (
+          <Button
+            color="red"
+            variant="white"
+            onClick={() => handleDeleteSectionClick()}
+          >
+            Delete
+          </Button>
+        )}
+      </Group>
+      <ItemsList />
+      {(mode === 'edit' || mode === 'build') && (
+        <Stack>
+          <Button
+            variant="filled"
+            color="orange.9"
+            component={Link}
+            to="/workout/add-exercise"
+            onClick={() => handleOpenAddExerciseClick()}
+          >
+            Add Exercise
+          </Button>
+          <Button
+            variant="filled"
+            color="orange.9"
+            onClick={() => handleAddSupersetClick()}
+          >
+            Add Superset
+          </Button>
+        </Stack>
+      )}
+    </Stack>
   );
 }

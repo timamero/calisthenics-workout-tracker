@@ -26,47 +26,45 @@ export default function ExerciseItemUI({
   handleDeleteExerciseClick,
 }: ExerciseItemUIProps) {
   return (
-    <Group align="flex-start">
-      {(mode === 'edit' || mode === 'build') && (
-        <ReorderButtonGroup
-          handleUpClick={() => handleUpClick()}
-          handleDownClick={() => handleDownClick()}
-          isFirst={isFirst}
-          isLast={isLast}
-        />
-      )}
-      <Stack
-        bd="1px solid var(--mantine-color-default-border)"
-        p="lg"
-        w={300}
-        bg="transparent"
-        bdrs="lg"
-      >
-        <Group>
-          <Text>{name}</Text>
-          {(mode === 'edit' || mode === 'build') && (
-            <Button
-              color="red"
-              variant="white"
-              onClick={() => handleDeleteExerciseClick()}
-            >
-              Delete
-            </Button>
-          )}
-        </Group>
-        <Stack gap="xs">
-          <SetList />
-        </Stack>
+    <Stack
+      bd="1px solid var(--mantine-color-default-border)"
+      p="lg"
+      w="100%"
+      bg="transparent"
+      bdrs="lg"
+    >
+      <Group>
+        {(mode === 'edit' || mode === 'build') && (
+          <ReorderButtonGroup
+            handleUpClick={() => handleUpClick()}
+            handleDownClick={() => handleDownClick()}
+            isFirst={isFirst}
+            isLast={isLast}
+          />
+        )}
+        <Text>{name}</Text>
         {(mode === 'edit' || mode === 'build') && (
           <Button
-            variant="outline"
-            color="dark"
-            onClick={() => handleAddSetClick()}
+            color="red"
+            variant="white"
+            onClick={() => handleDeleteExerciseClick()}
           >
-            Add Set
+            Delete
           </Button>
         )}
+      </Group>
+      <Stack gap="xs">
+        <SetList />
       </Stack>
-    </Group>
+      {(mode === 'edit' || mode === 'build') && (
+        <Button
+          variant="outline"
+          color="dark"
+          onClick={() => handleAddSetClick()}
+        >
+          Add Set
+        </Button>
+      )}
+    </Stack>
   );
 }
