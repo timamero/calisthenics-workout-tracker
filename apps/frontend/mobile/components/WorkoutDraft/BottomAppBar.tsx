@@ -45,7 +45,7 @@ export default function BottomAppBar() {
         styles.bottom,
         {
           height: BOTTOM_APPBAR_HEIGHT + bottom,
-          backgroundColor: theme.colors.surfaceVariant,
+          backgroundColor: theme.colors.gray1,
         },
       ]}
       safeAreaInsets={{ bottom }}
