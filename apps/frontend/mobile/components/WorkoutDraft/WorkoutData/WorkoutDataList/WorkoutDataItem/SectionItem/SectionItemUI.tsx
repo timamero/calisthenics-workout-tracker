@@ -89,6 +89,7 @@ export default function SectionItemUI({
             hideEdit={mode === 'log' ? true : false}
             variant={'title'}
             maxLength={70}
+            size="md"
           />
         </View>
         {(mode === 'build' || mode === 'edit') && (
