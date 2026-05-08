@@ -1,8 +1,18 @@
 import { type ReactNode } from 'react';
-import { Button } from 'react-native-paper';
+import { Button, type ButtonProps } from 'react-native-paper';
 
-export default function CustomButton({ children }: { children: ReactNode }) {
+interface CustomButtonProps extends ButtonProps {
+  children: ReactNode;
+}
+
+export default function CustomButton({ children, ...rest }: CustomButtonProps) {
   return (
-    <Button labelStyle={{ fontFamily: 'Manrope-SemiBold' }}>{children}</Button>
+    <Button
+      // theme={{}}
+      labelStyle={[{ fontFamily: 'Manrope-SemiBold' }, rest.labelStyle]}
+      {...rest}
+    >
+      {children}
+    </Button>
   );
 }
