@@ -99,6 +99,7 @@ export default function SectionItemUI({
             }
           >
             <Menu.Item
+              leadingIcon="trash-can"
               onPress={() => {
                 closeMenu();
                 handleDeleteSectionPress();
@@ -107,6 +108,7 @@ export default function SectionItemUI({
             />
             {!isFirst && (
               <Menu.Item
+                leadingIcon="chevron-up-circle"
                 onPress={() => {
                   closeMenu();
                   handleUpPress();
@@ -116,6 +118,7 @@ export default function SectionItemUI({
             )}
             {!isLast && (
               <Menu.Item
+                leadingIcon="chevron-down-circle"
                 onPress={() => {
                   closeMenu();
                   handleDownPress();
