@@ -99,6 +99,7 @@ export default function WorkoutDraft() {
         onSave={setWorkoutTitle}
         variant="title"
         hideEdit={mode === 'log' ? true : false}
+        maxLength={70}
       />
       <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
       <View
