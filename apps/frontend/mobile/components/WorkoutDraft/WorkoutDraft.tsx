@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { BackHandler } from 'react-native';
-import { useTheme, Button } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import type { Mode } from '@cwt/schema/workouts';
@@ -36,7 +36,7 @@ export default function WorkoutDraft() {
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <Button
+        <CustomButton
           mode="text"
           onPress={() => setIsCancelWorkoutDialogVisible(true)}
           style={{
@@ -45,7 +45,7 @@ export default function WorkoutDraft() {
           textColor={theme.colors.onBackground}
         >
           Cancel
-        </Button>
+        </CustomButton>
       ),
       headerRight: () => (
         <CustomButton
