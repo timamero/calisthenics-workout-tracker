@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { View } from 'react-native';
-import { useTheme, Button } from 'react-native-paper';
+import { useTheme, Button, Menu, Divider } from 'react-native-paper';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
 import { useAddSupersetMobile } from '@cwt/hooks';
@@ -37,6 +38,12 @@ export default function SectionItemUI({
   const handleAddSupersetPress = useAddSupersetMobile(
     section.id,
   ).handleAddSupersetPress;
+
+  const [visible, setVisible] = useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
   return (
     <View
       style={{
@@ -77,6 +84,41 @@ export default function SectionItemUI({
           <Text style={{ color: theme.colors.onBackground }}>Section</Text>
         </View>
         {(mode === 'build' || mode === 'edit') && (
+          <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={<Button onPress={openMenu}>Show menu</Button>}
+          >
+            <Menu.Item
+              onPress={() => {
+                closeMenu();
+                handleDeleteSectionPress();
+              }}
+              title="Delete"
+            />
+            {!isFirst && (
+              <Menu.Item
+                onPress={() => {
+                  closeMenu();
+                  handleUpPress();
+                }}
+                title="Move Up"
+              />
+            )}
+            {!isLast && (
+              <Menu.Item
+                onPress={() => {
+                  closeMenu();
+                  handleDownPress();
+                }}
+                title="Move Down"
+              />
+            )}
+            <Divider />
+            {/* <Menu.Item onPress={() => {}} title="Move Down" /> */}
+          </Menu>
+        )}
+        {/* {(mode === 'build' || mode === 'edit') && (
           <Button
             mode="outlined"
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
@@ -85,8 +127,8 @@ export default function SectionItemUI({
             onPress={() => handleDeleteSectionPress()}
           >
             Delete
-          </Button>
-        )}
+          </Button> */}
+        {/* )} */}
       </View>
       {section.items.map((item) => {
         if (item.type === 'exercise') {
