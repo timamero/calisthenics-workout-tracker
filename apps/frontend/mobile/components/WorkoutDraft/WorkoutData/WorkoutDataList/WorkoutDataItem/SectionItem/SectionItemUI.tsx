@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useTheme, Button, Menu, Divider } from 'react-native-paper';
+import { Ionicons } from '@expo/vector-icons';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
 import { useAddSupersetMobile } from '@cwt/hooks';
@@ -87,7 +88,15 @@ export default function SectionItemUI({
           <Menu
             visible={visible}
             onDismiss={closeMenu}
-            anchor={<Button onPress={openMenu}>Show menu</Button>}
+            anchor={
+              <Button onPress={openMenu} style={{ height: 40, width: 32 }}>
+                <Ionicons
+                  name="ellipsis-vertical"
+                  size={24}
+                  color={theme.colors.secondary}
+                />
+              </Button>
+            }
           >
             <Menu.Item
               onPress={() => {
@@ -114,8 +123,6 @@ export default function SectionItemUI({
                 title="Move Down"
               />
             )}
-            <Divider />
-            {/* <Menu.Item onPress={() => {}} title="Move Down" /> */}
           </Menu>
         )}
         {/* {(mode === 'build' || mode === 'edit') && (
