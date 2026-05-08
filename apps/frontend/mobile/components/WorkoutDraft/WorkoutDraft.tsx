@@ -115,11 +115,16 @@ export default function WorkoutDraft() {
       }}
     >
       <KeyboardAvoidingView
-        style={{ flexShrink: 1 }}
+        // style={{ flexShrink: 1 }}
+        style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <ScrollView
-          style={{ marginBottom: 104, flexGrow: 1 }}
+          style={{
+            marginBottom: 104,
+            flexGrow: 1,
+            backgroundColor: theme.colors.lime2,
+          }}
           ref={workoutDataScrollViewRef}
         >
           <TextInputWithEdit
@@ -131,7 +136,7 @@ export default function WorkoutDraft() {
           />
           {/* <WorkoutData scrollViewRef={workoutDataScrollViewRef} /> */}
           <WorkoutData />
-          <View
+          {/* <View
             style={{
               position: 'absolute',
               bottom: 0,
@@ -140,9 +145,9 @@ export default function WorkoutDraft() {
               flexDirection: 'column',
             }}
           >
-            {mode !== 'log' && <AddWorkoutItemButtons />}
+            {mode !== 'log' && <AddWorkoutItemButtons />} */}
 
-            <View
+          {/* <View
               style={
                 mode === 'build'
                   ? {
@@ -159,8 +164,8 @@ export default function WorkoutDraft() {
                       marginBottom: 16,
                     }
               }
-            >
-              {mode !== 'build' && (
+            > */}
+          {/* {mode !== 'build' && (
                 <SegmentedButtons
                   density="small"
                   value={mode}
@@ -181,9 +186,9 @@ export default function WorkoutDraft() {
                     },
                   ]}
                 />
-              )}
+              )} */}
 
-              {/* <Button
+          {/* <Button
                 icon="check"
                 theme={{
                   colors: {
@@ -199,10 +204,66 @@ export default function WorkoutDraft() {
               >
                 Complete Workout
               </Button> */}
-            </View>
-          </View>
+          {/* </View> */}
+          {/* </View> */}
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          height: 150,
+          backgroundColor: theme.colors.red4,
+        }}
+      >
+        {mode !== 'log' && <AddWorkoutItemButtons />}
+        <View
+          style={
+            mode === 'build'
+              ? {
+                  position: 'relative',
+                  marginInline: 16,
+                  marginBottom: 16,
+                }
+              : {
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginInline: 16,
+                  marginBottom: 16,
+                  backgroundColor: theme.colors.violet3,
+                }
+          }
+        >
+          {mode !== 'build' && (
+            <SegmentedButtons
+              density="small"
+              value={mode}
+              onValueChange={(value: Mode) => handleSetMode(value)}
+              theme={{
+                colors: { secondaryContainer: theme.colors.primary },
+              }}
+              buttons={[
+                {
+                  value: 'edit',
+                  label: 'Edit',
+                  uncheckedColor: theme.colors.onBackground,
+                },
+                {
+                  value: 'log',
+                  label: 'Log',
+                  uncheckedColor: theme.colors.onBackground,
+                },
+              ]}
+            />
+          )}
+        </View>
+      </View>
       <WorkoutOverlays workoutDataScrollViewRef={workoutDataScrollViewRef} />
     </View>
   );
