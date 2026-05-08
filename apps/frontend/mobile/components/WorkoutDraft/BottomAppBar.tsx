@@ -60,6 +60,12 @@ export default function BottomAppBar() {
           bottom: (BOTTOM_APPBAR_HEIGHT + bottom) / 2,
           transform: 'translateY(8px)',
         }}
+        theme={{
+          colors: {
+            secondaryContainer: theme.colors.tertiary,
+            onSecondaryContainer: theme.colors.onTertiary,
+          },
+        }}
         buttons={[
           {
             value: 'edit',
