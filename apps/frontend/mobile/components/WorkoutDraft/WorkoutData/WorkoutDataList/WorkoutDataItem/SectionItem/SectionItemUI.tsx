@@ -39,11 +39,6 @@ export default function SectionItemUI({
     section.id,
   ).handleAddSupersetPress;
 
-  // const [visible, setVisible] = useState(false);
-
-  // const openMenu = () => setVisible(true);
-
-  // const closeMenu = () => setVisible(false);
   return (
     <View
       style={{
@@ -92,59 +87,7 @@ export default function SectionItemUI({
             handleDownPress={handleDownPress}
             handleDeletePress={handleDeleteSectionPress}
           />
-          // <Menu
-          //   visible={visible}
-          //   onDismiss={closeMenu}
-          //   anchor={
-          //     <IconButton
-          //       icon="dots-vertical"
-          //       // iconColor={MD3Colors.error50}
-          //       size={24}
-          //       onPress={openMenu}
-          //     />
-          //   }
-          // >
-          //   <Menu.Item
-          //     leadingIcon="trash-can"
-          //     onPress={() => {
-          //       closeMenu();
-          //       handleDeleteSectionPress();
-          //     }}
-          //     title="Delete"
-          //   />
-          //   {!isFirst && (
-          //     <Menu.Item
-          //       leadingIcon="chevron-up-circle"
-          //       onPress={() => {
-          //         closeMenu();
-          //         handleUpPress();
-          //       }}
-          //       title="Move Up"
-          //     />
-          //   )}
-          //   {!isLast && (
-          //     <Menu.Item
-          //       leadingIcon="chevron-down-circle"
-          //       onPress={() => {
-          //         closeMenu();
-          //         handleDownPress();
-          //       }}
-          //       title="Move Down"
-          //     />
-          //   )}
-          // </Menu>
         )}
-        {/* {(mode === 'build' || mode === 'edit') && (
-          <Button
-            mode="outlined"
-            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.onBackground}
-            style={{ borderColor: theme.colors.error, flexShrink: 0 }}
-            onPress={() => handleDeleteSectionPress()}
-          >
-            Delete
-          </Button> */}
-        {/* )} */}
       </View>
       {section.items.map((item) => {
         if (item.type === 'exercise') {
