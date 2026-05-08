@@ -1,6 +1,7 @@
 import { type RefObject } from 'react';
 import { View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type { Mode } from '@cwt/schema/workouts';
 
@@ -17,6 +18,8 @@ interface WorkoutDraftUIProps {
   mode: Mode;
 }
 
+const BOTTOM_APPBAR_HEIGHT = 80;
+
 export default function WorkoutDraftUI({
   scrollViewRef,
   workoutTitle,
@@ -24,6 +27,7 @@ export default function WorkoutDraftUI({
   mode,
 }: WorkoutDraftUIProps) {
   const theme = useTheme() as CustomTheme;
+  const { bottom } = useSafeAreaInsets();
 
   return (
     <View
@@ -38,7 +42,7 @@ export default function WorkoutDraftUI({
       >
         <ScrollView
           style={{
-            marginBottom: 104,
+            marginBottom: BOTTOM_APPBAR_HEIGHT + bottom,
             flexGrow: 1,
           }}
           ref={scrollViewRef}
@@ -53,7 +57,6 @@ export default function WorkoutDraftUI({
           <WorkoutData />
         </ScrollView>
       </KeyboardAvoidingView>
-
       <BottomAppBar />
 
       <WorkoutOverlays />
