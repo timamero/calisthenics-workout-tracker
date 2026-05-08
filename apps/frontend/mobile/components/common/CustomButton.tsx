@@ -8,7 +8,6 @@ interface CustomButtonProps extends ButtonProps {
 export default function CustomButton({ children, ...rest }: CustomButtonProps) {
   return (
     <Button
-      // theme={{}}
       labelStyle={[{ fontFamily: 'Manrope-SemiBold' }, rest.labelStyle]}
       {...rest}
     >

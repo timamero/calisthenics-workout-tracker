@@ -79,7 +79,11 @@ export default function TextInputWithEditUI({
             {text}
           </Text>
           {!hideEdit && (
-            <CustomButton mode="outlined" onPress={onEditClick}>
+            <CustomButton
+              mode="contained-tonal"
+              onPress={onEditClick}
+              icon="pencil"
+            >
               Edit
             </CustomButton>
           )}
@@ -136,7 +140,11 @@ export default function TextInputWithEditUI({
               >
                 Cancel
               </CustomButton>
-              <CustomButton mode="contained" onPress={() => onSaveClick()}>
+              <CustomButton
+                mode="contained-tonal"
+                onPress={() => onSaveClick()}
+                icon="check-bold"
+              >
                 Save
               </CustomButton>
             </View>
