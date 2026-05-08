@@ -35,7 +35,7 @@ export default function WorkoutItemMenu({
           closeMenu();
           handleDeletePress();
         }}
-        title="Delete"
+        title={`Delete ${itemType === 'section' ? 'Section' : itemType === 'superset' ? 'Superset' : 'Exercise'}`}
       />
       {!isFirst && (
         <Menu.Item
