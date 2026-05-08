@@ -7,6 +7,7 @@ import { Text } from '../../../../../../customText';
 import { CustomTheme } from '../../../../../../theme';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import SetList from '../SetList';
+import WorkoutItemMenu from '../WorkoutItemMenu';
 
 interface ExerciseItemUIProps {
   mode: Mode;
@@ -72,15 +73,23 @@ export default function ExerciseItemUI({
           {name}
         </Text>
         {(mode === 'build' || mode === 'edit') && (
-          <Button
-            mode="outlined"
-            onPress={handleDeleteExercisePress}
-            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.onBackground}
-            style={{ borderColor: theme.colors.error, flexShrink: 0 }}
-          >
-            Delete Exercise
-          </Button>
+          <WorkoutItemMenu
+            itemType="exercise"
+            isFirst={isFirst}
+            isLast={isLast}
+            handleUpPress={handleUpPress}
+            handleDownPress={handleDownPress}
+            handleDeletePress={handleDeleteExercisePress}
+          />
+          // <Button
+          //   mode="outlined"
+          //   onPress={handleDeleteExercisePress}
+          //   labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+          //   textColor={theme.colors.onBackground}
+          //   style={{ borderColor: theme.colors.error, flexShrink: 0 }}
+          // >
+          //   Delete Exercise
+          // </Button>
         )}
       </View>
       <SetList />

@@ -10,6 +10,7 @@ import { CustomTheme } from '../../../../../../theme';
 import { Text } from '../../../../../../customText';
 import ExercisesList from './ExercisesList';
 import ExerciseSetGroup from '../ExerciseSetGroup';
+import WorkoutItemMenu from '../WorkoutItemMenu';
 
 interface SupersetItemUIProps {
   mode: Mode;
@@ -73,15 +74,23 @@ export default function SupersetItemUI({
           <Text style={{ color: theme.colors.onBackground }}>Superset</Text>
         </View>
         {(mode === 'build' || mode === 'edit') && (
-          <Button
-            mode="outlined"
-            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.onBackground}
-            style={{ borderColor: theme.colors.error, flexShrink: 0 }}
-            onPress={() => handleDeleteSupersetPress()}
-          >
-            Delete
-          </Button>
+          <WorkoutItemMenu
+            itemType="superset"
+            isFirst={isFirst}
+            isLast={isLast}
+            handleUpPress={handleUpPress}
+            handleDownPress={handleDownPress}
+            handleDeletePress={handleDeleteSupersetPress}
+          />
+          // <Button
+          //   mode="outlined"
+          //   labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+          //   textColor={theme.colors.onBackground}
+          //   style={{ borderColor: theme.colors.error, flexShrink: 0 }}
+          //   onPress={() => handleDeleteSupersetPress()}
+          // >
+          //   Delete
+          // </Button>
         )}
       </View>
       {mode === 'build' || mode === 'edit' ? (
