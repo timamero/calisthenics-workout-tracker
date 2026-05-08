@@ -115,7 +115,7 @@ export default function WorkoutDraft() {
       }}
     >
       <KeyboardAvoidingView
-        style={{ flexGrow: 1 }}
+        style={{ flexShrink: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <ScrollView
