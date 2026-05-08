@@ -39,6 +39,13 @@ export default function AddWorkoutItemButtons() {
         visible={isAddWorkoutItemButtonsVisible}
         icon={open ? 'close' : 'plus'}
         style={styles.fabGroup}
+        variant="tertiary"
+        theme={{
+          colors: {
+            tertiaryContainer: theme.colors.tertiary,
+            onTertiaryContainer: theme.colors.onTertiary,
+          },
+        }}
         actions={[
           {
             icon: 'application',

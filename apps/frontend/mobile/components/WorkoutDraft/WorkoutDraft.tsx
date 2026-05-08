@@ -49,7 +49,7 @@ export default function WorkoutDraft() {
       ),
       headerRight: () => (
         <CustomButton
-          mode="contained"
+          mode="contained-tonal"
           onPress={() => setIsSaveWorkoutDialogVisible(true)}
         >
           Finish
