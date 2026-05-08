@@ -1,5 +1,11 @@
 import { useEffect, useContext } from 'react';
-import { View, BackHandler } from 'react-native';
+import {
+  View,
+  BackHandler,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import { useTheme, Button, SegmentedButtons } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -94,82 +100,95 @@ export default function WorkoutDraft() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <TextInputWithEdit
-        initialValue={workoutTitle!}
-        onSave={setWorkoutTitle}
-        variant="title"
-        hideEdit={mode === 'log' ? true : false}
-        maxLength={70}
-      />
-      <WorkoutData scrollViewRef={workoutDataScrollViewRef} />
-      <View
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
+      <KeyboardAvoidingView
+        style={{ flexGrow: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        {mode !== 'log' && <AddWorkoutItemButtons />}
-
-        <View
-          style={
-            mode === 'build'
-              ? {
-                  position: 'relative',
-                  marginInline: 16,
-                  marginBottom: 16,
-                }
-              : {
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginInline: 16,
-                  marginBottom: 16,
-                }
-          }
+        <ScrollView
+          style={{ marginBottom: 104, flexGrow: 1 }}
+          ref={workoutDataScrollViewRef}
         >
-          {mode !== 'build' && (
-            <SegmentedButtons
-              density="small"
-              value={mode}
-              onValueChange={(value: Mode) => handleSetMode(value)}
-              theme={{ colors: { secondaryContainer: theme.colors.primary } }}
-              buttons={[
-                {
-                  value: 'edit',
-                  label: 'Edit',
-                  uncheckedColor: theme.colors.onBackground,
-                },
-                {
-                  value: 'log',
-                  label: 'Log',
-                  uncheckedColor: theme.colors.onBackground,
-                },
-              ]}
-            />
-          )}
-
-          <Button
-            icon="check"
-            theme={{
-              colors: {
-                primaryContainer: theme.colors.background,
-                onPrimaryContainer: theme.colors.onBackground,
-              },
-            }}
+          <TextInputWithEdit
+            initialValue={workoutTitle!}
+            onSave={setWorkoutTitle}
+            variant="title"
+            hideEdit={mode === 'log' ? true : false}
+            maxLength={70}
+          />
+          {/* <WorkoutData scrollViewRef={workoutDataScrollViewRef} /> */}
+          <WorkoutData />
+          <View
             style={{
-              borderWidth: 2,
-              borderColor: theme.colors.primary,
+              position: 'absolute',
+              bottom: 0,
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
             }}
-            onPress={() => setIsSaveWorkoutDialogVisible(true)}
           >
-            Complete Workout
-          </Button>
-        </View>
-      </View>
+            {mode !== 'log' && <AddWorkoutItemButtons />}
+
+            <View
+              style={
+                mode === 'build'
+                  ? {
+                      position: 'relative',
+                      marginInline: 16,
+                      marginBottom: 16,
+                    }
+                  : {
+                      position: 'relative',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      marginInline: 16,
+                      marginBottom: 16,
+                    }
+              }
+            >
+              {mode !== 'build' && (
+                <SegmentedButtons
+                  density="small"
+                  value={mode}
+                  onValueChange={(value: Mode) => handleSetMode(value)}
+                  theme={{
+                    colors: { secondaryContainer: theme.colors.primary },
+                  }}
+                  buttons={[
+                    {
+                      value: 'edit',
+                      label: 'Edit',
+                      uncheckedColor: theme.colors.onBackground,
+                    },
+                    {
+                      value: 'log',
+                      label: 'Log',
+                      uncheckedColor: theme.colors.onBackground,
+                    },
+                  ]}
+                />
+              )}
+
+              <Button
+                icon="check"
+                theme={{
+                  colors: {
+                    primaryContainer: theme.colors.background,
+                    onPrimaryContainer: theme.colors.onBackground,
+                  },
+                }}
+                style={{
+                  borderWidth: 2,
+                  borderColor: theme.colors.primary,
+                }}
+                onPress={() => setIsSaveWorkoutDialogVisible(true)}
+              >
+                Complete Workout
+              </Button>
+            </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
       <WorkoutOverlays workoutDataScrollViewRef={workoutDataScrollViewRef} />
     </View>
   );
