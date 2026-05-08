@@ -5,9 +5,17 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
-import { useTheme, Button, SegmentedButtons } from 'react-native-paper';
+import {
+  useTheme,
+  Button,
+  SegmentedButtons,
+  Appbar,
+  FAB,
+} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type { Mode } from '@cwt/schema/workouts';
 import {
@@ -24,7 +32,11 @@ import type { CustomTheme } from '../../theme';
 import TextInputWithEdit from '../common/TextInputWithEdit';
 import CustomButton from '../common/CustomButton';
 
+const BOTTOM_APPBAR_HEIGHT = 80;
+const MEDIUM_FAB_HEIGHT = 56;
+
 export default function WorkoutDraft() {
+  const { bottom } = useSafeAreaInsets();
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
@@ -208,7 +220,7 @@ export default function WorkoutDraft() {
           {/* </View> */}
         </ScrollView>
       </KeyboardAvoidingView>
-
+      {/* 
       <View
         style={{
           position: 'absolute',
@@ -216,6 +228,8 @@ export default function WorkoutDraft() {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
+          justifyContent: 'flex-end',
+          paddingBottom: 24,
           height: 150,
           backgroundColor: theme.colors.red4,
         }}
@@ -233,9 +247,9 @@ export default function WorkoutDraft() {
                   position: 'relative',
                   display: 'flex',
                   flexDirection: 'row',
-                  justifyContent: 'space-between',
+                  justifyContent: 'center',
                   marginInline: 16,
-                  marginBottom: 16,
+                  // marginBottom: 16,
                   backgroundColor: theme.colors.violet3,
                 }
           }
@@ -245,6 +259,11 @@ export default function WorkoutDraft() {
               density="small"
               value={mode}
               onValueChange={(value: Mode) => handleSetMode(value)}
+              style={{
+                // width: 'auto',
+                backgroundColor: theme.colors.dark8,
+                transform: 'translateX(-50%)',
+              }}
               theme={{
                 colors: { secondaryContainer: theme.colors.primary },
               }}
@@ -252,19 +271,95 @@ export default function WorkoutDraft() {
                 {
                   value: 'edit',
                   label: 'Edit',
-                  uncheckedColor: theme.colors.onBackground,
+                  // uncheckedColor: theme.colors.onBackground,
+                  style: { width: 50 },
+                  labelStyle: { fontFamily: 'Manrope-SemiBold' },
                 },
                 {
                   value: 'log',
                   label: 'Log',
-                  uncheckedColor: theme.colors.onBackground,
+                  style: { width: 40 },
+                  labelStyle: { fontFamily: 'Manrope-SemiBold' },
+                  // uncheckedColor: theme.colors.onBackground,
                 },
               ]}
             />
           )}
         </View>
-      </View>
+      </View> */}
+      <Appbar
+        style={[
+          styles.bottom,
+          {
+            height: BOTTOM_APPBAR_HEIGHT + bottom,
+            backgroundColor: theme.colors.elevation.level2,
+          },
+        ]}
+        safeAreaInsets={{ bottom }}
+      >
+        {/* <Appbar.Action icon="archive" onPress={() => {}} />
+        <Appbar.Action icon="email" onPress={() => {}} />
+        <Appbar.Action icon="label" onPress={() => {}} />
+        <Appbar.Action icon="delete" onPress={() => {}} /> */}
+        <SegmentedButtons
+          density="small"
+          value={mode}
+          onValueChange={(value: Mode) => handleSetMode(value)}
+          style={{
+            // width: 'auto',
+            position: 'absolute',
+            left: 32,
+            bottom: (BOTTOM_APPBAR_HEIGHT + bottom) / 2,
+            // bottom: (BOTTOM_APPBAR_HEIGHT + bottom) / 2,
+            transform: 'translateY(8px)',
+          }}
+          theme={{
+            colors: { secondaryContainer: theme.colors.primary },
+          }}
+          buttons={[
+            {
+              value: 'edit',
+              label: 'Edit',
+              // uncheckedColor: theme.colors.onBackground,
+              style: { width: 50 },
+              labelStyle: { fontFamily: 'Manrope-SemiBold' },
+            },
+            {
+              value: 'log',
+              label: 'Log',
+              style: { width: 40 },
+              labelStyle: { fontFamily: 'Manrope-SemiBold' },
+              // uncheckedColor: theme.colors.onBackground,
+            },
+          ]}
+        />
+        <AddWorkoutItemButtons />
+        {/* <FAB
+          mode="flat"
+          size="medium"
+          icon="plus"
+          onPress={() => {}}
+          style={[
+            styles.fab,
+            { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
+          ]}
+        /> */}
+      </Appbar>
       <WorkoutOverlays workoutDataScrollViewRef={workoutDataScrollViewRef} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  bottom: {
+    backgroundColor: 'aquamarine',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  fab: {
+    position: 'absolute',
+    right: 16,
+  },
+});
