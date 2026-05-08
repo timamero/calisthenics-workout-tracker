@@ -55,7 +55,7 @@ export default function TextInputWithEditUI({
             {text}
           </Text>
           {!hideEdit && (
-            <CustomButton mode="contained" onPress={onEditClick}>
+            <CustomButton mode="outlined" onPress={onEditClick}>
               Edit
             </CustomButton>
           )}
