@@ -1,11 +1,5 @@
 import { useEffect, useContext } from 'react';
-import {
-  View,
-  BackHandler,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-} from 'react-native';
+import { BackHandler } from 'react-native';
 import { useTheme, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,12 +8,9 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutContextMobile } from '@cwt/hooks';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
-import WorkoutData from './WorkoutData';
-import WorkoutOverlays from './WorkoutOverlays';
 import type { CustomTheme } from '../../theme';
-import TextInputWithEdit from '../common/TextInputWithEdit';
 import CustomButton from '../common/CustomButton';
-import BottomAppBar from './BottomAppBar';
+import WorkoutDraftUI from './WorkoutDraftUI';
 
 export default function WorkoutDraft() {
   const theme = useTheme() as CustomTheme;
@@ -88,37 +79,11 @@ export default function WorkoutDraft() {
   }, [setIsCancelWorkoutDialogVisible]);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: theme.colors.background,
-      }}
-    >
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        <ScrollView
-          style={{
-            marginBottom: 104,
-            flexGrow: 1,
-          }}
-          ref={workoutDataScrollViewRef}
-        >
-          <TextInputWithEdit
-            initialValue={workoutTitle!}
-            onSave={setWorkoutTitle}
-            variant="title"
-            hideEdit={mode === 'log' ? true : false}
-            maxLength={70}
-          />
-          <WorkoutData />
-        </ScrollView>
-      </KeyboardAvoidingView>
-
-      <BottomAppBar />
-
-      <WorkoutOverlays workoutDataScrollViewRef={workoutDataScrollViewRef} />
-    </View>
+    <WorkoutDraftUI
+      scrollViewRef={workoutDataScrollViewRef}
+      workoutTitle={workoutTitle!}
+      setWorkoutTitle={setWorkoutTitle}
+      mode={mode}
+    />
   );
 }
