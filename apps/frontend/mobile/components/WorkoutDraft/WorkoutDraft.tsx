@@ -22,6 +22,7 @@ import WorkoutOverlays from './WorkoutOverlays';
 import AddWorkoutItemButtons from './AddWorkoutItemButtons';
 import type { CustomTheme } from '../../theme';
 import TextInputWithEdit from '../common/TextInputWithEdit';
+import CustomButton from '../common/CustomButton';
 
 export default function WorkoutDraft() {
   const theme = useTheme() as CustomTheme;
@@ -75,9 +76,22 @@ export default function WorkoutDraft() {
           Cancel
         </Button>
       ),
+      headerRight: () => (
+        <CustomButton
+          mode="contained"
+          onPress={() => setIsSaveWorkoutDialogVisible(true)}
+        >
+          Finish
+        </CustomButton>
+      ),
       headerTitle: () => null,
     });
-  }, [navigation, theme.colors.onBackground, setIsCancelWorkoutDialogVisible]);
+  }, [
+    navigation,
+    theme.colors.onBackground,
+    setIsCancelWorkoutDialogVisible,
+    setIsSaveWorkoutDialogVisible,
+  ]);
 
   useEffect(() => {
     const onBackPress = () => {
@@ -169,7 +183,7 @@ export default function WorkoutDraft() {
                 />
               )}
 
-              <Button
+              {/* <Button
                 icon="check"
                 theme={{
                   colors: {
@@ -184,7 +198,7 @@ export default function WorkoutDraft() {
                 onPress={() => setIsSaveWorkoutDialogVisible(true)}
               >
                 Complete Workout
-              </Button>
+              </Button> */}
             </View>
           </View>
         </ScrollView>
