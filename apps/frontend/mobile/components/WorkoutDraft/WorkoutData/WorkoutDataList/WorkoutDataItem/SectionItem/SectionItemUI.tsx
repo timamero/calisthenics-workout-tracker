@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { View } from 'react-native';
-import { useTheme, Button, Menu, IconButton } from 'react-native-paper';
+import { useTheme, Button } from 'react-native-paper';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
 import { useAddSupersetMobile } from '@cwt/hooks';
@@ -11,6 +10,7 @@ import SupersetItem from '../SupersetItem';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import { CustomTheme } from '../../../../../../theme';
 import { Text } from '../../../../../../customText';
+import WorkoutItemMenu from '../WorkoutItemMenu';
 
 interface SectionItemUIProps {
   mode: Mode;
@@ -39,11 +39,11 @@ export default function SectionItemUI({
     section.id,
   ).handleAddSupersetPress;
 
-  const [visible, setVisible] = useState(false);
+  // const [visible, setVisible] = useState(false);
 
-  const openMenu = () => setVisible(true);
+  // const openMenu = () => setVisible(true);
 
-  const closeMenu = () => setVisible(false);
+  // const closeMenu = () => setVisible(false);
   return (
     <View
       style={{
@@ -84,47 +84,55 @@ export default function SectionItemUI({
           <Text style={{ color: theme.colors.onBackground }}>Section</Text>
         </View>
         {(mode === 'build' || mode === 'edit') && (
-          <Menu
-            visible={visible}
-            onDismiss={closeMenu}
-            anchor={
-              <IconButton
-                icon="dots-vertical"
-                // iconColor={MD3Colors.error50}
-                size={24}
-                onPress={openMenu}
-              />
-            }
-          >
-            <Menu.Item
-              leadingIcon="trash-can"
-              onPress={() => {
-                closeMenu();
-                handleDeleteSectionPress();
-              }}
-              title="Delete"
-            />
-            {!isFirst && (
-              <Menu.Item
-                leadingIcon="chevron-up-circle"
-                onPress={() => {
-                  closeMenu();
-                  handleUpPress();
-                }}
-                title="Move Up"
-              />
-            )}
-            {!isLast && (
-              <Menu.Item
-                leadingIcon="chevron-down-circle"
-                onPress={() => {
-                  closeMenu();
-                  handleDownPress();
-                }}
-                title="Move Down"
-              />
-            )}
-          </Menu>
+          <WorkoutItemMenu
+            itemType="section"
+            isFirst={isFirst}
+            isLast={isLast}
+            handleUpPress={handleUpPress}
+            handleDownPress={handleDownPress}
+            handleDeletePress={handleDeleteSectionPress}
+          />
+          // <Menu
+          //   visible={visible}
+          //   onDismiss={closeMenu}
+          //   anchor={
+          //     <IconButton
+          //       icon="dots-vertical"
+          //       // iconColor={MD3Colors.error50}
+          //       size={24}
+          //       onPress={openMenu}
+          //     />
+          //   }
+          // >
+          //   <Menu.Item
+          //     leadingIcon="trash-can"
+          //     onPress={() => {
+          //       closeMenu();
+          //       handleDeleteSectionPress();
+          //     }}
+          //     title="Delete"
+          //   />
+          //   {!isFirst && (
+          //     <Menu.Item
+          //       leadingIcon="chevron-up-circle"
+          //       onPress={() => {
+          //         closeMenu();
+          //         handleUpPress();
+          //       }}
+          //       title="Move Up"
+          //     />
+          //   )}
+          //   {!isLast && (
+          //     <Menu.Item
+          //       leadingIcon="chevron-down-circle"
+          //       onPress={() => {
+          //         closeMenu();
+          //         handleDownPress();
+          //       }}
+          //       title="Move Down"
+          //     />
+          //   )}
+          // </Menu>
         )}
         {/* {(mode === 'build' || mode === 'edit') && (
           <Button
