@@ -24,19 +24,19 @@ export default function ReorderButtonGroup({
       {!isFirst && (
         <IconButton
           onPress={() => handleUpPress()}
-          icon="arrow-up"
-          iconColor={theme.colors.onBackground}
-          size={16}
-          style={{ margin: 0 }}
+          icon="chevron-up-circle-outline"
+          iconColor={theme.colors.tertiary}
+          size={24}
+          style={{ margin: 0, height: 32, width: 32 }}
         />
       )}
       {!isLast && (
         <IconButton
           onPress={handleDownPress}
-          icon="arrow-down"
-          iconColor={theme.colors.onBackground}
-          size={16}
-          style={{ margin: 0 }}
+          icon="chevron-down-circle-outline"
+          iconColor={theme.colors.tertiary}
+          size={24}
+          style={{ margin: 0, height: 32, width: 32 }}
         />
       )}
     </View>
@@ -48,6 +48,6 @@ const getStyles = (theme: CustomTheme) =>
     buttonGroup: {
       display: 'flex',
       flexDirection: 'column',
-      gap: 4,
+      gap: 2,
     },
   });
