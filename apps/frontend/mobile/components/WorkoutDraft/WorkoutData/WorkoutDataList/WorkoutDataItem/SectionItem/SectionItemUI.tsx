@@ -5,22 +5,26 @@ import type { Mode, Section } from '@cwt/schema/workouts';
 import { useAddSupersetMobile } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
+import { CustomTheme } from '../../../../../../theme';
+// import { Text } from '../../../../../../customText';
+
 import ExerciseItem from '../ExerciseItem';
 import SupersetItem from '../SupersetItem';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
-import { CustomTheme } from '../../../../../../theme';
-import { Text } from '../../../../../../customText';
 import WorkoutItemMenu from '../WorkoutItemMenu';
+import TextInputWithEdit from '../../../../../common/TextInputWithEdit';
 
 interface SectionItemUIProps {
   mode: Mode;
   section: Section;
   isFirst: boolean;
   isLast: boolean;
+  title: string;
   handleUpPress: () => void;
   handleDownPress: () => void;
   handleDeleteSectionPress: () => void;
   handleOpenAddExercisePress: () => void;
+  handleSetSectionTitle: (title: string) => void;
 }
 
 export default function SectionItemUI({
@@ -28,10 +32,12 @@ export default function SectionItemUI({
   section,
   isFirst,
   isLast,
+  title,
   handleUpPress,
   handleDownPress,
   handleDeleteSectionPress,
   handleOpenAddExercisePress,
+  handleSetSectionTitle,
 }: SectionItemUIProps) {
   const theme = useTheme() as CustomTheme;
 
@@ -76,7 +82,14 @@ export default function SectionItemUI({
               isLast={isLast}
             />
           )}
-          <Text style={{ color: theme.colors.onBackground }}>Section</Text>
+          {/* <Text style={{ color: theme.colors.onBackground }}>Section</Text> */}
+          <TextInputWithEdit
+            initialValue={title}
+            onSave={handleSetSectionTitle}
+            hideEdit={mode === 'log' ? true : false}
+            variant={'title'}
+            maxLength={70}
+          />
         </View>
         {(mode === 'build' || mode === 'edit') && (
           <WorkoutItemMenu

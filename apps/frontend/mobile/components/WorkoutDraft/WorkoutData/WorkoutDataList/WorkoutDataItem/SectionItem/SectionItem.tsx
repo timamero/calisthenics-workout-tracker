@@ -21,6 +21,9 @@ export default function SectionItem() {
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod,
   );
+  const setSectionTitle = useWorkoutDraftStore(
+    (state) => state.setSectionTitle,
+  );
 
   const { handleUpPress, handleDownPress } = useReorderItemMobile(section);
   const handleDeleteSectionPress = useDeleteItemMobile(
@@ -36,16 +39,23 @@ export default function SectionItem() {
     setIsAddWorkoutItemButtonsVisible(false);
     navigation.navigate('WorkoutStack', { screen: 'AddExercise' });
   };
+
+  const handleSetSectionTitle = (title: string) => {
+    setSectionIDToMod(section!.id);
+    setSectionTitle(title);
+  };
   return (
     <SectionItemUI
       mode={mode!}
       section={section}
       isFirst={section!.order === 0}
       isLast={section!.order === rootWorkoutDataLength - 1}
+      title={section!.name!}
       handleUpPress={handleUpPress}
       handleDownPress={handleDownPress}
       handleDeleteSectionPress={handleDeleteSectionPress}
       handleOpenAddExercisePress={handleOpenAddExercisePress}
+      handleSetSectionTitle={handleSetSectionTitle}
     />
   );
 }
