@@ -35,39 +35,30 @@ export default function TextInputWithEditUI({
           style={{
             display: 'flex',
             flexDirection: 'row',
-            flexGrow: 1,
-            backgroundColor: theme.colors.background,
+            justifyContent: 'flex-end',
+            alignItems: 'center',
             paddingInline: 16,
             paddingBlock: 32,
             borderRadius: 8,
+            gap: 8,
           }}
         >
-          <View
+          <Text
+            variant={variant === 'title' ? 'headlineLarge' : 'bodyLarge'}
+            numberOfLines={3}
             style={{
-              flexGrow: 1,
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              color: theme.colors.onBackground,
+              minWidth: 'auto',
+              flexShrink: 1,
             }}
           >
-            <Text
-              variant={variant === 'title' ? 'headlineLarge' : 'bodyLarge'}
-              numberOfLines={2}
-              style={{
-                color: theme.colors.onBackground,
-                minWidth: 200,
-                flexShrink: 1,
-              }}
-            >
-              {text}
-            </Text>
-            {!hideEdit && (
-              <CustomButton mode="contained" onPress={onEditClick}>
-                Edit
-              </CustomButton>
-            )}
-          </View>
+            {text}
+          </Text>
+          {!hideEdit && (
+            <CustomButton mode="contained" onPress={onEditClick}>
+              Edit
+            </CustomButton>
+          )}
         </View>
       )}
       {isEditMode && (
