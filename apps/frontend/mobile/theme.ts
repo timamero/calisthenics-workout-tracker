@@ -194,8 +194,8 @@ const theme: CustomTheme = {
 
     secondary: '#3b3b3b', // dark.5
     onSecondary: '#a9e34b', // lime.4
-    secondaryContainer: '#f4fce3', // lime.0
-    onSecondaryContainer: '#5c940d', // lime.9
+    secondaryContainer: '#d8f5a2', // lime.2
+    onSecondaryContainer: '#242424', // dark.7
     tertiary: '5f3dc4', // violet.9
     onTertiary: '#f8f9fa', // gray.0
     tertiaryContainer: '#b197fc', // violet.3
