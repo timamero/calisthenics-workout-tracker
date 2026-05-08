@@ -4,6 +4,7 @@ import { TextInput, useTheme } from 'react-native-paper';
 import { CustomTheme } from '../../../theme';
 import { Text } from '../../../customText';
 import CustomButton from '../CustomButton';
+import { VariantProp } from 'react-native-paper/lib/typescript/components/Typography/types';
 
 interface TextInputWithEditUIProps {
   isEditMode: boolean;
@@ -14,6 +15,7 @@ interface TextInputWithEditUIProps {
   onTextChange: (value: string) => void;
   hideEdit: boolean;
   variant: 'title' | 'body';
+  size: 'lg' | 'md' | 'sm';
 }
 
 export default function TextInputWithEditUI({
@@ -25,8 +27,29 @@ export default function TextInputWithEditUI({
   onTextChange,
   hideEdit,
   variant,
+  size,
 }: TextInputWithEditUIProps) {
   const theme = useTheme() as CustomTheme;
+
+  let appliedVariant: VariantProp<string>;
+
+  if (variant === 'title') {
+    if (size === 'lg') {
+      appliedVariant = 'headlineLarge';
+    } else if (size === 'md') {
+      appliedVariant = 'headlineMedium';
+    } else {
+      appliedVariant = 'headlineSmall';
+    }
+  } else {
+    if (size === 'lg') {
+      appliedVariant = 'bodyLarge';
+    } else if (size === 'md') {
+      appliedVariant = 'bodyMedium';
+    } else {
+      appliedVariant = 'bodySmall';
+    }
+  }
 
   return (
     <View style={{ paddingBottom: 24 }}>
@@ -44,7 +67,8 @@ export default function TextInputWithEditUI({
           }}
         >
           <Text
-            variant={variant === 'title' ? 'headlineLarge' : 'bodyLarge'}
+            // variant={variant === 'title' ? 'headlineLarge' : 'bodyLarge'}
+            variant={appliedVariant}
             numberOfLines={3}
             style={{
               color: theme.colors.onBackground,
