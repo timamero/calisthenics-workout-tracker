@@ -187,15 +187,15 @@ const theme: CustomTheme = {
   fonts: configureFonts({ config: fontConfig }),
   colors: {
     ...DefaultTheme.colors,
-    primary: '#94d82d', // lime.5
-    onPrimary: '#424242', // dark.4
+    primary: '#66a80f', // lime.7
+    onPrimary: '#f8f9fa', // gray.0
     primaryContainer: '#e9fac8', // lime.1
     onPrimaryContainer: '#242424', // dark.7
 
-    secondary: '#3b3b3b', // dark.5
-    onSecondary: '#a9e34b', // lime.4
-    secondaryContainer: '#d8f5a2', // lime.2
-    onSecondaryContainer: '#242424', // dark.7
+    secondary: '#d8f5a2', // lime.2
+    onSecondary: '#242424', // dark.7
+    secondaryContainer: '#e9ecef', // gray.2
+    onSecondaryContainer: '#424242', // dark.4
     tertiary: '#5f3dc4', // violet.9
     onTertiary: '#f8f9fa', // gray.0
     tertiaryContainer: '#b197fc', // violet.3
@@ -204,9 +204,9 @@ const theme: CustomTheme = {
     onError: '#f8f9fa', // gray.0
     errorContainer: '#fff5f5', // red.1
     onErrorContainer: '#C92A2A', // red.9
-    background: '#FAF9F6', // white
+    background: '#F5F5F5', // white
     onBackground: '#242424', // dark.7
-    surface: '#FAF9F6', // white
+    surface: '#F5F5F5', // white
     onSurface: '#242424', // dark.7
     surfaceVariant: '#E9ECEF', // gray.2
     onSurfaceVariant: '#424242', // dark.4
@@ -268,7 +268,8 @@ const theme: CustomTheme = {
     // dark950: '#0b0b0b',
 
     // Color shades (mantine colors to match web)
-    white: '#FAF9F6',
+    // white: '#FAF9F6',
+    white: '#F5F5F5',
 
     dark0: '#C9C9C9',
     dark1: '#b8b8b8',
