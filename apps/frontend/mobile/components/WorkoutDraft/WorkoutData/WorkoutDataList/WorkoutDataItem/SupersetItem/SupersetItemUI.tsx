@@ -11,6 +11,7 @@ import { Text } from '../../../../../../customText';
 import ExercisesList from './ExercisesList';
 import ExerciseSetGroup from '../ExerciseSetGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
+import CustomButton from '../../../../../common/CustomButton';
 
 interface SupersetItemUIProps {
   mode: Mode;
@@ -39,7 +40,7 @@ export default function SupersetItemUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        // backgroundColor: theme.colors.background,
+        backgroundColor: theme.colors.elevation.level4,
         // borderColor: theme.colors.outline,
         // borderWidth: 1,
         // paddingInline: 4,
@@ -47,10 +48,12 @@ export default function SupersetItemUI({
         marginBlock: 60,
         marginInline: 4,
         borderRadius: 8,
+        alignItems: 'center',
       }}
     >
       <View
         style={{
+          width: '100%',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -106,15 +109,17 @@ export default function SupersetItemUI({
         <ExerciseSetGroup />
       )}
       {(mode === 'build' || mode === 'edit') && (
-        <Button
-          mode="outlined"
-          labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-          textColor={theme.colors.primary}
-          style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
+        <CustomButton
+          mode="elevated"
+          // labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+          // textColor={theme.colors.primary}
+          // style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
           onPress={() => handleOpenAddExercisePress()}
+          icon="plus"
+          // style={{ flexShrink: 1 }}
         >
-          Add Exercise
-        </Button>
+          Exercise
+        </CustomButton>
       )}
     </View>
   );
