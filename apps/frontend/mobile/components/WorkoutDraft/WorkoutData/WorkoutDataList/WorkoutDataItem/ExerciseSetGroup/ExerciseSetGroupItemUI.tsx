@@ -21,7 +21,7 @@ export default function ExerciseSetGroupItemUI({
       style={{
         paddingInline: 16,
         paddingBlock: 16,
-        marginBlock: 8,
+        marginBlock: 32,
         marginInline: 4,
         borderWidth: 1,
         borderColor: theme.colors.outline,

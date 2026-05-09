@@ -40,8 +40,9 @@ export default function ExerciseItemUI({
         marginBlock: 32,
         marginInline: 4,
         borderWidth: 1,
-        borderColor: theme.colors.lime4,
-        backgroundColor: theme.colors.background,
+        borderColor: theme.colors.outline,
+        // borderColor: theme.colors.lime4,
+        // backgroundColor: theme.colors.secondaryContainer,
         borderRadius: 8,
       }}
     >
@@ -69,6 +70,7 @@ export default function ExerciseItemUI({
             fontWeight: 800,
             textAlign: 'center',
             flexShrink: 1,
+            padding: 16,
           }}
         >
           {name}
@@ -95,14 +97,15 @@ export default function ExerciseItemUI({
       </View>
       <SetList />
       {(mode === 'build' || mode === 'edit') && (
-        <View style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <View style={{ display: 'flex', alignItems: 'flex-end', padding: 16 }}>
           <Button
             mode="contained"
             onPress={() => handleAddSetPress()}
-            buttonColor={theme.colors.secondaryContainer}
-            textColor={theme.colors.onSecondaryContainer}
+            buttonColor={theme.colors.secondary}
+            textColor={theme.colors.onSecondary}
+            icon="plus"
           >
-            Add Set
+            Set
           </Button>
         </View>
       )}
