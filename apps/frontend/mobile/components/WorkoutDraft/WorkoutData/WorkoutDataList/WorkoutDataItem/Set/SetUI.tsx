@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { useTheme, Button, Checkbox } from 'react-native-paper';
+import { useTheme, Checkbox, IconButton } from 'react-native-paper';
 
 import { Mode } from '@cwt/schema/workouts';
 
@@ -21,6 +21,7 @@ interface SetUIProps {
 
 export default function SetUI({
   mode,
+  setsLength,
   setIndex,
   isCompleted,
   showDeleteButton,
@@ -30,16 +31,19 @@ export default function SetUI({
 }: SetUIProps) {
   const theme = useTheme() as CustomTheme;
 
+  const borderBottomWidth =
+    setsLength && setsLength > 0 && setIndex !== setsLength - 1 ? 1 : 0;
   return (
     <View
       key={`set-${setIndex}`}
       style={{
-        borderWidth: 1,
-        borderColor: theme.colors.outline,
+        borderBottomWidth: borderBottomWidth,
+        borderBottomColor: theme.colors.gray2,
         paddingInline: 8,
         paddingBlock: 16,
         marginBlock: 8,
-        borderRadius: 20,
+        marginInline: 8,
+        // borderRadius: 20,
         backgroundColor: theme.colors.background,
       }}
     >
@@ -57,15 +61,21 @@ export default function SetUI({
           >{`Set ${setIndex + 1}`}</Text>
         )}
         {showDeleteButton && (mode === 'build' || mode === 'edit') && (
-          <Button
-            mode="outlined"
+          // <Button
+          //   mode="outlined"
+          //   onPress={() => onDeleteSetPress()}
+          //   labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+          //   textColor={theme.colors.onBackground}
+          //   style={{ borderColor: theme.colors.error }}
+          // >
+          //   Delete Set
+          // </Button>
+          <IconButton
+            icon="trash-can"
+            iconColor={theme.colors.error}
+            size={20}
             onPress={() => onDeleteSetPress()}
-            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.onBackground}
-            style={{ borderColor: theme.colors.error }}
-          >
-            Delete Set
-          </Button>
+          />
         )}
       </View>
       <FieldsList />
