@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { useTheme, Button } from 'react-native-paper';
+import { useTheme, Button, Icon } from 'react-native-paper';
 
 import { Mode } from '@cwt/schema/workouts';
 
@@ -117,6 +117,16 @@ export default function ExerciseItemUI({
           </Button>
         </View>
       )}
+      <View
+        style={{
+          position: 'relative',
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <Icon source="link" color={theme.colors.gray7} size={24} />
+      </View>
     </View>
   );
 }
