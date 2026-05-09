@@ -221,11 +221,11 @@ const theme: CustomTheme = {
     elevation: {
       // tints of white
       level0: 'transparent',
-      level1: '#FEFEFB',
-      level2: '#FCFEF7',
-      level3: '#FBFDF3',
-      level4: '#F9FDEF',
-      level5: '#F8FCEB',
+      level1: '#FBFBFB',
+      level2: '#F6F6F6',
+      level3: '#F2F2F2',
+      level4: '#EEEEEE',
+      level5: '#E9E9E9',
     },
     surfaceDisabled: '#E9ECEF', // gray.2
     onSurfaceDisabled: '#828282', // dark.2
