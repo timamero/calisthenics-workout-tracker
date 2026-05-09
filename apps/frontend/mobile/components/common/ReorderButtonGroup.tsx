@@ -25,7 +25,6 @@ export default function ReorderButtonGroup({
         <IconButton
           onPress={() => handleUpPress()}
           icon="chevron-up-circle-outline"
-          iconColor={theme.colors.tertiary}
           size={24}
           style={{ margin: 0, height: 32, width: 32 }}
         />
@@ -34,7 +33,6 @@ export default function ReorderButtonGroup({
         <IconButton
           onPress={handleDownPress}
           icon="chevron-down-circle-outline"
-          iconColor={theme.colors.tertiary}
           size={24}
           style={{ margin: 0, height: 32, width: 32 }}
         />
