@@ -35,12 +35,12 @@ export default function ExerciseItemUI({
   return (
     <View
       style={{
-        paddingInline: 16,
-        paddingBlock: 16,
-        marginBlock: 8,
+        // paddingInline: 16,
+        // paddingBlock: 16,
+        marginBlock: 32,
         marginInline: 4,
         borderWidth: 1,
-        borderColor: theme.colors.outline,
+        borderColor: theme.colors.lime4,
         backgroundColor: theme.colors.background,
         borderRadius: 8,
       }}
@@ -51,6 +51,7 @@ export default function ExerciseItemUI({
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          paddingInline: 4,
         }}
       >
         {(mode === 'build' || mode === 'edit') && (
