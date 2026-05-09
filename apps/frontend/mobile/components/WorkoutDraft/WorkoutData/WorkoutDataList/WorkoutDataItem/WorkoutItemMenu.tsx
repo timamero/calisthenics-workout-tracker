@@ -28,6 +28,7 @@ export default function WorkoutItemMenu({
       visible={visible}
       onDismiss={closeMenu}
       anchor={<IconButton icon="dots-vertical" size={24} onPress={openMenu} />}
+      anchorPosition="bottom"
     >
       <Menu.Item
         leadingIcon="trash-can"
