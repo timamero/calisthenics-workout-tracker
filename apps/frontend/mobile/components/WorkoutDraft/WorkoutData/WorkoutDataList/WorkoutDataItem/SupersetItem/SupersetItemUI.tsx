@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { useTheme, Button } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
 // import { WorkoutDataItemContext } from '@cwt/context';
