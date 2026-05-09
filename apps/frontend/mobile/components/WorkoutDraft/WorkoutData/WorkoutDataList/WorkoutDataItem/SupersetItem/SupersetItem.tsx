@@ -20,6 +20,7 @@ export default function SupersetItem() {
   const supersetParentsSectionID = useContext(
     WorkoutDataItemContext,
   )?.parentSectionID;
+  const parentType = useContext(WorkoutDataItemContext)!.parentType;
   const mode = useWorkoutDraftStore((state) => state.mode);
   const { handleUpPress, handleDownPress } = useReorderItemMobile(superset);
   const handleDeleteSupersetPress = useDeleteItemMobile(
@@ -53,6 +54,7 @@ export default function SupersetItem() {
       superset={superset}
       isFirst={superset!.order === 0}
       isLast={superset!.order === useParentItemsLength() - 1}
+      parentType={parentType}
       handleUpPress={handleUpPress}
       handleDownPress={handleDownPress}
       handleDeleteSupersetPress={handleDeleteSupersetPress}

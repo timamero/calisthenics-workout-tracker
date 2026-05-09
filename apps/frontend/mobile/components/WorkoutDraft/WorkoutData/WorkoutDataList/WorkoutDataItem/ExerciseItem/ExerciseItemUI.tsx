@@ -14,6 +14,7 @@ interface ExerciseItemUIProps {
   name: string;
   isFirst: boolean;
   isLast: boolean;
+  parentType?: 'superset' | 'section' | null;
   handleUpPress: () => void;
   handleDownPress: () => void;
   handleAddSetPress: () => void;
@@ -25,6 +26,7 @@ export default function ExerciseItemUI({
   name,
   isFirst,
   isLast,
+  parentType,
   handleUpPress,
   handleDownPress,
   handleAddSetPress,
@@ -35,15 +37,21 @@ export default function ExerciseItemUI({
   return (
     <View
       style={{
-        // paddingInline: 16,
+        paddingInline:
+          parentType === 'superset' ? 8 : parentType === 'section' ? 0 : 4,
         // paddingBlock: 16,
-        marginBlock: 32,
-        marginInline: 4,
-        borderWidth: 1,
-        borderColor: theme.colors.outline,
+        marginInline:
+          parentType === 'superset' ? 4 : parentType === 'section' ? 16 : 4,
+        // marginInline: 4,
+        marginBlock:
+          parentType === 'superset' ? 0 : parentType === 'section' ? 24 : 40,
+        borderWidth: parentType === 'superset' ? 0 : 1,
+        borderBottomWidth: 1,
+        borderColor:
+          parentType === 'superset' ? theme.colors.gray3 : theme.colors.outline,
         // borderColor: theme.colors.lime4,
         // backgroundColor: theme.colors.secondaryContainer,
-        borderRadius: 8,
+        borderRadius: parentType === 'superset' ? 0 : 8,
       }}
     >
       <View
