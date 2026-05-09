@@ -13,6 +13,7 @@ interface SetUIProps {
   setsLength?: number;
   setIndex: number;
   isCompleted: boolean;
+  parentType?: 'superset' | 'section' | null;
   showDeleteButton?: boolean;
   hasSupersetParentType?: boolean | null;
   handleToggleCompleted: (value: boolean) => void;
@@ -24,13 +25,14 @@ export default function SetUI({
   setsLength,
   setIndex,
   isCompleted,
+  parentType,
   showDeleteButton,
   hasSupersetParentType,
   handleToggleCompleted,
   onDeleteSetPress,
 }: SetUIProps) {
   const theme = useTheme() as CustomTheme;
-
+  console.log('parentType in SetUI', parentType);
   const borderBottomWidth =
     setsLength && setsLength > 0 && setIndex !== setsLength - 1 ? 1 : 0;
   return (
@@ -38,7 +40,8 @@ export default function SetUI({
       key={`set-${setIndex}`}
       style={{
         borderBottomWidth: borderBottomWidth,
-        borderBottomColor: theme.colors.gray7,
+        borderBottomColor:
+          parentType === 'superset' ? theme.colors.gray3 : theme.colors.gray7,
         paddingInline: 8,
         paddingBlock: 16,
         marginBlock: 8,

@@ -15,18 +15,19 @@ export default function ExerciseSetGroupItemUI({
   children,
 }: ExerciseSetGroupItemUIProps) {
   const theme = useTheme() as CustomTheme;
-
   return (
     <View
       style={{
-        paddingInline: 16,
-        paddingBlock: 16,
-        marginBlock: 32,
-        marginInline: 4,
-        borderWidth: 1,
-        borderColor: theme.colors.outline,
-        backgroundColor: theme.colors.background,
-        borderRadius: 8,
+        paddingInline: 8,
+        // paddingBlock: 16,
+        // marginBlock: 32,
+        // marginInline: 4,
+        margin: 0,
+        borderWidth: 0,
+        borderBottomWidth: 1,
+        borderColor: theme.colors.gray3,
+        // backgroundColor: theme.colors.violet9,
+        borderRadius: 0,
       }}
     >
       <View

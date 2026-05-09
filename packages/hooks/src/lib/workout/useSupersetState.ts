@@ -8,7 +8,7 @@ export default function useSupersetState() {
   const exercisesGroupedBySetsList = groupExercisesBySet(superset);
 
   const supersetParentsSectionID = useContext(
-    WorkoutDataItemContext
+    WorkoutDataItemContext,
   )?.parentSectionID;
 
   return {

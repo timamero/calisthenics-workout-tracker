@@ -1,5 +1,8 @@
+import { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { IconButton, useTheme } from 'react-native-paper';
+
+import { WorkoutDataItemContext } from '@cwt/context';
 
 import { CustomTheme } from '../../theme';
 
@@ -19,12 +22,21 @@ export default function ReorderButtonGroup({
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
+
   return (
     <View style={styles.buttonGroup}>
       {!isFirst && (
         <IconButton
           onPress={() => handleUpPress()}
           icon="chevron-up-circle-outline"
+          iconColor={
+            parentType === 'superset'
+              ? theme.colors.lime5
+              : parentType === 'section'
+                ? theme.colors.tertiary
+                : theme.colors.primary
+          }
           size={24}
           style={{ margin: 0, height: 32, width: 32 }}
         />
@@ -33,6 +45,13 @@ export default function ReorderButtonGroup({
         <IconButton
           onPress={handleDownPress}
           icon="chevron-down-circle-outline"
+          iconColor={
+            parentType === 'superset'
+              ? theme.colors.lime5
+              : parentType === 'section'
+                ? theme.colors.tertiary
+                : theme.colors.primary
+          }
           size={24}
           style={{ margin: 0, height: 32, width: 32 }}
         />
