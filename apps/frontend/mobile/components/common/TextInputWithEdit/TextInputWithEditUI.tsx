@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { TextInput, useTheme } from 'react-native-paper';
+import { TextInput, useTheme, IconButton } from 'react-native-paper';
 
 import { CustomTheme } from '../../../theme';
 import { Text } from '../../../customText';
@@ -14,6 +14,7 @@ interface TextInputWithEditUIProps {
   onSaveClick: () => void;
   onTextChange: (value: string) => void;
   hideEdit: boolean;
+  hideEditLabel: boolean;
   variant: 'title' | 'body';
   size: 'lg' | 'md' | 'sm';
 }
@@ -26,6 +27,7 @@ export default function TextInputWithEditUI({
   onSaveClick,
   onTextChange,
   hideEdit,
+  hideEditLabel,
   variant,
   size,
 }: TextInputWithEditUIProps) {
@@ -68,7 +70,6 @@ export default function TextInputWithEditUI({
           }}
         >
           <Text
-            // variant={variant === 'title' ? 'headlineLarge' : 'bodyLarge'}
             variant={appliedVariant}
             numberOfLines={3}
             style={{
@@ -79,15 +80,23 @@ export default function TextInputWithEditUI({
           >
             {text}
           </Text>
-          {!hideEdit && (
-            <CustomButton
-              mode="contained-tonal"
-              onPress={onEditClick}
-              icon="pencil"
-            >
-              Edit
-            </CustomButton>
-          )}
+          {!hideEdit &&
+            (hideEditLabel === true ? (
+              <IconButton
+                icon="pencil"
+                iconColor={theme.colors.onSecondaryContainer}
+                size={20}
+                onPress={onEditClick}
+              />
+            ) : (
+              <CustomButton
+                mode="contained-tonal"
+                onPress={onEditClick}
+                icon="pencil"
+              >
+                {hideEditLabel ? '' : 'Edit'}
+              </CustomButton>
+            ))}
         </View>
       )}
       {isEditMode && (
