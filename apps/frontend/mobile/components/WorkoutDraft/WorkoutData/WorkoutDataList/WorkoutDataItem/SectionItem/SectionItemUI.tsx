@@ -114,6 +114,7 @@ export default function SectionItemUI({
               initialValue={title}
               onSave={handleSetSectionTitle}
               hideEdit={mode === 'log' ? true : false}
+              hideEditLabel={true}
               variant={'title'}
               maxLength={70}
               size="md"
