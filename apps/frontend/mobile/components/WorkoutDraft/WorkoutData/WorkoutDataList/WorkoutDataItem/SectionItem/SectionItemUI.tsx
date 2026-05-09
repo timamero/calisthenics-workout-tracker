@@ -13,6 +13,7 @@ import SupersetItem from '../SupersetItem';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
 import TextInputWithEdit from '../../../../../common/TextInputWithEdit';
+import AddItemMenu from './AddItemMenu';
 
 interface SectionItemUIProps {
   mode: Mode;
@@ -173,10 +174,15 @@ export default function SectionItemUI({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-end',
-            gap: 8,
+            margin: 8,
+            // gap: 8,
           }}
         >
-          <Button
+          <AddItemMenu
+            handleOpenAddExercisePress={handleOpenAddExercisePress}
+            handleAddSupersetPress={handleAddSupersetPress}
+          />
+          {/* <Button
             mode="outlined"
             labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
             textColor={theme.colors.primary}
@@ -193,7 +199,7 @@ export default function SectionItemUI({
             onPress={() => handleAddSupersetPress()}
           >
             Add Superset
-          </Button>
+          </Button> */}
         </View>
       )}
     </View>
