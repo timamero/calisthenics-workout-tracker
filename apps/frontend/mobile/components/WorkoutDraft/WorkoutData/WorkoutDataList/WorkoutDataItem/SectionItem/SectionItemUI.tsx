@@ -52,7 +52,7 @@ export default function SectionItemUI({
         flexDirection: 'column',
         borderWidth: 2,
         borderColor: theme.colors.tertiary,
-        backgroundColor: theme.colors.elevation.level2,
+        backgroundColor: theme.colors.violet0,
         // paddingInline: 4,
         // paddingBlock: 16,
         marginBlock: 64,
@@ -72,7 +72,7 @@ export default function SectionItemUI({
           borderBottomColor: theme.colors.tertiary,
           borderBottomWidth: 1,
           paddingInline: 8,
-          backgroundColor: theme.colors.elevation.level1,
+          backgroundColor: theme.colors.violet1,
         }}
       >
         {/* <View

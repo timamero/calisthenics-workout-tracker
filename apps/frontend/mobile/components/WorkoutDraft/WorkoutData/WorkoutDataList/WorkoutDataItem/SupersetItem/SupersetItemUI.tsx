@@ -39,7 +39,7 @@ export default function SupersetItemUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: theme.colors.background,
+        // backgroundColor: theme.colors.background,
         // borderColor: theme.colors.outline,
         // borderWidth: 1,
         // paddingInline: 4,
@@ -60,6 +60,7 @@ export default function SupersetItemUI({
           borderTopRightRadius: 8,
           borderWidth: 2,
           paddingInline: 4,
+          backgroundColor: theme.colors.elevation.level5,
         }}
       >
         {/* <View
