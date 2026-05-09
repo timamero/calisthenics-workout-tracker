@@ -187,8 +187,8 @@ const theme: CustomTheme = {
   fonts: configureFonts({ config: fontConfig }),
   colors: {
     ...DefaultTheme.colors,
-    primary: '#66a80f', // lime.7
-    onPrimary: '#f8f9fa', // gray.0
+    primary: '#242424', // dark.7
+    onPrimary: '#F5F5F5', // white
     primaryContainer: '#e9fac8', // lime.1
     onPrimaryContainer: '#242424', // dark.7
 
@@ -196,6 +196,7 @@ const theme: CustomTheme = {
     onSecondary: '#242424', // dark.7
     secondaryContainer: '#e9ecef', // gray.2
     onSecondaryContainer: '#424242', // dark.4
+
     tertiary: '#5f3dc4', // violet.9
     onTertiary: '#f8f9fa', // gray.0
     tertiaryContainer: '#b197fc', // violet.3
@@ -227,7 +228,7 @@ const theme: CustomTheme = {
       level5: '#F8FCEB',
     },
     surfaceDisabled: '#E9ECEF', // gray.2
-    onSurfaceDisabled: '#424242', // dark.4
+    onSurfaceDisabled: '#828282', // dark.2
     backdrop: '#E9ECEF', // gray.2
 
     // Semantic colors

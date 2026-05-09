@@ -23,7 +23,7 @@ export default function LargeButton({
         <View style={styles.titleContainer}>
           <Text
             variant="headlineMedium"
-            style={{ color: theme.colors.onBackground }}
+            style={{ color: theme.colors.onSecondary }}
           >
             {children}
           </Text>
@@ -38,10 +38,10 @@ const getStyles = (theme: CustomTheme) =>
     card: {
       marginBlock: 12,
       marginInline: 8,
-      backgroundColor: theme.colors.primary,
+      backgroundColor: theme.colors.secondary,
       boxShadow: 'rgba(222, 226, 230, 0.25) 1px 3px 17px -1px',
       padding: 16,
-      borderColor: theme.colors.onBackground,
+      borderColor: theme.colors.onSecondary,
       borderWidth: 1,
       height: 80,
       display: 'flex',
