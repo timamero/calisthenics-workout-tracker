@@ -53,11 +53,13 @@ export default function SectionItemUI({
         borderWidth: 1,
         borderColor: theme.colors.outline,
         backgroundColor: theme.colors.background,
-        paddingInline: 4,
-        paddingBlock: 16,
+        // paddingInline: 4,
+        // paddingBlock: 16,
         marginBlock: 8,
         marginInline: 4,
         borderRadius: 8,
+        overflow: 'hidden',
+        width: 'auto',
       }}
     >
       <View
@@ -65,13 +67,31 @@ export default function SectionItemUI({
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          width: 'auto',
+          borderBottomColor: theme.colors.outline,
+          borderBottomWidth: 1,
+          paddingInline: 4,
+          backgroundColor: theme.colors.elevation.level1,
         }}
       >
-        <View
+        {/* <View
           style={{
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'flex-start',
+            alignItems: 'center',
+            backgroundColor: theme.colors.red1,
+            width: '100%',
+          }}
+        > */}
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            flex: 1,
           }}
         >
           {(mode === 'build' || mode === 'edit') && (
@@ -83,16 +103,25 @@ export default function SectionItemUI({
             />
           )}
           {/* <Text style={{ color: theme.colors.onBackground }}>Section</Text> */}
-          <TextInputWithEdit
-            initialValue={title}
-            onSave={handleSetSectionTitle}
-            hideEdit={mode === 'log' ? true : false}
-            variant={'title'}
-            maxLength={70}
-            size="md"
-          />
+          <View
+            style={{
+              flexShrink: 1,
+              width: '100%',
+            }}
+          >
+            <TextInputWithEdit
+              initialValue={title}
+              onSave={handleSetSectionTitle}
+              hideEdit={mode === 'log' ? true : false}
+              variant={'title'}
+              maxLength={70}
+              size="md"
+            />
+          </View>
         </View>
+        {/* </View> */}
         {(mode === 'build' || mode === 'edit') && (
+          // <View style={{ flex: 1 }}>
           <WorkoutItemMenu
             itemType="section"
             isFirst={isFirst}
@@ -101,6 +130,7 @@ export default function SectionItemUI({
             handleDownPress={handleDownPress}
             handleDeletePress={handleDeleteSectionPress}
           />
+          // </View>
         )}
       </View>
       {section.items.map((item) => {

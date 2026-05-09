@@ -145,7 +145,7 @@ const fontConfig = {
     }),
     fontSize: 20,
     letterSpacing: 0,
-    lineHeight: 36,
+    lineHeight: 28,
   },
   bodyLarge: {
     fontFamily: Platform.select({
@@ -219,7 +219,7 @@ const theme: CustomTheme = {
     inverseOnSurface: '#E9ECEF', // gray.2
     inversePrimary: '#f4fce3', // lime.0
     elevation: {
-      // tints of lightest lime
+      // tints of white
       level0: 'transparent',
       level1: '#FEFEFB',
       level2: '#FCFEF7',
