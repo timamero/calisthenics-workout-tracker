@@ -19,6 +19,7 @@ export default function ExerciseItem() {
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
   const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const rootWorkoutDataLength = useWorkoutDraftStore(
@@ -52,6 +53,7 @@ export default function ExerciseItem() {
       name={name}
       isFirst={exercise!.order === 0}
       isLast={exercise!.order === useParentItemsLength() - 1}
+      parentType={parentType}
       handleUpPress={handleUpPress}
       handleDownPress={handleDownPress}
       handleAddSetPress={handleAddSetPress}

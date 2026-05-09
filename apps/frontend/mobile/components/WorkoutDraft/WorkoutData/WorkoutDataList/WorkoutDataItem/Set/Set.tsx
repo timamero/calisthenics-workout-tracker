@@ -14,6 +14,7 @@ import SetUI from './SetUI';
 
 export default function Set() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const set = useContext(SetContext)!.set;
   const setIndex = useContext(SetContext)!.setIndex;
   const sets = exercise.sets;
@@ -30,6 +31,7 @@ export default function Set() {
         setsLength={sets.length}
         setIndex={setIndex}
         isCompleted={set.completed}
+        parentType={parentType}
         handleToggleCompleted={handleToggleCompleted}
         showDeleteButton={sets.length > 1}
         onDeleteSetPress={handleDeleteSetPress}
@@ -43,6 +45,7 @@ export default function Set() {
       mode={mode!}
       setIndex={setIndex}
       isCompleted={set.completed}
+      parentType={parentType}
       handleToggleCompleted={handleToggleCompleted}
       hasSupersetParentType={true}
       onDeleteSetPress={handleDeleteSetPress}

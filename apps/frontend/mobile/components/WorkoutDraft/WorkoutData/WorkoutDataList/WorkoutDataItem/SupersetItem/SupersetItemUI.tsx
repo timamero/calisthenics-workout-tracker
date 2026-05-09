@@ -18,6 +18,7 @@ interface SupersetItemUIProps {
   superset: Superset;
   isFirst: boolean;
   isLast: boolean;
+  parentType?: 'superset' | 'section' | null;
   handleUpPress: () => void;
   handleDownPress: () => void;
   handleDeleteSupersetPress: () => void;
@@ -28,27 +29,28 @@ export default function SupersetItemUI({
   mode,
   isFirst,
   isLast,
+  parentType,
   handleUpPress,
   handleDownPress,
   handleDeleteSupersetPress,
   handleOpenAddExercisePress,
 }: SupersetItemUIProps) {
   const theme = useTheme() as CustomTheme;
-
+  console.log('superset parent', parentType);
   return (
     <View
       style={{
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: theme.colors.elevation.level4,
-        // borderColor: theme.colors.outline,
-        // borderWidth: 1,
+        borderColor: theme.colors.gray3,
+        borderWidth: 2,
         // paddingInline: 4,
         // paddingBlock: 16,
-        marginBlock: 60,
+        marginBlock: parentType === 'section' ? 24 : 40,
         marginInline: 4,
         borderRadius: 8,
-        alignItems: 'center',
+        alignItems: 'stretch',
       }}
     >
       <View
@@ -58,10 +60,10 @@ export default function SupersetItemUI({
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderColor: theme.colors.gray3,
+          borderBottomColor: theme.colors.gray3,
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
-          borderWidth: 2,
+          borderBottomWidth: 2,
           paddingInline: 4,
           backgroundColor: theme.colors.elevation.level5,
         }}
@@ -109,17 +111,25 @@ export default function SupersetItemUI({
         <ExerciseSetGroup />
       )}
       {(mode === 'build' || mode === 'edit') && (
-        <CustomButton
-          mode="elevated"
-          // labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-          // textColor={theme.colors.primary}
-          // style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
-          onPress={() => handleOpenAddExercisePress()}
-          icon="plus"
-          // style={{ flexShrink: 1 }}
+        <View
+          style={{
+            marginBlock: 16,
+            display: 'flex',
+            alignItems: 'center',
+          }}
         >
-          Exercise
-        </CustomButton>
+          <CustomButton
+            mode="elevated"
+            // labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
+            // textColor={theme.colors.primary}
+            // style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
+            onPress={() => handleOpenAddExercisePress()}
+            icon="plus"
+            // style={{ marginBlock: 16 }}
+          >
+            Exercise
+          </CustomButton>
+        </View>
       )}
     </View>
   );
