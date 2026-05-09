@@ -52,7 +52,7 @@ export default function TextInputWithEditUI({
   }
 
   return (
-    <View style={{ paddingBottom: 24 }}>
+    <View>
       {!isEditMode && (
         <View
           style={{
@@ -61,8 +61,9 @@ export default function TextInputWithEditUI({
             justifyContent: 'flex-end',
             alignItems: 'center',
             paddingInline: 16,
-            paddingBlock: 32,
+            paddingBlock: 4,
             borderRadius: 8,
+            marginBlock: 4,
             gap: 8,
           }}
         >
@@ -97,8 +98,9 @@ export default function TextInputWithEditUI({
             flexGrow: 1,
             backgroundColor: theme.colors.background,
             paddingInline: 16,
-            paddingBlock: 32,
+            paddingBlock: 4,
             borderRadius: 8,
+            marginBlock: 4,
           }}
         >
           <View
