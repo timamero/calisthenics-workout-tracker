@@ -11,10 +11,11 @@ export const MainTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => {
     return {
       headerStyle: {
-        backgroundColor: '#FAF9F6',
+        backgroundColor: '#f8f9fa',
       },
       headerTitleStyle: {
         color: '#242424',
+        fontFamily: 'ElmsSans-ExtraBold',
       },
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
@@ -38,9 +39,10 @@ export const MainTabs = createBottomTabNavigator({
         // @ts-ignore
         return <Ionicons name={iconName} size={size} color={color} />;
       },
-      tabBarActiveTintColor: '#94d82d',
+      tabBarActiveTintColor: '#5f3dc4',
       tabBarInactiveTintColor: '#242424',
-      tabBarStyle: { backgroundColor: '#FAF9F6' },
+      tabBarStyle: { backgroundColor: '#f8f9fa' },
+      tabBarLabelStyle: { fontFamily: 'ElmsSans-Regular' },
     };
   },
 
