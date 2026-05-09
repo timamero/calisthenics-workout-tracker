@@ -40,11 +40,11 @@ export default function SupersetItemUI({
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: theme.colors.background,
-        borderColor: theme.colors.outline,
-        borderWidth: 1,
-        paddingInline: 4,
-        paddingBlock: 16,
-        marginBlock: 8,
+        // borderColor: theme.colors.outline,
+        // borderWidth: 1,
+        // paddingInline: 4,
+        // paddingBlock: 16,
+        marginBlock: 32,
         marginInline: 4,
         borderRadius: 8,
       }}
@@ -54,25 +54,31 @@ export default function SupersetItemUI({
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
+          alignItems: 'center',
+          borderColor: theme.colors.gray3,
+          borderTopLeftRadius: 8,
+          borderTopRightRadius: 8,
+          borderWidth: 2,
+          paddingInline: 4,
         }}
       >
-        <View
+        {/* <View
           style={{
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'flex-start',
           }}
-        >
-          {(mode === 'build' || mode === 'edit') && (
-            <ReorderButtonGroup
-              handleUpPress={() => handleUpPress()}
-              handleDownPress={() => handleDownPress()}
-              isFirst={isFirst}
-              isLast={isLast}
-            />
-          )}
-          <Text style={{ color: theme.colors.onBackground }}>Superset</Text>
-        </View>
+        > */}
+        {(mode === 'build' || mode === 'edit') && (
+          <ReorderButtonGroup
+            handleUpPress={() => handleUpPress()}
+            handleDownPress={() => handleDownPress()}
+            isFirst={isFirst}
+            isLast={isLast}
+          />
+        )}
+        <Text style={{ color: theme.colors.onBackground }}>Superset</Text>
+        {/* </View> */}
         {(mode === 'build' || mode === 'edit') && (
           <WorkoutItemMenu
             itemType="superset"
