@@ -102,7 +102,7 @@ const getStyles = (theme: CustomTheme) =>
       boxShadow:
         'rgba(222, 226, 230, 0.05) 0px 1px 3px 0px, rgba(222, 226, 230, 0.05) 0px 28px 23px -7px, rgba(222, 226, 230, 0.04) 0px 12px 12px -7px',
       padding: 16,
-      borderColor: theme.colors.primary,
+      borderColor: theme.colors.secondary,
       borderWidth: 1,
     },
     cardContent: {
