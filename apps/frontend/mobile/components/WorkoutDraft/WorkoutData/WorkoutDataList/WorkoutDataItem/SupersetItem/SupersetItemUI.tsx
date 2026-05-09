@@ -44,7 +44,7 @@ export default function SupersetItemUI({
         // borderWidth: 1,
         // paddingInline: 4,
         // paddingBlock: 16,
-        marginBlock: 32,
+        marginBlock: 60,
         marginInline: 4,
         borderRadius: 8,
       }}

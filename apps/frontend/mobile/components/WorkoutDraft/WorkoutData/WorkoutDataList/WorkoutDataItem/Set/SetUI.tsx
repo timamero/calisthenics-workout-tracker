@@ -38,13 +38,13 @@ export default function SetUI({
       key={`set-${setIndex}`}
       style={{
         borderBottomWidth: borderBottomWidth,
-        borderBottomColor: theme.colors.gray2,
+        borderBottomColor: theme.colors.gray7,
         paddingInline: 8,
         paddingBlock: 16,
         marginBlock: 8,
         marginInline: 8,
         // borderRadius: 20,
-        backgroundColor: theme.colors.background,
+        // backgroundColor: theme.colors.background,
       }}
     >
       <View
