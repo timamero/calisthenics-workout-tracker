@@ -9,10 +9,11 @@ import OnboardingComplete from '../screens/OnboardingComplete';
 const authScreenOptions = {
   title: '',
   headerStyle: {
-    backgroundColor: '#FAF9F6',
+    backgroundColor: '#f8f9fa',
   },
   headerTitleStyle: {
     color: '#242424',
+    fontFamily: 'ElmsSans-ExtraBold',
   },
   headerTintColor: '#242424',
 };
