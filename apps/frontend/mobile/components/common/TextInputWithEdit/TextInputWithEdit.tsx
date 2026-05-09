@@ -8,6 +8,7 @@ interface TextInputWithEditProps {
   initialValue: string;
   onSave: (text: string) => void | Promise<void>;
   hideEdit?: boolean;
+  hideEditLabel?: boolean;
   variant?: 'title' | 'body';
   maxLength?: number;
   size?: 'lg' | 'md' | 'sm';
@@ -17,6 +18,7 @@ export default function TextInputWithEdit({
   initialValue,
   onSave,
   hideEdit = false,
+  hideEditLabel = false,
   variant = 'body',
   maxLength = 40,
   size = 'lg',
@@ -52,6 +54,7 @@ export default function TextInputWithEdit({
       }
       onTextChange={onTextChange}
       hideEdit={hideEdit}
+      hideEditLabel={hideEditLabel}
       variant={variant}
       size={size}
     />
