@@ -1,5 +1,6 @@
 import { ScrollView, View } from 'react-native';
-import { useTheme, Button } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CustomTheme } from '../../theme';
 
@@ -7,6 +8,7 @@ import ExerciseList from './ExerciseList';
 import Filter from '../Filter';
 import SearchBar from '../SearchBar';
 import FilterOverlay from '../FilterOverlay';
+import CustomButton from '../common/CustomButton';
 
 interface AddExerciseUIProps {
   selectedExerciseIDToAdd: number | null;
@@ -20,6 +22,7 @@ export default function AddExerciseUI({
   handleCancelPress,
 }: AddExerciseUIProps) {
   const theme = useTheme() as CustomTheme;
+  const { top } = useSafeAreaInsets();
 
   return (
     <>
@@ -27,7 +30,8 @@ export default function AddExerciseUI({
         style={{
           backgroundColor: theme.colors.background,
           paddingInline: 16,
-          paddingBlock: 16,
+          paddingBottom: 16,
+          paddingTop: 16 + top,
           width: '100%',
         }}
       >
@@ -48,7 +52,7 @@ export default function AddExerciseUI({
           // borderTopColor: theme.colors.orange1,
         }}
       >
-        <Button
+        <CustomButton
           mode="outlined"
           // textColor={theme.colors.light}
           onPress={() => handleCancelPress()}
@@ -58,8 +62,8 @@ export default function AddExerciseUI({
           }}
         >
           Cancel
-        </Button>
-        <Button
+        </CustomButton>
+        <CustomButton
           disabled={selectedExerciseIDToAdd === null}
           mode="contained"
           onPress={() => handleAddExercisePress?.()}
@@ -74,7 +78,7 @@ export default function AddExerciseUI({
           // }}
         >
           Add Exercise
-        </Button>
+        </CustomButton>
       </View>
       <FilterOverlay />
     </>
