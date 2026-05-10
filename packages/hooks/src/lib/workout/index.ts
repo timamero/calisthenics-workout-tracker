@@ -1,22 +1,21 @@
-import { useAddExercise, useAddExerciseMobile } from "./useAddExercise";
-import { useAddSet, useAddSetMobile } from "./useAddSet";
-import { useAddSuperset, useAddSupersetMobile } from "./useAddSuperset";
-import { useDeleteItem, useDeleteItemMobile } from "./useDeleteItem";
-import { useDeleteSet, useDeleteSetMobile } from "./useDeleteSet";
-import useFieldInputChange from "./useFieldInputChange";
-import useParentItemsLength from "./useParentItemsLength";
-import { useReorderItem, useReorderItemMobile } from "./useReorderItem";
-import useResetSelectedIDs from "./useResetSelectedIDs";
-import useToggleCompleted from "./useToggleCompleted";
-import useUpdateField from "./useUpdateField";
-import useSupersetState from "./useSupersetState";
-import useUpdateWorkoutTitle from "./useUpdateWorkoutTitle";
+import { useAddExercise, useAddExerciseMobile } from './useAddExercise';
+import { useAddSet, useAddSetMobile } from './useAddSet';
+import { useAddSuperset, useAddSupersetMobile } from './useAddSuperset';
+import { useDeleteItem, useDeleteItemMobile } from './useDeleteItem';
+import { useDeleteSet, useDeleteSetMobile } from './useDeleteSet';
+import useFieldInputChange from './useFieldInputChange';
+import useParentItemsLength from './useParentItemsLength';
+import { useReorderItem, useReorderItemMobile } from './useReorderItem';
+import useResetSelectedIDs from './useResetSelectedIDs';
+import useToggleCompleted from './useToggleCompleted';
+import useUpdateField from './useUpdateField';
+import useSupersetState from './useSupersetState';
 import {
   useWorkoutContext,
   useWorkoutContextWeb,
   useWorkoutContextMobile,
-} from "./useWorkoutContext";
-import useWorkoutSave from "./useWorkoutSave";
+} from './useWorkoutContext';
+import useWorkoutSave from './useWorkoutSave';
 
 export {
   useAddExercise,
@@ -37,7 +36,6 @@ export {
   useSupersetState,
   useToggleCompleted,
   useUpdateField,
-  useUpdateWorkoutTitle,
   useWorkoutContext,
   useWorkoutContextWeb,
   useWorkoutContextMobile,
