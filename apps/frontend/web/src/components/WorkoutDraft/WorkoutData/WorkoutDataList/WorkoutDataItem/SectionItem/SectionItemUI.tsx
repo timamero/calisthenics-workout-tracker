@@ -42,6 +42,7 @@ export default function SectionItemUI({
       w="100%"
       maw={1200}
       align="center"
+      pb="xl"
     >
       <Group
         align="flex-start"
