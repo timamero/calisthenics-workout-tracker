@@ -35,7 +35,7 @@ export default function SetUI({
   handleDeleteSetClick,
 }: SetUIProps) {
   return (
-    <Stack gap="xs" p="sm" w={200}>
+    <Stack gap="xs" p="sm" w="100%">
       <Group w="100%" justify="space-between">
         {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
           <Text size="xs" fw={600}>{`Set ${setIndex + 1}`}</Text>
@@ -52,8 +52,12 @@ export default function SetUI({
           </ActionIcon>
         )}
       </Group>
-      <FieldsList />
-      <LeverageAssistFieldsList />
+      <Stack align="center">
+        <Group>
+          <FieldsList />
+        </Group>
+        <LeverageAssistFieldsList />
+      </Stack>
       {mode === 'log' && (
         <Group justify="flex-end">
           <Checkbox

@@ -23,10 +23,11 @@ export default function ExerciseSetGroupItemUI({
       </Text>
       <Stack
         // bd="1px solid var(--mantine-color-default-border)"
-        p="lg"
-        w={300}
+        px="lg"
+        // w={300}
         bg="transparent"
         bdrs="lg"
+        w="100%"
       >
         {children}
       </Stack>
