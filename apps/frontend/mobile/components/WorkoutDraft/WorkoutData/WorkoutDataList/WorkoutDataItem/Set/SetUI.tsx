@@ -32,7 +32,6 @@ export default function SetUI({
   onDeleteSetPress,
 }: SetUIProps) {
   const theme = useTheme() as CustomTheme;
-  console.log('parentType in SetUI', parentType);
   const borderBottomWidth =
     setsLength && setsLength > 0 && setIndex !== setsLength - 1 ? 1 : 0;
   return (
