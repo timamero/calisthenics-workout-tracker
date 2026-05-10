@@ -63,11 +63,10 @@ const RootStack = createNativeStackNavigator({
           options: { headerShown: false },
         },
         WorkoutDetails: {
-          screen: WorkoutLogDetailScreen, // Or whatever component you want as a modal
+          screen: WorkoutLogDetailScreen,
           options: {
             presentation: 'modal',
-            headerShown: true,
-            title: 'Workout Details',
+            headerShown: false,
           },
         },
       },
