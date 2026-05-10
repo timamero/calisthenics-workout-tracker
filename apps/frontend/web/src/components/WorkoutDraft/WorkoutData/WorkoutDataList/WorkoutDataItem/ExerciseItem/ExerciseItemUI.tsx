@@ -51,6 +51,7 @@ export default function ExerciseItemUI({
       align="center"
       pos="relative"
       style={appliedStyle}
+      my={parentType === null ? 'xl' : 0}
     >
       <Group w="100%" wrap="nowrap">
         <Group justify="space-between" wrap="nowrap" w="100%" p="xs">

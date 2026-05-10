@@ -13,6 +13,7 @@ interface SupersetItemUIProps {
   superset: Superset;
   isFirst: boolean;
   isLast: boolean;
+  parentType?: 'superset' | 'section' | null;
   handleUpClick: () => void;
   handleDownClick: () => void;
   handleDeleteSupersetClick: () => void;
@@ -23,6 +24,7 @@ export default function SupersetItemUI({
   mode,
   isFirst,
   isLast,
+  parentType,
   handleUpClick,
   handleDownClick,
   handleDeleteSupersetClick,
@@ -37,6 +39,7 @@ export default function SupersetItemUI({
       maw={600}
       align="center"
       gap={0}
+      my={parentType === null ? 'xl' : 0}
     >
       <Group
         // bd="2px solid gray.3"
