@@ -99,8 +99,11 @@ export default function ExerciseItemUI({
       )}
       {parentType === 'superset' && parentItemsLength! > 1 && !isLast && (
         <Box pos="absolute" bottom={0} style={{ transform: 'translateY(18px' }}>
-          <ThemeIcon variant="light" color="gray.5">
-            <IoLink size={24} />
+          <ThemeIcon variant="transparent">
+            <IoLink
+              size={24}
+              style={{ color: 'var(--mantine-color-dark-2)' }}
+            />
           </ThemeIcon>
         </Box>
       )}
