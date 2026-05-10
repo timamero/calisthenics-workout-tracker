@@ -94,7 +94,7 @@ export default function ExerciseItemUI({
           </Button>
         </Group>
       )}
-      {parentItemsLength! > 1 && !isLast && (
+      {parentType === 'superset' && parentItemsLength! > 1 && !isLast && (
         <Box pos="absolute" bottom={0} style={{ transform: 'translateY(18px' }}>
           <ThemeIcon variant="light" color="gray.5">
             <IoLink size={24} />

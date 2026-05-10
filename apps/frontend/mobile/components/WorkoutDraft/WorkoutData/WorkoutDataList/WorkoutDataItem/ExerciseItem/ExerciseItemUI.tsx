@@ -108,7 +108,7 @@ export default function ExerciseItemUI({
         </View>
       )}
 
-      {parentItemsLength! > 1 && !isLast && (
+      {parentType === 'superset' && parentItemsLength! > 1 && !isLast && (
         <View
           style={{
             position: 'absolute',
