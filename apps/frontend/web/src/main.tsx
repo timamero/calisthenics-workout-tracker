@@ -65,7 +65,7 @@ const theme = createTheme({
       return {
         // ...defaultResolvedColors,
         background: 'var(--mantine-color-white)',
-        hover: 'var(--mantine-color-lime-1)',
+        hover: 'var(--mantine-color-gray-2)',
         color: 'var(--mantine-color-dark-7)',
         border: '1px solid var(--mantine-color-dark-7)',
       };
