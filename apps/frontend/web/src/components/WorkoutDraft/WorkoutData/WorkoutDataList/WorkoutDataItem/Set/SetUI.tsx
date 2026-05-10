@@ -74,7 +74,7 @@ export default function SetUI({
         </Group>
       )}
       {setsLength && setsLength > 0 && setIndex !== setsLength - 1 && (
-        <Divider />
+        <Divider color="dark.2" />
       )}
     </Stack>
   );
