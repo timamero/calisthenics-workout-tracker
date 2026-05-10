@@ -7,24 +7,17 @@ import {
 } from '@tanstack/react-router';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
-import {
-  createTheme,
-  MantineProvider,
-  defaultVariantColorsResolver,
-  NavLink,
-  ActionIcon,
-} from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 
 import { WorkoutContextProvider } from '@cwt/context';
 import { useSupabaseAuth } from '@cwt/hooks';
 
 import './styles/global.css';
-import navLinkClasses from './styles/NavLink.module.css';
-import actionIconClasses from './styles/ActionIcon.module.css';
 
 import { supabase } from './services/supabaseClient';
 import { routeTree } from './routeTree.gen';
 import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
+import theme from './theme';
 
 const router = createRouter({
   routeTree,
@@ -38,78 +31,6 @@ declare module '@tanstack/react-router' {
     router: typeof router;
   }
 }
-
-const theme = createTheme({
-  cursorType: 'pointer',
-  fontFamily:
-    'Manrope, Avenir, Montserrat, Corbel, URW Gothic, source-sans-pro, sans-serif',
-  fontFamilyMonospace:
-    'Source Code Pro, ui-monospace, Cascadia Code, Source Code Pro, Menlo, Consolas, DejaVu Sans Mono, monospace',
-  headings: {
-    fontFamily:
-      'Elms Sans, Seravek, Gill Sans Nova, Ubuntu, Calibri, DejaVu Sans, source-sans-pro, sans-serif',
-  },
-  autoContrast: true,
-  luminanceThreshold: 0.3,
-  primaryColor: 'lime',
-  white: '#F5F5F5',
-
-  variantColorResolver: (input) => {
-    const defaultResolvedColors = defaultVariantColorsResolver(input);
-    // const parsedColor = parseThemeColor({
-    //   color: input.color || input.theme.primaryColor,
-    //   theme: input.theme,
-    // });
-
-    if (input.variant === 'outline') {
-      return {
-        // ...defaultResolvedColors,
-        background: 'var(--mantine-color-white)',
-        hover: 'var(--mantine-color-gray-2)',
-        color: 'var(--mantine-color-dark-7)',
-        border: '1px solid var(--mantine-color-dark-7)',
-      };
-    }
-    if (input.variant === 'filled') {
-      return {
-        // ...defaultResolvedColors,
-        background: 'var(--mantine-color-dark-7)',
-        hover: 'var(--mantine-color-dark-5)',
-        color: 'var(--mantine-color-white)',
-        border: 'none',
-      };
-    }
-    if (input.variant === 'filled-violet') {
-      return {
-        // ...defaultResolvedColors,
-        background: 'var(--mantine-color-violet-9)',
-        hover: 'var(--mantine-color-violet-7)',
-        color: 'var(--mantine-color-gray-0)',
-        border: 'none',
-      };
-    }
-    if (input.variant === 'transparent') {
-      return {
-        // ...defaultResolvedColors,
-        background: 'none',
-        hover: 'var(--mantine-color-gray-2)',
-        color: 'var(--mantine-color-dark-7)',
-        border: 'none',
-      };
-    }
-
-    return defaultResolvedColors;
-  },
-
-  components: {
-    NavLink: NavLink.extend({
-      classNames: navLinkClasses,
-    }),
-    ActionIcon: ActionIcon.extend({
-      classNames: actionIconClasses,
-    }),
-  },
-});
 
 export const App = () => {
   useSupabaseAuth(supabase);
