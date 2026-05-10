@@ -2,6 +2,7 @@ import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import UserScreen from '../screens/UserScreen';
+import WorkoutLogDetailScreen from '../screens/WorkoutLogDetailScreen';
 
 import { useAuthStore } from '@cwt/state/stores';
 
@@ -60,6 +61,14 @@ const RootStack = createNativeStackNavigator({
         WorkoutStack: {
           screen: WorkoutStack,
           options: { headerShown: false },
+        },
+        WorkoutDetails: {
+          screen: WorkoutLogDetailScreen, // Or whatever component you want as a modal
+          options: {
+            presentation: 'modal',
+            headerShown: true,
+            title: 'Workout Details',
+          },
         },
       },
     },
