@@ -21,19 +21,24 @@ export default function ReorderButtonGroup({
     <Button.Group orientation="vertical">
       {!isFirst && (
         <Button
-          // color="dark"
           onClick={() => handleUpClick()}
           variant="transparent"
           p={1}
-          // my={1}
           bdrs="sm"
+          h="min-content"
         >
-          <IoChevronUpCircleOutline size={24} />
+          <IoChevronUpCircleOutline size={20} />
         </Button>
       )}
       {!isLast && (
-        <Button onClick={handleDownClick} variant="transparent" p={1}>
-          <IoChevronDownCircleOutline size={24} />
+        <Button
+          h="min-content"
+          onClick={handleDownClick}
+          variant="transparent"
+          bdrs="sm"
+          p={1}
+        >
+          <IoChevronDownCircleOutline size={20} />
         </Button>
       )}
     </Button.Group>

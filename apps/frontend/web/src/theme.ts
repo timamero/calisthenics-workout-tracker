@@ -92,7 +92,7 @@ const theme = createTheme({
       return {
         // ...defaultResolvedColors,
         background: 'none',
-        hover: 'var(--mantine-color-gray-2)',
+        hover: 'var(--mantine-color-gray-4)',
         color: 'var(--mantine-color-dark-7)',
         border: 'none',
       };
