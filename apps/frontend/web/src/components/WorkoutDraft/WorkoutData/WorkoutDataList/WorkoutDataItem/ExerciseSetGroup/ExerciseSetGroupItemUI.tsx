@@ -12,12 +12,17 @@ export default function ExerciseSetGroupItemUI({
   children,
 }: ExerciseSetGroupItemUIProps) {
   return (
-    <Stack w="100%" maw={600} miw={280}>
-      <Text size="xs" fw={600}>
+    <Stack
+      w="100%"
+      maw={600}
+      align="center"
+      style={{ borderBottom: '1px solid var(--mantine-color-gray-3)' }}
+    >
+      <Text size="lg" fw={600} my="xs">
         Set {setNumber}
       </Text>
       <Stack
-        bd="1px solid var(--mantine-color-default-border)"
+        // bd="1px solid var(--mantine-color-default-border)"
         p="lg"
         w={300}
         bg="transparent"
