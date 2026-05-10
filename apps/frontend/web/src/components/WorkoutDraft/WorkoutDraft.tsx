@@ -21,6 +21,8 @@ export default function WorkoutDraft() {
           hideEdit={mode === 'log' ? true : false}
           variant={'title'}
           maxLength={70}
+          titleOrder={1}
+          titleSize="h1"
         />
         <Stack gap="xl" align="center" w="100%">
           <WorkoutData />
