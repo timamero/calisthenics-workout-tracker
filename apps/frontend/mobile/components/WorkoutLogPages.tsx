@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { ScrollView } from 'react-native';
 import { useTheme, DataTable } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   useWorkoutLibraryStore,
@@ -13,9 +14,10 @@ import { WorkoutLogResponse } from '@cwt/schema/workouts';
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 import CardButton from '../components/common/CardButton';
-import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
+// import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 
 export default function WorkoutLogPages() {
+  const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
 
   const scrollRef = useRef<ScrollView>(null);
@@ -32,9 +34,9 @@ export default function WorkoutLogPages() {
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
 
-  const setVisible =
-    useWorkoutLogDetailContextMobile().mobileOverlayHandlers
-      .setIsOverlayVisible!;
+  // const setVisible =
+  //   useWorkoutLogDetailContextMobile().mobileOverlayHandlers
+  //     .setIsOverlayVisible!;
   const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
 
   const data = chunk(workoutLogs, itemsPerPage);
@@ -49,7 +51,8 @@ export default function WorkoutLogPages() {
     setDetailWorkout(workoutLog);
     setMode('read');
     setWorkoutData(workoutLog.workout_data.data);
-    setVisible(true);
+    navigation.navigate('WorkoutDetails');
+    // setVisible(true);
   };
 
   const items = data[activePage - 0].map((wo, i) => {
@@ -141,7 +144,7 @@ export default function WorkoutLogPages() {
           },
         }}
       />
-      <WorkoutLogDetailOverlay />
+      {/* <WorkoutLogDetailOverlay /> */}
     </>
   );
 }

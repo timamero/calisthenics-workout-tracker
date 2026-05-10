@@ -9,7 +9,10 @@ import {
   useExerciseLibraryStore,
   useLeveragesAssistsStore,
 } from '@cwt/state/stores';
-import { WorkoutContextProvider } from '@cwt/context';
+import {
+  WorkoutContextProvider,
+  WorkoutLogDetailContextProvider,
+} from '@cwt/context';
 import { useSupabaseAuth } from '@cwt/hooks';
 
 import theme from './theme';
@@ -72,9 +75,11 @@ export default function App() {
   return (
     <WorkoutContextProvider appType="mobile">
       <WorkoutDraftProvider>
-        <PaperProvider theme={theme}>
-          <Navigation />
-        </PaperProvider>
+        <WorkoutLogDetailContextProvider>
+          <PaperProvider theme={theme}>
+            <Navigation />
+          </PaperProvider>
+        </WorkoutLogDetailContextProvider>
       </WorkoutDraftProvider>
     </WorkoutContextProvider>
   );
