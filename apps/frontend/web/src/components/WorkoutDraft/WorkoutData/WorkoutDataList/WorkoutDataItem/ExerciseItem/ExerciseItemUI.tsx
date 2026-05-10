@@ -1,4 +1,5 @@
 import { Stack, Text, Button, Group, Box } from '@mantine/core';
+import { IoAdd } from 'react-icons/io5';
 
 import type { Mode } from '@cwt/schema/workouts';
 import SetList from '../SetList';
@@ -67,13 +68,16 @@ export default function ExerciseItemUI({
         <SetList />
       </Stack>
       {(mode === 'edit' || mode === 'build') && (
-        <Button
-          variant="outline"
-          color="dark"
-          onClick={() => handleAddSetClick()}
-        >
-          Add Set
-        </Button>
+        <Group justify="flex-end" w="100%" p="sm">
+          <Button
+            variant="outline"
+            color="lime"
+            onClick={() => handleAddSetClick()}
+            leftSection={<IoAdd size={16} />}
+          >
+            Set
+          </Button>
+        </Group>
       )}
     </Stack>
   );
