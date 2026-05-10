@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react';
-import { Title, TextInput, Button, Group, Text } from '@mantine/core';
+import { Title, TextInput, Button, Group, Text, Stack } from '@mantine/core';
 
 interface TextInputWithEditUIProps {
   isEditMode: boolean;
@@ -47,25 +47,27 @@ export default function TextInputWithEditUI({
         </Group>
       )}
       {isEditMode && (
-        <Group>
+        <Stack maw={400} w="100%">
           <TextInput w="100%" value={text} onChange={onTextChange} />
-          <Button
-            onClick={() => onCancelClick()}
-            size="compact-sm"
-            variant="subtle"
-            color="dark"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={() => onSaveClick()}
-            size="compact-sm"
-            variant="outline"
-            color="dark"
-          >
-            Save
-          </Button>
-        </Group>
+          <Group justify="flex-end">
+            <Button
+              onClick={() => onCancelClick()}
+              size="compact-sm"
+              variant="subtle"
+              color="dark"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => onSaveClick()}
+              size="compact-sm"
+              variant="outline"
+              color="dark"
+            >
+              Save
+            </Button>
+          </Group>
+        </Stack>
       )}
     </>
   );
