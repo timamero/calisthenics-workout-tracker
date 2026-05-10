@@ -16,7 +16,7 @@ export default function ExerciseSetGroupItemUI({
       w="100%"
       maw={600}
       align="center"
-      style={{ borderBottom: '1px solid var(--mantine-color-gray-3)' }}
+      style={{ borderBottom: '1px solid var(--mantine-color-dark-1)' }}
     >
       <Text size="lg" fw={600} my="xs">
         Set {setNumber}
