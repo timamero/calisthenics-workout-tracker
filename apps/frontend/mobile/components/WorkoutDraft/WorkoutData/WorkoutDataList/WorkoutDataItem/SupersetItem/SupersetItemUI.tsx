@@ -36,7 +36,6 @@ export default function SupersetItemUI({
   handleOpenAddExercisePress,
 }: SupersetItemUIProps) {
   const theme = useTheme() as CustomTheme;
-  console.log('superset parent', parentType);
   return (
     <View
       style={{
