@@ -13,7 +13,7 @@ export default function WorkoutDraft() {
     (state) => state.setWorkoutTitle,
   );
   return (
-    <Box bg={mode === 'edit' ? 'gray.1' : ''} flex="1" w="100%" p="md">
+    <Box flex="1" w="100%" p="md">
       <Stack gap="xl" align="center">
         <TextInputWithEdit
           initialValue={workoutTitle!}
