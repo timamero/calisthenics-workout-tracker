@@ -18,23 +18,41 @@ import {
  */
 function useDeleteItemLogic(
   itemType: "exercise" | "superset" | "section",
-  itemID: string
+  itemID: string,
 ) {
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
 
+  // if (itemType === "exercise") {
+  //   console.log(
+  //     "getting parentType, parentSupersetID, parentSectionID",
+  //     parentType,
+  //     parentSupersetID,
+  //     parentSectionID,
+  //   );
+  // }
+
   const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod
+    (state) => state.setSectionIDToMod,
   );
   const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod
+    (state) => state.setSupersetIDToMod,
   );
   const setExerciseIDToMod = useWorkoutDraftStore(
-    (state) => state.setExerciseIDToMod
+    (state) => state.setExerciseIDToMod,
   );
 
   const setIDs = () => {
+    if (itemType === "exercise") {
+      console.log("useDeleteItem || setting IDs for itemType", itemType);
+      console.log(
+        "getting parentType, parentSupersetID, parentSectionID",
+        parentType,
+        parentSupersetID,
+        parentSectionID,
+      );
+    }
     switch (itemType) {
       case "section":
         setSectionIDToMod(itemID);
@@ -70,7 +88,7 @@ function useDeleteItemLogic(
  */
 export function useDeleteItem(
   itemType: "exercise" | "superset" | "section",
-  itemID: string
+  itemID: string,
 ) {
   const { parentType, setIDs } = useDeleteItemLogic(itemType, itemID);
 
@@ -101,7 +119,7 @@ export function useDeleteItem(
  */
 export function useDeleteItemMobile(
   itemType: "exercise" | "superset" | "section",
-  itemID: string
+  itemID: string,
 ) {
   const { parentType, setIDs } = useDeleteItemLogic(itemType, itemID);
 
