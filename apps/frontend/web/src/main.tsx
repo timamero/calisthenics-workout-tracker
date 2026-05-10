@@ -52,7 +52,7 @@ const theme = createTheme({
   autoContrast: true,
   luminanceThreshold: 0.3,
   primaryColor: 'lime',
-  white: '#FAF9F6',
+  white: '#F5F5F5',
 
   variantColorResolver: (input) => {
     const defaultResolvedColors = defaultVariantColorsResolver(input);
