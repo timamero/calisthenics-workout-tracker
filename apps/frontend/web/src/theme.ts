@@ -5,6 +5,7 @@ import {
   defaultVariantColorsResolver,
   NavLink,
   ActionIcon,
+  type CSSVariablesResolver,
   type DefaultMantineColor,
   type MantineColorsTuple,
 } from '@mantine/core';
@@ -108,6 +109,18 @@ const theme = createTheme({
       classNames: actionIconClasses,
     }),
   },
+
+  other: {
+    outline: '#424242',
+  },
+});
+
+export const resolver: CSSVariablesResolver = (theme) => ({
+  variables: {
+    '--mantine-outline': theme.other.outline,
+  },
+  light: {},
+  dark: {},
 });
 
 export default theme;
