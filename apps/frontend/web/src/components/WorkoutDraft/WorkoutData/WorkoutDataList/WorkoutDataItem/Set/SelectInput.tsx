@@ -37,8 +37,8 @@ export default function SelectInput({
     if (mode === 'read') {
       return (
         <Stack>
-          <Text>{label}</Text>
-          <Text>
+          <Text ff="monospace">{label}</Text>
+          <Text ff="monospace">
             {set.fields.leverages?.find((field) => field.id === fieldID)?.value
               ? (set.fields.leverages.find((field) => field.id === fieldID)!
                   .value as string)
@@ -49,6 +49,7 @@ export default function SelectInput({
     }
     return (
       <Select
+        ff="monospace"
         label={label}
         data={options}
         value={
@@ -64,8 +65,8 @@ export default function SelectInput({
     if (mode === 'read') {
       return (
         <Stack>
-          <Text>{label}</Text>
-          <Text>
+          <Text ff="monospace">{label}</Text>
+          <Text ff="monospace">
             {set.fields.assists?.find((field) => field.id === fieldID)?.value
               ? (set.fields.assists.find((field) => field.id === fieldID)!
                   .value as string)
@@ -76,6 +77,7 @@ export default function SelectInput({
     }
     return (
       <Select
+        ff="monospace"
         label={label}
         data={options}
         value={
