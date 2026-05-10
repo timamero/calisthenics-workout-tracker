@@ -33,7 +33,7 @@ export default function SupersetItemUI({
   return (
     <Stack
       bdrs="md"
-      bd="2px solid gray.3"
+      bd="2px solid dark.1"
       bg="elevation.4"
       w="100%"
       maw={600}
@@ -50,7 +50,7 @@ export default function SupersetItemUI({
         style={{
           borderTopLeftRadius: 'var(--mantine-radius-md)',
           borderTopRightRadius: 'var(--mantine-radius-md)',
-          borderBottom: '1px solid var(--mantine-color-gray-3)',
+          borderBottom: '1px solid var(--mantine-color-dark-1)',
           // borderBottomColor: 'var(--mantine-color-red-3)',
         }}
       >

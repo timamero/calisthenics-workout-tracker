@@ -34,7 +34,7 @@ export default function ExerciseItemUI({
   const appliedStyle =
     parentType === 'superset'
       ? {
-          borderBottom: '1px solid var(--mantine-color-gray-3)',
+          borderBottom: '1px solid var(--mantine-color-dark-1)',
         }
       : {
           border: '1px solid var(--mantine-outline)',
