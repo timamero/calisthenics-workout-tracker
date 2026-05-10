@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, IconButton, useTheme } from 'react-native-paper';
+import { Menu, IconButton, useTheme, Surface } from 'react-native-paper';
 
 import { CustomTheme } from '../../../../../../theme';
 
@@ -23,14 +23,22 @@ export default function AddItemMenu({
       visible={visible}
       onDismiss={closeMenu}
       anchor={
-        <IconButton
-          mode="outlined"
-          icon="plus"
-          size={24}
-          onPress={openMenu}
-          style={{ boxShadow: `${theme.colors.onBackground} 1px 3px 9px -6px` }}
-          containerColor={theme.colors.onPrimary}
-        />
+        <Surface
+          elevation={4}
+          style={{
+            backgroundColor: theme.colors.background,
+            borderRadius: '50%',
+          }}
+        >
+          <IconButton
+            mode="contained"
+            icon="plus"
+            size={24}
+            onPress={openMenu}
+            containerColor={theme.colors.background}
+            rippleColor={theme.colors.violet2}
+          />
+        </Surface>
       }
       anchorPosition="top"
     >
