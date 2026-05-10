@@ -108,8 +108,7 @@ export default function ExerciseItemUI({
         </View>
       )}
 
-      {/* {isFirst && ( */}
-      {parentItemsLength! > 2 && !isLast && (
+      {parentItemsLength! > 1 && !isLast && (
         <View
           style={{
             position: 'absolute',
