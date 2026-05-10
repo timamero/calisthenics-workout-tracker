@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { useTheme, Button } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 import type { Mode, Section } from '@cwt/schema/workouts';
 import { useAddSupersetMobile } from '@cwt/hooks';
