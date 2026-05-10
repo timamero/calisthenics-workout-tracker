@@ -84,7 +84,7 @@ export default function SectionItemUI({
       </Group>
       <ItemsList />
       {(mode === 'edit' || mode === 'build') && (
-        <Stack>
+        <Stack align="flex-end" w="100%" p="sm">
           <AddItemMenu
             handleAddExerciseClick={handleAddExerciseClick}
             handleAddSupersetClick={handleAddSupersetClick}
