@@ -1,4 +1,4 @@
-import { Stack, Group, Text, Button, Box } from '@mantine/core';
+import { Stack, Group, Title, Button, Box } from '@mantine/core';
 import { Link } from '@tanstack/react-router';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
@@ -64,7 +64,9 @@ export default function SupersetItemUI({
             />
           )}
           <Group flex={1} align="center" justify="center">
-            <Text>Superset</Text>
+            <Title order={parentType === null ? 1 : 2} size="h4">
+              Superset
+            </Title>
           </Group>
         </Group>
         {(mode === 'edit' || mode === 'build') && (
