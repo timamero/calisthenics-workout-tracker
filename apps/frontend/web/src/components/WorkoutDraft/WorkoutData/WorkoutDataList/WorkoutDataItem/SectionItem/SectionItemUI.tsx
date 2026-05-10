@@ -62,7 +62,7 @@ export default function SectionItemUI({
               isLast={isLast}
             />
           )}
-          <Group flex={1} h={104} align="center" justify="center">
+          <Group flex={1} h="max-content" align="center" justify="center">
             <TextInputWithEdit
               initialValue={title}
               onSave={handleSetSectionTitle}
@@ -73,7 +73,7 @@ export default function SectionItemUI({
           </Group>
         </Group>
         {(mode === 'edit' || mode === 'build') && (
-          <Box p="md">
+          <Box p="xs">
             <WorkoutItemMenu
               itemType="section"
               handleUpClick={handleUpClick}
