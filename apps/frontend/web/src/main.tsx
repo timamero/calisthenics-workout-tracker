@@ -17,7 +17,7 @@ import './styles/global.css';
 import { supabase } from './services/supabaseClient';
 import { routeTree } from './routeTree.gen';
 import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
-import theme from './theme';
+import theme, { resolver } from './theme';
 
 const router = createRouter({
   routeTree,
@@ -42,7 +42,7 @@ if (!rootElement.innerHTML) {
   const root = createRoot(rootElement);
   root.render(
     <StrictMode>
-      <MantineProvider theme={theme}>
+      <MantineProvider theme={theme} cssVariablesResolver={resolver}>
         <WorkoutDraftProvider>
           <WorkoutContextProvider appType="web">
             <App />
