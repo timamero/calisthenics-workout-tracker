@@ -52,6 +52,7 @@ export default function WorkoutItemMenu({
           p="xs"
           w="min-content"
           h="min-content"
+          bdrs={24}
           onClick={() => setMenuOpened(!menuOpened)}
         >
           <IoEllipsisVertical size={24} />
