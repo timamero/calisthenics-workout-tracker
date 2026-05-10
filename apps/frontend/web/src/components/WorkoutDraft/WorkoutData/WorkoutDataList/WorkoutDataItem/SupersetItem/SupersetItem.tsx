@@ -16,6 +16,7 @@ export default function SupersetItem() {
   const supersetParentsSectionID = useContext(
     WorkoutDataItemContext,
   )?.parentSectionID;
+  const parentType = useContext(WorkoutDataItemContext)!.parentType;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const setSupersetIDToMod = useWorkoutDraftStore(
@@ -43,6 +44,7 @@ export default function SupersetItem() {
       superset={superset}
       isFirst={superset!.order === 0}
       isLast={superset!.order === useParentItemsLength() - 1}
+      parentType={parentType}
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleDeleteSupersetClick={handleDeleteSupersetClick}
