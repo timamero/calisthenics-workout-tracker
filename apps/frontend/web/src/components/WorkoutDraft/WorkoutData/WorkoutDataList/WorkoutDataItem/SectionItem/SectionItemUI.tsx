@@ -42,7 +42,8 @@ export default function SectionItemUI({
       w="100%"
       maw={1200}
       align="center"
-      pb="xl"
+      pb={mode === 'edit' || mode === 'build' ? 0 : 'lg'}
+      my="xl"
     >
       <Group
         align="flex-start"
