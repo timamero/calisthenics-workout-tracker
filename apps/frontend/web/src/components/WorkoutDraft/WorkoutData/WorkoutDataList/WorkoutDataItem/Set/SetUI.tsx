@@ -62,6 +62,7 @@ export default function SetUI({
         <Group justify="flex-end">
           <Checkbox
             label="Completed"
+            color="lime.4"
             labelPosition="left"
             checked={isCompleted}
             onChange={(event) =>
