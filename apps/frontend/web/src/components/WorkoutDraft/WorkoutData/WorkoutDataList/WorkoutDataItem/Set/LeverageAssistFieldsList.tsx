@@ -95,5 +95,5 @@ export default function LeverageAssistFieldsList() {
 }
 
 function LeverageAssistFieldsListUI({ children }: { children: ReactNode }) {
-  return <Stack>{children}</Stack>;
+  return <Stack gap="xs">{children}</Stack>;
 }
