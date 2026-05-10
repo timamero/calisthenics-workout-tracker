@@ -94,7 +94,7 @@ export default function WorkoutLayout() {
             <SegmentedControl
               value={mode as 'edit' | 'log'}
               onChange={() => handleSetMode()}
-              color="lime.2"
+              color="violet"
               data={[
                 {
                   value: 'edit',
