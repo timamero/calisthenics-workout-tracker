@@ -1,6 +1,7 @@
 import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useWorkoutLogDetailContextMobile } from '@cwt/hooks';
 import { formatDuration } from '@cwt/utils';
@@ -14,12 +15,10 @@ import WorkoutData from '../components/WorkoutDraft/WorkoutData';
 export default function WorkoutLogDetailScreen() {
   const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
+  const { top } = useSafeAreaInsets();
 
   const workoutLogDetail = useWorkoutLogDetailContextMobile()
     .workout as WorkoutLogResponse;
-  // const setVisible =
-  //   useWorkoutLogDetailContextMobile().mobileOverlayHandlers
-  //     .setIsOverlayVisible!;
   const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
 
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
@@ -40,22 +39,15 @@ export default function WorkoutLogDetailScreen() {
   });
 
   const handleCloseDetails = () => {
-    // setVisible(false);
     setDetailWorkout(null);
     resetWorkout();
-    navigation.navigate('History');
+    navigation.navigate('App', { screen: 'History' });
   };
 
   return (
-    // <Portal>
-    //   <Modal
-    //     visible={visible || false}
-    //     onDismiss={handleCloseModal}
-    //     contentContainerStyle={containerStyle}
-    //   >
     <View
       style={{
-        paddingTop: 16,
+        paddingTop: 16 + top,
         paddingInline: 16,
         display: 'flex',
         flexDirection: 'column',
