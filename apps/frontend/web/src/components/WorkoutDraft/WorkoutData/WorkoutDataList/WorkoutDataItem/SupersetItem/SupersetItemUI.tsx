@@ -83,15 +83,17 @@ export default function SupersetItemUI({
         <ExerciseSetGroup />
       )}
       {(mode === 'edit' || mode === 'build') && (
-        <Button
-          variant="filled"
-          color="orange.9"
-          component={Link}
-          to="/workout/add-exercise"
-          onClick={() => handleOpenAddExerciseClick()}
-        >
-          Add Exercise
-        </Button>
+        <Stack my="sm">
+          <Button
+            variant="filled"
+            color="orange.9"
+            component={Link}
+            to="/workout/add-exercise"
+            onClick={() => handleOpenAddExerciseClick()}
+          >
+            Add Exercise
+          </Button>
+        </Stack>
       )}
     </Stack>
   );
