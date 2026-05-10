@@ -29,12 +29,27 @@ export default function SupersetItemUI({
   handleOpenAddExerciseClick,
 }: SupersetItemUIProps) {
   return (
-    <Stack bg="transparent" w="100%" maw={600} align="center" gap={0}>
+    <Stack
+      bdrs="md"
+      bd="2px solid gray.3"
+      bg="elevation.4"
+      w="100%"
+      maw={600}
+      align="center"
+      gap={0}
+    >
       <Group
-        bd="2px solid var(--mantine-color-default-border)"
-        bdrs="lg"
+        // bd="2px solid gray.3"
+        // bdrs="lg"
         wrap="nowrap"
         w="100%"
+        bg="elevation.5"
+        style={{
+          borderTopLeftRadius: 'var(--mantine-radius-md)',
+          borderTopRightRadius: 'var(--mantine-radius-md)',
+          borderBottom: '1px solid var(--mantine-color-gray-3)',
+          // borderBottomColor: 'var(--mantine-color-red-3)',
+        }}
       >
         <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
           {(mode === 'edit' || mode === 'build') && (
