@@ -54,6 +54,7 @@ export default function ExerciseItem() {
       isFirst={exercise!.order === 0}
       isLast={exercise!.order === useParentItemsLength() - 1}
       parentType={parentType}
+      parentItemsLength={parentLength}
       handleUpPress={handleUpPress}
       handleDownPress={handleDownPress}
       handleAddSetPress={handleAddSetPress}

@@ -15,6 +15,7 @@ interface ExerciseItemUIProps {
   isFirst: boolean;
   isLast: boolean;
   parentType?: 'superset' | 'section' | null;
+  parentItemsLength?: number;
   handleUpPress: () => void;
   handleDownPress: () => void;
   handleAddSetPress: () => void;
@@ -27,6 +28,7 @@ export default function ExerciseItemUI({
   isFirst,
   isLast,
   parentType,
+  parentItemsLength,
   handleUpPress,
   handleDownPress,
   handleAddSetPress,
@@ -37,20 +39,17 @@ export default function ExerciseItemUI({
   return (
     <View
       style={{
+        position: 'relative',
         paddingInline:
           parentType === 'superset' ? 8 : parentType === 'section' ? 0 : 4,
-        // paddingBlock: 16,
         marginInline:
           parentType === 'superset' ? 4 : parentType === 'section' ? 16 : 4,
-        // marginInline: 4,
         marginBlock:
           parentType === 'superset' ? 0 : parentType === 'section' ? 24 : 40,
         borderWidth: parentType === 'superset' ? 0 : 1,
         borderBottomWidth: 1,
         borderColor:
           parentType === 'superset' ? theme.colors.gray3 : theme.colors.outline,
-        // borderColor: theme.colors.lime4,
-        // backgroundColor: theme.colors.secondaryContainer,
         borderRadius: parentType === 'superset' ? 0 : 8,
       }}
     >
@@ -92,15 +91,6 @@ export default function ExerciseItemUI({
             handleDownPress={handleDownPress}
             handleDeletePress={handleDeleteExercisePress}
           />
-          // <Button
-          //   mode="outlined"
-          //   onPress={handleDeleteExercisePress}
-          //   labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-          //   textColor={theme.colors.onBackground}
-          //   style={{ borderColor: theme.colors.error, flexShrink: 0 }}
-          // >
-          //   Delete Exercise
-          // </Button>
         )}
       </View>
       <SetList />
@@ -117,16 +107,28 @@ export default function ExerciseItemUI({
           </Button>
         </View>
       )}
-      <View
-        style={{
-          position: 'relative',
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <Icon source="link" color={theme.colors.gray7} size={24} />
-      </View>
+
+      {/* {isFirst && ( */}
+      {parentItemsLength! > 2 && !isLast && (
+        <View
+          style={{
+            position: 'absolute',
+            height: 'auto',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            bottom: 0,
+          }}
+        >
+          <View
+            style={{
+              transform: 'translateY(12px)',
+            }}
+          >
+            <Icon source="link" color={theme.colors.gray5} size={24} />
+          </View>
+        </View>
+      )}
     </View>
   );
 }
