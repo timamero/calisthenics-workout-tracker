@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
 
@@ -12,7 +11,6 @@ import { CustomTheme } from '../theme';
 import WorkoutData from './WorkoutDraft/WorkoutData';
 
 export default function WorkoutLogDetailOverlay() {
-  const scrollViewRef = useRef<ScrollView | null>(null);
   const theme = useTheme() as CustomTheme;
 
   const workoutLogDetail = useWorkoutLogDetailContextMobile()
@@ -137,7 +135,7 @@ export default function WorkoutLogDetailOverlay() {
                 )}
               </View>
             </View>
-            <WorkoutData scrollViewRef={scrollViewRef} />
+            <WorkoutData />
           </ScrollView>
         </View>
       </Modal>
