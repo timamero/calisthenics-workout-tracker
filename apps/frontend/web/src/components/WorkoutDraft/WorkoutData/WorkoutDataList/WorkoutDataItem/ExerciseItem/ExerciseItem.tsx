@@ -15,6 +15,8 @@ import ExerciseItemUI from './ExerciseItemUI';
 
 export default function ExerciseItem() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
+  const parentLength = useContext(WorkoutDataItemContext)?.parentItemsLength;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
   const getExerciseNameById = useExerciseLibraryStore(
@@ -37,6 +39,8 @@ export default function ExerciseItem() {
       name={name}
       isFirst={exercise!.order === 0}
       isLast={exercise!.order === useParentItemsLength() - 1}
+      parentType={parentType}
+      parentItemsLength={parentLength}
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleAddSetClick={handleAddSetClick}

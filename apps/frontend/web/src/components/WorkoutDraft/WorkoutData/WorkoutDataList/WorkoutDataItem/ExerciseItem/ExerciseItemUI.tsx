@@ -1,5 +1,5 @@
-import { Stack, Text, Button, Group, Box } from '@mantine/core';
-import { IoAdd } from 'react-icons/io5';
+import { Stack, Text, Button, Group, Box, ThemeIcon } from '@mantine/core';
+import { IoAdd, IoLink } from 'react-icons/io5';
 
 import type { Mode } from '@cwt/schema/workouts';
 import SetList from '../SetList';
@@ -11,6 +11,8 @@ interface ExerciseItemUIProps {
   name: string;
   isFirst: boolean;
   isLast: boolean;
+  parentType?: 'superset' | 'section' | null;
+  parentItemsLength?: number;
   handleUpClick: () => void;
   handleDownClick: () => void;
   handleAddSetClick: () => void;
@@ -22,20 +24,33 @@ export default function ExerciseItemUI({
   name,
   isFirst,
   isLast,
+  parentType,
+  parentItemsLength,
   handleUpClick,
   handleDownClick,
   handleAddSetClick,
   handleDeleteExerciseClick,
 }: ExerciseItemUIProps) {
+  const appliedStyle =
+    parentType === 'superset'
+      ? {
+          borderBottom: '1px solid var(--mantine-color-gray-3)',
+        }
+      : {
+          border: '1px solid var(--mantine-outline)',
+        };
   return (
     <Stack
-      bd="1px solid var(--mantine-color-default-border)"
+      // bd={`${parentType === 'superset' ? '0px' : '1px'} solid var(--mantine-outline)`}
       // p="lg"
       w="100%"
       maw={600}
       bg="transparent"
-      bdrs="lg"
+      // bdrs="lg"
+      bdrs={parentType === 'superset' ? 0 : 'var(--mantine-radius-lg)'}
       align="center"
+      pos="relative"
+      style={appliedStyle}
     >
       <Group w="100%" wrap="nowrap">
         <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
@@ -78,6 +93,13 @@ export default function ExerciseItemUI({
             Set
           </Button>
         </Group>
+      )}
+      {parentItemsLength! > 1 && !isLast && (
+        <Box pos="absolute" bottom={0} style={{ transform: 'translateY(18px' }}>
+          <ThemeIcon variant="light" color="gray.5">
+            <IoLink size={24} />
+          </ThemeIcon>
+        </Box>
       )}
     </Stack>
   );
