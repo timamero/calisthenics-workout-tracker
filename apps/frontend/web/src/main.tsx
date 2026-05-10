@@ -79,6 +79,15 @@ const theme = createTheme({
         border: 'none',
       };
     }
+    if (input.variant === 'filled-violet') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'var(--mantine-color-violet-9)',
+        hover: 'var(--mantine-color-violet-7)',
+        color: 'var(--mantine-color-gray-0)',
+        border: 'none',
+      };
+    }
     if (input.variant === 'transparent') {
       return {
         // ...defaultResolvedColors,
