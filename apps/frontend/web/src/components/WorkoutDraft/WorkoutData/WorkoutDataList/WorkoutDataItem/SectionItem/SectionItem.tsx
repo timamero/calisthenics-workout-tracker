@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 
 import type { Section } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
@@ -8,6 +9,8 @@ import SectionItemUI from './SectionItemUI';
 import { useDeleteItem, useReorderItem, useAddSuperset } from '@cwt/hooks';
 
 export default function SectionItem() {
+  const navigate = useNavigate();
+
   const section = useContext(WorkoutDataItemContext)!.item as Section;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
@@ -40,6 +43,13 @@ export default function SectionItem() {
     setSectionTitle(title);
   };
 
+  const handleAddExerciseClick = () => {
+    handleOpenAddExerciseClick();
+    navigate({
+      to: '/workout/add-exercise',
+    });
+  };
+
   return (
     <SectionItemUI
       mode={mode!}
@@ -49,7 +59,7 @@ export default function SectionItem() {
       handleUpClick={handleUpClick}
       handleDownClick={handleDownClick}
       handleDeleteSectionClick={handleDeleteSectionClick}
-      handleOpenAddExerciseClick={handleOpenAddExerciseClick}
+      handleAddExerciseClick={handleAddExerciseClick}
       handleAddSupersetClick={handleAddSupersetClick}
       handleSetSectionTitle={handleSetSectionTitle}
     />

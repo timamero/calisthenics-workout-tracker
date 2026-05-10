@@ -1,5 +1,5 @@
-import { Stack, Group, Button, Box } from '@mantine/core';
-import { Link } from '@tanstack/react-router';
+import { Stack, Group, Box } from '@mantine/core';
+// import { Link } from '@tanstack/react-router';
 
 import type { Mode } from '@cwt/schema/workouts';
 
@@ -7,6 +7,7 @@ import ItemsList from './ItemsList';
 import { TextInputWithEdit } from '../../../../../common/TextInputWithEdit';
 import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
+import AddItemMenu from './AddItemMenu';
 
 interface SectionItemUIProps {
   mode: Mode;
@@ -16,7 +17,7 @@ interface SectionItemUIProps {
   handleUpClick: () => void;
   handleDownClick: () => void;
   handleDeleteSectionClick: () => void;
-  handleOpenAddExerciseClick: () => void;
+  handleAddExerciseClick: () => void;
   handleAddSupersetClick: () => void;
   handleSetSectionTitle: (title: string) => void;
 }
@@ -29,7 +30,7 @@ export default function SectionItemUI({
   handleUpClick,
   handleDownClick,
   handleDeleteSectionClick,
-  handleOpenAddExerciseClick,
+  handleAddExerciseClick,
   handleAddSupersetClick,
   handleSetSectionTitle,
 }: SectionItemUIProps) {
@@ -47,7 +48,6 @@ export default function SectionItemUI({
         justify="space-between"
         w="100%"
         wrap="nowrap"
-        // p="md"
         style={{ borderBottom: '1px solid var(--mantine-color-dark-7)' }}
       >
         <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
@@ -85,22 +85,10 @@ export default function SectionItemUI({
       <ItemsList />
       {(mode === 'edit' || mode === 'build') && (
         <Stack>
-          <Button
-            variant="filled"
-            color="orange.9"
-            component={Link}
-            to="/workout/add-exercise"
-            onClick={() => handleOpenAddExerciseClick()}
-          >
-            Add Exercise
-          </Button>
-          <Button
-            variant="filled"
-            color="orange.9"
-            onClick={() => handleAddSupersetClick()}
-          >
-            Add Superset
-          </Button>
+          <AddItemMenu
+            handleAddExerciseClick={handleAddExerciseClick}
+            handleAddSupersetClick={handleAddSupersetClick}
+          />
         </Stack>
       )}
     </Stack>
