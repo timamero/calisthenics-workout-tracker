@@ -79,11 +79,11 @@ export default function ExerciseItemUI({
           </Box>
         )}
       </Group>
-      <Stack gap="xs">
+      <Stack gap="xs" w="100%" px="lg">
         <SetList />
       </Stack>
       {(mode === 'edit' || mode === 'build') && (
-        <Group justify="flex-end" w="100%" p="sm">
+        <Group justify="flex-end" w="100%" px="sm" pb="sm">
           <Button
             variant="outline"
             color="lime"
