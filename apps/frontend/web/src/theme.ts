@@ -1,0 +1,113 @@
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
+import {
+  createTheme,
+  defaultVariantColorsResolver,
+  NavLink,
+  ActionIcon,
+  type DefaultMantineColor,
+  type MantineColorsTuple,
+} from '@mantine/core';
+
+import './theme';
+
+import './styles/global.css';
+import navLinkClasses from './styles/NavLink.module.css';
+import actionIconClasses from './styles/ActionIcon.module.css';
+
+type ExtendedCustomColors = 'elevation' | DefaultMantineColor;
+
+declare module '@mantine/core' {
+  export interface MantineThemeColorsOverride {
+    colors: Record<ExtendedCustomColors, MantineColorsTuple>;
+  }
+}
+
+const theme = createTheme({
+  cursorType: 'pointer',
+  fontFamily:
+    'Manrope, Avenir, Montserrat, Corbel, URW Gothic, source-sans-pro, sans-serif',
+  fontFamilyMonospace:
+    'Source Code Pro, ui-monospace, Cascadia Code, Source Code Pro, Menlo, Consolas, DejaVu Sans Mono, monospace',
+  headings: {
+    fontFamily:
+      'Elms Sans, Seravek, Gill Sans Nova, Ubuntu, Calibri, DejaVu Sans, source-sans-pro, sans-serif',
+  },
+  autoContrast: true,
+  luminanceThreshold: 0.3,
+  primaryColor: 'lime',
+  white: '#F5F5F5',
+
+  colors: {
+    elevation: [
+      '#FBFBFB',
+      '#F6F6F6',
+      '#F2F2F2',
+      '#EEEEEE',
+      '#E9E9E9',
+      '#E5E5E5',
+      '#E0E0E0',
+      '#DBDBDB',
+      '#D6D6D6',
+      '#D1D1D1',
+    ],
+  },
+
+  variantColorResolver: (input) => {
+    const defaultResolvedColors = defaultVariantColorsResolver(input);
+    // const parsedColor = parseThemeColor({
+    //   color: input.color || input.theme.primaryColor,
+    //   theme: input.theme,
+    // });
+
+    if (input.variant === 'outline') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'var(--mantine-color-white)',
+        hover: 'var(--mantine-color-gray-2)',
+        color: 'var(--mantine-color-dark-7)',
+        border: '1px solid var(--mantine-color-dark-7)',
+      };
+    }
+    if (input.variant === 'filled') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'var(--mantine-color-dark-7)',
+        hover: 'var(--mantine-color-dark-5)',
+        color: 'var(--mantine-color-white)',
+        border: 'none',
+      };
+    }
+    if (input.variant === 'filled-violet') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'var(--mantine-color-violet-9)',
+        hover: 'var(--mantine-color-violet-7)',
+        color: 'var(--mantine-color-gray-0)',
+        border: 'none',
+      };
+    }
+    if (input.variant === 'transparent') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'none',
+        hover: 'var(--mantine-color-gray-2)',
+        color: 'var(--mantine-color-dark-7)',
+        border: 'none',
+      };
+    }
+
+    return defaultResolvedColors;
+  },
+
+  components: {
+    NavLink: NavLink.extend({
+      classNames: navLinkClasses,
+    }),
+    ActionIcon: ActionIcon.extend({
+      classNames: actionIconClasses,
+    }),
+  },
+});
+
+export default theme;
