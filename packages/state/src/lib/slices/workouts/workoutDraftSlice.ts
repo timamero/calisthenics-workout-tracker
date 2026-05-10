@@ -520,7 +520,7 @@ export const createWorkoutDraftSlice: StateCreator<
           };
 
           state.workoutData = state.workoutData.map((item) => {
-            if (item.id === sectionID) {
+            if (item.id === supersetID) {
               return updatedSuperset;
             } else {
               return item;
