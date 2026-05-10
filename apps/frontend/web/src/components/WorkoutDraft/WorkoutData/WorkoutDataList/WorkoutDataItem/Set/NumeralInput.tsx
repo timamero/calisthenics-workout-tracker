@@ -27,8 +27,8 @@ export default function NumeralInput({
     if (mode === 'read') {
       return (
         <Stack>
-          <Text>{label}</Text>
-          <Text>
+          <Text ff="monospace">{label}</Text>
+          <Text ff="monospace">
             {set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.leverages!.find((field) => field.id === fieldID)!
@@ -46,7 +46,8 @@ export default function NumeralInput({
     }
     return (
       <TextInput
-        w={68}
+        ff="monospace"
+        w={88}
         label={label}
         placeholder={'0'}
         value={
@@ -67,8 +68,8 @@ export default function NumeralInput({
     if (mode === 'read') {
       return (
         <Stack>
-          <Text>{label}</Text>
-          <Text>
+          <Text ff="monospace">{label}</Text>
+          <Text ff="monospace">
             {set.fields.assists!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.assists!.find((field) => field.id === fieldID)!.value ===
@@ -86,7 +87,8 @@ export default function NumeralInput({
     }
     return (
       <TextInput
-        w={68}
+        ff="monospace"
+        w={88}
         label={label}
         placeholder={'0'}
         value={
@@ -107,8 +109,8 @@ export default function NumeralInput({
     if (mode === 'read') {
       return (
         <Stack>
-          <Text>{label}</Text>
-          <Text>
+          <Text ff="monospace">{label}</Text>
+          <Text ff="monospace">
             {set.fields[fieldName] === undefined ||
             set.fields[fieldName]?.toString() === ''
               ? '0'
@@ -119,7 +121,8 @@ export default function NumeralInput({
     }
     return (
       <TextInput
-        w={68}
+        ff="monospace"
+        w={88}
         label={label}
         placeholder={'0'}
         value={

@@ -25,15 +25,16 @@ export default function DurationInput({
       : '00:00';
     return (
       <Stack>
-        <Text>{label}</Text>
-        <Text>{value}</Text>
+        <Text ff="monospace">{label}</Text>
+        <Text ff="monospace">{value}</Text>
       </Stack>
     );
   }
   return (
     <TextInput
-      w={68}
+      w={88}
       label={label}
+      ff="monospace"
       type="text"
       inputMode="numeric"
       pattern="^(0|[1-9][0-9]{0,2})$"
