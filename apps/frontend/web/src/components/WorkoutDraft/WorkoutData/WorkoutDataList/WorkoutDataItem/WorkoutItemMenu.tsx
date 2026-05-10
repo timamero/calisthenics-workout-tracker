@@ -49,13 +49,13 @@ export default function WorkoutItemMenu({
         <ActionIcon
           variant="transparent"
           size="md"
-          p="xs"
+          p="0"
           w="min-content"
           h="min-content"
           bdrs={24}
           onClick={() => setMenuOpened(!menuOpened)}
         >
-          <IoEllipsisVertical size={24} />
+          <IoEllipsisVertical size={20} />
         </ActionIcon>
       </Menu.Target>
 
