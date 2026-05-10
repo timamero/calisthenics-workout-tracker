@@ -68,7 +68,7 @@ export default function ExerciseItemUI({
           </Group>
         </Group>
         {(mode === 'edit' || mode === 'build') && (
-          <Box p="md">
+          <Box p="xs">
             <WorkoutItemMenu
               itemType="exercise"
               handleUpClick={handleUpClick}
