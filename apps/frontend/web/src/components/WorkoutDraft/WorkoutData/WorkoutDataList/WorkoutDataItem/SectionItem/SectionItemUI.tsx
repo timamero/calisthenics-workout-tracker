@@ -36,9 +36,9 @@ export default function SectionItemUI({
 }: SectionItemUIProps) {
   return (
     <Stack
-      bg="lime.0"
+      bg="violet.0"
       bdrs="sm"
-      bd="2px solid dark.4"
+      bd="2px solid violet.9"
       w="100%"
       maw={1200}
       align="center"
@@ -48,7 +48,8 @@ export default function SectionItemUI({
         justify="space-between"
         w="100%"
         wrap="nowrap"
-        style={{ borderBottom: '1px solid var(--mantine-color-dark-7)' }}
+        bg="violet.1"
+        style={{ borderBottom: '1px solid var(--mantine-color-violet-9)' }}
       >
         <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
           {(mode === 'edit' || mode === 'build') && (
