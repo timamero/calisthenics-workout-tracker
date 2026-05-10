@@ -80,7 +80,7 @@ export default function ExerciseItemUI({
           </Box>
         )}
       </Group>
-      <Stack gap="xs" w="100%" px="lg">
+      <Stack gap="0" w="100%" px="lg">
         <SetList />
       </Stack>
       {(mode === 'edit' || mode === 'build') && (
