@@ -47,7 +47,7 @@ export default function TextInputWithEditUI({
         </Group>
       )}
       {isEditMode && (
-        <Stack maw={400} w="100%">
+        <Stack maw={400} w="100%" gap={4}>
           <TextInput w="100%" value={text} onChange={onTextChange} />
           <Group justify="flex-end">
             <Button
