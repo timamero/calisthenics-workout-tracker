@@ -73,9 +73,9 @@ const theme = createTheme({
     if (input.variant === 'filled') {
       return {
         // ...defaultResolvedColors,
-        background: 'var(--mantine-color-lime-5)',
-        hover: 'var(--mantine-color-lime-3)',
-        color: 'var(--mantine-color-dark-4)',
+        background: 'var(--mantine-color-dark-7)',
+        hover: 'var(--mantine-color-dark-5)',
+        color: 'var(--mantine-color-white)',
         border: 'none',
       };
     }
