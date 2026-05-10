@@ -10,6 +10,9 @@ interface TextInputWithEditProps {
   hideEdit?: boolean;
   variant?: 'title' | 'body';
   maxLength?: number;
+  hideEditLabel?: boolean;
+  titleSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  titleOrder?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 export default function TextInputWithEdit({
@@ -18,6 +21,9 @@ export default function TextInputWithEdit({
   hideEdit = false,
   variant = 'body',
   maxLength = 40,
+  hideEditLabel = false,
+  titleSize = 'h3',
+  titleOrder = 1,
 }: TextInputWithEditProps) {
   const {
     isEditMode,
@@ -51,6 +57,9 @@ export default function TextInputWithEdit({
       onTextChange={onTextChange}
       hideEdit={hideEdit}
       variant={variant}
+      hideEditLabel={hideEditLabel}
+      titleSize={titleSize}
+      titleOrder={titleOrder}
     />
   );
 }

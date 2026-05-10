@@ -1,5 +1,14 @@
 import type { ChangeEvent } from 'react';
-import { Title, TextInput, Button, Group, Text, Stack } from '@mantine/core';
+import {
+  Title,
+  TextInput,
+  Button,
+  Group,
+  Text,
+  Stack,
+  ActionIcon,
+} from '@mantine/core';
+import { IoPencil } from 'react-icons/io5';
 
 interface TextInputWithEditUIProps {
   isEditMode: boolean;
@@ -10,6 +19,9 @@ interface TextInputWithEditUIProps {
   onTextChange: (event: ChangeEvent<HTMLInputElement>) => void;
   hideEdit: boolean;
   variant: 'title' | 'body';
+  hideEditLabel?: boolean;
+  titleSize: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  titleOrder: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 export default function TextInputWithEditUI({
@@ -21,29 +33,43 @@ export default function TextInputWithEditUI({
   onTextChange,
   hideEdit,
   variant,
+  hideEditLabel,
+  titleSize,
+  titleOrder,
 }: TextInputWithEditUIProps) {
   return (
     <>
       {!isEditMode && (
         <Group wrap="nowrap" justify="center">
           {variant === 'title' ? (
-            <Title size="h3" maw={400}>
+            <Title size={titleSize} order={titleOrder} maw={400}>
               {text}
             </Title>
           ) : (
             <Text maw={400}>{text}</Text>
           )}
 
-          {!hideEdit && (
-            <Button
-              size="compact-sm"
-              onClick={onEditClick}
-              variant="outline"
-              color="dark"
-            >
-              Edit
-            </Button>
-          )}
+          {!hideEdit &&
+            (hideEditLabel === true ? (
+              <ActionIcon
+                variant="outline"
+                // size="sm"
+                aria-label="Edit title"
+                size="md"
+              >
+                <IoPencil size={16} />
+              </ActionIcon>
+            ) : (
+              <Button
+                size="compact-sm"
+                onClick={onEditClick}
+                variant="outline"
+                color="dark"
+                leftSection={<IoPencil size={16} />}
+              >
+                Edit
+              </Button>
+            ))}
         </Group>
       )}
       {isEditMode && (
