@@ -69,6 +69,9 @@ export default function SectionItemUI({
               hideEdit={mode === 'log' ? true : false}
               variant={'title'}
               maxLength={70}
+              titleOrder={2}
+              titleSize="h3"
+              hideEditLabel={true}
             />
           </Group>
         </Group>
