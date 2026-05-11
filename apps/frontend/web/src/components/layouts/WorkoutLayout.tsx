@@ -82,9 +82,7 @@ export default function WorkoutLayout() {
         </Group>
       </AppShell.Header>
       <AppShell.Main style={{ display: 'flex' }}>
-        {/* <Stack> */}
         <Outlet />
-        {/* </Stack> */}
       </AppShell.Main>
       <AppShell.Footer>
         <Stack h="100%" justify="center" align="center">
