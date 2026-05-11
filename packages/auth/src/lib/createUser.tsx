@@ -10,10 +10,20 @@ export const createUser = async (
   supabase: SupabaseClient,
   email: string,
   password: string,
+  firstName?: string,
+  lastName?: string,
 ) => {
+  const options = {
+    data: {
+      first_name: firstName,
+      last_name: lastName,
+    },
+  };
+
   const { data, error } = await supabase.auth.signUp({
     email: email,
     password: password,
+    options: options,
   });
 
   if (error) {

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type SupabaseClient } from "@supabase/supabase-js";
 
-import { signIn } from "@cwt/auth";
+import { signIn, updateUserName } from "@cwt/auth";
 import { createUser } from "@cwt/auth";
 import {
   AuthSchema,
@@ -54,16 +54,35 @@ function useAuth(supabase: SupabaseClient) {
     }
   };
 
-  const handleSignUp = async ({ email, password }: Auth) => {
+  const handleSignUp = async ({
+    email,
+    password,
+    username,
+    firstName,
+    lastName,
+  }: AuthSignUp) => {
     setIsLoading(true);
     setAuthError(null);
 
     try {
-      const user = await createUser(supabase, email, password);
+      const user = await createUser(
+        supabase,
+        email,
+        password,
+        firstName,
+        lastName,
+      );
       if (!user) {
         setAuthError("Failed to create account. Please try again.");
         return null;
       }
+
+      try {
+        updateUserName(supabase, username);
+      } catch (error) {
+        console.error(error);
+      }
+
       setUser(user);
       return user;
     } catch (error) {
