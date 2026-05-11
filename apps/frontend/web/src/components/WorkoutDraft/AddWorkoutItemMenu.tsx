@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { Menu, ActionIcon } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
 import { IoAddOutline, IoAdd } from 'react-icons/io5';
 
 import { useAddSuperset } from '@cwt/hooks';
@@ -12,6 +13,7 @@ export default function AddWorkoutItemMenu() {
   const handleAddSupersetClick = useAddSuperset().handleAddSupersetClick;
 
   const [menuOpened, setMenuOpened] = useState(false);
+  const ref = useClickOutside(() => setMenuOpened(false));
 
   const handleAddExerciseClick = () => {
     navigate({
@@ -21,7 +23,7 @@ export default function AddWorkoutItemMenu() {
 
   return (
     <Menu opened={menuOpened} shadow="md" width={200}>
-      <Menu.Target>
+      <Menu.Target ref={ref}>
         <ActionIcon
           variant="filled-violet"
           size="xxl"
