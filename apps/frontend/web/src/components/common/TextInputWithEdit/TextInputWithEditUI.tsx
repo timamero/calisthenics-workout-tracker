@@ -53,6 +53,7 @@ export default function TextInputWithEditUI({
             (hideEditLabel === true ? (
               <ActionIcon
                 variant="outline"
+                onClick={onEditClick}
                 // size="sm"
                 aria-label="Edit title"
                 size="md"
@@ -74,7 +75,12 @@ export default function TextInputWithEditUI({
       )}
       {isEditMode && (
         <Stack maw={400} w="100%" gap={4}>
-          <TextInput w="100%" value={text} onChange={onTextChange} />
+          <TextInput
+            mod={{ isTitleH1: titleOrder === 1, isTitleH2: titleOrder === 2 }}
+            w="100%"
+            value={text}
+            onChange={onTextChange}
+          />
           <Group justify="flex-end">
             <Button
               onClick={() => onCancelClick()}

@@ -46,6 +46,7 @@ export default function NumeralInput({
     }
     return (
       <TextInput
+        mod={{ isLogInput: true }}
         ff="monospace"
         w={88}
         label={label}
@@ -87,6 +88,7 @@ export default function NumeralInput({
     }
     return (
       <TextInput
+        mod={{ isLogInput: true }}
         ff="monospace"
         w={88}
         label={label}
@@ -121,6 +123,7 @@ export default function NumeralInput({
     }
     return (
       <TextInput
+        mod={{ isLogInput: true }}
         ff="monospace"
         w={88}
         label={label}
