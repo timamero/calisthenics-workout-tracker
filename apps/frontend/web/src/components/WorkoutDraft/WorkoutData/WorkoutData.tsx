@@ -10,8 +10,6 @@ export default function WorkoutData() {
   const workoutData = useWorkoutDraftStore((state) => state.workoutData);
   const mode = useWorkoutDraftStore((state) => state.mode) as Mode;
 
-  console.log('WorkoutData || workoutData = ', workoutData);
-
   const workoutExercisesLength = useWorkoutDraftStore(
     (state) => state.workoutData,
   ).length;
