@@ -1,15 +1,16 @@
 .card {
   background-color: transparent;
-  border: 1px solid var(--mantine-color-default-border);
+  border: 1px solid var(--mantine-outline);
 }
 
 .card:hover {
   background-color: var(--mantine-color-gray-0);
-  border: 1px solid var(--mantine-color-gray-2);
-  box-shadow: var(--mantine-shadow-xs);
+  border: 1px solid var(--mantine-color-dark-2);
+  box-shadow: none;
 }
 
 .card[data-is-selected='true'] {
-  background-color: var(--mantine-color-orange-0);
-  border: 4px solid var(--mantine-color-orange-4);
+  background-color: var(--mantine-color-gray-0);
+  border: 1px solid var(--mantine-color-lime-4);
+  box-shadow: var(--mantine-shadow-md);
 }
