@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Menu, ActionIcon } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
 import {
   IoEllipsisVertical,
   IoTrashBin,
@@ -25,18 +26,15 @@ export default function WorkoutItemMenu({
   handleDeleteClick,
 }: WorkoutItemMenuProps) {
   const [menuOpened, setMenuOpened] = useState(false);
+  const ref = useClickOutside(() => setMenuOpened(false));
 
   const onUpClick = () => {
-    // setMenuOpened(() => false);
-    // handleUpClick();
     setMenuOpened(false);
     setTimeout(() => {
       handleUpClick();
     }, 100);
   };
   const onDownClick = () => {
-    // setMenuOpened(() => false);
-    // handleDownClick();
     setMenuOpened(false);
     setTimeout(() => {
       handleDownClick();
@@ -45,7 +43,7 @@ export default function WorkoutItemMenu({
 
   return (
     <Menu opened={menuOpened} shadow="md" width={200}>
-      <Menu.Target>
+      <Menu.Target ref={ref}>
         <ActionIcon
           variant="transparent"
           size="md"

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Menu, ActionIcon } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
 import { IoAdd } from 'react-icons/io5';
 
 interface WorkoutItemMenuProps {
@@ -12,23 +13,11 @@ export default function AddItemMenu({
   handleAddSupersetClick,
 }: WorkoutItemMenuProps) {
   const [menuOpened, setMenuOpened] = useState(false);
-
-  // const onUpClick = () => {
-  //   setMenuOpened(false);
-  //   setTimeout(() => {
-  //     handleUpClick();
-  //   }, 100);
-  // };
-  // const onDownClick = () => {
-  //   setMenuOpened(false);
-  //   setTimeout(() => {
-  //     handleDownClick();
-  //   }, 100);
-  // };
+  const ref = useClickOutside(() => setMenuOpened(false));
 
   return (
     <Menu opened={menuOpened} shadow="md" width={200}>
-      <Menu.Target>
+      <Menu.Target ref={ref}>
         <ActionIcon
           variant="filled"
           size="md"
