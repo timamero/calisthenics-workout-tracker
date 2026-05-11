@@ -32,6 +32,7 @@ export default function DurationInput({
   }
   return (
     <TextInput
+      mod={{ isLogInput: true }}
       w={88}
       label={label}
       ff="monospace"

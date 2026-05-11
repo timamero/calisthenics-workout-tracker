@@ -1,0 +1,38 @@
+.root {
+  &[data-istitleh1],
+  &[data-istitleh2] {
+    .input {
+      font-family: var(--mantine-font-family-headings);
+      font-weight: var(--mantine-heading-font-weight);
+    }
+  }
+
+  &[data-istitleh1] {
+    .wrapper,
+    .input {
+      height: 50px;
+    }
+    .input {
+      font-size: var(--mantine-h2-font-size);
+    }
+  }
+  &[data-istitleh2] {
+    .wrapper,
+    .input {
+      height: 40px;
+    }
+    .input {
+      font-size: var(--mantine-h3-font-size);
+    }
+  }
+
+  &[data-isloginput] {
+    .input {
+      font-family: var(--mantine-font-family-monospace);
+    }
+  }
+}
+
+.label {
+  white-space: nowrap;
+}
