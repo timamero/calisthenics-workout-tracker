@@ -1,4 +1,7 @@
 .root {
+  .label {
+    white-space: nowrap;
+  }
   &[data-istitleh1],
   &[data-istitleh2] {
     .input {
@@ -33,6 +36,6 @@
   }
 }
 
-.label {
+/* .label {
   white-space: nowrap;
-}
+} */

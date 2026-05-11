@@ -40,7 +40,7 @@ export default function SectionItemUI({
       bdrs="sm"
       bd="2px solid violet.9"
       w="100%"
-      maw={1200}
+      maw={840}
       align="center"
       pb={mode === 'edit' || mode === 'build' ? 0 : 'lg'}
       my="xl"
