@@ -104,6 +104,7 @@ export function useAuthSignUp(supabase: SupabaseClient) {
     defaultValues: {
       email: "",
       password: "",
+      username: "",
     },
   });
 
@@ -152,6 +153,7 @@ export function useAuthSignUpMobile(supabase: SupabaseClient) {
     defaultValues: {
       email: "",
       password: "",
+      username: "",
     },
   });
 
