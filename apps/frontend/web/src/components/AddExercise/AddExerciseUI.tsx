@@ -1,6 +1,5 @@
 import { Group, Button, Stack, ActionIcon } from '@mantine/core';
 import { IoFilterOutline } from 'react-icons/io5';
-import { Link } from '@tanstack/react-router';
 
 import ExercisesList from './ExercisesList';
 import ExerciseSearchBar from '../ExerciseSearchBar';
@@ -51,8 +50,6 @@ export default function AddExerciseOverlayUI({
         <Button
           color="gray"
           variant="outline"
-          component={Link}
-          to="/workout"
           onClick={() => handleCancelClick()}
         >
           Cancel

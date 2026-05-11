@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useNavigate } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router';
 
 import {
   useClearExerciseSearchAndFilters,
@@ -13,7 +13,7 @@ import AddExerciseUI from './AddExerciseUI';
 
 export default function AddExercise() {
   // --- Logic Hooks ---
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const { selectedExerciseIDToAdd, handleAddExercise } = useAddExercise();
 
@@ -35,6 +35,7 @@ export default function AddExercise() {
     resetSelectedIDs();
     clearExerciseFilters();
     clearExerciseSearch();
+    router.history.back();
   };
 
   const handleAddExerciseClick = () => {
@@ -43,9 +44,7 @@ export default function AddExercise() {
     clearExerciseFilters();
     clearExerciseSearch();
 
-    navigate({
-      to: '/workout',
-    });
+    router.history.back();
   };
 
   return (
