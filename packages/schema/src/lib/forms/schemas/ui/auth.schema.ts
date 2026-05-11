@@ -17,6 +17,12 @@ export const AuthSignUpSchema = z
       .max(24, {
         message: 'The username must be 24 characters or less',
       }),
+    firstName: z.string().max(24, {
+      message: 'The first name must be 24 characters or less',
+    }),
+    lastName: z.string().max(24, {
+      message: 'The first name must be 24 characters or less',
+    }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
