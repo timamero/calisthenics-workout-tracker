@@ -37,23 +37,7 @@ function SignUpView() {
   };
 
   const VisibilityToggleIcon = ({ reveal }: { reveal: boolean }) =>
-    reveal ? (
-      <IoEye
-        size={16}
-        // style={{
-        //   width: 'var(--psi-icon-size)',
-        //   height: 'var(--psi-icon-size)',
-        // }}
-      />
-    ) : (
-      <IoEyeOff
-        size={16}
-        // style={{
-        //   width: 'var(--psi-icon-size)',
-        //   height: 'var(--psi-icon-size)',
-        // }}
-      />
-    );
+    reveal ? <IoEye size={16} /> : <IoEyeOff size={16} />;
 
   useEffect(() => {
     if (user) {
