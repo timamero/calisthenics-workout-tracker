@@ -12,8 +12,10 @@ export default function ExerciseSetUI({
   children,
 }: ExerciseSetUIProps) {
   return (
-    <Stack>
-      <Text>{exerciseName}</Text>
+    <Stack align="center">
+      <Text size="md" fw={700}>
+        {exerciseName}
+      </Text>
       {children}
     </Stack>
   );

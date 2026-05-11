@@ -38,7 +38,7 @@ export default function SetUI({
     <Stack gap="xs" px="lg" mb="xs" w="100%">
       <Group w="100%" justify="space-between">
         {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
-          <Text size="lg" fw={900}>{`Set ${setIndex + 1}`}</Text>
+          <Text size="md" fw={700}>{`Set ${setIndex + 1}`}</Text>
         )}
 
         {showDeleteButton && (mode === 'build' || mode === 'edit') && (
