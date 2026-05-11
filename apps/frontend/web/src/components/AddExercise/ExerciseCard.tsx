@@ -32,6 +32,7 @@ export default function ExerciseCard({
       <Paper
         data-is-selected={isSelected}
         p="sm"
+        shadow="xs"
         radius="lg"
         className={classes.card}
       >
