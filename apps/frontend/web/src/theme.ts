@@ -8,6 +8,7 @@ import {
   type CSSVariablesResolver,
   type DefaultMantineColor,
   type MantineColorsTuple,
+  TextInput,
 } from '@mantine/core';
 
 import './theme';
@@ -15,6 +16,7 @@ import './theme';
 import './styles/global.css';
 import navLinkClasses from './styles/NavLink.module.css';
 import actionIconClasses from './styles/ActionIcon.module.css';
+import textInputClasses from './styles/TextInput.module.css';
 
 type ExtendedCustomColors = 'elevation' | DefaultMantineColor;
 
@@ -107,6 +109,9 @@ const theme = createTheme({
     }),
     ActionIcon: ActionIcon.extend({
       classNames: actionIconClasses,
+    }),
+    TextInput: TextInput.extend({
+      classNames: textInputClasses,
     }),
   },
 
