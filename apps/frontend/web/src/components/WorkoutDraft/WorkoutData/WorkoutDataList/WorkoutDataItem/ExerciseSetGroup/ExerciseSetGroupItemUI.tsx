@@ -15,15 +15,16 @@ export default function ExerciseSetGroupItemUI({
     <Stack
       w="100%"
       maw={600}
-      align="center"
+      align="flex-start"
+      px="lg"
       style={{ borderBottom: '1px solid var(--mantine-color-dark-1)' }}
     >
-      <Text size="lg" fw={600} my="xs">
+      <Text ff="heading" fz="xl" fw={800} my="xs" px="lg">
         Set {setNumber}
       </Text>
       <Stack
         // bd="1px solid var(--mantine-color-default-border)"
-        px="lg"
+        // px="lg"
         // w={300}
         bg="transparent"
         bdrs="lg"

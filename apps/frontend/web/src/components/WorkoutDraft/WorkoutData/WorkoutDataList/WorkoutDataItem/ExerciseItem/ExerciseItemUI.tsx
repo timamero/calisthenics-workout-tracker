@@ -64,7 +64,7 @@ export default function ExerciseItemUI({
             />
           )}
           <Group flex={1} align="center" justify="center">
-            <Text ff="heading" fz="xl" fw={600}>
+            <Text ff="heading" fz="xl" fw={800}>
               {name}
             </Text>
           </Group>
