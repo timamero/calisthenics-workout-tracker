@@ -68,6 +68,30 @@ function SignUpView() {
       </Title>
       <form onSubmit={auth.handleSubmit}>
         <TextInput
+          label="Username"
+          placeholder="Enter username"
+          size="md"
+          mb="md"
+          error={auth.errors.username?.message}
+          {...auth.register('username')}
+        />
+        <TextInput
+          label="First Name"
+          placeholder="Enter your first name"
+          size="md"
+          mb="md"
+          error={auth.errors.firstName?.message}
+          {...auth.register('firstName')}
+        />
+        <TextInput
+          label="Last Name"
+          placeholder="Enter your last name"
+          size="md"
+          mb="md"
+          error={auth.errors.lastName?.message}
+          {...auth.register('lastName')}
+        />
+        <TextInput
           label="Email"
           placeholder="Enter your email"
           size="md"
