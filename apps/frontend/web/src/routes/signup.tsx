@@ -76,6 +76,7 @@ function SignUpView() {
           placeholder="Enter username"
           size="md"
           mb="md"
+          withAsterisk
           error={auth.errors.username?.message}
           {...auth.register('username')}
         />
@@ -100,6 +101,7 @@ function SignUpView() {
           placeholder="Enter your email"
           size="md"
           mb="md"
+          withAsterisk
           error={auth.errors.email?.message}
           {...auth.register('email')}
         />
@@ -108,6 +110,7 @@ function SignUpView() {
           placeholder="Enter your password"
           size="md"
           mb="md"
+          withAsterisk
           visibilityToggleIcon={VisibilityToggleIcon}
           error={auth.errors.password?.message}
           {...auth.register('password')}
@@ -117,6 +120,7 @@ function SignUpView() {
           placeholder="Enter your password"
           size="md"
           mb="md"
+          withAsterisk
           error={auth.errors.confirmPassword?.message}
           visibilityToggleIcon={VisibilityToggleIcon}
           {...auth.register('confirmPassword')}
