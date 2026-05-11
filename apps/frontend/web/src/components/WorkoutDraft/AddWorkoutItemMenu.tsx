@@ -1,25 +1,23 @@
-import { useState, type ReactNode } from 'react';
-import { Button } from '@mantine/core';
-import { Link } from '@tanstack/react-router';
+import { useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 import { Menu, ActionIcon } from '@mantine/core';
-import { IoAddOutline } from 'react-icons/io5';
+import { IoAddOutline, IoAdd } from 'react-icons/io5';
 
 import { useAddSuperset } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-function MenuLabel({ children }: { children: ReactNode }) {
-  return (
-    <Menu.Label style={{ display: 'flex', justifyContent: 'center' }}>
-      {children}
-    </Menu.Label>
-  );
-}
-
 export default function AddWorkoutItemMenu() {
+  const navigate = useNavigate();
   const addSection = useWorkoutDraftStore((state) => state.addSection);
   const handleAddSupersetClick = useAddSuperset().handleAddSupersetClick;
 
   const [menuOpened, setMenuOpened] = useState(false);
+
+  const handleAddExerciseClick = () => {
+    navigate({
+      to: '/workout/add-exercise',
+    });
+  };
 
   return (
     <Menu opened={menuOpened} shadow="md" width={200}>
@@ -35,44 +33,34 @@ export default function AddWorkoutItemMenu() {
       </Menu.Target>
 
       <Menu.Dropdown bg="gray.2">
-        <MenuLabel>
-          <Button
-            variant="subtle"
-            color="dark"
-            component={Link}
-            onClick={() => setMenuOpened(false)}
-            to="/workout/add-exercise"
-          >
-            Add Exercise
-          </Button>
-        </MenuLabel>
+        <Menu.Item
+          onClick={() => {
+            setMenuOpened(false);
+            handleAddExerciseClick();
+          }}
+          leftSection={<IoAdd size={18} />}
+        >
+          Add Exercise
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => {
+            setMenuOpened(false);
+            handleAddSupersetClick();
+          }}
+          leftSection={<IoAdd size={18} />}
+        >
+          Add Superset
+        </Menu.Item>
 
-        <MenuLabel>
-          <Button
-            variant="subtle"
-            color="dark"
-            mx="auto"
-            onClick={() => {
-              setMenuOpened(false);
-              addSection();
-            }}
-          >
-            Add Section
-          </Button>
-        </MenuLabel>
-        <MenuLabel>
-          <Button
-            variant="subtle"
-            color="dark"
-            mx="auto"
-            onClick={() => {
-              setMenuOpened(false);
-              handleAddSupersetClick();
-            }}
-          >
-            Add Superset
-          </Button>
-        </MenuLabel>
+        <Menu.Item
+          onClick={() => {
+            setMenuOpened(false);
+            addSection();
+          }}
+          leftSection={<IoAdd size={18} />}
+        >
+          Add Section
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );
