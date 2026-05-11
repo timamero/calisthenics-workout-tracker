@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
+import { IoEye, IoEyeOff } from 'react-icons/io5';
 import {
   TextInput,
   PasswordInput,
@@ -34,6 +35,25 @@ function SignUpView() {
       auth.clearError();
     }
   };
+
+  const VisibilityToggleIcon = ({ reveal }: { reveal: boolean }) =>
+    reveal ? (
+      <IoEye
+        size={16}
+        // style={{
+        //   width: 'var(--psi-icon-size)',
+        //   height: 'var(--psi-icon-size)',
+        // }}
+      />
+    ) : (
+      <IoEyeOff
+        size={16}
+        // style={{
+        //   width: 'var(--psi-icon-size)',
+        //   height: 'var(--psi-icon-size)',
+        // }}
+      />
+    );
 
   useEffect(() => {
     if (user) {
@@ -104,6 +124,7 @@ function SignUpView() {
           placeholder="Enter your password"
           size="md"
           mb="md"
+          visibilityToggleIcon={VisibilityToggleIcon}
           error={auth.errors.password?.message}
           {...auth.register('password')}
         />
@@ -113,6 +134,7 @@ function SignUpView() {
           size="md"
           mb="md"
           error={auth.errors.confirmPassword?.message}
+          visibilityToggleIcon={VisibilityToggleIcon}
           {...auth.register('confirmPassword')}
         />
         {auth.authError && <Text c="red">{auth.authError}</Text>}
