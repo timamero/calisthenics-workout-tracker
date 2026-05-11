@@ -13,6 +13,19 @@ import {
 } from "@cwt/schema/forms";
 import { useAuthStore } from "@cwt/state/stores";
 
+const SIGNUP_DEFAULT_VALUES = {
+  email: "",
+  password: "",
+  username: "",
+  firstName: "",
+  lastName: "",
+};
+
+const LOGIN_DEFAULT_VALUES = {
+  email: "",
+  password: "",
+};
+
 function useAuth(supabase: SupabaseClient) {
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
@@ -77,10 +90,7 @@ export function useAuthLogin(supabase: SupabaseClient) {
     formState: { errors },
   } = useForm<Auth>({
     resolver: zodResolver(AuthSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: LOGIN_DEFAULT_VALUES,
   });
 
   return {
@@ -101,11 +111,7 @@ export function useAuthSignUp(supabase: SupabaseClient) {
     formState: { errors },
   } = useForm<AuthSignUp>({
     resolver: zodResolver(AuthSignUpSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      username: "",
-    },
+    defaultValues: SIGNUP_DEFAULT_VALUES,
   });
 
   return {
@@ -126,10 +132,7 @@ export function useAuthLoginMobile(supabase: SupabaseClient) {
     formState: { errors },
   } = useForm<Auth>({
     resolver: zodResolver(AuthSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: LOGIN_DEFAULT_VALUES,
   });
 
   return {
@@ -150,11 +153,7 @@ export function useAuthSignUpMobile(supabase: SupabaseClient) {
     formState: { errors },
   } = useForm<AuthSignUp>({
     resolver: zodResolver(AuthSignUpSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      username: "",
-    },
+    defaultValues: SIGNUP_DEFAULT_VALUES,
   });
 
   return {
