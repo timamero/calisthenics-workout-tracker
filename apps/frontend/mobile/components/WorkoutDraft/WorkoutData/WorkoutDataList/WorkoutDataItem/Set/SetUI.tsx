@@ -83,8 +83,17 @@ export default function SetUI({
           />
         )}
       </View>
-      <FieldsList />
-      <LeverageAssistFieldsList />
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 8,
+          paddingBottom: 8,
+        }}
+      >
+        <FieldsList />
+        <LeverageAssistFieldsList />
+      </View>
       {mode === 'log' && (
         <View
           style={{
