@@ -45,6 +45,63 @@ export default function SignupScreen() {
         control={auth.control}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
+            label="Username"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            autoCapitalize="none"
+            value={value}
+            error={typeof auth.errors.username?.message === 'string'}
+          />
+        )}
+        name="username"
+      />
+      {auth.errors.username && (
+        <Text style={{ color: theme.colors.error }}>
+          {auth.errors.username?.message}
+        </Text>
+      )}
+      <Controller
+        control={auth.control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            label="First Name"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            autoCapitalize="words"
+            value={value}
+            error={typeof auth.errors.firstName?.message === 'string'}
+          />
+        )}
+        name="firstName"
+      />
+      {auth.errors.firstName && (
+        <Text style={{ color: theme.colors.error }}>
+          {auth.errors.firstName?.message}
+        </Text>
+      )}
+      <Controller
+        control={auth.control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            label="Last Name"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            autoCapitalize="words"
+            value={value}
+            error={typeof auth.errors.lastName?.message === 'string'}
+          />
+        )}
+        name="lastName"
+      />
+      {auth.errors.lastName && (
+        <Text style={{ color: theme.colors.error }}>
+          {auth.errors.lastName?.message}
+        </Text>
+      )}
+      <Controller
+        control={auth.control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
             label="Email"
             onBlur={onBlur}
             onChangeText={onChange}
