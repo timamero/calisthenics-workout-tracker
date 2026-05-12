@@ -19,7 +19,7 @@ export default function ExerciseSetGroupItemUI({
     <View
       style={{
         paddingInline: 8,
-        // paddingBlock: 16,
+        paddingBlock: 8,
         // marginBlock: 32,
         // marginInline: 4,
         margin: 0,
@@ -40,9 +40,10 @@ export default function ExerciseSetGroupItemUI({
         }}
       >
         <Text
+          variant="headlineSmall"
           style={{
             color: theme.colors.onBackground,
-            fontWeight: 600,
+            // fontWeight: 600,
           }}
         >
           Set {setNumber}

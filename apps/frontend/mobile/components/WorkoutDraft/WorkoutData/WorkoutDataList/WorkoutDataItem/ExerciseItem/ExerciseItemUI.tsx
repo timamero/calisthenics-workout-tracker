@@ -40,10 +40,9 @@ export default function ExerciseItemUI({
     <View
       style={{
         position: 'relative',
-        paddingInline:
-          parentType === 'superset' ? 8 : parentType === 'section' ? 0 : 4,
-        marginInline:
-          parentType === 'superset' ? 4 : parentType === 'section' ? 16 : 4,
+        paddingInline: parentType === 'superset' ? 8 : 4,
+        marginInline: 4,
+        // parentType === 'superset' ? 4 : parentType === 'section' ? 8 : 4,
         marginBlock:
           parentType === 'superset' ? 0 : parentType === 'section' ? 24 : 40,
         borderWidth: parentType === 'superset' ? 0 : 1,
@@ -59,7 +58,7 @@ export default function ExerciseItemUI({
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingInline: 4,
+          // paddingInline: 4,
         }}
       >
         {(mode === 'build' || mode === 'edit') && (
@@ -70,18 +69,29 @@ export default function ExerciseItemUI({
             isLast={isLast}
           />
         )}
-        <Text
-          variant="headlineSmall"
+        <View
           style={{
-            color: theme.colors.onBackground,
-            // fontWeight: 800,
-            textAlign: 'center',
-            flexShrink: 1,
-            padding: 8,
+            paddingBlock: 8,
+            // paddingInline: 16,
+            // marginBlock: 4,
+            display: 'flex',
+            alignItems: 'center',
+            width: `${mode === 'log' ? '100%' : 'auto'}`,
           }}
         >
-          {name}
-        </Text>
+          <Text
+            variant="headlineSmall"
+            style={{
+              color: theme.colors.onBackground,
+              // fontWeight: 800,
+              textAlign: 'center',
+              flexShrink: 1,
+              padding: 8,
+            }}
+          >
+            {name}
+          </Text>
+        </View>
         {(mode === 'build' || mode === 'edit') && (
           <WorkoutItemMenu
             itemType="exercise"

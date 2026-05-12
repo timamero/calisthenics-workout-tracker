@@ -47,7 +47,7 @@ export default function Set() {
       isCompleted={set.completed}
       parentType={parentType}
       handleToggleCompleted={handleToggleCompleted}
-      hasSupersetParentType={true}
+      hasSupersetParentType={parentType === 'superset'}
       onDeleteSetPress={handleDeleteSetPress}
     />
   );
