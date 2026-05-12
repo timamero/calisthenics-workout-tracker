@@ -57,12 +57,16 @@ export default function SetUI({
           alignItems: 'center',
         }}
       >
-        {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
-          <Text
-            variant="bodyLarge"
-            style={{ color: theme.colors.onBackground }}
-          >{`Set ${setIndex + 1}`}</Text>
+        {/* {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && ( */}
+        {!hasSupersetParentType && (
+          <View style={{ paddingBlock: 8 }}>
+            <Text
+              variant="titleMedium"
+              style={{ color: theme.colors.onBackground }}
+            >{`Set ${setIndex + 1}`}</Text>
+          </View>
         )}
+
         {showDeleteButton && (mode === 'build' || mode === 'edit') && (
           <IconButton
             icon="trash-can"
@@ -79,12 +83,22 @@ export default function SetUI({
         style={{
           display: 'flex',
           flexDirection: 'column',
+          alignItems: 'center',
           gap: 8,
           paddingBottom: 8,
         }}
       >
-        <FieldsList />
-        <LeverageAssistFieldsList />
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            gap: 8,
+          }}
+        >
+          <FieldsList />
+          <LeverageAssistFieldsList />
+        </View>
       </View>
       {mode === 'log' && (
         <View
