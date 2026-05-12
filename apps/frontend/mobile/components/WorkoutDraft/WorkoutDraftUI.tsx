@@ -42,6 +42,7 @@ export default function WorkoutDraftUI({
       >
         <ScrollView
           style={{
+            marginTop: 8,
             marginBottom: BOTTOM_APPBAR_HEIGHT + bottom,
             flexGrow: 1,
           }}
