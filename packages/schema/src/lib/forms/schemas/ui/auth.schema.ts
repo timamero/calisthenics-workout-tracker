@@ -1,11 +1,17 @@
 import * as z from 'zod';
 
+const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/;
+
 export const AuthSchema = z.object({
   email: z.email(),
   password: z
     .string()
     .min(4, { message: 'The password must be 4 characters or more' })
-    .max(48, { message: 'The password must be 48 characters or less' }),
+    .max(48, { message: 'The password must be 48 characters or less' })
+    .regex(regex, {
+      message:
+        'The password must include uppercase and lowercase letters, a number, and a special character.',
+    }),
 });
 
 export const AuthSignUpSchema = z
