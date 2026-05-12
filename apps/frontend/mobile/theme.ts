@@ -133,7 +133,7 @@ const fontConfig = {
       default: 'sans-serif',
     }),
     fontSize: 32,
-    letterSpacing: 0,
+    letterSpacing: 0.25,
     lineHeight: 40,
   },
   headlineMedium: {
@@ -144,7 +144,7 @@ const fontConfig = {
       default: 'sans-serif',
     }),
     fontSize: 24,
-    letterSpacing: 0,
+    letterSpacing: 0.25,
     lineHeight: 28,
   },
   headlineSmall: {
@@ -155,7 +155,40 @@ const fontConfig = {
       default: 'sans-serif',
     }),
     fontSize: 20,
-    letterSpacing: 0,
+    letterSpacing: 0.25,
+    lineHeight: 20,
+  },
+  titleLarge: {
+    fontFamily: Platform.select({
+      web: 'Manrope-ExtraBold, source-sans-pro, sans-serif',
+      ios: 'Manrope-ExtraBold',
+      android: 'Manrope-ExtraBold',
+      default: 'sans-serif',
+    }),
+    fontSize: 20,
+    letterSpacing: 0.4,
+    lineHeight: 20,
+  },
+  titleMedium: {
+    fontFamily: Platform.select({
+      web: 'Manrope-ExtraBold, source-sans-pro, sans-serif',
+      ios: 'Manrope-ExtraBold',
+      android: 'Manrope-ExtraBold',
+      default: 'sans-serif',
+    }),
+    fontSize: 16,
+    letterSpacing: 0.4,
+    lineHeight: 20,
+  },
+  titleSmall: {
+    fontFamily: Platform.select({
+      web: 'Manrope-ExtraBold, source-sans-pro, sans-serif',
+      ios: 'Manrope-ExtraBold',
+      android: 'Manrope-ExtraBold',
+      default: 'sans-serif',
+    }),
+    fontSize: 12,
+    letterSpacing: 0.4,
     lineHeight: 20,
   },
   bodyLarge: {
@@ -166,7 +199,18 @@ const fontConfig = {
       default: 'sans-serif',
     }),
     fontSize: 18,
-    letterSpacing: 0.15,
+    letterSpacing: 0.4,
+    lineHeight: 24,
+  },
+  bodyMedium: {
+    fontFamily: Platform.select({
+      web: 'Manrope-Regular, source-sans-pro, sans-serif',
+      ios: 'Manrope-Regular',
+      android: 'Manrope-Regular',
+      default: 'sans-serif',
+    }),
+    fontSize: 16,
+    letterSpacing: 0.25,
     lineHeight: 24,
   },
   bodySmall: {
@@ -177,7 +221,7 @@ const fontConfig = {
       default: 'sans-serif',
     }),
     fontSize: 12,
-    letterSpacing: 0.4,
+    letterSpacing: 0.15,
     lineHeight: 16,
   },
   labelSmall: {
