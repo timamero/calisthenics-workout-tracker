@@ -30,15 +30,14 @@ export default function LoginScreen() {
         flexDirection: 'column',
         flex: 1,
         gap: 16,
-        paddingHorizontal: 16,
+        paddingHorizontal: 32,
+        paddingTop: 32,
         alignItems: 'stretch',
         justifyContent: 'flex-start',
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displaySmall" style={{ color: theme.colors.onPrimary }}>
-        Log In
-      </Text>
+      <Text variant="displaySmall">Log In</Text>
       <Controller
         control={auth.control}
         render={({ field: { onChange, onBlur, value } }) => (
