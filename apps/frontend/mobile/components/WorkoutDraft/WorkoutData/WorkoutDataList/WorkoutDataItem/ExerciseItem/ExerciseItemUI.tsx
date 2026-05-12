@@ -77,7 +77,7 @@ export default function ExerciseItemUI({
             fontWeight: 800,
             textAlign: 'center',
             flexShrink: 1,
-            padding: 16,
+            padding: 8,
           }}
         >
           {name}
@@ -95,7 +95,14 @@ export default function ExerciseItemUI({
       </View>
       <SetList />
       {(mode === 'build' || mode === 'edit') && (
-        <View style={{ display: 'flex', alignItems: 'flex-end', padding: 16 }}>
+        <View
+          style={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            paddingBottom: 16,
+            paddingInline: 4,
+          }}
+        >
           <Button
             mode="contained"
             onPress={() => handleAddSetPress()}
