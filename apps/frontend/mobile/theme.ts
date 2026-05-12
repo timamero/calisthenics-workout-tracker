@@ -132,7 +132,7 @@ const fontConfig = {
       android: 'ElmsSans-Bold',
       default: 'sans-serif',
     }),
-    fontSize: 26,
+    fontSize: 32,
     letterSpacing: 0,
     lineHeight: 40,
   },
@@ -143,9 +143,20 @@ const fontConfig = {
       android: 'ElmsSans-Bold',
       default: 'sans-serif',
     }),
-    fontSize: 20,
+    fontSize: 24,
     letterSpacing: 0,
     lineHeight: 28,
+  },
+  headlineSmall: {
+    fontFamily: Platform.select({
+      web: 'ElmsSans-Bold, source-sans-pro, sans-serif',
+      ios: 'ElmsSans-Bold',
+      android: 'ElmsSans-Bold',
+      default: 'sans-serif',
+    }),
+    fontSize: 20,
+    letterSpacing: 0,
+    lineHeight: 20,
   },
   bodyLarge: {
     fontFamily: Platform.select({

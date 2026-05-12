@@ -59,19 +59,11 @@ export default function SetUI({
       >
         {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
           <Text
+            variant="bodyLarge"
             style={{ color: theme.colors.onBackground }}
           >{`Set ${setIndex + 1}`}</Text>
         )}
         {showDeleteButton && (mode === 'build' || mode === 'edit') && (
-          // <Button
-          //   mode="outlined"
-          //   onPress={() => onDeleteSetPress()}
-          //   labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-          //   textColor={theme.colors.onBackground}
-          //   style={{ borderColor: theme.colors.error }}
-          // >
-          //   Delete Set
-          // </Button>
           <IconButton
             icon="trash-can"
             iconColor={theme.colors.error}
@@ -100,7 +92,7 @@ export default function SetUI({
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'flex-end',
-            paddingTop: 4,
+            width: '100%',
           }}
         >
           <Checkbox.Item
@@ -113,6 +105,7 @@ export default function SetUI({
             }}
             style={{
               width: 160,
+              height: 36,
             }}
           />
         </View>

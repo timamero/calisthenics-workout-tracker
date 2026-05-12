@@ -20,18 +20,29 @@ export default function ExerciseSetUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
       <Text
+        variant="headlineSmall"
         style={{
           color: theme.colors.onBackground,
-          fontWeight: 800,
+          // fontWeight: 800,
           // textAlign: 'center',
         }}
       >
         {exerciseName}
       </Text>
-      {children}
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          width: '100%',
+        }}
+      >
+        {children}
+      </View>
     </View>
   );
 }
