@@ -71,10 +71,10 @@ export default function ExerciseItemUI({
           />
         )}
         <Text
-          variant="bodyLarge"
+          variant="headlineSmall"
           style={{
             color: theme.colors.onBackground,
-            fontWeight: 800,
+            // fontWeight: 800,
             textAlign: 'center',
             flexShrink: 1,
             padding: 8,

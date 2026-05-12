@@ -82,7 +82,12 @@ export default function SupersetItemUI({
             isLast={isLast}
           />
         )}
-        <Text style={{ color: theme.colors.onBackground }}>Superset</Text>
+        <Text
+          variant="headlineMedium"
+          style={{ color: theme.colors.onBackground }}
+        >
+          Superset
+        </Text>
         {/* </View> */}
         {(mode === 'build' || mode === 'edit') && (
           <WorkoutItemMenu
