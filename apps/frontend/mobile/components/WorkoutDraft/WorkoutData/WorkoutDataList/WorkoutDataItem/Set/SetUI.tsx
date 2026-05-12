@@ -42,8 +42,8 @@ export default function SetUI({
         borderBottomColor:
           parentType === 'superset' ? theme.colors.gray3 : theme.colors.gray7,
         paddingInline: 8,
-        paddingBlock: 16,
-        marginBlock: 8,
+        paddingBlock: 4,
+        // marginBlock: 8,
         marginInline: 8,
         // borderRadius: 20,
         // backgroundColor: theme.colors.background,
@@ -77,6 +77,9 @@ export default function SetUI({
             iconColor={theme.colors.error}
             size={20}
             onPress={() => onDeleteSetPress()}
+            style={{
+              margin: 0,
+            }}
           />
         )}
       </View>
@@ -88,7 +91,7 @@ export default function SetUI({
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'flex-end',
-            paddingTop: 12,
+            paddingTop: 4,
           }}
         >
           <Checkbox.Item

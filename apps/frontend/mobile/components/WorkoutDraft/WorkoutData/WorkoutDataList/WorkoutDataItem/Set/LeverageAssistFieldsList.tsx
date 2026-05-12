@@ -76,35 +76,31 @@ export default function LeverageAssistFieldsList() {
   }
 
   return (
-    <View
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 8,
-        justifyContent: 'center',
-        paddingTop: 12,
-      }}
-    >
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: 24,
-          justifyContent: 'center',
-        }}
-      >
-        {leverageFields}
-      </View>
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: 24,
-          justifyContent: 'center',
-        }}
-      >
-        {assistFields}
-      </View>
-    </View>
+    <>
+      {leverageFields && (
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 24,
+            justifyContent: 'flex-start',
+          }}
+        >
+          {leverageFields}
+        </View>
+      )}
+      {assistFields && (
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 24,
+            justifyContent: 'flex-start',
+          }}
+        >
+          {assistFields}
+        </View>
+      )}
+    </>
   );
 }
