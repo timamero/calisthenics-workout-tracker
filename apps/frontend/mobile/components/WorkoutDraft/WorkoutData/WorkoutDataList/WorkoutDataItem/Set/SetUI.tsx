@@ -41,7 +41,7 @@ export default function SetUI({
         width: 320,
         borderBottomWidth: borderBottomWidth,
         borderBottomColor:
-          parentType === 'superset' ? theme.colors.gray3 : theme.colors.gray7,
+          parentType === 'superset' ? theme.colors.dark1 : theme.colors.gray7,
         paddingBottom: setIndex !== setsLength! - 1 ? 8 : 0,
         // paddingInline:
         //   parentType === 'superset' ? 0 : parentType === 'section' ? 8 : 16,

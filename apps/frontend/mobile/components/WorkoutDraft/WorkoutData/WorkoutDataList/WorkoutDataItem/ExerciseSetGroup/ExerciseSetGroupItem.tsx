@@ -12,12 +12,14 @@ interface ExerciseSetGroupItemProps {
   exercisesGroupedBySets: ExercisesGroupedBySetsReturnType;
   parentSectionID: string | null;
   parentSupersetID: string | null;
+  setsLength: number | null;
 }
 
 export default function ExerciseSetGroupItem({
   exercisesGroupedBySets,
   parentSectionID,
   parentSupersetID,
+  setsLength,
 }: ExerciseSetGroupItemProps) {
   const getExerciseNameById = useExerciseLibraryStore(
     (state) => state.getExerciseNameByID,
@@ -57,6 +59,7 @@ export default function ExerciseSetGroupItem({
   });
   return (
     <ExerciseSetGroupItemUI
+      setsLength={setsLength!}
       setNumber={exercisesGroupedBySets.setGroupNumber + 1}
     >
       {exercisesGroup}

@@ -6,11 +6,13 @@ import { Text } from '../../../../../../customText';
 import { CustomTheme } from '../../../../../../theme';
 
 interface ExerciseSetGroupItemUIProps {
+  setsLength: number;
   setNumber: number;
   children: ReactNode;
 }
 
 export default function ExerciseSetGroupItemUI({
+  setsLength,
   setNumber,
   children,
 }: ExerciseSetGroupItemUIProps) {
@@ -25,8 +27,8 @@ export default function ExerciseSetGroupItemUI({
         // marginInline: 4,
         margin: 0,
         borderWidth: 0,
-        borderBottomWidth: 1,
-        borderColor: theme.colors.gray3,
+        borderBottomWidth: setsLength === setNumber ? 0 : 1,
+        borderColor: theme.colors.dark1,
         // backgroundColor: theme.colors.violet9,
         borderRadius: 0,
       }}
@@ -41,7 +43,7 @@ export default function ExerciseSetGroupItemUI({
         }}
       >
         <Text
-          variant="headlineSmall"
+          variant="titleLarge"
           style={{
             color: theme.colors.onBackground,
             // fontWeight: 600,

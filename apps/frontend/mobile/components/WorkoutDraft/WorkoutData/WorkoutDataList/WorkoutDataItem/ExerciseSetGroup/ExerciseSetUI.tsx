@@ -25,7 +25,7 @@ export default function ExerciseSetUI({
       }}
     >
       <Text
-        variant="titleMedium"
+        variant="headlineSmall"
         style={{
           color: theme.colors.onBackground,
           // fontWeight: 800,

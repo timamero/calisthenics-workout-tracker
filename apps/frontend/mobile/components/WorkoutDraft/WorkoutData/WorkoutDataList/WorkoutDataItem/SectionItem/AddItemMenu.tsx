@@ -26,7 +26,7 @@ export default function AddItemMenu({
         <Surface
           elevation={4}
           style={{
-            backgroundColor: theme.colors.background,
+            backgroundColor: theme.colors.tertiary,
             borderRadius: '50%',
           }}
         >
@@ -35,7 +35,8 @@ export default function AddItemMenu({
             icon="plus"
             size={24}
             onPress={openMenu}
-            containerColor={theme.colors.background}
+            iconColor={theme.colors.onTertiary}
+            containerColor={theme.colors.tertiary}
             rippleColor={theme.colors.violet2}
           />
         </Surface>
