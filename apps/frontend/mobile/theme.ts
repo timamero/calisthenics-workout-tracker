@@ -11,38 +11,8 @@ export type CustomTheme = typeof DefaultTheme & {
     advancedPillColor: string;
     musclePillColor: string;
     musclePillBgColor: string;
-    // grey: string;
-    // darkGrey: string;
-    // orange1: string;
-    // light: string;
+    backgroundOpaque: string;
 
-    // errorLight: string;
-
-    // orange50: string;
-    // orange100: string;
-    // orange200: string;
-    // orange300: string;
-    // orange400: string;
-    // orange500: string;
-    // orange600: string;
-    // orange700: string;
-    // orange800: string;
-    // orange900: string;
-    // orange950: string;
-
-    // dark50: string;
-    // dark100: string;
-    // dark200: string;
-    // dark300: string;
-    // dark400: string;
-    // dark500: string;
-    // dark600: string;
-    // dark700: string;
-    // dark800: string;
-    // dark900: string;
-    // dark950: string;
-
-    // Color shades (mantine colors to match web)
     white: string;
 
     dark0: string;
@@ -224,17 +194,6 @@ const fontConfig = {
     letterSpacing: 0.15,
     lineHeight: 16,
   },
-  // labelLarge: {
-  //   fontFamily: Platform.select({
-  //     web: 'SourceCodePro-Light, ui-monospace, monospace',
-  //     ios: 'SourceCodePro-Light',
-  //     android: 'SourceCodePro-Light',
-  //     default: 'monospace',
-  //   }),
-  //   fontSize: 18,
-  //   letterSpacing: 0.4,
-  //   lineHeight: 20,
-  // },
   labelMedium: {
     fontFamily: Platform.select({
       web: 'SourceCodePro-Medium, ui-monospace, monospace',
@@ -314,39 +273,9 @@ const theme: CustomTheme = {
     advancedPillColor: 'rgb(250, 82, 82)',
     musclePillColor: 'rgb(190, 75, 219)', // mantine: grape.6
     musclePillBgColor: 'rgb(248 240 252)', // mantine: grape.0
-    // grey: 'rgb(206 212 218)',
-    // darkGrey: 'rgb(33 37 41)', // mantine: gray.9
-    // orange1: 'rgb(255 232 204)', // mantine: orange.1
-    // light: 'rgb(255 244 230)', // mantine: orange.0
+    backgroundOpaque: 'rgba(245, 245, 245, 0.4)',
 
-    // errorLight: '#FFA07A',
-
-    // orange50: '#fff0ef',
-    // orange100: '#ffe1df',
-    // orange200: '#ffbfba',
-    // orange300: '#ff9f96',
-    // orange400: '#ff7766',
-    // orange500: '#ff4500',
-    // orange600: '#cb3500',
-    // orange700: '#9c2600',
-    // orange800: '#6c1800',
-    // orange900: '#420b00',
-    // orange950: '#2d0500',
-
-    // dark50: '#f1f1f1',
-    // dark100: '#e2e2e2',
-    // dark200: '#c4c4c4',
-    // dark300: '#a8a8a8',
-    // dark400: '#8b8b8b',
-    // dark500: '#727272',
-    // dark600: '#595959',
-    // dark700: '#404040',
-    // dark800: '#2a2a2a',
-    // dark900: '#141414',
-    // dark950: '#0b0b0b',
-
-    // Color shades (mantine colors to match web)
-    // white: '#FAF9F6',
+    // Mantine Colors
     white: '#F5F5F5',
 
     dark0: '#C9C9C9',
