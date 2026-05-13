@@ -48,7 +48,7 @@ export default function WorkoutLogDetailScreen() {
     <View
       style={{
         paddingTop: 16 + top,
-        paddingInline: 16,
+        // paddingInline: 16,
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -70,7 +70,7 @@ export default function WorkoutLogDetailScreen() {
       </View>
       <Text
         variant="headlineLarge"
-        style={{ color: theme.colors.onBackground }}
+        style={{ color: theme.colors.onBackground, padding: 16 }}
       >
         {workoutLogDetail?.title}
       </Text>
@@ -135,11 +135,13 @@ const getStyles = (theme: CustomTheme) =>
       textTransform: 'uppercase',
       color: theme.colors.onBackground,
       marginBottom: 2,
+      marginInline: 16,
     },
     metadataValue: {
       fontWeight: 700,
       color: theme.colors.onBackground,
       marginBottom: 8,
+      marginInline: 20,
     },
     flexRowStart: {
       display: 'flex',
