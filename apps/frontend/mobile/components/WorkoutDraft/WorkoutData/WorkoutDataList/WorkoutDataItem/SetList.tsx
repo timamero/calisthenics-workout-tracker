@@ -31,5 +31,5 @@ export default function SetList() {
       </SetContext.Provider>
     );
   });
-  return <View>{setList}</View>;
+  return <>{setList}</>;
 }
