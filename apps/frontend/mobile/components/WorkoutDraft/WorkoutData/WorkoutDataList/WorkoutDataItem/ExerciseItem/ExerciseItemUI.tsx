@@ -53,6 +53,10 @@ export default function ExerciseItemUI({
         borderColor:
           parentType === 'superset' ? theme.colors.dark1 : theme.colors.outline,
         borderRadius: parentType === 'superset' ? 0 : 8,
+        backgroundColor:
+          parentType === 'superset'
+            ? 'transparent'
+            : theme.colors.backgroundOpaque,
       }}
     >
       <View
