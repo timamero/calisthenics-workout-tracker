@@ -37,16 +37,22 @@ export default function DurationInput({
   }
 
   return (
-    <TextInput
-      mode="outlined"
-      keyboardType="number-pad"
-      placeholder="0"
-      placeholderTextColor="grey"
-      style={{ height: 32 }}
-      textColor={theme.colors.onBackground}
-      // label={label[0].toUpperCase() + label.slice(1)}
-      value={getSecondsInDuration(set.fields[fieldName]!.toString())}
-      onChangeText={(text) => handleRestFieldChange(text)}
-    />
+    <View style={{ display: 'flex', gap: 4 }}>
+      <Text variant="labelMedium">
+        {label[0].toUpperCase() + label.slice(1)}
+      </Text>
+      <TextInput
+        mode="outlined"
+        keyboardType="number-pad"
+        placeholder="0"
+        placeholderTextColor="grey"
+        style={{ height: 32 }}
+        textColor={theme.colors.onBackground}
+        contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
+        // label={label[0].toUpperCase() + label.slice(1)}
+        value={getSecondsInDuration(set.fields[fieldName]!.toString())}
+        onChangeText={(text) => handleRestFieldChange(text)}
+      />
+    </View>
   );
 }
