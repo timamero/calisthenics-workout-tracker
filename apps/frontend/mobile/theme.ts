@@ -224,16 +224,38 @@ const fontConfig = {
     letterSpacing: 0.15,
     lineHeight: 16,
   },
+  // labelLarge: {
+  //   fontFamily: Platform.select({
+  //     web: 'SourceCodePro-Light, ui-monospace, monospace',
+  //     ios: 'SourceCodePro-Light',
+  //     android: 'SourceCodePro-Light',
+  //     default: 'monospace',
+  //   }),
+  //   fontSize: 18,
+  //   letterSpacing: 0.4,
+  //   lineHeight: 20,
+  // },
+  labelMedium: {
+    fontFamily: Platform.select({
+      web: 'SourceCodePro-Medium, ui-monospace, monospace',
+      ios: 'SourceCodePro-Medium',
+      android: 'SourceCodePro-Medium',
+      default: 'monospace',
+    }),
+    fontSize: 14,
+    letterSpacing: 0.4,
+    lineHeight: 16,
+  },
   labelSmall: {
     fontFamily: Platform.select({
       web: 'SourceCodePro-Bold, ui-monospace, monospace',
-      ios: 'MSourceCodePro-Bold',
+      ios: 'SourceCodePro-Bold',
       android: 'SourceCodePro-Bold',
       default: 'monospace',
     }),
     fontSize: 11,
     letterSpacing: 0.4,
-    lineHeight: 16,
+    lineHeight: 12,
   },
 } as const;
 

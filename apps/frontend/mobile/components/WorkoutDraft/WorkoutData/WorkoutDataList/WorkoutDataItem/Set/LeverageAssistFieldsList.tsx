@@ -84,6 +84,7 @@ export default function LeverageAssistFieldsList() {
             flexDirection: 'row',
             gap: 24,
             justifyContent: 'flex-start',
+            position: 'relative',
           }}
         >
           {leverageFields}
@@ -96,6 +97,7 @@ export default function LeverageAssistFieldsList() {
             flexDirection: 'row',
             gap: 24,
             justifyContent: 'flex-start',
+            position: 'relative',
           }}
         >
           {assistFields}
