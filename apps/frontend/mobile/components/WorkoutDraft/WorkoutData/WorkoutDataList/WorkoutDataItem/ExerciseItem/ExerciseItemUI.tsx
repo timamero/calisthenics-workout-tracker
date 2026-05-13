@@ -40,11 +40,14 @@ export default function ExerciseItemUI({
     <View
       style={{
         position: 'relative',
-        paddingInline: parentType === 'superset' ? 8 : 4,
-        marginInline: 4,
+        paddingBlock: 8,
+        // paddingInline: parentType === 'superset' ? 8 : 4,
+        marginInline:
+          parentType === 'superset' ? 16 : parentType === 'section' ? 20 : 4,
         // parentType === 'superset' ? 4 : parentType === 'section' ? 8 : 4,
-        marginBlock:
-          parentType === 'superset' ? 0 : parentType === 'section' ? 24 : 40,
+        marginTop:
+          parentType === 'superset' ? 0 : parentType === 'section' ? 24 : 44,
+        marginBottom: isLast ? 44 : 0,
         borderWidth: parentType === 'superset' ? 0 : 1,
         borderBottomWidth: 1,
         borderColor:
@@ -71,12 +74,14 @@ export default function ExerciseItemUI({
         )}
         <View
           style={{
-            paddingBlock: 8,
+            // paddingBlock: 8,
             // paddingInline: 16,
             // marginBlock: 4,
             display: 'flex',
             alignItems: 'center',
             width: `${mode === 'log' ? '100%' : 'auto'}`,
+            // width: 'min-content',
+            flexShrink: 1,
           }}
         >
           <Text
@@ -85,8 +90,9 @@ export default function ExerciseItemUI({
               color: theme.colors.onBackground,
               // fontWeight: 800,
               textAlign: 'center',
-              flexShrink: 1,
+              // flexShrink: 1,
               padding: 8,
+              flexWrap: 'wrap',
             }}
           >
             {name}
@@ -103,14 +109,24 @@ export default function ExerciseItemUI({
           />
         )}
       </View>
-      <SetList />
+      <View
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          // paddingInline:
+          //   parentType === 'superset' ? 0 : parentType === 'section' ? 14 : 16,
+        }}
+      >
+        <SetList />
+      </View>
       {(mode === 'build' || mode === 'edit') && (
         <View
           style={{
             display: 'flex',
             alignItems: 'flex-end',
-            paddingBottom: 16,
-            paddingInline: 4,
+            margin: 8,
+            // paddingBottom: 16,
+            // paddingInline: 4,
           }}
         >
           <Button

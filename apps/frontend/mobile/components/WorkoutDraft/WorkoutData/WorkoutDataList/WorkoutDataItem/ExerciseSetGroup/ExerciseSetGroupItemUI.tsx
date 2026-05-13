@@ -18,8 +18,9 @@ export default function ExerciseSetGroupItemUI({
   return (
     <View
       style={{
-        paddingInline: 8,
-        paddingBlock: 8,
+        // paddingInline: 8,
+        width: 320,
+        paddingTop: 8,
         // marginBlock: 32,
         // marginInline: 4,
         margin: 0,

@@ -57,7 +57,8 @@ export default function SectionItemUI({
         backgroundColor: theme.colors.violet0,
         // paddingInline: 4,
         // paddingBlock: 16,
-        marginBlock: 40,
+        marginTop: 44,
+        marginBottom: isLast ? 44 : 0,
         // marginInline: 4,
         // borderRadius: 8,
         overflow: 'hidden',
@@ -73,7 +74,7 @@ export default function SectionItemUI({
           width: 'auto',
           borderBottomColor: theme.colors.tertiary,
           borderBottomWidth: 1,
-          paddingInline: 8,
+          paddingInline: 4,
           backgroundColor: theme.colors.violet1,
         }}
       >

@@ -21,6 +21,7 @@ export default function ExerciseSetUI({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        gap: 8,
       }}
     >
       <Text
@@ -28,7 +29,7 @@ export default function ExerciseSetUI({
         style={{
           color: theme.colors.onBackground,
           // fontWeight: 800,
-          // textAlign: 'center',
+          textAlign: 'center',
         }}
       >
         {exerciseName}

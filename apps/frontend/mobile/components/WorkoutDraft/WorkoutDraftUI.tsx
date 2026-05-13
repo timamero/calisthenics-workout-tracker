@@ -42,19 +42,21 @@ export default function WorkoutDraftUI({
       >
         <ScrollView
           style={{
-            marginTop: 8,
+            // marginTop: 8,
             marginBottom: BOTTOM_APPBAR_HEIGHT + bottom,
             flexGrow: 1,
           }}
           ref={scrollViewRef}
         >
-          <TextInputWithEdit
-            initialValue={workoutTitle}
-            onSave={setWorkoutTitle}
-            variant="title"
-            hideEdit={mode === 'log' ? true : false}
-            maxLength={70}
-          />
+          <View style={{ marginTop: 8 }}>
+            <TextInputWithEdit
+              initialValue={workoutTitle}
+              onSave={setWorkoutTitle}
+              variant="title"
+              hideEdit={mode === 'log' ? true : false}
+              maxLength={70}
+            />
+          </View>
           <WorkoutData />
         </ScrollView>
       </KeyboardAvoidingView>

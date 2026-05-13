@@ -38,13 +38,16 @@ export default function SetUI({
     <View
       key={`set-${setIndex}`}
       style={{
+        width: 320,
         borderBottomWidth: borderBottomWidth,
         borderBottomColor:
           parentType === 'superset' ? theme.colors.gray3 : theme.colors.gray7,
-        paddingInline: 8,
-        paddingBlock: 4,
+        paddingBottom: setIndex !== setsLength! - 1 ? 8 : 0,
+        // paddingInline:
+        //   parentType === 'superset' ? 0 : parentType === 'section' ? 8 : 16,
+        // paddingBlock: 4,
         // marginBlock: 8,
-        marginInline: 8,
+        // marginInline: 8,
         // borderRadius: 20,
         // backgroundColor: theme.colors.background,
       }}
@@ -84,8 +87,8 @@ export default function SetUI({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: 8,
-          paddingBottom: 8,
+          // gap: 8,
+          // paddingBottom: 8,
         }}
       >
         <View
