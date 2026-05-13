@@ -148,6 +148,7 @@ export default function SelectInput({
               borderWidth: 1,
               borderColor: theme.colors.outline,
             }}
+            disabled={set.completed}
             labelStyle={{ fontFamily: 'SourceCodePro-Regular' }}
             onPress={openMenu}
             theme={{
