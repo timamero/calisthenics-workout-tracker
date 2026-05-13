@@ -18,6 +18,7 @@ export default function EmptyWorkoutPlaceholder({ mode }: { mode: Mode }) {
         borderStyle: 'dashed',
         display: 'flex',
         alignItems: 'center',
+        marginTop: 44,
         marginInline: 20,
         padding: 16,
         gap: 16,
