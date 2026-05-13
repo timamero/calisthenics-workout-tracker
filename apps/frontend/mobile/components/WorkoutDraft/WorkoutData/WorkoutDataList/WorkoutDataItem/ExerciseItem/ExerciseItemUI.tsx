@@ -47,7 +47,7 @@ export default function ExerciseItemUI({
         // parentType === 'superset' ? 4 : parentType === 'section' ? 8 : 4,
         marginTop:
           parentType === 'superset' ? 0 : parentType === 'section' ? 24 : 44,
-        marginBottom: isLast ? 44 : 0,
+        marginBottom: isLast && !parentType ? 44 : 0,
         borderWidth: parentType === 'superset' ? 0 : 1,
         borderBottomWidth: 1,
         borderColor:
