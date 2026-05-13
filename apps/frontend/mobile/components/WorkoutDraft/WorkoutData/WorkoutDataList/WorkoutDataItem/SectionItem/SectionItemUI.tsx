@@ -116,7 +116,7 @@ export default function SectionItemUI({
             <TextInputWithEdit
               initialValue={title}
               onSave={handleSetSectionTitle}
-              hideEdit={mode === 'log' ? true : false}
+              hideEdit={mode === 'log' || mode === 'read' ? true : false}
               hideEditLabel={true}
               variant={'title'}
               maxLength={70}
