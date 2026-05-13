@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { View } from 'react-native';
 
 import { Exercise } from '@cwt/schema/workouts';
 import { useUpdateField } from '@cwt/hooks';
