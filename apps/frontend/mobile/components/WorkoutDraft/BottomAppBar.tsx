@@ -62,8 +62,8 @@ export default function BottomAppBar() {
         }}
         theme={{
           colors: {
-            secondaryContainer: theme.colors.tertiary,
-            onSecondaryContainer: theme.colors.onTertiary,
+            secondaryContainer: theme.colors.primaryContainer,
+            onSecondaryContainer: theme.colors.onPrimaryContainer,
           },
         }}
         buttons={[

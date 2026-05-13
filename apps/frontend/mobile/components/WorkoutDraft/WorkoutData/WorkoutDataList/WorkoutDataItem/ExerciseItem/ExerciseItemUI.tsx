@@ -51,7 +51,7 @@ export default function ExerciseItemUI({
         borderWidth: parentType === 'superset' ? 0 : 1,
         borderBottomWidth: 1,
         borderColor:
-          parentType === 'superset' ? theme.colors.gray3 : theme.colors.outline,
+          parentType === 'superset' ? theme.colors.dark1 : theme.colors.outline,
         borderRadius: parentType === 'superset' ? 0 : 8,
       }}
     >
@@ -130,10 +130,10 @@ export default function ExerciseItemUI({
           }}
         >
           <Button
-            mode="contained"
+            mode="outlined"
             onPress={() => handleAddSetPress()}
-            buttonColor={theme.colors.secondary}
-            textColor={theme.colors.onSecondary}
+            // buttonColor={theme.colors.secondaryContainer}
+            // textColor={theme.colors.onSecondaryContainer}
             icon="plus"
           >
             Set
@@ -154,10 +154,13 @@ export default function ExerciseItemUI({
         >
           <View
             style={{
-              transform: 'translateY(12px)',
+              transform: 'translateY(13px)',
+              backgroundColor: theme.colors.elevation.level5,
+              borderRadius: 12,
+              padding: 1,
             }}
           >
-            <Icon source="link" color={theme.colors.gray5} size={24} />
+            <Icon source="link" color={theme.colors.dark2} size={24} />
           </View>
         </View>
       )}

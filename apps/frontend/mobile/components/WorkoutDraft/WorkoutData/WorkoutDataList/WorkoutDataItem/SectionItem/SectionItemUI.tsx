@@ -57,6 +57,7 @@ export default function SectionItemUI({
         backgroundColor: theme.colors.violet0,
         // paddingInline: 4,
         // paddingBlock: 16,
+        paddingBottom: mode === 'edit' || mode === 'build' ? 0 : 24,
         marginTop: 44,
         marginBottom: isLast ? 44 : 0,
         // marginInline: 4,

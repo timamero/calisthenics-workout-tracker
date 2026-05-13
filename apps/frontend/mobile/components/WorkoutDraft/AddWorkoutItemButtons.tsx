@@ -39,27 +39,31 @@ export default function AddWorkoutItemButtons() {
         visible={isAddWorkoutItemButtonsVisible}
         icon={open ? 'close' : 'plus'}
         style={styles.fabGroup}
-        variant="tertiary"
-        theme={{
-          colors: {
-            tertiaryContainer: theme.colors.tertiary,
-            onTertiaryContainer: theme.colors.onTertiary,
-          },
-        }}
+        // variant="tertiary"
+        // theme={{
+        //   colors: {
+        //     tertiaryContainer: theme.colors.tertiary,
+        //     onTertiaryContainer: theme.colors.onTertiary,
+        //   },
+        // }}
         actions={[
           {
             icon: 'application',
             label: 'Add Section',
             onPress: () => addSection(),
+            labelStyle: styles.labelStyle,
+            // style: styles.labelStyle,
           },
           {
             icon: 'alpha-s-circle',
             label: 'Add Superset',
+            labelStyle: styles.labelStyle,
             onPress: () => handleAddSupersetPress(),
           },
           {
             icon: 'arm-flex',
             label: 'Add Exercise',
+            labelStyle: styles.labelStyle,
             onPress: () => handleAddExercisePress(),
           },
         ]}
@@ -73,9 +77,14 @@ const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     fabGroup: {
       paddingRight: 16,
+      // fontFamily: 'Manrope-Regular',
     },
     fab: {
       position: 'absolute',
       right: 0,
+      // fontFamily: 'sans-serif',
+    },
+    labelStyle: {
+      fontFamily: 'Manrope-Regular',
     },
   });
