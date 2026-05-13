@@ -1,13 +1,20 @@
 import { type RefObject } from 'react';
-import { View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import {
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  ImageBackground,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type { Mode } from '@cwt/schema/workouts';
 
+import type { CustomTheme } from '../../theme';
+
 import WorkoutData from './WorkoutData';
 import WorkoutOverlays from './WorkoutOverlays';
-import type { CustomTheme } from '../../theme';
 import TextInputWithEdit from '../common/TextInputWithEdit';
 import BottomAppBar from './BottomAppBar';
 
@@ -36,30 +43,38 @@ export default function WorkoutDraftUI({
         backgroundColor: theme.colors.background,
       }}
     >
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      <ImageBackground
+        source={require('../../assets/grid.png')}
+        imageStyle={{ opacity: mode === 'build' || mode === 'edit' ? 1 : 0 }}
+        style={{
+          flex: 1,
+        }}
+        resizeMode="repeat"
       >
-        <ScrollView
-          style={{
-            // marginTop: 8,
-            marginBottom: BOTTOM_APPBAR_HEIGHT + bottom,
-            flexGrow: 1,
-          }}
-          ref={scrollViewRef}
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
-          <View style={{ marginTop: 8 }}>
-            <TextInputWithEdit
-              initialValue={workoutTitle}
-              onSave={setWorkoutTitle}
-              variant="title"
-              hideEdit={mode === 'log' ? true : false}
-              maxLength={70}
-            />
-          </View>
-          <WorkoutData />
-        </ScrollView>
-      </KeyboardAvoidingView>
+          <ScrollView
+            style={{
+              marginBottom: BOTTOM_APPBAR_HEIGHT + bottom,
+              flexGrow: 1,
+            }}
+            ref={scrollViewRef}
+          >
+            <View style={{ marginTop: 8 }}>
+              <TextInputWithEdit
+                initialValue={workoutTitle}
+                onSave={setWorkoutTitle}
+                variant="title"
+                hideEdit={mode === 'log' ? true : false}
+                maxLength={70}
+              />
+            </View>
+            <WorkoutData />
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </ImageBackground>
       <BottomAppBar />
 
       <WorkoutOverlays />
