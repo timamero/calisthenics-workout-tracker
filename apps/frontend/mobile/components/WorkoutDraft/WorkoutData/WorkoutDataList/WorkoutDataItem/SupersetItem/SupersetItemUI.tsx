@@ -46,8 +46,10 @@ export default function SupersetItemUI({
         borderWidth: 2,
         // paddingInline: 4,
         // paddingBlock: 16,
-        marginBlock: parentType === 'section' ? 24 : 40,
-        marginInline: 4,
+        marginInline: parentType === 'section' ? 20 : 4,
+        marginTop: parentType === 'section' ? 24 : 44,
+        marginBottom: isLast ? 44 : 0,
+        // marginInline: 4,
         borderRadius: 8,
         alignItems: 'stretch',
       }}
@@ -63,7 +65,7 @@ export default function SupersetItemUI({
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
           borderBottomWidth: 2,
-          paddingInline: 4,
+          // paddingInline: 4,
           backgroundColor: theme.colors.elevation.level5,
         }}
       >
@@ -84,16 +86,17 @@ export default function SupersetItemUI({
         )}
         <View
           style={{
-            paddingBlock: 8,
-            paddingInline: 16,
+            // paddingBlock: 8,
+            // paddingInline: 16,
             // marginBlock: 4,
+            padding: 8,
             display: 'flex',
             alignItems: 'flex-end',
             width: `${mode === 'log' ? '100%' : 'auto'}`,
           }}
         >
           <Text
-            variant="headlineMedium"
+            variant="titleSmall"
             style={{ color: theme.colors.onBackground }}
           >
             Superset
@@ -123,12 +126,14 @@ export default function SupersetItemUI({
       {mode === 'build' || mode === 'edit' ? (
         <ExercisesList />
       ) : (
-        <ExerciseSetGroup />
+        <View style={{ display: 'flex', alignItems: 'center' }}>
+          <ExerciseSetGroup />
+        </View>
       )}
       {(mode === 'build' || mode === 'edit') && (
         <View
           style={{
-            marginBlock: 16,
+            marginBlock: 8,
             display: 'flex',
             alignItems: 'center',
           }}
