@@ -44,7 +44,7 @@ export default function DurationInput({
       placeholderTextColor="grey"
       style={{ height: 32 }}
       textColor={theme.colors.onBackground}
-      label={label[0].toUpperCase() + label.slice(1)}
+      // label={label[0].toUpperCase() + label.slice(1)}
       value={getSecondsInDuration(set.fields[fieldName]!.toString())}
       onChangeText={(text) => handleRestFieldChange(text)}
     />

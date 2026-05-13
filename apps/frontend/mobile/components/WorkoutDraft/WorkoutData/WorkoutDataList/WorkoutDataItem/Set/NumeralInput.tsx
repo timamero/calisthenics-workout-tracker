@@ -60,7 +60,7 @@ export default function NumeralInput({
         placeholderTextColor="grey"
         textColor={theme.colors.onBackground}
         keyboardType="number-pad"
-        label={label}
+        // label={label}
         style={{ height: 32 }}
         value={
           set.fields.leverages!.find((field) => field.id === fieldID)!.value ===
@@ -105,7 +105,7 @@ export default function NumeralInput({
         placeholderTextColor="grey"
         textColor={theme.colors.onBackground}
         keyboardType="number-pad"
-        label={label}
+        // label={label}
         style={{ height: 32 }}
         value={
           set.fields.assists!.find((field) => field.id === fieldID)!.value ===
@@ -144,7 +144,7 @@ export default function NumeralInput({
       placeholderTextColor="grey"
       textColor={theme.colors.onBackground}
       keyboardType="number-pad"
-      label={label}
+      // label={label}
       style={{ height: 32 }}
       value={
         set.fields.reps === undefined || set.fields.reps === null
