@@ -3,8 +3,12 @@ import { useSupersetState } from '@cwt/hooks';
 import ExerciseSetGroupItem from './ExerciseSetGroupItem';
 
 export default function ExerciseSetGroup() {
-  const { supersetID, exercisesGroupedBySetsList, supersetParentsSectionID } =
-    useSupersetState();
+  const {
+    supersetID,
+    exercisesGroupedBySetsList,
+    setsLength,
+    supersetParentsSectionID,
+  } = useSupersetState();
 
   if (!exercisesGroupedBySetsList) {
     return null;
@@ -14,6 +18,7 @@ export default function ExerciseSetGroup() {
     return (
       <ExerciseSetGroupItem
         key={group.setGroupNumber}
+        setsLength={setsLength}
         exercisesGroupedBySets={group}
         parentSupersetID={supersetID}
         parentSectionID={supersetParentsSectionID || null}

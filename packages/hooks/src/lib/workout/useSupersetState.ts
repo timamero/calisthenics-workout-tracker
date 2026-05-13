@@ -16,6 +16,8 @@ export default function useSupersetState() {
     supersetParentsSectionID,
     exercises: superset.exercises,
     exercisesGroupedBySetsList,
+    setsLength:
+      superset.exercises.length > 0 ? superset.exercises[0].sets.length : null,
     supersetItemsLength: superset.exercises.length,
   };
 }
