@@ -72,11 +72,20 @@ export default function NumeralInput({
           mode="outlined"
           placeholder="0"
           placeholderTextColor="grey"
-          textColor={theme.colors.onBackground}
           keyboardType="number-pad"
           contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
+          disabled={set.completed}
           // label={label}
-          style={{ height: 32, flex: 0 }}
+          style={{
+            height: 32,
+            width: 64,
+            backgroundColor: set.completed
+              ? theme.colors.gray2
+              : theme.colors.background,
+          }}
+          textColor={
+            set.completed ? theme.colors.dark2 : theme.colors.onBackground
+          }
           value={
             set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === null ||
@@ -133,11 +142,20 @@ export default function NumeralInput({
           mode="outlined"
           placeholder="0"
           placeholderTextColor="grey"
-          textColor={theme.colors.onBackground}
           keyboardType="number-pad"
           // label={label}
-          style={{ height: 32, width: 64 }}
+          style={{
+            height: 32,
+            width: 64,
+            backgroundColor: set.completed
+              ? theme.colors.gray2
+              : theme.colors.background,
+          }}
+          textColor={
+            set.completed ? theme.colors.dark2 : theme.colors.onBackground
+          }
           contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
+          disabled={set.completed}
           value={
             set.fields.assists!.find((field) => field.id === fieldID)!.value ===
               null ||
@@ -188,11 +206,20 @@ export default function NumeralInput({
         mode="outlined"
         placeholder="0"
         placeholderTextColor="grey"
-        textColor={theme.colors.onBackground}
         keyboardType="number-pad"
         // label={label}
         contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
-        style={{ height: 32, flexShrink: 1 }}
+        disabled={set.completed}
+        style={{
+          height: 32,
+          width: 64,
+          backgroundColor: set.completed
+            ? theme.colors.gray2
+            : theme.colors.background,
+        }}
+        textColor={
+          set.completed ? theme.colors.dark2 : theme.colors.onBackground
+        }
         value={
           set.fields.reps === undefined || set.fields.reps === null
             ? '0'

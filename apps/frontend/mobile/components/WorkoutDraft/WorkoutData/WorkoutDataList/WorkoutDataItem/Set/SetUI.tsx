@@ -116,6 +116,8 @@ export default function SetUI({
             label="Completed"
             status={isCompleted ? 'checked' : 'unchecked'}
             onPress={() => handleToggleCompleted(!isCompleted)}
+            theme={{ colors: { primary: theme.colors.lime4 } }}
+            rippleColor={theme.colors.lime2}
             labelStyle={{
               color: theme.colors.onBackground,
               fontSize: 16,

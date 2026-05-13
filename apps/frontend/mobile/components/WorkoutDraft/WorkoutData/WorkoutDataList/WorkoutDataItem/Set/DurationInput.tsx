@@ -46,12 +46,20 @@ export default function DurationInput({
         keyboardType="number-pad"
         placeholder="0"
         placeholderTextColor="grey"
-        style={{ height: 32 }}
-        textColor={theme.colors.onBackground}
+        style={{
+          height: 32,
+          backgroundColor: set.completed
+            ? theme.colors.gray2
+            : theme.colors.background,
+        }}
+        textColor={
+          set.completed ? theme.colors.dark2 : theme.colors.onBackground
+        }
         contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
         // label={label[0].toUpperCase() + label.slice(1)}
         value={getSecondsInDuration(set.fields[fieldName]!.toString())}
         onChangeText={(text) => handleRestFieldChange(text)}
+        disabled={set.completed}
       />
     </View>
   );
