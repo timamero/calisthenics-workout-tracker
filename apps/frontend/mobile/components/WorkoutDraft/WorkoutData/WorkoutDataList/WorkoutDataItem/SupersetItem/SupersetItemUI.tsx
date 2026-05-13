@@ -48,7 +48,7 @@ export default function SupersetItemUI({
         // paddingBlock: 16,
         marginInline: parentType === 'section' ? 20 : 4,
         marginTop: parentType === 'section' ? 24 : 44,
-        marginBottom: isLast ? 44 : 0,
+        marginBottom: isLast && !parentType ? 44 : 0,
         // marginInline: 4,
         borderRadius: 8,
         alignItems: 'stretch',
