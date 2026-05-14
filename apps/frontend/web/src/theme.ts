@@ -9,11 +9,13 @@ import {
   type DefaultMantineColor,
   type MantineColorsTuple,
   TextInput,
+  AppShell,
 } from '@mantine/core';
 
 import './theme';
 
 import './styles/global.css';
+import appBarClasses from './styles/AppBar.module.css';
 import navLinkClasses from './styles/NavLink.module.css';
 import actionIconClasses from './styles/ActionIcon.module.css';
 import textInputClasses from './styles/TextInput.module.css';
@@ -104,6 +106,9 @@ const theme = createTheme({
   },
 
   components: {
+    AppShell: AppShell.extend({
+      classNames: appBarClasses,
+    }),
     NavLink: NavLink.extend({
       classNames: navLinkClasses,
     }),
