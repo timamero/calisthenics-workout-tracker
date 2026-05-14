@@ -28,7 +28,7 @@ import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
 SplashScreen.preventAutoHideAsync();
 
 SplashScreen.setOptions({
-  duration: 1000,
+  duration: 200,
   fade: true,
 });
 
