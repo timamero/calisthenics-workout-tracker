@@ -22,7 +22,7 @@ import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
 import { getLeveragesAssists } from './services/leveragesAssistsService';
 
-// import SplashScreen from './components/common/SplashScreen';
+import AuthSplashScreen from './components/common/AuthSplashScreen';
 import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
 
 SplashScreen.preventAutoHideAsync();
@@ -77,8 +77,12 @@ export default function App() {
     }
   }, [loading]);
 
-  if (!loading) {
-    return null;
+  if (loading) {
+    return (
+      <PaperProvider theme={theme}>
+        <AuthSplashScreen />
+      </PaperProvider>
+    );
   }
 
   return (
