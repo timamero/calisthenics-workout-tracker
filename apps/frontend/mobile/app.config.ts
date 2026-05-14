@@ -27,23 +27,27 @@ const getAppName = () => {
 
 const getIcon = () => {
   if (IS_DEV) {
-    return './assets/icon-development.png';
+    return './assets/adaptive-icon-development.png';
   }
 
   if (IS_PREVIEW) {
-    return './assets/icon-preview.png';
+    return './assets/adaptive-icon-preview.png';
   }
 
-  return './assets/icon.png';
+  return './assets/adaptive-icon.png';
 };
 
 export default ({ config }: any) => ({
   ...config,
   name: getAppName(),
   slug: config.slug ?? 'cwt-mobile',
+  icon: getIcon(),
   android: {
     ...config.android,
     package: getUniqueIdentifier(),
-    icon: getIcon(),
+    adaptiveIcon: {
+      foregroundImage: getIcon(),
+      backgroundColor: '#F5F5F5',
+    },
   },
 });

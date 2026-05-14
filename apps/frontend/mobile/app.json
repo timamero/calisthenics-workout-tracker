@@ -5,11 +5,7 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "backgroundColor": "#F5F5F5",
     "android": {
       "edgeToEdgeEnabled": true
     },
@@ -24,12 +20,8 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#F5F5F5",
-          "image": "./assets/splash-icon-dark.png",
-          "dark": {
-            "image": "./assets/splash-icon-dark.png",
-            "backgroundColor": "#F5F5F5"
-          },
-          "imageWidth": 160
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 80
         }
       ],
       [
