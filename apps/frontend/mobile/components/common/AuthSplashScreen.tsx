@@ -4,7 +4,7 @@ import { useTheme, ActivityIndicator } from 'react-native-paper';
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
 
-export default function SplashScreen() {
+export default function AuthSplashScreen() {
   const theme = useTheme() as CustomTheme;
 
   return (
