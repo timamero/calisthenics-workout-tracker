@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="32" height="32" version="1.1" viewBox="0 0 8.4667 8.4667" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter id="filter18" x="-.25197" y="-.23183" width="1.5459" height="1.5023" color-interpolation-filters="sRGB">
+   <feFlood flood-color="rgb(36,36,36)" flood-opacity=".49804" in="SourceGraphic" result="flood"/>
+   <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="5.000000"/>
+   <feOffset dx="2.000000" dy="2.000000" in="blur" result="offset"/>
+   <feComposite in="flood" in2="offset" operator="in" result="comp1"/>
+   <feComposite in="SourceGraphic" in2="comp1" result="comp2"/>
+  </filter>
+ </defs>
+ <g transform="translate(-300.9 -65.286)">
+  <g transform="matrix(.068468 0 0 .068468 280.3 60.816)" stroke-width="0">
+   <circle cx="362.73" cy="127.12" r="61.829" fill="#a9e34b"/>
+   <path d="m362.91 111.15q-0.81643 11.539-0.81643 22.914 0 8.9263 1.6328 11.648 1.6329 2.667 6.2593 2.667 3.81 0 9.7971-0.97972l0.32658 2.4493q-9.3073 4.7353-16.492 4.7353-5.8239 0-8.5997-3.1568-2.7214-3.2113-2.7214-9.6339 0-9.144 2.8847-30.643h-17.526l-0.32658-2.0139q6.096-2.9936 11.648-6.1504h15.349q14.043 0 20.302-0.16328l0.32658 0.38099q-0.97972 3.6467-1.8506 8.4909-8.8719-0.54428-20.193-0.54428z" fill="#242424" filter="url(#filter18)" style="font-variation-settings:'wght' 500;white-space:pre" aria-label="τ "/>
+  </g>
+ </g>
+</svg>
