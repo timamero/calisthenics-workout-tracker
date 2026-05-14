@@ -9,13 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SignupRouteImport } from './routes/signup'
-import { Route as OnboardingCompleteRouteImport } from './routes/onboardingComplete'
-import { Route as OnboardingRouteImport } from './routes/onboarding'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as AboutRouteImport } from './routes/about'
+import { Route as SiteRouteRouteImport } from './routes/_site/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as SiteIndexRouteImport } from './routes/_site/index'
+import { Route as SiteSignupRouteImport } from './routes/_site/signup'
+import { Route as SiteOnboardingCompleteRouteImport } from './routes/_site/onboardingComplete'
+import { Route as SiteOnboardingRouteImport } from './routes/_site/onboarding'
+import { Route as SiteLoginRouteImport } from './routes/_site/login'
+import { Route as SiteAboutRouteImport } from './routes/_site/about'
 import { Route as AuthWorkoutRouteRouteImport } from './routes/_auth/workout/route'
 import { Route as AuthDashboardRouteRouteImport } from './routes/_auth/dashboard/route'
 import { Route as AuthWorkoutIndexRouteImport } from './routes/_auth/workout/index'
@@ -27,39 +28,43 @@ import { Route as AuthDashboardLibraryRouteImport } from './routes/_auth/dashboa
 import { Route as AuthDashboardHomeRouteImport } from './routes/_auth/dashboard/home'
 import { Route as AuthDashboardHistoryRouteImport } from './routes/_auth/dashboard/history'
 
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OnboardingCompleteRoute = OnboardingCompleteRouteImport.update({
-  id: '/onboardingComplete',
-  path: '/onboardingComplete',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OnboardingRoute = OnboardingRouteImport.update({
-  id: '/onboarding',
-  path: '/onboarding',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const SiteRouteRoute = SiteRouteRouteImport.update({
+  id: '/_site',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteSignupRoute = SiteSignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteOnboardingCompleteRoute = SiteOnboardingCompleteRouteImport.update({
+  id: '/onboardingComplete',
+  path: '/onboardingComplete',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteOnboardingRoute = SiteOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteLoginRoute = SiteLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteAboutRoute = SiteAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => SiteRouteRoute,
 } as any)
 const AuthWorkoutRouteRoute = AuthWorkoutRouteRouteImport.update({
   id: '/workout',
@@ -113,14 +118,14 @@ const AuthDashboardHistoryRoute = AuthDashboardHistoryRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/login': typeof LoginRoute
-  '/onboarding': typeof OnboardingRoute
-  '/onboardingComplete': typeof OnboardingCompleteRoute
-  '/signup': typeof SignupRoute
+  '/': typeof SiteIndexRoute
   '/dashboard': typeof AuthDashboardRouteRouteWithChildren
   '/workout': typeof AuthWorkoutRouteRouteWithChildren
+  '/about': typeof SiteAboutRoute
+  '/login': typeof SiteLoginRoute
+  '/onboarding': typeof SiteOnboardingRoute
+  '/onboardingComplete': typeof SiteOnboardingCompleteRoute
+  '/signup': typeof SiteSignupRoute
   '/dashboard/history': typeof AuthDashboardHistoryRoute
   '/dashboard/home': typeof AuthDashboardHomeRoute
   '/dashboard/library': typeof AuthDashboardLibraryRoute
@@ -131,12 +136,12 @@ export interface FileRoutesByFullPath {
   '/workout/': typeof AuthWorkoutIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/login': typeof LoginRoute
-  '/onboarding': typeof OnboardingRoute
-  '/onboardingComplete': typeof OnboardingCompleteRoute
-  '/signup': typeof SignupRoute
+  '/': typeof SiteIndexRoute
+  '/about': typeof SiteAboutRoute
+  '/login': typeof SiteLoginRoute
+  '/onboarding': typeof SiteOnboardingRoute
+  '/onboardingComplete': typeof SiteOnboardingCompleteRoute
+  '/signup': typeof SiteSignupRoute
   '/dashboard/history': typeof AuthDashboardHistoryRoute
   '/dashboard/home': typeof AuthDashboardHomeRoute
   '/dashboard/library': typeof AuthDashboardLibraryRoute
@@ -148,15 +153,16 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/_auth': typeof AuthRouteRouteWithChildren
-  '/about': typeof AboutRoute
-  '/login': typeof LoginRoute
-  '/onboarding': typeof OnboardingRoute
-  '/onboardingComplete': typeof OnboardingCompleteRoute
-  '/signup': typeof SignupRoute
+  '/_site': typeof SiteRouteRouteWithChildren
   '/_auth/dashboard': typeof AuthDashboardRouteRouteWithChildren
   '/_auth/workout': typeof AuthWorkoutRouteRouteWithChildren
+  '/_site/about': typeof SiteAboutRoute
+  '/_site/login': typeof SiteLoginRoute
+  '/_site/onboarding': typeof SiteOnboardingRoute
+  '/_site/onboardingComplete': typeof SiteOnboardingCompleteRoute
+  '/_site/signup': typeof SiteSignupRoute
+  '/_site/': typeof SiteIndexRoute
   '/_auth/dashboard/history': typeof AuthDashboardHistoryRoute
   '/_auth/dashboard/home': typeof AuthDashboardHomeRoute
   '/_auth/dashboard/library': typeof AuthDashboardLibraryRoute
@@ -170,13 +176,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dashboard'
+    | '/workout'
     | '/about'
     | '/login'
     | '/onboarding'
     | '/onboardingComplete'
     | '/signup'
-    | '/dashboard'
-    | '/workout'
     | '/dashboard/history'
     | '/dashboard/home'
     | '/dashboard/library'
@@ -203,15 +209,16 @@ export interface FileRouteTypes {
     | '/workout'
   id:
     | '__root__'
-    | '/'
     | '/_auth'
-    | '/about'
-    | '/login'
-    | '/onboarding'
-    | '/onboardingComplete'
-    | '/signup'
+    | '/_site'
     | '/_auth/dashboard'
     | '/_auth/workout'
+    | '/_site/about'
+    | '/_site/login'
+    | '/_site/onboarding'
+    | '/_site/onboardingComplete'
+    | '/_site/signup'
+    | '/_site/'
     | '/_auth/dashboard/history'
     | '/_auth/dashboard/home'
     | '/_auth/dashboard/library'
@@ -223,50 +230,17 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
-  AboutRoute: typeof AboutRoute
-  LoginRoute: typeof LoginRoute
-  OnboardingRoute: typeof OnboardingRoute
-  OnboardingCompleteRoute: typeof OnboardingCompleteRoute
-  SignupRoute: typeof SignupRoute
+  SiteRouteRoute: typeof SiteRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/onboardingComplete': {
-      id: '/onboardingComplete'
-      path: '/onboardingComplete'
-      fullPath: '/onboardingComplete'
-      preLoaderRoute: typeof OnboardingCompleteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/onboarding': {
-      id: '/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof OnboardingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/_site': {
+      id: '/_site'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof SiteRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
@@ -276,12 +250,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_site/': {
+      id: '/_site/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/signup': {
+      id: '/_site/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SiteSignupRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/onboardingComplete': {
+      id: '/_site/onboardingComplete'
+      path: '/onboardingComplete'
+      fullPath: '/onboardingComplete'
+      preLoaderRoute: typeof SiteOnboardingCompleteRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/onboarding': {
+      id: '/_site/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof SiteOnboardingRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/login': {
+      id: '/_site/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof SiteLoginRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/about': {
+      id: '/_site/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof SiteAboutRouteImport
+      parentRoute: typeof SiteRouteRoute
     }
     '/_auth/workout': {
       id: '/_auth/workout'
@@ -404,14 +413,31 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 )
 
+interface SiteRouteRouteChildren {
+  SiteAboutRoute: typeof SiteAboutRoute
+  SiteLoginRoute: typeof SiteLoginRoute
+  SiteOnboardingRoute: typeof SiteOnboardingRoute
+  SiteOnboardingCompleteRoute: typeof SiteOnboardingCompleteRoute
+  SiteSignupRoute: typeof SiteSignupRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+}
+
+const SiteRouteRouteChildren: SiteRouteRouteChildren = {
+  SiteAboutRoute: SiteAboutRoute,
+  SiteLoginRoute: SiteLoginRoute,
+  SiteOnboardingRoute: SiteOnboardingRoute,
+  SiteOnboardingCompleteRoute: SiteOnboardingCompleteRoute,
+  SiteSignupRoute: SiteSignupRoute,
+  SiteIndexRoute: SiteIndexRoute,
+}
+
+const SiteRouteRouteWithChildren = SiteRouteRoute._addFileChildren(
+  SiteRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
-  AboutRoute: AboutRoute,
-  LoginRoute: LoginRoute,
-  OnboardingRoute: OnboardingRoute,
-  OnboardingCompleteRoute: OnboardingCompleteRoute,
-  SignupRoute: SignupRoute,
+  SiteRouteRoute: SiteRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
