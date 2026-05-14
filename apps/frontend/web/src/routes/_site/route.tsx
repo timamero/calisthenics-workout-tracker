@@ -1,6 +1,6 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router';
-import { AppShell, Image, Text } from '@mantine/core';
-import Logo from '../../assets/logo-opt-160x160.svg';
+import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
+import { AppShell, Image, Text, UnstyledButton, Group } from '@mantine/core';
+import Logo from '../../assets/logo-min-opt-160x160.svg';
 // import { useDisclosure } from '@mantine/hooks';
 
 export const Route = createFileRoute('/_site')({
@@ -23,8 +23,21 @@ function RouteComponent() {
         {/* <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" /> */}
 
         {/* <div>Logo</div> */}
-        <Image radius="md" h={40} w={40} src={Logo} />
-        <Text>Torque</Text>
+        <Group bg="lime.2" h="100%" px="xl">
+          <UnstyledButton component={Link} to="/">
+            <Group>
+              <Image
+                radius="md"
+                w={24}
+                style={{ aspectRatio: 0.92 }}
+                src={Logo}
+              />
+              <Text ff="heading" fw="bolder" size="xl">
+                Torque
+              </Text>
+            </Group>
+          </UnstyledButton>
+        </Group>
       </AppShell.Header>
 
       {/* <AppShell.Navbar>Navbar</AppShell.Navbar> */}
