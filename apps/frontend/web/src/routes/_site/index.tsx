@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Title, Stack, Button, Text, Group } from '@mantine/core';
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/_site/')({
   component: HomeView,
 });
 

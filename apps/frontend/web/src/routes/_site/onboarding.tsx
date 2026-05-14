@@ -16,7 +16,7 @@ import type { ComboboxItem } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useState } from 'react';
 
-export const Route = createFileRoute('/onboarding')({
+export const Route = createFileRoute('/_site/onboarding')({
   component: OnboardingView,
 });
 
