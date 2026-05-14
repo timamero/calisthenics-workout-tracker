@@ -37,7 +37,7 @@ export const AuthStack = createNativeStackNavigator({
             }}
           >
             <Image
-              style={{ width: 32, height: 32 }}
+              style={{ width: 36, height: 36 }}
               source={require('../assets/logo-240x240.png')}
             />
             <Text variant="headlineSmall">Torque</Text>

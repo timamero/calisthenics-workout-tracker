@@ -1,10 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import StartWorkoutScreen from '../screens/StartWorkoutScreen';
 import LibraryScreen from '../screens/LibraryScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+
+import { Text } from '../customText';
 
 // App Navigator
 export const MainTabs = createBottomTabNavigator({
@@ -50,7 +53,22 @@ export const MainTabs = createBottomTabNavigator({
     Home: {
       screen: StartWorkoutScreen,
       options: {
-        title: 'Workout',
+        headerTitle: () => (
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
+            <Image
+              style={{ width: 36, height: 36 }}
+              source={require('../assets/logo-240x240.png')}
+            />
+            <Text variant="headlineSmall">Home</Text>
+          </View>
+        ),
       },
     },
     Library: {
