@@ -21,6 +21,18 @@
     },
     "plugins": [
       [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F5F5F5",
+          "image": "./assets/splash-icon-dark.png",
+          "dark": {
+            "image": "./assets/splash-icon-dark.png",
+            "backgroundColor": "#F5F5F5"
+          },
+          "imageWidth": 200
+        }
+      ],
+      [
         "expo-font",
         {
           "fonts": [

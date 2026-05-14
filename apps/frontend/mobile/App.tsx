@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import 'react-native-get-random-values';
 // import { View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
-
+import * as SplashScreen from 'expo-splash-screen';
 import {
   useAuthStore,
   useWorkoutLibraryStore,
@@ -22,8 +22,15 @@ import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
 import { getLeveragesAssists } from './services/leveragesAssistsService';
 
-import SplashScreen from './components/common/SplashScreen';
+// import SplashScreen from './components/common/SplashScreen';
 import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
+
+SplashScreen.preventAutoHideAsync();
+
+SplashScreen.setOptions({
+  duration: 1000,
+  fade: true,
+});
 
 export default function App() {
   const loading = useAuthStore((state) => state.loading);
@@ -64,12 +71,14 @@ export default function App() {
     asyncFetchData();
   }, [setExercises, supabaseSession, setWorkouts, setLeveragesAssists]);
 
-  if (loading) {
-    return (
-      <PaperProvider theme={theme}>
-        <SplashScreen />
-      </PaperProvider>
-    );
+  useEffect(() => {
+    if (!loading) {
+      SplashScreen.hideAsync();
+    }
+  }, [loading]);
+
+  if (!loading) {
+    return null;
   }
 
   return (
