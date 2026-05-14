@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Button } from '@mantine/core';
 
-export const Route = createFileRoute('/onboardingComplete')({
+export const Route = createFileRoute('/_site/onboardingComplete')({
   component: RouteComponent,
 });
 

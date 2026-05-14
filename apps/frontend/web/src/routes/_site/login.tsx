@@ -16,9 +16,9 @@ import { useNavigate } from '@tanstack/react-router';
 import { useAuthLogin } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
-import { supabase } from '../services/supabaseClient';
+import { supabase } from '../../services/supabaseClient';
 
-export const Route = createFileRoute('/login')({
+export const Route = createFileRoute('/_site/login')({
   component: LoginView,
 });
 
