@@ -509,7 +509,7 @@ function HomeView() {
 
         <Group>
           <Text fz={10} fw={500} lts="0.1em" c="dark.3">
-            ©2026 Anne Camero Digital Studio
+            &copy;{`${new Date().getFullYear()} Anne Camero Digital Studio`}
           </Text>
         </Group>
       </Stack>
