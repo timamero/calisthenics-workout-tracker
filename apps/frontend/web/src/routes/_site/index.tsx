@@ -20,7 +20,6 @@ import {
   IoTimeOutline,
   IoServerOutline,
   IoLayersOutline,
-  IoLogoApple,
   IoLogoGooglePlaystore,
 } from 'react-icons/io5';
 
@@ -451,40 +450,27 @@ function HomeView() {
         <Divider />
 
         {/* ── CTA ──────────────────────────────────────────────────────── */}
-        <Paper
-          withBorder
-          radius="lg"
-          p="xl"
-          bg="var(--mantine-color-default-hover)"
-        >
+        <Paper withBorder radius="lg" p="xl" bg="elevation.3">
           <Group justify="space-between" align="center" wrap="wrap" gap="lg">
             <Box maw={420}>
               <Title
                 order={2}
                 fz={{ base: 22, sm: 32 }}
                 lh={1.1}
-                lts="0.01em"
+                lts="0.008em"
                 mb="sm"
               >
                 Your body is already the machine. Start using it.
               </Title>
-              <Text fz={13} c="dimmed" lh={1.6} fw={300}>
+              <Text fz={13} c="dark.3" lh={1.6} fw={300}>
                 Free to download. Free to start. Get in early and help shape
                 what Torque becomes.
               </Text>
             </Box>
             <Stack gap="xs" align="flex-end">
-              <Text fz={10} fw={500} lts="0.1em" tt="uppercase" c="dimmed">
-                Available on
+              <Text fz={10} fw={500} lts="0.1em" tt="uppercase" c="dark.3">
+                Also available on
               </Text>
-              <Paper withBorder radius="md" px="md" py={8}>
-                <Group gap={8}>
-                  <IoLogoApple size={16} />
-                  <Text fz={13} fw={500}>
-                    App Store
-                  </Text>
-                </Group>
-              </Paper>
               <Paper withBorder radius="md" px="md" py={8}>
                 <Group gap={8}>
                   <IoLogoGooglePlaystore size={16} />
