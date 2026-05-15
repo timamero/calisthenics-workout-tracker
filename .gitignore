@@ -63,3 +63,5 @@ logs/
 .cache/
 .backup/
 .secrets.baseline
+examples/*
+*/examples
