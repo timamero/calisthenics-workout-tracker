@@ -226,7 +226,7 @@ function HomeView() {
   ];
 
   return (
-    <Container size="md" py="xl">
+    <Container size="md" pt="xl">
       <Stack gap="xl">
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <Paper withBorder radius="lg" p="xl" bg="elevation.3" mb="xl">
@@ -504,6 +504,12 @@ function HomeView() {
             </Stack>
           </Group>
         </Paper>
+
+        <Divider />
+
+        <Group>
+          <Text fz="sm">©2026 Anne Camero Digital Studio</Text>
+        </Group>
       </Stack>
     </Container>
   );
