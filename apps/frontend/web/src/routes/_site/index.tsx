@@ -228,13 +228,7 @@ function HomeView() {
     <Container size="md" py="xl">
       <Stack gap="xl">
         {/* ── Hero ─────────────────────────────────────────────────────── */}
-        <Paper
-          withBorder
-          radius="lg"
-          p="xl"
-          bg="var(--mantine-color-elevation-3)"
-          style={{ border: '1px solid var(--mantine-color-lime-2)' }}
-        >
+        <Paper withBorder radius="lg" p="xl" bg="elevation.3" mb="xl">
           <Stack gap="lg">
             <Group justify="flex-end" align="center" wrap="wrap" gap="sm">
               <Group gap="xs" wrap="wrap">
@@ -328,6 +322,7 @@ function HomeView() {
           color="violet.9"
           bg="violet.0"
           radius="md"
+          mb="xl"
           title="This is an early alpha release."
         >
           <Text fz={13} lh={1.7}>
@@ -339,7 +334,7 @@ function HomeView() {
         </Alert>
 
         {/* ── What's in alpha.1 ────────────────────────────────────────── */}
-        <Stack gap="md">
+        <Stack gap="md" mb="xl">
           <Box>
             <Text
               fz={11}
@@ -370,7 +365,7 @@ function HomeView() {
         <Divider />
 
         {/* ── The foundation ───────────────────────────────────────────── */}
-        <Stack gap="md">
+        <Stack gap="md" mb="xl">
           <Box>
             <Text
               fz={11}
@@ -421,7 +416,7 @@ function HomeView() {
         <Divider />
 
         {/* ── Roadmap ──────────────────────────────────────────────────── */}
-        <Stack gap="md">
+        <Stack gap="md" mb="xl">
           <Box>
             <Text
               fz={11}
