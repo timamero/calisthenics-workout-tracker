@@ -318,7 +318,8 @@ function HomeView() {
         {/* ── Alpha notice ─────────────────────────────────────────────── */}
         <Alert
           icon={<IoInformationCircleOutline size={18} />}
-          color="yellow"
+          color="violet.9"
+          bg="violet.0"
           radius="md"
           title="This is an early alpha release."
         >
