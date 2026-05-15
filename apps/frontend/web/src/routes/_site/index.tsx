@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import {
   Container,
   Stack,
@@ -12,6 +12,7 @@ import {
   Divider,
   Alert,
   ThemeIcon,
+  Button,
 } from '@mantine/core';
 
 import {
@@ -313,6 +314,32 @@ function HomeView() {
               sessions, and build a training history from day one. No barbell.
               No membership. Just force.
             </Text>
+            <Group
+              align="center"
+              justify="flex-start"
+              gap="md"
+              // mt={20}
+              w="100%"
+            >
+              <Button
+                component={Link}
+                to="/signup"
+                variant="filled"
+                size="md"
+                radius="md"
+              >
+                Sign Up
+              </Button>
+              <Button
+                component={Link}
+                to="/login"
+                variant="outline"
+                size="md"
+                radius="md"
+              >
+                Log In
+              </Button>
+            </Group>
           </Stack>
         </Paper>
 
