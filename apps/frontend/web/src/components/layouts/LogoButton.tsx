@@ -20,7 +20,7 @@ export default function LogoButton({ linkTo }: { linkTo: string }) {
           className={classes.logoButtonText}
           ff="heading"
           fw="bolder"
-          size="xl"
+          size="lg"
         >
           Torque
         </Text>
