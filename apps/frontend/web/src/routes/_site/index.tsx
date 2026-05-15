@@ -62,15 +62,22 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
   return (
-    <Paper withBorder radius="md" p="md" h="100%">
+    <Paper
+      withBorder
+      radius="md"
+      p="md"
+      h="100%"
+      bg="elevation.3"
+      style={{ border: '1px solid var(--mantine-color-lime-2)' }}
+    >
       <Stack gap={8}>
-        <ThemeIcon variant="light" color="gray" size="lg" radius="md">
+        <ThemeIcon variant="light" color="lime" size="lg" radius="md">
           <Icon size={18} />
         </ThemeIcon>
         <Text fw={500} fz={14}>
           {title}
         </Text>
-        <Text fz={13} c="dimmed" lh={1.6}>
+        <Text fz={13} c="dark.3" lh={1.6}>
           {description}
         </Text>
       </Stack>
@@ -339,7 +346,7 @@ function HomeView() {
               fw={500}
               lts="0.16em"
               tt="uppercase"
-              c="dimmed"
+              c="dark.3"
               mb={6}
             >
               What's in alpha.1
@@ -348,7 +355,7 @@ function HomeView() {
               Everything you need to start training
             </Title>
           </Box>
-          <Text fz={14} c="dimmed" lh={1.8} fw={300}>
+          <Text fz={14} c="dark.3" lh={1.8} fw={300}>
             The first release focuses on the fundamentals — a solid exercise
             library, a flexible workout builder, and a logbook to track your
             sessions. The tools that matter most when you're getting started.
