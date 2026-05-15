@@ -157,7 +157,7 @@ function StatCard({ value, label }: StatCardProps) {
       >
         {value}
       </Text>
-      <Text fz={12} c="dimmed" lh={1.4}>
+      <Text fz={12} c="dark.3" lh={1.4}>
         {label}
       </Text>
     </Paper>
