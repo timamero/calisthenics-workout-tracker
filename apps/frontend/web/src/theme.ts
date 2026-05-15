@@ -7,6 +7,7 @@ import {
   ActionIcon,
   type CSSVariablesResolver,
   type DefaultMantineColor,
+  type DefaultMantineSize,
   type MantineColorsTuple,
   TextInput,
   AppShell,
@@ -21,10 +22,14 @@ import actionIconClasses from './styles/ActionIcon.module.css';
 import textInputClasses from './styles/TextInput.module.css';
 
 type ExtendedCustomColors = 'elevation' | DefaultMantineColor;
+type ExtendedFontSizes = 'xxs' | 'xsplus' | DefaultMantineSize;
 
 declare module '@mantine/core' {
   export interface MantineThemeColorsOverride {
     colors: Record<ExtendedCustomColors, MantineColorsTuple>;
+  }
+  export interface MantineThemeSizesOverride {
+    fontSizes: Record<ExtendedFontSizes, string>;
   }
 }
 
@@ -34,9 +39,21 @@ const theme = createTheme({
     'Manrope, Avenir, Montserrat, Corbel, URW Gothic, source-sans-pro, sans-serif',
   fontFamilyMonospace:
     'Source Code Pro, ui-monospace, Cascadia Code, Source Code Pro, Menlo, Consolas, DejaVu Sans Mono, monospace',
+  fontSizes: {
+    xxs: '0.625rem',
+    xsplus: '0.813rem',
+  },
   headings: {
     fontFamily:
       'Elms Sans, Seravek, Gill Sans Nova, Ubuntu, Calibri, DejaVu Sans, source-sans-pro, sans-serif',
+    sizes: {
+      h1: { fontSize: '100px' },
+      h2: { fontSize: '72px' },
+      h3: { fontSize: '56px' },
+      h4: { fontSize: '38px' },
+      h5: { fontSize: '28px' },
+      h6: { fontSize: '18px' },
+    },
   },
   autoContrast: true,
   luminanceThreshold: 0.3,
