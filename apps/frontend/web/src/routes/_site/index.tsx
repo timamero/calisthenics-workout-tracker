@@ -146,7 +146,7 @@ interface StatCardProps {
 
 function StatCard({ value, label }: StatCardProps) {
   return (
-    <Paper bg="var(--mantine-color-default-hover)" radius="md" p="md">
+    <Paper radius="md" p="md" bg="lime.0">
       <Text
         fz={36}
         fw={700}
@@ -377,7 +377,7 @@ function HomeView() {
               fw={500}
               lts="0.16em"
               tt="uppercase"
-              c="dimmed"
+              c="dark.3"
               mb={6}
             >
               The foundation
@@ -386,7 +386,7 @@ function HomeView() {
               The most accessible gym ever built
             </Title>
           </Box>
-          <Text fz={14} c="dimmed" lh={1.8} fw={300}>
+          <Text fz={14} c="dark.3" lh={1.8} fw={300}>
             A floor. A pull-up bar. A park bench. That's your gym — free, open
             24 hours, and never crowded.{' '}
             <Text
