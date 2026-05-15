@@ -508,7 +508,9 @@ function HomeView() {
         <Divider />
 
         <Group>
-          <Text fz="sm">©2026 Anne Camero Digital Studio</Text>
+          <Text fz={10} fw={500} lts="0.1em" c="dark.3">
+            ©2026 Anne Camero Digital Studio
+          </Text>
         </Group>
       </Stack>
     </Container>
