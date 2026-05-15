@@ -37,13 +37,20 @@ function PhysicsCallout() {
     { eq: 'You = F', label: 'you are the load' },
   ];
   return (
-    <Stack gap={12} align="flex-end">
+    <Stack gap="sm" align="flex-end">
       {lines.map(({ eq, label }) => (
         <Box key={eq} ta="right">
-          <Text ff="monospace" fz={13} fw={600} lts="0.1em" c="dark.4" lh={1}>
+          <Text
+            ff="monospace"
+            fz="xsplus"
+            fw={600}
+            lts="0.1em"
+            c="dark.4"
+            lh={1}
+          >
             {eq}
           </Text>
-          <Text fz={10} fw={400} lts="0.06em" c="dark.3" lh={1.4}>
+          <Text fz="xxs" fw={400} lts="0.06em" c="dark.3" lh={1.4}>
             {label}
           </Text>
         </Box>
@@ -74,10 +81,10 @@ function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
         <ThemeIcon variant="light" color="lime" size="lg" radius="md">
           <Icon size={18} />
         </ThemeIcon>
-        <Text fw={500} fz={14}>
+        <Text fw={500} fz="sm">
           {title}
         </Text>
-        <Text fz={13} c="dark.3" lh={1.6}>
+        <Text fz="xsplus" c="dark.3" lh={1.6}>
           {description}
         </Text>
       </Stack>
@@ -123,14 +130,14 @@ function RoadmapCard({
             Now — {version}
           </Badge>
         ) : (
-          <Text fz={10} fw={500} lts="0.1em" tt="uppercase" c="dark.3">
+          <Text fz="xxs" fw={500} lts="0.1em" tt="uppercase" c="dark.3">
             Coming — {version}
           </Text>
         )}
         <Text fw={500} fz={14}>
           {title}
         </Text>
-        <Text fz={12} c="dark.3" lh={1.55}>
+        <Text fz="xs" c="dark.3" lh={1.55}>
           {description}
         </Text>
       </Stack>
@@ -157,7 +164,7 @@ function StatCard({ value, label }: StatCardProps) {
       >
         {value}
       </Text>
-      <Text fz={12} c="dark.3" lh={1.4}>
+      <Text fz="xs" c="dark.3" lh={1.4}>
         {label}
       </Text>
     </Paper>
@@ -274,7 +281,7 @@ function HomeView() {
               <Box>
                 <Title
                   order={1}
-                  fz={{ base: 72, sm: 100 }}
+                  fz={{ base: 'h3', xs: 'h2', sm: 'h1' }}
                   lh={0.88}
                   lts="0.02em"
                   mb={8}
@@ -352,7 +359,7 @@ function HomeView() {
           mb="xl"
           title="This is an early alpha release."
         >
-          <Text fz={13} lh={1.7}>
+          <Text fz="xsplus" lh={1.7}>
             You may encounter bugs, and workout data may not carry over between
             future releases if breaking changes are required. Your feedback
             during this phase directly shapes what Torque becomes — thank you
@@ -373,7 +380,7 @@ function HomeView() {
             >
               What's in alpha.1
             </Text>
-            <Title order={2} fz={{ base: 28, sm: 38 }} lh={1} lts="0.02em">
+            <Title order={2} fz={{ base: 'h5', sm: 'h4' }} lh={1} lts="0.02em">
               Everything you need to start training
             </Title>
           </Box>
@@ -404,7 +411,7 @@ function HomeView() {
             >
               The foundation
             </Text>
-            <Title order={2} fz={{ base: 28, sm: 38 }} lh={1} lts="0.02em">
+            <Title order={2} fz={{ base: 'h5', sm: 'h4' }} lh={1} lts="0.02em">
               The most accessible gym ever built
             </Title>
           </Box>
@@ -455,7 +462,7 @@ function HomeView() {
             >
               What's coming
             </Text>
-            <Title order={2} fz={{ base: 28, sm: 38 }} lh={1} lts="0.02em">
+            <Title order={2} fz={{ base: 'h5', sm: 'h4' }} lh={1} lts="0.02em">
               The roadmap
             </Title>
           </Box>
@@ -477,26 +484,26 @@ function HomeView() {
             <Box maw={420}>
               <Title
                 order={2}
-                fz={{ base: 22, sm: 32 }}
+                fz={{ base: 'h6', sm: 'h5' }}
                 lh={1.1}
                 lts="0.008em"
                 mb="sm"
               >
                 Your body is already the machine. Start using it.
               </Title>
-              <Text fz={13} c="dark.3" lh={1.6} fw={300}>
+              <Text fz="xsplus" c="dark.3" lh={1.6} fw={300}>
                 Free to download. Free to start. Get in early and help shape
                 what Torque becomes.
               </Text>
             </Box>
             <Stack gap="xs" align="flex-end">
-              <Text fz={10} fw={500} lts="0.1em" tt="uppercase" c="dark.3">
+              <Text fz="xxs" fw={500} lts="0.1em" tt="uppercase" c="dark.3">
                 Also available on
               </Text>
               <Paper withBorder radius="md" px="md" py={8}>
                 <Group gap={8}>
                   <IoLogoGooglePlaystore size={16} />
-                  <Text fz={13} fw={500}>
+                  <Text fz="xsplus" fw={500}>
                     Google Play
                   </Text>
                 </Group>
@@ -508,7 +515,7 @@ function HomeView() {
         <Divider />
 
         <Group>
-          <Text fz={10} fw={500} lts="0.1em" c="dark.3">
+          <Text fz="xxs" fw={500} lts="0.1em" c="dark.3">
             &copy;{`${new Date().getFullYear()} Anne Camero Digital Studio`}
           </Text>
         </Group>
