@@ -1,166 +1,477 @@
 import { createFileRoute } from '@tanstack/react-router';
 import {
   Container,
-  Title,
-  Text,
-  Button,
-  Group,
-  SimpleGrid,
-  ThemeIcon,
-  rem,
   Stack,
+  Group,
   Box,
+  Text,
+  Title,
+  Badge,
+  Paper,
+  SimpleGrid,
+  Divider,
+  Alert,
+  ThemeIcon,
 } from '@mantine/core';
-import type { IconType } from 'react-icons';
-import {
-  IoStatsChartOutline,
-  IoExtensionPuzzleOutline,
-  IoPhonePortraitOutline,
-  IoPeopleOutline,
-  IoChevronForward,
-} from 'react-icons/io5';
 
-interface FeatureProps {
-  icon: IconType;
-  title: string;
-  description: string;
-}
+import {
+  IoInformationCircleOutline,
+  IoSwapVertical,
+  IoTimeOutline,
+  IoServerOutline,
+  IoLayersOutline,
+  IoLogoApple,
+  IoLogoGooglePlaystore,
+} from 'react-icons/io5';
 
 export const Route = createFileRoute('/_site/')({
   component: HomeView,
 });
 
-/**
- * Feature sub-component to display individual value propositions
- */
-function Feature({ icon: Icon, title, description }: FeatureProps) {
+// ─── Physics callout ────────────────────────────────────────────────────────
+
+function PhysicsCallout() {
+  const lines = [
+    { eq: 'τ = r × F', label: 'torque = moment arm × force' },
+    { eq: 'F = mg', label: 'force = mass × gravity' },
+    { eq: 'You = F', label: 'you are the load' },
+  ];
   return (
-    <Stack align="center" gap="sm" ta="center">
-      <ThemeIcon size={54} radius="xl" variant="light" color="blue">
-        <Icon size={rem(32)} />
-      </ThemeIcon>
-      <Text fw={700} size="lg">
-        {title}
-      </Text>
-      <Text size="sm" c="dimmed" lh={1.6}>
-        {description}
-      </Text>
+    <Stack gap={12} align="flex-end">
+      {lines.map(({ eq, label }) => (
+        <Box key={eq} ta="right">
+          <Text ff="monospace" fz={13} fw={600} lts="0.1em" c="dimmed" lh={1}>
+            {eq}
+          </Text>
+          <Text fz={10} fw={400} lts="0.06em" c="dimmed" lh={1.4}>
+            {label}
+          </Text>
+        </Box>
+      ))}
     </Stack>
   );
 }
 
-function HomeView() {
+// ─── Feature card ────────────────────────────────────────────────────────────
+
+interface FeatureCardProps {
+  icon: React.ComponentType<{ size?: number }>;
+  title: string;
+  description: string;
+}
+
+function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
   return (
-    <Box component="main">
-      {/* Hero Section */}
-      <Box
-        bg="gray.0"
-        style={{
-          paddingTop: rem(120),
-          paddingBottom: rem(100),
-          backgroundImage:
-            'radial-gradient(at 50% 50%, rgba(34, 139, 230, 0.05) 0%, transparent 50%)',
-        }}
+    <Paper withBorder radius="md" p="md" h="100%">
+      <Stack gap={8}>
+        <ThemeIcon variant="light" color="gray" size="lg" radius="md">
+          <Icon size={18} />
+        </ThemeIcon>
+        <Text fw={500} fz={14}>
+          {title}
+        </Text>
+        <Text fz={13} c="dimmed" lh={1.6}>
+          {description}
+        </Text>
+      </Stack>
+    </Paper>
+  );
+}
+
+// ─── Roadmap card ────────────────────────────────────────────────────────────
+
+function RoadmapCard({
+  version,
+  title,
+  description,
+  isCurrent,
+}: {
+  version: string;
+  title: string;
+  description: string;
+  isCurrent: boolean;
+}) {
+  return (
+    <Paper
+      withBorder
+      radius="md"
+      p="md"
+      h="100%"
+      style={
+        isCurrent
+          ? { borderWidth: 2, borderColor: 'var(--mantine-color-blue-5)' }
+          : {}
+      }
+    >
+      <Stack gap={6}>
+        {isCurrent ? (
+          <Badge
+            color="blue"
+            variant="light"
+            size="xs"
+            radius="xl"
+            w="fit-content"
+          >
+            Now — {version}
+          </Badge>
+        ) : (
+          <Text fz={10} fw={500} lts="0.1em" tt="uppercase" c="dimmed">
+            Coming — {version}
+          </Text>
+        )}
+        <Text fw={500} fz={14}>
+          {title}
+        </Text>
+        <Text fz={12} c="dimmed" lh={1.55}>
+          {description}
+        </Text>
+      </Stack>
+    </Paper>
+  );
+}
+
+// ─── Stat card ───────────────────────────────────────────────────────────────
+
+interface StatCardProps {
+  value: string;
+  label: string;
+}
+
+function StatCard({ value, label }: StatCardProps) {
+  return (
+    <Paper bg="var(--mantine-color-default-hover)" radius="md" p="md">
+      <Text
+        fz={36}
+        fw={700}
+        lh={1}
+        mb={4}
+        style={{ fontVariantNumeric: 'tabular-nums' }}
       >
-        <Container size="lg">
-          <Stack align="center" gap="xl" ta="center">
-            <Title
-              order={1}
-              size={rem(56)}
-              fw={900}
-              style={{ lineHeight: 1.1 }}
-            >
-              Master Your Bodyweight with{' '}
-              <Text
-                component="span"
-                variant="gradient"
-                gradient={{ from: 'blue', to: 'cyan' }}
-                inherit
-              >
+        {value}
+      </Text>
+      <Text fz={12} c="dimmed" lh={1.4}>
+        {label}
+      </Text>
+    </Paper>
+  );
+}
+
+// ─── Main landing page ───────────────────────────────────────────────────────
+
+function HomeView() {
+  const features = [
+    {
+      icon: IoServerOutline,
+      title: 'Exercise library',
+      description:
+        '100+ predefined calisthenics exercises — push-ups, pull-ups, dips, squats, core work, and handstand progressions — searchable and ready to log.',
+    },
+    {
+      icon: IoLayersOutline,
+      title: 'Workout builder',
+      description:
+        'Build sessions with exercises, sets, reps, and timed holds. Organise with sections, supersets, and custom ordering.',
+    },
+    {
+      icon: IoSwapVertical,
+      title: 'Set progressions',
+      description:
+        "Track challenge and assist progressions — weighted vests, resistance bands, elevation changes — to log how you're making exercises harder or easier over time.",
+    },
+    {
+      icon: IoTimeOutline,
+      title: 'Workout history',
+      description:
+        'A chronological logbook of your completed sessions. Tap any past workout to review exactly what you did.',
+    },
+  ];
+
+  const roadmap = [
+    {
+      version: 'alpha.1',
+      title: 'Core logging',
+      description:
+        'Exercise library, workout builder, set progressions, supersets, and workout history.',
+      isCurrent: true,
+    },
+    {
+      version: 'alpha.2',
+      title: 'Progressions library',
+      description:
+        'Predefined skill progressions — pull-up, pistol squat, front lever — with structured exercise paths. Plus onboarding, profile, and a calendar logbook view.',
+      isCurrent: false,
+    },
+    {
+      version: 'alpha.3',
+      title: 'Progression tracking',
+      description:
+        "See your progress through each skill progression — completed steps, current exercises, and how far you've come.",
+      isCurrent: false,
+    },
+    {
+      version: 'alpha.4',
+      title: 'AI workout generator',
+      description:
+        'Personalised workouts generated from your goals, fitness level, and available equipment — powered by AI.',
+      isCurrent: false,
+    },
+  ];
+
+  return (
+    <Container size="md" py="xl">
+      <Stack gap="xl">
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
+        <Paper
+          withBorder
+          radius="lg"
+          p="xl"
+          bg="var(--mantine-color-default-hover)"
+        >
+          <Stack gap="lg">
+            {/* Nav row */}
+            <Group justify="space-between" align="center" wrap="wrap" gap="sm">
+              <Text fz={20} fw={800} lts="0.12em" tt="uppercase" ff="monospace">
                 Torque
               </Text>
-            </Title>
-            <Text size="xl" c="dimmed" maw={640} mx="auto">
-              The precision calisthenics workout tracker. Master advanced
-              skills, track every progression, and visualize your strength
-              journey like never before.
-            </Text>
-            <Group gap="md">
-              <Button
-                size="xl"
-                radius="md"
-                color="blue"
-                rightSection={<IoChevronForward size={20} />}
-              >
-                Start Your Journey
-              </Button>
-              <Button size="xl" radius="md" variant="outline" color="blue">
-                Explore Exercises
-              </Button>
+              <Group gap="xs" wrap="wrap">
+                <Badge color="yellow" variant="light" size="sm" radius="xl">
+                  Early Access — v0.1.0-alpha.1
+                </Badge>
+                <Badge color="gray" variant="light" size="sm" radius="xl">
+                  Calisthenics
+                </Badge>
+                <Badge color="gray" variant="light" size="sm" radius="xl">
+                  Bodyweight
+                </Badge>
+              </Group>
             </Group>
-          </Stack>
-        </Container>
-      </Box>
 
-      {/* Features Section */}
-      <Container size="lg" py={rem(100)}>
-        <Stack gap={50}>
-          <Box ta="center">
-            <Text fw={700} c="blue" tt="uppercase" lts={rem(1)} mb="xs">
-              Features
+            {/* Wordmark + physics */}
+            <Group
+              align="flex-end"
+              justify="space-between"
+              gap="xl"
+              wrap="wrap"
+            >
+              <Box>
+                <Title
+                  order={1}
+                  fz={{ base: 72, sm: 100 }}
+                  lh={0.88}
+                  lts="0.02em"
+                  mb={8}
+                >
+                  Torque.
+                </Title>
+                <Text
+                  fz={{ base: 20, sm: 28 }}
+                  fw={700}
+                  lts="0.06em"
+                  tt="uppercase"
+                  c="dimmed"
+                >
+                  Generate force.{' '}
+                  <Text component="span" c="var(--mantine-color-text)" inherit>
+                    Anywhere.
+                  </Text>
+                </Text>
+              </Box>
+              <PhysicsCallout />
+            </Group>
+
+            {/* Intro */}
+            <Text fz={14} c="dimmed" lh={1.8} maw={520} fw={300}>
+              Calisthenics is physics made personal. Every pull-up, dip, and
+              push-up is your body generating rotational force —{' '}
+              <Text
+                component="span"
+                fw={500}
+                c="var(--mantine-color-text)"
+                inherit
+              >
+                torque
+              </Text>{' '}
+              — against gravity, with nothing but your own mass as the load.
+              Torque is the app built for that. Log your workouts, track your
+              sessions, and build a training history from day one. No barbell.
+              No membership. Just force.
             </Text>
-            <Title order={2} size={rem(36)} fw={800}>
-              Engineered for Bodyweight Athletes
+          </Stack>
+        </Paper>
+
+        {/* ── Alpha notice ─────────────────────────────────────────────── */}
+        <Alert
+          icon={<IoInformationCircleOutline size={18} />}
+          color="yellow"
+          radius="md"
+          title="This is an early alpha release."
+        >
+          <Text fz={13} lh={1.7}>
+            You may encounter bugs, and workout data may not carry over between
+            future releases if breaking changes are required. Your feedback
+            during this phase directly shapes what Torque becomes — thank you
+            for being part of it.
+          </Text>
+        </Alert>
+
+        {/* ── What's in alpha.1 ────────────────────────────────────────── */}
+        <Stack gap="md">
+          <Box>
+            <Text
+              fz={11}
+              fw={500}
+              lts="0.16em"
+              tt="uppercase"
+              c="dimmed"
+              mb={6}
+            >
+              What's in alpha.1
+            </Text>
+            <Title order={2} fz={{ base: 28, sm: 38 }} lh={1} lts="0.02em">
+              Everything you need to start training
             </Title>
           </Box>
+          <Text fz={14} c="dimmed" lh={1.8} fw={300}>
+            The first release focuses on the fundamentals — a solid exercise
+            library, a flexible workout builder, and a logbook to track your
+            sessions. The tools that matter most when you're getting started.
+          </Text>
+          <SimpleGrid cols={{ base: 1, xs: 2, sm: 4 }} spacing="sm">
+            {features.map((f) => (
+              <FeatureCard key={f.title} {...f} />
+            ))}
+          </SimpleGrid>
+        </Stack>
 
-          <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing={50}>
-            <Feature
-              icon={IoStatsChartOutline}
-              title="Progress Analytics"
-              description="Visualize your strength curves and volume history with detailed interactive charts."
+        <Divider />
+
+        {/* ── The foundation ───────────────────────────────────────────── */}
+        <Stack gap="md">
+          <Box>
+            <Text
+              fz={11}
+              fw={500}
+              lts="0.16em"
+              tt="uppercase"
+              c="dimmed"
+              mb={6}
+            >
+              The foundation
+            </Text>
+            <Title order={2} fz={{ base: 28, sm: 38 }} lh={1} lts="0.02em">
+              The most accessible gym ever built
+            </Title>
+          </Box>
+          <Text fz={14} c="dimmed" lh={1.8} fw={300}>
+            A floor. A pull-up bar. A park bench. That's your gym — free, open
+            24 hours, and never crowded.{' '}
+            <Text
+              component="span"
+              fw={500}
+              c="var(--mantine-color-text)"
+              inherit
+            >
+              Bodyweight training works because physics doesn't care where you
+              are.
+            </Text>{' '}
+            Gravity applies the same force whether you're in a boutique studio
+            or your living room at 6am. Torque helps you harness that force and
+            build a real training record from the ground up.
+          </Text>
+          <SimpleGrid cols={{ base: 1, xs: 3 }} spacing="sm">
+            <StatCard
+              value="0"
+              label="Equipment required to start training today"
             />
-            <Feature
-              icon={IoExtensionPuzzleOutline}
-              title="Skill Tree"
-              description="Unlock new levels of strength with our comprehensive progression roadmaps for elite skills."
+            <StatCard
+              value="100+"
+              label="Exercises across push, pull, core, and legs"
             />
-            <Feature
-              icon={IoPhonePortraitOutline}
-              title="Field Ready"
-              description="A fast, responsive mobile experience designed for the intensity of your workout environment."
-            />
-            <Feature
-              icon={IoPeopleOutline}
-              title="Social Motivation"
-              description="Connect with other athletes, share personal bests, and find inspiration for your next session."
+            <StatCard
+              value="∞"
+              label="Locations you can train — floor optional"
             />
           </SimpleGrid>
         </Stack>
-      </Container>
 
-      {/* Call to Action Section */}
-      <Container size="lg" pb={rem(100)}>
-        <Stack
-          align="center"
-          gap="xl"
-          ta="center"
-          bg="blue.7"
-          p={{ base: 30, sm: 60 }}
-          style={{ borderRadius: rem(24) }}
-        >
-          <Title order={2} size={rem(42)} c="white" fw={800}>
-            Ready to master your bodyweight?
-          </Title>
-          <Text c="white" opacity={0.9} size="lg" maw={500}>
-            Join thousands of athletes who are already using Torque to push
-            their physical limits.
+        <Divider />
+
+        {/* ── Roadmap ──────────────────────────────────────────────────── */}
+        <Stack gap="md">
+          <Box>
+            <Text
+              fz={11}
+              fw={500}
+              lts="0.16em"
+              tt="uppercase"
+              c="dimmed"
+              mb={6}
+            >
+              What's coming
+            </Text>
+            <Title order={2} fz={{ base: 28, sm: 38 }} lh={1} lts="0.02em">
+              The roadmap
+            </Title>
+          </Box>
+          <Text fz={14} c="dimmed" lh={1.8} fw={300}>
+            Alpha.1 is the starting line. Here's where Torque is headed.
           </Text>
-          <Button size="xl" variant="white" color="blue" radius="md">
-            Create Your Free Account
-          </Button>
+          <SimpleGrid cols={{ base: 1, xs: 2, sm: 4 }} spacing="sm">
+            {roadmap.map((r) => (
+              <RoadmapCard key={r.version} {...r} />
+            ))}
+          </SimpleGrid>
         </Stack>
-      </Container>
-    </Box>
+
+        <Divider />
+
+        {/* ── CTA ──────────────────────────────────────────────────────── */}
+        <Paper
+          withBorder
+          radius="lg"
+          p="xl"
+          bg="var(--mantine-color-default-hover)"
+        >
+          <Group justify="space-between" align="center" wrap="wrap" gap="lg">
+            <Box maw={420}>
+              <Title
+                order={2}
+                fz={{ base: 22, sm: 32 }}
+                lh={1.1}
+                lts="0.01em"
+                mb="sm"
+              >
+                Your body is already the machine. Start using it.
+              </Title>
+              <Text fz={13} c="dimmed" lh={1.6} fw={300}>
+                Free to download. Free to start. Get in early and help shape
+                what Torque becomes.
+              </Text>
+            </Box>
+            <Stack gap="xs" align="flex-end">
+              <Text fz={10} fw={500} lts="0.1em" tt="uppercase" c="dimmed">
+                Available on
+              </Text>
+              <Paper withBorder radius="md" px="md" py={8}>
+                <Group gap={8}>
+                  <IoLogoApple size={16} />
+                  <Text fz={13} fw={500}>
+                    App Store
+                  </Text>
+                </Group>
+              </Paper>
+              <Paper withBorder radius="md" px="md" py={8}>
+                <Group gap={8}>
+                  <IoLogoGooglePlaystore size={16} />
+                  <Text fz={13} fw={500}>
+                    Google Play
+                  </Text>
+                </Group>
+              </Paper>
+            </Stack>
+          </Group>
+        </Paper>
+      </Stack>
+    </Container>
   );
 }
