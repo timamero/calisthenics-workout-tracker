@@ -16,6 +16,7 @@ import { Route as SiteSignupRouteImport } from './routes/_site/signup'
 import { Route as SiteOnboardingCompleteRouteImport } from './routes/_site/onboardingComplete'
 import { Route as SiteOnboardingRouteImport } from './routes/_site/onboarding'
 import { Route as SiteLoginRouteImport } from './routes/_site/login'
+import { Route as SiteIndexOldRouteImport } from './routes/_site/indexOld'
 import { Route as SiteAboutRouteImport } from './routes/_site/about'
 import { Route as AuthWorkoutRouteRouteImport } from './routes/_auth/workout/route'
 import { Route as AuthDashboardRouteRouteImport } from './routes/_auth/dashboard/route'
@@ -59,6 +60,11 @@ const SiteOnboardingRoute = SiteOnboardingRouteImport.update({
 const SiteLoginRoute = SiteLoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteIndexOldRoute = SiteIndexOldRouteImport.update({
+  id: '/indexOld',
+  path: '/indexOld',
   getParentRoute: () => SiteRouteRoute,
 } as any)
 const SiteAboutRoute = SiteAboutRouteImport.update({
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthDashboardRouteRouteWithChildren
   '/workout': typeof AuthWorkoutRouteRouteWithChildren
   '/about': typeof SiteAboutRoute
+  '/indexOld': typeof SiteIndexOldRoute
   '/login': typeof SiteLoginRoute
   '/onboarding': typeof SiteOnboardingRoute
   '/onboardingComplete': typeof SiteOnboardingCompleteRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof SiteIndexRoute
   '/about': typeof SiteAboutRoute
+  '/indexOld': typeof SiteIndexOldRoute
   '/login': typeof SiteLoginRoute
   '/onboarding': typeof SiteOnboardingRoute
   '/onboardingComplete': typeof SiteOnboardingCompleteRoute
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/_auth/dashboard': typeof AuthDashboardRouteRouteWithChildren
   '/_auth/workout': typeof AuthWorkoutRouteRouteWithChildren
   '/_site/about': typeof SiteAboutRoute
+  '/_site/indexOld': typeof SiteIndexOldRoute
   '/_site/login': typeof SiteLoginRoute
   '/_site/onboarding': typeof SiteOnboardingRoute
   '/_site/onboardingComplete': typeof SiteOnboardingCompleteRoute
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/workout'
     | '/about'
+    | '/indexOld'
     | '/login'
     | '/onboarding'
     | '/onboardingComplete'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/indexOld'
     | '/login'
     | '/onboarding'
     | '/onboardingComplete'
@@ -214,6 +225,7 @@ export interface FileRouteTypes {
     | '/_auth/dashboard'
     | '/_auth/workout'
     | '/_site/about'
+    | '/_site/indexOld'
     | '/_site/login'
     | '/_site/onboarding'
     | '/_site/onboardingComplete'
@@ -283,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof SiteLoginRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/indexOld': {
+      id: '/_site/indexOld'
+      path: '/indexOld'
+      fullPath: '/indexOld'
+      preLoaderRoute: typeof SiteIndexOldRouteImport
       parentRoute: typeof SiteRouteRoute
     }
     '/_site/about': {
@@ -415,6 +434,7 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 
 interface SiteRouteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
+  SiteIndexOldRoute: typeof SiteIndexOldRoute
   SiteLoginRoute: typeof SiteLoginRoute
   SiteOnboardingRoute: typeof SiteOnboardingRoute
   SiteOnboardingCompleteRoute: typeof SiteOnboardingCompleteRoute
@@ -424,6 +444,7 @@ interface SiteRouteRouteChildren {
 
 const SiteRouteRouteChildren: SiteRouteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
+  SiteIndexOldRoute: SiteIndexOldRoute,
   SiteLoginRoute: SiteLoginRoute,
   SiteOnboardingRoute: SiteOnboardingRoute,
   SiteOnboardingCompleteRoute: SiteOnboardingCompleteRoute,
