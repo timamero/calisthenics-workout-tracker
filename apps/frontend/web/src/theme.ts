@@ -45,16 +45,16 @@ const theme = createTheme({
 
   colors: {
     elevation: [
-      '#FBFBFB',
       '#F6F6F6',
-      '#F2F2F2',
-      '#EEEEEE',
-      '#E9E9E9',
-      '#E5E5E5',
-      '#E0E0E0',
-      '#DBDBDB',
-      '#D6D6D6',
-      '#D1D1D1',
+      '#F7F7F7',
+      '#F8F8F8',
+      '#F9F9F9',
+      '#FAFAFA',
+      '#FBFBFB',
+      '#FCFCFC',
+      '#FDFDFD',
+      '#FEFEFE',
+      '#FFFFFF',
     ],
   },
 

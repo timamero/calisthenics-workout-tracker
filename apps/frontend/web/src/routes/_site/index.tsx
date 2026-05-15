@@ -40,10 +40,10 @@ function PhysicsCallout() {
     <Stack gap={12} align="flex-end">
       {lines.map(({ eq, label }) => (
         <Box key={eq} ta="right">
-          <Text ff="monospace" fz={13} fw={600} lts="0.1em" c="dimmed" lh={1}>
+          <Text ff="monospace" fz={13} fw={600} lts="0.1em" c="dark.4" lh={1}>
             {eq}
           </Text>
-          <Text fz={10} fw={400} lts="0.06em" c="dimmed" lh={1.4}>
+          <Text fz={10} fw={400} lts="0.06em" c="dark.3" lh={1.4}>
             {label}
           </Text>
         </Box>
@@ -225,22 +225,38 @@ function HomeView() {
           withBorder
           radius="lg"
           p="xl"
-          bg="var(--mantine-color-default-hover)"
+          bg="var(--mantine-color-elevation-3)"
+          style={{ border: '1px solid var(--mantine-color-lime-2)' }}
         >
           <Stack gap="lg">
-            {/* Nav row */}
-            <Group justify="space-between" align="center" wrap="wrap" gap="sm">
-              <Text fz={20} fw={800} lts="0.12em" tt="uppercase" ff="monospace">
-                Torque
-              </Text>
+            <Group justify="flex-end" align="center" wrap="wrap" gap="sm">
               <Group gap="xs" wrap="wrap">
-                <Badge color="yellow" variant="light" size="sm" radius="xl">
+                <Badge
+                  ff="monospace"
+                  color="violet.9"
+                  bg="violet.0"
+                  variant="light"
+                  size="sm"
+                  radius="xl"
+                >
                   Early Access — v0.1.0-alpha.1
                 </Badge>
-                <Badge color="gray" variant="light" size="sm" radius="xl">
+                <Badge
+                  ff="monospace"
+                  color="dark.4"
+                  variant="light"
+                  size="sm"
+                  radius="xl"
+                >
                   Calisthenics
                 </Badge>
-                <Badge color="gray" variant="light" size="sm" radius="xl">
+                <Badge
+                  ff="monospace"
+                  color="dark.4"
+                  variant="light"
+                  size="sm"
+                  radius="xl"
+                >
                   Bodyweight
                 </Badge>
               </Group>
@@ -268,7 +284,7 @@ function HomeView() {
                   fw={700}
                   lts="0.06em"
                   tt="uppercase"
-                  c="dimmed"
+                  c="dark.2"
                 >
                   Generate force.{' '}
                   <Text component="span" c="var(--mantine-color-text)" inherit>
@@ -280,7 +296,7 @@ function HomeView() {
             </Group>
 
             {/* Intro */}
-            <Text fz={14} c="dimmed" lh={1.8} maw={520} fw={300}>
+            <Text fz={14} c="dark.3" lh={1.8} maw={520} fw={300}>
               Calisthenics is physics made personal. Every pull-up, dip, and
               push-up is your body generating rotational force —{' '}
               <Text
