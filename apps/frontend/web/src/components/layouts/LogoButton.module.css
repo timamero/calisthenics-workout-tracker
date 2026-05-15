@@ -8,7 +8,7 @@
 }
 
 .logoButtonText {
-  color: var(--mantine-color-dark-4);
+  color: var(--mantine-color-dark-7);
 }
 
 .logoButton:hover .logoButtonIconWrapper {
@@ -16,5 +16,5 @@
 }
 
 .logoButton:hover .logoButtonText {
-  color: var(--mantine-color-dark-7);
+  color: var(--mantine-color-lime-7);
 }
