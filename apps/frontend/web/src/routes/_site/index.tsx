@@ -106,14 +106,15 @@ function RoadmapCard({
       h="100%"
       style={
         isCurrent
-          ? { borderWidth: 2, borderColor: 'var(--mantine-color-blue-5)' }
+          ? { borderWidth: 2, borderColor: 'var(--mantine-color-lime-2)' }
           : {}
       }
     >
       <Stack gap={6}>
         {isCurrent ? (
           <Badge
-            color="blue"
+            color="dark"
+            bg="lime.2"
             variant="light"
             size="xs"
             radius="xl"
@@ -122,14 +123,14 @@ function RoadmapCard({
             Now — {version}
           </Badge>
         ) : (
-          <Text fz={10} fw={500} lts="0.1em" tt="uppercase" c="dimmed">
+          <Text fz={10} fw={500} lts="0.1em" tt="uppercase" c="dark.3">
             Coming — {version}
           </Text>
         )}
         <Text fw={500} fz={14}>
           {title}
         </Text>
-        <Text fz={12} c="dimmed" lh={1.55}>
+        <Text fz={12} c="dark.3" lh={1.55}>
           {description}
         </Text>
       </Stack>
@@ -428,7 +429,7 @@ function HomeView() {
               fw={500}
               lts="0.16em"
               tt="uppercase"
-              c="dimmed"
+              c="dark.3"
               mb={6}
             >
               What's coming
@@ -437,7 +438,7 @@ function HomeView() {
               The roadmap
             </Title>
           </Box>
-          <Text fz={14} c="dimmed" lh={1.8} fw={300}>
+          <Text fz={14} c="dark.3" lh={1.8} fw={300}>
             Alpha.1 is the starting line. Here's where Torque is headed.
           </Text>
           <SimpleGrid cols={{ base: 1, xs: 2, sm: 4 }} spacing="sm">
