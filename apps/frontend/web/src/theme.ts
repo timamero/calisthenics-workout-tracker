@@ -35,6 +35,19 @@ declare module '@mantine/core' {
     fontSizes: Record<ExtendedFontSizes, string>;
     lineHeights: Record<ExtendedLineHeights, string>;
   }
+
+  export interface MantineThemeOther {
+    outline: string;
+    letterSpacing: {
+      tightest: string;
+      tighter: string;
+      tight: string;
+      normal: string;
+      wide: string;
+      wider: string;
+      widest: string;
+    };
+  }
 }
 
 const theme = createTheme({
@@ -150,12 +163,28 @@ const theme = createTheme({
 
   other: {
     outline: '#424242',
+    letterSpacing: {
+      tightest: '0.008em',
+      tighter: '0.01em',
+      tight: '0.02em',
+      normal: '0',
+      wide: '0.04em',
+      wider: '0.1em',
+      widest: '0.16em',
+    },
   },
 });
 
 export const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
     '--mantine-outline': theme.other.outline,
+    '--mantine-letter-spacing-tightest': theme.other.letterSpacing.tightest,
+    '--mantine-letter-spacing-tighter': theme.other.letterSpacing.tighter,
+    '--mantine-letter-spacing-tight': theme.other.letterSpacing.tight,
+    '--mantine-letter-spacing-normal': theme.other.letterSpacing.normal,
+    '--mantine-letter-spacing-wide': theme.other.letterSpacing.wide,
+    '--mantine-letter-spacing-wider': theme.other.letterSpacing.wider,
+    '--mantine-letter-spacing-widest': theme.other.letterSpacing.widest,
   },
   light: {},
   dark: {},
