@@ -44,13 +44,23 @@ function PhysicsCallout() {
             ff="monospace"
             fz="xsplus"
             fw={600}
-            lts="0.1em"
             c="dark.4"
             lh="xxs"
+            style={(theme) => ({
+              letterSpacing: theme.other.letterSpacing.wider,
+            })}
           >
             {eq}
           </Text>
-          <Text fz="xxs" fw={400} lts="0.06em" c="dark.3" lh="xs">
+          <Text
+            fz="xxs"
+            fw={400}
+            c="dark.3"
+            lh="xs"
+            style={(theme) => ({
+              letterSpacing: theme.other.letterSpacing.wide,
+            })}
+          >
             {label}
           </Text>
         </Box>
@@ -129,7 +139,15 @@ function RoadmapCard({
             Now — {version}
           </Badge>
         ) : (
-          <Text fz="xxs" fw={500} lts="0.1em" tt="uppercase" c="dark.3">
+          <Text
+            fz="xxs"
+            fw={500}
+            tt="uppercase"
+            c="dark.3"
+            style={(theme) => ({
+              letterSpacing: theme.other.letterSpacing.wider,
+            })}
+          >
             Coming — {version}
           </Text>
         )}
@@ -282,17 +300,21 @@ function HomeView() {
                   order={1}
                   fz={{ base: 'h3', xs: 'h2', sm: 'h1' }}
                   lh="xxl"
-                  lts="0.02em"
                   mb={8}
+                  style={(theme) => ({
+                    letterSpacing: theme.other.letterSpacing.tight,
+                  })}
                 >
                   Torque.
                 </Title>
                 <Text
                   fz={{ base: 20, sm: 28 }}
                   fw={700}
-                  lts="0.06em"
                   tt="uppercase"
                   c="dark.2"
+                  style={(theme) => ({
+                    letterSpacing: theme.other.letterSpacing.wide,
+                  })}
                 >
                   Generate force.{' '}
                   <Text component="span" c="var(--mantine-color-text)" inherit>
@@ -372,10 +394,12 @@ function HomeView() {
             <Text
               fz={11}
               fw={500}
-              lts="0.16em"
               tt="uppercase"
               c="dark.3"
               mb={6}
+              style={(theme) => ({
+                letterSpacing: theme.other.letterSpacing.widest,
+              })}
             >
               What's in alpha.1
             </Text>
@@ -383,7 +407,9 @@ function HomeView() {
               order={2}
               fz={{ base: 'h5', sm: 'h4' }}
               lh="xxs"
-              lts="0.02em"
+              style={(theme) => ({
+                letterSpacing: theme.other.letterSpacing.widest,
+              })}
             >
               Everything you need to start training
             </Title>
@@ -408,10 +434,12 @@ function HomeView() {
             <Text
               fz={11}
               fw={500}
-              lts="0.16em"
               tt="uppercase"
               c="dark.3"
               mb={6}
+              style={(theme) => ({
+                letterSpacing: theme.other.letterSpacing.wide,
+              })}
             >
               The foundation
             </Text>
@@ -419,7 +447,9 @@ function HomeView() {
               order={2}
               fz={{ base: 'h5', sm: 'h4' }}
               lh="xss"
-              lts="0.02em"
+              style={(theme) => ({
+                letterSpacing: theme.other.letterSpacing.tight,
+              })}
             >
               The most accessible gym ever built
             </Title>
@@ -464,10 +494,12 @@ function HomeView() {
             <Text
               fz={11}
               fw={500}
-              lts="0.16em"
               tt="uppercase"
               c="dark.3"
               mb={6}
+              style={(theme) => ({
+                letterSpacing: theme.other.letterSpacing.widest,
+              })}
             >
               What's coming
             </Text>
@@ -475,7 +507,9 @@ function HomeView() {
               order={2}
               fz={{ base: 'h5', sm: 'h4' }}
               lh="xxs"
-              lts="0.02em"
+              style={(theme) => ({
+                letterSpacing: theme.other.letterSpacing.tight,
+              })}
             >
               The roadmap
             </Title>
@@ -500,8 +534,10 @@ function HomeView() {
                 order={2}
                 fz={{ base: 'h6', sm: 'h5' }}
                 lh="xxs"
-                lts="0.008em"
                 mb="sm"
+                style={(theme) => ({
+                  letterSpacing: theme.other.letterSpacing.tightest,
+                })}
               >
                 Your body is already the machine. Start using it.
               </Title>
@@ -511,7 +547,15 @@ function HomeView() {
               </Text>
             </Box>
             <Stack gap="xs" align="flex-end">
-              <Text fz="xxs" fw={500} lts="0.1em" tt="uppercase" c="dark.3">
+              <Text
+                fz="xxs"
+                fw={500}
+                tt="uppercase"
+                c="dark.3"
+                style={(theme) => ({
+                  letterSpacing: theme.other.letterSpacing.wider,
+                })}
+              >
                 Sign up or log in
               </Text>
               <Group
@@ -555,8 +599,10 @@ function HomeView() {
                 order={2}
                 fz={{ base: 'h6', sm: 'h5' }}
                 lh="xxs"
-                lts="0.008em"
                 mb="sm"
+                style={(theme) => ({
+                  letterSpacing: theme.other.letterSpacing.tightest,
+                })}
               >
                 Want the mobile app?
               </Title>
@@ -566,10 +612,25 @@ function HomeView() {
               </Text>
             </Box>
             <Stack gap="xs" align="flex-end">
-              <Text fz="xxs" fw={500} lts="0.1em" tt="uppercase" c="dark.3">
+              <Text
+                fz="xxs"
+                fw={500}
+                tt="uppercase"
+                c="dark.3"
+                style={(theme) => ({
+                  letterSpacing: theme.other.letterSpacing.wider,
+                })}
+              >
                 Request access at
               </Text>
-              <Text fz="xs" fw={600} lts="0.1em" c="dark.3">
+              <Text
+                fz="xs"
+                fw={600}
+                c="dark.3"
+                style={(theme) => ({
+                  letterSpacing: theme.other.letterSpacing.wider,
+                })}
+              >
                 info@torquefit.com
               </Text>
             </Stack>
@@ -592,7 +653,14 @@ function HomeView() {
         <Divider />
 
         <Group>
-          <Text fz="xxs" fw={500} lts="0.1em" c="dark.3">
+          <Text
+            fz="xxs"
+            fw={500}
+            c="dark.3"
+            style={(theme) => ({
+              letterSpacing: theme.other.letterSpacing.wider,
+            })}
+          >
             &copy;{`${new Date().getFullYear()} Anne Camero Digital Studio`}
           </Text>
         </Group>
