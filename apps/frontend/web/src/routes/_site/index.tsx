@@ -46,11 +46,11 @@ function PhysicsCallout() {
             fw={600}
             lts="0.1em"
             c="dark.4"
-            lh={1}
+            lh="xxs"
           >
             {eq}
           </Text>
-          <Text fz="xxs" fw={400} lts="0.06em" c="dark.3" lh={1.4}>
+          <Text fz="xxs" fw={400} lts="0.06em" c="dark.3" lh="xs">
             {label}
           </Text>
         </Box>
@@ -83,7 +83,7 @@ function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
         <Text fw={500} fz="sm">
           {title}
         </Text>
-        <Text fz="xsplus" c="dark.3" lh={1.6}>
+        <Text fz="xsplus" c="dark.3" lh="lg">
           {description}
         </Text>
       </Stack>
@@ -136,7 +136,7 @@ function RoadmapCard({
         <Text fw={500} fz={14}>
           {title}
         </Text>
-        <Text fz="xs" c="dark.3" lh={1.55}>
+        <Text fz="xs" c="dark.3" lh="lg">
           {description}
         </Text>
       </Stack>
@@ -157,13 +157,13 @@ function StatCard({ value, label }: StatCardProps) {
       <Text
         fz={36}
         fw={700}
-        lh={1}
+        lh="xxs"
         mb={4}
         style={{ fontVariantNumeric: 'tabular-nums' }}
       >
         {value}
       </Text>
-      <Text fz="xs" c="dark.3" lh={1.4}>
+      <Text fz="xs" c="dark.3" lh="xs">
         {label}
       </Text>
     </Paper>
@@ -281,7 +281,7 @@ function HomeView() {
                 <Title
                   order={1}
                   fz={{ base: 'h3', xs: 'h2', sm: 'h1' }}
-                  lh={0.88}
+                  lh="xxl"
                   lts="0.02em"
                   mb={8}
                 >
@@ -304,7 +304,7 @@ function HomeView() {
             </Group>
 
             {/* Intro */}
-            <Text fz={14} c="dark.3" lh={1.8} maw={520} fw={300}>
+            <Text fz={14} c="dark.3" lh="xxl" maw={520} fw={300}>
               Calisthenics is physics made personal. Every pull-up, dip, and
               push-up is your body generating rotational force —{' '}
               <Text
@@ -358,7 +358,7 @@ function HomeView() {
           mb="xl"
           title="This is an early alpha release."
         >
-          <Text fz="xsplus" lh={1.7}>
+          <Text fz="xsplus" lh="xxl">
             You may encounter bugs, and workout data may not carry over between
             future releases if breaking changes are required. Your feedback
             during this phase directly shapes what Torque becomes — thank you
@@ -379,7 +379,12 @@ function HomeView() {
             >
               What's in alpha.1
             </Text>
-            <Title order={2} fz={{ base: 'h5', sm: 'h4' }} lh={1} lts="0.02em">
+            <Title
+              order={2}
+              fz={{ base: 'h5', sm: 'h4' }}
+              lh="xxs"
+              lts="0.02em"
+            >
               Everything you need to start training
             </Title>
           </Box>
@@ -410,7 +415,12 @@ function HomeView() {
             >
               The foundation
             </Text>
-            <Title order={2} fz={{ base: 'h5', sm: 'h4' }} lh={1} lts="0.02em">
+            <Title
+              order={2}
+              fz={{ base: 'h5', sm: 'h4' }}
+              lh="xss"
+              lts="0.02em"
+            >
               The most accessible gym ever built
             </Title>
           </Box>
@@ -461,7 +471,12 @@ function HomeView() {
             >
               What's coming
             </Text>
-            <Title order={2} fz={{ base: 'h5', sm: 'h4' }} lh={1} lts="0.02em">
+            <Title
+              order={2}
+              fz={{ base: 'h5', sm: 'h4' }}
+              lh="xxs"
+              lts="0.02em"
+            >
               The roadmap
             </Title>
           </Box>
@@ -484,14 +499,13 @@ function HomeView() {
               <Title
                 order={2}
                 fz={{ base: 'h6', sm: 'h5' }}
-                // lh={1.1}
-                lh="xxs" //30.8px
+                lh="xxs"
                 lts="0.008em"
                 mb="sm"
               >
                 Your body is already the machine. Start using it.
               </Title>
-              <Text fz="xsplus" c="dark.3" lh={1.6} fw={300}>
+              <Text fz="xsplus" c="dark.3" lh="lg" fw={300}>
                 The Torque web app is free and ready to go — no download needed.
                 Just open it and start logging.
               </Text>
@@ -540,7 +554,7 @@ function HomeView() {
               <Title
                 order={2}
                 fz={{ base: 'h6', sm: 'h5' }}
-                lh={1.1}
+                lh="xxs"
                 lts="0.008em"
                 mb="sm"
               >
@@ -569,7 +583,7 @@ function HomeView() {
           mb="xl"
           // title="The mobile app is currently in internal testing. Invited users only. iOS availability coming in a future release."
         >
-          <Text fz="xsplus" lh={1.7}>
+          <Text fz="xsplus" lh="xl">
             The mobile app is currently in internal testing. Invited users only.
             iOS availability coming in a future release.
           </Text>
