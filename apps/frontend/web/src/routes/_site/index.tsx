@@ -74,7 +74,6 @@ function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
       radius="md"
       p="md"
       h="100%"
-      bg="elevation.3"
       style={{ border: '1px solid var(--mantine-color-lime-2)' }}
     >
       <Stack gap={8}>
@@ -236,7 +235,7 @@ function HomeView() {
     <Container size="md" pt="xl">
       <Stack gap="xl">
         {/* ── Hero ─────────────────────────────────────────────────────── */}
-        <Paper withBorder radius="lg" p="xl" bg="elevation.3" mb="xl">
+        <Paper withBorder radius="lg" p="xl" mb="xl">
           <Stack gap="lg">
             <Group justify="flex-end" align="center" wrap="wrap" gap="sm">
               <Group gap="xs" wrap="wrap">
@@ -479,7 +478,7 @@ function HomeView() {
         <Divider />
 
         {/* ── CTA ──────────────────────────────────────────────────────── */}
-        <Paper withBorder radius="lg" p="xl" bg="elevation.3" mb="xl">
+        <Paper withBorder radius="lg" p="xl" mb="xl">
           <Group justify="space-between" align="center" wrap="wrap" gap="lg">
             <Box maw={420}>
               <Title
@@ -533,7 +532,6 @@ function HomeView() {
           withBorder
           radius="lg"
           p="xl"
-          bg="elevation.3"
           style={{ border: '1px solid var(--mantine-color-violet-2)' }}
         >
           <Group justify="space-between" align="center" wrap="wrap" gap="lg">
