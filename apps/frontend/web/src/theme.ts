@@ -25,6 +25,7 @@ import textInputClasses from './styles/TextInput.module.css';
 
 type ExtendedCustomColors = 'elevation' | DefaultMantineColor;
 type ExtendedFontSizes = 'xxs' | 'xsplus' | DefaultMantineSize;
+type ExtendedLineHeights = 'xxs' | 'xxl' | DefaultMantineSize;
 
 declare module '@mantine/core' {
   export interface MantineThemeColorsOverride {
@@ -32,6 +33,7 @@ declare module '@mantine/core' {
   }
   export interface MantineThemeSizesOverride {
     fontSizes: Record<ExtendedFontSizes, string>;
+    lineHeights: Record<ExtendedLineHeights, string>;
   }
 }
 
@@ -44,6 +46,10 @@ const theme = createTheme({
   fontSizes: {
     xxs: '0.625rem',
     xsplus: '0.813rem',
+  },
+  lineHeights: {
+    xxs: '1.1',
+    xxl: '1.8',
   },
   headings: {
     fontFamily:

@@ -383,7 +383,7 @@ function HomeView() {
               Everything you need to start training
             </Title>
           </Box>
-          <Text fz={14} c="dark.3" lh={1.8} fw={300}>
+          <Text fz={14} c="dark.3" lh="xxl" fw={300}>
             The first release focuses on the fundamentals — a solid exercise
             library, a flexible workout builder, and a logbook to track your
             sessions. The tools that matter most when you're getting started.
@@ -414,7 +414,7 @@ function HomeView() {
               The most accessible gym ever built
             </Title>
           </Box>
-          <Text fz={14} c="dark.3" lh={1.8} fw={300}>
+          <Text fz={14} c="dark.3" lh="xxl" fw={300}>
             A floor. A pull-up bar. A park bench. That's your gym — free, open
             24 hours, and never crowded.{' '}
             <Text
@@ -465,7 +465,7 @@ function HomeView() {
               The roadmap
             </Title>
           </Box>
-          <Text fz={14} c="dark.3" lh={1.8} fw={300}>
+          <Text fz={14} c="dark.3" lh="xxl" fw={300}>
             Alpha.1 is the starting line. Here's where Torque is headed.
           </Text>
           <SimpleGrid cols={{ base: 1, xs: 2, sm: 4 }} spacing="sm">
@@ -484,7 +484,8 @@ function HomeView() {
               <Title
                 order={2}
                 fz={{ base: 'h6', sm: 'h5' }}
-                lh={1.1}
+                // lh={1.1}
+                lh="xxs" //30.8px
                 lts="0.008em"
                 mb="sm"
               >
@@ -545,7 +546,7 @@ function HomeView() {
               >
                 Want the mobile app?
               </Title>
-              <Text fz="xsplus" c="dark.3" lh={1.6} fw={300}>
+              <Text fz="xsplus" c="dark.3" lh="lg" fw={300}>
                 The Android app is currently in invite-only testing. To request
                 access, send us an email and we'll add you to the list.
               </Text>
