@@ -21,7 +21,7 @@ import {
   IoTimeOutline,
   IoServerOutline,
   IoLayersOutline,
-  IoLogoGooglePlaystore,
+  // IoLogoGooglePlaystore,
 } from 'react-icons/io5';
 
 export const Route = createFileRoute('/_site/')({
@@ -479,7 +479,7 @@ function HomeView() {
         <Divider />
 
         {/* ── CTA ──────────────────────────────────────────────────────── */}
-        <Paper withBorder radius="lg" p="xl" bg="elevation.3">
+        <Paper withBorder radius="lg" p="xl" bg="elevation.3" mb="xl">
           <Group justify="space-between" align="center" wrap="wrap" gap="lg">
             <Box maw={420}>
               <Title
@@ -492,25 +492,89 @@ function HomeView() {
                 Your body is already the machine. Start using it.
               </Title>
               <Text fz="xsplus" c="dark.3" lh={1.6} fw={300}>
-                Free to download. Free to start. Get in early and help shape
-                what Torque becomes.
+                The Torque web app is free and ready to go — no download needed.
+                Just open it and start logging.
               </Text>
             </Box>
             <Stack gap="xs" align="flex-end">
               <Text fz="xxs" fw={500} lts="0.1em" tt="uppercase" c="dark.3">
-                Also available on
+                Sign up or log in
               </Text>
-              <Paper withBorder radius="md" px="md" py={8}>
-                <Group gap={8}>
-                  <IoLogoGooglePlaystore size={16} />
-                  <Text fz="xsplus" fw={500}>
-                    Google Play
-                  </Text>
-                </Group>
-              </Paper>
+              <Group
+                align="center"
+                justify="flex-start"
+                gap="md"
+                // mt={20}
+                w="100%"
+              >
+                <Button
+                  component={Link}
+                  to="/signup"
+                  variant="filled"
+                  size="md"
+                  radius="md"
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  component={Link}
+                  to="/login"
+                  variant="outline"
+                  size="md"
+                  radius="md"
+                >
+                  Log In
+                </Button>
+              </Group>
             </Stack>
           </Group>
         </Paper>
+        <Paper
+          withBorder
+          radius="lg"
+          p="xl"
+          bg="elevation.3"
+          style={{ border: '1px solid var(--mantine-color-violet-2)' }}
+        >
+          <Group justify="space-between" align="center" wrap="wrap" gap="lg">
+            <Box maw={420}>
+              <Title
+                order={2}
+                fz={{ base: 'h6', sm: 'h5' }}
+                lh={1.1}
+                lts="0.008em"
+                mb="sm"
+              >
+                Want the mobile app?
+              </Title>
+              <Text fz="xsplus" c="dark.3" lh={1.6} fw={300}>
+                The Android app is currently in invite-only testing. To request
+                access, send us an email and we'll add you to the list.
+              </Text>
+            </Box>
+            <Stack gap="xs" align="flex-end">
+              <Text fz="xxs" fw={500} lts="0.1em" tt="uppercase" c="dark.3">
+                Request access at
+              </Text>
+              <Text fz="xs" fw={600} lts="0.1em" c="dark.3">
+                info@torquefit.com
+              </Text>
+            </Stack>
+          </Group>
+        </Paper>
+        <Alert
+          icon={<IoInformationCircleOutline size={18} />}
+          color="violet.9"
+          bg="violet.0"
+          radius="md"
+          mb="xl"
+          // title="The mobile app is currently in internal testing. Invited users only. iOS availability coming in a future release."
+        >
+          <Text fz="xsplus" lh={1.7}>
+            The mobile app is currently in internal testing. Invited users only.
+            iOS availability coming in a future release.
+          </Text>
+        </Alert>
 
         <Divider />
 
