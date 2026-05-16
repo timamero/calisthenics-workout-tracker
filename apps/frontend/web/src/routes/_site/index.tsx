@@ -408,7 +408,7 @@ function HomeView() {
               fz={{ base: 'h5', sm: 'h4' }}
               lh="xxs"
               style={(theme) => ({
-                letterSpacing: theme.other.letterSpacing.widest,
+                letterSpacing: theme.other.letterSpacing.tight,
               })}
             >
               Everything you need to start training
@@ -438,7 +438,7 @@ function HomeView() {
               c="dark.3"
               mb={6}
               style={(theme) => ({
-                letterSpacing: theme.other.letterSpacing.wide,
+                letterSpacing: theme.other.letterSpacing.widest,
               })}
             >
               The foundation
