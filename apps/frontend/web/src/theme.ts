@@ -11,14 +11,16 @@ import {
   type MantineColorsTuple,
   TextInput,
   AppShell,
+  Paper,
 } from '@mantine/core';
 
 import './theme';
 
 import './styles/global.css';
-import appBarClasses from './styles/AppBar.module.css';
-import navLinkClasses from './styles/NavLink.module.css';
 import actionIconClasses from './styles/ActionIcon.module.css';
+import appBarClasses from './styles/AppBar.module.css';
+import paperClasses from './styles/Paper.module.css';
+import navLinkClasses from './styles/NavLink.module.css';
 import textInputClasses from './styles/TextInput.module.css';
 
 type ExtendedCustomColors = 'elevation' | DefaultMantineColor;
@@ -123,14 +125,17 @@ const theme = createTheme({
   },
 
   components: {
+    ActionIcon: ActionIcon.extend({
+      classNames: actionIconClasses,
+    }),
     AppShell: AppShell.extend({
       classNames: appBarClasses,
     }),
     NavLink: NavLink.extend({
       classNames: navLinkClasses,
     }),
-    ActionIcon: ActionIcon.extend({
-      classNames: actionIconClasses,
+    Paper: Paper.extend({
+      classNames: paperClasses,
     }),
     TextInput: TextInput.extend({
       classNames: textInputClasses,
