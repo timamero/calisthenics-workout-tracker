@@ -151,7 +151,7 @@ function RoadmapCard({
             Coming — {version}
           </Text>
         )}
-        <Text fw={500} fz={14}>
+        <Text fw={500} fz="sm">
           {title}
         </Text>
         <Text fz="xs" c="dark.3" lh="lg">
@@ -173,7 +173,7 @@ function StatCard({ value, label }: StatCardProps) {
   return (
     <Paper radius="md" p="md" bg="lime.0">
       <Text
-        fz={36}
+        fz="xxl"
         fw={700}
         lh="xxs"
         mb={4}
@@ -308,7 +308,7 @@ function HomeView() {
                   Torque.
                 </Title>
                 <Text
-                  fz={{ base: 20, sm: 28 }}
+                  fz={{ base: 'xl', sm: 'xxl' }}
                   fw={700}
                   tt="uppercase"
                   c="dark.2"
@@ -326,7 +326,7 @@ function HomeView() {
             </Group>
 
             {/* Intro */}
-            <Text fz={14} c="dark.3" lh="xxl" maw={520} fw={300}>
+            <Text fz="sm" c="dark.3" lh="xxl" maw={520} fw={300}>
               Calisthenics is physics made personal. Every pull-up, dip, and
               push-up is your body generating rotational force —{' '}
               <Text
@@ -392,7 +392,7 @@ function HomeView() {
         <Stack gap="md" mb="xl">
           <Box>
             <Text
-              fz={11}
+              fz="xxs"
               fw={500}
               tt="uppercase"
               c="dark.3"
@@ -414,7 +414,7 @@ function HomeView() {
               Everything you need to start training
             </Title>
           </Box>
-          <Text fz={14} c="dark.3" lh="xxl" fw={300}>
+          <Text fz="sm" c="dark.3" lh="xxl" fw={300}>
             The first release focuses on the fundamentals — a solid exercise
             library, a flexible workout builder, and a logbook to track your
             sessions. The tools that matter most when you're getting started.
@@ -432,7 +432,7 @@ function HomeView() {
         <Stack gap="md" mb="xl">
           <Box>
             <Text
-              fz={11}
+              fz="xxs"
               fw={500}
               tt="uppercase"
               c="dark.3"
@@ -454,7 +454,7 @@ function HomeView() {
               The most accessible gym ever built
             </Title>
           </Box>
-          <Text fz={14} c="dark.3" lh="xxl" fw={300}>
+          <Text fz="sm" c="dark.3" lh="xxl" fw={300}>
             A floor. A pull-up bar. A park bench. That's your gym — free, open
             24 hours, and never crowded.{' '}
             <Text
@@ -492,7 +492,7 @@ function HomeView() {
         <Stack gap="md" mb="xl">
           <Box>
             <Text
-              fz={11}
+              fz="xxs"
               fw={500}
               tt="uppercase"
               c="dark.3"
@@ -514,7 +514,7 @@ function HomeView() {
               The roadmap
             </Title>
           </Box>
-          <Text fz={14} c="dark.3" lh="xxl" fw={300}>
+          <Text fz="sm" c="dark.3" lh="xxl" fw={300}>
             Alpha.1 is the starting line. Here's where Torque is headed.
           </Text>
           <SimpleGrid cols={{ base: 1, xs: 2, sm: 4 }} spacing="sm">

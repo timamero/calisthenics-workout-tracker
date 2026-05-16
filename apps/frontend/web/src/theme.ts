@@ -24,7 +24,7 @@ import navLinkClasses from './styles/NavLink.module.css';
 import textInputClasses from './styles/TextInput.module.css';
 
 type ExtendedCustomColors = 'elevation' | DefaultMantineColor;
-type ExtendedFontSizes = 'xxs' | 'xsplus' | DefaultMantineSize;
+type ExtendedFontSizes = 'xxs' | 'xsplus' | 'xxl' | 'xxxl' | DefaultMantineSize;
 type ExtendedLineHeights = 'xxs' | 'xxl' | DefaultMantineSize;
 
 declare module '@mantine/core' {
@@ -59,6 +59,8 @@ const theme = createTheme({
   fontSizes: {
     xxs: '0.625rem',
     xsplus: '0.813rem',
+    xxl: '1.75rem',
+    xxxl: '2.25rem',
   },
   lineHeights: {
     xxs: '1.1',
