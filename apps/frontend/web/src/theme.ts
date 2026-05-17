@@ -157,6 +157,9 @@ const theme = createTheme({
     }),
     Paper: Paper.extend({
       classNames: paperClasses,
+      defaultProps: {
+        shadow: 'xs',
+      },
     }),
     TextInput: TextInput.extend({
       classNames: textInputClasses,
