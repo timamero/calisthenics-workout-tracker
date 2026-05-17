@@ -22,7 +22,7 @@ export default function WorkoutDraft() {
           variant={'title'}
           maxLength={70}
           titleOrder={1}
-          titleSize="h1"
+          titleSize="h2"
         />
         {mode === 'edit' || mode === 'build' ? (
           <Stack pos="relative" h="100%" w="100%">

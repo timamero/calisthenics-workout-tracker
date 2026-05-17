@@ -57,10 +57,14 @@ const theme = createTheme({
   fontFamilyMonospace:
     'Source Code Pro, ui-monospace, Cascadia Code, Source Code Pro, Menlo, Consolas, DejaVu Sans Mono, monospace',
   fontSizes: {
-    xxs: '0.625rem',
-    xsplus: '0.813rem',
-    xxl: '1.75rem',
-    xxxl: '2.25rem',
+    xxs: '0.625rem', // 10px
+    xsplus: '0.813rem', // 13px
+    xxl: '1.75rem', // 28px
+    xxxl: '2.25rem', // 36px
+    display_lg: '6.25rem', // 100px
+    display_md: '4.5rem', // 72px
+    display_sm: '3.5rem', // 56px
+    display_xs: '3rem', // 48px
   },
   lineHeights: {
     xxs: '1.1',
@@ -70,12 +74,12 @@ const theme = createTheme({
     fontFamily:
       'Elms Sans, Seravek, Gill Sans Nova, Ubuntu, Calibri, DejaVu Sans, source-sans-pro, sans-serif',
     sizes: {
-      h1: { fontSize: '100px' },
-      h2: { fontSize: '72px' },
-      h3: { fontSize: '56px' },
-      h4: { fontSize: '38px' },
-      h5: { fontSize: '28px' },
-      h6: { fontSize: '18px' },
+      h1: { fontSize: '42px' },
+      h2: { fontSize: '36px' },
+      h3: { fontSize: '28px' },
+      h4: { fontSize: '24px' },
+      h5: { fontSize: '20px' },
+      h6: { fontSize: '16px' },
     },
   },
   autoContrast: true,
@@ -169,9 +173,9 @@ const theme = createTheme({
   other: {
     outline: '#424242',
     letterSpacing: {
-      tightest: '0.008em',
-      tighter: '0.01em',
-      tight: '0.02em',
+      tightest: '-0.008em',
+      tighter: '-0.01em',
+      tight: '-0.02em',
       normal: '0',
       wide: '0.04em',
       wider: '0.1em',
