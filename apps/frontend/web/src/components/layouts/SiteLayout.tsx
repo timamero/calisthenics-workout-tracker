@@ -9,7 +9,7 @@ export default function SiteLayout() {
   // const [opened, { toggle }] = useDisclosure();
   return (
     <AppShell
-      padding="md"
+      padding="0"
       header={{ height: 60 }}
       // navbar={{
       //   width: 300,

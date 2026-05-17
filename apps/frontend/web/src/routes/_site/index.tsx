@@ -250,7 +250,7 @@ function HomeView() {
   ];
 
   return (
-    <Container size="md" pt="xl">
+    <Container size="md" pt="xl" pb="md">
       <Stack gap="xl">
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <Paper withBorder radius="lg" p="xl" mb="xl">
@@ -298,8 +298,13 @@ function HomeView() {
               <Box>
                 <Title
                   order={1}
-                  fz={{ base: 'h3', xs: 'h2', sm: 'h1' }}
-                  lh="xxl"
+                  // fz={{ base: 'h3', xs: 'h2', sm: 'h1' }}
+                  fz={{
+                    base: 'display_md',
+                    // xs: 'display_md',
+                    sm: 'display_lg',
+                  }}
+                  lh="xxs"
                   mb={8}
                   style={(theme) => ({
                     letterSpacing: theme.other.letterSpacing.tight,
@@ -405,7 +410,7 @@ function HomeView() {
             </Text>
             <Title
               order={2}
-              fz={{ base: 'h5', sm: 'h4' }}
+              fz={{ base: 'h1', sm: 'display_xs' }}
               lh="xxs"
               style={(theme) => ({
                 letterSpacing: theme.other.letterSpacing.tight,
@@ -445,7 +450,7 @@ function HomeView() {
             </Text>
             <Title
               order={2}
-              fz={{ base: 'h5', sm: 'h4' }}
+              fz={{ base: 'h1', sm: 'display_xs' }}
               lh="xss"
               style={(theme) => ({
                 letterSpacing: theme.other.letterSpacing.tight,
@@ -505,7 +510,7 @@ function HomeView() {
             </Text>
             <Title
               order={2}
-              fz={{ base: 'h5', sm: 'h4' }}
+              fz={{ base: 'h1', sm: 'display_xs' }}
               lh="xxs"
               style={(theme) => ({
                 letterSpacing: theme.other.letterSpacing.tight,
@@ -532,7 +537,7 @@ function HomeView() {
             <Box maw={420}>
               <Title
                 order={2}
-                fz={{ base: 'h6', sm: 'h5' }}
+                fz={{ base: 'h2', sm: 'h1' }}
                 lh="xxs"
                 mb="sm"
                 style={(theme) => ({
@@ -597,7 +602,7 @@ function HomeView() {
             <Box maw={420}>
               <Title
                 order={2}
-                fz={{ base: 'h6', sm: 'h5' }}
+                fz={{ base: 'h2', sm: 'h1' }}
                 lh="xxs"
                 mb="sm"
                 style={(theme) => ({
