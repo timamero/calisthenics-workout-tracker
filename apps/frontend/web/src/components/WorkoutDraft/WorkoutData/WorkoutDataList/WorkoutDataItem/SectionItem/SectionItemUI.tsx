@@ -44,21 +44,15 @@ export default function SectionItemUI({
       bd="1px solid var(--mantine-color-lime-2)"
     >
       <Stack
-        // bg="gray.0"
-        // bdrs="sm"
-        // bd="2px solid violet.9"
         w="100%"
-        // maw={840}
         align="center"
         pb={mode === 'edit' || mode === 'build' ? 0 : 'lg'}
-        // my="xl"
       >
         <Group
           align="flex-start"
           justify="space-between"
           w="100%"
           wrap="nowrap"
-          // bg="elevation.4"
           style={{ borderBottom: '1px solid var(--mantine-color-lime-2)' }}
         >
           <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
