@@ -52,7 +52,7 @@ export default function WorkoutLayout() {
         collapsed: { mobile: true, desktop: true },
       }}
       footer={{
-        height: mode === 'log' ? 80 : 160,
+        height: mode === 'log' ? 60 : 120,
         collapsed:
           mode === 'log' || location.pathname === '/workout' ? false : true,
       }}
@@ -85,14 +85,14 @@ export default function WorkoutLayout() {
         <Outlet />
       </AppShell.Main>
       <AppShell.Footer>
-        <Stack h="100%" justify="center" align="center">
+        <Stack h="100%" justify="center" align="center" gap="sm">
           {mode !== 'log' && <AddWorkoutItemMenu />}
 
           {mode !== 'build' && (
             <SegmentedControl
               value={mode as 'edit' | 'log'}
               onChange={() => handleSetMode()}
-              color="violet"
+              color="lime"
               data={[
                 {
                   value: 'edit',
