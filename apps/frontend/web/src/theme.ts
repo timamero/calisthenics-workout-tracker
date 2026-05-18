@@ -119,14 +119,9 @@ const theme = createTheme({
 
   variantColorResolver: (input) => {
     const defaultResolvedColors = defaultVariantColorsResolver(input);
-    // const parsedColor = parseThemeColor({
-    //   color: input.color || input.theme.primaryColor,
-    //   theme: input.theme,
-    // });
 
     if (input.variant === 'outline') {
       return {
-        // ...defaultResolvedColors,
         background: 'var(--mantine-color-white)',
         hover: 'var(--mantine-color-gray-2)',
         color: 'var(--mantine-color-dark-7)',
@@ -135,25 +130,38 @@ const theme = createTheme({
     }
     if (input.variant === 'outline-lime') {
       return {
-        // ...defaultResolvedColors,
         background: 'var(--mantine-color-lime-2)',
         hover: 'var(--mantine-color-lime-4)',
         color: 'var(--mantine-color-dark-7)',
         border: '1px solid var(--mantine-color-dark-7)',
       };
     }
+    if (input.variant === 'outline-violet') {
+      return {
+        background: 'none',
+        hover: 'var(--mantine-color-violet-0)',
+        color: 'var(--mantine-color-violet-8)',
+        border: '1px solid var(--mantine-color-violet-8)',
+      };
+    }
     if (input.variant === 'filled') {
       return {
-        // ...defaultResolvedColors,
         background: 'var(--mantine-color-dark-7)',
         hover: 'var(--mantine-color-dark-5)',
         color: 'var(--mantine-color-white)',
         border: 'none',
       };
     }
+    if (input.variant === 'filled-lime') {
+      return {
+        background: 'var(--mantine-color-lime-4)',
+        hover: 'var(--mantine-color-lime-2)',
+        color: 'var(--mantine-color-dark-7)',
+        border: 'none',
+      };
+    }
     if (input.variant === 'filled-violet') {
       return {
-        // ...defaultResolvedColors,
         background: 'var(--mantine-color-violet-9)',
         hover: 'var(--mantine-color-violet-7)',
         color: 'var(--mantine-color-gray-0)',
@@ -162,7 +170,6 @@ const theme = createTheme({
     }
     if (input.variant === 'filled-gray') {
       return {
-        // ...defaultResolvedColors,
         background: 'var(--mantine-color-gray-2)',
         hover: 'var(--mantine-color-gray-4)',
         color: 'var(--mantine-color-dark-4)',
@@ -171,7 +178,6 @@ const theme = createTheme({
     }
     if (input.variant === 'transparent') {
       return {
-        // ...defaultResolvedColors,
         background: 'none',
         hover: 'var(--mantine-color-gray-2)',
         color: 'var(--mantine-color-dark-7)',
@@ -180,7 +186,6 @@ const theme = createTheme({
     }
     if (input.variant === 'transparent-violet') {
       return {
-        // ...defaultResolvedColors,
         background: 'none',
         hover: 'var(--mantine-color-violet-2)',
         color: 'var(--mantine-color-dark-7)',
