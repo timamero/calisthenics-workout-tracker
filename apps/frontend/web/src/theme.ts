@@ -12,6 +12,8 @@ import {
   TextInput,
   AppShell,
   Paper,
+  PasswordInput,
+  Title,
 } from '@mantine/core';
 
 import './theme';
@@ -20,6 +22,7 @@ import './styles/global.css';
 import actionIconClasses from './styles/ActionIcon.module.css';
 import appBarClasses from './styles/AppBar.module.css';
 import paperClasses from './styles/Paper.module.css';
+import passwordInputClasses from './styles/PasswordInput.module.css';
 import navLinkClasses from './styles/NavLink.module.css';
 import textInputClasses from './styles/TextInput.module.css';
 
@@ -212,8 +215,16 @@ const theme = createTheme({
         shadow: 'xs',
       },
     }),
+    PasswordInput: PasswordInput.extend({
+      classNames: passwordInputClasses,
+    }),
     TextInput: TextInput.extend({
       classNames: textInputClasses,
+    }),
+    Title: Title.extend({
+      defaultProps: {
+        textWrap: 'pretty',
+      },
     }),
   },
 
