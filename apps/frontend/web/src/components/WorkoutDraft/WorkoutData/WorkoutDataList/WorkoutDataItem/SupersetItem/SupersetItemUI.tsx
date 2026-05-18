@@ -1,4 +1,4 @@
-import { Stack, Group, Title, Button, Box } from '@mantine/core';
+import { Stack, Group, Title, Button, Box, useMatches } from '@mantine/core';
 import { Link } from '@tanstack/react-router';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
@@ -30,6 +30,11 @@ export default function SupersetItemUI({
   handleDeleteSupersetClick,
   handleOpenAddExerciseClick,
 }: SupersetItemUIProps) {
+  const appliedTitleSize = useMatches({
+    base: parentType === null ? 'h5' : 'h6',
+
+    md: 'h3',
+  });
   return (
     <Stack
       bdrs="md"
@@ -64,7 +69,7 @@ export default function SupersetItemUI({
             />
           )}
           <Group flex={1} align="center" justify="center">
-            <Title order={parentType === null ? 1 : 2} size="h4">
+            <Title order={parentType === null ? 2 : 3} size={appliedTitleSize}>
               Superset
             </Title>
           </Group>
