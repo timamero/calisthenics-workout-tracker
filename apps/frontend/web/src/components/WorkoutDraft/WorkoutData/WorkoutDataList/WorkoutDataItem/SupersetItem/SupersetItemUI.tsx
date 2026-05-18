@@ -1,4 +1,12 @@
-import { Stack, Group, Title, Button, Box, useMatches } from '@mantine/core';
+import {
+  Stack,
+  Group,
+  Title,
+  Button,
+  Box,
+  useMatches,
+  Paper,
+} from '@mantine/core';
 import { Link } from '@tanstack/react-router';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
@@ -36,75 +44,88 @@ export default function SupersetItemUI({
     md: 'h3',
   });
   return (
-    <Stack
-      bdrs="md"
-      bd="2px solid dark.1"
-      bg="elevation.4"
+    <Paper
+      withBorder
       w="100%"
-      // maw={600}
-      align="center"
-      gap={0}
+      radius="lg"
+      bd="1px solid var(--mantine-color-violet-2)"
       my={parentType === null ? 'xl' : 0}
     >
-      <Group
-        // bd="2px solid gray.3"
-        // bdrs="lg"
-        wrap="nowrap"
+      <Stack
+        bdrs="md"
+        // bd="2px solid dark.1"
+        // bg="elevation.4"
         w="100%"
-        bg="elevation.5"
-        style={{
-          borderTopLeftRadius: 'var(--mantine-radius-md)',
-          borderTopRightRadius: 'var(--mantine-radius-md)',
-          borderBottom: '1px solid var(--mantine-color-dark-1)',
-          // borderBottomColor: 'var(--mantine-color-red-3)',
-        }}
+        // maw={600}
+        align="center"
+        gap={0}
+        // my={parentType === null ? 'xl' : 0}
+        // bd="1px solid var(--mantine-color-violet-2)"
       >
-        <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
-          {(mode === 'edit' || mode === 'build') && (
-            <ReorderButtonGroup
-              handleUpClick={() => handleUpClick()}
-              handleDownClick={() => handleDownClick()}
-              isFirst={isFirst}
-              isLast={isLast}
-            />
-          )}
-          <Group flex={1} align="center" justify="center">
-            <Title order={parentType === null ? 2 : 3} size={appliedTitleSize}>
-              Superset
-            </Title>
+        <Group
+          // bd="2px solid gray.3"
+          // bdrs="lg"
+          wrap="nowrap"
+          w="100%"
+          // bg="elevation.5"
+          style={{
+            // borderTopLeftRadius: 'var(--mantine-radius-md)',
+            // borderTopRightRadius: 'var(--mantine-radius-md)',
+            borderBottom: '1px solid var(--mantine-color-violet-2)',
+            // borderBottomColor: 'var(--mantine-color-red-3)',
+          }}
+        >
+          <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
+            {(mode === 'edit' || mode === 'build') && (
+              <ReorderButtonGroup
+                handleUpClick={() => handleUpClick()}
+                handleDownClick={() => handleDownClick()}
+                isFirst={isFirst}
+                isLast={isLast}
+              />
+            )}
+            <Group flex={1} align="center" justify="center">
+              <Title
+                order={parentType === null ? 2 : 3}
+                size={appliedTitleSize}
+                c="dark.3"
+              >
+                Superset
+              </Title>
+            </Group>
           </Group>
+          {(mode === 'edit' || mode === 'build') && (
+            <Box p="xs">
+              <WorkoutItemMenu
+                itemType="superset"
+                handleUpClick={handleUpClick}
+                handleDownClick={handleDownClick}
+                handleDeleteClick={handleDeleteSupersetClick}
+                isFirst={isFirst}
+                isLast={isLast}
+              />
+            </Box>
+          )}
         </Group>
-        {(mode === 'edit' || mode === 'build') && (
-          <Box p="xs">
-            <WorkoutItemMenu
-              itemType="superset"
-              handleUpClick={handleUpClick}
-              handleDownClick={handleDownClick}
-              handleDeleteClick={handleDeleteSupersetClick}
-              isFirst={isFirst}
-              isLast={isLast}
-            />
-          </Box>
+        {mode === 'edit' || mode === 'build' ? (
+          <ExercisesList />
+        ) : (
+          <ExerciseSetGroup />
         )}
-      </Group>
-      {mode === 'edit' || mode === 'build' ? (
-        <ExercisesList />
-      ) : (
-        <ExerciseSetGroup />
-      )}
-      {(mode === 'edit' || mode === 'build') && (
-        <Stack my="sm">
-          <Button
-            variant="filled"
-            color="orange.9"
-            component={Link}
-            to="/workout/add-exercise"
-            onClick={() => handleOpenAddExerciseClick()}
-          >
-            Add Exercise
-          </Button>
-        </Stack>
-      )}
-    </Stack>
+        {(mode === 'edit' || mode === 'build') && (
+          <Stack my="sm">
+            <Button
+              variant="filled"
+              color="orange.9"
+              component={Link}
+              to="/workout/add-exercise"
+              onClick={() => handleOpenAddExerciseClick()}
+            >
+              Add Exercise
+            </Button>
+          </Stack>
+        )}
+      </Stack>
+    </Paper>
   );
 }

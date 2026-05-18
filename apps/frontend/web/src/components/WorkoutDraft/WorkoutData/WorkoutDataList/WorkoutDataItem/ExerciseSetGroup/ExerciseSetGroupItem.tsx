@@ -9,12 +9,14 @@ import ExerciseSetGroupItemUI from './ExerciseSetGroupItemUI';
 import ExerciseSetUI from './ExerciseSetUI';
 
 interface ExerciseSetGroupItemProps {
+  totalSets: number | null;
   exercisesGroupedBySets: ExercisesGroupedBySetsReturnType;
   parentSectionID: string | null;
   parentSupersetID: string | null;
 }
 
 export default function ExerciseSetGroupItem({
+  totalSets,
   exercisesGroupedBySets,
   parentSectionID,
   parentSupersetID,
@@ -28,10 +30,11 @@ export default function ExerciseSetGroupItem({
     parentSupersetID,
   );
 
-  const exercisesGroup = exercisesGroupedBySets.exercises.map((ex) => {
+  const exercisesGroup = exercisesGroupedBySets.exercises.map((ex, i) => {
     return (
       <ExerciseSetUI
         key={ex.id}
+        isLast={exercisesGroupedBySets.exercises.length === i + 1}
         exerciseName={getExerciseNameById(ex.exercise_id)}
       >
         <WorkoutDataItemContext.Provider
@@ -58,6 +61,7 @@ export default function ExerciseSetGroupItem({
   return (
     <ExerciseSetGroupItemUI
       setNumber={exercisesGroupedBySets.setGroupNumber + 1}
+      totalSets={totalSets ? totalSets : null}
     >
       {exercisesGroup}
     </ExerciseSetGroupItemUI>

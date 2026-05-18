@@ -3,11 +3,13 @@ import type { ReactNode } from 'react';
 import { Group, Stack, Text } from '@mantine/core';
 
 interface ExerciseSetGroupItemUIProps {
+  totalSets: number | null;
   setNumber: number;
   children: ReactNode;
 }
 
 export default function ExerciseSetGroupItemUI({
+  totalSets,
   setNumber,
   children,
 }: ExerciseSetGroupItemUIProps) {
@@ -17,10 +19,19 @@ export default function ExerciseSetGroupItemUI({
       // maw={600}
       align="center"
       px="lg"
-      style={{ borderBottom: '1px solid var(--mantine-color-dark-1)' }}
+      pb="sm"
+      style={{
+        borderBottom: `${setNumber === totalSets ? '0' : '1'}px solid var(--mantine-color-violet-2)`,
+      }}
     >
       <Group w="100%" justify="space-between" maw={360}>
-        <Text ff="heading" fz="xl" fw={800} my="xs" px="lg">
+        <Text
+          ff="heading"
+          fz={{ base: 'lg', md: 'xl' }}
+          fw={800}
+          my="xs"
+          px="lg"
+        >
           Set {setNumber}
         </Text>
       </Group>
