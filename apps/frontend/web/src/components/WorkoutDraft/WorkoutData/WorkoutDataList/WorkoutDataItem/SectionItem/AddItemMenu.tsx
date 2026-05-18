@@ -19,12 +19,13 @@ export default function AddItemMenu({
     <Menu opened={menuOpened} shadow="md" width={200}>
       <Menu.Target ref={ref}>
         <ActionIcon
-          variant="filled"
+          variant="filled-lime"
           size="md"
-          p="xs"
+          p={{ base: 'xxs', md: 'xs' }}
           w="min-content"
           h="min-content"
           onClick={() => setMenuOpened(!menuOpened)}
+          aria-label="Add exercise or superset to section"
         >
           <IoAdd size={24} />
         </ActionIcon>

@@ -118,8 +118,7 @@ export default function SupersetItemUI({
         {(mode === 'edit' || mode === 'build') && (
           <Stack my="sm">
             <Button
-              variant="filled"
-              color="orange.9"
+              variant="outline-violet"
               component={Link}
               to="/workout/add-exercise"
               onClick={() => handleOpenAddExerciseClick()}
