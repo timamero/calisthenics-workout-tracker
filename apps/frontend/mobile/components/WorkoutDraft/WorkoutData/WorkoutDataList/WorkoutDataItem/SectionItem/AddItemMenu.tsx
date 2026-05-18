@@ -24,9 +24,9 @@ export default function AddItemMenu({
       onDismiss={closeMenu}
       anchor={
         <Surface
-          elevation={4}
+          elevation={2}
           style={{
-            backgroundColor: theme.colors.tertiary,
+            backgroundColor: theme.colors.lime4,
             borderRadius: '50%',
           }}
         >
@@ -35,9 +35,9 @@ export default function AddItemMenu({
             icon="plus"
             size={24}
             onPress={openMenu}
-            iconColor={theme.colors.onTertiary}
-            containerColor={theme.colors.tertiary}
-            rippleColor={theme.colors.violet2}
+            iconColor={theme.colors.dark7}
+            containerColor={theme.colors.lime4}
+            rippleColor={theme.colors.lime2}
           />
         </Surface>
       }

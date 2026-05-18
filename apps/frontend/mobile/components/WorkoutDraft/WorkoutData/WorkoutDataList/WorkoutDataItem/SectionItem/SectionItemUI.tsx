@@ -51,17 +51,13 @@ export default function SectionItemUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        borderTopWidth: 2,
-        borderBottomWidth: 2,
-        borderColor: theme.colors.tertiary,
-        backgroundColor: theme.colors.violet0,
-        // paddingInline: 4,
-        // paddingBlock: 16,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: theme.colors.lime2,
+        backgroundColor: theme.colors.elevation.level5,
         paddingBottom: mode === 'edit' || mode === 'build' ? 0 : 24,
         marginTop: 44,
         marginBottom: isLast ? 44 : 0,
-        // marginInline: 4,
-        // borderRadius: 8,
         overflow: 'hidden',
         width: 'auto',
       }}
@@ -73,22 +69,11 @@ export default function SectionItemUI({
           justifyContent: 'space-between',
           alignItems: 'flex-start',
           width: 'auto',
-          borderBottomColor: theme.colors.tertiary,
+          borderBottomColor: theme.colors.lime2,
           borderBottomWidth: 1,
           paddingInline: 4,
-          backgroundColor: theme.colors.violet1,
         }}
       >
-        {/* <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            backgroundColor: theme.colors.red1,
-            width: '100%',
-          }}
-        > */}
         <View
           style={{
             display: 'flex',
@@ -106,7 +91,6 @@ export default function SectionItemUI({
               isLast={isLast}
             />
           )}
-          {/* <Text style={{ color: theme.colors.onBackground }}>Section</Text> */}
           <View
             style={{
               flexShrink: 1,
@@ -124,9 +108,7 @@ export default function SectionItemUI({
             />
           </View>
         </View>
-        {/* </View> */}
         {(mode === 'build' || mode === 'edit') && (
-          // <View style={{ flex: 1 }}>
           <WorkoutItemMenu
             itemType="section"
             isFirst={isFirst}
@@ -135,7 +117,6 @@ export default function SectionItemUI({
             handleDownPress={handleDownPress}
             handleDeletePress={handleDeleteSectionPress}
           />
-          // </View>
         )}
       </View>
       {section.items.map((item) => {
@@ -177,31 +158,12 @@ export default function SectionItemUI({
             flexDirection: 'column',
             alignItems: 'flex-end',
             margin: 8,
-            // gap: 8,
           }}
         >
           <AddItemMenu
             handleOpenAddExercisePress={handleOpenAddExercisePress}
             handleAddSupersetPress={handleAddSupersetPress}
           />
-          {/* <Button
-            mode="outlined"
-            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.primary}
-            style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
-            onPress={() => handleOpenAddExercisePress()}
-          >
-            Add Exercise
-          </Button>
-          <Button
-            mode="outlined"
-            labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            textColor={theme.colors.primary}
-            style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
-            onPress={() => handleAddSupersetPress()}
-          >
-            Add Superset
-          </Button> */}
         </View>
       )}
     </View>
