@@ -44,7 +44,7 @@ export default function ExerciseItemUI({
       // bd={`${parentType === 'superset' ? '0px' : '1px'} solid var(--mantine-outline)`}
       // p="lg"
       w="100%"
-      maw={600}
+      // maw={600}
       bg="transparent"
       // bdrs="lg"
       bdrs={parentType === 'superset' ? 0 : 'var(--mantine-radius-lg)'}

@@ -1,4 +1,4 @@
-import { Stack, Box } from '@mantine/core';
+import { Stack, Container } from '@mantine/core';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
@@ -13,7 +13,12 @@ export default function WorkoutDraft() {
     (state) => state.setWorkoutTitle,
   );
   return (
-    <Box flex="1" w="100%" p="md">
+    <Container
+      flex="1"
+      w="100%"
+      px={{ base: 'xxs', md: 'xl' }}
+      py={{ base: 'md', md: 'xl' }}
+    >
       <Stack gap="xl" align="center">
         <TextInputWithEdit
           initialValue={workoutTitle!}
@@ -75,18 +80,18 @@ export default function WorkoutDraft() {
                 WebkitMaskComposite: 'source-in',
               }}
             />
-            <Stack gap="xl" align="center" w="100%">
-              <WorkoutData />
-            </Stack>
+            {/* <Stack gap="xl" align="center" w="100%"> */}
+            <WorkoutData />
+            {/* </Stack> */}
           </Stack>
         ) : (
-          <Stack gap="xl" align="center" w="100%">
-            <WorkoutData />
-          </Stack>
+          // <Stack gap="xl" align="center" w="100%">
+          <WorkoutData />
+          // </Stack>
         )}
       </Stack>
       <WorkoutOverlays />
       {/* </Stack> */}
-    </Box>
+    </Container>
   );
 }
