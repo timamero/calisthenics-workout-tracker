@@ -7,6 +7,7 @@ import {
   Text,
   Stack,
   ActionIcon,
+  useMatches,
 } from '@mantine/core';
 import type { TitleOrder, TitleSize } from '@mantine/core';
 import { IoPencil } from 'react-icons/io5';
@@ -38,12 +39,28 @@ export default function TextInputWithEditUI({
   titleSize,
   titleOrder,
 }: TextInputWithEditUIProps) {
+  console.log('TextInputWithEditUI |titleSize', titleSize);
+  const appliedSize = useMatches({
+    base:
+      titleSize === 'h1'
+        ? 'h3'
+        : titleSize === 'h2'
+          ? 'h4'
+          : titleSize === 'h3'
+            ? 'h5'
+            : titleSize === 'h4' || titleSize === 'h5'
+              ? 'h5'
+              : 'h6',
+    // base: titleSize === 'h2' ? 'h3' : 'h4',
+    md: titleSize,
+  });
+  console.log('TextInputWithEditUI | appliedSize', appliedSize);
   return (
     <>
       {!isEditMode && (
         <Group wrap="nowrap" justify="center">
           {variant === 'title' ? (
-            <Title size={titleSize} order={titleOrder} maw={400}>
+            <Title size={appliedSize} order={titleOrder} maw={400}>
               {text}
             </Title>
           ) : (
