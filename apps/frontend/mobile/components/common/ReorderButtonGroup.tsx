@@ -24,19 +24,20 @@ export default function ReorderButtonGroup({
 
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
 
+  const appliedColor =
+    parentType === 'superset'
+      ? theme.colors.violet4
+      : parentType === 'section'
+        ? theme.colors.dark2
+        : theme.colors.primary;
+
   return (
     <View style={styles.buttonGroup}>
       {!isFirst && (
         <IconButton
           onPress={() => handleUpPress()}
-          icon="chevron-up-circle-outline"
-          iconColor={
-            parentType === 'superset'
-              ? theme.colors.lime5
-              : parentType === 'section'
-                ? theme.colors.tertiary
-                : theme.colors.primary
-          }
+          icon={parentType === 'superset' ? 'chevron-up' : 'chevron-up-circle'}
+          iconColor={appliedColor}
           size={24}
           style={{ margin: 0, height: 32, width: 32 }}
         />
@@ -44,14 +45,10 @@ export default function ReorderButtonGroup({
       {!isLast && (
         <IconButton
           onPress={handleDownPress}
-          icon="chevron-down-circle-outline"
-          iconColor={
-            parentType === 'superset'
-              ? theme.colors.lime5
-              : parentType === 'section'
-                ? theme.colors.tertiary
-                : theme.colors.primary
+          icon={
+            parentType === 'superset' ? 'chevron-down' : 'chevron-down-circle'
           }
+          iconColor={appliedColor}
           size={24}
           style={{ margin: 0, height: 32, width: 32 }}
         />

@@ -28,7 +28,6 @@ export default function ExerciseSetUI({
         variant="headlineSmall"
         style={{
           color: theme.colors.onBackground,
-          // fontWeight: 800,
           textAlign: 'center',
         }}
       >
