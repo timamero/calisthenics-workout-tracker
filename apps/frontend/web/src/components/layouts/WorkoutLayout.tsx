@@ -52,7 +52,11 @@ export default function WorkoutLayout() {
         collapsed: { mobile: true, desktop: true },
       }}
       footer={{
-        height: mode === 'log' ? 60 : 120,
+        // height: mode === 'log' ? 60 : 120,
+        height: {
+          base: mode === 'log' ? 60 : 120,
+          md: mode === 'log' ? 80 : 160,
+        },
         collapsed:
           mode === 'log' || location.pathname === '/workout' ? false : true,
       }}
