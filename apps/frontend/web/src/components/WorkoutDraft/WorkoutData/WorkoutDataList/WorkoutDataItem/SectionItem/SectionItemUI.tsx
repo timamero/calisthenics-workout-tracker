@@ -40,7 +40,7 @@ export default function SectionItemUI({
       bdrs="sm"
       bd="2px solid violet.9"
       w="100%"
-      maw={840}
+      // maw={840}
       align="center"
       pb={mode === 'edit' || mode === 'build' ? 0 : 'lg'}
       my="xl"
@@ -88,7 +88,9 @@ export default function SectionItemUI({
           </Box>
         )}
       </Group>
-      <ItemsList />
+      <Stack w="100%" px={{ base: 'xxs', md: 'xl' }} gap="lg">
+        <ItemsList />
+      </Stack>
       {(mode === 'edit' || mode === 'build') && (
         <Stack align="flex-end" w="100%" p="sm">
           <AddItemMenu

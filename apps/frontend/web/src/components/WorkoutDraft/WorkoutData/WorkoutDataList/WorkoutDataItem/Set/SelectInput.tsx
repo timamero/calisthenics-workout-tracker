@@ -50,6 +50,7 @@ export default function SelectInput({
     return (
       <Select
         ff="monospace"
+        w={192}
         label={label}
         data={options}
         value={
@@ -78,6 +79,7 @@ export default function SelectInput({
     return (
       <Select
         ff="monospace"
+        w={192}
         label={label}
         data={options}
         value={

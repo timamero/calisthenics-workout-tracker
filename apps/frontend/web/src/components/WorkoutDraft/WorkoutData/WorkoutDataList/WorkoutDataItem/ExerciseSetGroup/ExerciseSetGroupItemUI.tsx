@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Stack, Text } from '@mantine/core';
+import { Group, Stack, Text } from '@mantine/core';
 
 interface ExerciseSetGroupItemUIProps {
   setNumber: number;
@@ -14,14 +14,16 @@ export default function ExerciseSetGroupItemUI({
   return (
     <Stack
       w="100%"
-      maw={600}
-      align="flex-start"
+      // maw={600}
+      align="center"
       px="lg"
       style={{ borderBottom: '1px solid var(--mantine-color-dark-1)' }}
     >
-      <Text ff="heading" fz="xl" fw={800} my="xs" px="lg">
-        Set {setNumber}
-      </Text>
+      <Group w="100%" justify="space-between" maw={360}>
+        <Text ff="heading" fz="xl" fw={800} my="xs" px="lg">
+          Set {setNumber}
+        </Text>
+      </Group>
       <Stack
         // bd="1px solid var(--mantine-color-default-border)"
         // px="lg"
