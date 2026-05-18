@@ -39,7 +39,10 @@ export default function SetUI({
       <Stack w="100%" align="center">
         <Group w="100%" justify="space-between" maw={360}>
           {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
-            <Text size="md" fw={700}>{`Set ${setIndex + 1}`}</Text>
+            <Text
+              fz={{ base: 'sm', md: 'md' }}
+              fw={700}
+            >{`Set ${setIndex + 1}`}</Text>
           )}
 
           {showDeleteButton && (mode === 'build' || mode === 'edit') && (
@@ -80,7 +83,7 @@ export default function SetUI({
       {setsLength && setsLength > 0 && setIndex !== setsLength - 1 && (
         <Stack w="100%" align="center">
           <Stack w="100%" maw={360}>
-            <Divider color="dark.2" />
+            <Divider color="gray.3" />
           </Stack>
         </Stack>
       )}

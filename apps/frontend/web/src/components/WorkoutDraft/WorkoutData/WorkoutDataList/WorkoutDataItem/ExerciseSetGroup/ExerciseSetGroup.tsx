@@ -14,6 +14,9 @@ export default function ExerciseSetGroup() {
     return (
       <ExerciseSetGroupItem
         key={group.setGroupNumber}
+        totalSets={
+          exercisesGroupedBySetsList ? exercisesGroupedBySetsList.length : null
+        }
         exercisesGroupedBySets={group}
         parentSupersetID={supersetID}
         parentSectionID={supersetParentsSectionID || null}
