@@ -51,10 +51,8 @@ export default function TextInputWithEditUI({
             : titleSize === 'h4' || titleSize === 'h5'
               ? 'h5'
               : 'h6',
-    // base: titleSize === 'h2' ? 'h3' : 'h4',
     md: titleSize,
   });
-  console.log('TextInputWithEditUI | appliedSize', appliedSize);
   return (
     <>
       {!isEditMode && (
@@ -72,7 +70,6 @@ export default function TextInputWithEditUI({
               <ActionIcon
                 variant="outline"
                 onClick={onEditClick}
-                // size="sm"
                 aria-label="Edit title"
                 size="md"
               >

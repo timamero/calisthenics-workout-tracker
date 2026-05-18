@@ -51,29 +51,12 @@ export default function SupersetItemUI({
       bd="1px solid var(--mantine-color-violet-2)"
       my={parentType === null ? 'xl' : 0}
     >
-      <Stack
-        bdrs="md"
-        // bd="2px solid dark.1"
-        // bg="elevation.4"
-        w="100%"
-        // maw={600}
-        align="center"
-        gap={0}
-        // my={parentType === null ? 'xl' : 0}
-        // bd="1px solid var(--mantine-color-violet-2)"
-      >
+      <Stack bdrs="md" w="100%" align="center" gap={0}>
         <Group
-          // bd="2px solid gray.3"
-          // bdrs="lg"
-          // mx="lg"
           wrap="nowrap"
           w="100%"
-          // bg="red"
           style={{
-            // borderTopLeftRadius: 'var(--mantine-radius-md)',
-            // borderTopRightRadius: 'var(--mantine-radius-md)',
             borderBottom: '1px solid var(--mantine-color-violet-2)',
-            // borderBottomColor: 'var(--mantine-color-red-3)',
           }}
         >
           <Group justify="space-between" wrap="nowrap" w="100%" p="xs">

@@ -52,7 +52,6 @@ export default function WorkoutLayout() {
         collapsed: { mobile: true, desktop: true },
       }}
       footer={{
-        // height: mode === 'log' ? 60 : 120,
         height: {
           base: mode === 'log' ? 60 : 120,
           md: mode === 'log' ? 80 : 160,
@@ -68,7 +67,6 @@ export default function WorkoutLayout() {
             variant="outline"
             size="md"
             radius="md"
-            // color="gray"
             onClick={() => cancelOverlayHandler!.open()}
           >
             Cancel
@@ -77,8 +75,6 @@ export default function WorkoutLayout() {
             variant="filled"
             size="md"
             radius="md"
-            // color="orange"
-
             onClick={() => saveOverlayHandler!.open()}
           >
             Finish

@@ -16,7 +16,6 @@ export default function ExerciseSetGroupItemUI({
   return (
     <Stack
       w="100%"
-      // maw={600}
       align="center"
       px="lg"
       pb="sm"
@@ -35,14 +34,7 @@ export default function ExerciseSetGroupItemUI({
           Set {setNumber}
         </Text>
       </Group>
-      <Stack
-        // bd="1px solid var(--mantine-color-default-border)"
-        // px="lg"
-        // w={300}
-        bg="transparent"
-        bdrs="lg"
-        w="100%"
-      >
+      <Stack bg="transparent" bdrs="lg" w="100%">
         {children}
       </Stack>
     </Stack>
