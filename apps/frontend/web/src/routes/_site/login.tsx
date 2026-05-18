@@ -12,7 +12,7 @@ import {
   Loader,
   Container,
 } from '@mantine/core';
-import { useNavigate } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 
 import { useAuthLogin } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
@@ -102,6 +102,15 @@ function LoginView() {
           />
           {auth.authError && <Text c="red">{auth.authError}</Text>}
           <Group mt="lg" justify="flex-end">
+            <Button
+              component={Link}
+              to="/"
+              type="button"
+              size="md"
+              variant="transparent"
+            >
+              Back
+            </Button>
             <Button
               type="submit"
               variant="filled"
