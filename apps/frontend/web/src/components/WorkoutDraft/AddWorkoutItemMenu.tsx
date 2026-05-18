@@ -25,12 +25,14 @@ export default function AddWorkoutItemMenu() {
     <Menu opened={menuOpened} shadow="md" width={200}>
       <Menu.Target ref={ref}>
         <ActionIcon
-          variant="filled-violet"
-          size="xxl"
+          variant="filled"
+          c="lime.4"
+          size="xl"
           w="min-content"
+          // p="xs"
           onClick={() => setMenuOpened(!menuOpened)}
         >
-          <IoAddOutline size={60} />
+          <IoAddOutline size={32} />
         </ActionIcon>
       </Menu.Target>
 
