@@ -59,7 +59,7 @@ export default function WorkoutLayout() {
       padding="0"
     >
       <AppShell.Header>
-        <Group justify="space-between" h="100%" px="md">
+        <Group justify="space-between" h="100%" px="md" bg="gray.0">
           <Button
             variant="outline"
             size="md"
@@ -85,14 +85,16 @@ export default function WorkoutLayout() {
         <Outlet />
       </AppShell.Main>
       <AppShell.Footer>
-        <Stack h="100%" justify="center" align="center" gap="sm">
+        <Stack h="100%" justify="center" align="center" gap="sm" bg="gray.0">
           {mode !== 'log' && <AddWorkoutItemMenu />}
 
           {mode !== 'build' && (
             <SegmentedControl
               value={mode as 'edit' | 'log'}
               onChange={() => handleSetMode()}
-              color="lime"
+              color="lime.2"
+              transitionDuration={500}
+              transitionTimingFunction="linear"
               data={[
                 {
                   value: 'edit',

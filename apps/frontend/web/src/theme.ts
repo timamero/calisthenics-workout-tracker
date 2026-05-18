@@ -127,6 +127,15 @@ const theme = createTheme({
         border: '1px solid var(--mantine-color-dark-7)',
       };
     }
+    if (input.variant === 'outline-lime') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'var(--mantine-color-lime-2)',
+        hover: 'var(--mantine-color-lime-4)',
+        color: 'var(--mantine-color-dark-7)',
+        border: '1px solid var(--mantine-color-dark-7)',
+      };
+    }
     if (input.variant === 'filled') {
       return {
         // ...defaultResolvedColors,
