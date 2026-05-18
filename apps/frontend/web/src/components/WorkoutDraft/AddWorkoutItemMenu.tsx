@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { Menu, ActionIcon } from '@mantine/core';
+import { Menu, ActionIcon, useMatches } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
 import { IoAddOutline, IoAdd } from 'react-icons/io5';
 
@@ -15,6 +15,8 @@ export default function AddWorkoutItemMenu() {
   const [menuOpened, setMenuOpened] = useState(false);
   const ref = useClickOutside(() => setMenuOpened(false));
 
+  const appliedSize = useMatches({ base: 'xl', md: 'xxl' });
+
   const handleAddExerciseClick = () => {
     navigate({
       to: '/workout/add-exercise',
@@ -27,7 +29,7 @@ export default function AddWorkoutItemMenu() {
         <ActionIcon
           variant="outline-lime"
           // c="lime.4"
-          size="xl"
+          size={appliedSize}
           w="min-content"
           // p="xs"
           onClick={() => setMenuOpened(!menuOpened)}
