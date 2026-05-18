@@ -20,16 +20,12 @@ export default function ExerciseSetGroupItemUI({
   return (
     <View
       style={{
-        // paddingInline: 8,
         width: 320,
         paddingTop: 8,
-        // marginBlock: 32,
-        // marginInline: 4,
         margin: 0,
         borderWidth: 0,
         borderBottomWidth: setsLength === setNumber ? 0 : 1,
-        borderColor: theme.colors.dark1,
-        // backgroundColor: theme.colors.violet9,
+        borderColor: theme.colors.gray3,
         borderRadius: 0,
       }}
     >

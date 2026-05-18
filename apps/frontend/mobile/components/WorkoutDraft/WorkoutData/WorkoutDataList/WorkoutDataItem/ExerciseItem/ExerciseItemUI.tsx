@@ -75,13 +75,9 @@ export default function ExerciseItemUI({
         )}
         <View
           style={{
-            // paddingBlock: 8,
-            // paddingInline: 16,
-            // marginBlock: 4,
             display: 'flex',
             alignItems: 'center',
             width: `${mode === 'log' ? '100%' : 'auto'}`,
-            // width: 'min-content',
             flexShrink: 1,
           }}
         >
@@ -89,9 +85,7 @@ export default function ExerciseItemUI({
             variant="headlineSmall"
             style={{
               color: theme.colors.onBackground,
-              // fontWeight: 800,
               textAlign: 'center',
-              // flexShrink: 1,
               padding: 8,
               flexWrap: 'wrap',
             }}
@@ -114,8 +108,6 @@ export default function ExerciseItemUI({
         style={{
           display: 'flex',
           alignItems: 'center',
-          // paddingInline:
-          //   parentType === 'superset' ? 0 : parentType === 'section' ? 14 : 16,
         }}
       >
         <SetList />
@@ -126,15 +118,11 @@ export default function ExerciseItemUI({
             display: 'flex',
             alignItems: 'flex-end',
             margin: 8,
-            // paddingBottom: 16,
-            // paddingInline: 4,
           }}
         >
           <Button
             mode="outlined"
             onPress={() => handleAddSetPress()}
-            // buttonColor={theme.colors.secondaryContainer}
-            // textColor={theme.colors.onSecondaryContainer}
             icon="plus"
           >
             Set

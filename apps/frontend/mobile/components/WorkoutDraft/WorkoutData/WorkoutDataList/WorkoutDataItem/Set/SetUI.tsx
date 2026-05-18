@@ -40,16 +40,8 @@ export default function SetUI({
       style={{
         width: 320,
         borderBottomWidth: borderBottomWidth,
-        borderBottomColor:
-          parentType === 'superset' ? theme.colors.dark1 : theme.colors.gray7,
+        borderBottomColor: theme.colors.gray3,
         paddingBottom: setIndex !== setsLength! - 1 ? 8 : 0,
-        // paddingInline:
-        //   parentType === 'superset' ? 0 : parentType === 'section' ? 8 : 16,
-        // paddingBlock: 4,
-        // marginBlock: 8,
-        // marginInline: 8,
-        // borderRadius: 20,
-        // backgroundColor: theme.colors.background,
       }}
     >
       <View
