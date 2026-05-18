@@ -25,8 +25,8 @@ export default function AddWorkoutItemMenu() {
     <Menu opened={menuOpened} shadow="md" width={200}>
       <Menu.Target ref={ref}>
         <ActionIcon
-          variant="filled"
-          c="lime.4"
+          variant="outline-lime"
+          // c="lime.4"
           size="xl"
           w="min-content"
           // p="xs"
