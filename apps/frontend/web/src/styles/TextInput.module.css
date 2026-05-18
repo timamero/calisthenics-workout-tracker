@@ -2,6 +2,16 @@
   .label {
     white-space: nowrap;
   }
+  .input {
+    background-color: var(--mantine-color-elevation-1);
+
+    &:focus,
+    &:focus-visible {
+      border: 0px solid var(--mantine-color-gray-5);
+      outline: 2px solid var(--mantine-color-lime-3);
+    }
+  }
+
   &[data-istitleh1],
   &[data-istitleh2] {
     .input {
@@ -35,7 +45,3 @@
     }
   }
 }
-
-/* .label {
-  white-space: nowrap;
-} */
