@@ -1,8 +1,13 @@
-import { Button } from '@mantine/core';
+import { useContext } from 'react';
+import { Stack, ActionIcon } from '@mantine/core';
 import {
-  IoChevronUpCircleOutline,
-  IoChevronDownCircleOutline,
+  IoChevronUp,
+  IoChevronDown,
+  // IoChevronUpCircleOutline,
+  // IoChevronDownCircleOutline,
 } from 'react-icons/io5';
+
+import { WorkoutDataItemContext } from '@cwt/context';
 
 interface ReorderButtonProps {
   isFirst: boolean;
@@ -17,30 +22,35 @@ export default function ReorderButtonGroup({
   handleUpClick,
   handleDownClick,
 }: ReorderButtonProps) {
+  const parentType = useContext(WorkoutDataItemContext)?.parentType;
+
+  const appliedVariant =
+    parentType === 'superset'
+      ? 'transparent-violet'
+      : parentType === 'section'
+        ? 'filled-gray'
+        : 'outline-lime';
+
   return (
-    <Button.Group orientation="vertical">
+    <Stack gap="xxs">
       {!isFirst && (
-        <Button
+        <ActionIcon
+          size="md"
+          variant={appliedVariant}
           onClick={() => handleUpClick()}
-          variant="transparent"
-          p={1}
-          bdrs="sm"
-          h="min-content"
         >
-          <IoChevronUpCircleOutline size={20} />
-        </Button>
+          <IoChevronUp style={{ width: '80%', height: '80%' }} />
+        </ActionIcon>
       )}
       {!isLast && (
-        <Button
-          h="min-content"
-          onClick={handleDownClick}
-          variant="transparent"
-          bdrs="sm"
-          p={1}
+        <ActionIcon
+          size="md"
+          variant={appliedVariant}
+          onClick={() => handleDownClick()}
         >
-          <IoChevronDownCircleOutline size={20} />
-        </Button>
+          <IoChevronDown style={{ width: '80%', height: '80%' }} />
+        </ActionIcon>
       )}
-    </Button.Group>
+    </Stack>
   );
 }

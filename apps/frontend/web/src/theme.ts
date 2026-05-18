@@ -160,11 +160,29 @@ const theme = createTheme({
         border: 'none',
       };
     }
+    if (input.variant === 'filled-gray') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'var(--mantine-color-gray-2)',
+        hover: 'var(--mantine-color-gray-4)',
+        color: 'var(--mantine-color-dark-4)',
+        border: 'none',
+      };
+    }
     if (input.variant === 'transparent') {
       return {
         // ...defaultResolvedColors,
         background: 'none',
-        hover: 'var(--mantine-color-gray-4)',
+        hover: 'var(--mantine-color-gray-2)',
+        color: 'var(--mantine-color-dark-7)',
+        border: 'none',
+      };
+    }
+    if (input.variant === 'transparent-violet') {
+      return {
+        // ...defaultResolvedColors,
+        background: 'none',
+        hover: 'var(--mantine-color-violet-2)',
         color: 'var(--mantine-color-dark-7)',
         border: 'none',
       };
