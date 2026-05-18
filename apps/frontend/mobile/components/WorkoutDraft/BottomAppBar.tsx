@@ -88,7 +88,6 @@ export default function BottomAppBar() {
 
 const styles = StyleSheet.create({
   bottom: {
-    backgroundColor: 'aquamarine',
     position: 'absolute',
     left: 0,
     right: 0,
