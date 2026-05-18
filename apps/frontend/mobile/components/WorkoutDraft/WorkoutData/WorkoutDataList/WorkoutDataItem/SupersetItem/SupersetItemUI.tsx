@@ -41,15 +41,12 @@ export default function SupersetItemUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: theme.colors.elevation.level4,
-        borderColor: theme.colors.dark1,
-        borderWidth: 2,
-        // paddingInline: 4,
-        // paddingBlock: 16,
+        backgroundColor: theme.colors.elevation.level3,
+        borderColor: theme.colors.violet2,
+        borderWidth: 1,
         marginInline: parentType === 'section' ? 20 : 4,
         marginTop: parentType === 'section' ? 24 : 44,
         marginBottom: isLast && !parentType ? 44 : 0,
-        // marginInline: 4,
         borderRadius: 8,
         alignItems: 'stretch',
       }}
@@ -61,21 +58,13 @@ export default function SupersetItemUI({
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderBottomColor: theme.colors.dark1,
+          borderBottomColor: theme.colors.violet2,
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
-          borderBottomWidth: 2,
-          // paddingInline: 4,
-          backgroundColor: theme.colors.elevation.level5,
+          borderBottomWidth: 1,
+          // backgroundColor: theme.colors.elevation.level3,
         }}
       >
-        {/* <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-          }}
-        > */}
         {(mode === 'build' || mode === 'edit') && (
           <ReorderButtonGroup
             handleUpPress={() => handleUpPress()}
@@ -86,23 +75,16 @@ export default function SupersetItemUI({
         )}
         <View
           style={{
-            // paddingBlock: 8,
-            // paddingInline: 16,
-            // marginBlock: 4,
             padding: 8,
             display: 'flex',
             alignItems: 'flex-end',
             width: `${mode === 'log' ? '100%' : 'auto'}`,
           }}
         >
-          <Text
-            variant="titleSmall"
-            style={{ color: theme.colors.onBackground }}
-          >
+          <Text variant="titleSmall" style={{ color: theme.colors.dark3 }}>
             Superset
           </Text>
         </View>
-        {/* </View> */}
         {(mode === 'build' || mode === 'edit') && (
           <WorkoutItemMenu
             itemType="superset"
@@ -112,15 +94,6 @@ export default function SupersetItemUI({
             handleDownPress={handleDownPress}
             handleDeletePress={handleDeleteSupersetPress}
           />
-          // <Button
-          //   mode="outlined"
-          //   labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-          //   textColor={theme.colors.onBackground}
-          //   style={{ borderColor: theme.colors.error, flexShrink: 0 }}
-          //   onPress={() => handleDeleteSupersetPress()}
-          // >
-          //   Delete
-          // </Button>
         )}
       </View>
       {mode === 'build' || mode === 'edit' ? (
@@ -140,12 +113,8 @@ export default function SupersetItemUI({
         >
           <CustomButton
             mode="elevated"
-            // labelStyle={{ marginVertical: 8, marginHorizontal: 16 }}
-            // textColor={theme.colors.primary}
-            // style={{ borderColor: theme.colors.primary, flexShrink: 0 }}
             onPress={() => handleOpenAddExercisePress()}
             icon="plus"
-            // style={{ marginBlock: 16 }}
           >
             Exercise
           </CustomButton>

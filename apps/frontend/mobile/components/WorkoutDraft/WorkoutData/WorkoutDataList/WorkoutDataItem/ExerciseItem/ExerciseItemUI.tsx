@@ -41,22 +41,19 @@ export default function ExerciseItemUI({
       style={{
         position: 'relative',
         paddingBlock: 8,
-        // paddingInline: parentType === 'superset' ? 8 : 4,
         marginInline:
           parentType === 'superset' ? 16 : parentType === 'section' ? 20 : 4,
-        // parentType === 'superset' ? 4 : parentType === 'section' ? 8 : 4,
         marginTop:
           parentType === 'superset' ? 0 : parentType === 'section' ? 24 : 44,
         marginBottom: isLast && !parentType ? 44 : 0,
         borderWidth: parentType === 'superset' ? 0 : 1,
         borderBottomWidth: 1,
-        borderColor:
-          parentType === 'superset' ? theme.colors.dark1 : theme.colors.outline,
+        borderColor: theme.colors.gray3,
         borderRadius: parentType === 'superset' ? 0 : 8,
         backgroundColor:
           parentType === 'superset'
             ? 'transparent'
-            : theme.colors.backgroundOpaque,
+            : theme.colors.elevation.level3,
       }}
     >
       <View
