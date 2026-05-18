@@ -35,23 +35,25 @@ export default function SetUI({
   handleDeleteSetClick,
 }: SetUIProps) {
   return (
-    <Stack gap="xs" px="lg" mb="xs" w="100%">
-      <Group w="100%" justify="space-between">
-        {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
-          <Text size="md" fw={700}>{`Set ${setIndex + 1}`}</Text>
-        )}
+    <Stack gap="xs" px="sm" mb="xs" w="100%">
+      <Stack w="100%" align="center">
+        <Group w="100%" justify="space-between" maw={360}>
+          {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
+            <Text size="md" fw={700}>{`Set ${setIndex + 1}`}</Text>
+          )}
 
-        {showDeleteButton && (mode === 'build' || mode === 'edit') && (
-          <ActionIcon
-            variant="subtle"
-            size="sm"
-            c="red"
-            onClick={() => handleDeleteSetClick()}
-          >
-            <IoTrashBin size={18} />
-          </ActionIcon>
-        )}
-      </Group>
+          {showDeleteButton && (mode === 'build' || mode === 'edit') && (
+            <ActionIcon
+              variant="subtle"
+              size="sm"
+              c="red"
+              onClick={() => handleDeleteSetClick()}
+            >
+              <IoTrashBin size={18} />
+            </ActionIcon>
+          )}
+        </Group>
+      </Stack>
       <Stack align="center">
         <Stack align="flex-start" gap="0" w="max-content">
           <Group>
@@ -61,20 +63,26 @@ export default function SetUI({
         </Stack>
       </Stack>
       {mode === 'log' && (
-        <Group justify="flex-end">
-          <Checkbox
-            label="Completed"
-            color="lime.4"
-            labelPosition="left"
-            checked={isCompleted}
-            onChange={(event) =>
-              handleToggleCompleted(event.currentTarget.checked)
-            }
-          />
-        </Group>
+        <Stack w="100%" align="center">
+          <Group justify="flex-end" w="100%" maw={360}>
+            <Checkbox
+              label="Completed"
+              color="lime.4"
+              labelPosition="left"
+              checked={isCompleted}
+              onChange={(event) =>
+                handleToggleCompleted(event.currentTarget.checked)
+              }
+            />
+          </Group>
+        </Stack>
       )}
       {setsLength && setsLength > 0 && setIndex !== setsLength - 1 && (
-        <Divider color="dark.2" />
+        <Stack w="100%" align="center">
+          <Stack w="100%" maw={360}>
+            <Divider color="dark.2" />
+          </Stack>
+        </Stack>
       )}
     </Stack>
   );

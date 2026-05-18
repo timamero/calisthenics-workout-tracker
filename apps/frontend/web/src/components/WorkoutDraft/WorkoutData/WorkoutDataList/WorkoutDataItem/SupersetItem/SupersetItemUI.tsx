@@ -41,7 +41,7 @@ export default function SupersetItemUI({
       bd="2px solid dark.1"
       bg="elevation.4"
       w="100%"
-      maw={600}
+      // maw={600}
       align="center"
       gap={0}
       my={parentType === null ? 'xl' : 0}

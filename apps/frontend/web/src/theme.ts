@@ -35,14 +35,17 @@ type ExtendedFontSizes =
   | 'display_xs'
   | DefaultMantineSize;
 type ExtendedLineHeights = 'xxs' | 'xxl' | DefaultMantineSize;
+type ExtendedSpacing = 'xxs' | DefaultMantineSize;
 
 declare module '@mantine/core' {
   export interface MantineThemeColorsOverride {
     colors: Record<ExtendedCustomColors, MantineColorsTuple>;
   }
+
   export interface MantineThemeSizesOverride {
     fontSizes: Record<ExtendedFontSizes, string>;
     lineHeights: Record<ExtendedLineHeights, string>;
+    spacing: Record<ExtendedSpacing, string>;
   }
 
   export interface MantineThemeOther {
@@ -78,6 +81,9 @@ const theme = createTheme({
   lineHeights: {
     xxs: '1.1',
     xxl: '1.8',
+  },
+  spacing: {
+    xxs: '0.25rem',
   },
   headings: {
     fontFamily:
