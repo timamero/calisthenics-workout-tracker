@@ -65,9 +65,10 @@ export default function SupersetItemUI({
         <Group
           // bd="2px solid gray.3"
           // bdrs="lg"
+          // mx="lg"
           wrap="nowrap"
           w="100%"
-          // bg="elevation.5"
+          // bg="red"
           style={{
             // borderTopLeftRadius: 'var(--mantine-radius-md)',
             // borderTopRightRadius: 'var(--mantine-radius-md)',
@@ -108,7 +109,9 @@ export default function SupersetItemUI({
           )}
         </Group>
         {mode === 'edit' || mode === 'build' ? (
-          <ExercisesList />
+          <Box w="100%" px={{ base: 'xxs', md: 'lg' }}>
+            <ExercisesList />
+          </Box>
         ) : (
           <ExerciseSetGroup />
         )}
