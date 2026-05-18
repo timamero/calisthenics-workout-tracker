@@ -1,4 +1,5 @@
 import { useEffect, type ChangeEvent } from 'react';
+import type { TitleOrder, TitleSize } from '@mantine/core';
 
 import { useUpdateTextInput } from '@cwt/hooks';
 
@@ -11,8 +12,8 @@ interface TextInputWithEditProps {
   variant?: 'title' | 'body';
   maxLength?: number;
   hideEditLabel?: boolean;
-  titleSize?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  titleOrder?: 1 | 2 | 3 | 4 | 5 | 6;
+  titleSize?: TitleSize;
+  titleOrder?: TitleOrder;
 }
 
 export default function TextInputWithEdit({
