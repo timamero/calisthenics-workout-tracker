@@ -40,14 +40,6 @@ export default function ExerciseItemUI({
   handleAddSetClick,
   handleDeleteExerciseClick,
 }: ExerciseItemUIProps) {
-  // const appliedStyle =
-  //   parentType === 'superset'
-  //     ? {
-  //         borderBottom: '1px solid var(--mantine-color-dark-1)',
-  //       }
-  //     : {
-  //         border: '1px solid var(--mantine-outline)',
-  //       };
   return (
     <Paper
       withBorder={parentType !== 'superset'}
@@ -57,15 +49,7 @@ export default function ExerciseItemUI({
       py={mode === 'edit' || mode === 'build' ? '0' : 'sm'}
       my={parentType === null ? 'xl' : 0}
     >
-      <Stack
-        w="100%"
-        // bg="transparent"
-        // bdrs={parentType === 'superset' ? 0 : 'var(--mantine-radius-lg)'}
-        align="center"
-        pos="relative"
-        // style={appliedStyle}
-        // my={parentType === null ? 'xl' : 0}
-      >
+      <Stack w="100%" align="center" pos="relative">
         <Group w="100%" wrap="nowrap">
           <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
             {(mode === 'edit' || mode === 'build') && (

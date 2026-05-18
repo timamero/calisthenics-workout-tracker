@@ -9,12 +9,7 @@ export default function LogoButton({ linkTo }: { linkTo: string }) {
     <UnstyledButton component={Link} to={linkTo} className={classes.logoButton}>
       <Group gap={8}>
         <Box className={classes.logoButtonIconWrapper} p="xs" bdrs={32}>
-          <Image
-            // radius="md"
-            w={16}
-            style={{ aspectRatio: 0.92 }}
-            src={Logo}
-          />
+          <Image w={16} style={{ aspectRatio: 0.92 }} src={Logo} />
         </Box>
         <Text
           className={classes.logoButtonText}

@@ -1,11 +1,6 @@
 import { useContext } from 'react';
 import { Stack, ActionIcon } from '@mantine/core';
-import {
-  IoChevronUp,
-  IoChevronDown,
-  // IoChevronUpCircleOutline,
-  // IoChevronDownCircleOutline,
-} from 'react-icons/io5';
+import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
 
 import { WorkoutDataItemContext } from '@cwt/context';
 
