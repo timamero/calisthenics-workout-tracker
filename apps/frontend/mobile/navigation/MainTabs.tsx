@@ -68,10 +68,15 @@ export const MainTabs = createBottomTabNavigator({
     Library: {
       screen: LibraryScreen,
       options: {
-        title: 'Exercise Library',
+        title: 'Exercises',
       },
     },
-    History: HistoryScreen,
+    History: {
+      screen: HistoryScreen,
+      options: {
+        title: 'Logs',
+      },
+    },
     Settings: SettingsScreen,
   },
   initialRouteName: 'Home',
