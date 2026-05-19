@@ -11,6 +11,7 @@ import {
   Stack,
   Loader,
   Container,
+  useMatches,
 } from '@mantine/core';
 import { Link, useNavigate } from '@tanstack/react-router';
 
@@ -52,6 +53,9 @@ function LoginView() {
     setLoading(false);
   }, [user, navigate]);
 
+  // --- UI Helpers
+  const appliedSize = useMatches({ base: 'sm', md: 'md' });
+
   if (loading || user) {
     return (
       <Stack align="center" justify="center" h="100%" gap="xs" flex={1}>
@@ -82,7 +86,13 @@ function LoginView() {
         >
           {siteContent().loginHeading}
         </Title>
-        <Text fw={500} fz="md" c="dark.3" mt={-12} ta="center">
+        <Text
+          fw={500}
+          fz={{ base: 'sm', md: 'md' }}
+          c="dark.3"
+          mt={-12}
+          ta="center"
+        >
           {siteContent().loginSubtext}
         </Text>
       </Stack>
@@ -91,7 +101,7 @@ function LoginView() {
           <TextInput
             label="Email"
             placeholder="Enter your email"
-            size="md"
+            size={appliedSize}
             mb="md"
             error={auth.errors.email?.message}
             {...auth.register('email')}
@@ -99,7 +109,7 @@ function LoginView() {
           <PasswordInput
             label="Password"
             placeholder="Enter your password"
-            size="md"
+            size={appliedSize}
             mb="md"
             error={auth.errors.password?.message}
             {...auth.register('password')}
@@ -110,7 +120,7 @@ function LoginView() {
               component={Link}
               to="/"
               type="button"
-              size="md"
+              size={appliedSize}
               variant="transparent"
             >
               Back
@@ -118,7 +128,7 @@ function LoginView() {
             <Button
               type="submit"
               variant="filled"
-              size="md"
+              size={appliedSize}
               onClick={handleSubmitClick}
               disabled={
                 auth.isLoading || auth.errors.email || auth.errors.password
