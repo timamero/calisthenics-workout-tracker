@@ -44,6 +44,7 @@ export default function LoginScreen() {
     >
       <View style={{ paddingBottom: 16 }}>
         <Text variant="headlineMedium">{siteContent().loginHeading}</Text>
+        <Text variant="bodyLarge">{siteContent().loginSubtext}</Text>
       </View>
       <Controller
         control={auth.control}
