@@ -9,8 +9,6 @@ import {
   Box,
   Title,
   Text,
-  Stack,
-  Loader,
 } from '@mantine/core';
 
 import { useNavigate } from '@tanstack/react-router';
@@ -18,6 +16,7 @@ import { useAuthSignUp } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
 import { supabase } from '../../services/supabaseClient';
+import DefaultLoader from '../../components/common/DefaultLoader';
 
 export const Route = createFileRoute('/_site/signup')({
   component: SignUpView,
@@ -56,20 +55,7 @@ function SignUpView() {
     reveal ? <IoEye size={16} /> : <IoEyeOff size={16} />;
 
   if (loading || user) {
-    return (
-      <Stack align="center" justify="center" h="100vh">
-        <Stack align="center">
-          <Title order={1} size={32}>
-            Thank you for waiting!
-          </Title>
-          <Text size="xl">Checking your credentials.</Text>
-        </Stack>
-
-        <Stack mt={40}>
-          <Loader color="lime" />;
-        </Stack>
-      </Stack>
-    );
+    return <DefaultLoader />;
   }
 
   return (
