@@ -9,16 +9,16 @@ import {
   Title,
   Text,
   Stack,
-  Loader,
   Container,
 } from '@mantine/core';
 import { Link, useNavigate } from '@tanstack/react-router';
 
-import { loaderContent, siteContent } from '@cwt/content';
+import { siteContent } from '@cwt/content';
 import { useAuthLogin } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
 import { supabase } from '../../services/supabaseClient';
+import DefaultLoader from '../../components/common/DefaultLoader';
 
 export const Route = createFileRoute('/_site/login')({
   component: LoginView,
@@ -53,18 +53,7 @@ function LoginView() {
   }, [user, navigate]);
 
   if (loading || user) {
-    return (
-      <Stack align="center" justify="center" h="100%" gap="xs" flex={1}>
-        <Stack h={40}>
-          <Loader color="lime" />;
-        </Stack>
-        <Stack align="center" mt="xs" h="100%">
-          <Text ff="heading" fz="xl" fw={700}>
-            {loaderContent().loadingAppMessage}
-          </Text>
-        </Stack>
-      </Stack>
-    );
+    return <DefaultLoader />;
   }
 
   return (
