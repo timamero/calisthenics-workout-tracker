@@ -1,15 +1,17 @@
+import { loaderContent } from './loaderContent';
+import { siteContent } from './siteContent';
+import { startWorkoutContent } from './startWorkoutContent';
 import {
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
   emptyWorkoutPlaceholderContent,
-} from "./workoutContent";
-import { startWorkoutContent } from "./startWorkoutContent";
-import { siteContent } from "./siteContent";
+} from './workoutContent';
 
 export {
+  loaderContent,
+  siteContent,
+  startWorkoutContent,
   saveWorkoutConfirmationContent,
   cancelWorkoutConfirmationContent,
   emptyWorkoutPlaceholderContent,
-  startWorkoutContent,
-  siteContent,
 };
