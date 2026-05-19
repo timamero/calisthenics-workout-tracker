@@ -55,7 +55,6 @@ export default function LibraryScreen() {
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
       if ((filters.length === 0 || filters === undefined) && !search) {
-        console.log('no need to clear');
         return;
       }
 
