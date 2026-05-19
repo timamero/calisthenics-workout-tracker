@@ -1,9 +1,10 @@
 import { View, Image } from 'react-native';
-import { useTheme, Text, Button } from 'react-native-paper';
+import { useTheme, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CustomTheme } from '../theme';
+import CustomButton from '../components/common/CustomButton';
 
 export default function LandingScreen() {
   const theme = useTheme() as CustomTheme;
@@ -102,20 +103,18 @@ export default function LandingScreen() {
           >
             Sign Up or Log In
           </Text>
-          <Button
+          <CustomButton
             mode="contained"
-            buttonColor={theme.colors.primary}
             onPress={() => navigation.navigate('Signup')}
           >
             Sign Up
-          </Button>
-          <Button
+          </CustomButton>
+          <CustomButton
             mode="outlined"
-            textColor={theme.colors.outline}
             onPress={() => navigation.navigate('Login')}
           >
             Log In
-          </Button>
+          </CustomButton>
         </View>
       </View>
     </SafeAreaView>
