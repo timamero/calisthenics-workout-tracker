@@ -36,10 +36,10 @@ export const MainTabs = createBottomTabNavigator({
 
         return <Icon source={iconName} color={color} size={size} />;
       },
-      tabBarActiveTintColor: '#5f3dc4',
+      tabBarActiveTintColor: '#a9e34b', // lime.4
       tabBarInactiveTintColor: '#242424',
       tabBarStyle: { backgroundColor: '#f8f9fa' },
-      tabBarLabelStyle: { fontFamily: 'ElmsSans-Regular' },
+      tabBarLabelStyle: { fontFamily: 'ElmsSans-Regular', color: '#242424' },
     };
   },
 
