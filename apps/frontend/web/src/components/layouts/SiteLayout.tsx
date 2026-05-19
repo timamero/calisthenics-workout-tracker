@@ -11,7 +11,7 @@ export default function SiteLayout() {
           <LogoButton linkTo="/" />
         </Group>
       </AppShell.Header>
-      <AppShell.Main>
+      <AppShell.Main style={{ display: 'flex', flexDirection: 'column' }}>
         <Outlet />
       </AppShell.Main>
     </AppShell>
