@@ -1,6 +1,7 @@
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { useTheme, Text, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CustomTheme } from '../theme';
 
@@ -9,14 +10,14 @@ export default function LandingScreen() {
   const navigation = useNavigation<any>();
 
   return (
-    <View
+    <SafeAreaView
       style={{
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
         gap: 16,
         paddingHorizontal: 16,
-        paddingBlock: 16,
+        paddingVertical: 16,
         alignItems: 'stretch',
         justifyContent: 'center',
         backgroundColor: theme.colors.background,
@@ -25,42 +26,55 @@ export default function LandingScreen() {
       <View
         style={{
           display: 'flex',
-          justifyContent: 'center',
-          paddingHorizontal: 16,
-          paddingBlock: 16,
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 4,
         }}
       >
-        <Text
-          variant="headlineLarge"
-          style={{ color: theme.colors.onBackground }}
+        <Image
+          style={{ width: 36, height: 36 }}
+          source={require('../assets/logo-240x240.png')}
+        />
+        <View
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            paddingHorizontal: 4,
+            paddingBlock: 16,
+          }}
         >
-          Torque
-        </Text>
-        <View style={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
           <Text
-            style={{
-              color: theme.colors.dark2,
-              fontFamily: 'Manrope-Bold',
-              textTransform: 'uppercase',
-              fontSize: 20,
-              lineHeight: 22,
-              letterSpacing: 0.64,
-            }}
+            variant="headlineLarge"
+            style={{ color: theme.colors.onBackground }}
           >
-            Generate force.
+            Torque
           </Text>
-          <Text
-            style={{
-              color: theme.colors.onBackground,
-              fontFamily: 'Manrope-Bold',
-              textTransform: 'uppercase',
-              fontSize: 20,
-              lineHeight: 22,
-              letterSpacing: 0.64,
-            }}
-          >
-            Anywhere.
-          </Text>
+          <View style={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
+            <Text
+              style={{
+                color: theme.colors.dark2,
+                fontFamily: 'Manrope-Bold',
+                textTransform: 'uppercase',
+                fontSize: 20,
+                lineHeight: 22,
+                letterSpacing: 0.64,
+              }}
+            >
+              Generate force.
+            </Text>
+            <Text
+              style={{
+                color: theme.colors.onBackground,
+                fontFamily: 'Manrope-Bold',
+                textTransform: 'uppercase',
+                fontSize: 20,
+                lineHeight: 22,
+                letterSpacing: 0.64,
+              }}
+            >
+              Anywhere.
+            </Text>
+          </View>
         </View>
       </View>
       <View
@@ -104,6 +118,6 @@ export default function LandingScreen() {
           </Button>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
