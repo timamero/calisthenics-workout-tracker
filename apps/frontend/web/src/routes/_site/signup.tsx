@@ -24,21 +24,24 @@ export const Route = createFileRoute('/_site/signup')({
 });
 
 function SignUpView() {
+  // --- UI Hooks ---
   const navigate = useNavigate();
+
+  // --- Logic Hooks ---
   const auth = useAuthSignUp(supabase);
   const user = useAuthStore((state) => state.user);
 
+  // --- Local State ---
   const [loading, setLoading] = useState(true);
 
+  // --- Handlers ---
   const handleSubmitClick = () => {
     if (auth.authError) {
       auth.clearError();
     }
   };
 
-  const VisibilityToggleIcon = ({ reveal }: { reveal: boolean }) =>
-    reveal ? <IoEye size={16} /> : <IoEyeOff size={16} />;
-
+  // --- Effects ---
   useEffect(() => {
     if (user) {
       navigate({
@@ -47,6 +50,10 @@ function SignUpView() {
     }
     setLoading(false);
   }, [user, navigate]);
+
+  // --- Helper Components ---
+  const VisibilityToggleIcon = ({ reveal }: { reveal: boolean }) =>
+    reveal ? <IoEye size={16} /> : <IoEyeOff size={16} />;
 
   if (loading || user) {
     return (
