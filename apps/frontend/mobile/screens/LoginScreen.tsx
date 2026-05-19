@@ -91,7 +91,6 @@ export default function LoginScreen() {
       {auth.authError && (
         <Text style={{ color: theme.colors.error }}>{auth.authError}</Text>
       )}
-      {/* TODO: Style disabled button */}
       <Button
         mode="contained"
         buttonColor={theme.colors.primary}
