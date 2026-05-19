@@ -103,8 +103,8 @@ const fontConfig = {
       default: 'sans-serif',
     }),
     fontSize: 32,
-    letterSpacing: 0.25,
-    lineHeight: 40,
+    letterSpacing: -0.32,
+    lineHeight: 32,
   },
   headlineMedium: {
     fontFamily: Platform.select({
