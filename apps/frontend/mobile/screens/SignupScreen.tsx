@@ -1,22 +1,33 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { useTheme, TextInput, Text, Button } from 'react-native-paper';
+import { useTheme, TextInput, Text } from 'react-native-paper';
 import { Controller } from 'react-hook-form';
+
+import { siteContent } from '@cwt/content';
 import { useAuthSignUpMobile } from '@cwt/hooks';
 
 import { CustomTheme } from '../theme';
-
+import { globalStyles } from '../styles/global';
 import { supabase } from '../services/supabaseClient';
 
+import CustomButton from '../components/common/CustomButton';
+
 export default function SignupScreen() {
+  // --- UI Hooks ---
   const theme = useTheme() as CustomTheme;
 
+  // --- Logic Hooks ---
+  const auth = useAuthSignUpMobile(supabase);
+
+  // --- Local State ---
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState<boolean>(false);
 
-  const auth = useAuthSignUpMobile(supabase);
+  // --- Styles ---
+  const styles = globalStyles(theme);
 
+  // --- Handlers ---
   const handleSubmitPress = (e: React.BaseSyntheticEvent) => {
     if (auth.authError) {
       auth.clearError();
@@ -26,21 +37,11 @@ export default function SignupScreen() {
   };
 
   return (
-    <View
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        flex: 1,
-        gap: 16,
-        paddingHorizontal: 16,
-        alignItems: 'stretch',
-        justifyContent: 'flex-start',
-        backgroundColor: theme.colors.background,
-      }}
-    >
-      <Text variant="displaySmall" style={{ color: theme.colors.onBackground }}>
-        Sign Up
-      </Text>
+    <View style={styles.container}>
+      <View style={{ paddingBottom: 16 }}>
+        <Text variant="headlineMedium">{siteContent().signupHeading}</Text>
+        <Text variant="bodyLarge">{siteContent().signupSubtext}</Text>
+      </View>
       <Controller
         control={auth.control}
         render={({ field: { onChange, onBlur, value } }) => (
@@ -173,10 +174,8 @@ export default function SignupScreen() {
       {auth.authError && (
         <Text style={{ color: theme.colors.error }}>{auth.authError}</Text>
       )}
-      {/* TODO: Style disabled button */}
-      <Button
+      <CustomButton
         mode="contained"
-        buttonColor={theme.colors.primary}
         onPress={handleSubmitPress}
         disabled={
           auth.isLoading ||
@@ -188,7 +187,7 @@ export default function SignupScreen() {
         }
       >
         Sign Up
-      </Button>
+      </CustomButton>
     </View>
   );
 }
