@@ -49,7 +49,7 @@ export default function SupersetItemUI({
       w="100%"
       radius="lg"
       bd="1px solid var(--mantine-color-violet-2)"
-      my={parentType === null ? 'xl' : 0}
+      my={{ base: 0, md: parentType === null ? 'xs' : 0 }}
     >
       <Stack bdrs="md" w="100%" align="center" gap={0}>
         <Group

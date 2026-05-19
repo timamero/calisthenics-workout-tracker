@@ -36,7 +36,7 @@ export default function SectionItemUI({
 }: SectionItemUIProps) {
   return (
     <Paper
-      my="xl"
+      my={{ base: 0, md: 'xs' }}
       radius="md"
       w="100%"
       shadow="sm"
