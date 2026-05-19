@@ -1,20 +1,21 @@
 .root {
-  border-radius: var(--mantine-radius-xl);
+  .label {
+    color: var(--mantine-color-dark-7);
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: var(--mantine-letter-spacing-wide);
+  }
+
+  border-radius: var(--mantine-radius-lg);
+
   &:hover {
-    background-color: var(--mantine-color-lime-2);
+    background-color: var(--mantine-color-lime-1);
+    .label {
+      font-weight: 600;
+    }
   }
 
   &[data-active] {
-    background-color: var(--mantine-color-lime-1);
-
-    .label {
-      color: var(--mantine-color-lime-9);
-    }
+    background-color: var(--mantine-color-gray-1);
   }
-}
-
-.label {
-  color: var(--mantine-color-dark-7);
-  text-transform: uppercase;
-  font-weight: 600;
 }
