@@ -3,18 +3,23 @@ import { View } from 'react-native';
 import { useTheme, TextInput, Text, Button } from 'react-native-paper';
 import { Controller } from 'react-hook-form';
 
+import { siteContent } from '@cwt/content';
 import { useAuthLoginMobile } from '@cwt/hooks';
 
 import { CustomTheme } from '../theme';
 import { supabase } from '../services/supabaseClient';
 
 export default function LoginScreen() {
+  // --- UI Hooks ---
   const theme = useTheme() as CustomTheme;
 
-  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-
+  // --- Logic Hooks ---
   const auth = useAuthLoginMobile(supabase);
 
+  // --- Local State ---
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
+  // --- Handlers ---
   const handleSubmitPress = (e: React.BaseSyntheticEvent) => {
     if (auth.authError) {
       auth.clearError();
@@ -37,7 +42,9 @@ export default function LoginScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text variant="displaySmall">Log In</Text>
+      <View style={{ paddingBottom: 16 }}>
+        <Text variant="headlineMedium">{siteContent().loginHeading}</Text>
+      </View>
       <Controller
         control={auth.control}
         render={({ field: { onChange, onBlur, value } }) => (
