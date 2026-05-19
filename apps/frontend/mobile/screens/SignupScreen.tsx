@@ -133,6 +133,7 @@ export default function SignupScreen() {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            autoCapitalize="none"
             secureTextEntry={!isPasswordVisible}
             error={typeof auth.errors.password?.message === 'string'}
           />
@@ -160,6 +161,7 @@ export default function SignupScreen() {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            autoCapitalize="none"
             secureTextEntry={!isConfirmPasswordVisible}
             error={typeof auth.errors.confirmPassword?.message === 'string'}
           />
