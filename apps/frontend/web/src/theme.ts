@@ -188,7 +188,7 @@ const theme = createTheme({
       return {
         background: 'none',
         hover: 'var(--mantine-color-violet-2)',
-        color: 'var(--mantine-color-dark-7)',
+        color: 'var(--mantine-color-violet-4)',
         border: 'none',
       };
     }
