@@ -14,6 +14,7 @@ import {
 } from '@mantine/core';
 import { Link, useNavigate } from '@tanstack/react-router';
 
+import { siteContent } from '@cwt/content';
 import { useAuthLogin } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
@@ -79,7 +80,7 @@ function LoginView() {
             textAlign: 'center',
           })}
         >
-          Every session counts. Pick up where you left off.
+          {siteContent().loginHeading}
         </Title>
       </Stack>
       <Box maw={400} mx="auto" mt="lg">
