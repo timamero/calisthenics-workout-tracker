@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from 'react-native-paper';
 
 import StartWorkoutScreen from '../screens/StartWorkoutScreen';
 import LibraryScreen from '../screens/LibraryScreen';
@@ -9,7 +9,6 @@ import SettingsScreen from '../screens/SettingsScreen';
 
 import { Text } from '../customText';
 
-// App Navigator
 export const MainTabs = createBottomTabNavigator({
   screenOptions: ({ route }) => {
     return {
@@ -24,23 +23,18 @@ export const MainTabs = createBottomTabNavigator({
         let iconName;
 
         if (route.name === 'Home') {
-          iconName = focused ? 'home' : 'home-outline';
-        } else if (route.name === 'About') {
-          iconName = focused
-            ? 'information-circle'
-            : 'information-circle-outline';
+          iconName = focused ? 'home-variant' : 'home-variant-outline';
         } else if (route.name === 'Library') {
-          iconName = focused ? 'library' : 'library-outline';
+          iconName = focused ? 'database' : 'database-outline';
         } else if (route.name === 'History') {
-          iconName = focused ? 'file-tray-full' : 'file-tray-outline';
+          iconName = focused ? 'chart-box' : 'chart-box-outline';
         } else if (route.name === 'Settings') {
-          iconName = focused ? 'settings' : 'settings-outline';
+          iconName = focused ? 'cog' : 'cog-outline';
         } else {
-          iconName = 'brush';
+          iconName = 'close-thick';
         }
 
-        // @ts-ignore
-        return <Ionicons name={iconName} size={size} color={color} />;
+        return <Icon source={iconName} color={color} size={size} />;
       },
       tabBarActiveTintColor: '#5f3dc4',
       tabBarInactiveTintColor: '#242424',
