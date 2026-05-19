@@ -14,7 +14,7 @@ import {
 } from '@mantine/core';
 import { Link, useNavigate } from '@tanstack/react-router';
 
-import { siteContent } from '@cwt/content';
+import { loaderContent, siteContent } from '@cwt/content';
 import { useAuthLogin } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
@@ -54,15 +54,14 @@ function LoginView() {
 
   if (loading || user) {
     return (
-      <Stack align="center" justify="center" h="100vh">
-        <Stack align="center">
-          <Text ff="heading" fz="xl" fw={700}>
-            Welcome back! Fetching your data now…
-          </Text>
-        </Stack>
-
-        <Stack mt={40}>
+      <Stack align="center" justify="center" h="100%" gap="xs" flex={1}>
+        <Stack h={40}>
           <Loader color="lime" />;
+        </Stack>
+        <Stack align="center" mt="xs" h="100%">
+          <Text ff="heading" fz="xl" fw={700}>
+            {loaderContent().loadingAppMessage}
+          </Text>
         </Stack>
       </Stack>
     );
