@@ -26,7 +26,7 @@ export const AuthStack = createNativeStackNavigator({
     },
     Login: {
       screen: LoginScreen,
-      options: authScreenOptions,
+      options: { ...authScreenOptions, title: 'Log In' },
     },
     Signup: {
       screen: SignupScreen,
