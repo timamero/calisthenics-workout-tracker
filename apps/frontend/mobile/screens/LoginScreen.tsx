@@ -78,6 +78,7 @@ export default function LoginScreen() {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            autoCapitalize="none"
             secureTextEntry={!isPasswordVisible}
             error={typeof auth.errors.password?.message === 'string'}
           />
