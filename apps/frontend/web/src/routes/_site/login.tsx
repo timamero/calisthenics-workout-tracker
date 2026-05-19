@@ -69,18 +69,22 @@ function LoginView() {
 
   return (
     <Container py="xl">
-      <Stack align="center" w="100%">
+      <Stack align="center" w="100%" gap={0}>
         <Title
           order={1}
           mb="md"
           fz={{ base: 'h3', md: 'h2' }}
+          lh="xxs"
+          ta="center"
           style={(theme) => ({
             letterSpacing: theme.other.letterSpacing.tight,
-            textAlign: 'center',
           })}
         >
           {siteContent().loginHeading}
         </Title>
+        <Text fw={500} fz="md" c="dark.3" mt={-12} ta="center">
+          {siteContent().loginSubtext}
+        </Text>
       </Stack>
       <Box maw={400} mx="auto" mt="lg">
         <form onSubmit={auth.handleSubmit}>
