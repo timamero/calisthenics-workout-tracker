@@ -24,7 +24,7 @@ export default function ReorderButtonGroup({
       ? 'transparent-violet'
       : parentType === 'section'
         ? 'filled-gray'
-        : 'outline-lime';
+        : 'filled';
 
   return (
     <Stack gap="xxs">

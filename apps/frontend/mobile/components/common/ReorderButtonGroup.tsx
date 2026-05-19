@@ -28,7 +28,7 @@ export default function ReorderButtonGroup({
     parentType === 'superset'
       ? theme.colors.violet4
       : parentType === 'section'
-        ? theme.colors.dark2
+        ? theme.colors.dark3
         : theme.colors.primary;
 
   return (
