@@ -9,8 +9,8 @@ export default function DashBoardLayout() {
 
   const navLinks = [
     linkOptions({ label: 'Home', to: '/dashboard/home' }),
-    linkOptions({ label: 'Library', to: '/dashboard/library' }),
-    linkOptions({ label: 'Past Workouts', to: '/dashboard/history' }),
+    linkOptions({ label: 'Exercises', to: '/dashboard/library' }),
+    linkOptions({ label: 'Logs', to: '/dashboard/history' }),
     // linkOptions({ label: 'Profile', to: '/dashboard/user' }), // temporarily disabled until v0.1.0-alpha.2
     linkOptions({ label: 'Settings', to: '/dashboard/settings' }),
   ];
@@ -31,6 +31,7 @@ export default function DashBoardLayout() {
           <LogoButton linkTo="/dashboard/home" />
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         </Group>
+        Exercises
       </AppShell.Header>
       <AppShell.Navbar p="md">
         {navLinks.map((link) => {
