@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { createFileRoute, useBlocker } from '@tanstack/react-router';
-import { Title, Stack, Group, ActionIcon } from '@mantine/core';
+import { Title, Stack, Group, ActionIcon, Container, Box } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IoFilterOutline } from 'react-icons/io5';
 
@@ -70,25 +70,48 @@ function LibraryView() {
         handlers: detailHandlers,
       }}
     >
-      <Stack gap="xl">
-        <Title size="h6">Exercise Library</Title>
-        <Group>
-          <ExerciseSearchBar />
-          <ActionIcon
-            variant="outline"
-            color="gray.5"
-            aria-label="Exercise filter"
-            onClick={() => exerciseFilterOverlayHandler?.open()}
+      <Box pos="relative">
+        <Container py="md">
+          <Title
+            order={1}
+            mb="md"
+            fz={{ base: 'h3', md: 'h2' }}
+            lh="xxs"
+            ta="center"
+            style={(theme) => ({
+              letterSpacing: theme.other.letterSpacing.tight,
+            })}
           >
-            <IoFilterOutline />
-          </ActionIcon>
-        </Group>
-        <Stack align="center">
-          <ExercisesList />
-        </Stack>
-        <ExercisesFilterOverlay />
-        <ExerciseDetailOverlay />
-      </Stack>
+            Exercise Library
+          </Title>
+        </Container>
+        <Container
+          py="md"
+          pos="sticky"
+          top={58}
+          bg="white"
+          style={{ borderBottom: '1px solid var(--mantine-color-gray-3)' }}
+        >
+          <Group>
+            <ExerciseSearchBar />
+            <ActionIcon
+              variant="outline"
+              color="gray.5"
+              aria-label="Exercise filter"
+              onClick={() => exerciseFilterOverlayHandler?.open()}
+            >
+              <IoFilterOutline />
+            </ActionIcon>
+          </Group>
+        </Container>
+        <Container p="md">
+          <Stack align="center">
+            <ExercisesList />
+          </Stack>
+        </Container>
+      </Box>
+      <ExercisesFilterOverlay />
+      <ExerciseDetailOverlay />
     </ExerciseDetailContext.Provider>
   );
 }

@@ -23,7 +23,7 @@ export default function DashBoardLayout() {
         breakpoint: 'sm',
         collapsed: { mobile: !opened },
       }}
-      padding="md"
+      padding={0}
       style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}
     >
       <AppShell.Header>
