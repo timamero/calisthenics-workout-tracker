@@ -14,7 +14,7 @@ export default function ExercisesList() {
       spacing={{ base: 'lg' }}
       verticalSpacing={{ base: 'lg' }}
     >
-      {exercises.map((exercise, i) => (
+      {exercises!.map((exercise, i) => (
         <ExerciseCard exercise={exercise} key={i} />
       ))}
     </SimpleGrid>
