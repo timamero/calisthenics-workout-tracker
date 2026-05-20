@@ -80,6 +80,18 @@ export type CustomTheme = typeof DefaultTheme & {
     red7: string;
     red8: string;
     red9: string;
+
+    limeElevation1: string;
+    limeElevation2: string;
+    limeElevation3: string;
+    limeElevation4: string;
+    limeElevation5: string;
+
+    violetElevation1: string;
+    violetElevation2: string;
+    violetElevation3: string;
+    violetElevation4: string;
+    violetElevation5: string;
   };
 };
 
@@ -343,6 +355,18 @@ const theme: CustomTheme = {
     red7: '#f03e3e',
     red8: '#e03131',
     red9: '#c92a2a',
+
+    limeElevation1: '#F9FDF0',
+    limeElevation2: '#FAFEF2',
+    limeElevation3: '#FBFEF4',
+    limeElevation4: '#FCFEF8',
+    limeElevation5: '#FDFEFA',
+
+    violetElevation1: '#F8F6FF',
+    violetElevation2: '#F8F7FF',
+    violetElevation3: '#F9F8FF',
+    violetElevation4: '#FAF9FF',
+    violetElevation5: '#FBFAFF',
   },
 };
 

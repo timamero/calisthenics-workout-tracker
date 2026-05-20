@@ -10,7 +10,6 @@ export default function useUpdateTextInput(initialValue: string = "") {
     setIsEditMode(false);
   };
   const handleSaveClick = (onSave: null | (() => void) = null) => {
-    console.log("calling handleSaveClick with onSave: ", onSave);
     if (onSave) {
       onSave();
     }

@@ -10,7 +10,7 @@ import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
-import WorkoutData from '../components/WorkoutDraft/WorkoutData';
+import WorkoutData from '../components/Workout/WorkoutData';
 
 export default function WorkoutLogDetailScreen() {
   const navigation = useNavigation<any>();
