@@ -3,7 +3,6 @@ import { Card, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
 import { CustomTheme } from '../../theme';
-import { Text } from '../../customText';
 
 interface LargeButtonProps {
   handlePress: () => void;
@@ -20,14 +19,7 @@ export default function LargeButton({
   return (
     <Card style={styles.card} onPress={() => handlePress()}>
       <Card.Content style={styles.cardContent}>
-        <View style={styles.titleContainer}>
-          <Text
-            variant="headlineMedium"
-            style={{ color: theme.colors.onSecondary }}
-          >
-            {children}
-          </Text>
-        </View>
+        <View style={styles.contentContainer}>{children}</View>
       </Card.Content>
     </Card>
   );
@@ -36,14 +28,13 @@ export default function LargeButton({
 const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     card: {
-      marginBlock: 12,
-      marginInline: 8,
-      backgroundColor: theme.colors.secondary,
+      backgroundColor: theme.colors.primaryContainer,
       boxShadow: 'rgba(222, 226, 230, 0.25) 1px 3px 17px -1px',
-      padding: 16,
-      borderColor: theme.colors.onSecondary,
+      paddingInline: 16,
+      paddingBlock: 32,
+      borderColor: theme.colors.onPrimaryContainer,
       borderWidth: 1,
-      height: 80,
+      height: 'auto',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -52,9 +43,10 @@ const getStyles = (theme: CustomTheme) =>
       paddingHorizontal: 0,
       paddingVertical: 0,
     },
-    titleContainer: {
+    contentContainer: {
       display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'column',
       justifyContent: 'center',
+      alignItems: 'center',
     },
   });

@@ -7,12 +7,16 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { startWorkoutContent } from '@cwt/content';
 
 import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
+import { globalStyles } from '../styles/global';
 import { CustomTheme } from '../theme';
+import { Text } from '../customText';
 import LargeButton from '../components/common/LargeButton';
 
 export default function StartWorkoutScreen() {
   const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
+
+  const styles = globalStyles(theme);
 
   const setIsAddWorkoutItemButtonsVisible =
     useContext(WorkoutDraftContext)?.setIsAddWorkoutItemButtonsVisible!;
@@ -83,18 +87,42 @@ export default function StartWorkoutScreen() {
   // }, [navigation, theme.colors.grey]);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: theme.colors.background,
-      }}
-    >
+    <View style={styles.container}>
       {/* <LargeButton handlePress={onBuildNewWorkoutPress}>
         {startWorkoutContent().createNewBuildButton}
       </LargeButton> */}
-      <LargeButton handlePress={onLogNewWorkoutPress}>
-        {startWorkoutContent().createNewLogButton}
-      </LargeButton>
+      <View>
+        <Text variant="headlineMedium">
+          {startWorkoutContent().welcomeHeadline}
+        </Text>
+        <Text variant="bodyLarge">{startWorkoutContent().welcomeSubtext}</Text>
+      </View>
+      <View
+        style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <View style={{ transform: 'translateY(-50%)' }}>
+          <LargeButton handlePress={onLogNewWorkoutPress}>
+            {/* {startWorkoutContent().createNewLogButton} */}
+            <Text
+              variant="headlineMedium"
+              style={{ color: theme.colors.onSecondary }}
+            >
+              {startWorkoutContent().createNewLogButton}
+            </Text>
+            <Text
+              variant="bodyMedium"
+              style={{ color: theme.colors.onSecondary }}
+            >
+              {startWorkoutContent().createNewLogSublabel}
+            </Text>
+          </LargeButton>
+        </View>
+      </View>
       {/* 
       <Text variant="headlineSmall" style={{ color: theme.colors.light }}>
         {startWorkoutContent().workoutBuildListHeading}

@@ -116,7 +116,7 @@ const fontConfig = {
     }),
     fontSize: 32,
     letterSpacing: -0.32,
-    lineHeight: 32,
+    lineHeight: 40,
   },
   headlineMedium: {
     fontFamily: Platform.select({
