@@ -31,7 +31,6 @@ export default function DashBoardLayout() {
           <LogoButton linkTo="/dashboard/home" />
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         </Group>
-        Exercises
       </AppShell.Header>
       <AppShell.Navbar p="md">
         {navLinks.map((link) => {

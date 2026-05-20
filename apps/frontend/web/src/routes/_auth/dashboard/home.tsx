@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title, Stack, Group, Text } from '@mantine/core';
+import { Title, Stack, Group, Text, Container } from '@mantine/core';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import { startWorkoutContent } from '@cwt/content';
 
 import LargeButton from '../../../components/common/LargeButton';
 
@@ -59,25 +60,37 @@ function AppView() {
   // });
 
   return (
-    <Stack align="center" justify="flex-start">
-      <Title order={1}>Welcome Back</Title>
-      <Text size="xl">
-        Progress isn't always a straight line. Just keep moving.
-      </Text>
-      <Stack gap="xl" mt={80}>
-        <Title order={2} size="h2">
-          Start Workout
-        </Title>
-        <Group w="100%">
-          <LargeButton
-            to="/workout"
-            onButtonClick={handleCreateWorkoutLogClick}
+    <Container h="100%" py="xl">
+      <Stack h="100%">
+        <Stack gap={0} align="center">
+          <Title
+            order={1}
+            size="h2"
+            lh="xxs"
+            lts="var(--mantine-letter-spacing-tight)"
           >
-            <Text fw={700} ta="center">
-              Start Blank Workout
-            </Text>
-          </LargeButton>
-          {/* <LargeButton
+            {startWorkoutContent().welcomeHeadline}
+          </Title>
+          <Text size="xl">{startWorkoutContent().welcomeSubtext}</Text>
+        </Stack>
+        <Stack flex={1} gap="xl" justify="center">
+          <Group
+            w="100%"
+            justify="center"
+            style={{ transform: 'translateY(-100%)' }}
+          >
+            <LargeButton
+              to="/workout"
+              onButtonClick={handleCreateWorkoutLogClick}
+            >
+              <Text fz="h4" fw={700} ta="center" lh="xxs">
+                {startWorkoutContent().createNewLogButton}
+              </Text>
+              <Text fz="sm" fw={400} ta="center" lh="xxs">
+                {startWorkoutContent().createNewLogSublabel}
+              </Text>
+            </LargeButton>
+            {/* <LargeButton
             to="/workout"
             onButtonClick={handleCreateWorkoutBuildClick}
           >
@@ -85,8 +98,8 @@ function AppView() {
               Create a Workout Template
             </Text>
           </LargeButton> */}
-        </Group>
-        {/* {workoutBuildCards && workoutBuildCards.length > 0 && (
+          </Group>
+          {/* {workoutBuildCards && workoutBuildCards.length > 0 && (
           <Stack>
             <Text fw={700} size="xl">
               Start Workout From Template
@@ -97,7 +110,7 @@ function AppView() {
           </Stack>
         )} */}
 
-        {/* {workoutLogCards && workoutLogCards.length > 0 && (
+          {/* {workoutLogCards && workoutLogCards.length > 0 && (
           <Stack>
             <Text fw={700} size="xl">
               Start Workout From Recent Workout
@@ -107,7 +120,8 @@ function AppView() {
             </ScrollArea>
           </Stack>
         )} */}
+        </Stack>
       </Stack>
-    </Stack>
+    </Container>
   );
 }
