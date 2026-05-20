@@ -62,6 +62,18 @@ declare module '@mantine/core' {
       wider: string;
       widest: string;
     };
+    customColors: {
+      limeElevation1: string;
+      limeElevation2: string;
+      limeElevation3: string;
+      limeElevation4: string;
+      limeElevation5: string;
+      violetElevation1: string;
+      violetElevation2: string;
+      violetElevation3: string;
+      violetElevation4: string;
+      violetElevation5: string;
+    };
   }
 }
 
@@ -191,7 +203,7 @@ const theme = createTheme({
       return {
         background: 'none',
         hover: 'var(--mantine-color-violet-2)',
-        color: 'var(--mantine-color-dark-7)',
+        color: 'var(--mantine-color-violet-4)',
         border: 'none',
       };
     }
@@ -239,6 +251,19 @@ const theme = createTheme({
       wider: '0.1em',
       widest: '0.16em',
     },
+    customColors: {
+      limeElevation1: '#F9FDF0',
+      limeElevation2: '#FAFEF2',
+      limeElevation3: '#FBFEF4',
+      limeElevation4: '#FCFEF8',
+      limeElevation5: '#FDFEFA',
+
+      violetElevation1: '#F8F6FF',
+      violetElevation2: '#F8F7FF',
+      violetElevation3: '#F9F8FF',
+      violetElevation4: '#FAF9FF',
+      violetElevation5: '#FBFAFF',
+    },
   },
 });
 
@@ -252,6 +277,21 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--mantine-letter-spacing-wide': theme.other.letterSpacing.wide,
     '--mantine-letter-spacing-wider': theme.other.letterSpacing.wider,
     '--mantine-letter-spacing-widest': theme.other.letterSpacing.widest,
+    '--mantine-color-lime-elevation-1': theme.other.customColors.limeElevation1,
+    '--mantine-color-lime-elevation-2': theme.other.customColors.limeElevation2,
+    '--mantine-color-lime-elevation-3': theme.other.customColors.limeElevation3,
+    '--mantine-color-lime-elevation-4': theme.other.customColors.limeElevation4,
+    '--mantine-color-lime-elevation-5': theme.other.customColors.limeElevation5,
+    '--mantine-color-violet-elevation-1':
+      theme.other.customColors.violetElevation1,
+    '--mantine-color-violet-elevation-2':
+      theme.other.customColors.violetElevation2,
+    '--mantine-color-violet-elevation-3':
+      theme.other.customColors.violetElevation3,
+    '--mantine-color-violet-elevation-4':
+      theme.other.customColors.violetElevation4,
+    '--mantine-color-violet-elevation-5':
+      theme.other.customColors.violetElevation5,
   },
   light: {},
   dark: {},
