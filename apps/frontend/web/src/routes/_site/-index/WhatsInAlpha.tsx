@@ -50,9 +50,6 @@ function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
 // ─── What's in alpha.1 ───────────────────────────────────────────────────────
 
 export default function WhatsInAlpha() {
-  const smallFontSize = { base: 'xxs', md: 'xs' };
-  const title2FontSize = { base: 'h2', md: 'display_xs' };
-
   const features = [
     {
       icon: IoServerOutline,
@@ -84,7 +81,7 @@ export default function WhatsInAlpha() {
     <Stack gap="md" mb="xl">
       <Box>
         <Text
-          fz={smallFontSize}
+          fz={{ base: 'xxs', md: 'xs' }}
           fw={500}
           tt="uppercase"
           c="dark.3"
@@ -97,7 +94,7 @@ export default function WhatsInAlpha() {
         </Text>
         <Title
           order={2}
-          fz={title2FontSize}
+          fz={{ base: 'h2', md: 'display_xs' }}
           lh="xxs"
           style={(theme) => ({
             letterSpacing: theme.other.letterSpacing.tight,

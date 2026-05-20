@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router';
 import {
-  // Container,
   Stack,
   Group,
   Box,
@@ -8,21 +7,9 @@ import {
   Title,
   Badge,
   Paper,
-  // SimpleGrid,
-  // Divider,
-  // Alert,
-  // ThemeIcon,
   Button,
   useMatches,
 } from '@mantine/core';
-
-// import {
-//   IoInformationCircleOutline,
-//   IoSwapVertical,
-//   IoTimeOutline,
-//   IoServerOutline,
-//   IoLayersOutline,
-// } from 'react-icons/io5';
 
 import { useDefaultSize } from '../../../hooks';
 
