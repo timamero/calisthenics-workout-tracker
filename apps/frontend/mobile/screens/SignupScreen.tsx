@@ -38,12 +38,12 @@ export default function SignupScreen() {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: theme.colors.background }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        contentContainerStyle={styles.container}
+        contentContainerStyle={{ ...styles.container, gap: 16 }}
       >
         <View style={{ paddingBottom: 16 }}>
           <Text variant="headlineMedium">{siteContent().signupHeading}</Text>
