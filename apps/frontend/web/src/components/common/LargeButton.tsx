@@ -18,11 +18,11 @@ export default function LargeButton({
   return (
     <UnstyledButton
       onClick={onButtonClick}
-      className={classes.button}
+      // className={classes.button}
       component={Link}
       to={to}
     >
-      <Paper p="md" radius="sm" bg="lime.2" h={240} w={240}>
+      <Paper py="lg" px="xxl" className={classes.button}>
         <Stack align="center" justify="center" gap="sm" h="100%">
           {children}
         </Stack>

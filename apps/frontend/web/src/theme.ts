@@ -38,7 +38,7 @@ type ExtendedFontSizes =
   | 'display_xs'
   | DefaultMantineSize;
 type ExtendedLineHeights = 'xxs' | 'xxl' | DefaultMantineSize;
-type ExtendedSpacing = 'xxs' | DefaultMantineSize;
+type ExtendedSpacing = 'xxs' | 'xxl' | DefaultMantineSize;
 
 declare module '@mantine/core' {
   export interface MantineThemeColorsOverride {
@@ -99,6 +99,7 @@ const theme = createTheme({
   },
   spacing: {
     xxs: '0.25rem',
+    xxl: '3rem',
   },
   headings: {
     fontFamily:

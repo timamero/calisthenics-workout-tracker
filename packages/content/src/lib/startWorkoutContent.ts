@@ -1,8 +1,12 @@
-export const startWorkoutContent = () => {
+export const startWorkoutContent = (name?: string) => {
   return {
-    createNewBuildButton: "Build New Workout",
-    createNewLogButton: "Start Blank Workout",
-    workoutBuildListHeading: "Start Workout From Template",
-    workoutLogListHeading: "Start Workout From Recent Workout",
+    welcomeHeadline: name
+      ? `Let's get to work, ${name}.`
+      : "Let's get to work!",
+    welcomeSubtext: "What are you doing today?",
+    createNewTemplateButton: "Build a template",
+    createNewTemplateSublabel: "Save a workout to reuse later.",
+    createNewLogButton: "Start a workout",
+    createNewLogSublabel: "Log a session as you go.",
   };
 };
