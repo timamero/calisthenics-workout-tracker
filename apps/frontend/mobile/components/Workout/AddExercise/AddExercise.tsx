@@ -7,7 +7,7 @@ import {
   useResetSelectedIDs,
 } from '@cwt/hooks';
 
-import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
+import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 
 import AddExerciseUI from './AddExerciseUI';
 

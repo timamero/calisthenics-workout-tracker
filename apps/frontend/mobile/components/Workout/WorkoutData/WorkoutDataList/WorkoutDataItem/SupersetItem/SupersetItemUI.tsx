@@ -5,7 +5,7 @@ import type { Mode, Superset } from '@cwt/schema/workouts';
 // import { WorkoutDataItemContext } from '@cwt/context';
 
 // import { ExerciseItemContainer } from '../ExerciseItem';
-import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
+import ReorderButtonGroup from '../../../../ReorderButtonGroup';
 import { CustomTheme } from '../../../../../../theme';
 import { Text } from '../../../../../../customText';
 import ExercisesList from './ExercisesList';

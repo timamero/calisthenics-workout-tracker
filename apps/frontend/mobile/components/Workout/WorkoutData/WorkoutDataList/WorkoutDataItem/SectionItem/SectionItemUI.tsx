@@ -10,7 +10,7 @@ import { CustomTheme } from '../../../../../../theme';
 
 import ExerciseItem from '../ExerciseItem';
 import SupersetItem from '../SupersetItem';
-import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
+import ReorderButtonGroup from '../../../../ReorderButtonGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
 import TextInputWithEdit from '../../../../../common/TextInputWithEdit';
 import AddItemMenu from './AddItemMenu';
