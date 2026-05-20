@@ -12,14 +12,16 @@ import {
   Container,
   Stack,
 } from '@mantine/core';
-
 import { useNavigate } from '@tanstack/react-router';
+
+import { siteContent } from '@cwt/content';
 import { useAuthSignUp } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
 import { supabase } from '../../services/supabaseClient';
+import { useDefaultSize } from '../../hooks';
+
 import DefaultLoader from '../../components/common/DefaultLoader';
-import { siteContent } from '@cwt/content';
 
 export const Route = createFileRoute('/_site/signup')({
   component: SignUpView,
@@ -57,6 +59,8 @@ function SignUpView() {
   const VisibilityToggleIcon = ({ reveal }: { reveal: boolean }) =>
     reveal ? <IoEye size={16} /> : <IoEyeOff size={16} />;
 
+  const defaultSize = useDefaultSize();
+
   if (loading || user) {
     return <DefaultLoader />;
   }
@@ -85,7 +89,7 @@ function SignUpView() {
           <TextInput
             label="Username"
             placeholder="Enter username"
-            size="md"
+            size={defaultSize}
             mb="md"
             withAsterisk
             error={auth.errors.username?.message}
@@ -95,7 +99,7 @@ function SignUpView() {
             <TextInput
               label="First Name"
               placeholder="Enter your first name"
-              size="md"
+              size={defaultSize}
               mb="md"
               error={auth.errors.firstName?.message}
               {...auth.register('firstName')}
@@ -104,7 +108,7 @@ function SignUpView() {
             <TextInput
               label="Last Name"
               placeholder="Enter your last name"
-              size="md"
+              size={defaultSize}
               mb="md"
               style={{ flexShrink: 1 }}
               error={auth.errors.lastName?.message}
@@ -114,7 +118,7 @@ function SignUpView() {
           <TextInput
             label="Email"
             placeholder="Enter your email"
-            size="md"
+            size={defaultSize}
             mb="md"
             withAsterisk
             error={auth.errors.email?.message}
@@ -123,7 +127,7 @@ function SignUpView() {
           <PasswordInput
             label="Password"
             placeholder="Enter your password"
-            size="md"
+            size={defaultSize}
             mb="md"
             withAsterisk
             visibilityToggleIcon={VisibilityToggleIcon}
@@ -133,7 +137,7 @@ function SignUpView() {
           <PasswordInput
             label="Confirm Password"
             placeholder="Enter your password"
-            size="md"
+            size={defaultSize}
             mb="md"
             withAsterisk
             error={auth.errors.confirmPassword?.message}
@@ -146,7 +150,7 @@ function SignUpView() {
               component={Link}
               to="/"
               type="button"
-              size="md"
+              size={defaultSize}
               variant="transparent"
             >
               Back
@@ -154,7 +158,7 @@ function SignUpView() {
             <Button
               type="submit"
               variant="filled"
-              size="md"
+              size={defaultSize}
               onClick={handleSubmitClick}
               disabled={
                 auth.isLoading ||
