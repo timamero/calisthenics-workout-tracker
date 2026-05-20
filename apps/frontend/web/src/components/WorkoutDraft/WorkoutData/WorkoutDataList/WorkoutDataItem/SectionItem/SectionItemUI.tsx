@@ -40,7 +40,7 @@ export default function SectionItemUI({
       radius="md"
       w="100%"
       shadow="sm"
-      bg="elevation.5"
+      bg="var(--mantine-color-lime-elevation-3)"
       bd="1px solid var(--mantine-color-lime-2)"
     >
       <Stack
