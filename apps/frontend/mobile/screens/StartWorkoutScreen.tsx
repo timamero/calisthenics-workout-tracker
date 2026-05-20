@@ -105,7 +105,7 @@ export default function StartWorkoutScreen() {
           justifyContent: 'center',
         }}
       >
-        <View style={{ transform: 'translateY(-50%)' }}>
+        <View style={{ transform: 'translateY(-100%)' }}>
           <LargeButton handlePress={onLogNewWorkoutPress}>
             {/* {startWorkoutContent().createNewLogButton} */}
             <Text
