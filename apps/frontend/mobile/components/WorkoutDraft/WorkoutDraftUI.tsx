@@ -56,6 +56,7 @@ export default function WorkoutDraftUI({
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
           <ScrollView
+            keyboardShouldPersistTaps="handled"
             style={{
               marginBottom: BOTTOM_APPBAR_HEIGHT + bottom,
               flexGrow: 1,
