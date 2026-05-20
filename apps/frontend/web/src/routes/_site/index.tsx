@@ -13,6 +13,7 @@ import {
   Alert,
   ThemeIcon,
   Button,
+  useMatches,
 } from '@mantine/core';
 
 import {
@@ -38,10 +39,13 @@ function PhysicsCallout() {
     { eq: 'F = mg', label: 'force = mass × gravity' },
     { eq: 'You = F', label: 'you are the load' },
   ];
+
+  const alignValue = useMatches({ base: 'flex-start', xs: 'flex-end' });
   return (
-    <Stack gap="sm" align="flex-end">
+    // <Stack gap="sm" align="flex-end" w={{ base: '100%', sm: 'auto' }}>
+    <Stack gap="sm" align={alignValue}>
       {lines.map(({ eq, label }) => (
-        <Box key={eq} ta="right">
+        <Box key={eq} ta={{ base: 'left', xs: 'right' }}>
           <Text
             ff="monospace"
             fz="xsplus"
@@ -561,13 +565,7 @@ function HomeView() {
               >
                 Sign up or log in
               </Text>
-              <Group
-                align="center"
-                justify="flex-start"
-                gap="md"
-                // mt={20}
-                w="100%"
-              >
+              <Group align="center" justify="flex-start" gap="md" w="100%">
                 <Button
                   component={Link}
                   to="/signup"
