@@ -53,7 +53,9 @@ export default function ExerciseItemUI({
         backgroundColor:
           parentType === 'superset'
             ? 'transparent'
-            : theme.colors.elevation.level3,
+            : parentType === 'section'
+              ? theme.colors.limeElevation4
+              : theme.colors.elevation.level5,
       }}
     >
       <View
