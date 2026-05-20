@@ -8,7 +8,7 @@ import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
-import WorkoutData from './WorkoutDraft/WorkoutData';
+import WorkoutData from './Workout/WorkoutData';
 
 export default function WorkoutLogDetailOverlay() {
   const theme = useTheme() as CustomTheme;
