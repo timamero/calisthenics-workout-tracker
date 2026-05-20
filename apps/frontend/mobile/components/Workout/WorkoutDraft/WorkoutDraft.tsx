@@ -7,9 +7,9 @@ import type { Mode } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutContextMobile } from '@cwt/hooks';
 
-import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
-import type { CustomTheme } from '../../theme';
-import CustomButton from '../common/CustomButton';
+import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
+import type { CustomTheme } from '../../../theme';
+import CustomButton from '../../common/CustomButton';
 import WorkoutDraftUI from './WorkoutDraftUI';
 
 export default function WorkoutDraft() {

@@ -12,7 +12,7 @@ import { Link } from '@tanstack/react-router';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
 
-import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
+import ReorderButtonGroup from '../../../../ReorderButtonGroup';
 import ExerciseSetGroup from '../ExerciseSetGroup';
 import ExercisesList from './ExercisesList';
 import WorkoutItemMenu from '../WorkoutItemMenu';
