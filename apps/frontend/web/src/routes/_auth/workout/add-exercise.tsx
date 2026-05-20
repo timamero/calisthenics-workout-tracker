@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import AddExercise from '../../../components/AddExercise';
+import AddExercise from '../../../components/Workout/AddExercise';
 
 export const Route = createFileRoute('/_auth/workout/add-exercise')({
   component: RouteComponent,
