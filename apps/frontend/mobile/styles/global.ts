@@ -6,7 +6,6 @@ export const globalStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     container: {
       flexDirection: 'column',
-      gap: 16,
       paddingHorizontal: 32,
       paddingTop: 32,
       alignItems: 'stretch',

@@ -30,7 +30,7 @@ export const AuthStack = createNativeStackNavigator({
     },
     Signup: {
       screen: SignupScreen,
-      options: authScreenOptions,
+      options: { ...authScreenOptions, title: 'Sign Up' },
     },
     Onboarding: {
       screen: OnboardingScreen,
