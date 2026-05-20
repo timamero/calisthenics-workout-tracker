@@ -200,6 +200,11 @@ function HomeView() {
   const smallFontSize = { base: 'xxs', md: 'xs' };
   const title2FontSize = { base: 'h2', md: 'display_xs' };
   const ctaTitleFontSize = { base: 'h3', md: 'h1' };
+  const ctaAlignValue = useMatches({ base: 'flex-start', sm: 'flex-end' });
+  const ctaWrapValue = useMatches({
+    base: 'wrap',
+    md: 'nowrap',
+  }) as React.ComponentProps<typeof Group>['wrap'];
 
   const features = [
     {
@@ -535,8 +540,13 @@ function HomeView() {
 
         {/* ── CTA ──────────────────────────────────────────────────────── */}
         <Paper withBorder radius="lg" p="xl" mb="xl">
-          <Group justify="space-between" align="center" wrap="wrap" gap="lg">
-            <Box maw={420}>
+          <Group
+            justify="space-between"
+            align="center"
+            wrap={ctaWrapValue}
+            gap="lg"
+          >
+            <Box maw={{ base: 420, md: 460 }}>
               <Title
                 order={2}
                 fz={ctaTitleFontSize}
@@ -553,7 +563,11 @@ function HomeView() {
                 Just open it and start logging.
               </Text>
             </Box>
-            <Stack gap="xs" align="flex-end">
+            <Stack
+              gap="xs"
+              align={ctaAlignValue}
+              w={{ base: '100%', sm: 'auto' }}
+            >
               <Text
                 fz={smallFontSize}
                 fw={500}
@@ -565,7 +579,13 @@ function HomeView() {
               >
                 Sign up or log in
               </Text>
-              <Group align="center" justify="flex-start" gap="md" w="100%">
+              <Group
+                align="center"
+                justify="flex-start"
+                gap="md"
+                w="100%"
+                wrap="nowrap"
+              >
                 <Button
                   component={Link}
                   to="/signup"
@@ -594,8 +614,13 @@ function HomeView() {
           p="xl"
           style={{ border: '1px solid var(--mantine-color-violet-2)' }}
         >
-          <Group justify="space-between" align="center" wrap="wrap" gap="lg">
-            <Box maw={420}>
+          <Group
+            justify="space-between"
+            align="center"
+            wrap={ctaWrapValue}
+            gap="lg"
+          >
+            <Box maw={{ base: 420, md: 460 }}>
               <Title
                 order={2}
                 fz={ctaTitleFontSize}
@@ -612,7 +637,11 @@ function HomeView() {
                 access, send us an email and we'll add you to the list.
               </Text>
             </Box>
-            <Stack gap="xs" align="flex-end">
+            <Stack
+              gap="xs"
+              align={ctaAlignValue}
+              w={{ base: '100%', sm: 'auto' }}
+            >
               <Text
                 fz={smallFontSize}
                 fw={500}
