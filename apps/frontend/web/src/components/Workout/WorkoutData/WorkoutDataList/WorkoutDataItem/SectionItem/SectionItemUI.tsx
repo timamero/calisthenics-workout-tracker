@@ -5,7 +5,7 @@ import type { Mode } from '@cwt/schema/workouts';
 
 import ItemsList from './ItemsList';
 import { TextInputWithEdit } from '../../../../../common/TextInputWithEdit';
-import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
+import ReorderButtonGroup from '../../../../ReorderButtonGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
 import AddItemMenu from './AddItemMenu';
 

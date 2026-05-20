@@ -5,7 +5,7 @@ import { Mode } from '@cwt/schema/workouts';
 
 import { Text } from '../../../../../../customText';
 import { CustomTheme } from '../../../../../../theme';
-import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
+import ReorderButtonGroup from '../../../../ReorderButtonGroup';
 import SetList from '../SetList';
 import WorkoutItemMenu from '../WorkoutItemMenu';
 

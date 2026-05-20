@@ -11,12 +11,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type { Mode } from '@cwt/schema/workouts';
 
-import type { CustomTheme } from '../../theme';
+import type { CustomTheme } from '../../../theme';
 
-import WorkoutData from './WorkoutData';
-import WorkoutOverlays from './WorkoutOverlays';
-import TextInputWithEdit from '../common/TextInputWithEdit';
-import BottomAppBar from './BottomAppBar';
+import WorkoutData from '../WorkoutData';
+import WorkoutOverlays from '../WorkoutOverlays';
+import TextInputWithEdit from '../../common/TextInputWithEdit';
+import BottomAppBar from '../BottomAppBar';
 
 interface WorkoutDraftUIProps {
   scrollViewRef: RefObject<ScrollView | null>;

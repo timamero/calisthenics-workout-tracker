@@ -12,7 +12,7 @@ import { IoAdd, IoLink } from 'react-icons/io5';
 
 import type { Mode } from '@cwt/schema/workouts';
 import SetList from '../SetList';
-import ReorderButtonGroup from '../../../../../common/ReorderButtonGroup';
+import ReorderButtonGroup from '../../../../ReorderButtonGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
 
 interface ExerciseItemUIProps {
