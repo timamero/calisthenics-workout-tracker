@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
 import { CustomTheme } from '../theme';
-import AddExercise from '../components/AddExercise';
+import AddExercise from '../components/Workout/AddExercise';
 
 export default function AddExerciseScreen() {
   const theme = useTheme() as CustomTheme;
