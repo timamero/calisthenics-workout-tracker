@@ -22,7 +22,6 @@ import {
   IoTimeOutline,
   IoServerOutline,
   IoLayersOutline,
-  // IoLogoGooglePlaystore,
 } from 'react-icons/io5';
 
 import { useDefaultSize } from '../../hooks';
@@ -42,7 +41,6 @@ function PhysicsCallout() {
 
   const alignValue = useMatches({ base: 'flex-start', xs: 'flex-end' });
   return (
-    // <Stack gap="sm" align="flex-end" w={{ base: '100%', sm: 'auto' }}>
     <Stack gap="sm" align={alignValue}>
       {lines.map(({ eq, label }) => (
         <Box key={eq} ta={{ base: 'left', xs: 'right' }}>
@@ -672,7 +670,6 @@ function HomeView() {
           bg="violet.0"
           radius="md"
           mb="xl"
-          // title="The mobile app is currently in internal testing. Invited users only. iOS availability coming in a future release."
         >
           <Text fz="xsplus" lh="xl">
             The mobile app is currently in internal testing. Invited users only.
