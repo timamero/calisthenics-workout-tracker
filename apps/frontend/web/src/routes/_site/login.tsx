@@ -10,7 +10,6 @@ import {
   Text,
   Stack,
   Container,
-  useMatches,
 } from '@mantine/core';
 import { Link, useNavigate } from '@tanstack/react-router';
 
@@ -19,6 +18,8 @@ import { useAuthLogin } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
 import { supabase } from '../../services/supabaseClient';
+import { useDefaultSize } from '../../hooks';
+
 import DefaultLoader from '../../components/common/DefaultLoader';
 
 export const Route = createFileRoute('/_site/login')({
@@ -53,8 +54,8 @@ function LoginView() {
     setLoading(false);
   }, [user, navigate]);
 
-  // --- UI Helpers
-  const appliedSize = useMatches({ base: 'sm', md: 'md' });
+  // --- Helper Components ---
+  const defaultSize = useDefaultSize();
 
   if (loading || user) {
     return <DefaultLoader />;
@@ -75,13 +76,7 @@ function LoginView() {
         >
           {siteContent().loginHeading}
         </Title>
-        <Text
-          fw={500}
-          fz={{ base: 'sm', md: 'md' }}
-          c="dark.3"
-          mt={-12}
-          ta="center"
-        >
+        <Text fw={500} fz={{ defaultSize }} c="dark.3" mt={-12} ta="center">
           {siteContent().loginSubtext}
         </Text>
       </Stack>
@@ -90,7 +85,7 @@ function LoginView() {
           <TextInput
             label="Email"
             placeholder="Enter your email"
-            size={appliedSize}
+            size={defaultSize}
             mb="md"
             error={auth.errors.email?.message}
             {...auth.register('email')}
@@ -98,7 +93,7 @@ function LoginView() {
           <PasswordInput
             label="Password"
             placeholder="Enter your password"
-            size={appliedSize}
+            size={defaultSize}
             mb="md"
             error={auth.errors.password?.message}
             {...auth.register('password')}
@@ -109,7 +104,7 @@ function LoginView() {
               component={Link}
               to="/"
               type="button"
-              size={appliedSize}
+              size={defaultSize}
               variant="transparent"
             >
               Back
@@ -117,7 +112,7 @@ function LoginView() {
             <Button
               type="submit"
               variant="filled"
-              size={appliedSize}
+              size={defaultSize}
               onClick={handleSubmitClick}
               disabled={
                 auth.isLoading || auth.errors.email || auth.errors.password
