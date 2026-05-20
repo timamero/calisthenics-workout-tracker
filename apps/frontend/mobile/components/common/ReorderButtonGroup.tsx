@@ -36,7 +36,7 @@ export default function ReorderButtonGroup({
       {!isFirst && (
         <IconButton
           onPress={() => handleUpPress()}
-          icon={parentType === 'superset' ? 'chevron-up' : 'chevron-up-circle'}
+          icon={parentType === 'superset' ? 'chevron-up' : 'chevron-up-box'}
           iconColor={appliedColor}
           size={24}
           style={{ margin: 0, height: 32, width: 32 }}
@@ -45,9 +45,7 @@ export default function ReorderButtonGroup({
       {!isLast && (
         <IconButton
           onPress={handleDownPress}
-          icon={
-            parentType === 'superset' ? 'chevron-down' : 'chevron-down-circle'
-          }
+          icon={parentType === 'superset' ? 'chevron-down' : 'chevron-down-box'}
           iconColor={appliedColor}
           size={24}
           style={{ margin: 0, height: 32, width: 32 }}
