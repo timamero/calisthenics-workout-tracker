@@ -49,6 +49,7 @@ export default function SupersetItemUI({
       withBorder
       w="100%"
       radius="lg"
+      bg="var(--mantine-color-violet-elevation-4)"
       bd="1px solid var(--mantine-color-violet-2)"
       my={{ base: 0, md: parentType === null ? 'xs' : 0 }}
     >

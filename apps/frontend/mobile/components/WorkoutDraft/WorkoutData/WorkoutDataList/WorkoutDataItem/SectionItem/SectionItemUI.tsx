@@ -54,7 +54,7 @@ export default function SectionItemUI({
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderColor: theme.colors.lime2,
-        backgroundColor: theme.colors.elevation.level5,
+        backgroundColor: theme.colors.limeElevation3,
         paddingBottom: mode === 'edit' || mode === 'build' ? 0 : 24,
         marginTop: 44,
         marginBottom: isLast ? 44 : 0,

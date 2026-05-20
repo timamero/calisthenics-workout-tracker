@@ -41,7 +41,7 @@ export default function SupersetItemUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: theme.colors.elevation.level3,
+        backgroundColor: theme.colors.violetElevation4,
         borderColor: theme.colors.violet2,
         borderWidth: 1,
         marginInline: parentType === 'section' ? 20 : 4,
@@ -112,10 +112,15 @@ export default function SupersetItemUI({
           }}
         >
           <CustomButton
-            mode="elevated"
+            mode="contained"
             onPress={() => handleOpenAddExercisePress()}
             icon="plus"
-            theme={{ colors: { primary: theme.colors.violet8 } }}
+            theme={{
+              colors: {
+                primary: theme.colors.gray1,
+                onPrimary: theme.colors.violet8,
+              },
+            }}
           >
             Exercise
           </CustomButton>

@@ -24,7 +24,7 @@ export default function AddItemMenu({
       onDismiss={closeMenu}
       anchor={
         <Surface
-          elevation={2}
+          elevation={0}
           style={{
             backgroundColor: theme.colors.lime4,
             borderRadius: '50%',

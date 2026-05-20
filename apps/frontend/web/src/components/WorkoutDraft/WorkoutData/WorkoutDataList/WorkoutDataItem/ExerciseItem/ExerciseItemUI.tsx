@@ -48,6 +48,13 @@ export default function ExerciseItemUI({
       w="100%"
       py={mode === 'edit' || mode === 'build' ? '0' : 'sm'}
       my={{ base: 0, md: parentType === null ? 'xs' : 0 }}
+      bg={
+        parentType === 'section'
+          ? 'var(--mantine-color-lime-elevation-4)'
+          : parentType === 'superset'
+            ? 'transparent'
+            : 'elevation.5'
+      }
     >
       <Stack w="100%" align="center" pos="relative">
         <Group w="100%" wrap="nowrap">
