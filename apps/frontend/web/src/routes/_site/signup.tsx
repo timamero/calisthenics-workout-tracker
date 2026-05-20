@@ -80,7 +80,7 @@ function SignUpView() {
         >
           {siteContent().signupHeading}
         </Title>
-        <Text fw={500} fz="md" c="dark.3" mt={-12} ta="center">
+        <Text fw={500} fz={defaultSize} c="dark.3" mt={-12} ta="center">
           {siteContent().signupSubtext}
         </Text>
       </Stack>
