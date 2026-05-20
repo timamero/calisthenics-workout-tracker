@@ -24,6 +24,8 @@ import {
   // IoLogoGooglePlaystore,
 } from 'react-icons/io5';
 
+import { useDefaultSize } from '../../hooks';
+
 export const Route = createFileRoute('/_site/')({
   component: HomeView,
 });
@@ -191,6 +193,10 @@ function StatCard({ value, label }: StatCardProps) {
 // ─── Main landing page ───────────────────────────────────────────────────────
 
 function HomeView() {
+  const smallFontSize = { base: 'xxs', md: 'xs' };
+  const title2FontSize = { base: 'h2', md: 'display_xs' };
+  const ctaTitleFontSize = { base: 'h3', md: 'h1' };
+
   const features = [
     {
       icon: IoServerOutline,
@@ -262,7 +268,7 @@ function HomeView() {
                   color="violet.9"
                   bg="violet.0"
                   variant="light"
-                  size="sm"
+                  size={useDefaultSize()}
                   radius="xl"
                 >
                   Early Access — v0.1.0-alpha.1
@@ -271,7 +277,7 @@ function HomeView() {
                   ff="monospace"
                   color="dark.4"
                   variant="light"
-                  size="sm"
+                  size={useDefaultSize()}
                   radius="xl"
                 >
                   Calisthenics
@@ -280,7 +286,7 @@ function HomeView() {
                   ff="monospace"
                   color="dark.4"
                   variant="light"
-                  size="sm"
+                  size={useDefaultSize()}
                   radius="xl"
                 >
                   Bodyweight
@@ -298,10 +304,8 @@ function HomeView() {
               <Box>
                 <Title
                   order={1}
-                  // fz={{ base: 'h3', xs: 'h2', sm: 'h1' }}
                   fz={{
                     base: 'display_md',
-                    // xs: 'display_md',
                     sm: 'display_lg',
                   }}
                   lh="xxs"
@@ -347,18 +351,12 @@ function HomeView() {
               sessions, and build a training history from day one. No barbell.
               No membership. Just force.
             </Text>
-            <Group
-              align="center"
-              justify="flex-start"
-              gap="md"
-              // mt={20}
-              w="100%"
-            >
+            <Group align="center" justify="flex-start" gap="md" w="100%">
               <Button
                 component={Link}
                 to="/signup"
                 variant="filled"
-                size="md"
+                size={useDefaultSize()}
                 radius="md"
               >
                 Sign Up
@@ -367,7 +365,7 @@ function HomeView() {
                 component={Link}
                 to="/login"
                 variant="outline"
-                size="md"
+                size={useDefaultSize()}
                 radius="md"
               >
                 Log In
@@ -397,7 +395,7 @@ function HomeView() {
         <Stack gap="md" mb="xl">
           <Box>
             <Text
-              fz="xxs"
+              fz={smallFontSize}
               fw={500}
               tt="uppercase"
               c="dark.3"
@@ -410,7 +408,7 @@ function HomeView() {
             </Text>
             <Title
               order={2}
-              fz={{ base: 'h1', sm: 'display_xs' }}
+              fz={title2FontSize}
               lh="xxs"
               style={(theme) => ({
                 letterSpacing: theme.other.letterSpacing.tight,
@@ -437,7 +435,7 @@ function HomeView() {
         <Stack gap="md" mb="xl">
           <Box>
             <Text
-              fz="xxs"
+              fz={smallFontSize}
               fw={500}
               tt="uppercase"
               c="dark.3"
@@ -450,7 +448,7 @@ function HomeView() {
             </Text>
             <Title
               order={2}
-              fz={{ base: 'h1', sm: 'display_xs' }}
+              fz={title2FontSize}
               lh="xss"
               style={(theme) => ({
                 letterSpacing: theme.other.letterSpacing.tight,
@@ -497,7 +495,7 @@ function HomeView() {
         <Stack gap="md" mb="xl">
           <Box>
             <Text
-              fz="xxs"
+              fz={smallFontSize}
               fw={500}
               tt="uppercase"
               c="dark.3"
@@ -510,7 +508,7 @@ function HomeView() {
             </Text>
             <Title
               order={2}
-              fz={{ base: 'h1', sm: 'display_xs' }}
+              fz={title2FontSize}
               lh="xxs"
               style={(theme) => ({
                 letterSpacing: theme.other.letterSpacing.tight,
@@ -537,7 +535,7 @@ function HomeView() {
             <Box maw={420}>
               <Title
                 order={2}
-                fz={{ base: 'h2', sm: 'h1' }}
+                fz={ctaTitleFontSize}
                 lh="xxs"
                 mb="sm"
                 style={(theme) => ({
@@ -553,7 +551,7 @@ function HomeView() {
             </Box>
             <Stack gap="xs" align="flex-end">
               <Text
-                fz="xxs"
+                fz={smallFontSize}
                 fw={500}
                 tt="uppercase"
                 c="dark.3"
@@ -574,7 +572,7 @@ function HomeView() {
                   component={Link}
                   to="/signup"
                   variant="filled"
-                  size="md"
+                  size={useDefaultSize()}
                   radius="md"
                 >
                   Sign Up
@@ -583,7 +581,7 @@ function HomeView() {
                   component={Link}
                   to="/login"
                   variant="outline"
-                  size="md"
+                  size={useDefaultSize()}
                   radius="md"
                 >
                   Log In
@@ -602,7 +600,7 @@ function HomeView() {
             <Box maw={420}>
               <Title
                 order={2}
-                fz={{ base: 'h2', sm: 'h1' }}
+                fz={ctaTitleFontSize}
                 lh="xxs"
                 mb="sm"
                 style={(theme) => ({
@@ -618,7 +616,7 @@ function HomeView() {
             </Box>
             <Stack gap="xs" align="flex-end">
               <Text
-                fz="xxs"
+                fz={smallFontSize}
                 fw={500}
                 tt="uppercase"
                 c="dark.3"
@@ -659,7 +657,7 @@ function HomeView() {
 
         <Group>
           <Text
-            fz="xxs"
+            fz={smallFontSize}
             fw={500}
             c="dark.3"
             style={(theme) => ({
