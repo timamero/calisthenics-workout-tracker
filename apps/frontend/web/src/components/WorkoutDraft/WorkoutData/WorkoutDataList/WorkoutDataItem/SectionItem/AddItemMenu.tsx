@@ -21,6 +21,7 @@ export default function AddItemMenu({
         <ActionIcon
           variant="filled-lime"
           size="md"
+          bdrs={24}
           p={{ base: 'xxs', md: 'xs' }}
           w="min-content"
           h="min-content"

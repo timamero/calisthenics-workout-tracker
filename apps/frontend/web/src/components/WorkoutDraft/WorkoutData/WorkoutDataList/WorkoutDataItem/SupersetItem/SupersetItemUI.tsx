@@ -7,6 +7,7 @@ import {
   useMatches,
   Paper,
 } from '@mantine/core';
+import { IoAdd } from 'react-icons/io5';
 import { Link } from '@tanstack/react-router';
 
 import type { Mode, Superset } from '@cwt/schema/workouts';
@@ -104,9 +105,10 @@ export default function SupersetItemUI({
               variant="outline-violet"
               component={Link}
               to="/workout/add-exercise"
+              leftSection={<IoAdd size={24} />}
               onClick={() => handleOpenAddExerciseClick()}
             >
-              Add Exercise
+              Exercise
             </Button>
           </Stack>
         )}
