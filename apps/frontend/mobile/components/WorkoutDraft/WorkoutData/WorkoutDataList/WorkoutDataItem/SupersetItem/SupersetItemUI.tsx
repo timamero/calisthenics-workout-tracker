@@ -115,6 +115,7 @@ export default function SupersetItemUI({
             mode="elevated"
             onPress={() => handleOpenAddExercisePress()}
             icon="plus"
+            theme={{ colors: { primary: theme.colors.violet8 } }}
           >
             Exercise
           </CustomButton>
