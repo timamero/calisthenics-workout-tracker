@@ -7,7 +7,7 @@ import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 
-import WorkoutData from './WorkoutDraft/WorkoutData';
+import WorkoutData from './Workout/WorkoutData';
 
 export default function WorkoutLogDetailOverlay() {
   const workoutLogDetail = useWorkoutLogDetailContextWeb()
