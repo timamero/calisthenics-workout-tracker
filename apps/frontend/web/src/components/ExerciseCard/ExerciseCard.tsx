@@ -13,6 +13,8 @@ import { type ExerciseResponse } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '@cwt/context';
 
+import classes from './ExerciseCard.module.css';
+
 interface ExerciseCardProps {
   exercise: ExerciseResponse;
 }
@@ -35,7 +37,18 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   };
   return (
     <UnstyledButton onClick={handleExerciseClick}>
-      <Paper shadow="sm" p="md" radius="lg" miw={300} maw={460} withBorder>
+      <Paper
+        className={classes.button}
+        shadow="sm"
+        p="md"
+        radius="lg"
+        miw={300}
+        maw={460}
+        h="100%"
+        mah={230}
+        mx="auto"
+        withBorder
+      >
         <Stack align="stretch" justify="center" gap="sm">
           <Group justify="flex-end">
             <Badge ff="monospace" variant={difficultyVariant}>
