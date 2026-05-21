@@ -1,0 +1,10 @@
+.button {
+  background-color: var(--mantine-elevation-3);
+  box-shadow: var(--mantine-shadow-sm);
+  transition: all 0.15s ease-in-out;
+}
+
+.button:hover {
+  background-color: var(--mantine-color-lime-elevation-1);
+  box-shadow: none;
+}
