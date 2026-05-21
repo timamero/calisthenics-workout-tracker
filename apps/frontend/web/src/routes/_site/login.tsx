@@ -48,7 +48,7 @@ function LoginView() {
   useEffect(() => {
     if (user) {
       navigate({
-        to: '/dashboard',
+        to: '/dashboard/home',
       });
     }
     setLoading(false);
