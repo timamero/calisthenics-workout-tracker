@@ -43,7 +43,7 @@ export default function ExerciseDetailOverlay() {
   const difficultyStyles = getDifficultyStyles();
 
   const containerStyle = {
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.colors.elevation.level3,
     paddingBlock: 20,
     marginInline: 16,
   };
@@ -148,9 +148,7 @@ export default function ExerciseDetailOverlay() {
               }}
             >
               <View>
-                <Text variant="bodyLarge" style={styles.metadataTitle}>
-                  Difficulty
-                </Text>
+                <Text style={styles.metadataTitle}>Difficulty</Text>
                 <View style={styles.flexRowStart}>
                   <Pill
                     backgroundColor={difficultyStyles.backgroundColor}
@@ -162,9 +160,7 @@ export default function ExerciseDetailOverlay() {
                 </View>
               </View>
               <View>
-                <Text variant="bodyLarge" style={styles.metadataTitle}>
-                  Emphasis
-                </Text>
+                <Text style={styles.metadataTitle}>Emphasis</Text>
                 <View style={styles.flexRowStart}>
                   <Pill
                     backgroundColor={theme.colors.lime0}
@@ -175,15 +171,11 @@ export default function ExerciseDetailOverlay() {
                 </View>
               </View>
               <View>
-                <Text variant="bodyLarge" style={styles.metadataTitle}>
-                  Target Muscles
-                </Text>
+                <Text style={styles.metadataTitle}>Target Muscles</Text>
                 <View style={styles.pillsContainer}>{muscleMetadata}</View>
               </View>
               <View>
-                <Text variant="bodyLarge" style={styles.metadataTitle}>
-                  Required Equipment
-                </Text>
+                <Text style={styles.metadataTitle}>Required Equipment</Text>
                 <View style={styles.pillsContainer}>
                   {exercise?.required_equipment == null ||
                   exercise.required_equipment.length === 0 ? (
@@ -202,7 +194,11 @@ export default function ExerciseDetailOverlay() {
             <View>
               <Text
                 variant="headlineMedium"
-                style={{ color: theme.colors.onBackground }}
+                style={{
+                  color: theme.colors.onBackground,
+                  textTransform: 'uppercase',
+                  letterSpacing: 0.64,
+                }}
               >
                 Instructions
               </Text>
@@ -227,9 +223,10 @@ export default function ExerciseDetailOverlay() {
 const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     metadataTitle: {
-      fontWeight: 700,
+      fontFamily: 'ElmsSans-Bold',
+      letterSpacing: 1.6,
       textTransform: 'uppercase',
-      color: theme.colors.onBackground,
+      color: theme.colors.gray7,
       marginBottom: 4,
     },
     flexRowStart: {
