@@ -125,13 +125,10 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
 const getStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     card: {
-      // marginBlock: 12,
-      // marginInline: 36,
-      backgroundColor: theme.colors.background,
-      boxShadow:
-        'rgba(222, 226, 230, 0.05) 0px 1px 3px 0px, rgba(222, 226, 230, 0.05) 0px 28px 23px -7px, rgba(222, 226, 230, 0.04) 0px 12px 12px -7px',
-      padding: 16,
-      borderColor: theme.colors.onBackground,
+      backgroundColor: theme.colors.elevation.level3,
+      paddingBlock: 12,
+      paddingInline: 16,
+      borderColor: theme.colors.gray3,
       borderWidth: 1,
     },
     cardContent: {
@@ -139,7 +136,7 @@ const getStyles = (theme: CustomTheme) =>
       paddingVertical: 0,
       display: 'flex',
       flexDirection: 'column',
-      gap: 12,
+      gap: 8,
     },
     difficultyContainer: {
       display: 'flex',
