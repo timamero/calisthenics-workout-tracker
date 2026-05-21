@@ -25,6 +25,7 @@ function ExerciseMetadata({ title, children }: ExerciseMetadataProps) {
   return (
     <Stack gap="xxs">
       <Text
+        ff="heading"
         tt="uppercase"
         size="md"
         fw={700}
