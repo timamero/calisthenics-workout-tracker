@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card, useTheme } from 'react-native-paper';
-import { View, StyleSheet, Keyboard } from 'react-native';
+import { View, StyleSheet, Keyboard, Platform } from 'react-native';
 
 import { ExerciseResponse, Attributes } from '@cwt/schema/exercises';
 
@@ -59,8 +59,8 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             {exercise.target_muscles.map((muscle, i) => {
               return (
                 <Pill
-                  backgroundColor={theme.colors.musclePillBgColor}
-                  textColor={theme.colors.musclePillColor}
+                  backgroundColor={theme.colors.gray2}
+                  textColor={theme.colors.dark4}
                   key={i}
                 >
                   {muscle}
@@ -78,16 +78,15 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             exercise.required_equipment.length === 0 ? (
               <Pill
                 backgroundColor={theme.colors.background}
-                textColor={theme.colors.onBackground}
+                textColor={theme.colors.dark7}
               >
                 {`---` as '---'}
               </Pill>
             ) : (
               exercise.required_equipment.map((equipment, i) => (
                 <Pill
-                  backgroundColor={theme.colors.background}
-                  textColor={theme.colors.onBackground}
-                  borderColor={theme.colors.onBackground}
+                  backgroundColor={theme.colors.dark7}
+                  textColor={theme.colors.white}
                   key={i}
                 >
                   {equipment as Attributes}
@@ -140,6 +139,12 @@ const getStyles = (theme: CustomTheme) =>
     exerciseMetadataTitle: {
       textTransform: 'uppercase',
       color: theme.colors.dark5,
+      fontFamily: Platform.select({
+        web: 'ElmsSans-Bold, source-sans-pro, sans-serif',
+        ios: 'ElmsSans-Bold',
+        android: 'ElmsSans-Bold',
+        default: 'sans-serif',
+      }),
     },
     metadataPillsContainer: {
       width: '80%',
