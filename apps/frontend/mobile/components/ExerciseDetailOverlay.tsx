@@ -17,12 +17,30 @@ export default function ExerciseDetailOverlay() {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
-  const difficultyColor =
-    exercise?.difficulty === 'beginner'
-      ? theme.colors.beginnerPillColor
-      : exercise?.difficulty === 'intermediate'
-        ? theme.colors.intermediatePillColor
-        : theme.colors.advancedPillColor;
+  const getDifficultyStyles = () => {
+    switch (exercise?.difficulty) {
+      case 'beginner':
+        return {
+          backgroundColor: theme.colors.lime2,
+          textColor: theme.colors.dark7,
+          borderColor: theme.colors.dark7,
+        };
+      case 'intermediate':
+        return {
+          backgroundColor: theme.colors.teal2,
+          textColor: theme.colors.dark7,
+          borderColor: theme.colors.dark7,
+        };
+      default:
+        return {
+          backgroundColor: theme.colors.violet2,
+          textColor: theme.colors.dark7,
+          borderColor: theme.colors.dark7,
+        };
+    }
+  };
+
+  const difficultyStyles = getDifficultyStyles();
 
   const containerStyle = {
     backgroundColor: theme.colors.background,
@@ -33,8 +51,8 @@ export default function ExerciseDetailOverlay() {
     return (
       <View key={i} style={styles.flexRowStart}>
         <Pill
-          backgroundColor={theme.colors.musclePillBgColor}
-          textColor={theme.colors.musclePillColor}
+          backgroundColor={theme.colors.gray2}
+          textColor={theme.colors.dark4}
         >
           {muscle}
         </Pill>
@@ -46,9 +64,8 @@ export default function ExerciseDetailOverlay() {
       return (
         <View key={i} style={styles.flexRowStart}>
           <Pill
-            backgroundColor={theme.colors.background}
-            textColor={theme.colors.onBackground}
-            borderColor={theme.colors.onBackground}
+            backgroundColor={theme.colors.dark7}
+            textColor={theme.colors.white}
           >
             {equipment as Equipment}
           </Pill>
@@ -63,29 +80,24 @@ export default function ExerciseDetailOverlay() {
         <View
           style={{
             display: 'flex',
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: 40,
+            height: 40,
+            borderColor: theme.colors.onBackground,
+            borderWidth: 1,
+            borderRadius: 20,
           }}
         >
-          <View
+          <Text
             style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderColor: theme.colors.onBackground,
-              borderBottomWidth: 1,
-              borderRightWidth: 1,
-              paddingInline: 8,
+              fontSize: 20,
+              fontWeight: '700',
+              color: theme.colors.onBackground,
             }}
           >
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 700,
-                color: theme.colors.onBackground,
-              }}
-            >
-              {i + 1}
-            </Text>
-          </View>
+            {i + 1}
+          </Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text style={{ color: theme.colors.onBackground }}>
@@ -141,8 +153,9 @@ export default function ExerciseDetailOverlay() {
                 </Text>
                 <View style={styles.flexRowStart}>
                   <Pill
-                    backgroundColor={difficultyColor}
-                    textColor={theme.colors.onBackground}
+                    backgroundColor={difficultyStyles.backgroundColor}
+                    textColor={difficultyStyles.textColor}
+                    borderColor={difficultyStyles.borderColor}
                   >
                     {(exercise?.difficulty as Difficulty) || ''}
                   </Pill>
@@ -154,7 +167,7 @@ export default function ExerciseDetailOverlay() {
                 </Text>
                 <View style={styles.flexRowStart}>
                   <Pill
-                    backgroundColor={theme.colors.background}
+                    backgroundColor={theme.colors.lime0}
                     textColor={theme.colors.onBackground}
                   >
                     {(exercise?.emphasis as Emphasis) || ''}
