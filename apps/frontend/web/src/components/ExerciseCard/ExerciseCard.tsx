@@ -35,13 +35,8 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   };
   return (
     <UnstyledButton onClick={handleExerciseClick}>
-      <Paper shadow="lg" p="md" radius="lg" miw={300} maw={460} withBorder>
-        <Stack
-          bg="var(--mantine-color-body)"
-          align="stretch"
-          justify="center"
-          gap="sm"
-        >
+      <Paper shadow="sm" p="md" radius="lg" miw={300} maw={460} withBorder>
+        <Stack align="stretch" justify="center" gap="sm">
           <Group justify="flex-end">
             <Badge ff="monospace" variant={difficultyVariant}>
               {exercise.difficulty}
