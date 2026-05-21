@@ -11,8 +11,9 @@ export default function ExercisesList() {
   return (
     <SimpleGrid
       cols={{ base: 1, md: 2, lg: 3 }}
-      spacing={{ base: 'lg' }}
-      verticalSpacing={{ base: 'lg' }}
+      spacing={{ base: 'sm' }}
+      verticalSpacing={{ base: 'sm' }}
+      w="100%"
     >
       {exercises!.map((exercise, i) => (
         <ExerciseCard exercise={exercise} key={i} />
