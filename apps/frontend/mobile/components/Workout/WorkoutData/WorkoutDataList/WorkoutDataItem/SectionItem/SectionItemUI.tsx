@@ -51,8 +51,7 @@ export default function SectionItemUI({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
+        borderWidth: 1,
         borderColor: theme.colors.lime2,
         backgroundColor: theme.colors.limeElevation3,
         paddingBottom: mode === 'edit' || mode === 'build' ? 0 : 24,
@@ -60,6 +59,8 @@ export default function SectionItemUI({
         marginBottom: isLast ? 44 : 0,
         overflow: 'hidden',
         width: 'auto',
+        marginInline: 4,
+        borderRadius: 4,
       }}
     >
       <View
@@ -71,7 +72,6 @@ export default function SectionItemUI({
           width: 'auto',
           borderBottomColor: theme.colors.lime2,
           borderBottomWidth: 1,
-          paddingInline: 4,
         }}
       >
         <View
