@@ -20,12 +20,30 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
 
-  const difficultyColor =
-    exercise.difficulty === 'beginner'
-      ? theme.colors.beginnerPillColor
-      : exercise.difficulty === 'intermediate'
-        ? '#fab005'
-        : '#fa5252';
+  const getDifficultyStyles = () => {
+    switch (exercise.difficulty) {
+      case 'beginner':
+        return {
+          backgroundColor: theme.colors.lime2,
+          textColor: theme.colors.dark7,
+          borderColor: theme.colors.dark7,
+        };
+      case 'intermediate':
+        return {
+          backgroundColor: theme.colors.teal2,
+          textColor: theme.colors.dark7,
+          borderColor: theme.colors.dark7,
+        };
+      default:
+        return {
+          backgroundColor: theme.colors.violet2,
+          textColor: theme.colors.dark7,
+          borderColor: theme.colors.dark7,
+        };
+    }
+  };
+
+  const difficultyStyles = getDifficultyStyles();
 
   const handleShowModal = () => {
     if (showModal && setExercise) {
@@ -39,7 +57,11 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
     <Card style={styles.card} onPress={handleShowModal}>
       <Card.Content style={styles.cardContent}>
         <View style={styles.difficultyContainer}>
-          <Pill backgroundColor={difficultyColor} textColor="white">
+          <Pill
+            backgroundColor={difficultyStyles.backgroundColor}
+            textColor={difficultyStyles.textColor}
+            borderColor={difficultyStyles.borderColor}
+          >
             {exercise.difficulty}
           </Pill>
         </View>
