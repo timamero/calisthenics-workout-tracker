@@ -111,7 +111,7 @@ function LibraryView() {
         </Container>
       </Box>
       <ExercisesFilterOverlay />
-      <ExerciseDetailOverlay />
+      {exerciseDetail && <ExerciseDetailOverlay />}
     </ExerciseDetailContext.Provider>
   );
 }
