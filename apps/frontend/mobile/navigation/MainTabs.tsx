@@ -14,7 +14,6 @@ export const MainTabs = createBottomTabNavigator({
     return {
       headerStyle: {
         backgroundColor: '#f8f9fa',
-        zIndex: 10,
       },
       headerTitleStyle: {
         color: '#242424',
