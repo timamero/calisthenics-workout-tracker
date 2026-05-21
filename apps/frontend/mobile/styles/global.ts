@@ -6,8 +6,8 @@ export const globalStyles = (theme: CustomTheme) =>
   StyleSheet.create({
     container: {
       flexDirection: 'column',
-      paddingHorizontal: 32,
-      paddingTop: 32,
+      paddingInline: 24,
+      paddingBlock: 24,
       alignItems: 'stretch',
       justifyContent: 'flex-start',
       backgroundColor: theme.colors.background,
