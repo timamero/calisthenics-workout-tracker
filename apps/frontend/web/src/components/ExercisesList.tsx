@@ -10,7 +10,7 @@ export default function ExercisesList() {
   );
   return (
     <SimpleGrid
-      cols={{ base: 1, md: 2, lg: 3 }}
+      cols={{ base: 1, md: 2 }}
       spacing={{ base: 'sm' }}
       verticalSpacing={{ base: 'sm' }}
       w="100%"
