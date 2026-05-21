@@ -11,6 +11,7 @@ import {
   PasswordInput,
   Title,
   type CSSVariablesResolver,
+  Badge,
 } from '@mantine/core';
 
 import './styles/global.css';
@@ -178,6 +179,12 @@ const theme = createTheme({
     }),
     AppShell: AppShell.extend({
       classNames: appBarClasses,
+    }),
+    Badge: Badge.extend({
+      defaultProps: {
+        ff: 'monospace',
+        lts: 'var(--mantine-letter-spacing-wider)',
+      },
     }),
     NavLink: NavLink.extend({
       classNames: navLinkClasses,
