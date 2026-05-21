@@ -39,7 +39,6 @@ export default function TextInputWithEditUI({
   titleSize,
   titleOrder,
 }: TextInputWithEditUIProps) {
-  console.log('TextInputWithEditUI |titleSize', titleSize);
   const appliedSize = useMatches({
     base:
       titleSize === 'h1'
