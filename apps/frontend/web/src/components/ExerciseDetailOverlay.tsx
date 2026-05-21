@@ -8,6 +8,7 @@ import {
   Group,
   Button,
   Title,
+  Center,
 } from '@mantine/core';
 
 import { ExerciseDetailContext } from '@cwt/context';
@@ -81,18 +82,32 @@ export default function ExerciseDetailOverlay() {
       const regex = /\d\. /g;
       return (
         <Group key={i} wrap="nowrap" align="flex-start">
-          <Text
-            size="xl"
-            fw={700}
-            style={{
-              borderBottom: `1px solid var(--mantine-color-dark-6)`,
-              borderRight: `1px solid var(--mantine-color-dark-6)`,
-              paddingInline: 8,
-            }}
+          <Center
+            mih={40}
+            mah={40}
+            miw={40}
+            maw={40}
+            bd={`1px solid var(--mantine-color-dark-3)`}
+            bdrs={40}
           >
-            {i + 1}
+            <Text
+              size="xl"
+              fw={700}
+              c="dark.3"
+              // bdrs="sm"
+              // style={{
+              //   border: `1px solid var(--mantine-color-dark-6)`,
+              //   // borderBottom: `1px solid var(--mantine-color-dark-6)`,
+              //   // borderRight: `1px solid var(--mantine-color-dark-6)`,
+              //   paddingInline: 8,
+              // }}
+            >
+              {i + 1}
+            </Text>
+          </Center>
+          <Text pt="xxs" ta="left">
+            {instruction.split(regex)[1]}
           </Text>
-          <Text>{instruction.split(regex)[1]}</Text>
         </Group>
       );
     },
@@ -116,7 +131,12 @@ export default function ExerciseDetailOverlay() {
             </Button>
           </Group>
           <Group justify="flex-start" mt="sm">
-            <Title order={2} size="h2">
+            <Title
+              order={2}
+              fz={{ base: 'h2', md: 'display_xs' }}
+              lh="xss"
+              lts="var(--mantine-letter-spacing-tight)"
+            >
               {exerciseDetail.name}
             </Title>
           </Group>
@@ -148,11 +168,16 @@ export default function ExerciseDetailOverlay() {
               )}
             </ExerciseMetadata>
           </Stack>
-          <Stack mt="sm">
-            <Title order={3} size="h4" tt="uppercase">
+          <Stack mt="xl">
+            <Title
+              order={3}
+              lh="xxs"
+              tt="uppercase"
+              lts="var(--mantine-letter-spacing-wide)"
+            >
               Instructions
             </Title>
-            <Stack>{instructions}</Stack>
+            <Stack gap="lg">{instructions}</Stack>
           </Stack>
         </Stack>
       </Group>
