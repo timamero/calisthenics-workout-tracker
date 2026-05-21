@@ -60,7 +60,9 @@ export const MainTabs = createBottomTabNavigator({
               style={{ width: 36, height: 36 }}
               source={require('../assets/logo-240x240.png')}
             />
-            <Text variant="headlineSmall">Home</Text>
+            <Text style={{ fontFamily: 'ElmsSans-ExtraBold', fontSize: 20 }}>
+              Home
+            </Text>
           </View>
         ),
       },
