@@ -166,7 +166,7 @@ function AuthLayout() {
 
   if (exerciseLoading || workoutLibraryLoading || leveragesAssistsLoading) {
     return (
-      <Stack bg="red" h="100vh" justify="center">
+      <Stack h="100vh" justify="center">
         <DefaultLoader />
       </Stack>
     );
