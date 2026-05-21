@@ -23,12 +23,6 @@ interface ExerciseCardProps {
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   const setDetailExercise = useContext(ExerciseDetailContext)?.setExercise;
   const detailHandlers = useContext(ExerciseDetailContext)?.handlers;
-  // const difficultyVariant =
-  //   exercise.difficulty == 'beginner'
-  //     ? 'outline-lime'
-  //     : exercise.difficulty == 'intermediate'
-  //       ? 'outline-teal'
-  //       : 'outline-violet-dark';
 
   const handleExerciseClick = () => {
     if (exercise && setDetailExercise && detailHandlers) {
@@ -52,10 +46,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
       >
         <Stack align="stretch" justify="center" gap="sm">
           <Group justify="flex-end">
-            <Badge
-              ff="monospace"
-              variant={getDifficultyVariant(exercise.difficulty)}
-            >
+            <Badge variant={getDifficultyVariant(exercise.difficulty)}>
               {exercise.difficulty}
             </Badge>
           </Group>
@@ -71,7 +62,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             <Group gap={8}>
               {exercise.target_muscles.map((muscle, i) => {
                 return (
-                  <Badge ff="monospace" variant="filled-gray" key={i}>
+                  <Badge variant="filled-gray" key={i}>
                     {muscle}
                   </Badge>
                 );
@@ -85,12 +76,12 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             <Group gap={8}>
               {exercise.required_equipment == null ||
               exercise.required_equipment.length == 0 ? (
-                <Badge ff="monospace" color="dark" variant="transparent">
+                <Badge color="dark" variant="transparent">
                   ---
                 </Badge>
               ) : (
                 exercise.required_equipment.map((equipment, i) => (
-                  <Badge ff="monospace" variant="filled" key={i}>
+                  <Badge variant="filled" key={i}>
                     {equipment}
                   </Badge>
                 ))
