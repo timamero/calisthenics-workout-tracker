@@ -79,7 +79,7 @@ export default SearchBar;
 const getStyles = () =>
   StyleSheet.create({
     container: {
-      paddingBlock: 12,
-      paddingInline: 36,
+      // paddingBlock: 12,
+      // paddingInline: 36,
     },
   });
