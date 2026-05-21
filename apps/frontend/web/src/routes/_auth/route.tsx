@@ -118,11 +118,10 @@ function AuthLayout() {
   );
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
-  const setLoading = useExerciseLibraryStore((state) => state.setLoading);
-  const loading = useExerciseLibraryStore((state) => state.loading);
-  const isExercisesSet = useExerciseLibraryStore((state) =>
-    state.displayedExercises === null ? false : true,
+  const setExerciseLoading = useExerciseLibraryStore(
+    (state) => state.setLoading,
   );
+  const exerciseLoading = useExerciseLibraryStore((state) => state.loading);
 
   useEffect(() => {
     if (!user) {
@@ -136,19 +135,19 @@ function AuthLayout() {
     setLeveragesAssists(data.leveragesAssists);
     setWorkouts(data.logs, data.builds);
     setExercises(data.exercises);
-    setLoading(false);
+    setExerciseLoading(false);
   }, [
     data.exercises,
     data.leveragesAssists,
     data.logs,
     data.builds,
     setExercises,
-    setLoading,
+    setExerciseLoading,
     setLeveragesAssists,
     setWorkouts,
   ]);
 
-  if (!isExercisesSet || loading) {
+  if (exerciseLoading) {
     return <DefaultLoader />;
   }
   return <Outlet />;
