@@ -31,7 +31,7 @@ export const createExerciseLibrarySlice: StateCreator<
 > = (set, get) => ({
   masterExercises: null,
   displayedExercises: null,
-  loading: false,
+  loading: true,
   setLoading: (loading) => set({ loading }),
   setExercises: (exercises) =>
     set((state) => {

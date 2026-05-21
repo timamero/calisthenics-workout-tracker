@@ -10,10 +10,12 @@ import type {
 } from '@cwt/schema/workouts';
 
 export interface WorkoutLibrarySlice {
+  loading: boolean;
   masterWorkoutLogs: Array<WorkoutLogRequest | WorkoutLogResponse>;
   masterWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
   displayedWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
   displayedWorkoutLogs: Array<WorkoutLogRequest | WorkoutLogResponse>;
+  setLoading: (loading: boolean) => void;
   sortWorkoutLogsByDate: (
     logs: Array<WorkoutLogResponse>,
   ) => Array<WorkoutLogResponse>;
@@ -40,10 +42,12 @@ export const createWorkoutLibrarySlice: StateCreator<
   [],
   WorkoutLibrarySlice
 > = (set, get) => ({
+  loading: true,
   masterWorkoutLogs: [], // TODO: Check that the max number returned is 20
   masterWorkoutBuilds: [], // TODO: Check that the max number returned is 10
   displayedWorkoutBuilds: [],
   displayedWorkoutLogs: [],
+  setLoading: (loading) => set({ loading }),
   sortWorkoutLogsByDate: (logs) => {
     return [...logs].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
