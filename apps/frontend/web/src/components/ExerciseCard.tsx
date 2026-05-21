@@ -20,13 +20,12 @@ interface ExerciseCardProps {
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   const setDetailExercise = useContext(ExerciseDetailContext)?.setExercise;
   const detailHandlers = useContext(ExerciseDetailContext)?.handlers;
-
-  const difficultyColor =
+  const difficultyVariant =
     exercise.difficulty == 'beginner'
-      ? 'blue'
+      ? 'outline-lime'
       : exercise.difficulty == 'intermediate'
-        ? 'yellow'
-        : 'red';
+        ? 'outline-teal'
+        : 'outline-violet-dark';
 
   const handleExerciseClick = () => {
     if (exercise && setDetailExercise && detailHandlers) {
@@ -44,7 +43,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
           gap="sm"
         >
           <Group justify="flex-end">
-            <Badge ff="monospace" color={difficultyColor}>
+            <Badge ff="monospace" variant={difficultyVariant}>
               {exercise.difficulty}
             </Badge>
           </Group>
@@ -60,7 +59,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             <Group gap={8}>
               {exercise.target_muscles.map((muscle, i) => {
                 return (
-                  <Badge ff="monospace" variant="light" color="grape" key={i}>
+                  <Badge ff="monospace" variant="filled-gray" key={i}>
                     {muscle}
                   </Badge>
                 );
@@ -79,7 +78,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
                 </Badge>
               ) : (
                 exercise.required_equipment.map((equipment, i) => (
-                  <Badge ff="monospace" color="dark" variant="outline" key={i}>
+                  <Badge ff="monospace" variant="filled" key={i}>
                     {equipment}
                   </Badge>
                 ))
