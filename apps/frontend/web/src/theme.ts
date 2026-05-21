@@ -5,15 +5,16 @@ import {
   defaultVariantColorsResolver,
   NavLink,
   ActionIcon,
-  type CSSVariablesResolver,
-  type DefaultMantineColor,
-  type DefaultMantineSize,
-  type MantineColorsTuple,
   TextInput,
   AppShell,
   Paper,
   PasswordInput,
   Title,
+  type CSSVariablesResolver,
+  type DefaultMantineColor,
+  type DefaultMantineSize,
+  type MantineColorsTuple,
+  type BadgeVariant,
 } from '@mantine/core';
 
 import './theme';
@@ -39,6 +40,12 @@ type ExtendedFontSizes =
   | DefaultMantineSize;
 type ExtendedLineHeights = 'xxs' | 'xxl' | DefaultMantineSize;
 type ExtendedSpacing = 'xxs' | 'xxl' | DefaultMantineSize;
+export type BadgeExtendedVariants =
+  | 'filled-gray'
+  | 'outline-lime'
+  | 'outline-violet-dark'
+  | 'outline-teal'
+  | BadgeVariant;
 
 declare module '@mantine/core' {
   export interface MantineThemeColorsOverride {
@@ -74,6 +81,9 @@ declare module '@mantine/core' {
       violetElevation4: string;
       violetElevation5: string;
     };
+  }
+  export interface BadgeProps {
+    variant?: BadgeExtendedVariants;
   }
 }
 
