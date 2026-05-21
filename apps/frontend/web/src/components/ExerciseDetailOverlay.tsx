@@ -91,18 +91,7 @@ export default function ExerciseDetailOverlay() {
             bd={`1px solid var(--mantine-color-dark-3)`}
             bdrs={40}
           >
-            <Text
-              size="xl"
-              fw={700}
-              c="dark.3"
-              // bdrs="sm"
-              // style={{
-              //   border: `1px solid var(--mantine-color-dark-6)`,
-              //   // borderBottom: `1px solid var(--mantine-color-dark-6)`,
-              //   // borderRight: `1px solid var(--mantine-color-dark-6)`,
-              //   paddingInline: 8,
-              // }}
-            >
+            <Text size="xl" fw={700} c="dark.3">
               {i + 1}
             </Text>
           </Center>
@@ -151,7 +140,7 @@ export default function ExerciseDetailOverlay() {
               </Badge>
             </ExerciseMetadata>
             <ExerciseMetadata title="Emphasis">
-              <Badge size="lg" variant="light" color="blue">
+              <Badge size="lg" c="dark.7" bg="lime.0">
                 {exerciseDetail.emphasis}
               </Badge>
             </ExerciseMetadata>
