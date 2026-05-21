@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, type ReactNode } from 'react';
 import {
   Modal,
   Stack,
@@ -14,6 +14,36 @@ import { ExerciseDetailContext } from '@cwt/context';
 import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
 import { getDifficultyVariant } from '../utils';
+
+interface ExerciseMetadataProps {
+  title: string;
+  children: ReactNode;
+}
+
+function ExerciseMetadata({ title, children }: ExerciseMetadataProps) {
+  return (
+    <Stack gap="xxs">
+      <Text
+        tt="uppercase"
+        size="md"
+        fw={700}
+        c="gray.7"
+        lts="var(--mantine-letter-spacing-wider)"
+      >
+        {title}
+      </Text>
+      <Flex
+        gap="md"
+        justify="flex-start"
+        align="flex-start"
+        direction="row"
+        wrap="wrap"
+      >
+        {children}
+      </Flex>
+    </Stack>
+  );
+}
 
 export default function ExerciseDetailOverlay() {
   const exerciseDetail = useContext(ExerciseDetailContext)?.exercise;
@@ -90,62 +120,34 @@ export default function ExerciseDetailOverlay() {
               {exerciseDetail.name}
             </Title>
           </Group>
-          <Flex direction="row" wrap="wrap" gap="xl" justify="flex-start">
-            <Stack>
-              <Text tt="uppercase" size="md" c="gray.7">
-                Difficulty
-              </Text>
+          <Stack gap="md" justify="flex-start">
+            <ExerciseMetadata title="Difficulty">
               <Badge
                 size="lg"
                 variant={getDifficultyVariant(exerciseDetail.difficulty)}
               >
                 {exerciseDetail.difficulty}
               </Badge>
-            </Stack>
-            <Stack>
-              <Text tt="uppercase" size="md" c="gray.7">
-                Emphasis
-              </Text>
+            </ExerciseMetadata>
+            <ExerciseMetadata title="Emphasis">
               <Badge size="lg" variant="light" color="blue">
                 {exerciseDetail.emphasis}
               </Badge>
-            </Stack>
-            <Stack>
-              <Text tt="uppercase" size="md" c="gray.7">
-                Target Muscles
-              </Text>
-              <Flex
-                gap="md"
-                justify="flex-start"
-                align="flex-start"
-                direction="row"
-                wrap="wrap"
-              >
-                {muscleMetadata}
-              </Flex>
-            </Stack>
-            <Stack>
-              <Text tt="uppercase" size="md" c="gray.7">
-                Required Equipment
-              </Text>
-              <Flex
-                gap="md"
-                justify="flex-start"
-                align="flex-start"
-                direction="row"
-                wrap="wrap"
-              >
-                {exerciseDetail.required_equipment == null ||
-                exerciseDetail.required_equipment.length == 0 ? (
-                  <Badge color="dark" variant="transparent">
-                    ---
-                  </Badge>
-                ) : (
-                  equipmentMetadata
-                )}
-              </Flex>
-            </Stack>
-          </Flex>
+            </ExerciseMetadata>
+            <ExerciseMetadata title="Target Muscles">
+              {muscleMetadata}
+            </ExerciseMetadata>
+            <ExerciseMetadata title="Required Equipment">
+              {exerciseDetail.required_equipment == null ||
+              exerciseDetail.required_equipment.length == 0 ? (
+                <Badge color="dark" variant="transparent">
+                  ---
+                </Badge>
+              ) : (
+                equipmentMetadata
+              )}
+            </ExerciseMetadata>
+          </Stack>
           <Stack mt="sm">
             <Title order={3} size="h4" tt="uppercase">
               Instructions
@@ -157,19 +159,3 @@ export default function ExerciseDetailOverlay() {
     </Modal>
   );
 }
-
-// {
-//     id: 1,
-//     name: 'Standard Push-Up',
-//     target_muscles: ['chest', 'triceps', 'shoulders'],
-//     required_equipment: [],
-//     emphasis: 'strength',
-//     difficulty: 'beginner',
-//     tags: ['push', 'upper'],
-//     instructions: [
-//       '1. Start in a strong plank position. Hands slightly wider than shoulders. Fingers forward.',
-//       '2. Lower your chest towards the floor, keeping elbows close to your body and core tight.',
-//       '3. Push through your palms, extending arms fully to return to the plank.',
-//       '4. Keep your body straight throughout the movement.',
-//     ],
-//   },
