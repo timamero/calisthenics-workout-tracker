@@ -160,6 +160,22 @@ const theme = createTheme({
         border: '1px solid var(--mantine-color-violet-8)',
       };
     }
+    if (input.variant === 'outline-violet-dark') {
+      return {
+        background: 'var(--mantine-color-violet-2)',
+        hover: 'var(--mantine-color-violet-4)',
+        color: 'var(--mantine-color-dark-7)',
+        border: '1px solid var(--mantine-color-dark-7)',
+      };
+    }
+    if (input.variant === 'outline-teal') {
+      return {
+        background: 'var(--mantine-color-teal-2)',
+        hover: 'var(--mantine-color-teal-4)',
+        color: 'var(--mantine-color-dark-7)',
+        border: '1px solid var(--mantine-color-dark-7)',
+      };
+    }
     if (input.variant === 'filled') {
       return {
         background: 'var(--mantine-color-dark-7)',
@@ -189,6 +205,14 @@ const theme = createTheme({
         background: 'var(--mantine-color-gray-2)',
         hover: 'var(--mantine-color-gray-4)',
         color: 'var(--mantine-color-dark-4)',
+        border: 'none',
+      };
+    }
+    if (input.variant === 'light-lime') {
+      return {
+        background: 'var(--mantine-color-gray-2)',
+        hover: 'var(--mantine-color-gray-4)',
+        color: 'var(--mantine-color-lime-9)',
         border: 'none',
       };
     }
