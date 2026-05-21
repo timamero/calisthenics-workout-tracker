@@ -96,8 +96,8 @@ export default function LibraryScreen() {
         hideModal: hideExerciseDetailModal,
       }}
     >
-      <ScrollView stickyHeaderIndices={[0]}>
-        <Surface>
+      <View>
+        <Surface elevation={1} style={{ zIndex: 0 }}>
           <View
             style={{
               paddingBlock: 16,
@@ -109,10 +109,17 @@ export default function LibraryScreen() {
             <Filter />
           </View>
         </Surface>
-        <View style={{ ...styles.container }}>
-          <ExerciseList />
-        </View>
-      </ScrollView>
+        <ScrollView
+          // stickyHeaderIndices={[0]}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
+          style={{ zIndex: -1 }}
+        >
+          <View style={{ ...styles.container, paddingBottom: 160 }}>
+            <ExerciseList />
+          </View>
+        </ScrollView>
+      </View>
       <FilterOverlay />
       <ExerciseDetailOverlay />
     </ExerciseDetailContext.Provider>

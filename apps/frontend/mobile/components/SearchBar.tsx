@@ -65,6 +65,7 @@ const SearchBar = () => {
           color: theme.colors.onBackground,
         }}
         style={{
+          // paddingBlock: 0,
           backgroundColor: theme.colors.background,
           borderWidth: 1,
           borderColor: theme.colors.onBackground,
