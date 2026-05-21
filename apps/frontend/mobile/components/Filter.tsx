@@ -17,8 +17,9 @@ const Filter = () => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        paddingBlock: 12,
-        paddingInline: 36,
+        marginTop: 16,
+        // paddingBlock: 12,
+        // paddingInline: 36,
       }}
     >
       <Button

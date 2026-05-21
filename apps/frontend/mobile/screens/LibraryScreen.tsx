@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { Surface, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import { ExerciseResponse } from '@cwt/schema/exercises';
@@ -15,6 +15,7 @@ import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
+import { globalStyles } from '../styles/global';
 
 import ExerciseList from '../components/ExerciseList';
 import SearchBar from '../components/SearchBar';
@@ -25,6 +26,8 @@ import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
 export default function LibraryScreen() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
+
+  const styles = globalStyles(theme);
 
   // --- Hooks ---
   const { clearExerciseSearch, clearExerciseFilters } =
@@ -93,20 +96,25 @@ export default function LibraryScreen() {
         hideModal: hideExerciseDetailModal,
       }}
     >
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: theme.colors.background,
-        }}
-      >
-        <ScrollView>
-          <SearchBar />
-          <Filter />
+      <ScrollView stickyHeaderIndices={[0]}>
+        <Surface>
+          <View
+            style={{
+              paddingBlock: 16,
+              paddingInline: 24,
+              backgroundColor: theme.colors.elevation.level2,
+            }}
+          >
+            <SearchBar />
+            <Filter />
+          </View>
+        </Surface>
+        <View style={{ ...styles.container }}>
           <ExerciseList />
-        </ScrollView>
-        <FilterOverlay />
-        <ExerciseDetailOverlay />
-      </View>
+        </View>
+      </ScrollView>
+      <FilterOverlay />
+      <ExerciseDetailOverlay />
     </ExerciseDetailContext.Provider>
   );
 }
