@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { useNavigate } from '@tanstack/react-router';
+import { Stack } from '@mantine/core';
 
 import {
   useAuthStore,
@@ -122,6 +123,18 @@ function AuthLayout() {
     (state) => state.setLoading,
   );
   const exerciseLoading = useExerciseLibraryStore((state) => state.loading);
+  const setWorkoutLibraryLoading = useWorkoutLibraryStore(
+    (state) => state.setLoading,
+  );
+  const workoutLibraryLoading = useWorkoutLibraryStore(
+    (state) => state.loading,
+  );
+  const setLeveragesAssistsLoading = useLeveragesAssistsStore(
+    (state) => state.setLoading,
+  );
+  const leveragesAssistsLoading = useLeveragesAssistsStore(
+    (state) => state.loading,
+  );
 
   useEffect(() => {
     if (!user) {
@@ -136,6 +149,8 @@ function AuthLayout() {
     setWorkouts(data.logs, data.builds);
     setExercises(data.exercises);
     setExerciseLoading(false);
+    setWorkoutLibraryLoading(false);
+    setLeveragesAssistsLoading(false);
   }, [
     data.exercises,
     data.leveragesAssists,
@@ -145,10 +160,16 @@ function AuthLayout() {
     setExerciseLoading,
     setLeveragesAssists,
     setWorkouts,
+    setWorkoutLibraryLoading,
+    setLeveragesAssistsLoading,
   ]);
 
-  if (exerciseLoading) {
-    return <DefaultLoader />;
+  if (exerciseLoading || workoutLibraryLoading || leveragesAssistsLoading) {
+    return (
+      <Stack bg="red" h="100vh" justify="center">
+        <DefaultLoader />
+      </Stack>
+    );
   }
   return <Outlet />;
 }
