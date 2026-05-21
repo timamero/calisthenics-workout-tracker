@@ -7,13 +7,13 @@
     border-color 200ms ease;
   border-radius: var(--mantine-radius-xl);
   padding: 8px 2px;
-  border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-8));
-  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
-  color: var(--mantine-color-dark-4);
+  border: 1px solid var(--mantine-color-gray-3);
+  background-color: var(--mantine-color-elevation-3);
+  color: var(--mantine-color-dark-7);
 
   &[data-checked] {
-    border-color: var(--mantine-color-orange-filled);
-    background-color: var(--mantine-color-orange-light);
+    border-color: var(--mantine-color-lime-2);
+    background-color: var(--mantine-color-lime-1);
   }
 }
 
@@ -21,4 +21,8 @@
   flex: 1;
   margin-left: var(--mantine-spacing-sm);
   margin-right: 8px;
+}
+
+.body p {
+  text-wrap: nowrap;
 }
