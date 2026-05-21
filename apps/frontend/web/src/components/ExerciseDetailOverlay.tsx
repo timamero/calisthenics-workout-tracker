@@ -67,6 +67,10 @@ export default function ExerciseDetailOverlay() {
       );
     },
   );
+  if (!exerciseDetail) {
+    return null;
+  }
+
   return (
     <Modal
       opened={detailOpened || false}
@@ -83,7 +87,7 @@ export default function ExerciseDetailOverlay() {
           </Group>
           <Group justify="flex-start" mt="sm">
             <Title order={2} size="h2">
-              {exerciseDetail?.name}
+              {exerciseDetail.name}
             </Title>
           </Group>
           <Flex direction="row" wrap="wrap" gap="xl" justify="flex-start">
@@ -93,9 +97,9 @@ export default function ExerciseDetailOverlay() {
               </Text>
               <Badge
                 size="lg"
-                variant={getDifficultyVariant(exerciseDetail!.difficulty)}
+                variant={getDifficultyVariant(exerciseDetail.difficulty)}
               >
-                {exerciseDetail!.difficulty}
+                {exerciseDetail.difficulty}
               </Badge>
             </Stack>
             <Stack>
@@ -103,7 +107,7 @@ export default function ExerciseDetailOverlay() {
                 Emphasis
               </Text>
               <Badge size="lg" variant="light" color="blue">
-                {exerciseDetail?.emphasis}
+                {exerciseDetail.emphasis}
               </Badge>
             </Stack>
             <Stack>
@@ -131,7 +135,7 @@ export default function ExerciseDetailOverlay() {
                 direction="row"
                 wrap="wrap"
               >
-                {exerciseDetail?.required_equipment == null ||
+                {exerciseDetail.required_equipment == null ||
                 exerciseDetail.required_equipment.length == 0 ? (
                   <Badge color="dark" variant="transparent">
                     ---
