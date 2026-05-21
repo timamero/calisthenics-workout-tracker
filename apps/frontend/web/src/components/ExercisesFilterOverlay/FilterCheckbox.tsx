@@ -2,10 +2,8 @@ import { memo } from 'react';
 import { Text, UnstyledButton, Checkbox } from '@mantine/core';
 
 import { type Attributes } from '@cwt/schema/exercises';
-// import { useStore } from '@cwt/state/store';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import type { FilterCheckboxKey } from '@cwt/schema/exercises';
-// import { type FilterGroup } from '@cwt/state/types';
 
 import classes from './FilterCheckbox.module.css';
 
@@ -37,8 +35,6 @@ const FilterCheckbox = memo(function FilterCheckbox({
       m={4}
       size="xs"
       onClick={() => handleClick()}
-      variant={isSelected ? 'filled' : 'outline'}
-      color={isSelected ? 'orange' : 'gray'}
       data-checked={isSelected || undefined}
       className={classes.button}
       style={{ minWidth: 100 }}
@@ -53,7 +49,7 @@ const FilterCheckbox = memo(function FilterCheckbox({
         checked={isSelected}
         onChange={() => {}}
         tabIndex={-1}
-        color="orange"
+        color="lime.4"
         size="xs"
         mr="xs"
         styles={{ input: { cursor: 'pointer' } }}

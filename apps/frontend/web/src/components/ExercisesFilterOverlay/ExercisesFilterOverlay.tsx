@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Group, Modal, Button, Stack } from '@mantine/core';
+import { Group, Modal, Button, Stack, Title } from '@mantine/core';
 
 import {
   useExercisesFilterStore,
@@ -81,29 +81,43 @@ export default function ExercisesFilterOverlay() {
     <Modal
       opened={exerciseFilterOverlayOpened!}
       onClose={onFilterOverlayClose}
-      title="Filter Exercises"
-      styles={{
-        title: {
-          fontFamily: 'var(--mantine-font-family-headings)',
-          fontWeight: 700,
-        },
-      }}
+      withCloseButton={false}
+      size="xl"
+      // title="Filter Exercises"
+      // styles={{
+      //   title: {
+      //     fontFamily: 'var(--mantine-font-family-headings)',
+      //     fontWeight: 700,
+      //   },
+      // }}
     >
-      <Stack gap="lg">
-        <FilterSelections />
-      </Stack>
-      <Group mt="lg" grow>
-        <Button
-          color="gray"
-          variant="outline"
-          onClick={() => handleClearFiltersClick()}
+      {/* <Group justify="center"> */}
+      <Stack p="md" miw={300}>
+        <Title
+          order={2}
+          fz={{ base: 'h2', md: 'display_xs' }}
+          lh="xss"
+          lts="var(--mantine-letter-spacing-tight)"
         >
-          Clear All
-        </Button>
-        <Button color="orange" onClick={() => handleApplyFiltersClick()}>
-          Apply Filters
-        </Button>
-      </Group>
+          Filter Exercises
+        </Title>
+        <Stack gap="lg">
+          <FilterSelections />
+        </Stack>
+        <Group mt="lg" grow>
+          <Button
+            color="gray"
+            variant="outline"
+            onClick={() => handleClearFiltersClick()}
+          >
+            Clear All
+          </Button>
+          <Button color="orange" onClick={() => handleApplyFiltersClick()}>
+            Apply Filters
+          </Button>
+        </Group>
+      </Stack>
+      {/* </Group> */}
     </Modal>
   );
 }
