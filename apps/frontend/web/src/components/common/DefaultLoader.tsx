@@ -8,7 +8,7 @@ export default function DefaultLoader() {
       <Stack h={40}>
         <Loader color="lime" />;
       </Stack>
-      <Stack align="center" mt="xs" h="100%">
+      <Stack align="center" mt="xs">
         <Text ff="heading" fz="xl" fw={700}>
           {loaderContent().loadingAppMessage}
         </Text>
