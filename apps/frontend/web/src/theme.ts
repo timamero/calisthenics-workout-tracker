@@ -208,14 +208,6 @@ const theme = createTheme({
         border: 'none',
       };
     }
-    if (input.variant === 'light-lime') {
-      return {
-        background: 'var(--mantine-color-gray-2)',
-        hover: 'var(--mantine-color-gray-4)',
-        color: 'var(--mantine-color-lime-9)',
-        border: 'none',
-      };
-    }
     if (input.variant === 'transparent') {
       return {
         background: 'none',
