@@ -56,7 +56,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             </Title>
           </Group>
           <Group gap="sm" wrap="nowrap" align="flex-start">
-            <Text tt="uppercase" size="xs" c="gray.7">
+            <Text ff="heading" tt="uppercase" size="xs" c="gray.7">
               Muscles:{' '}
             </Text>
             <Group gap={8}>
@@ -70,7 +70,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
             </Group>
           </Group>
           <Group gap="sm" wrap="nowrap" align="flex-start">
-            <Text tt="uppercase" size="xs" c="gray.7">
+            <Text ff="heading" tt="uppercase" size="xs" c="gray.7">
               Equipment:{' '}
             </Text>
             <Group gap={8}>
