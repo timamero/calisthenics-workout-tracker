@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Title, Stack } from '@mantine/core';
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { useNavigate } from '@tanstack/react-router';
 
@@ -22,6 +21,8 @@ import {
   getWorkoutLogs,
   getWorkoutBuilds,
 } from '../../services/workoutsService';
+
+import DefaultLoader from '../../components/common/DefaultLoader';
 
 export const Route = createFileRoute('/_auth')({
   beforeLoad: () => {
@@ -96,7 +97,6 @@ export const Route = createFileRoute('/_auth')({
         exercises = fetchedExercises;
       }
     }
-
     return { exercises, leveragesAssists, logs, builds };
   },
   component: AuthLayout,
@@ -149,12 +149,7 @@ function AuthLayout() {
   ]);
 
   if (!isExercisesSet || loading) {
-    console.log('displaying exercises loading');
-    return (
-      <Stack>
-        <Title size="h6">Loading</Title>
-      </Stack>
-    );
+    return <DefaultLoader />;
   }
   return <Outlet />;
 }
