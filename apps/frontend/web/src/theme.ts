@@ -17,6 +17,7 @@ import {
 import './styles/global.css';
 import actionIconClasses from './styles/ActionIcon.module.css';
 import appBarClasses from './styles/AppBar.module.css';
+import badgeClasses from './styles/Badge.module.css';
 import paperClasses from './styles/Paper.module.css';
 import passwordInputClasses from './styles/PasswordInput.module.css';
 import navLinkClasses from './styles/NavLink.module.css';
@@ -181,6 +182,7 @@ const theme = createTheme({
       classNames: appBarClasses,
     }),
     Badge: Badge.extend({
+      classNames: badgeClasses,
       defaultProps: {
         ff: 'monospace',
         lts: 'var(--mantine-letter-spacing-wider)',
