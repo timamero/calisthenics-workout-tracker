@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card, useTheme } from 'react-native-paper';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Keyboard } from 'react-native';
 
 import { ExerciseResponse, Attributes } from '@cwt/schema/exercises';
 
@@ -31,6 +31,7 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
     if (showModal && setExercise) {
       setExercise(exercise);
       showModal();
+      Keyboard.dismiss();
     }
   };
 
