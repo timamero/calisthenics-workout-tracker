@@ -28,7 +28,7 @@ export default function ExerciseDetailOverlay() {
   const muscleMetadata = exerciseDetail?.target_muscles.map(
     (muscle: Muscle, i: number) => {
       return (
-        <Badge size="lg" variant="light" color="grape" key={i}>
+        <Badge size="lg" variant="filled-gray" key={i}>
           {muscle}
         </Badge>
       );
@@ -41,7 +41,7 @@ export default function ExerciseDetailOverlay() {
     )
     .map((equipment: Equipment, i: number) => {
       return (
-        <Badge size="lg" color="dark" variant="outline" key={i}>
+        <Badge size="lg" variant="filled" key={i}>
           {equipment}
         </Badge>
       );
@@ -102,7 +102,7 @@ export default function ExerciseDetailOverlay() {
               <Text tt="uppercase" size="md" c="gray.7">
                 Emphasis
               </Text>
-              <Badge size="lg" color="dark" variant="outline" bg="gray.1">
+              <Badge size="lg" variant="light" color="blue">
                 {exerciseDetail?.emphasis}
               </Badge>
             </Stack>
