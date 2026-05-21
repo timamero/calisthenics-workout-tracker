@@ -13,17 +13,12 @@ import {
 import { ExerciseDetailContext } from '@cwt/context';
 import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
+import { getDifficultyVariant } from '../utils';
+
 export default function ExerciseDetailOverlay() {
   const exerciseDetail = useContext(ExerciseDetailContext)?.exercise;
   const detailHandlers = useContext(ExerciseDetailContext)?.handlers;
   const detailOpened = useContext(ExerciseDetailContext)?.opened;
-
-  const difficultyColor =
-    exerciseDetail?.difficulty == 'beginner'
-      ? 'blue'
-      : exerciseDetail?.difficulty == 'intermediate'
-        ? 'yellow'
-        : 'red';
 
   const handleCloseModal = () => {
     if (detailHandlers) {
@@ -96,8 +91,11 @@ export default function ExerciseDetailOverlay() {
               <Text tt="uppercase" size="md" c="gray.7">
                 Difficulty
               </Text>
-              <Badge size="lg" color={difficultyColor}>
-                {exerciseDetail?.difficulty}
+              <Badge
+                size="lg"
+                variant={getDifficultyVariant(exerciseDetail!.difficulty)}
+              >
+                {exerciseDetail!.difficulty}
               </Badge>
             </Stack>
             <Stack>

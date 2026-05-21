@@ -13,6 +13,7 @@ import { type ExerciseResponse } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '@cwt/context';
 
+import { getDifficultyVariant } from '../../utils';
 import classes from './ExerciseCard.module.css';
 
 interface ExerciseCardProps {
@@ -22,12 +23,12 @@ interface ExerciseCardProps {
 export default function ExerciseCard({ exercise }: ExerciseCardProps) {
   const setDetailExercise = useContext(ExerciseDetailContext)?.setExercise;
   const detailHandlers = useContext(ExerciseDetailContext)?.handlers;
-  const difficultyVariant =
-    exercise.difficulty == 'beginner'
-      ? 'outline-lime'
-      : exercise.difficulty == 'intermediate'
-        ? 'outline-teal'
-        : 'outline-violet-dark';
+  // const difficultyVariant =
+  //   exercise.difficulty == 'beginner'
+  //     ? 'outline-lime'
+  //     : exercise.difficulty == 'intermediate'
+  //       ? 'outline-teal'
+  //       : 'outline-violet-dark';
 
   const handleExerciseClick = () => {
     if (exercise && setDetailExercise && detailHandlers) {
@@ -51,7 +52,10 @@ export default function ExerciseCard({ exercise }: ExerciseCardProps) {
       >
         <Stack align="stretch" justify="center" gap="sm">
           <Group justify="flex-end">
-            <Badge ff="monospace" variant={difficultyVariant}>
+            <Badge
+              ff="monospace"
+              variant={getDifficultyVariant(exercise.difficulty)}
+            >
               {exercise.difficulty}
             </Badge>
           </Group>

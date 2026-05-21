@@ -1,4 +1,8 @@
-export function getDifficultyVariant(difficulty: string) {
+import type { BadgeExtendedVariants } from '../types';
+
+export function getDifficultyVariant(
+  difficulty: string,
+): BadgeExtendedVariants {
   return difficulty == 'beginner'
     ? 'outline-lime'
     : difficulty == 'intermediate'
