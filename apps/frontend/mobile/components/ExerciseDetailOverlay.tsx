@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Equipment, Difficulty, Emphasis } from '@cwt/schema/exercises';
 
@@ -14,8 +15,12 @@ export default function ExerciseDetailOverlay() {
   const hideModal = React.useContext(ExerciseDetailContext)?.hideModal;
   const visible = React.useContext(ExerciseDetailContext)?.visible;
   const exercise = React.useContext(ExerciseDetailContext)?.exercise;
+
   const theme = useTheme() as CustomTheme;
   const styles = getStyles(theme);
+  const height = Dimensions.get('window').height;
+  const { top, bottom } = useSafeAreaInsets();
+  const overlayHeight = height - (top + bottom);
 
   const getDifficultyStyles = () => {
     switch (exercise?.difficulty) {
@@ -44,8 +49,6 @@ export default function ExerciseDetailOverlay() {
 
   const containerStyle = {
     backgroundColor: theme.colors.elevation.level3,
-    paddingBlock: 20,
-    marginInline: 16,
   };
   const muscleMetadata = exercise?.target_muscles.map((muscle, i) => {
     return (
@@ -115,7 +118,7 @@ export default function ExerciseDetailOverlay() {
         onDismiss={hideModal}
         contentContainerStyle={containerStyle}
       >
-        <View style={{ paddingInline: 16 }}>
+        <View style={{ padding: 16, height: overlayHeight }}>
           <View
             style={{
               display: 'flex',
@@ -138,7 +141,7 @@ export default function ExerciseDetailOverlay() {
           >
             {exercise?.name}
           </Text>
-          <ScrollView style={{ height: 660 }}>
+          <ScrollView>
             <View
               style={{
                 display: 'flex',
