@@ -4,7 +4,7 @@ import { TextInput, Text, Stack } from '@mantine/core';
 import { SetContext } from '@cwt/context';
 import { useFieldInputChange } from '@cwt/hooks';
 
-import { getSecondsInDuration, formatDuration } from '@cwt/utils';
+import { getSecondsInDuration } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 interface DurationInputProps {
@@ -21,12 +21,12 @@ export default function DurationInput({
   const mode = useWorkoutDraftStore((state) => state.mode);
   if (mode === 'read') {
     const value = set.fields[fieldName]
-      ? formatDuration(set.fields[fieldName])
-      : '00:00';
+      ? getSecondsInDuration(set.fields[fieldName])
+      : '0s';
     return (
-      <Stack>
-        <Text ff="monospace">{label}</Text>
-        <Text ff="monospace">{value}</Text>
+      <Stack gap="xxs">
+        <Text ff="heading">{label}</Text>
+        <Text fw={600}>{value}s</Text>
       </Stack>
     );
   }
@@ -35,7 +35,6 @@ export default function DurationInput({
       mod={{ isloginput: true }}
       w={88}
       label={label}
-      ff="monospace"
       type="text"
       inputMode="numeric"
       pattern="^(0|[1-9][0-9]{0,2})$"
