@@ -1,5 +1,5 @@
 .button {
-  background-color: var(--mantine-color-lime-1);
+  background-color: var(--mantine-color-lime-1) !important;
   border-radius: var(--mantine-radius-lg);
   border: 1px solid var(--mantine-color-dark-7);
   box-shadow: var(--mantine-shadow-sm);
@@ -7,6 +7,6 @@
 }
 
 .button:hover {
-  background-color: var(--mantine-color-lime-elevation-1);
+  background-color: var(--mantine-color-lime-elevation-1) !important;
   box-shadow: none;
 }

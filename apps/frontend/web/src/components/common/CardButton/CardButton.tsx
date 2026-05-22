@@ -1,5 +1,7 @@
-import { Paper, Stack, UnstyledButton } from '@mantine/core';
+import { Paper, UnstyledButton } from '@mantine/core';
 import type { ReactNode } from 'react';
+
+import classes from './CardButton.module.css';
 
 interface CardButtonProps {
   handleClick?: () => void;
@@ -13,22 +15,17 @@ export default function CardButton({
   return (
     <UnstyledButton onClick={handleClick}>
       <Paper
-        shadow="xs"
+        className={classes.button}
         p="md"
         radius="lg"
-        miw={160}
+        miw={300}
+        maw={460}
         h="100%"
-        mih={160}
+        mah={230}
+        mx="auto"
         withBorder
       >
-        <Stack
-          bg="var(--mantine-color-body)"
-          align="center"
-          justify="center"
-          gap="sm"
-        >
-          {children}
-        </Stack>
+        {children}
       </Paper>
     </UnstyledButton>
   );
