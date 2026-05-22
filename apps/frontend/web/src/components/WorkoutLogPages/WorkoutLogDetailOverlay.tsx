@@ -1,13 +1,12 @@
-// import { useContext } from 'react';
-import { Modal, Stack, Text, Group, Button, Title } from '@mantine/core';
+import { Modal, Stack, Group, Button, Title } from '@mantine/core';
 
-// import { WorkoutLogDetailContext } from '@cwt/context';
 import { formatDuration } from '@cwt/utils';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 
 import WorkoutData from '../Workout/WorkoutData';
+import WorkoutMetadataItem from './WorkoutMetadataItem';
 
 export default function WorkoutLogDetailOverlay() {
   const workoutLogDetail = useWorkoutLogDetailContextWeb()
@@ -57,35 +56,24 @@ export default function WorkoutLogDetailOverlay() {
             </Title>
           </Group>
           <Stack gap="md" justify="flex-start">
-            <Stack gap="xs">
-              <Text tt="uppercase" size="xs" c="gray.7">
-                Date
-              </Text>
-              <Text size="md">{date}</Text>
-            </Stack>
+            <WorkoutMetadataItem label="Date" data={date} />
             {workoutLogDetail?.description && (
-              <Stack gap="xs">
-                <Text tt="uppercase" size="xs" c="gray.7">
-                  Description
-                </Text>
-                <Text size="md">{workoutLogDetail?.description}</Text>
-              </Stack>
+              <WorkoutMetadataItem
+                label="Description"
+                data={workoutLogDetail.description}
+              />
             )}
             {workoutLogDetail?.goal && (
-              <Stack gap="xs">
-                <Text tt="uppercase" size="xs" c="gray.7">
-                  Goal
-                </Text>
-                <Text size="md">{workoutLogDetail?.goal}</Text>
-              </Stack>
+              <WorkoutMetadataItem
+                label="Workout Goal"
+                data={workoutLogDetail.goal.toLocaleUpperCase()}
+              />
             )}
             {duration && (
-              <Stack gap="xs">
-                <Text tt="uppercase" size="xs" c="gray.7">
-                  Duration
-                </Text>
-                <Text size="md">{duration}</Text>
-              </Stack>
+              <WorkoutMetadataItem
+                label="Duration (HH:MM:SS)"
+                data={duration}
+              />
             )}
           </Stack>
 
