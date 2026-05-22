@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import { Select, Text, Stack } from '@mantine/core';
+import { Select } from '@mantine/core';
 
 import { SetContext } from '@cwt/context';
 import { useLeveragesAssistsStore } from '@cwt/state/stores';
 import { useFieldInputChange } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+import TextInputReading from './InputReading';
 
 interface NumeralInputProps {
   label: string;
@@ -18,6 +19,7 @@ export default function SelectInput({
   trackingType = null,
 }: NumeralInputProps) {
   const set = useContext(SetContext)!.set;
+
   const leverageOrAssistID =
     trackingType === 'leverages'
       ? (set.fields.leverages?.find((field) => field.id === fieldID)!
@@ -36,20 +38,19 @@ export default function SelectInput({
   if (trackingType === 'leverages') {
     if (mode === 'read') {
       return (
-        <Stack>
-          <Text ff="monospace">{label}</Text>
-          <Text ff="monospace">
-            {set.fields.leverages?.find((field) => field.id === fieldID)?.value
+        <TextInputReading
+          label={label}
+          value={
+            set.fields.leverages?.find((field) => field.id === fieldID)?.value
               ? (set.fields.leverages.find((field) => field.id === fieldID)!
                   .value as string)
-              : null}
-          </Text>
-        </Stack>
+              : ''
+          }
+        />
       );
     }
     return (
       <Select
-        ff="monospace"
         w={192}
         label={label}
         data={options}
@@ -65,20 +66,19 @@ export default function SelectInput({
   } else if (trackingType === 'assists') {
     if (mode === 'read') {
       return (
-        <Stack>
-          <Text ff="monospace">{label}</Text>
-          <Text ff="monospace">
-            {set.fields.assists?.find((field) => field.id === fieldID)?.value
+        <TextInputReading
+          label={label}
+          value={
+            set.fields.assists?.find((field) => field.id === fieldID)?.value
               ? (set.fields.assists.find((field) => field.id === fieldID)!
                   .value as string)
-              : null}
-          </Text>
-        </Stack>
+              : ''
+          }
+        />
       );
     }
     return (
       <Select
-        ff="monospace"
         w={192}
         label={label}
         data={options}

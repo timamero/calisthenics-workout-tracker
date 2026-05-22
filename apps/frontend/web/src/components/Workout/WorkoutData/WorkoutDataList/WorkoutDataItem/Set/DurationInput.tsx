@@ -1,11 +1,13 @@
 import { useContext } from 'react';
-import { TextInput, Text, Stack } from '@mantine/core';
+import { TextInput } from '@mantine/core';
 
 import { SetContext } from '@cwt/context';
 import { useFieldInputChange } from '@cwt/hooks';
 
 import { getSecondsInDuration } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+
+import TextInputReading from './InputReading';
 
 interface DurationInputProps {
   label: string;
@@ -17,18 +19,14 @@ export default function DurationInput({
   fieldName,
 }: DurationInputProps) {
   const set = useContext(SetContext)!.set;
+
   const handleChange = useFieldInputChange(fieldName, 'duration');
   const mode = useWorkoutDraftStore((state) => state.mode);
   if (mode === 'read') {
     const value = set.fields[fieldName]
       ? getSecondsInDuration(set.fields[fieldName])
       : '0s';
-    return (
-      <Stack gap="xxs">
-        <Text ff="heading">{label}</Text>
-        <Text fw={600}>{value}s</Text>
-      </Stack>
-    );
+    return <TextInputReading label={label} value={value} />;
   }
   return (
     <TextInput

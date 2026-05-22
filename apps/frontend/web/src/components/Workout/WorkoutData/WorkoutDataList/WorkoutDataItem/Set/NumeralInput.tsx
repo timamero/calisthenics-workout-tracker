@@ -1,9 +1,11 @@
 import { useContext } from 'react';
-import { TextInput, Text, Stack } from '@mantine/core';
+import { TextInput } from '@mantine/core';
 
 import { SetContext } from '@cwt/context';
 import { useFieldInputChange } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
+
+import TextInputReading from './InputReading';
 
 interface NumeralInputProps {
   label: string;
@@ -23,15 +25,6 @@ export default function NumeralInput({
   const handleChange = useFieldInputChange(fieldName, 'numeral', fieldID);
   const mode = useWorkoutDraftStore((state) => state.mode);
 
-  function TextInputReading({ value }: { value: string }) {
-    return (
-      <Stack gap="xxs">
-        <Text ff="heading">{label}</Text>
-        <Text fw={600}>{value}</Text>
-      </Stack>
-    );
-  }
-
   function TextInputLogging({ value }: { value: string }) {
     return (
       <TextInput
@@ -49,6 +42,7 @@ export default function NumeralInput({
     if (mode === 'read') {
       return (
         <TextInputReading
+          label={label}
           value={
             set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === null ||
@@ -84,6 +78,7 @@ export default function NumeralInput({
     if (mode === 'read') {
       return (
         <TextInputReading
+          label={label}
           value={
             set.fields.assists!.find((field) => field.id === fieldID)!.value ===
               null ||
@@ -119,6 +114,7 @@ export default function NumeralInput({
     if (mode === 'read') {
       return (
         <TextInputReading
+          label={label}
           value={
             set.fields[fieldName] === undefined ||
             set.fields[fieldName]?.toString() === ''
