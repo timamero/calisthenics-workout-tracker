@@ -23,13 +23,34 @@ export default function NumeralInput({
   const handleChange = useFieldInputChange(fieldName, 'numeral', fieldID);
   const mode = useWorkoutDraftStore((state) => state.mode);
 
+  function TextInputReading({ value }: { value: string }) {
+    return (
+      <Stack gap="xxs">
+        <Text ff="heading">{label}</Text>
+        <Text fw={600}>{value}</Text>
+      </Stack>
+    );
+  }
+
+  function TextInputLogging({ value }: { value: string }) {
+    return (
+      <TextInput
+        mod={{ isloginput: true }}
+        w={88}
+        label={label}
+        placeholder={'0'}
+        value={value}
+        onChange={handleChange}
+      />
+    );
+  }
+
   if (fieldName === 'value' && trackingType === 'leverages') {
     if (mode === 'read') {
       return (
-        <Stack>
-          <Text ff="monospace">{label}</Text>
-          <Text ff="monospace">
-            {set.fields.leverages!.find((field) => field.id === fieldID)!
+        <TextInputReading
+          value={
+            set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === undefined ||
@@ -39,18 +60,13 @@ export default function NumeralInput({
               ? '0'
               : set.fields
                   .leverages!.find((field) => field.id === fieldID)!
-                  .value!.toString()}
-          </Text>
-        </Stack>
+                  .value!.toString()
+          }
+        />
       );
     }
     return (
-      <TextInput
-        mod={{ isloginput: true }}
-        ff="monospace"
-        w={88}
-        label={label}
-        placeholder={'0'}
+      <TextInputLogging
         value={
           set.fields.leverages!.find((field) => field.id === fieldID)!.value ===
             null ||
@@ -61,18 +77,16 @@ export default function NumeralInput({
                 .leverages!.find((field) => field.id === fieldID)!
                 .value!.toString()
         }
-        onChange={handleChange}
       />
     );
   }
   if (fieldName === 'value' && trackingType === 'assists') {
     if (mode === 'read') {
       return (
-        <Stack>
-          <Text ff="monospace">{label}</Text>
-          <Text ff="monospace">
-            {set.fields.assists!.find((field) => field.id === fieldID)!
-              .value === null ||
+        <TextInputReading
+          value={
+            set.fields.assists!.find((field) => field.id === fieldID)!.value ===
+              null ||
             set.fields.assists!.find((field) => field.id === fieldID)!.value ===
               undefined ||
             set.fields
@@ -81,18 +95,13 @@ export default function NumeralInput({
               ? '0'
               : set.fields
                   .assists!.find((field) => field.id === fieldID)!
-                  .value!.toString()}
-          </Text>
-        </Stack>
+                  .value!.toString()
+          }
+        />
       );
     }
     return (
-      <TextInput
-        mod={{ isloginput: true }}
-        ff="monospace"
-        w={88}
-        label={label}
-        placeholder={'0'}
+      <TextInputLogging
         value={
           set.fields.assists!.find((field) => field.id === fieldID)!.value ===
             null ||
@@ -103,37 +112,29 @@ export default function NumeralInput({
                 .assists!.find((field) => field.id === fieldID)!
                 .value!.toString()
         }
-        onChange={handleChange}
       />
     );
   }
   if (fieldName !== 'value') {
     if (mode === 'read') {
       return (
-        <Stack>
-          <Text ff="monospace">{label}</Text>
-          <Text ff="monospace">
-            {set.fields[fieldName] === undefined ||
+        <TextInputReading
+          value={
+            set.fields[fieldName] === undefined ||
             set.fields[fieldName]?.toString() === ''
               ? '0'
-              : set.fields[fieldName]!.toString()}
-          </Text>
-        </Stack>
+              : set.fields[fieldName]!.toString()
+          }
+        />
       );
     }
     return (
-      <TextInput
-        mod={{ isloginput: true }}
-        ff="monospace"
-        w={88}
-        label={label}
-        placeholder={'0'}
+      <TextInputLogging
         value={
           set.fields[fieldName] === undefined
             ? '0'
             : set.fields[fieldName]!.toString()
         }
-        onChange={handleChange}
       />
     );
   }
