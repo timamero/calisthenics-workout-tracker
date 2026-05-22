@@ -1,5 +1,4 @@
 .button {
-  /* background-color: var(--mantine-elevation-3); */
   box-shadow: var(--mantine-shadow-sm);
   transition: all 0.15s ease-in-out;
 }

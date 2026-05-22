@@ -18,7 +18,7 @@ import './styles/global.css';
 import actionIconClasses from './styles/ActionIcon.module.css';
 import appBarClasses from './styles/AppBar.module.css';
 import badgeClasses from './styles/Badge.module.css';
-import paperClasses from './styles/Paper.module.css';
+// import paperClasses from './styles/Paper.module.css';
 import passwordInputClasses from './styles/PasswordInput.module.css';
 import navLinkClasses from './styles/NavLink.module.css';
 import textInputClasses from './styles/TextInput.module.css';
@@ -192,9 +192,10 @@ const theme = createTheme({
       classNames: navLinkClasses,
     }),
     Paper: Paper.extend({
-      classNames: paperClasses,
+      // classNames: paperClasses,
       defaultProps: {
         shadow: 'xs',
+        bg: 'elevation.3',
       },
     }),
     PasswordInput: PasswordInput.extend({
