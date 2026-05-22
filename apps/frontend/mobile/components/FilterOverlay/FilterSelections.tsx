@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Dimensions } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'react-native-paper';
 import { useShallow } from 'zustand/shallow';
 
@@ -37,6 +38,12 @@ const Selections = React.memo(function Selections({
 export default function FilterSelections() {
   const theme = useTheme() as CustomTheme;
 
+  const height = Dimensions.get('window').height;
+  const { top, bottom } = useSafeAreaInsets();
+  console.log('height, top, bottom', height, top, bottom);
+  const overlayHeight = height - (top + bottom);
+  console.log('overlayHeight', overlayHeight);
+
   const filterCheckboxSelections = useExercisesFilterStore(
     useShallow((state) => state.filterCheckboxSelections),
   );
@@ -48,7 +55,7 @@ export default function FilterSelections() {
   return (
     <ScrollView
       style={{
-        height: 460,
+        // height: 870,
         backgroundColor: theme.colors.background,
         paddingInline: 20,
         paddingBlock: 16,
@@ -60,13 +67,12 @@ export default function FilterSelections() {
             <Text
               style={{
                 textTransform: 'uppercase',
-                fontWeight: 400,
-                color: theme.colors.onBackground,
+                color: theme.colors.gray7,
               }}
-              variant="headlineMedium"
+              variant="headlineSmall"
               key={i}
             >
-              {keyName}
+              {keyName.split('_').join(' ')}
             </Text>
             <View
               style={{

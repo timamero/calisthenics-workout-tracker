@@ -96,7 +96,14 @@ export default function LibraryScreen() {
         hideModal: hideExerciseDetailModal,
       }}
     >
-      <View>
+      <View
+        style={{
+          // backgroundColor: theme.colors.dark7,
+          zIndex: -2,
+          // height: 'auto',
+          flex: 1,
+        }}
+      >
         <Surface elevation={1} style={{ zIndex: 0 }}>
           <View
             style={{
@@ -115,9 +122,19 @@ export default function LibraryScreen() {
         <ScrollView
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag"
-          style={{ zIndex: -1 }}
+          style={{
+            zIndex: -1,
+            backgroundColor: theme.colors.background,
+            flex: 1,
+          }}
         >
-          <View style={{ ...styles.container, paddingBottom: 160 }}>
+          <View
+            style={{
+              ...styles.container,
+              paddingBottom: 160,
+              flex: 1,
+            }}
+          >
             <ExerciseList />
           </View>
         </ScrollView>
