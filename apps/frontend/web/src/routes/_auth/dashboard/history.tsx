@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Title, Stack } from '@mantine/core';
+import { Title, Stack, Container } from '@mantine/core';
 
 import { WorkoutLogDetailContextProvider } from '@cwt/context';
 
@@ -12,16 +12,28 @@ export const Route = createFileRoute('/_auth/dashboard/history')({
 function HistoryView() {
   return (
     <WorkoutLogDetailContextProvider>
-      <Stack
-        mih="100%"
-        pb="lg"
-        flex={1}
-        display="flex"
-        style={{ flexDirection: 'column' }}
-      >
-        <Title>Past Workouts</Title>
-        <WorkoutLogPages />
-      </Stack>
+      <Container py="md">
+        <Stack
+          mih="100%"
+          flex={1}
+          display="flex"
+          style={{ flexDirection: 'column' }}
+        >
+          <Title
+            order={1}
+            mb="md"
+            fz={{ base: 'h3', md: 'h2' }}
+            lh="xxs"
+            ta="center"
+            style={(theme) => ({
+              letterSpacing: theme.other.letterSpacing.tight,
+            })}
+          >
+            Past Workouts
+          </Title>
+          <WorkoutLogPages />
+        </Stack>
+      </Container>
     </WorkoutLogDetailContextProvider>
   );
 }
