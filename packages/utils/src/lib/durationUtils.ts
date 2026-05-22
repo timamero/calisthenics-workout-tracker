@@ -19,8 +19,8 @@ export function getSecondsInDuration(inputString: string): string {
 
 /**
  * Converts an ISO 8601 duration string to a formatted time string
- * Returns "MM:SS" or "HH:MM:SS" if there is an hour portion
- * Example: "PT45S" => "00:45", "PT1H30M45S" => "01:30:45"
+ * Returns "HH:MM:SS" format
+ * Example: "PT45S" => "00:00:45", "PT1H30M45S" => "01:30:45"
  */
 export function formatDuration(isoString: string): string {
   if (typeof isoString !== "string") {
@@ -29,10 +29,11 @@ export function formatDuration(isoString: string): string {
   }
 
   // Check if already in correct format (MM:SS or HH:MM:SS)
-  if (
-    /^(\d{2}):(\d{2})$/.test(isoString) ||
-    /^(\d{2}):(\d{2}):(\d{2})$/.test(isoString)
-  ) {
+  const mmssMatch = isoString.match(/^(\d{2}):(\d{2})$/);
+  if (mmssMatch) {
+    return `00:${isoString}`;
+  }
+  if (/^(\d{2}):(\d{2}):(\d{2})$/.test(isoString)) {
     return isoString;
   }
 
@@ -50,8 +51,5 @@ export function formatDuration(isoString: string): string {
 
   const pad = (num: number): string => String(num).padStart(2, "0");
 
-  if (hours > 0) {
-    return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-  }
-  return `${pad(minutes)}:${pad(seconds)}`;
+  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 }
