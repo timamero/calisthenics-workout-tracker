@@ -22,7 +22,7 @@ import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
 import { getLeveragesAssists } from './services/leveragesAssistsService';
 
-import AuthSplashScreen from './components/common/AuthSplashScreen';
+import DefaultLoaderScreen from './screens/DefaultLoaderScreen';
 import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
 
 SplashScreen.preventAutoHideAsync();
@@ -33,7 +33,7 @@ SplashScreen.setOptions({
 });
 
 export default function App() {
-  const loading = useAuthStore((state) => state.loading);
+  const authLoading = useAuthStore((state) => state.loading);
   const supabaseSession = useAuthStore((state) => state.session);
 
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
@@ -72,15 +72,15 @@ export default function App() {
   }, [setExercises, supabaseSession, setWorkouts, setLeveragesAssists]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!authLoading) {
       SplashScreen.hideAsync();
     }
-  }, [loading]);
+  }, [authLoading]);
 
-  if (loading) {
+  if (authLoading) {
     return (
       <PaperProvider theme={theme}>
-        <AuthSplashScreen />
+        <DefaultLoaderScreen />
       </PaperProvider>
     );
   }
