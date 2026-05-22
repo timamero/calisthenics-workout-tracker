@@ -101,8 +101,11 @@ export default function LibraryScreen() {
           <View
             style={{
               paddingBlock: 16,
-              paddingInline: 24,
+              paddingInline: 8,
               backgroundColor: theme.colors.elevation.level2,
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
             <SearchBar />
@@ -110,7 +113,6 @@ export default function LibraryScreen() {
           </View>
         </Surface>
         <ScrollView
-          // stickyHeaderIndices={[0]}
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag"
           style={{ zIndex: -1 }}

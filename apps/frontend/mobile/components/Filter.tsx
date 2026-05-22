@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Button, useTheme } from 'react-native-paper';
+import { IconButton, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
 import { CustomTheme } from '../theme';
@@ -16,26 +16,14 @@ const Filter = () => {
       style={{
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        marginTop: 16,
-        // paddingBlock: 12,
-        // paddingInline: 36,
       }}
     >
-      <Button
+      <IconButton
         icon="filter-variant"
         mode="outlined"
-        textColor={theme.colors.onBackground}
-        contentStyle={{
-          flexDirection: 'row-reverse',
-        }}
-        style={{
-          borderColor: theme.colors.onBackground,
-        }}
+        size={36}
         onPress={() => setIsExerciseFilterVisible(true)}
-      >
-        Filter
-      </Button>
+      />
     </View>
   );
 };
