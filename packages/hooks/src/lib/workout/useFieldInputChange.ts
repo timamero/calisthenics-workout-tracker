@@ -1,8 +1,8 @@
-import { useContext, ChangeEvent } from "react";
+import { useContext, ChangeEvent } from 'react';
 
-import { WorkoutDataItemContext, SetContext } from "@cwt/context";
-import type { SetFields, Leverage, Assist } from "@cwt/schema/workouts";
-import { useWorkoutDraftStore } from "@cwt/state/stores";
+import { WorkoutDataItemContext, SetContext } from '@cwt/context';
+import type { SetFields, Leverage, Assist } from '@cwt/schema/workouts';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 /**
  * Hook to handle changes in input fields for a workout set.
@@ -13,9 +13,9 @@ import { useWorkoutDraftStore } from "@cwt/state/stores";
  * @returns A change handler function for the specified input field.
  */
 export default function useFieldInputChange(
-  fieldName: "rest" | "time" | "reps" | "weight" | "value",
-  inputType: "numeral" | "duration" | "select",
-  fieldID?: string // Needed for updating leverage or asssit fields
+  fieldName: 'rest' | 'time' | 'reps' | 'weight' | 'value',
+  inputType: 'numeral' | 'duration' | 'select',
+  fieldID?: string, // Needed for updating leverage or asssit fields
 ) {
   const set = useContext(SetContext)!.set;
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
@@ -23,16 +23,16 @@ export default function useFieldInputChange(
   const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
 
   const setLeverageOrAssistIDToMod = useWorkoutDraftStore(
-    (state) => state.setLeverageOrAssistIDToMod
+    (state) => state.setLeverageOrAssistIDToMod,
   );
 
   const handleUpdateField = (
     updatedField:
       | Partial<SetFields>
-      | Pick<Leverage, "value">
-      | Pick<Assist, "value">
+      | Pick<Leverage, 'value'>
+      | Pick<Assist, 'value'>,
   ) => {
-    if (parentType === "superset") {
+    if (parentType === 'superset') {
       handleSetFieldChange(set.id, updatedField, exerciseID);
     } else {
       handleSetFieldChange(set.id, updatedField);
@@ -40,45 +40,46 @@ export default function useFieldInputChange(
   };
 
   const handleChange = (
-    eventOrValue: ChangeEvent<HTMLInputElement> | string | null
+    eventOrValue: ChangeEvent<HTMLInputElement> | string | null,
   ) => {
     if (fieldID) {
       setLeverageOrAssistIDToMod(fieldID);
     }
 
     const value =
-      typeof eventOrValue === "object" &&
+      typeof eventOrValue === 'object' &&
       eventOrValue !== null &&
-      "target" in eventOrValue
+      'target' in eventOrValue
         ? eventOrValue.target.value
         : eventOrValue;
 
-    if (inputType === "select") {
+    if (inputType === 'select') {
       const updatedField = { value: value };
       handleUpdateField(updatedField);
     }
 
     // Allow empty string for controlled input
-    if (value === "") {
+    if (value === '') {
       const updatedField:
         | Partial<SetFields>
-        | Pick<Leverage, "value">
-        | Pick<Assist, "value"> = {
-        [fieldName]: "",
+        | Pick<Leverage, 'value'>
+        | Pick<Assist, 'value'> = {
+        [fieldName]: '',
       };
       handleUpdateField(updatedField);
       return;
     }
     // Validate: only numbers, no leading zeros except for '0'
     if (/^(0|[1-9][0-9]{0,2})$/.test(value!)) {
+      // if (/^(0|[1-9][0-9]{0,2})(\.\d{1,2})?$/.test(value!)) {  // This validation allows decimals up to two places.
       const num = Number(value);
       if (num >= 0 && num <= 999) {
         const formattedValue =
-          inputType === "duration" ? "PT" + value + "S" : Number(value);
+          inputType === 'duration' ? 'PT' + value + 'S' : Number(value);
         const updatedField:
           | Partial<SetFields>
-          | Pick<Leverage, "value">
-          | Pick<Assist, "value"> = {
+          | Pick<Leverage, 'value'>
+          | Pick<Assist, 'value'> = {
           [fieldName]: formattedValue,
         };
         handleUpdateField(updatedField);
