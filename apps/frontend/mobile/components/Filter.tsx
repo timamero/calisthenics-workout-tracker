@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { IconButton } from 'react-native-paper';
 import { View } from 'react-native';
 
-import { CustomTheme } from '../theme';
 import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
 
 const Filter = () => {
