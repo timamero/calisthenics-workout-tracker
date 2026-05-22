@@ -14,7 +14,6 @@ function HistoryView() {
     <WorkoutLogDetailContextProvider>
       <Container
         py="md"
-        bg="red.2"
         mih="100%"
         style={{ display: 'flex', flexDirection: 'column' }}
       >
