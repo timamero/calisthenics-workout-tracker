@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import 'react-native-get-random-values';
-// import { View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import * as SplashScreen from 'expo-splash-screen';
 import {
@@ -64,12 +63,7 @@ export default function App() {
 
   useEffect(() => {
     const asyncFetchData = async () => {
-      console.log('calling asyncFetchData', supabaseSession?.access_token);
       if (supabaseSession?.access_token) {
-        console.log('fetching data');
-        // setExerciseLoading(true);
-        // setWorkoutLibraryLoading(true);
-        // setLeveragesAssistsLoading(true);
         const exercises = await getExercises(supabaseSession.access_token);
         if (exercises) {
           setExercises(exercises);
@@ -89,24 +83,12 @@ export default function App() {
         if (leveragesAssists) {
           setLeveragesAssists(leveragesAssists);
         }
-        console.log('setting loading states to false');
         setExerciseLoading(false);
         setWorkoutLibraryLoading(false);
         setLeveragesAssistsLoading(false);
       }
     };
     asyncFetchData();
-    // console.log(
-    //   'authLoading and supabaseSession',
-    //   authLoading,
-    //   supabaseSession,
-    // );
-    // if (!authLoading && supabaseSession === null) {
-    //   console.log('auth comleted loading and no supabase session');
-    //   setExerciseLoading(false);
-    //   setWorkoutLibraryLoading(false);
-    //   setLeveragesAssistsLoading(false);
-    // }
   }, [
     setExercises,
     supabaseSession,
@@ -118,35 +100,10 @@ export default function App() {
   ]);
 
   useEffect(() => {
-    if (
-      !authLoading
-      // !exerciseLoading &&
-      // !workoutLibraryLoading &&
-      // !leveragesAssistsLoading
-    ) {
+    if (!authLoading) {
       SplashScreen.hideAsync();
     }
-    // else {
-    //   setExerciseLoading(false);
-    //   setWorkoutLibraryLoading(false);
-    //   setLeveragesAssistsLoading(false);
-    // }
-  }, [
-    authLoading,
-    // exerciseLoading,
-    // workoutLibraryLoading,
-    // leveragesAssistsLoading,
-  ]);
-
-  console.log(
-    'loading states',
-    authLoading,
-    exerciseLoading,
-    workoutLibraryLoading,
-    leveragesAssistsLoading,
-  );
-
-  console.log('supabaseSession', supabaseSession);
+  }, [authLoading]);
 
   if (
     authLoading ||
