@@ -90,7 +90,7 @@ export default function TextInputWithEditUI({
       {isEditMode && (
         <Stack maw={400} w="100%" gap={4}>
           <TextInput
-            mod={{ isTitleH1: titleOrder === 1, isTitleH2: titleOrder === 2 }}
+            mod={{ istitleh1: titleOrder === 1, istitleh2: titleOrder === 2 }}
             w="100%"
             value={text}
             onChange={onTextChange}
