@@ -17,6 +17,5 @@ function Loader() {
 }
 
 function RouteComponent() {
-  console.log('add-exercise || add-exercise page mounted');
   return <AddExercise />;
 }
