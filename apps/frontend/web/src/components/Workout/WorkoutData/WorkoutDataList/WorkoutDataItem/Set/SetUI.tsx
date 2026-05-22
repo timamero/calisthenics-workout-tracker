@@ -38,12 +38,13 @@ export default function SetUI({
     <Stack gap="xs" px="sm" mb="xs" w="100%">
       <Stack w="100%" align="center">
         <Group w="100%" justify="space-between" maw={360}>
-          {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && (
-            <Text
-              fz={{ base: 'sm', md: 'md' }}
-              fw={700}
-            >{`Set ${setIndex + 1}`}</Text>
-          )}
+          {!hasSupersetParentType &&
+            (mode === 'build' || mode === 'edit' || mode === 'read') && (
+              <Text
+                fz={{ base: 'sm', md: 'md' }}
+                fw={700}
+              >{`Set ${setIndex + 1}`}</Text>
+            )}
 
           {showDeleteButton && (mode === 'build' || mode === 'edit') && (
             <ActionIcon
@@ -58,11 +59,11 @@ export default function SetUI({
         </Group>
       </Stack>
       <Stack align="center">
-        <Stack align="flex-start" gap="0" w="max-content">
-          <Group>
+        <Stack align="flex-start" gap="0">
+          <Group justify="center" gap="xs" wrap="wrap">
             <FieldsList />
+            <LeverageAssistFieldsList />
           </Group>
-          <LeverageAssistFieldsList />
         </Stack>
       </Stack>
       {mode === 'log' && (
