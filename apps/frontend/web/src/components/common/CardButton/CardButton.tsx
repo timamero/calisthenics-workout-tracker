@@ -16,12 +16,12 @@ export default function CardButton({
     <UnstyledButton onClick={handleClick}>
       <Paper
         className={classes.button}
-        p="md"
+        p="lg"
         radius="lg"
         miw={300}
-        maw={460}
+        maw={620}
         h="100%"
-        mah={230}
+        mah="max-content"
         mx="auto"
         withBorder
       >
