@@ -12,9 +12,14 @@ export const Route = createFileRoute('/_auth/dashboard/history')({
 function HistoryView() {
   return (
     <WorkoutLogDetailContextProvider>
-      <Container py="md">
+      <Container
+        py="md"
+        bg="red.2"
+        mih="100%"
+        style={{ display: 'flex', flexDirection: 'column' }}
+      >
         <Stack
-          mih="100%"
+          h="100%"
           flex={1}
           display="flex"
           style={{ flexDirection: 'column' }}
