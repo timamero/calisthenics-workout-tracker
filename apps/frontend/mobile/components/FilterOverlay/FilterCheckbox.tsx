@@ -33,11 +33,11 @@ export default function FilterCheckbox({
   };
 
   const checkboxBgColor = isSelected
-    ? 'rgba(255, 99, 71, 0.08)'
+    ? theme.colors.lime1
     : theme.colors.background;
   const checkboxBorderColor = isSelected
-    ? theme.colors.primary
-    : 'rgb(222, 226, 230)';
+    ? theme.colors.lime2
+    : theme.colors.gray3;
   const labelFontWeight = isSelected ? '700' : '400';
   return (
     <View
@@ -51,7 +51,7 @@ export default function FilterCheckbox({
       <Checkbox.Item
         label={selection}
         labelVariant="bodySmall"
-        uncheckedColor="rgb(222, 226, 230)"
+        uncheckedColor={theme.colors.gray3}
         labelStyle={{
           textTransform: 'uppercase',
           color: theme.colors.onBackground,
