@@ -43,8 +43,8 @@ export default function WorkoutLogDetailOverlay() {
       size="xl"
       withCloseButton={false}
     >
-      <Group justify="center">
-        <Stack mb="lg" maw={580}>
+      <Stack align="stretch" w="100%">
+        <Stack mb="lg">
           <Group justify="flex-end">
             <Button variant="outline" color="dark" onClick={handleCloseModal}>
               Back to Workouts
@@ -79,7 +79,7 @@ export default function WorkoutLogDetailOverlay() {
 
           <WorkoutData />
         </Stack>
-      </Group>
+      </Stack>
     </Modal>
   );
 }
