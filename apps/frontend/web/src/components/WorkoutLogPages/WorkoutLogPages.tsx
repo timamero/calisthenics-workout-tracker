@@ -1,22 +1,15 @@
 import { useState } from 'react';
-import {
-  Title,
-  Pagination,
-  Stack,
-  ScrollArea,
-  Badge,
-  Text,
-  Group,
-} from '@mantine/core';
+import { Title, Pagination, Stack, ScrollArea, Badge } from '@mantine/core';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { chunk, formatDuration } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
+import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import CardButton from '../../components/common/CardButton';
 import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
-import type { WorkoutLogResponse } from '@cwt/schema/workouts';
+import WorkoutMetadataItem from './WorkoutMetadataItem';
 
 export default function WorkoutLogPages() {
   const [activePage, setPage] = useState(1);
@@ -44,31 +37,6 @@ export default function WorkoutLogPages() {
     }
   };
 
-  interface WorkoutMetadataProps {
-    label: string;
-    data: string;
-  }
-
-  function WorkoutMetadata({ label, data }: WorkoutMetadataProps) {
-    return (
-      <Group align="flex-start" gap="xxs" wrap="nowrap">
-        <Text ff="heading" tt="uppercase" size="md" c="gray.7">
-          {label}:{' '}
-        </Text>
-        <Text
-          // component="span"
-          ff="monospace"
-          tt="none"
-          size="md"
-          fw={700}
-          lts="var(--mantine-letter-spacing-wider)"
-          px="sm"
-        >
-          {data}
-        </Text>
-      </Group>
-    );
-  }
   const items = data[activePage - 1].map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
     const date = new Date(wo.date).toLocaleString('en-US', {
@@ -87,19 +55,19 @@ export default function WorkoutLogPages() {
           <Badge size="xl" variant="outline-lime" radius="sm" tt="capitalize">
             {date}
           </Badge>
-          <Title lh="xxs" order={2} size="h4">
+          <Title lh="xxl" order={2} size="h4">
             {workoutTitle}
           </Title>
           {wo.description && (
-            <WorkoutMetadata label="Description" data={wo.description} />
+            <WorkoutMetadataItem label="Description" data={wo.description} />
           )}
           {wo.goal && (
-            <WorkoutMetadata
+            <WorkoutMetadataItem
               label="Workout Goal"
               data={wo.goal.toUpperCase()}
             />
           )}
-          <WorkoutMetadata label="Duration (HH:MM:SS)" data={duration} />
+          <WorkoutMetadataItem label="Duration (HH:MM:SS)" data={duration} />
         </Stack>
       </CardButton>
     );
