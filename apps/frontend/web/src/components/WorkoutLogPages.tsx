@@ -68,7 +68,7 @@ export default function WorkoutLogPages() {
   return (
     <Stack justify="stretch" flex={1}>
       <ScrollArea.Autosize mah="min-content" h="100%" flex={1}>
-        <SimpleGrid cols={{ base: 1, md: 2, xl: 3 }}>{items}</SimpleGrid>
+        <SimpleGrid cols={{ base: 1, md: 2 }}>{items}</SimpleGrid>
       </ScrollArea.Autosize>
       <Pagination
         flex={0}
