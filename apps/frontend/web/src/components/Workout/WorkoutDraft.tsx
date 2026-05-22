@@ -23,7 +23,7 @@ export default function WorkoutDraft() {
         <TextInputWithEdit
           initialValue={workoutTitle!}
           onSave={setWorkoutTitle}
-          hideEdit={mode === 'log' ? true : false}
+          hideEdit={mode === 'log' || mode === 'read' ? true : false}
           variant={'title'}
           maxLength={70}
           titleOrder={1}
