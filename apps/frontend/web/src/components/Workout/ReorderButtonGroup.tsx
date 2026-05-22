@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Stack, ActionIcon } from '@mantine/core';
+import { Stack, ActionIcon, useMatches } from '@mantine/core';
 import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
 
 import { WorkoutDataItemContext } from '@cwt/context';
@@ -26,11 +26,13 @@ export default function ReorderButtonGroup({
         ? 'filled-gray'
         : 'filled';
 
+  const appliedSize = useMatches({ base: 'xs', md: 'md' });
+
   return (
     <Stack gap="xxs">
       {!isFirst && (
         <ActionIcon
-          size="md"
+          size={appliedSize}
           variant={appliedVariant}
           onClick={() => handleUpClick()}
         >
@@ -39,7 +41,7 @@ export default function ReorderButtonGroup({
       )}
       {!isLast && (
         <ActionIcon
-          size="md"
+          size={appliedSize}
           variant={appliedVariant}
           onClick={() => handleDownClick()}
         >
