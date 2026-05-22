@@ -23,11 +23,7 @@ export default function FilterOverlay() {
   const { top, bottom } = useSafeAreaInsets();
   const overlayHeight = height - (top + bottom);
   const containerStyle = {
-    backgroundColor: theme.colors.background,
-    // paddingBlock: 20,
-    // marginInline: 16,
-    borderWidth: 1,
-    borderColor: theme.colors.gray3,
+    backgroundColor: theme.colors.elevation.level3,
   };
 
   // --- Hooks ---
