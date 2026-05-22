@@ -33,7 +33,7 @@ function HistoryView() {
               letterSpacing: theme.other.letterSpacing.tight,
             })}
           >
-            Past Workouts
+            Workouts
           </Title>
           <WorkoutLogPages />
         </Stack>

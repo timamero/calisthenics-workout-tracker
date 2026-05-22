@@ -76,7 +76,7 @@ export const MainTabs = createBottomTabNavigator({
     History: {
       screen: HistoryScreen,
       options: {
-        title: 'Logs',
+        title: 'Workouts',
       },
     },
     Settings: SettingsScreen,
