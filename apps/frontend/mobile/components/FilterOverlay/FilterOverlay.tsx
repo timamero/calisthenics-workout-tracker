@@ -1,6 +1,7 @@
 import { useContext } from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { Modal, Portal, Button, useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
   useExercisesFilterStore,
@@ -17,12 +18,16 @@ import FilterSelections from './FilterSelections';
 
 export default function FilterOverlay() {
   const theme = useTheme() as CustomTheme;
+
+  const height = Dimensions.get('window').height;
+  const { top, bottom } = useSafeAreaInsets();
+  const overlayHeight = height - (top + bottom);
   const containerStyle = {
     backgroundColor: theme.colors.background,
-    paddingBlock: 20,
-    marginInline: 16,
-    borderWidth: 2,
-    borderColor: theme.colors.outline,
+    // paddingBlock: 20,
+    // marginInline: 16,
+    borderWidth: 1,
+    borderColor: theme.colors.gray3,
   };
 
   // --- Hooks ---
@@ -93,52 +98,65 @@ export default function FilterOverlay() {
         onDismiss={onModalClose}
         contentContainerStyle={containerStyle}
       >
-        <View
-          style={{
-            paddingLeft: 20,
-            paddingBottom: 16,
-            borderBottomWidth: 2,
-            borderBottomColor: theme.colors.outline,
-          }}
-        >
-          <Text
-            variant="headlineMedium"
-            style={{ color: theme.colors.onBackground, opacity: 0.9 }}
-          >
-            Filter Exercises
-          </Text>
-        </View>
-        <FilterSelections />
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            paddingTop: 20,
-            borderTopWidth: 2,
-            borderTopColor: theme.colors.outline,
-          }}
-        >
-          <Button
-            mode="outlined"
-            textColor="rgb(134, 142, 150)"
-            onPress={handleClearFiltersPress}
+        <View style={{ height: overlayHeight }}>
+          <View
             style={{
-              borderColor: 'rgb(134, 142, 150)',
-              borderRadius: 4,
+              paddingInline: 16,
+              paddingBlock: 16,
+              borderBottomWidth: 1,
+              borderBottomColor: theme.colors.gray3,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
-            Clear All
-          </Button>
-          <Button
-            mode="contained"
-            onPress={handleApplyFiltersPress}
+            <Text
+              variant="headlineMedium"
+              style={{ color: theme.colors.onBackground, opacity: 0.9 }}
+            >
+              Filter Exercises
+            </Text>
+            <Button
+              mode="outlined"
+              textColor={theme.colors.onBackground}
+              onPress={onModalClose}
+            >
+              Cancel
+            </Button>
+          </View>
+          <FilterSelections />
+          <View
             style={{
-              borderRadius: 4,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              paddingBlock: 16,
+              borderTopWidth: 1,
+              borderTopColor: theme.colors.gray3,
             }}
           >
-            Apply Filters
-          </Button>
+            <Button
+              mode="outlined"
+              textColor="rgb(134, 142, 150)"
+              onPress={handleClearFiltersPress}
+              style={{
+                borderColor: 'rgb(134, 142, 150)',
+                borderRadius: 4,
+              }}
+            >
+              Clear All
+            </Button>
+            <Button
+              mode="contained"
+              onPress={handleApplyFiltersPress}
+              style={{
+                borderRadius: 4,
+              }}
+            >
+              Apply Filters
+            </Button>
+          </View>
         </View>
       </Modal>
     </Portal>
