@@ -65,7 +65,6 @@ const SearchBar = () => {
           color: theme.colors.onBackground,
         }}
         style={{
-          // paddingBlock: 0,
           backgroundColor: theme.colors.background,
           borderWidth: 1,
           borderColor: theme.colors.onBackground,
@@ -80,7 +79,6 @@ export default SearchBar;
 const getStyles = () =>
   StyleSheet.create({
     container: {
-      // paddingBlock: 12,
-      // paddingInline: 36,
+      flex: 1,
     },
   });
