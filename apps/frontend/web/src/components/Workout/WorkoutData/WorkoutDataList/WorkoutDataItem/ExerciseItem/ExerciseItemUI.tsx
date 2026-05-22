@@ -56,9 +56,9 @@ export default function ExerciseItemUI({
             : 'elevation.5'
       }
     >
-      <Stack w="100%" align="center" pos="relative">
+      <Stack w="100%" align="center" pos="relative" gap={0}>
         <Group w="100%" wrap="nowrap">
-          <Group justify="space-between" wrap="nowrap" w="100%" p="xs">
+          <Group justify="space-between" wrap="nowrap" w="100%" pt="xs" px="xs">
             {(mode === 'edit' || mode === 'build') && (
               <ReorderButtonGroup
                 handleUpClick={() => handleUpClick()}
@@ -74,7 +74,7 @@ export default function ExerciseItemUI({
             </Group>
           </Group>
           {(mode === 'edit' || mode === 'build') && (
-            <Box p="xs">
+            <Box pt="xs" px="xs">
               <WorkoutItemMenu
                 itemType="exercise"
                 handleUpClick={handleUpClick}
