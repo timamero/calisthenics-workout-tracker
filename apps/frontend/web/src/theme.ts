@@ -214,13 +214,13 @@ const theme = createTheme({
   other: {
     outline: '#424242',
     letterSpacing: {
-      tightest: '-0.008em',
-      tighter: '-0.01em',
-      tight: '-0.02em',
+      tightest: '-0.008em', // -0.128pxs
+      tighter: '-0.01em', // -0.16px
+      tight: '-0.02em', // -0.32px
       normal: '0',
-      wide: '0.04em',
-      wider: '0.1em',
-      widest: '0.16em',
+      wide: '0.04em', // 0.64px
+      wider: '0.1em', // 1.6px
+      widest: '0.16em', // 2.56px
     },
     customColors: {
       limeElevation1: '#F9FDF0',

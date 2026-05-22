@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import {
   Title,
-  Text,
   Pagination,
-  SimpleGrid,
   Stack,
-  // Box,
   ScrollArea,
+  Badge,
+  Text,
+  Group,
 } from '@mantine/core';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
-import { formatDuration, chunk } from '@cwt/utils';
+import { chunk, formatDuration } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 
@@ -31,7 +31,9 @@ export default function WorkoutLogPages() {
 
   if (logs.length === 0) return null;
 
-  const data = chunk(logs, 6);
+  const chunkSize = logs.length >= 15 ? 15 : logs.length;
+
+  const data = chunk(logs, chunkSize);
 
   const handleWorkoutLogClick = (workoutLog: WorkoutLogResponse) => {
     if (setDetailWorkout && detailHandlers) {
@@ -42,6 +44,31 @@ export default function WorkoutLogPages() {
     }
   };
 
+  interface WorkoutMetadataProps {
+    label: string;
+    data: string;
+  }
+
+  function WorkoutMetadata({ label, data }: WorkoutMetadataProps) {
+    return (
+      <Group align="flex-start" gap="xxs" wrap="nowrap">
+        <Text ff="heading" tt="uppercase" size="md" c="gray.7">
+          {label}:{' '}
+        </Text>
+        <Text
+          // component="span"
+          ff="monospace"
+          tt="none"
+          size="md"
+          fw={700}
+          lts="var(--mantine-letter-spacing-wider)"
+          px="sm"
+        >
+          {data}
+        </Text>
+      </Group>
+    );
+  }
   const items = data[activePage - 1].map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
     const date = new Date(wo.date).toLocaleString('en-US', {
@@ -50,25 +77,37 @@ export default function WorkoutLogPages() {
       day: 'numeric',
     });
     const duration = formatDuration(wo.duration!);
+
     return (
       <CardButton
         key={i}
         handleClick={() => handleWorkoutLogClick(wo as WorkoutLogResponse)}
       >
-        <Title order={3} size="h5">
-          {workoutTitle}
-        </Title>
-        <Text>{date}</Text>
-        <Text>{wo.goal}</Text>
-        <Text>{wo.description}</Text>
-        <Text>{duration}</Text>
+        <Stack>
+          <Badge size="xl" variant="outline-lime" radius="sm" tt="capitalize">
+            {date}
+          </Badge>
+          <Title lh="xxs" order={2} size="h4">
+            {workoutTitle}
+          </Title>
+          {wo.description && (
+            <WorkoutMetadata label="Description" data={wo.description} />
+          )}
+          {wo.goal && (
+            <WorkoutMetadata
+              label="Workout Goal"
+              data={wo.goal.toUpperCase()}
+            />
+          )}
+          <WorkoutMetadata label="Duration (HH:MM:SS)" data={duration} />
+        </Stack>
       </CardButton>
     );
   });
   return (
     <Stack justify="stretch" flex={1} h="100%">
       <ScrollArea.Autosize mah="min-content" h="100%" flex={1}>
-        <SimpleGrid cols={{ base: 1, md: 2 }}>{items}</SimpleGrid>
+        <Stack py="sm">{items}</Stack>
       </ScrollArea.Autosize>
       <Pagination
         flex={0}
@@ -77,6 +116,7 @@ export default function WorkoutLogPages() {
         value={activePage}
         onChange={setPage}
         mt="sm"
+        color="lime.2"
       />
       <WorkoutLogDetailOverlay />
     </Stack>
