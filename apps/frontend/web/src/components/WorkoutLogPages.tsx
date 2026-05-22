@@ -66,7 +66,7 @@ export default function WorkoutLogPages() {
     );
   });
   return (
-    <Stack justify="stretch" flex={1}>
+    <Stack justify="stretch" flex={1} h="100%">
       <ScrollArea.Autosize mah="min-content" h="100%" flex={1}>
         <SimpleGrid cols={{ base: 1, md: 2 }}>{items}</SimpleGrid>
       </ScrollArea.Autosize>
