@@ -14,7 +14,7 @@ import { formatDuration, chunk } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 
-import CardButton from '../components/common/CardButton';
+import CardButton from '../../components/common/CardButton';
 import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
