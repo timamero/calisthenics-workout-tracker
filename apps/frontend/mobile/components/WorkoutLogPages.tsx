@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { ScrollView, View, Dimensions } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useTheme, DataTable } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -19,7 +19,6 @@ import Pill from './Pill';
 export default function WorkoutLogPages() {
   const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
-  const width = Dimensions.get('window').width;
 
   const scrollRef = useRef<ScrollView>(null);
 
