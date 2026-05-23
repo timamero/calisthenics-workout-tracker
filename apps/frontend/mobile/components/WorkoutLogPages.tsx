@@ -206,7 +206,7 @@ export default function WorkoutLogPages() {
         style={{
           borderTopColor: theme.colors.gray3,
           borderTopWidth: 1,
-          backgroundColor: theme.colors.lime1,
+          backgroundColor: theme.colors.lime0,
         }}
         theme={{
           colors: {
