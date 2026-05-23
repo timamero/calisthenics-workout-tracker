@@ -1,26 +1,25 @@
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-// import { WorkoutLogDetailContextProvider } from '@cwt/context';
-
 import { CustomTheme } from '../theme';
+import { globalStyles } from '../styles/global';
+
 import WorkoutLogPages from '../components/WorkoutLogPages';
 
 export default function HistoryScreen() {
   const theme = useTheme() as CustomTheme;
 
+  const styles = globalStyles(theme);
+
   return (
-    // <WorkoutLogDetailContextProvider>
     <View
       style={{
+        ...styles.container,
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: theme.colors.background,
+        paddingBottom: 0,
       }}
     >
       <WorkoutLogPages />
     </View>
-    // </WorkoutLogDetailContextProvider>
   );
 }
