@@ -1,12 +1,5 @@
 import { useContext, useState } from 'react';
-import {
-  View,
-  // Modal,
-  // TouchableOpacity,
-  // Text,
-  // FlatList,
-  // StyleSheet,
-} from 'react-native';
+import { View } from 'react-native';
 import { useTheme, Menu } from 'react-native-paper';
 import { SetContext } from '@cwt/context';
 import {
@@ -72,50 +65,11 @@ export default function SelectInput({
 
   const closeMenu = () => setVisible(false);
 
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // const styles = StyleSheet.create({
-  //   container: {
-  //     minWidth: 150,
-  //     position: 'relative',
-  //   },
-  //   button: {
-  //     borderWidth: 1,
-  //     borderColor: theme.colors.outline,
-  //     backgroundColor: 'transparent',
-  //     padding: 12,
-  //     borderRadius: 4,
-  //   },
-  //   buttonText: {
-  //     color: theme.colors.onBackground,
-  //   },
-  //   modal: {
-  //     margin: 0,
-  //     justifyContent: 'flex-end',
-  //   },
-  //   dropdown: {
-  //     position: 'absolute',
-  //     top: 0,
-  //     maxHeight: 200,
-  //     backgroundColor: theme.colors.background,
-  //     borderColor: theme.colors.outline,
-  //     borderWidth: 1,
-  //     borderRadius: 4,
-  //   },
-  //   option: {
-  //     padding: 12,
-  //     borderBottomWidth: 1,
-  //     borderBottomColor: theme.colors.outline,
-  //   },
-  //   optionText: {
-  //     color: theme.colors.onBackground,
-  //   },
-  // });
-
   if (mode === 'read') {
     return (
       <TextInputReading
         label={label}
+        labelWidth={116}
         value={
           selectedValue === undefined || !selectedValue
             ? ''
@@ -127,7 +81,9 @@ export default function SelectInput({
 
   return (
     <View style={{ display: 'flex', gap: 4 }}>
-      <Text variant="labelMedium">{leverageOrAssist.name}</Text>
+      <View style={{ width: 116 }}>
+        <Text variant="labelMedium">{leverageOrAssist.name}</Text>
+      </View>
       <Menu
         visible={visible}
         onDismiss={closeMenu}

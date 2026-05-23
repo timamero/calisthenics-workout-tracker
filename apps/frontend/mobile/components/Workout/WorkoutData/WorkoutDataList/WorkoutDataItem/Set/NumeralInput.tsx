@@ -38,6 +38,7 @@ export default function NumeralInput({
       return (
         <TextInputReading
           label={label}
+          labelWidth={116}
           value={
             set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === null ||
@@ -56,7 +57,10 @@ export default function NumeralInput({
     }
     return (
       <View style={{ display: 'flex', gap: 4 }}>
-        <Text variant="labelMedium">{label}</Text>
+        <View style={{ width: 116 }}>
+          <Text variant="labelMedium">{label}</Text>
+        </View>
+        {/* <Text variant="labelMedium">{label}</Text> */}
         <TextInput
           mode="outlined"
           placeholder="0"
@@ -96,6 +100,7 @@ export default function NumeralInput({
       return (
         <TextInputReading
           label={label}
+          labelWidth={116}
           value={
             set.fields.assists!.find((field) => field.id === fieldID)!.value ===
               null ||
@@ -114,7 +119,10 @@ export default function NumeralInput({
     }
     return (
       <View style={{ display: 'flex', gap: 4 }}>
-        <Text variant="labelMedium">{label}</Text>
+        <View style={{ width: 116 }}>
+          <Text variant="labelMedium">{label}</Text>
+        </View>
+        {/* <Text variant="labelMedium">{label}</Text> */}
         <TextInput
           mode="outlined"
           placeholder="0"
@@ -153,6 +161,7 @@ export default function NumeralInput({
     return (
       <TextInputReading
         label={label}
+        labelWidth="auto"
         value={
           set.fields.reps === undefined ||
           set.fields.reps === null ||
@@ -166,6 +175,9 @@ export default function NumeralInput({
 
   return (
     <View style={{ display: 'flex', gap: 4 }}>
+      {/* <View style={{ width: 116, backgroundColor: 'red' }}>
+        <Text variant="labelMedium">{label}</Text>
+      </View> */}
       <Text variant="labelMedium">{label}</Text>
       <TextInput
         mode="outlined"
