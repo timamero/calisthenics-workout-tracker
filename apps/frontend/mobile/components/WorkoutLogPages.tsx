@@ -110,7 +110,7 @@ export default function WorkoutLogPages() {
                     textTransform: 'uppercase',
                   }}
                 >
-                  Duration:
+                  Description:
                 </Text>
                 <Text
                   variant="labelMedium"
