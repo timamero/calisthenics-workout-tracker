@@ -1,4 +1,4 @@
-import { View, ScrollView, Dimensions } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -26,8 +26,6 @@ export default function WorkoutLogDetailScreen() {
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   if (!workoutLogDetail) return null;
-
-  const windowHeight = Dimensions.get('window').height;
 
   const duration = workoutLogDetail.duration
     ? formatDuration(workoutLogDetail.duration)
