@@ -1,5 +1,5 @@
 import { useContext, type ReactNode } from 'react';
-import { Group } from '@mantine/core';
+import { Stack, Group } from '@mantine/core';
 
 import type { Exercise, Leverage, Assist } from '@cwt/schema/workouts';
 import { WorkoutDataItemContext } from '@cwt/context';
@@ -95,5 +95,5 @@ export default function LeverageAssistFieldsList() {
 }
 
 function LeverageAssistFieldsListUI({ children }: { children: ReactNode }) {
-  return <Group gap="xs">{children}</Group>;
+  return <Stack gap={0}>{children}</Stack>;
 }

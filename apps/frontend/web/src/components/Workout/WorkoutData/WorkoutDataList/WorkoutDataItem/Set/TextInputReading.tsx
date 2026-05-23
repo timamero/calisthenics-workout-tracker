@@ -10,8 +10,8 @@ export default function TextInputReading({
   value,
 }: TextInputReadingProps) {
   return (
-    <Stack gap={0} mx="md">
-      <Text ff="heading" lh="xxs">
+    <Stack gap={0} mx="md" maw={154}>
+      <Text ff="heading" lh="xxs" style={{ textWrap: 'balance' }}>
         {label}
       </Text>
 
