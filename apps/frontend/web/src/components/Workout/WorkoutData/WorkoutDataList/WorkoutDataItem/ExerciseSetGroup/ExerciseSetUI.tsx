@@ -15,7 +15,7 @@ export default function ExerciseSetUI({
 }: ExerciseSetUIProps) {
   return (
     <Stack align="center">
-      <Text fz={{ base: 'sm', md: 'md' }} fw={700}>
+      <Text fz={{ base: 'md', md: 'lg' }} fw={800}>
         {exerciseName}
       </Text>
       {children}

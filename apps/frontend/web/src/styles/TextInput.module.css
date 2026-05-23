@@ -1,6 +1,7 @@
 .root {
   .label {
     white-space: nowrap;
+    max-width: 154;
   }
   .input {
     background-color: var(--mantine-color-elevation-1);
