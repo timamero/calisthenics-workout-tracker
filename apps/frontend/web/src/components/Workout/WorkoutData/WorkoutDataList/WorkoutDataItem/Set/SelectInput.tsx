@@ -5,7 +5,7 @@ import { SetContext } from '@cwt/context';
 import { useLeveragesAssistsStore } from '@cwt/state/stores';
 import { useFieldInputChange } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import TextInputReading from './InputReading';
+import TextInputReading from './TextInputReading';
 
 interface NumeralInputProps {
   label: string;
