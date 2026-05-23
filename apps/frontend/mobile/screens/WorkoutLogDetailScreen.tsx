@@ -10,12 +10,14 @@ import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
+import { globalStyles } from '../styles/global';
 import WorkoutData from '../components/Workout/WorkoutData';
 
 export default function WorkoutLogDetailScreen() {
   const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
-  const { top } = useSafeAreaInsets();
+  const styles = globalStyles(theme);
+  const { top, bottom } = useSafeAreaInsets();
 
   const workoutLogDetail = useWorkoutLogDetailContextMobile()
     .workout as WorkoutLogResponse;
@@ -25,7 +27,7 @@ export default function WorkoutLogDetailScreen() {
 
   if (!workoutLogDetail) return null;
 
-  const styles = getStyles(theme);
+  const localStyles = getStyles(theme);
 
   const windowHeight = Dimensions.get('window').height;
 
@@ -47,10 +49,9 @@ export default function WorkoutLogDetailScreen() {
   return (
     <View
       style={{
-        paddingTop: 16 + top,
-        // paddingInline: 16,
-        display: 'flex',
-        flexDirection: 'column',
+        ...styles.container,
+        paddingBottom: bottom + 24,
+        paddingTop: top + 24,
       }}
     >
       <View
@@ -84,36 +85,36 @@ export default function WorkoutLogDetailScreen() {
           }}
         >
           <View>
-            <Text variant="bodySmall" style={styles.metadataTitle}>
+            <Text variant="bodySmall" style={localStyles.metadataTitle}>
               Date
             </Text>
-            <Text style={styles.metadataValue}>{date}</Text>
+            <Text style={localStyles.metadataValue}>{date}</Text>
             {workoutLogDetail?.description && (
               <>
-                <Text variant="bodySmall" style={styles.metadataTitle}>
+                <Text variant="bodySmall" style={localStyles.metadataTitle}>
                   Description
                 </Text>
-                <Text variant="bodyLarge" style={styles.metadataValue}>
+                <Text variant="bodyLarge" style={localStyles.metadataValue}>
                   {workoutLogDetail?.description}
                 </Text>
               </>
             )}
             {workoutLogDetail?.goal && (
               <>
-                <Text variant="bodySmall" style={styles.metadataTitle}>
+                <Text variant="bodySmall" style={localStyles.metadataTitle}>
                   Goal
                 </Text>
-                <Text variant="bodyLarge" style={styles.metadataValue}>
+                <Text variant="bodyLarge" style={localStyles.metadataValue}>
                   {workoutLogDetail?.goal}
                 </Text>
               </>
             )}
             {duration && (
               <>
-                <Text variant="bodySmall" style={styles.metadataTitle}>
+                <Text variant="bodySmall" style={localStyles.metadataTitle}>
                   Duration
                 </Text>
-                <Text variant="bodyLarge" style={styles.metadataValue}>
+                <Text variant="bodyLarge" style={localStyles.metadataValue}>
                   {duration}
                 </Text>
               </>
@@ -123,8 +124,6 @@ export default function WorkoutLogDetailScreen() {
         <WorkoutData />
       </ScrollView>
     </View>
-    //   </Modal>
-    // </Portal>
   );
 }
 
