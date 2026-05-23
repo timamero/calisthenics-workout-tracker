@@ -9,6 +9,7 @@ import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import CardButton from '../../components/common/CardButton';
 import WorkoutMetadataItem from './WorkoutMetadataItem';
+import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 
 export default function WorkoutLogPages() {
   const [activePage, setPage] = useState(1);
@@ -28,6 +29,7 @@ export default function WorkoutLogPages() {
   const data = chunk(logs, chunkSize);
 
   const handleWorkoutLogClick = (workoutLog: WorkoutLogResponse) => {
+    console.log('WorkoutLogPages|| handlWorkoutLocClick called');
     if (setDetailWorkout && detailHandlers) {
       setDetailWorkout(workoutLog);
       setMode('read');
@@ -85,6 +87,7 @@ export default function WorkoutLogPages() {
         mt="sm"
         color="lime.2"
       />
+      <WorkoutLogDetailOverlay />
     </Stack>
   );
 }
