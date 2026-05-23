@@ -48,8 +48,11 @@ export default function WorkoutLogDetailScreen() {
     <View
       style={{
         ...styles.container,
+        flex: 1,
+        paddingInline: 0,
         paddingBottom: bottom + 24,
         paddingTop: top + 24,
+        backgroundColor: theme.colors.elevation.level3,
       }}
     >
       <View
@@ -57,6 +60,10 @@ export default function WorkoutLogDetailScreen() {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'flex-end',
+          paddingInline: 24,
+          paddingBottom: 16,
+          borderBottomWidth: 1,
+          borderBottomColor: theme.colors.gray3,
         }}
       >
         <Button
@@ -67,19 +74,24 @@ export default function WorkoutLogDetailScreen() {
           Back to Workouts
         </Button>
       </View>
-      <Text
-        variant="headlineLarge"
-        style={{ color: theme.colors.onBackground, padding: 16 }}
-      >
-        {workoutLogDetail?.title}
-      </Text>
-      <ScrollView style={{ height: windowHeight - 200 }}>
+      <ScrollView style={{ backgroundColor: theme.colors.background, flex: 1 }}>
+        <Text
+          variant="headlineLarge"
+          style={{
+            color: theme.colors.onBackground,
+            paddingInline: 24,
+            paddingBlock: 16,
+          }}
+        >
+          {workoutLogDetail?.title}
+        </Text>
         <View
           style={{
             display: 'flex',
             flexDirection: 'column',
             rowGap: 12,
             marginBlock: 24,
+            marginInline: 24,
           }}
         >
           <View style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
