@@ -33,16 +33,14 @@ export default function ExerciseSetGroupItemUI({
         style={{
           display: 'flex',
           flexDirection: 'column',
-          // alignItems: 'center',
           justifyContent: 'center',
           gap: 12,
         }}
       >
         <Text
-          variant="titleLarge"
+          variant="titleMedium"
           style={{
             color: theme.colors.onBackground,
-            // fontWeight: 600,
           }}
         >
           Set {setNumber}
@@ -52,8 +50,6 @@ export default function ExerciseSetGroupItemUI({
             display: 'flex',
             flexDirection: 'column',
             gap: 12,
-            // alignItems: 'center',
-            // justifyContent: 'space-between',
           }}
         >
           {children}
