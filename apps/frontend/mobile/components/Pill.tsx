@@ -9,13 +9,17 @@ interface PillProps {
   textColor: string;
   backgroundColor: string;
   borderColor?: string;
-  children: Attributes | '---';
+  size?: 'sm' | 'lg';
+  borderRadius?: number;
+  children: string;
 }
 
 export default function Pill({
   textColor,
   backgroundColor,
   borderColor,
+  size = 'sm',
+  borderRadius = 20,
   children,
 }: PillProps) {
   const theme = useTheme() as CustomTheme;
@@ -35,6 +39,7 @@ export default function Pill({
     ...borderStyle,
     ...backgroundColorStyle,
     ...baseContainerStyles,
+    borderRadius: borderRadius,
   };
 
   const styles = StyleSheet.create({
@@ -44,7 +49,10 @@ export default function Pill({
 
   return (
     <View style={styles.container}>
-      <Text variant="labelSmall" style={styles.pill}>
+      <Text
+        variant={size === 'sm' ? 'labelSmall' : 'labelLarge'}
+        style={styles.pill}
+      >
         {children}
       </Text>
     </View>
@@ -61,6 +69,5 @@ const getContainerBaseStyles = (theme: CustomTheme) => {
   return {
     paddingHorizontal: 12,
     paddingVertical: 4,
-    borderRadius: 20,
   };
 };

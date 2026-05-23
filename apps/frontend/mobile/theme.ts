@@ -206,11 +206,22 @@ const fontConfig = {
     letterSpacing: 0.15,
     lineHeight: 16,
   },
+  labelLarge: {
+    fontFamily: Platform.select({
+      web: 'SourceCodePro-Bold, ui-monospace, monospace',
+      ios: 'SourceCodePro-Bold',
+      android: 'SourceCodePro-Bold',
+      default: 'monospace',
+    }),
+    fontSize: 16,
+    letterSpacing: 0.4,
+    lineHeight: 18,
+  },
   labelMedium: {
     fontFamily: Platform.select({
-      web: 'SourceCodePro-Medium, ui-monospace, monospace',
-      ios: 'SourceCodePro-Medium',
-      android: 'SourceCodePro-Medium',
+      web: 'SourceCodePro-Bold, ui-monospace, monospace',
+      ios: 'SourceCodePro-Bold',
+      android: 'SourceCodePro-Bold',
       default: 'monospace',
     }),
     fontSize: 14,
