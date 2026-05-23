@@ -15,7 +15,6 @@ import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 import CardButton from '../components/common/CardButton';
 import Pill from './Pill';
-// import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 
 export default function WorkoutLogPages() {
   const navigation = useNavigation<any>();
@@ -67,7 +66,6 @@ export default function WorkoutLogPages() {
           borderBottomWidth: 0,
           paddingInline: 0,
           paddingBlock: 8,
-          overflow: 'visible',
         }}
       >
         <DataTable.Cell>
@@ -186,14 +184,14 @@ export default function WorkoutLogPages() {
     <>
       <ScrollView
         ref={scrollRef}
-        showsVerticalScrollIndicator={false}
         style={{
           width: '100%',
           flex: 1,
-          overflow: 'visible',
+          paddingTop: 24,
+          paddingInline: 24,
         }}
       >
-        <DataTable>{items}</DataTable>
+        <DataTable style={{ marginBottom: 40 }}>{items}</DataTable>
       </ScrollView>
       <DataTable.Pagination
         page={activePage}
@@ -209,7 +207,6 @@ export default function WorkoutLogPages() {
           borderTopColor: theme.colors.gray3,
           borderTopWidth: 1,
           backgroundColor: theme.colors.lime1,
-          marginInline: -24,
         }}
         theme={{
           colors: {

@@ -16,7 +16,8 @@ export default function HistoryScreen() {
       style={{
         ...styles.container,
         flex: 1,
-        paddingBottom: 0,
+        paddingBlock: 0,
+        paddingInline: 0,
       }}
     >
       <WorkoutLogPages />
