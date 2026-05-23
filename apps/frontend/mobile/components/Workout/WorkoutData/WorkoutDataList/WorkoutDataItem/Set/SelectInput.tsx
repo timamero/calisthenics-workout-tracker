@@ -18,6 +18,7 @@ import { useFieldInputChange } from '@cwt/hooks';
 import { Text } from '../../../../../../customText';
 import CustomButton from '../../../../../common/CustomButton';
 import type { CustomTheme } from '../../../../../../theme';
+import TextInputReading from './TextInputReading';
 
 interface SelectInputProps {
   label: string;
@@ -113,24 +114,14 @@ export default function SelectInput({
 
   if (mode === 'read') {
     return (
-      <View>
-        <Text
-          style={{
-            color: theme.colors.onBackground,
-            fontFamily: 'SourceCodePro-Regular',
-          }}
-        >
-          {label}
-        </Text>
-        <Text
-          style={{
-            color: theme.colors.onBackground,
-            fontFamily: 'SourceCodePro-Regular',
-          }}
-        >
-          {selectedValue}
-        </Text>
-      </View>
+      <TextInputReading
+        label={label}
+        value={
+          selectedValue === undefined || !selectedValue
+            ? ''
+            : selectedValue.toString()
+        }
+      />
     );
   }
 
