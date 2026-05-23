@@ -17,7 +17,6 @@ export default function ExerciseSetUI({
   children,
 }: ExerciseSetUIProps) {
   const theme = useTheme() as CustomTheme;
-  console.log('exercise, isLast', exerciseName, isLast);
   return (
     <View>
       <View
