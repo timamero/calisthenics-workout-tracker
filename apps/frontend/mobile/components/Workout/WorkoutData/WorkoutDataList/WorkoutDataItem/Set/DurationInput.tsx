@@ -9,6 +9,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { CustomTheme } from '../../../../../../theme';
 import { Text } from '../../../../../../customText';
+import TextInputReading from './TextInputReading';
 
 interface DurationInputProps {
   label: string;
@@ -28,12 +29,7 @@ export default function DurationInput({
     const value = set.fields[fieldName]
       ? formatDuration(set.fields[fieldName])
       : '00:00';
-    return (
-      <View>
-        <Text style={{ color: theme.colors.onBackground }}>{label}</Text>
-        <Text style={{ color: theme.colors.onBackground }}>{value}</Text>
-      </View>
-    );
+    return <TextInputReading label={label} value={value} />;
   }
 
   return (

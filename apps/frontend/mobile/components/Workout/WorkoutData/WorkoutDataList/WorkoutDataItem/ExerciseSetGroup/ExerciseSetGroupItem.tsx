@@ -30,10 +30,11 @@ export default function ExerciseSetGroupItem({
     parentSupersetID,
   );
 
-  const exercisesGroup = exercisesGroupedBySets.exercises.map((ex) => {
+  const exercisesGroup = exercisesGroupedBySets.exercises.map((ex, i) => {
     return (
       <ExerciseSetUI
         key={ex.id}
+        isLast={Object.keys(exercisesGroupedBySets).length === i}
         exerciseName={getExerciseNameById(ex.exercise_id)}
       >
         <WorkoutDataItemContext.Provider

@@ -8,6 +8,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import { CustomTheme } from '../../../../../../theme';
 import { Text } from '../../../../../../customText';
+import TextInputReading from './TextInputReading';
 
 interface NumeralInputProps {
   label: string;
@@ -35,22 +36,10 @@ export default function NumeralInput({
   if (fieldName === 'value' && trackingType === 'leverages') {
     if (mode === 'read') {
       return (
-        <View>
-          <Text
-            style={{
-              color: theme.colors.onBackground,
-              fontFamily: 'SourceCodePro-Regular',
-            }}
-          >
-            {label}
-          </Text>
-          <Text
-            style={{
-              color: theme.colors.onBackground,
-              fontFamily: 'SourceCodePro-Regular',
-            }}
-          >
-            {set.fields.leverages!.find((field) => field.id === fieldID)!
+        <TextInputReading
+          label={label}
+          value={
+            set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === null ||
             set.fields.leverages!.find((field) => field.id === fieldID)!
               .value === undefined ||
@@ -60,9 +49,9 @@ export default function NumeralInput({
               ? '0'
               : set.fields
                   .leverages!.find((field) => field.id === fieldID)!
-                  .value!.toString()}
-          </Text>
-        </View>
+                  .value!.toString()
+          }
+        />
       );
     }
     return (
@@ -105,23 +94,11 @@ export default function NumeralInput({
   if (fieldName === 'value' && trackingType === 'assists') {
     if (mode === 'read') {
       return (
-        <View>
-          <Text
-            style={{
-              color: theme.colors.onBackground,
-              fontFamily: 'SourceCodePro-Regular',
-            }}
-          >
-            {label}
-          </Text>
-          <Text
-            style={{
-              color: theme.colors.onBackground,
-              fontFamily: 'SourceCodePro-Regular',
-            }}
-          >
-            {set.fields.assists!.find((field) => field.id === fieldID)!
-              .value === null ||
+        <TextInputReading
+          label={label}
+          value={
+            set.fields.assists!.find((field) => field.id === fieldID)!.value ===
+              null ||
             set.fields.assists!.find((field) => field.id === fieldID)!.value ===
               undefined ||
             set.fields
@@ -130,9 +107,9 @@ export default function NumeralInput({
               ? '0'
               : set.fields
                   .assists!.find((field) => field.id === fieldID)!
-                  .value!.toString()}
-          </Text>
-        </View>
+                  .value!.toString()
+          }
+        />
       );
     }
     return (
@@ -174,28 +151,16 @@ export default function NumeralInput({
 
   if (mode === 'read') {
     return (
-      <View>
-        <Text
-          style={{
-            color: theme.colors.onBackground,
-            fontFamily: 'SourceCodePro-Regular',
-          }}
-        >
-          {label}
-        </Text>
-        <Text
-          style={{
-            color: theme.colors.onBackground,
-            fontFamily: 'SourceCodePro-Regular',
-          }}
-        >
-          {set.fields.reps === undefined ||
+      <TextInputReading
+        label={label}
+        value={
+          set.fields.reps === undefined ||
           set.fields.reps === null ||
           set.fields.reps.toString() === ''
             ? '0'
-            : set.fields.reps.toString()}
-        </Text>
-      </View>
+            : set.fields.reps.toString()
+        }
+      />
     );
   }
 
