@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useTheme, DataTable } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,6 +14,7 @@ import { WorkoutLogResponse } from '@cwt/schema/workouts';
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 import CardButton from '../components/common/CardButton';
+import Pill from './Pill';
 // import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 
 export default function WorkoutLogPages() {
@@ -34,9 +35,6 @@ export default function WorkoutLogPages() {
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
 
-  // const setVisible =
-  //   useWorkoutLogDetailContextMobile().mobileOverlayHandlers
-  //     .setIsOverlayVisible!;
   const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
 
   const data = chunk(workoutLogs, itemsPerPage);
@@ -52,7 +50,6 @@ export default function WorkoutLogPages() {
     setMode('read');
     setWorkoutData(workoutLog.workout_data.data);
     navigation.navigate('WorkoutDetails');
-    // setVisible(true);
   };
 
   const items = data[activePage - 0].map((wo, i) => {
@@ -73,36 +70,105 @@ export default function WorkoutLogPages() {
           <CardButton
             handlePress={() => handleWorkoutLogPress(wo as WorkoutLogResponse)}
           >
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+              }}
+            >
+              <Pill
+                size="lg"
+                textColor={theme.colors.dark7}
+                backgroundColor={theme.colors.lime2}
+                borderColor={theme.colors.dark7}
+                borderRadius={4}
+              >
+                {date}
+              </Pill>
+            </View>
             <Text
               variant="headlineMedium"
               style={{ color: theme.colors.onBackground }}
             >
               {wo.title}
             </Text>
-            <Text
-              variant="bodyMedium"
-              style={{ color: theme.colors.onBackground }}
+            {wo.goal && (
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'flex-start',
+                  gap: 8,
+                }}
+              >
+                <Text
+                  variant="bodySmall"
+                  style={{
+                    color: theme.colors.onBackground,
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Duration:
+                </Text>
+                <Text
+                  variant="labelMedium"
+                  style={{ color: theme.colors.onBackground, flexShrink: 1 }}
+                >
+                  {wo.description}
+                </Text>
+              </View>
+            )}
+            {wo.goal && (
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'flex-start',
+                  gap: 8,
+                }}
+              >
+                <Text
+                  variant="bodySmall"
+                  style={{
+                    color: theme.colors.onBackground,
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Workout Goal:
+                </Text>
+                <Text
+                  variant="labelMedium"
+                  style={{ color: theme.colors.onBackground }}
+                >
+                  {wo.goal.toUpperCase()}
+                </Text>
+              </View>
+            )}
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                gap: 8,
+              }}
             >
-              {date}
-            </Text>
-            <Text
-              variant="bodyMedium"
-              style={{ color: theme.colors.onBackground }}
-            >
-              {wo.goal}
-            </Text>
-            <Text
-              variant="bodyMedium"
-              style={{ color: theme.colors.onBackground }}
-            >
-              {wo.description}
-            </Text>
-            <Text
-              variant="bodyMedium"
-              style={{ color: theme.colors.onBackground }}
-            >
-              {duration}
-            </Text>
+              <Text
+                variant="bodySmall"
+                style={{
+                  color: theme.colors.onBackground,
+                  textTransform: 'uppercase',
+                }}
+              >
+                Duration (HH:MM:SS):
+              </Text>
+              <Text
+                variant="labelMedium"
+                style={{ color: theme.colors.onBackground }}
+              >
+                {duration}
+              </Text>
+            </View>
           </CardButton>
         </DataTable.Cell>
       </DataTable.Row>
@@ -138,13 +204,9 @@ export default function WorkoutLogPages() {
         theme={{
           colors: {
             onSurface: theme.colors.onBackground,
-            // elevation: {
-            //   level2: theme.colors.dark800,
-            // },
           },
         }}
       />
-      {/* <WorkoutLogDetailOverlay /> */}
     </>
   );
 }
