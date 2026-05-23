@@ -15,14 +15,14 @@ const getUniqueIdentifier = () => {
 
 const getAppName = () => {
   if (IS_DEV) {
-    return 'CWT (Dev)';
+    return 'Torque-Dev';
   }
 
   if (IS_PREVIEW) {
-    return 'CWT (Preview)';
+    return 'Torque-Preview';
   }
 
-  return 'CWT';
+  return 'Torque';
 };
 
 const getIcon = () => {
@@ -37,6 +37,18 @@ const getIcon = () => {
   return './assets/adaptive-icon.png';
 };
 
+const getBackgroundColor = () => {
+  if (IS_DEV) {
+    return '#f1f3f5';
+  }
+
+  if (IS_PREVIEW) {
+    return '#868e96';
+  }
+
+  return '#f4fce3';
+};
+
 export default ({ config }: any) => ({
   ...config,
   name: getAppName(),
@@ -47,7 +59,7 @@ export default ({ config }: any) => ({
     package: getUniqueIdentifier(),
     adaptiveIcon: {
       foregroundImage: getIcon(),
-      backgroundColor: '#F5F5F5',
+      backgroundColor: getBackgroundColor(),
     },
   },
 });
