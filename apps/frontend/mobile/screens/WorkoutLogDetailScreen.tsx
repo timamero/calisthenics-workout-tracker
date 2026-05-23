@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, ScrollView, Dimensions } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -26,8 +26,6 @@ export default function WorkoutLogDetailScreen() {
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   if (!workoutLogDetail) return null;
-
-  const localStyles = getStyles(theme);
 
   const windowHeight = Dimensions.get('window').height;
 
@@ -84,41 +82,107 @@ export default function WorkoutLogDetailScreen() {
             marginBlock: 24,
           }}
         >
-          <View>
-            <Text variant="bodySmall" style={localStyles.metadataTitle}>
-              Date
-            </Text>
-            <Text style={localStyles.metadataValue}>{date}</Text>
+          <View style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                gap: 8,
+              }}
+            >
+              <Text
+                variant="bodyMedium"
+                style={{
+                  color: theme.colors.onBackground,
+                  textTransform: 'uppercase',
+                }}
+              >
+                Date:
+              </Text>
+              <Text
+                variant="labelLarge"
+                style={{ color: theme.colors.onBackground, flexShrink: 1 }}
+              >
+                {date}
+              </Text>
+            </View>
             {workoutLogDetail?.description && (
-              <>
-                <Text variant="bodySmall" style={localStyles.metadataTitle}>
-                  Description
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'flex-start',
+                  gap: 8,
+                }}
+              >
+                <Text
+                  variant="bodyMedium"
+                  style={{
+                    color: theme.colors.onBackground,
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Duration:
                 </Text>
-                <Text variant="bodyLarge" style={localStyles.metadataValue}>
-                  {workoutLogDetail?.description}
+                <Text
+                  variant="labelLarge"
+                  style={{ color: theme.colors.onBackground, flexShrink: 1 }}
+                >
+                  {workoutLogDetail.description}
                 </Text>
-              </>
+              </View>
             )}
             {workoutLogDetail?.goal && (
-              <>
-                <Text variant="bodySmall" style={localStyles.metadataTitle}>
-                  Goal
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'flex-start',
+                  gap: 8,
+                }}
+              >
+                <Text
+                  variant="bodyMedium"
+                  style={{
+                    color: theme.colors.onBackground,
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Workout Goal:
                 </Text>
-                <Text variant="bodyLarge" style={localStyles.metadataValue}>
-                  {workoutLogDetail?.goal}
+                <Text
+                  variant="labelLarge"
+                  style={{ color: theme.colors.onBackground, flexShrink: 1 }}
+                >
+                  {workoutLogDetail.goal.toUpperCase()}
                 </Text>
-              </>
+              </View>
             )}
-            {duration && (
-              <>
-                <Text variant="bodySmall" style={localStyles.metadataTitle}>
-                  Duration
-                </Text>
-                <Text variant="bodyLarge" style={localStyles.metadataValue}>
-                  {duration}
-                </Text>
-              </>
-            )}
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                gap: 8,
+              }}
+            >
+              <Text
+                variant="bodyMedium"
+                style={{
+                  color: theme.colors.onBackground,
+                  textTransform: 'uppercase',
+                }}
+              >
+                Duration (HH:MM:SS):
+              </Text>
+              <Text
+                variant="labelLarge"
+                style={{ color: theme.colors.onBackground, flexShrink: 1 }}
+              >
+                {duration}
+              </Text>
+            </View>
           </View>
         </View>
         <WorkoutData />
@@ -126,31 +190,3 @@ export default function WorkoutLogDetailScreen() {
     </View>
   );
 }
-
-const getStyles = (theme: CustomTheme) =>
-  StyleSheet.create({
-    metadataTitle: {
-      fontWeight: 700,
-      textTransform: 'uppercase',
-      color: theme.colors.onBackground,
-      marginBottom: 2,
-      marginInline: 16,
-    },
-    metadataValue: {
-      fontWeight: 700,
-      color: theme.colors.onBackground,
-      marginBottom: 8,
-      marginInline: 20,
-    },
-    flexRowStart: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-    },
-    pillsContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: 8,
-    },
-  });
