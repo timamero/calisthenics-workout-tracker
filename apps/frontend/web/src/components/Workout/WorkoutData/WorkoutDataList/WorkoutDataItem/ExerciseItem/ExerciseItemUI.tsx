@@ -94,7 +94,7 @@ export default function ExerciseItemUI({
             justify="flex-end"
             w="100%"
             px="sm"
-            pb={parentType !== 'superset' ? 'sm' : '0'}
+            pb={parentType !== 'superset' ? 'sm' : 0}
           >
             <Button
               variant="outline"
