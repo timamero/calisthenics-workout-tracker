@@ -43,6 +43,7 @@ export default function SetUI({
               <Text
                 fz={{ base: 'sm', md: 'md' }}
                 fw={700}
+                c="dark.4"
               >{`Set ${setIndex + 1}`}</Text>
             )}
 
@@ -60,10 +61,10 @@ export default function SetUI({
       </Stack>
       <Stack align="center">
         <Stack align="flex-start" gap="0">
-          <Group justify="center" gap="xs" wrap="wrap">
+          <Stack justify="center" gap="xs">
             <FieldsList />
             <LeverageAssistFieldsList />
-          </Group>
+          </Stack>
         </Stack>
       </Stack>
       {mode === 'log' && (

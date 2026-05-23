@@ -26,10 +26,11 @@ export default function ExerciseSetGroupItemUI({
       <Group w="100%" justify="space-between" maw={360}>
         <Text
           ff="heading"
-          fz={{ base: 'lg', md: 'xl' }}
-          fw={800}
+          fz={{ base: 'mg', md: 'lg' }}
+          fw={700}
           my="xs"
           px="lg"
+          c="dark.4"
         >
           Set {setNumber}
         </Text>
