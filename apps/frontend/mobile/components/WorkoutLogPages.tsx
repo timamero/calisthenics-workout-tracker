@@ -94,7 +94,7 @@ export default function WorkoutLogPages() {
             >
               {wo.title}
             </Text>
-            {wo.goal && (
+            {wo.description && (
               <View
                 style={{
                   display: 'flex',
