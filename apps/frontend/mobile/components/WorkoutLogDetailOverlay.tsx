@@ -33,9 +33,6 @@ export default function WorkoutLogDetailOverlay() {
   const containerStyle = {
     backgroundColor: theme.colors.background,
     paddingBlock: 8,
-    // marginTop: 80,
-    // height: windowHeight,
-    // marginInline: 16,
   };
 
   const duration = workoutLogDetail.duration

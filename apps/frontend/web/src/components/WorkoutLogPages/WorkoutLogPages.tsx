@@ -8,7 +8,6 @@ import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import CardButton from '../../components/common/CardButton';
-import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 import WorkoutMetadataItem from './WorkoutMetadataItem';
 
 export default function WorkoutLogPages() {
@@ -86,7 +85,6 @@ export default function WorkoutLogPages() {
         mt="sm"
         color="lime.2"
       />
-      <WorkoutLogDetailOverlay />
     </Stack>
   );
 }
