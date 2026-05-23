@@ -7,7 +7,7 @@ import { useFieldInputChange } from '@cwt/hooks';
 import { getSecondsInDuration } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import TextInputReading from './InputReading';
+import TextInputReading from './TextInputReading';
 
 interface DurationInputProps {
   label: string;
