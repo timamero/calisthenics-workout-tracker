@@ -65,8 +65,9 @@ export default function WorkoutLogPages() {
         key={`${wo.date}-${i}`}
         style={{
           borderBottomWidth: 0,
-          paddingInline: 24,
+          paddingInline: 0,
           paddingBlock: 8,
+          overflow: 'visible',
         }}
       >
         <DataTable.Cell>
@@ -185,10 +186,11 @@ export default function WorkoutLogPages() {
     <>
       <ScrollView
         ref={scrollRef}
+        showsVerticalScrollIndicator={false}
         style={{
           width: '100%',
           flex: 1,
-          backgroundColor: theme.colors.background,
+          overflow: 'visible',
         }}
       >
         <DataTable>{items}</DataTable>
@@ -203,7 +205,12 @@ export default function WorkoutLogPages() {
         onItemsPerPageChange={onItemsPerPageChange}
         showFastPaginationControls={false}
         selectPageDropdownLabel={'Rows per page'}
-        style={{ borderTopColor: theme.colors.onBackground, borderTopWidth: 1 }}
+        style={{
+          borderTopColor: theme.colors.gray3,
+          borderTopWidth: 1,
+          backgroundColor: theme.colors.lime1,
+          marginInline: -24,
+        }}
         theme={{
           colors: {
             onSurface: theme.colors.onBackground,
