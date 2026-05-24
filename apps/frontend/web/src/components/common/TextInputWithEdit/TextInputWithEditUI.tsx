@@ -52,6 +52,7 @@ export default function TextInputWithEditUI({
               : 'h6',
     md: titleSize,
   });
+  console.log('variant', variant);
   return (
     <>
       {!isEditMode && (
@@ -90,7 +91,11 @@ export default function TextInputWithEditUI({
       {isEditMode && (
         <Stack maw={400} w="100%" gap={4}>
           <TextInput
-            mod={{ istitleh1: titleOrder === 1, istitleh2: titleOrder === 2 }}
+            mod={
+              variant === 'title'
+                ? { istitleh1: titleOrder === 1, istitleh2: titleOrder === 2 }
+                : undefined
+            }
             w="100%"
             value={text}
             onChange={onTextChange}
