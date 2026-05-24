@@ -83,19 +83,17 @@ export default function ExercisesFilterOverlay() {
       onClose={onFilterOverlayClose}
       withCloseButton={false}
       size="xl"
-      // title="Filter Exercises"
-      // styles={{
-      //   title: {
-      //     fontFamily: 'var(--mantine-font-family-headings)',
-      //     fontWeight: 700,
-      //   },
-      // }}
     >
-      {/* <Group justify="center"> */}
-      <Stack p="md" miw={300}>
+      <Stack p="xxs" miw={300}>
+        <Stack align="flex-end">
+          <Button color="gray" variant="outline" onClick={onFilterOverlayClose}>
+            Close
+          </Button>
+        </Stack>
         <Title
           order={2}
-          fz={{ base: 'h2', md: 'display_xs' }}
+          fz={{ base: 'h3', md: 'h2' }}
+          fw={800}
           lh="xss"
           lts="var(--mantine-letter-spacing-tight)"
         >
