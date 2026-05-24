@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { View, Dimensions } from 'react-native';
-import { Modal, Portal, Button, useTheme } from 'react-native-paper';
+import { Modal, Portal, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -15,6 +15,7 @@ import { CustomTheme } from '../../theme';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 import FilterSelections from './FilterSelections';
+import CustomButton from '../common/CustomButton';
 
 export default function FilterOverlay() {
   const theme = useTheme() as CustomTheme;
@@ -113,13 +114,13 @@ export default function FilterOverlay() {
             >
               Filter Exercises
             </Text>
-            <Button
+            <CustomButton
               mode="outlined"
               textColor={theme.colors.onBackground}
               onPress={onModalClose}
             >
               Cancel
-            </Button>
+            </CustomButton>
           </View>
           <FilterSelections />
           <View
@@ -132,7 +133,7 @@ export default function FilterOverlay() {
               borderTopColor: theme.colors.gray3,
             }}
           >
-            <Button
+            <CustomButton
               mode="outlined"
               textColor="rgb(134, 142, 150)"
               onPress={handleClearFiltersPress}
@@ -142,8 +143,8 @@ export default function FilterOverlay() {
               }}
             >
               Clear All
-            </Button>
-            <Button
+            </CustomButton>
+            <CustomButton
               mode="contained"
               onPress={handleApplyFiltersPress}
               style={{
@@ -151,7 +152,7 @@ export default function FilterOverlay() {
               }}
             >
               Apply Filters
-            </Button>
+            </CustomButton>
           </View>
         </View>
       </Modal>
