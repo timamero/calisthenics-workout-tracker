@@ -104,12 +104,12 @@ export default function TextInputWithEditUI({
           style={{
             display: 'flex',
             flexDirection: 'row',
-            flexGrow: 1,
-            backgroundColor: theme.colors.background,
-            paddingInline: 16,
+            backgroundColor: theme.colors.gray2,
+            paddingInline: 8,
             paddingBlock: 4,
             borderRadius: 8,
             marginBlock: 4,
+            marginInline: 4,
           }}
         >
           <View
