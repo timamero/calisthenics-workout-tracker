@@ -54,7 +54,14 @@ export default function AddExerciseUI({
           zIndex: 0,
         }}
       >
-        <View style={{ paddingBottom: 40 }}>
+        <View
+          style={{
+            paddingBottom: 40,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 8,
+          }}
+        >
           <ExerciseList />
         </View>
       </ScrollView>
