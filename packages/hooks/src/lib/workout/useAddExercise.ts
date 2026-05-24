@@ -19,6 +19,11 @@ function useAddExerciseLogic() {
   const selectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.selectedExerciseIDToAdd,
   );
+
+  const sectionIDToMod = useWorkoutDraftStore((state) => state.sectionIDToMod);
+  const supersetIDToMod = useWorkoutDraftStore(
+    (state) => state.supersetIDToMod,
+  );
   const setSelectedExerciseIDToAdd = useWorkoutDraftStore(
     (state) => state.setSelectedExerciseIDToAdd,
   );
@@ -29,6 +34,7 @@ function useAddExerciseLogic() {
 
   return {
     selectedExerciseIDToAdd,
+    hasParent: sectionIDToMod || supersetIDToMod,
     setSelectedExerciseIDToAdd,
     addExercise,
     getExerciseById,
@@ -68,6 +74,7 @@ export function useAddExercise() {
 export function useAddExerciseMobile() {
   const {
     selectedExerciseIDToAdd,
+    hasParent,
     setSelectedExerciseIDToAdd,
     addExercise,
     getExerciseById,
@@ -81,7 +88,10 @@ export function useAddExerciseMobile() {
     );
 
     setSelectedExerciseIDToAdd(null);
-    workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
+
+    if (!hasParent) {
+      workoutDataScrollViewRef!.current?.scrollToEnd({ animated: true });
+    }
   };
 
   return {
