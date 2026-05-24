@@ -122,6 +122,14 @@ const theme = createTheme({
         border: '1px solid var(--mantine-color-dark-7)',
       };
     }
+    if (input.variant === 'outline-red') {
+      return {
+        background: 'none',
+        hover: 'var(--mantine-color-red-0)',
+        color: 'var(--mantine-color-red-9)',
+        border: '1px solid var(--mantine-color-red-9)',
+      };
+    }
     if (input.variant === 'filled') {
       return {
         background: 'var(--mantine-color-dark-7)',
