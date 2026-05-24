@@ -5,12 +5,15 @@ import { signOut, updateUserName } from '@cwt/auth';
 import { useUser } from '@cwt/hooks';
 
 import { CustomTheme } from '../theme';
-import { Text } from '../customText';
+import { globalStyles } from '../styles/global';
 import { supabase } from '../services/supabaseClient';
+
+import { Text } from '../customText';
 import TextInputWithEdit from '../components/common/TextInputWithEdit';
 
 export default function SettingsScreen() {
   const theme = useTheme() as CustomTheme;
+  const styles = globalStyles(theme);
 
   const name = useUser().name;
 
@@ -23,19 +26,16 @@ export default function SettingsScreen() {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: theme.colors.background,
-        paddingBlock: 40,
-      }}
-    >
+    <View style={{ ...styles.container, flex: 1, gap: 24 }}>
       <View
         style={{
           display: 'flex',
           justifyContent: 'flex-start',
-          flex: 1,
-          paddingInline: 24,
+          alignItems: 'center',
+          backgroundColor: theme.colors.elevation.level3,
+          borderRadius: 16,
+          padding: 16,
+          gap: 16,
         }}
       >
         <Text
@@ -44,12 +44,28 @@ export default function SettingsScreen() {
             color: theme.colors.onBackground,
           }}
         >
-          Name
+          User Settings
         </Text>
-        <TextInputWithEdit
-          initialValue={name ? name : ''}
-          onSave={handleOnSave}
-        />
+        <View
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            variant="headlineSmall"
+            style={{
+              color: theme.colors.onBackground,
+            }}
+          >
+            Name
+          </Text>
+          <TextInputWithEdit
+            initialValue={name ? name : ''}
+            onSave={handleOnSave}
+          />
+        </View>
       </View>
       <View style={{ display: 'flex', alignItems: 'center' }}>
         <Button
