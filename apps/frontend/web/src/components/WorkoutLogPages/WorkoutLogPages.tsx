@@ -56,7 +56,7 @@ export default function WorkoutLogPages() {
           <Badge size="xl" variant="outline-lime" radius="sm" tt="capitalize">
             {date}
           </Badge>
-          <Title lh="xxl" order={2} size="h4">
+          <Title lh="xxs" order={2} size="h4">
             {workoutTitle}
           </Title>
           {wo.description && (
