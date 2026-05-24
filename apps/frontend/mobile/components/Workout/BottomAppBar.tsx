@@ -70,14 +70,16 @@ export default function BottomAppBar() {
           {
             value: 'edit',
             label: 'Edit',
+            icon: 'pencil-box-outline',
             style: { width: 50 },
-            labelStyle: { fontFamily: 'Manrope-SemiBold' },
+            labelStyle: { fontFamily: 'Manrope-SemiBold', lineHeight: 22 },
           },
           {
             value: 'log',
             label: 'Log',
+            icon: 'play-outline',
             style: { width: 40 },
-            labelStyle: { fontFamily: 'Manrope-SemiBold' },
+            labelStyle: { fontFamily: 'Manrope-SemiBold', lineHeight: 22 },
           },
         ]}
       />
