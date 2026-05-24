@@ -9,6 +9,7 @@ import {
 } from '@mantine/core';
 import { type ExerciseResponse } from '@cwt/schema/exercises';
 
+import { getDifficultyVariant } from '../../../utils';
 import classes from './ExerciseCard.module.css';
 
 interface ExerciseCardProps {
@@ -26,30 +27,41 @@ export default function ExerciseCard({
     <UnstyledButton
       onClick={(e) => onExerciseClick(e)}
       data-exercise-id={exercise.id}
-      miw={300}
-      maw={460}
+      // miw={300}
+      // maw={460}
     >
       <Paper
         data-is-selected={isSelected}
-        p="sm"
-        shadow="xs"
+        shadow="sm"
+        p="md"
         radius="lg"
+        miw={300}
+        maw={460}
+        h="100%"
+        mah={230}
+        mx="auto"
+        withBorder
         className={classes.card}
       >
         <Stack align="stretch" justify="center" gap="sm">
-          <Group justify="center" mb="sm">
+          <Group justify="flex-end">
+            <Badge variant={getDifficultyVariant(exercise.difficulty)}>
+              {exercise.difficulty}
+            </Badge>
+          </Group>
+          <Group justify="space-between" mb="sm">
             <Title order={2} size="h5">
               {exercise.name}
             </Title>
           </Group>
           <Group gap="sm" wrap="nowrap" align="flex-start">
-            <Text tt="uppercase" size="xs" c="gray.7">
+            <Text ff="heading" tt="uppercase" size="xs" c="gray.7">
               Muscles:{' '}
             </Text>
             <Group gap={8}>
               {exercise.target_muscles.map((muscle, i) => {
                 return (
-                  <Badge variant="light" color="grape" key={i}>
+                  <Badge variant="filled-gray" key={i}>
                     {muscle}
                   </Badge>
                 );
@@ -57,7 +69,7 @@ export default function ExerciseCard({
             </Group>
           </Group>
           <Group gap="sm" wrap="nowrap" align="flex-start">
-            <Text tt="uppercase" size="xs" c="gray.7">
+            <Text ff="heading" tt="uppercase" size="xs" c="gray.7">
               Equipment:{' '}
             </Text>
             <Group gap={8}>
@@ -68,7 +80,7 @@ export default function ExerciseCard({
                 </Badge>
               ) : (
                 exercise.required_equipment.map((equipment, i) => (
-                  <Badge color="dark" variant="outline" key={i}>
+                  <Badge variant="filled" key={i}>
                     {equipment}
                   </Badge>
                 ))

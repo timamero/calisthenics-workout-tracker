@@ -4,13 +4,13 @@
 }
 
 .card:hover {
-  background-color: var(--mantine-color-gray-0);
-  border: 1px solid var(--mantine-color-dark-2);
+  background-color: var(--mantine-color-lime-elevation-5) !important;
+  border: 1px solid var(--mantine-color-dark-2) !important;
   box-shadow: none;
 }
 
 .card[data-is-selected='true'] {
-  background-color: var(--mantine-color-gray-0);
+  background-color: var(--mantine-color-lime-0) !important;
   border: 1px solid var(--mantine-color-lime-4);
   box-shadow: var(--mantine-shadow-md);
 }

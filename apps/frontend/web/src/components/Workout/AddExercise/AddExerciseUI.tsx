@@ -19,8 +19,8 @@ export default function AddExerciseOverlayUI({
   handleCancelClick,
 }: AddExerciseUIProps) {
   return (
-    <Stack gap="xl" w="100%" p="md">
-      <Group>
+    <Stack gap="xl" w="100%" p={0}>
+      <Group p="md">
         <ExerciseSearchBar />
         <ActionIcon
           variant="outline"
@@ -45,6 +45,7 @@ export default function AddExerciseOverlayUI({
           zIndex: 2,
           padding: '16px 0',
           boxShadow: '0 -2px 8px rgba(0,0,0,0.04)',
+          borderTop: '1px solid var(--mantine-color-gray-3)',
         }}
       >
         <Button
