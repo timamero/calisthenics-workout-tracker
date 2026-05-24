@@ -21,6 +21,7 @@ export default function WorkoutMetadataItem({
         fw={700}
         lts="var(--mantine-letter-spacing-wider)"
         px="sm"
+        lh="xs"
       >
         {data}
       </Text>
