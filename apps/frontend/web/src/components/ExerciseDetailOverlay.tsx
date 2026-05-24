@@ -123,7 +123,8 @@ export default function ExerciseDetailOverlay() {
           <Group justify="flex-start" mt="sm">
             <Title
               order={2}
-              fz={{ base: 'h2', md: 'display_xs' }}
+              fz={{ base: 'h3', md: 'h2' }}
+              fw={800}
               lh="xss"
               lts="var(--mantine-letter-spacing-tight)"
             >
@@ -161,6 +162,7 @@ export default function ExerciseDetailOverlay() {
           <Stack mt="xl">
             <Title
               order={3}
+              fz={{ base: 'h4', md: 'h3' }}
               lh="xxs"
               tt="uppercase"
               lts="var(--mantine-letter-spacing-wide)"
