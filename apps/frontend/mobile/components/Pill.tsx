@@ -1,8 +1,6 @@
 import { Text, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
-import { Attributes } from '@cwt/schema/exercises';
-
 import { CustomTheme } from '../theme';
 
 interface PillProps {
