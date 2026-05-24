@@ -31,7 +31,7 @@ export default function AddExerciseOverlayUI({
           <IoFilterOutline />
         </ActionIcon>
       </Group>
-      <Stack gap="lg" align="center">
+      <Stack gap="lg" align="center" px="md">
         <ExercisesList />
       </Stack>
       <Group
