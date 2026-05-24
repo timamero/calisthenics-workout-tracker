@@ -57,7 +57,7 @@ export default function SetUI({
           <View style={{ paddingBlock: 8 }}>
             <Text
               variant="titleMedium"
-              style={{ color: theme.colors.onBackground }}
+              style={{ color: theme.colors.dark4 }}
             >{`Set ${setIndex + 1}`}</Text>
           </View>
         )}

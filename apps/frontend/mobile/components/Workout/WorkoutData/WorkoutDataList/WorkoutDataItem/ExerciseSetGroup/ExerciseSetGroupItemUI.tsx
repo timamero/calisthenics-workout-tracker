@@ -40,7 +40,7 @@ export default function ExerciseSetGroupItemUI({
         <Text
           variant="titleMedium"
           style={{
-            color: theme.colors.onBackground,
+            color: theme.colors.dark4,
           }}
         >
           Set {setNumber}

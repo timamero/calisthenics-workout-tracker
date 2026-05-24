@@ -21,8 +21,8 @@ export default function TextInputReading({
       <View style={{ width: labelWidth }}>
         <Text
           style={{
-            color: theme.colors.dark4,
-            fontFamily: 'ElmsSans-Bold',
+            color: theme.colors.onBackground,
+            fontFamily: 'ElmsSans-Regular',
           }}
         >
           {label}
@@ -31,7 +31,7 @@ export default function TextInputReading({
       <Text
         style={{
           color: theme.colors.onBackground,
-          fontFamily: 'Manrope-Regular',
+          fontFamily: 'Manrope-Bold',
         }}
       >
         {value}
