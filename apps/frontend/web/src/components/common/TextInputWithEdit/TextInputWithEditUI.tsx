@@ -52,7 +52,6 @@ export default function TextInputWithEditUI({
               : 'h6',
     md: titleSize,
   });
-  console.log('variant', variant);
   return (
     <>
       {!isEditMode && (
