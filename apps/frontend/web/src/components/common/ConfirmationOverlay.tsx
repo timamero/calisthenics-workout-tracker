@@ -1,5 +1,7 @@
 import { Group, Modal, Button, Stack, Text } from '@mantine/core';
 
+import { useWorkoutDraftStore } from '@cwt/state/stores';
+
 interface ConfirmationOverlayProps {
   opened: boolean;
   handler: { close: () => void };
@@ -17,15 +19,30 @@ export default function ConfirmationOverlay({
   confirmButtonLabel,
   onConfirmationClick,
 }: ConfirmationOverlayProps) {
+  const setExerciseID = useWorkoutDraftStore(
+    (state) => state.setExerciseIDToMod,
+  );
+  const setSupersetID = useWorkoutDraftStore(
+    (state) => state.setSupersetIDToMod,
+  );
+  const setSectionID = useWorkoutDraftStore((state) => state.setSectionIDToMod);
+
   const handleConfirmClick = () => {
     handler.close();
     onConfirmationClick();
   };
 
+  const handleClose = () => {
+    setExerciseID(null);
+    setSupersetID(null);
+    setSectionID(null);
+    handler.close();
+  };
+
   return (
     <Modal
       opened={opened}
-      onClose={() => handler.close()}
+      onClose={() => handleClose()}
       title={title}
       styles={{
         title: {
@@ -37,11 +54,15 @@ export default function ConfirmationOverlay({
       <Stack gap="lg">
         <Text>{message}</Text>
       </Stack>
-      <Group mt="lg" grow>
-        <Button color="gray" variant="outline" onClick={() => handler.close()}>
+      <Group mt="lg" justify="flex-end">
+        <Button color="gray" variant="outline" onClick={() => handleClose()}>
           Cancel
         </Button>
-        <Button color="orange" onClick={() => handleConfirmClick()}>
+        <Button
+          color="orange"
+          onClick={() => handleConfirmClick()}
+          w="max-content"
+        >
           {confirmButtonLabel}
         </Button>
       </Group>
