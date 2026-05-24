@@ -51,7 +51,13 @@ export default function WorkoutLogDetailOverlay() {
             </Button>
           </Group>
           <Group justify="flex-start" mt="sm">
-            <Title order={2} size="h2">
+            <Title
+              order={2}
+              fz={{ base: 'h3', md: 'h2' }}
+              fw={800}
+              lh="xss"
+              lts="var(--mantine-letter-spacing-tight)"
+            >
               {workoutLogDetail?.title}
             </Title>
           </Group>
