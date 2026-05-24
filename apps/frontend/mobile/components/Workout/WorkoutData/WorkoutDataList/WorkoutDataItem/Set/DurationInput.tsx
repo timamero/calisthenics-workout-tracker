@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { View } from 'react-native';
 import { TextInput, useTheme } from 'react-native-paper';
 
-import { getSecondsInDuration, formatDuration } from '@cwt/utils';
+import { getSecondsInDuration } from '@cwt/utils';
 import { SetContext } from '@cwt/context';
 import { useFieldInputChange } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
@@ -27,9 +27,9 @@ export default function DurationInput({
   const mode = useWorkoutDraftStore((state) => state.mode);
   if (mode === 'read') {
     const value = set.fields[fieldName]
-      ? formatDuration(set.fields[fieldName])
-      : '00:00';
-    return <TextInputReading label={label} value={value} />;
+      ? getSecondsInDuration(set.fields[fieldName])
+      : '0s';
+    return <TextInputReading label={label} value={value} labelWidth="auto" />;
   }
 
   return (
