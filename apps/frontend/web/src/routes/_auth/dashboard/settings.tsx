@@ -52,7 +52,7 @@ function SettingsView() {
             onSave={handleOnSave}
           />
         </Stack>
-        <Button color="red" onClick={handleSignOut} size="md">
+        <Button variant="outline-red" onClick={handleSignOut} size="md">
           Log Out
         </Button>
       </Stack>
