@@ -9,7 +9,7 @@ import TextInputReading from './TextInputReading';
 
 interface NumeralInputProps {
   label: string;
-  fieldName: 'reps' | 'weight' | 'value';
+  fieldName: 'reps' | 'value';
   fieldID?: string;
   trackingType?: string | null;
 }
@@ -38,22 +38,22 @@ export default function NumeralInput({
     );
   }
 
-  if (fieldName === 'value' && trackingType === 'leverages') {
+  if (fieldName === 'value' && trackingType === 'set progressions') {
     if (mode === 'read') {
       return (
         <TextInputReading
           label={label}
           value={
-            set.fields.leverages!.find((field) => field.id === fieldID)!
+            set.fields.setProgressions!.find((field) => field.id === fieldID)!
               .value === null ||
-            set.fields.leverages!.find((field) => field.id === fieldID)!
+            set.fields.setProgressions!.find((field) => field.id === fieldID)!
               .value === undefined ||
             set.fields
-              .leverages!.find((field) => field.id === fieldID)!
+              .setProgressions!.find((field) => field.id === fieldID)!
               .value!.toString() === ''
               ? '0'
               : set.fields
-                  .leverages!.find((field) => field.id === fieldID)!
+                  .setProgressions!.find((field) => field.id === fieldID)!
                   .value!.toString()
           }
         />
@@ -62,49 +62,13 @@ export default function NumeralInput({
     return (
       <TextInputLogging
         value={
-          set.fields.leverages!.find((field) => field.id === fieldID)!.value ===
-            null ||
-          set.fields.leverages!.find((field) => field.id === fieldID)!.value ===
-            undefined
+          set.fields.setProgressions!.find((field) => field.id === fieldID)!
+            .value === null ||
+          set.fields.setProgressions!.find((field) => field.id === fieldID)!
+            .value === undefined
             ? ''
             : set.fields
-                .leverages!.find((field) => field.id === fieldID)!
-                .value!.toString()
-        }
-      />
-    );
-  }
-  if (fieldName === 'value' && trackingType === 'assists') {
-    if (mode === 'read') {
-      return (
-        <TextInputReading
-          label={label}
-          value={
-            set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-              null ||
-            set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-              undefined ||
-            set.fields
-              .assists!.find((field) => field.id === fieldID)!
-              .value!.toString() === ''
-              ? '0'
-              : set.fields
-                  .assists!.find((field) => field.id === fieldID)!
-                  .value!.toString()
-          }
-        />
-      );
-    }
-    return (
-      <TextInputLogging
-        value={
-          set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-            null ||
-          set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-            undefined
-            ? ''
-            : set.fields
-                .assists!.find((field) => field.id === fieldID)!
+                .setProgressions!.find((field) => field.id === fieldID)!
                 .value!.toString()
         }
       />
