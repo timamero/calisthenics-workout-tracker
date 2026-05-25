@@ -1,41 +1,33 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import type {
-  Assist,
-  Leverage,
-  SetFields,
-  Exercise,
-} from "@cwt/schema/workouts";
-import { WorkoutDataItemContext } from "@cwt/context";
-import { useWorkoutDraftStore } from "@cwt/state/stores";
+import type { SetProgression, SetFields, Exercise } from '@cwt/schema/workouts';
+import { WorkoutDataItemContext } from '@cwt/context';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 export default function useUpdateField(
   parentSectionID?: string | null,
-  parentSupersetID?: string | null
+  parentSupersetID?: string | null,
 ) {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setExerciseIDToMod = useWorkoutDraftStore(
-    (state) => state.setExerciseIDToMod
+    (state) => state.setExerciseIDToMod,
   );
   const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod
+    (state) => state.setSupersetIDToMod,
   );
   const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod
+    (state) => state.setSectionIDToMod,
   );
   const updateField = useWorkoutDraftStore((state) => state.updateField);
-  const updateLeverageOrAssistField = useWorkoutDraftStore(
-    (state) => state.updateLeverageOrAssistField
+  const updateSetProgressionField = useWorkoutDraftStore(
+    (state) => state.updateSetProgressionField,
   );
 
   const handleSetFieldChange = (
     setID: string,
-    updatedField:
-      | Partial<SetFields>
-      | Pick<Leverage, "value">
-      | Pick<Assist, "value">,
-    exerciseID?: string
+    updatedField: Partial<SetFields> | Pick<SetProgression, 'value'>,
+    exerciseID?: string,
   ) => {
     setSetIDToMod(setID);
     setExerciseIDToMod(exerciseID ? exerciseID! : exercise.id);
@@ -45,10 +37,8 @@ export default function useUpdateField(
     if (parentSectionID) {
       setSectionIDToMod(parentSectionID);
     }
-    if (useWorkoutDraftStore.getState().leverageOrAssistIDToMod) {
-      updateLeverageOrAssistField(
-        updatedField as Pick<Leverage, "value"> | Pick<Assist, "value">
-      );
+    if (useWorkoutDraftStore.getState().setProgressionIDToMod) {
+      updateSetProgressionField(updatedField as Pick<SetProgression, 'value'>);
     } else {
       updateField(updatedField as Partial<SetFields>);
     }

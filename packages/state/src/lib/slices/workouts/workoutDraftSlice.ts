@@ -9,8 +9,7 @@ import type {
   Mode,
   Section,
   Superset,
-  Leverage,
-  Assist,
+  SetProgression,
 } from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
 
@@ -23,10 +22,10 @@ import {
 } from './workoutDefaults';
 import {
   createFields,
-  updateLeverageOrAssistFieldInSets,
+  updateSetProgressionFieldInSets,
 } from './workoutDraftActions';
 import { useExerciseLibraryStore } from '../../stores/exercises/exerciseLibraryStore';
-import { useLeveragesAssistsStore } from '../../stores/leveragesAssistsStore';
+import { useSetProgressionsStore } from '../../stores/setProgressionsStore';
 
 interface WorkoutDraftState {
   mode: Mode | null;
@@ -40,7 +39,7 @@ interface WorkoutDraftState {
   exerciseIDToMod: string | null;
   supersetIDToMod: string | null;
   sectionIDToMod: string | null;
-  leverageOrAssistIDToMod: string | null;
+  setProgressionIDToMod: string | null;
   isWorkoutSavePending: boolean;
   workoutToSave: WorkoutBuildRequest | WorkoutLogRequest | null;
 }
@@ -59,8 +58,8 @@ interface WorkoutDraftAction {
   setExerciseIDToMod: (id: string | null) => void;
   setSupersetIDToMod: (id: string | null) => void;
   setSectionIDToMod: (id: string | null) => void;
-  setLeverageOrAssistIDToMod: (id: string | null) => void;
-  addSection: () => void; // CWT-230
+  setSetProgressionIDToMod: (id: string | null) => void;
+  addSection: () => void;
   addSuperset: (sectionID: string | null) => void;
   addExercise: (tracking: Tracking[]) => void;
   removeRootItem: (id: string) => void;
@@ -72,8 +71,8 @@ interface WorkoutDraftAction {
   deleteSet: () => void;
   deleteSetInSuperset: () => void;
   updateField: (updatedField: Partial<SetFields>) => void;
-  updateLeverageOrAssistField: (
-    updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
+  updateSetProgressionField: (
+    updatedField: Pick<SetProgression, 'value'>,
   ) => void;
   // TODO: Create this later after refactoring this slice
   // getFieldByID: (
@@ -115,7 +114,7 @@ export const createWorkoutDraftSlice: StateCreator<
   exerciseIDToMod: null,
   supersetIDToMod: null,
   sectionIDToMod: null,
-  leverageOrAssistIDToMod: null,
+  setProgressionIDToMod: null,
   isWorkoutSavePending: false,
   workoutToSave: null,
 
@@ -200,9 +199,9 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       state.sectionIDToMod = id;
     }),
-  setLeverageOrAssistIDToMod: (id) =>
+  setSetProgressionIDToMod: (id) =>
     set((state) => {
-      state.leverageOrAssistIDToMod = id;
+      state.setProgressionIDToMod = id;
     }),
   addSection: () =>
     set((state) => {
@@ -261,14 +260,14 @@ export const createWorkoutDraftSlice: StateCreator<
         const selectedExercise = useExerciseLibraryStore
           .getState()
           .getExerciseByID(exerciseID);
-        const getLeverageOrAssist = (id: number) =>
-          useLeveragesAssistsStore.getState().getLeverageOrAssistByID(id);
+        const getSetProgression = (id: number) =>
+          useSetProgressionsStore.getState().getSetProgressionByID(id);
 
         const fields = createFields(
           tracking,
           exerciseID,
           selectedExercise,
-          getLeverageOrAssist,
+          getSetProgression,
         );
 
         const exercise = {
@@ -699,8 +698,8 @@ export const createWorkoutDraftSlice: StateCreator<
         const exerciseID = get().exerciseIDToMod;
 
         // Prepare helper for creating fields
-        const getLeverageOrAssist = (id: number) =>
-          useLeveragesAssistsStore.getState().getLeverageOrAssistByID(id);
+        const getSetProgression = (id: number) =>
+          useSetProgressionsStore.getState().getSetProgressionByID(id);
 
         // Add set to exercise in root
         if (!sectionID && !supersetID && exerciseID) {
@@ -717,7 +716,7 @@ export const createWorkoutDraftSlice: StateCreator<
             tracking,
             updatedExercise.exercise_id,
             selectedExercise,
-            getLeverageOrAssist,
+            getSetProgression,
           );
 
           updatedExercise = {
@@ -752,7 +751,7 @@ export const createWorkoutDraftSlice: StateCreator<
             tracking,
             updatedExercise.exercise_id,
             selectedExercise,
-            getLeverageOrAssist,
+            getSetProgression,
           );
 
           updatedExercise = {
@@ -798,7 +797,7 @@ export const createWorkoutDraftSlice: StateCreator<
             tracking,
             updatedExercise.exercise_id,
             selectedExercise,
-            getLeverageOrAssist,
+            getSetProgression,
           );
 
           updatedExercise = {
@@ -847,7 +846,7 @@ export const createWorkoutDraftSlice: StateCreator<
             tracking,
             updatedExercise.exercise_id,
             selectedExercise,
-            getLeverageOrAssist,
+            getSetProgression,
           );
 
           updatedExercise = {
@@ -912,8 +911,8 @@ export const createWorkoutDraftSlice: StateCreator<
             (superset) => superset.id === supersetID,
           ) as Superset;
 
-          const getLeverageOrAssist = (id: number) =>
-            useLeveragesAssistsStore.getState().getLeverageOrAssistByID(id);
+          const getSetProgression = (id: number) =>
+            useSetProgressionsStore.getState().getSetProgressionByID(id);
 
           let updatedSuperset = superset;
           updatedSuperset.exercises = updatedSuperset.exercises.map(
@@ -926,7 +925,7 @@ export const createWorkoutDraftSlice: StateCreator<
                 tracking,
                 exercise.exercise_id,
                 selectedExercise,
-                getLeverageOrAssist,
+                getSetProgression,
               );
 
               return {
@@ -959,7 +958,7 @@ export const createWorkoutDraftSlice: StateCreator<
           ) as Superset;
 
           const getLeverageOrAssist = (id: number) =>
-            useLeveragesAssistsStore.getState().getLeverageOrAssistByID(id);
+            useSetProgressionsStore.getState().getSetProgressionByID(id);
 
           let updatedSuperset = superset;
           updatedSuperset.exercises = updatedSuperset.exercises.map(
@@ -1445,12 +1444,12 @@ export const createWorkoutDraftSlice: StateCreator<
       state.sectionIDToMod = null;
       state.setIDToMod = null;
     }),
-  updateLeverageOrAssistField: (updatedField) =>
+  updateSetProgressionField: (updatedField) =>
     set((state) => {
       const sectionID = get().sectionIDToMod;
       const supersetID = get().supersetIDToMod;
       const exerciseID = get().exerciseIDToMod;
-      const leverageOrAssistID = get().leverageOrAssistIDToMod;
+      const setProgressionID = get().setProgressionIDToMod;
       const setID = get().setIDToMod;
 
       // Update field of exercise in root
@@ -1464,11 +1463,11 @@ export const createWorkoutDraftSlice: StateCreator<
         }
         let updatedExercise = exercise;
 
-        updatedExercise.sets = updateLeverageOrAssistFieldInSets(
+        updatedExercise.sets = updateSetProgressionFieldInSets(
           updatedExercise.sets,
           updatedField,
           setID,
-          leverageOrAssistID,
+          setProgressionID,
         );
 
         state.workoutData = state.workoutData.map((item) => {
@@ -1490,11 +1489,11 @@ export const createWorkoutDraftSlice: StateCreator<
           return;
         }
         let updatedExercise = exercise;
-        updatedExercise.sets = updateLeverageOrAssistFieldInSets(
+        updatedExercise.sets = updateSetProgressionFieldInSets(
           updatedExercise.sets,
           updatedField,
           setID,
-          leverageOrAssistID,
+          setProgressionID,
         );
 
         let updatedSection = section;
@@ -1527,11 +1526,11 @@ export const createWorkoutDraftSlice: StateCreator<
           return;
         }
         let updatedExercise = exercise;
-        updatedExercise.sets = updateLeverageOrAssistFieldInSets(
+        updatedExercise.sets = updateSetProgressionFieldInSets(
           updatedExercise.sets,
           updatedField,
           setID,
-          leverageOrAssistID,
+          setProgressionID,
         );
 
         let updatedSuperset = superset;
@@ -1567,11 +1566,11 @@ export const createWorkoutDraftSlice: StateCreator<
           return;
         }
         let updatedExercise = exercise;
-        updatedExercise.sets = updateLeverageOrAssistFieldInSets(
+        updatedExercise.sets = updateSetProgressionFieldInSets(
           updatedExercise.sets,
           updatedField,
           setID,
-          leverageOrAssistID,
+          setProgressionID,
         );
 
         let updatedSuperset = superset;
@@ -1609,7 +1608,7 @@ export const createWorkoutDraftSlice: StateCreator<
       state.supersetIDToMod = null;
       state.sectionIDToMod = null;
       state.setIDToMod = null;
-      state.leverageOrAssistIDToMod = null;
+      state.setProgressionIDToMod = null;
     }),
   toggleCompleted: (value) =>
     set((state) => {
