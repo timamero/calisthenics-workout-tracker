@@ -4,8 +4,8 @@ export {
   EmphasisSchema,
   DifficultySchema,
   TrackingSchema,
-  LeverageAssistSchema,
-  LeveragesAssistValueTypeSchema,
+  SetProgressionTypeSchema,
+  SetProgressionValueTypeSchema,
   SortDirectionSchema,
   UnitSchema,
 } from './enums.schema';

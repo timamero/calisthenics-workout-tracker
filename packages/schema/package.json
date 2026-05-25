@@ -34,6 +34,10 @@
       "types": "./dist/lib/leveragesAssists/types.d.ts",
       "default": "./dist/lib/leveragesAssists/types.js"
     },
+    "./setProgressions": {
+      "types": "./dist/lib/setProgressions/types.d.ts",
+      "default": "./dist/lib/setProgressions/types.js"
+    },
     "./sampleSchema": {
       "types": "./dist/sampleSchema.d.ts",
       "default": "./dist/sampleSchema.js"

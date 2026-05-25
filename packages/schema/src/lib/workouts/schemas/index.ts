@@ -15,8 +15,9 @@ export {
   WorkoutLogResponseSchema,
 } from './api/workoutLog.schema';
 export {
-  LeverageSchema,
-  AssistSchema,
+  // LeverageSchema,
+  // AssistSchema,
+  SetProgressionSchema,
   SetFieldsSchema,
   SetSchema,
   ExerciseSchema,

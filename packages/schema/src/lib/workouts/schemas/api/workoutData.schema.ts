@@ -2,25 +2,28 @@ import { z } from 'zod';
 
 import { TrackingTypeSchema } from '../enums.schema';
 
-export const LeverageSchema = z.object({
+export const SetProgressionSchema = z.object({
   id: z.string(),
-  leverages_assists_id: z.number(),
+  set_progression_id: z.number(),
   value: z.union([z.number(), z.string(), z.null()]),
 });
+// export const LeverageSchema = z.object({
+//   id: z.string(),
+//   leverages_assists_id: z.number(),
+//   value: z.union([z.number(), z.string(), z.null()]),
+// });
 
-export const AssistSchema = z.object({
-  id: z.string(),
-  leverages_assists_id: z.number(),
-  value: z.union([z.number(), z.string(), z.null()]),
-});
+// export const AssistSchema = z.object({
+//   id: z.string(),
+//   leverages_assists_id: z.number(),
+//   value: z.union([z.number(), z.string(), z.null()]),
+// });
 
 export const SetFieldsSchema = z.object({
   reps: z.nullable(z.number()),
   time: z.nullable(z.string()), // ISO 8601 duration
-  weight: z.nullable(z.number()),
   rest: z.nullable(z.string()), // ISO 8601 duration
-  leverages: z.nullable(z.array(LeverageSchema)),
-  assists: z.nullable(z.array(AssistSchema)),
+  setProgressions: z.nullable(z.array(SetProgressionSchema)),
 });
 
 export const SetSchema = z.object({
