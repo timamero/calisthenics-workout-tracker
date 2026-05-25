@@ -4,6 +4,5 @@ export { useWorkoutStopwatchStore } from './workouts/workoutStopWatchStore';
 export { useExerciseLibraryStore } from './exercises/exerciseLibraryStore';
 export { useExercisesFilterStore } from './exercises/exercisesFilterStore';
 export { useExercisesSearchStore } from './exercises/exercisesSearchStore';
-export { useLeveragesAssistsStore } from './leveragesAssistsStore';
 export { useSetProgressionsStore } from './setProgressionsStore';
 export { useAuthStore } from './authStore';

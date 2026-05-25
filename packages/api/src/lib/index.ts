@@ -5,7 +5,6 @@ import {
   postWorkoutBuild,
   postWorkoutLog,
 } from './workoutsService';
-import { getLeveragesAssists } from './leveragesAssistsService';
 import { getSetProgressions } from './setProgressionsService';
 
 export {
@@ -15,5 +14,4 @@ export {
   postWorkoutBuild,
   postWorkoutLog,
   getSetProgressions,
-  getLeveragesAssists,
 };

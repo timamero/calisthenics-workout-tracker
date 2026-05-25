@@ -19,11 +19,6 @@ export function addSetProgressionField(
   getSetProgression: (id: number) => SetProgressionResponse,
 ): SetFields {
   let updatedFields = fields;
-  console.log('workoutDraftActions || addSetProgressionField called');
-  console.log('fields: ', fields);
-  console.log('selectedExerciseID', selectedExerciseID);
-  console.log('tracking: ', tracking);
-  console.log('selectedExercise: ', selectedExercise);
 
   if (!selectedExercise.default_set_progression_id) {
     console.error('This exercise does not have a default_set_progression_id');
