@@ -42,10 +42,6 @@ function SetProgressionField({
   }
 }
 
-// function SetProgressionFieldUI({ children }: { children: ReactNode }) {
-//   return <Group align="center">{children}</Group>;
-// }
-
 export default function SetProgressionFieldsList() {
   const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
   const tracked = exercise.tracked;

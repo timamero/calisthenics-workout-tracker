@@ -2,11 +2,7 @@ import { useContext } from 'react';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import {
-  // WorkoutContext,
-  WorkoutDataItemContext,
-  SetContext,
-} from '@cwt/context';
+import { WorkoutDataItemContext, SetContext } from '@cwt/context';
 import { useDeleteSetMobile, useToggleCompleted } from '@cwt/hooks';
 import { Exercise } from '@cwt/schema/workouts';
 
