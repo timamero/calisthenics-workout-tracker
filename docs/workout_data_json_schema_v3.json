@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "Root schema representing a workout structure, containing a list of sections, supersets, or exercises.",
+  "description": "Version 0.3.0; Updated on 5/24/2026",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "The main list of workout items, which can be a Section, Superset, or Exercise.",
+      "items": {
+        "anyOf": [
+          { "$ref": "#/$defs/Exercise" },
+          { "$ref": "#/$defs/Section" },
+          { "$ref": "#/$defs/Superset" }
+        ]
+      }
+    }
+  },
+  "required": ["data"],
+  "additionalProperties": false,
+  "$defs": {
+    "Section": {
+      "type": "object",
+      "description": "A group of exercises or supersets under a named section of a workout such as Warm-up, Skill, or Main Set.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the section."
+        },
+        "name": {
+          "type": ["string", "null"],
+          "description": "Optional name of the section such as Warm-up."
+        },
+        "order": {
+          "type": "integer",
+          "description": "Order in which this section appears relative to others."
+        },
+        "type": {
+          "const": "section",
+          "description": "Fixed discriminator type for this object section."
+        },
+        "items": {
+          "type": "array",
+          "description": "List of exercises or supersets within this section.",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/$defs/Exercise" },
+              { "$ref": "#/$defs/Superset" }
+            ]
+          }
+        }
+      },
+      "required": ["id", "name", "order", "type", "items"],
+      "additionalProperties": false
+    },
+    "Superset": {
+      "type": "object",
+      "description": "A collection of exercises performed back to back with minimal rest.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the superset."
+        },
+        "order": {
+          "type": "integer",
+          "description": "Order in which this superset appears relative to others."
+        },
+        "type": {
+          "const": "superset",
+          "description": "Fixed discriminator type for this object superset."
+        },
+        "exercises": {
+          "type": "array",
+          "description": "List of exercises included in this superset.",
+          "items": { "$ref": "#/$defs/Exercise" }
+        }
+      },
+      "required": ["id", "order", "exercises", "type"],
+      "additionalProperties": false
+    },
+    "Exercise": {
+      "type": "object",
+      "description": "Represents a single exercise, including tracking data and sets performed.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the exercise instance."
+        },
+        "exercise_id": {
+          "type": "integer",
+          "description": "Reference ID from the exercise library."
+        },
+        "tracked": {
+          "type": "array",
+          "description": "List of tracked fields for this exercise such as reps, time, or weight.",
+          "items": { "type": "string" }
+        },
+        "order": {
+          "type": "integer",
+          "description": "Order in which this exercise appears in a section or superset."
+        },
+        "type": {
+          "const": "exercise",
+          "description": "Fixed discriminator type for this object exercise."
+        },
+        "sets": {
+          "type": "array",
+          "description": "List of sets associated with this exercise.",
+          "items": {
+            "type": "object",
+            "description": "Represents a single set of the exercise, including completion and metrics.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for this set."
+              },
+              "completed": {
+                "type": "boolean",
+                "description": "Indicates whether this set has been completed."
+              },
+              "completed_at": {
+                "type": ["string", "null"],
+                "description": "Timestamp of when the set was completed, or null if not completed."
+              },
+              "fields": {
+                "type": "object",
+                "description": "Holds the performance metrics for the set.",
+                "properties": {
+                  "reps": {
+                    "type": ["integer", "null"],
+                    "description": "Number of repetitions performed."
+                  },
+                  "time": {
+                    "type": ["string", "null"],
+                    "description": "Duration in ISO 8601 format for time based exercises such as PT30S."
+                  },
+                  "rpe": {
+                    "type": ["integer", "null"],
+                    "description": "Measured RPE."
+                  },
+                  "rest": {
+                    "type": ["string", "null"],
+                    "description": "Rest time IN ISO 8601 format after completing the set such as PT60s."
+                  },
+                  "set_progressions": {
+                    "type": ["array", "null"],
+                    "description": "List of challenges and assists applied during the set such as weight, box height, lean angle or variation.",
+                    "items": {
+                      "type": "object",
+                      "description": "Represents a single object applied to the set.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Unique identifier for this set progression record."
+                        },
+                        "set_progressions_id": {
+                          "type": "integer",
+                          "description": "Reference ID from the set progressions table."
+                        },
+                        "value": {
+                          "type": ["integer", "string", "null"],
+                          "description": "Challenge or assist value which can be numeric, descriptive, or null."
+                        }
+                      },
+                      "required": ["id", "set_progression_id", "value"],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": ["id", "completed", "fields"],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": ["id", "exercise_id", "sets", "type", "tracked", "order"],
+    "additionalProperties": false
+  }
+}
