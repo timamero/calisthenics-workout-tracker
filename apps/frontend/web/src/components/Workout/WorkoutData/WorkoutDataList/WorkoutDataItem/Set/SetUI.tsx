@@ -11,7 +11,8 @@ import { IoTrashBin } from 'react-icons/io5';
 import type { Mode } from '@cwt/schema/workouts';
 
 import FieldsList from './FieldsList';
-import LeverageAssistFieldsList from './LeverageAssistFieldsList';
+// import LeverageAssistFieldsList from './LeverageAssistFieldsList';
+import SetProgressionFieldsList from './SetProgressionList';
 
 interface SetUIProps {
   mode: Mode;
@@ -63,7 +64,8 @@ export default function SetUI({
         <Stack align="flex-start" gap="0">
           <Stack justify="center" gap="xs">
             <FieldsList />
-            <LeverageAssistFieldsList />
+            <SetProgressionFieldsList />
+            {/* <LeverageAssistFieldsList /> */}
           </Stack>
         </Stack>
       </Stack>
