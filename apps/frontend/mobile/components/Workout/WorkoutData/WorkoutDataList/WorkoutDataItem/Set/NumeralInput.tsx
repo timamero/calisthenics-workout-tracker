@@ -12,7 +12,7 @@ import TextInputReading from './TextInputReading';
 
 interface NumeralInputProps {
   label: string;
-  fieldName: 'reps' | 'weight' | 'value';
+  fieldName: 'reps' | 'value';
   fieldID?: string;
   trackingType?: string | null;
 }
@@ -33,23 +33,23 @@ export default function NumeralInput({
   );
   const mode = useWorkoutDraftStore((state) => state.mode);
 
-  if (fieldName === 'value' && trackingType === 'leverages') {
+  if (fieldName === 'value') {
     if (mode === 'read') {
       return (
         <TextInputReading
           label={label}
           labelWidth={116}
           value={
-            set.fields.leverages!.find((field) => field.id === fieldID)!
+            set.fields.setProgressions!.find((field) => field.id === fieldID)!
               .value === null ||
-            set.fields.leverages!.find((field) => field.id === fieldID)!
+            set.fields.setProgressions!.find((field) => field.id === fieldID)!
               .value === undefined ||
             set.fields
-              .leverages!.find((field) => field.id === fieldID)!
+              .setProgressions!.find((field) => field.id === fieldID)!
               .value?.toString() === ''
               ? '0'
               : set.fields
-                  .leverages!.find((field) => field.id === fieldID)!
+                  .setProgressions!.find((field) => field.id === fieldID)!
                   .value!.toString()
           }
         />
@@ -60,7 +60,6 @@ export default function NumeralInput({
         <View style={{ width: 116 }}>
           <Text variant="labelMedium">{label}</Text>
         </View>
-        {/* <Text variant="labelMedium">{label}</Text> */}
         <TextInput
           mode="outlined"
           placeholder="0"
@@ -68,7 +67,6 @@ export default function NumeralInput({
           keyboardType="number-pad"
           contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
           disabled={set.completed}
-          // label={label}
           style={{
             height: 32,
             width: 64,
@@ -80,75 +78,13 @@ export default function NumeralInput({
             set.completed ? theme.colors.dark2 : theme.colors.onBackground
           }
           value={
-            set.fields.leverages!.find((field) => field.id === fieldID)!
+            set.fields.setProgressions!.find((field) => field.id === fieldID)!
               .value === null ||
-            set.fields.leverages!.find((field) => field.id === fieldID)!
+            set.fields.setProgressions!.find((field) => field.id === fieldID)!
               .value === undefined
               ? '0'
               : set.fields
-                  .leverages!.find((field) => field.id === fieldID)!
-                  .value!.toString()
-          }
-          onChangeText={(text) => handleNumeralFieldChange(text)}
-        />
-      </View>
-    );
-  }
-
-  if (fieldName === 'value' && trackingType === 'assists') {
-    if (mode === 'read') {
-      return (
-        <TextInputReading
-          label={label}
-          labelWidth={116}
-          value={
-            set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-              null ||
-            set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-              undefined ||
-            set.fields
-              .assists!.find((field) => field.id === fieldID)!
-              .value?.toString() === ''
-              ? '0'
-              : set.fields
-                  .assists!.find((field) => field.id === fieldID)!
-                  .value!.toString()
-          }
-        />
-      );
-    }
-    return (
-      <View style={{ display: 'flex', gap: 4 }}>
-        <View style={{ width: 116 }}>
-          <Text variant="labelMedium">{label}</Text>
-        </View>
-        {/* <Text variant="labelMedium">{label}</Text> */}
-        <TextInput
-          mode="outlined"
-          placeholder="0"
-          placeholderTextColor="grey"
-          keyboardType="number-pad"
-          // label={label}
-          style={{
-            height: 32,
-            width: 64,
-            backgroundColor: set.completed
-              ? theme.colors.gray2
-              : theme.colors.background,
-          }}
-          textColor={
-            set.completed ? theme.colors.dark2 : theme.colors.onBackground
-          }
-          contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
-          disabled={set.completed}
-          value={
-            set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-              null ||
-            set.fields.assists!.find((field) => field.id === fieldID)!.value ===
-              undefined
-              ? '0'
-              : set.fields
-                  .assists!.find((field) => field.id === fieldID)!
+                  .setProgressions!.find((field) => field.id === fieldID)!
                   .value!.toString()
           }
           onChangeText={(text) => handleNumeralFieldChange(text)}
@@ -175,16 +111,12 @@ export default function NumeralInput({
 
   return (
     <View style={{ display: 'flex', gap: 4 }}>
-      {/* <View style={{ width: 116, backgroundColor: 'red' }}>
-        <Text variant="labelMedium">{label}</Text>
-      </View> */}
       <Text variant="labelMedium">{label}</Text>
       <TextInput
         mode="outlined"
         placeholder="0"
         placeholderTextColor="grey"
         keyboardType="number-pad"
-        // label={label}
         contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
         disabled={set.completed}
         style={{

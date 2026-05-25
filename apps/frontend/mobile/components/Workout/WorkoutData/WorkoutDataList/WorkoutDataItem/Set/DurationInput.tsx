@@ -52,7 +52,6 @@ export default function DurationInput({
           set.completed ? theme.colors.dark2 : theme.colors.onBackground
         }
         contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
-        // label={label[0].toUpperCase() + label.slice(1)}
         value={getSecondsInDuration(set.fields[fieldName]!.toString())}
         onChangeText={(text) => handleRestFieldChange(text)}
         disabled={set.completed}
