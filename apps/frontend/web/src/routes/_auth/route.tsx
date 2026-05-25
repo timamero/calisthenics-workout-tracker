@@ -6,18 +6,18 @@ import { Stack } from '@mantine/core';
 import {
   useAuthStore,
   useExerciseLibraryStore,
-  useLeveragesAssistsStore,
+  useSetProgressionsStore,
   useWorkoutLibraryStore,
 } from '@cwt/state/stores';
 import { type ExerciseResponse } from '@cwt/schema/exercises';
-import { type LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
+import { type SetProgressionResponse } from '@cwt/schema/setProgressions';
 import type {
   WorkoutBuildResponse,
   WorkoutLogResponse,
 } from '@cwt/schema/workouts';
 
 import { getExercises } from '../../services/exercisesService';
-import { getLeveragesAssists } from '../../services/leveragesAssistsService';
+import { getSetProgressions } from '../../services/setProgressionsService';
 import {
   getWorkoutLogs,
   getWorkoutBuilds,
@@ -35,15 +35,15 @@ export const Route = createFileRoute('/_auth')({
     }
   },
   loader: async () => {
-    let leveragesAssists: LeveragesAssistsResponse[] | null = null;
+    let setProgressions: SetProgressionResponse[] | null = null;
     let logs: WorkoutLogResponse[] | null = null;
     let builds: WorkoutBuildResponse[] | null = null;
     let exercises: ExerciseResponse[] | null = null;
 
-    const leveragesAssistsState =
-      useLeveragesAssistsStore.getState().leveragesAssists;
-    if (leveragesAssistsState) {
-      leveragesAssists = leveragesAssistsState;
+    const setProgressionsState =
+      useSetProgressionsStore.getState().setProgressions;
+    if (setProgressionsState) {
+      setProgressions = setProgressionsState;
     }
     const displayedWorkoutLogs =
       useWorkoutLibraryStore.getState().displayedWorkoutLogs;
@@ -61,19 +61,19 @@ export const Route = createFileRoute('/_auth')({
       exercises = displayedExercises;
     }
 
-    if (exercises && leveragesAssists && logs && builds) {
-      return { exercises, leveragesAssists, logs, builds };
+    if (exercises && setProgressions && logs && builds) {
+      return { exercises, setProgressions, logs, builds };
     }
 
     const supabaseSession = useAuthStore.getState().session;
     if (supabaseSession?.access_token) {
-      if (!leveragesAssists) {
-        console.time('fetching LeveragesAssists');
-        const fetchedLeveragesAssists = await getLeveragesAssists(
+      if (!setProgressions) {
+        console.time('fetching SetProgressions');
+        const fetchedSetProgressions = await getSetProgressions(
           supabaseSession.access_token,
         );
-        console.timeEnd('fetching LeveragesAssists');
-        leveragesAssists = fetchedLeveragesAssists;
+        console.timeEnd('fetching SetProgressions');
+        setProgressions = fetchedSetProgressions;
       }
       if (!logs) {
         console.time('fetching workout logs');
@@ -98,7 +98,7 @@ export const Route = createFileRoute('/_auth')({
         exercises = fetchedExercises;
       }
     }
-    return { exercises, leveragesAssists, logs, builds };
+    return { exercises, setProgressions, logs, builds };
   },
   component: AuthLayout,
 });
@@ -109,13 +109,13 @@ function AuthLayout() {
 
   const data: {
     exercises: ExerciseResponse[];
-    leveragesAssists: LeveragesAssistsResponse[];
+    setProgressions: SetProgressionResponse[];
     logs: WorkoutLogResponse[];
     builds: WorkoutBuildResponse[];
   } = Route.useLoaderData();
 
-  const setLeveragesAssists = useLeveragesAssistsStore(
-    (state) => state.setLeveragesAssists,
+  const setSetProgressions = useSetProgressionsStore(
+    (state) => state.setSetProgression,
   );
   const setWorkouts = useWorkoutLibraryStore((state) => state.setWorkouts);
   const setExercises = useExerciseLibraryStore((state) => state.setExercises);
@@ -129,10 +129,10 @@ function AuthLayout() {
   const workoutLibraryLoading = useWorkoutLibraryStore(
     (state) => state.loading,
   );
-  const setLeveragesAssistsLoading = useLeveragesAssistsStore(
+  const setSetProgressionsLoading = useSetProgressionsStore(
     (state) => state.setLoading,
   );
-  const leveragesAssistsLoading = useLeveragesAssistsStore(
+  const setProgressionsLoading = useSetProgressionsStore(
     (state) => state.loading,
   );
 
@@ -145,26 +145,26 @@ function AuthLayout() {
   }, [user, navigate]);
 
   useEffect(() => {
-    setLeveragesAssists(data.leveragesAssists);
+    setSetProgressions(data.setProgressions);
     setWorkouts(data.logs, data.builds);
     setExercises(data.exercises);
     setExerciseLoading(false);
     setWorkoutLibraryLoading(false);
-    setLeveragesAssistsLoading(false);
+    setSetProgressionsLoading(false);
   }, [
     data.exercises,
-    data.leveragesAssists,
+    data.setProgressions,
     data.logs,
     data.builds,
     setExercises,
     setExerciseLoading,
-    setLeveragesAssists,
+    setSetProgressions,
     setWorkouts,
     setWorkoutLibraryLoading,
-    setLeveragesAssistsLoading,
+    setSetProgressionsLoading,
   ]);
 
-  if (exerciseLoading || workoutLibraryLoading || leveragesAssistsLoading) {
+  if (exerciseLoading || workoutLibraryLoading || setProgressionsLoading) {
     return (
       <Stack h="100vh" justify="center">
         <DefaultLoader />
