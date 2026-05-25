@@ -6,7 +6,7 @@ import { Mode } from '@cwt/schema/workouts';
 import { Text } from '../../../../../../customText';
 import { CustomTheme } from '../../../../../../theme';
 import FieldsList from './FieldsList';
-import LeverageAssistFieldsList from './LeverageAssistFieldsList';
+import SetProgressionFieldsList from './SetProgressionFieldsList';
 
 interface SetUIProps {
   mode: Mode;
@@ -79,8 +79,6 @@ export default function SetUI({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          // gap: 8,
-          // paddingBottom: 8,
         }}
       >
         <View
@@ -92,7 +90,7 @@ export default function SetUI({
           }}
         >
           <FieldsList />
-          <LeverageAssistFieldsList />
+          <SetProgressionFieldsList />
         </View>
       </View>
       {mode === 'log' && (

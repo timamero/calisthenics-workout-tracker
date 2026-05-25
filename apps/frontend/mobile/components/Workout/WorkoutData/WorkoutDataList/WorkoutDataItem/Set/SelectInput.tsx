@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useTheme, Menu } from 'react-native-paper';
 import { SetContext } from '@cwt/context';
 import {
-  useLeveragesAssistsStore,
+  useSetProgressionsStore,
   useWorkoutDraftStore,
 } from '@cwt/state/stores';
 import { useFieldInputChange } from '@cwt/hooks';
@@ -34,30 +34,26 @@ export default function SelectInput({
   const set = useContext(SetContext)!.set;
   const mode = useWorkoutDraftStore((state) => state.mode);
 
-  const leverageOrAssistID =
-    trackingType === 'leverages'
-      ? (set.fields.leverages?.find((field) => field.id === fieldID)!
-          .leverages_assists_id as number)
-      : (set.fields.assists?.find((field) => field.id === fieldID)!
-          .leverages_assists_id as number);
+  const setProgressionID = set.fields.setProgressions?.find(
+    (field) => field.id === fieldID,
+  )!.set_progression_id as number;
 
-  const leverageOrAssist = useLeveragesAssistsStore((state) =>
-    state.getLeverageOrAssistByID(leverageOrAssistID),
+  const setProgression = useSetProgressionsStore((state) =>
+    state.getSetProgressionByID(setProgressionID),
   );
 
   const handleChange = useFieldInputChange('value', 'select', fieldID);
 
-  const options: OptionType[] = leverageOrAssist.value_options.map(
+  const options: OptionType[] = setProgression.value_options.map(
     (option: string) => ({
       key: option,
       value: option,
     }),
   );
 
-  const selectedValue =
-    trackingType === 'leverages'
-      ? set.fields.leverages?.find((field) => field.id === fieldID)?.value
-      : set.fields.assists?.find((field) => field.id === fieldID)?.value;
+  const selectedValue = set.fields.setProgressions?.find(
+    (field) => field.id === fieldID,
+  )?.value;
 
   const [visible, setVisible] = useState(false);
 
@@ -82,7 +78,7 @@ export default function SelectInput({
   return (
     <View style={{ display: 'flex', gap: 4 }}>
       <View style={{ width: 116 }}>
-        <Text variant="labelMedium">{leverageOrAssist.name}</Text>
+        <Text variant="labelMedium">{setProgression.name}</Text>
       </View>
       <Menu
         visible={visible}
