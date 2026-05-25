@@ -1,14 +1,14 @@
-import { LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
+import { SetProgressionResponse } from '@cwt/schema/setProgressions';
 
 const BASE_DATE = new Date('2025-08-14T20:06:21.040Z');
 
-export const sampleLeveragesAssists: LeveragesAssistsResponse[] = [
+export const sampleLeveragesAssists: SetProgressionResponse[] = [
   {
     id: 1,
     created_at: BASE_DATE,
     updated_at: null,
     name: 'Ring Height',
-    type: 'leverage',
+    type: 'challenge',
     value_type: 'int',
     value_options: null,
     value_int_difficulty_direction: 'descending',
@@ -21,7 +21,7 @@ export const sampleLeveragesAssists: LeveragesAssistsResponse[] = [
     created_at: BASE_DATE,
     updated_at: null,
     name: 'Hand width',
-    type: 'leverage',
+    type: 'challenge',
     value_type: 'int',
     value_options: null,
     value_int_difficulty_direction: 'ascending',
@@ -34,7 +34,7 @@ export const sampleLeveragesAssists: LeveragesAssistsResponse[] = [
     created_at: BASE_DATE,
     updated_at: null,
     name: 'Lean Angle',
-    type: 'leverage',
+    type: 'challenge',
     value_type: 'int',
     value_options: null,
     value_int_difficulty_direction: 'ascending',
@@ -48,7 +48,7 @@ export const sampleLeveragesAssists: LeveragesAssistsResponse[] = [
     created_at: BASE_DATE,
     updated_at: null,
     name: 'Resistance Band',
-    type: 'leverage',
+    type: 'challenge',
     value_type: 'options',
     value_options: ['Extra Light', 'Light', 'Medium', 'Heavy', 'Extra Heavy'],
     value_int_difficulty_direction: null,
@@ -61,7 +61,7 @@ export const sampleLeveragesAssists: LeveragesAssistsResponse[] = [
     created_at: BASE_DATE,
     updated_at: null,
     name: 'Weight',
-    type: 'leverage',
+    type: 'challenge',
     value_type: 'int',
     value_options: null,
     value_int_difficulty_direction: 'ascending',
@@ -74,7 +74,7 @@ export const sampleLeveragesAssists: LeveragesAssistsResponse[] = [
     created_at: BASE_DATE,
     updated_at: null,
     name: 'Weight',
-    type: 'leverage',
+    type: 'challenge',
     value_type: 'int',
     value_options: null,
     value_int_difficulty_direction: 'ascending',
@@ -114,7 +114,7 @@ export const sampleLeveragesAssists: LeveragesAssistsResponse[] = [
     created_at: BASE_DATE,
     updated_at: null,
     name: 'Bar Height',
-    type: 'leverage',
+    type: 'challenge',
     value_type: 'int',
     value_options: null,
     value_int_difficulty_direction: 'descending',
@@ -127,7 +127,7 @@ export const sampleLeveragesAssists: LeveragesAssistsResponse[] = [
     created_at: BASE_DATE,
     updated_at: null,
     name: 'Feet Height',
-    type: 'leverage',
+    type: 'challenge',
     value_type: 'int',
     value_options: null,
     value_int_difficulty_direction: 'ascending',
