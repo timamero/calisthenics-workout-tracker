@@ -2,7 +2,7 @@ import { SetProgressionResponse } from '@cwt/schema/setProgressions';
 
 const BASE_DATE = new Date('2025-08-14T20:06:21.040Z');
 
-export const sampleLeveragesAssists: SetProgressionResponse[] = [
+export const sampleSetProgressions: SetProgressionResponse[] = [
   {
     id: 1,
     created_at: BASE_DATE,
