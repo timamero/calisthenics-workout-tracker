@@ -1,11 +1,11 @@
-import { ScrollView } from "react-native";
+import { ScrollView } from 'react-native';
 
 import {
   useWorkoutDraftStore,
   useExerciseLibraryStore,
-} from "@cwt/state/stores";
+} from '@cwt/state/stores';
 
-import { useWorkoutContextMobile } from "./useWorkoutContext";
+import { useWorkoutContextMobile } from './useWorkoutContext';
 
 /**
  * Common logic for adding an exercise to a workout draft.
@@ -55,7 +55,7 @@ export function useAddExercise() {
 
   const handleAddExercise = () => {
     addExercise(
-      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
+      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_types,
     );
 
     setSelectedExerciseIDToAdd(null);
@@ -84,7 +84,7 @@ export function useAddExerciseMobile() {
     workoutDataScrollViewRef: null | React.RefObject<ScrollView | null>,
   ) => {
     addExercise(
-      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_type,
+      getExerciseById(selectedExerciseIDToAdd as number).default_tracking_types,
     );
 
     setSelectedExerciseIDToAdd(null);

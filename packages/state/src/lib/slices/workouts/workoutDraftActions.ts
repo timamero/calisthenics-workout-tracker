@@ -1,14 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import type {
-  Exercise,
-  SetFields,
-  Leverage,
-  Assist,
-  Set,
-} from '@cwt/schema/workouts';
+import type { SetFields, SetProgression, Set } from '@cwt/schema/workouts';
 import type { ExerciseResponse } from '@cwt/schema/exercises';
-import type { LeveragesAssistsResponse } from '@cwt/schema/leveragesAssists';
+import type { SetProgressionResponse } from '@cwt/schema/setProgressions';
 
 import {
   DEFAULT_FIELDS,
@@ -17,146 +11,104 @@ import {
   DEFAULT_REST_SET,
 } from './workoutDefaults';
 
-export function addLeveragesOrAssistsField(
+export function addSetProgressionField(
   fields: SetFields,
   selectedExerciseID: number,
   tracking: string[],
   selectedExercise: ExerciseResponse,
-  getLeverageOrAssist: (id: number) => LeveragesAssistsResponse,
+  getSetProgression: (id: number) => SetProgressionResponse,
 ): SetFields {
   let updatedFields = fields;
 
   if (tracking.includes('leverages')) {
-    if (!selectedExercise.default_leverage_id) {
-      console.error('This exercise does not have a default_leverage_id');
+    if (!selectedExercise.default_set_progression_id) {
+      console.error('This exercise does not have a default_set_progression_id');
     }
-    const leverageID: number = selectedExercise.default_leverage_id!;
-    const leverage: LeveragesAssistsResponse = getLeverageOrAssist(leverageID);
-    const valueType = leverage.value_type;
+    const setProgressionID: number =
+      selectedExercise.default_set_progression_id!;
+    const setProgression: SetProgressionResponse =
+      getSetProgression(setProgressionID);
+    const valueType = setProgression.value_type;
 
-    let leverageField: Leverage;
+    let SetProgressionField: SetProgression;
     if (valueType === 'int') {
-      leverageField = {
+      SetProgressionField = {
         id: uuidv4(),
-        leverages_assists_id: leverageID,
+        set_progression_id: setProgressionID,
         value: null,
       };
     } else {
-      const firstOption = leverage.value_options[0];
-      leverageField = {
+      const firstOption = setProgression.value_options[0];
+      SetProgressionField = {
         id: uuidv4(),
-        leverages_assists_id: leverageID,
+        set_progression_id: setProgressionID,
         value: firstOption,
       };
     }
 
-    updatedFields = { ...fields, leverages: [leverageField] };
+    updatedFields = { ...fields, setProgressions: [SetProgressionField] };
   }
 
-  if (tracking.includes('assists')) {
-    if (!selectedExercise.default_assist_id) {
-      console.error('This exercise does not have a default_assist_id');
-    }
-    const assistID: number = selectedExercise.default_assist_id!;
-    const assist: LeveragesAssistsResponse = getLeverageOrAssist(assistID);
-    const valueType = assist.value_type;
-
-    let assistField: Assist;
-    if (valueType === 'int') {
-      assistField = {
-        id: uuidv4(),
-        leverages_assists_id: assistID,
-        value: null,
-      };
-    } else {
-      const firstOption = assist.value_options[0];
-      assistField = {
-        id: uuidv4(),
-        leverages_assists_id: assistID,
-        value: firstOption,
-      };
-    }
-
-    updatedFields = { ...fields, assists: [assistField] };
-  }
-
-  if (!tracking.includes('leverages') && !tracking.includes('assists')) {
+  if (!tracking.includes('set progressions')) {
     console.error('Invalid tracking type.');
   }
 
   return updatedFields;
 }
 
-export function updateLeverageOrAssistFieldInSets(
+export function updateSetProgressionFieldInSets(
   sets: Set[],
-  updatedField: Pick<Leverage, 'value'> | Pick<Assist, 'value'>,
+  updatedField: Pick<SetProgression, 'value'>,
   setID: string | null,
-  leverageOrAssistID: string | null,
+  setProgressionID: string | null,
 ): Set[] {
-  if (!setID || !leverageOrAssistID) {
-    console.error('setID and leverageOrAssistID are required');
+  if (!setID || !setProgressionID) {
+    console.error('setID and setProgressionID are required');
     return sets;
   }
 
-  let trackingTypeUpdated: 'leverages' | 'assists';
+  let trackingTypeUpdated: 'set progressions';
 
   const updatedSets = sets.map((set) => {
     if (set.id === setID) {
-      const leverageFields = set.fields.leverages;
-      const assistFields = set.fields.assists;
+      const setProgressionFields = set.fields.setProgressions;
 
       let fieldToUpdate = null;
 
-      if (leverageFields) {
-        fieldToUpdate = leverageFields.find(
-          (field) => field.id === leverageOrAssistID,
+      if (setProgressionFields) {
+        fieldToUpdate = setProgressionFields.find(
+          (field) => field.id === setProgressionID,
         );
         if (fieldToUpdate) {
-          trackingTypeUpdated = 'leverages';
+          trackingTypeUpdated = 'set progressions';
         }
-      } else if (assistFields && !fieldToUpdate) {
-        fieldToUpdate = assistFields.find(
-          (field) => field.id === leverageOrAssistID,
-        );
-        trackingTypeUpdated = 'assists';
       }
 
-      const updatedAssistOrLeverageField = {
+      const updatedSetProgressionField = {
         ...fieldToUpdate,
         ...updatedField,
       };
 
       if (
-        trackingTypeUpdated === 'leverages' &&
-        leverageFields &&
-        leverageFields.length > 0
+        trackingTypeUpdated === 'set progressions' &&
+        setProgressionFields &&
+        setProgressionFields.length > 0
       ) {
-        const updatedLeverageFields = leverageFields.map((field) => {
-          if (field.id === leverageOrAssistID) {
-            return updatedAssistOrLeverageField;
-          }
-          return field;
-        }) as Leverage[];
+        const updatedSetProgressionFields = setProgressionFields.map(
+          (field) => {
+            if (field.id === setProgressionID) {
+              return updatedSetProgressionField;
+            }
+            return field;
+          },
+        ) as SetProgression[];
 
         return {
           ...set,
-          fields: { ...set.fields, leverages: updatedLeverageFields },
-        };
-      } else if (
-        trackingTypeUpdated === 'assists' &&
-        assistFields &&
-        assistFields.length > 0
-      ) {
-        const updatedAssistFields = assistFields.map((field) => {
-          if (field.id === leverageOrAssistID) {
-            return updatedAssistOrLeverageField;
-          }
-          return field;
-        }) as Assist[];
-
-        return {
-          ...set,
-          fields: { ...set.fields, assists: updatedAssistFields },
+          fields: {
+            ...set.fields,
+            setProgressions: updatedSetProgressionFields,
+          },
         };
       }
     }
@@ -170,7 +122,7 @@ export function createFields(
   tracking: string[],
   exerciseID: number,
   selectedExercise: ExerciseResponse,
-  getLeverageOrAssist: (id: number) => LeveragesAssistsResponse,
+  getSetProgression: (id: number) => SetProgressionResponse,
 ) {
   let fields = DEFAULT_FIELDS;
   if (tracking.includes('reps')) {
@@ -180,13 +132,13 @@ export function createFields(
     fields = { ...fields, ...DEFAULT_TIME_SET };
   }
 
-  if (tracking.includes('leverages') || tracking.includes('assists')) {
-    fields = addLeveragesOrAssistsField(
+  if (tracking.includes('set progression')) {
+    fields = addSetProgressionField(
       fields,
       exerciseID,
       tracking,
       selectedExercise,
-      getLeverageOrAssist,
+      getSetProgression,
     );
   }
 
