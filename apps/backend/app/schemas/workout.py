@@ -5,25 +5,29 @@ from uuid import UUID
 from pydantic import BaseModel, Field
 
 
-class LeverageSchema(BaseModel):
+class SetProgressionSchema(BaseModel):
     id: UUID
-    leverages_assists_id: int
+    set_progression_id: int
     value: Optional[int | str] = None
 
 
-class AssistSchema(BaseModel):
-    id: UUID
-    leverages_assists_id: int
-    value: Optional[int | str] = None
+# class LeverageSchema(BaseModel):
+#     id: UUID
+#     leverages_assists_id: int
+#     value: Optional[int | str] = None
+
+
+# class AssistSchema(BaseModel):
+#     id: UUID
+#     leverages_assists_id: int
+#     value: Optional[int | str] = None
 
 
 class SetFieldsSchema(BaseModel):
     reps: Optional[int] = None
     time: Optional[str] = None  # ISO 8601 duration string
-    weight: Optional[int] = None
     rest: Optional[str] = None  # ISO 8601 duration string
-    leverages: Optional[List[LeverageSchema]] = None
-    assists: Optional[List[AssistSchema]] = None
+    setProgressions: Optional[List[SetProgressionSchema]]
 
 
 class SetSchema(BaseModel):
