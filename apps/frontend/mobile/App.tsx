@@ -6,7 +6,7 @@ import {
   useAuthStore,
   useWorkoutLibraryStore,
   useExerciseLibraryStore,
-  useLeveragesAssistsStore,
+  useSetProgressionsStore,
 } from '@cwt/state/stores';
 import {
   WorkoutContextProvider,
@@ -19,7 +19,7 @@ import { supabase } from './services/supabaseClient';
 import Navigation from './navigation';
 import { getExercises } from './services/exercisesService';
 import { getWorkoutBuilds, getWorkoutLogs } from './services/workoutsService';
-import { getLeveragesAssists } from './services/leveragesAssistsService';
+import { getSetProgressions } from './services/setProgressionsService';
 
 import DefaultLoaderScreen from './screens/DefaultLoaderScreen';
 import WorkoutDraftProvider from './providers/WorkoutDraftProvider';
@@ -49,13 +49,13 @@ export default function App() {
     (state) => state.setLoading,
   );
 
-  const setLeveragesAssists = useLeveragesAssistsStore(
-    (state) => state.setLeveragesAssists,
+  const setSetProgressions = useSetProgressionsStore(
+    (state) => state.setSetProgression,
   );
-  const leveragesAssistsLoading = useLeveragesAssistsStore(
+  const setProgressionsLoading = useSetProgressionsStore(
     (state) => state.loading,
   );
-  const setLeveragesAssistsLoading = useLeveragesAssistsStore(
+  const setSetProgressionsLoading = useSetProgressionsStore(
     (state) => state.setLoading,
   );
 
@@ -77,15 +77,15 @@ export default function App() {
           setWorkouts(workoutLogs, workoutBuilds);
         }
 
-        const leveragesAssists = await getLeveragesAssists(
+        const setProgressions = await getSetProgressions(
           supabaseSession.access_token,
         );
-        if (leveragesAssists) {
-          setLeveragesAssists(leveragesAssists);
+        if (setProgressions) {
+          setSetProgressions(setProgressions);
         }
         setExerciseLoading(false);
         setWorkoutLibraryLoading(false);
-        setLeveragesAssistsLoading(false);
+        setSetProgressionsLoading(false);
       }
     };
     asyncFetchData();
@@ -93,10 +93,10 @@ export default function App() {
     setExercises,
     supabaseSession,
     setWorkouts,
-    setLeveragesAssists,
+    setSetProgressions,
     setExerciseLoading,
     setWorkoutLibraryLoading,
-    setLeveragesAssistsLoading,
+    setSetProgressionsLoading,
   ]);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ export default function App() {
   if (
     authLoading ||
     (supabaseSession &&
-      (exerciseLoading || workoutLibraryLoading || leveragesAssistsLoading))
+      (exerciseLoading || workoutLibraryLoading || setProgressionsLoading))
   ) {
     return (
       <PaperProvider theme={theme}>
