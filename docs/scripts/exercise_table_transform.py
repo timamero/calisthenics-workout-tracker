@@ -28,7 +28,7 @@ VALID_MUSCLES = {
 
 VALID_EQUIPMENT = {
     "pull up bar",
-    "paralletes",
+    "parallettes",
     "parallel bars",
     "gymnastic rings",
     "barbell",
