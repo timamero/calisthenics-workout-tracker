@@ -2,6 +2,7 @@ import csv
 import json
 import os
 import re
+from datetime import datetime, timezone
 
 # Define validation sets based on Supabase Enums
 VALID_MUSCLES = {
@@ -53,6 +54,12 @@ VALID_EMPHASIS = {"plyometrics", "mobility", "power", "endurance", "strength"}
 VALID_DIFFICULTY = {"beginner", "intermediate", "advanced", "elite"}
 VALID_SOURCE = {"manual", "ai_generated", "default"}
 VALID_TRACKING = {"reps", "time", "rpe", "set progressions"}
+
+
+def get_current_utc_timestamp():
+    """Returns the current UTC time formatted for Supabase."""
+    # Matches format: 2025-10-02 18:58:41.735924+00
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S.%f+00")
 
 
 def clean_and_parse_array(val, valid_set=None, field_name=""):
@@ -145,10 +152,15 @@ def transform_csv(input_file, output_file):
                 transformed_row["name"] = row.get("name", "").strip()
                 transformed_row["video_url"] = row.get("video_url", "").strip()
                 transformed_row["updated_at"] = row.get("updated_at", "").strip()
-                transformed_row["created_at"] = row.get("created_at", "").strip()
                 transformed_row["default_set_progression_id"] = row.get(
                     "default_set_progression_id", ""
                 ).strip()
+
+                # Handle created_at with a fallback to the current UTC timestamp
+                created_at_val = row.get("created_at", "").strip()
+                if not created_at_val:
+                    created_at_val = get_current_utc_timestamp()
+                transformed_row["created_at"] = created_at_val
 
                 # Process and validate array fields
                 transformed_row["target_muscles"] = clean_and_parse_array(
@@ -211,7 +223,7 @@ def transform_csv(input_file, output_file):
         print("\nDETAILED FAILURE LIST:")
         for fail in failed_rows:
             print(f"""- [Row {fail['row_number']}] ID
-                  : {fail['exercise_id']} | Name: '{fail['exercise_name']}'""")
+                : {fail['exercise_id']} | Name: '{fail['exercise_name']}'""")
             print(f"  Reason: {fail['error']}\n")
 
 
