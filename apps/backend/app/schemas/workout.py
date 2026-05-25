@@ -11,18 +11,6 @@ class SetProgressionSchema(BaseModel):
     value: Optional[int | str] = None
 
 
-# class LeverageSchema(BaseModel):
-#     id: UUID
-#     leverages_assists_id: int
-#     value: Optional[int | str] = None
-
-
-# class AssistSchema(BaseModel):
-#     id: UUID
-#     leverages_assists_id: int
-#     value: Optional[int | str] = None
-
-
 class SetFieldsSchema(BaseModel):
     reps: Optional[int] = None
     time: Optional[str] = None  # ISO 8601 duration string
