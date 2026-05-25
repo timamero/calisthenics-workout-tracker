@@ -17,6 +17,10 @@ export default function SetProgressionFieldsList() {
     (state) => state.getSetProgressionByID,
   );
 
+  if (!tracked.includes('set progressions')) {
+    return null;
+  }
+
   const setProgressionFields = set?.fields.setProgressions!.map(
     (setProgressionsField) => {
       const setProgression = getSetProgressionByID(
