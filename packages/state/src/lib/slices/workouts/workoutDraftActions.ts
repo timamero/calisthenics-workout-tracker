@@ -19,35 +19,37 @@ export function addSetProgressionField(
   getSetProgression: (id: number) => SetProgressionResponse,
 ): SetFields {
   let updatedFields = fields;
+  console.log('workoutDraftActions || addSetProgressionField called');
+  console.log('fields: ', fields);
+  console.log('selectedExerciseID', selectedExerciseID);
+  console.log('tracking: ', tracking);
+  console.log('selectedExercise: ', selectedExercise);
 
-  if (tracking.includes('leverages')) {
-    if (!selectedExercise.default_set_progression_id) {
-      console.error('This exercise does not have a default_set_progression_id');
-    }
-    const setProgressionID: number =
-      selectedExercise.default_set_progression_id!;
-    const setProgression: SetProgressionResponse =
-      getSetProgression(setProgressionID);
-    const valueType = setProgression.value_type;
-
-    let SetProgressionField: SetProgression;
-    if (valueType === 'int') {
-      SetProgressionField = {
-        id: uuidv4(),
-        set_progression_id: setProgressionID,
-        value: null,
-      };
-    } else {
-      const firstOption = setProgression.value_options[0];
-      SetProgressionField = {
-        id: uuidv4(),
-        set_progression_id: setProgressionID,
-        value: firstOption,
-      };
-    }
-
-    updatedFields = { ...fields, setProgressions: [SetProgressionField] };
+  if (!selectedExercise.default_set_progression_id) {
+    console.error('This exercise does not have a default_set_progression_id');
   }
+  const setProgressionID: number = selectedExercise.default_set_progression_id!;
+  const setProgression: SetProgressionResponse =
+    getSetProgression(setProgressionID);
+  const valueType = setProgression.value_type;
+
+  let SetProgressionField: SetProgression;
+  if (valueType === 'int') {
+    SetProgressionField = {
+      id: uuidv4(),
+      set_progression_id: setProgressionID,
+      value: null,
+    };
+  } else {
+    const firstOption = setProgression.value_options[0];
+    SetProgressionField = {
+      id: uuidv4(),
+      set_progression_id: setProgressionID,
+      value: firstOption,
+    };
+  }
+
+  updatedFields = { ...fields, setProgressions: [SetProgressionField] };
 
   if (!tracking.includes('set progressions')) {
     console.error('Invalid tracking type.');
@@ -132,7 +134,7 @@ export function createFields(
     fields = { ...fields, ...DEFAULT_TIME_SET };
   }
 
-  if (tracking.includes('set progression')) {
+  if (tracking.includes('set progressions')) {
     fields = addSetProgressionField(
       fields,
       exerciseID,

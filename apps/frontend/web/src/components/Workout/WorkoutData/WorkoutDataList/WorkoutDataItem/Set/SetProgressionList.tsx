@@ -37,7 +37,6 @@ function SetProgressionField({
         key={setProgressionField.id}
         label={`${setProgression.name}`}
         fieldID={setProgressionField.id}
-        trackingType="set progressions"
       />
     );
   }
@@ -56,8 +55,6 @@ export default function SetProgressionFieldsList() {
   if (!tracked.includes('set progressions')) {
     return null;
   }
-
-  // let setProgressionsFields;
 
   const setProgressionFields = set?.fields.setProgressions!.map(
     (setProgressionField) => {
