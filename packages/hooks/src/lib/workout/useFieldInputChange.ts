@@ -1,7 +1,7 @@
 import { useContext, ChangeEvent } from 'react';
 
 import { WorkoutDataItemContext, SetContext } from '@cwt/context';
-import type { SetFields, Leverage, Assist } from '@cwt/schema/workouts';
+import type { SetFields, SetProgression } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 /**
@@ -22,15 +22,12 @@ export default function useFieldInputChange(
   const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
   const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
 
-  const setLeverageOrAssistIDToMod = useWorkoutDraftStore(
-    (state) => state.setLeverageOrAssistIDToMod,
+  const setSetProgressionIDToMod = useWorkoutDraftStore(
+    (state) => state.setSetProgressionIDToMod,
   );
 
   const handleUpdateField = (
-    updatedField:
-      | Partial<SetFields>
-      | Pick<Leverage, 'value'>
-      | Pick<Assist, 'value'>,
+    updatedField: Partial<SetFields> | Pick<SetProgression, 'value'>,
   ) => {
     if (parentType === 'superset') {
       handleSetFieldChange(set.id, updatedField, exerciseID);
@@ -43,7 +40,7 @@ export default function useFieldInputChange(
     eventOrValue: ChangeEvent<HTMLInputElement> | string | null,
   ) => {
     if (fieldID) {
-      setLeverageOrAssistIDToMod(fieldID);
+      setSetProgressionIDToMod(fieldID);
     }
 
     const value =
@@ -60,10 +57,7 @@ export default function useFieldInputChange(
 
     // Allow empty string for controlled input
     if (value === '') {
-      const updatedField:
-        | Partial<SetFields>
-        | Pick<Leverage, 'value'>
-        | Pick<Assist, 'value'> = {
+      const updatedField: Partial<SetFields> | Pick<SetProgression, 'value'> = {
         [fieldName]: '',
       };
       handleUpdateField(updatedField);
@@ -76,12 +70,10 @@ export default function useFieldInputChange(
       if (num >= 0 && num <= 999) {
         const formattedValue =
           inputType === 'duration' ? 'PT' + value + 'S' : Number(value);
-        const updatedField:
-          | Partial<SetFields>
-          | Pick<Leverage, 'value'>
-          | Pick<Assist, 'value'> = {
-          [fieldName]: formattedValue,
-        };
+        const updatedField: Partial<SetFields> | Pick<SetProgression, 'value'> =
+          {
+            [fieldName]: formattedValue,
+          };
         handleUpdateField(updatedField);
       }
     }

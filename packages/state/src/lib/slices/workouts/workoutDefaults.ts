@@ -45,24 +45,16 @@ export const INITIALIZED_WORKOUT_LOG_TO_SAVE: Omit<
 export const DEFAULT_FIELDS: SetFields = {
   reps: null,
   time: null,
-  weight: null,
   rest: null,
-  leverages: null,
-  assists: null,
+  setProgressions: null,
 };
 
 export const DEFAULT_REP_SET: Pick<SetFields, 'reps'> = {
-  // ...DEFAULT_FIELDS,
   reps: 10,
-  // rest: 'PT30S',
 };
 export const DEFAULT_TIME_SET: Pick<SetFields, 'time'> = {
-  // ...DEFAULT_FIELDS,
   time: 'PT30S',
-  // rest: 'PT30S',
 };
 export const DEFAULT_REST_SET: Pick<SetFields, 'rest'> = {
-  // ...DEFAULT_FIELDS,
-  // time: 'PT30S',
   rest: 'PT30S',
 };
