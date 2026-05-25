@@ -30,10 +30,6 @@
       "types": "./dist/lib/workouts/types.d.ts",
       "default": "./dist/lib/workouts/types.js"
     },
-    "./leveragesAssists": {
-      "types": "./dist/lib/leveragesAssists/types.d.ts",
-      "default": "./dist/lib/leveragesAssists/types.js"
-    },
     "./setProgressions": {
       "types": "./dist/lib/setProgressions/types.d.ts",
       "default": "./dist/lib/setProgressions/types.js"

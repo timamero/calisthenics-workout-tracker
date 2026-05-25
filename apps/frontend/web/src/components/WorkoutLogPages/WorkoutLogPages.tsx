@@ -29,7 +29,6 @@ export default function WorkoutLogPages() {
   const data = chunk(logs, chunkSize);
 
   const handleWorkoutLogClick = (workoutLog: WorkoutLogResponse) => {
-    console.log('WorkoutLogPages|| handlWorkoutLocClick called');
     if (setDetailWorkout && detailHandlers) {
       setDetailWorkout(workoutLog);
       setMode('read');

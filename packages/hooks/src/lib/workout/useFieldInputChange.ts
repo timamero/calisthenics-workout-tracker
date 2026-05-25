@@ -15,7 +15,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 export default function useFieldInputChange(
   fieldName: 'rest' | 'time' | 'reps' | 'weight' | 'value',
   inputType: 'numeral' | 'duration' | 'select',
-  fieldID?: string, // Needed for updating leverage or asssit fields
+  fieldID?: string, // Needed for updating set progression fields
 ) {
   const set = useContext(SetContext)!.set;
   const parentType = useContext(WorkoutDataItemContext)?.parentType;

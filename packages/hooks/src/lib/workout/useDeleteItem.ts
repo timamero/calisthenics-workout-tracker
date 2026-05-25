@@ -1,11 +1,11 @@
-import { useContext } from "react";
-import { WorkoutDataItemContext } from "@cwt/context";
-import { useWorkoutDraftStore } from "@cwt/state/stores";
+import { useContext } from 'react';
+import { WorkoutDataItemContext } from '@cwt/context';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import {
   useWorkoutContextWeb,
   useWorkoutContextMobile,
-} from "./useWorkoutContext";
+} from './useWorkoutContext';
 
 /**
  * Common logic for deleting an item (Section, Superset, or Exercise) from a workout draft.
@@ -17,21 +17,12 @@ import {
  * @returns A function that, when called, initiates the deletion process for the appropriate item.
  */
 function useDeleteItemLogic(
-  itemType: "exercise" | "superset" | "section",
+  itemType: 'exercise' | 'superset' | 'section',
   itemID: string,
 ) {
   const parentType = useContext(WorkoutDataItemContext)?.parentType;
   const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
   const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
-
-  // if (itemType === "exercise") {
-  //   console.log(
-  //     "getting parentType, parentSupersetID, parentSectionID",
-  //     parentType,
-  //     parentSupersetID,
-  //     parentSectionID,
-  //   );
-  // }
 
   const setSectionIDToMod = useWorkoutDraftStore(
     (state) => state.setSectionIDToMod,
@@ -44,23 +35,14 @@ function useDeleteItemLogic(
   );
 
   const setIDs = () => {
-    if (itemType === "exercise") {
-      console.log("useDeleteItem || setting IDs for itemType", itemType);
-      console.log(
-        "getting parentType, parentSupersetID, parentSectionID",
-        parentType,
-        parentSupersetID,
-        parentSectionID,
-      );
-    }
     switch (itemType) {
-      case "section":
+      case 'section':
         setSectionIDToMod(itemID);
         break;
-      case "superset":
+      case 'superset':
         setSupersetIDToMod(itemID);
         break;
-      case "exercise":
+      case 'exercise':
         setExerciseIDToMod(itemID);
         break;
     }
@@ -87,7 +69,7 @@ function useDeleteItemLogic(
  * @returns An object containing handleDeleteItemClick function.
  */
 export function useDeleteItem(
-  itemType: "exercise" | "superset" | "section",
+  itemType: 'exercise' | 'superset' | 'section',
   itemID: string,
 ) {
   const { parentType, setIDs } = useDeleteItemLogic(itemType, itemID);
@@ -118,7 +100,7 @@ export function useDeleteItem(
  * @returns An object containing handleDeleteItemPress function.
  */
 export function useDeleteItemMobile(
-  itemType: "exercise" | "superset" | "section",
+  itemType: 'exercise' | 'superset' | 'section',
   itemID: string,
 ) {
   const { parentType, setIDs } = useDeleteItemLogic(itemType, itemID);

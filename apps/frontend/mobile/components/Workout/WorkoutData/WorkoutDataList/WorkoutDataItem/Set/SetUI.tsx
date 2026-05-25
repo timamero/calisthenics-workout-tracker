@@ -52,7 +52,6 @@ export default function SetUI({
           alignItems: 'center',
         }}
       >
-        {/* {!hasSupersetParentType && (mode === 'build' || mode === 'edit') && ( */}
         {!hasSupersetParentType && (
           <View style={{ paddingBlock: 8 }}>
             <Text

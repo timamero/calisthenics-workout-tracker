@@ -37,7 +37,6 @@ export default function FilterSelections() {
 
   const filterGroupNames = filterCheckboxSelections.map((s) => s.keyName);
   const uniqueFilterGroupNames = [...new Set(filterGroupNames)];
-  console.log('unique: ', uniqueFilterGroupNames);
   return (
     <>
       {uniqueFilterGroupNames.map((keyName) => {
