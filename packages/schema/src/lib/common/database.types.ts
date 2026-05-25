@@ -53,9 +53,10 @@ export type Database = {
       exercises: {
         Row: {
           created_at: string
-          default_assist_id: number | null
-          default_leverage_id: number | null
-          default_tracking_type: Database["public"]["Enums"]["tracking_type"][]
+          default_set_progression_id: number | null
+          default_tracking_types:
+            | Database["public"]["Enums"]["tracking_type"][]
+            | null
           difficulty: Database["public"]["Enums"]["difficulty_type"]
           emphasis: Database["public"]["Enums"]["emphasis_type"]
           id: number
@@ -70,9 +71,10 @@ export type Database = {
         }
         Insert: {
           created_at?: string
-          default_assist_id?: number | null
-          default_leverage_id?: number | null
-          default_tracking_type?: Database["public"]["Enums"]["tracking_type"][]
+          default_set_progression_id?: number | null
+          default_tracking_types?:
+            | Database["public"]["Enums"]["tracking_type"][]
+            | null
           difficulty: Database["public"]["Enums"]["difficulty_type"]
           emphasis: Database["public"]["Enums"]["emphasis_type"]
           id?: number
@@ -87,9 +89,10 @@ export type Database = {
         }
         Update: {
           created_at?: string
-          default_assist_id?: number | null
-          default_leverage_id?: number | null
-          default_tracking_type?: Database["public"]["Enums"]["tracking_type"][]
+          default_set_progression_id?: number | null
+          default_tracking_types?:
+            | Database["public"]["Enums"]["tracking_type"][]
+            | null
           difficulty?: Database["public"]["Enums"]["difficulty_type"]
           emphasis?: Database["public"]["Enums"]["emphasis_type"]
           id?: number
@@ -104,17 +107,10 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "exercises_default_assist_id_fkey"
-            columns: ["default_assist_id"]
+            foreignKeyName: "exercises_default_set_progression_id_fkey"
+            columns: ["default_set_progression_id"]
             isOneToOne: false
-            referencedRelation: "leverages_assists"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "exercises_default_leverage_id_fkey"
-            columns: ["default_leverage_id"]
-            isOneToOne: false
-            referencedRelation: "leverages_assists"
+            referencedRelation: "set_progressions"
             referencedColumns: ["id"]
           },
         ]
@@ -212,7 +208,6 @@ export type Database = {
       progression_exercises_inactive: {
         Row: {
           category: string
-          exercise_id: number
           id: number
           level: number | null
           name: string
@@ -222,7 +217,6 @@ export type Database = {
         }
         Insert: {
           category: string
-          exercise_id: number
           id?: number
           level?: number | null
           name: string
@@ -232,7 +226,6 @@ export type Database = {
         }
         Update: {
           category?: string
-          exercise_id?: number
           id?: number
           level?: number | null
           name?: string
@@ -241,13 +234,6 @@ export type Database = {
           purpose?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "progression_exercises_exercise_id_fkey"
-            columns: ["exercise_id"]
-            isOneToOne: false
-            referencedRelation: "exercises"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "progression_exercises_progression_id_fkey"
             columns: ["progression_id"]
@@ -281,6 +267,57 @@ export type Database = {
         }
         Relationships: []
       }
+      set_progressions: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          id: number
+          measure_instructions: string | null
+          name: string
+          type: Database["public"]["Enums"]["set_progression_type"]
+          updated_at: string | null
+          value_int_difficulty_direction:
+            | Database["public"]["Enums"]["sort_direction"]
+            | null
+          value_int_unit: Database["public"]["Enums"]["unit"] | null
+          value_options: string[] | null
+          value_type: Database["public"]["Enums"]["set_progression_value_type"]
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order: number
+          id?: number
+          measure_instructions?: string | null
+          name: string
+          type?: Database["public"]["Enums"]["set_progression_type"]
+          updated_at?: string | null
+          value_int_difficulty_direction?:
+            | Database["public"]["Enums"]["sort_direction"]
+            | null
+          value_int_unit?: Database["public"]["Enums"]["unit"] | null
+          value_options?: string[] | null
+          value_type: Database["public"]["Enums"]["set_progression_value_type"]
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: number
+          measure_instructions?: string | null
+          name?: string
+          type?: Database["public"]["Enums"]["set_progression_type"]
+          updated_at?: string | null
+          value_int_difficulty_direction?:
+            | Database["public"]["Enums"]["sort_direction"]
+            | null
+          value_int_unit?: Database["public"]["Enums"]["unit"] | null
+          value_options?: string[] | null
+          value_type?: Database["public"]["Enums"]["set_progression_value_type"]
+        }
+        Relationships: []
+      }
       test_table: {
         Row: {
           id: number
@@ -300,7 +337,7 @@ export type Database = {
         Row: {
           created_at: string
           description: string | null
-          estimated_duration: unknown
+          estimated_duration: string | null
           goal: Database["public"]["Enums"]["goal"] | null
           id: number
           notes: string | null
@@ -314,7 +351,7 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
-          estimated_duration?: unknown
+          estimated_duration?: string | null
           goal?: Database["public"]["Enums"]["goal"] | null
           id?: number
           notes?: string | null
@@ -328,7 +365,7 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
-          estimated_duration?: unknown
+          estimated_duration?: string | null
           goal?: Database["public"]["Enums"]["goal"] | null
           id?: number
           notes?: string | null
@@ -346,7 +383,7 @@ export type Database = {
           created_at: string
           date: string
           description: string | null
-          duration: unknown
+          duration: string
           goal: Database["public"]["Enums"]["goal"] | null
           id: number
           notes: string | null
@@ -362,7 +399,7 @@ export type Database = {
           created_at?: string
           date: string
           description?: string | null
-          duration: unknown
+          duration: string
           goal?: Database["public"]["Enums"]["goal"] | null
           id?: number
           notes?: string | null
@@ -378,7 +415,7 @@ export type Database = {
           created_at?: string
           date?: string
           description?: string | null
-          duration?: unknown
+          duration?: string
           goal?: Database["public"]["Enums"]["goal"] | null
           id?: number
           notes?: string | null
@@ -408,7 +445,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      difficulty_type: "beginner" | "intermediate" | "advanced"
+      difficulty_type: "beginner" | "intermediate" | "advanced" | "elite"
       emphasis_type:
         | "plyometrics"
         | "mobility"
@@ -416,11 +453,11 @@ export type Database = {
         | "endurance"
         | "strength"
       equipment:
-        | "pull up bars"
-        | "paralletes"
+        | "pull up bar"
+        | "parallettes"
         | "parallel bars"
         | "gymnastic rings"
-        | "bar"
+        | "barbell"
         | "suspension trainer"
         | "ab roller"
         | "speed rope"
@@ -429,6 +466,13 @@ export type Database = {
         | "bench"
         | "resistance bands"
         | "none"
+        | "ankle weights"
+        | "dip belt"
+        | "dumbbells"
+        | "kettlebell"
+        | "medicine ball"
+        | "nordic strap"
+        | "sliders"
       goal: "function" | "endurance" | "hypertrophy" | "strength" | "power"
       leverage_assist: "leverage" | "assist"
       leverage_assist_value_type: "int" | "options"
@@ -441,7 +485,7 @@ export type Database = {
         | "shoulders"
         | "biceps"
         | "triceps"
-        | "calf"
+        | "calves"
         | "latissimus dorsi"
         | "abs"
         | "obliques"
@@ -451,16 +495,14 @@ export type Database = {
         | "full body"
         | "core"
         | "forearms"
+        | "inner thighs"
+        | "outer thighs"
+      set_progression_type: "challenge" | "assist"
+      set_progression_value_type: "int" | "options"
       sort_direction: "ascending" | "descending"
       source: "manual" | "ai_generated" | "default"
       status: "draft" | "finalized" | "archived"
-      tracking_type:
-        | "reps"
-        | "time"
-        | "weight"
-        | "rpe"
-        | "leverages"
-        | "assists"
+      tracking_type: "reps" | "time" | "rpe" | "set progressions"
       unit: "lb" | "kg" | "in" | "cm" | "m" | "ft" | "deg"
     }
     CompositeTypes: {
@@ -589,7 +631,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      difficulty_type: ["beginner", "intermediate", "advanced"],
+      difficulty_type: ["beginner", "intermediate", "advanced", "elite"],
       emphasis_type: [
         "plyometrics",
         "mobility",
@@ -598,11 +640,11 @@ export const Constants = {
         "strength",
       ],
       equipment: [
-        "pull up bars",
-        "paralletes",
+        "pull up bar",
+        "parallettes",
         "parallel bars",
         "gymnastic rings",
-        "bar",
+        "barbell",
         "suspension trainer",
         "ab roller",
         "speed rope",
@@ -611,6 +653,13 @@ export const Constants = {
         "bench",
         "resistance bands",
         "none",
+        "ankle weights",
+        "dip belt",
+        "dumbbells",
+        "kettlebell",
+        "medicine ball",
+        "nordic strap",
+        "sliders",
       ],
       goal: ["function", "endurance", "hypertrophy", "strength", "power"],
       leverage_assist: ["leverage", "assist"],
@@ -624,7 +673,7 @@ export const Constants = {
         "shoulders",
         "biceps",
         "triceps",
-        "calf",
+        "calves",
         "latissimus dorsi",
         "abs",
         "obliques",
@@ -634,11 +683,15 @@ export const Constants = {
         "full body",
         "core",
         "forearms",
+        "inner thighs",
+        "outer thighs",
       ],
+      set_progression_type: ["challenge", "assist"],
+      set_progression_value_type: ["int", "options"],
       sort_direction: ["ascending", "descending"],
       source: ["manual", "ai_generated", "default"],
       status: ["draft", "finalized", "archived"],
-      tracking_type: ["reps", "time", "weight", "rpe", "leverages", "assists"],
+      tracking_type: ["reps", "time", "rpe", "set progressions"],
       unit: ["lb", "kg", "in", "cm", "m", "ft", "deg"],
     },
   },
