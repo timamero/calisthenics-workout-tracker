@@ -10,8 +10,9 @@ import {
   ExerciseSchema,
   SupersetSchema,
   SectionSchema,
-  LeverageSchema,
-  AssistSchema,
+  SetProgressionSchema,
+  // LeverageSchema,
+  // AssistSchema,
   SetSchema,
   SetFieldsSchema,
   GoalSchema,
@@ -32,8 +33,9 @@ export type WorkoutLogLimitedDetails = z.infer<
 export type Exercise = z.infer<typeof ExerciseSchema>;
 export type Superset = z.infer<typeof SupersetSchema>;
 export type Section = z.infer<typeof SectionSchema>;
-export type Leverage = z.infer<typeof LeverageSchema>;
-export type Assist = z.infer<typeof AssistSchema>;
+export type SetProgression = z.infer<typeof SetProgressionSchema>;
+// export type Leverage = z.infer<typeof LeverageSchema>;
+// export type Assist = z.infer<typeof AssistSchema>;
 export type Set = z.infer<typeof SetSchema>;
 export type SetFields = z.infer<typeof SetFieldsSchema>;
 export type Goal = z.infer<typeof GoalSchema>;

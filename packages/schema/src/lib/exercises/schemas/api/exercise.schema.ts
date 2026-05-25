@@ -17,11 +17,10 @@ export const ExerciseResponseSchema = z.object({
   difficulty: DifficultySchema,
   tags: z.array(z.string()),
   instructions: z.array(z.string()),
-  default_tracking_type: z.array(TrackingSchema),
+  default_tracking_types: z.array(TrackingSchema),
   video_url: z.nullable(z.string()),
   source: z.string().default('default'),
   updated_at: z.nullable(z.date()),
   created_at: z.date().default(() => new Date()),
-  default_leverage_id: z.nullable(z.number()),
-  default_assist_id: z.nullable(z.number()),
+  default_set_progression_id: z.nullable(z.number()),
 });
