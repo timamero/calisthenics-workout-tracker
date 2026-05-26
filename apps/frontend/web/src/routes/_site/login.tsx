@@ -63,6 +63,10 @@ function LoginView() {
       navigate({
         to: '/dashboard/home',
       });
+    } else if (user && !user.user_metadata.email_verified) {
+      navigate({
+        to: '/confirmation',
+      });
     }
     setLoading(false);
   }, [user, navigate]);
