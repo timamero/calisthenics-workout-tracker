@@ -29,7 +29,7 @@ import DefaultLoader from '../../components/common/DefaultLoader';
 export const Route = createFileRoute('/_site/login')({
   beforeLoad: () => {
     const user = useAuthStore.getState().user;
-    if (user) {
+    if (user && user.user_metadata.email_verified) {
       throw redirect({
         to: '/dashboard/home',
       });
