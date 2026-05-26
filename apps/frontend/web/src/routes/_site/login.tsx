@@ -70,7 +70,7 @@ function LoginView() {
   // --- Helper Components ---
   const defaultSize = useDefaultSize();
 
-  if (loading) {
+  if (loading || user) {
     return <DefaultLoader />;
   }
 
