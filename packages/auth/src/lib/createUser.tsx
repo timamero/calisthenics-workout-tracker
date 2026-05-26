@@ -4,17 +4,19 @@
  * @returns {Promise<Object|null>} The created user object or null if an error occurred.
  * @throws Will log an error if user creation fails.
  */
-import { SupabaseClient } from "@supabase/supabase-js";
+import { SupabaseClient } from '@supabase/supabase-js';
 
 export const createUser = async (
   supabase: SupabaseClient,
   email: string,
   password: string,
+  username: string,
   firstName?: string,
   lastName?: string,
 ) => {
   const options = {
     data: {
+      display_name: username,
       first_name: firstName,
       last_name: lastName,
     },
@@ -27,7 +29,7 @@ export const createUser = async (
   });
 
   if (error) {
-    console.error("Error creating user:", error);
+    console.error('Error creating user:', error);
     return null;
   }
   return data.user;
