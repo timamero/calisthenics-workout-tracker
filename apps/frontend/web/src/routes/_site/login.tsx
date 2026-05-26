@@ -59,7 +59,7 @@ function LoginView() {
 
   // --- Effects ---
   useEffect(() => {
-    if (user) {
+    if (user && user.user_metadata.email_verified) {
       navigate({
         to: '/dashboard/home',
       });
