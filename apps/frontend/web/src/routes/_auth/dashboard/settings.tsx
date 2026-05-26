@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { Stack, Title, Button, Text, Container } from '@mantine/core';
 
@@ -7,6 +8,7 @@ import { useUser } from '@cwt/hooks';
 import { supabase } from '../../../services/supabaseClient';
 
 import { TextInputWithEdit } from '../../../components/common/TextInputWithEdit';
+import DefaultLoader from '../../../components/common/DefaultLoader';
 
 export const Route = createFileRoute('/_auth/dashboard/settings')({
   component: SettingsView,
@@ -15,13 +17,21 @@ export const Route = createFileRoute('/_auth/dashboard/settings')({
 function SettingsView() {
   const name = useUser().name;
 
+  // --- Local State ---
+  const [loading, setLoading] = useState(false);
+
   const handleSignOut = () => {
+    setLoading(true);
     signOut(supabase);
   };
 
   const handleOnSave = (text: string) => {
     updateUserName(supabase, text);
   };
+
+  if (loading) {
+    return <DefaultLoader customMessage="Signing out..." />;
+  }
 
   return (
     <Container h="100%" py="xl">
