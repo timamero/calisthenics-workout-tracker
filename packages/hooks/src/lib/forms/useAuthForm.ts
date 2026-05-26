@@ -1,29 +1,29 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { type SupabaseClient } from "@supabase/supabase-js";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { type SupabaseClient } from '@supabase/supabase-js';
 
-import { signIn, updateUserName } from "@cwt/auth";
-import { createUser } from "@cwt/auth";
+import { signIn, updateUserName } from '@cwt/auth';
+import { createUser } from '@cwt/auth';
 import {
   AuthSchema,
   AuthSignUpSchema,
   type Auth,
   type AuthSignUp,
-} from "@cwt/schema/forms";
-import { useAuthStore } from "@cwt/state/stores";
+} from '@cwt/schema/forms';
+import { useAuthStore } from '@cwt/state/stores';
 
 const SIGNUP_DEFAULT_VALUES = {
-  email: "",
-  password: "",
-  username: "",
-  firstName: "",
-  lastName: "",
+  email: '',
+  password: '',
+  username: '',
+  firstName: '',
+  lastName: '',
 };
 
 const LOGIN_DEFAULT_VALUES = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 function useAuth(supabase: SupabaseClient) {
@@ -39,14 +39,14 @@ function useAuth(supabase: SupabaseClient) {
     try {
       const user = await signIn(supabase, email, password);
       if (!user) {
-        setAuthError("Failed to sign in. Please check your credentials.");
+        setAuthError('Failed to sign in. Please check your credentials.');
         return null;
       }
       setUser(user);
       return user;
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : "An error occurred";
+        error instanceof Error ? error.message : 'An error occurred';
       setAuthError(message);
       return null;
     } finally {
@@ -69,25 +69,21 @@ function useAuth(supabase: SupabaseClient) {
         supabase,
         email,
         password,
+        username,
         firstName,
         lastName,
       );
-      if (!user) {
-        setAuthError("Failed to create account. Please try again.");
-        return null;
-      }
 
-      try {
-        updateUserName(supabase, username);
-      } catch (error) {
-        console.error(error);
+      if (!user) {
+        setAuthError('Failed to create account. Please try again.');
+        return null;
       }
 
       setUser(user);
       return user;
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : "An error occurred";
+        error instanceof Error ? error.message : 'An error occurred';
       setAuthError(message);
       return null;
     } finally {
