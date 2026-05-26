@@ -76,7 +76,7 @@ function SignUpView() {
 
   const defaultSize = useDefaultSize();
 
-  if (loading) {
+  if (loading || user) {
     return <DefaultLoader />;
   }
 
