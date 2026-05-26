@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { createFileRoute } from '@tanstack/react-router';
+import {
+  createFileRoute,
+  Link,
+  useNavigate,
+  redirect,
+} from '@tanstack/react-router';
 import {
   TextInput,
   PasswordInput,
@@ -11,7 +16,6 @@ import {
   Stack,
   Container,
 } from '@mantine/core';
-import { Link, useNavigate } from '@tanstack/react-router';
 
 import { siteContent } from '@cwt/content';
 import { useAuthLogin } from '@cwt/hooks';
@@ -23,6 +27,14 @@ import { useDefaultSize } from '../../hooks';
 import DefaultLoader from '../../components/common/DefaultLoader';
 
 export const Route = createFileRoute('/_site/login')({
+  beforeLoad: () => {
+    const user = useAuthStore.getState().user;
+    if (user) {
+      throw redirect({
+        to: '/dashboard/home',
+      });
+    }
+  },
   component: LoginView,
 });
 
@@ -33,6 +45,7 @@ function LoginView() {
   // --- Logic Hooks ---
   const auth = useAuthLogin(supabase);
   const user = useAuthStore((state) => state.user);
+  console.log('login || user', user);
 
   // --- Local State ---
   const [loading, setLoading] = useState(true);
@@ -57,7 +70,7 @@ function LoginView() {
   // --- Helper Components ---
   const defaultSize = useDefaultSize();
 
-  if (loading || user) {
+  if (loading) {
     return <DefaultLoader />;
   }
 

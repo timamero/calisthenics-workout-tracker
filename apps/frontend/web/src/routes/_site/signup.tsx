@@ -12,7 +12,7 @@ import {
   Container,
   Stack,
 } from '@mantine/core';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, redirect } from '@tanstack/react-router';
 
 import { siteContent } from '@cwt/content';
 import { useAuthSignUp } from '@cwt/hooks';
@@ -24,6 +24,14 @@ import { useDefaultSize } from '../../hooks';
 import DefaultLoader from '../../components/common/DefaultLoader';
 
 export const Route = createFileRoute('/_site/signup')({
+  beforeLoad: () => {
+    const user = useAuthStore.getState().user;
+    if (user) {
+      throw redirect({
+        to: '/dashboard/home',
+      });
+    }
+  },
   component: SignUpView,
 });
 
@@ -34,6 +42,11 @@ function SignUpView() {
   // --- Logic Hooks ---
   const auth = useAuthSignUp(supabase);
   const user = useAuthStore((state) => state.user);
+  console.log('signup || user', JSON.stringify(user));
+  console.log(
+    'signup || user.email_confirmed',
+    user?.user_metadata.email_verified,
+  );
 
   // --- Local State ---
   const [loading, setLoading] = useState(true);
@@ -48,9 +61,11 @@ function SignUpView() {
   // --- Effects ---
   useEffect(() => {
     if (user) {
-      navigate({
-        to: '/dashboard',
-      });
+      if (!user.user_metadata.email_veriified) {
+        navigate({
+          to: '/confirmation',
+        });
+      }
     }
     setLoading(false);
   }, [user, navigate]);
@@ -61,7 +76,7 @@ function SignUpView() {
 
   const defaultSize = useDefaultSize();
 
-  if (loading || user) {
+  if (loading) {
     return <DefaultLoader />;
   }
 
