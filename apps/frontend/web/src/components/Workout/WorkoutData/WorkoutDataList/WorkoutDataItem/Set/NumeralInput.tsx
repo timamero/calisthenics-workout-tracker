@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, type ChangeEvent } from 'react';
 import { TextInput } from '@mantine/core';
 
 import { SetContext } from '@cwt/context';
@@ -14,6 +14,30 @@ interface NumeralInputProps {
   trackingType?: string | null;
 }
 
+interface TextInputLoggingProps {
+  value: string;
+  label: string;
+  handleChange: (
+    eventOrValue: string | ChangeEvent<HTMLInputElement> | null,
+  ) => void;
+}
+
+function TextInputLogging({
+  value,
+  label,
+  handleChange,
+}: TextInputLoggingProps) {
+  return (
+    <TextInput
+      mod={{ isloginput: true }}
+      w={88}
+      label={label}
+      placeholder={'0'}
+      value={value}
+      onChange={handleChange}
+    />
+  );
+}
 export default function NumeralInput({
   label,
   fieldName,
@@ -24,19 +48,6 @@ export default function NumeralInput({
 
   const handleChange = useFieldInputChange(fieldName, 'numeral', fieldID);
   const mode = useWorkoutDraftStore((state) => state.mode);
-
-  function TextInputLogging({ value }: { value: string }) {
-    return (
-      <TextInput
-        mod={{ isloginput: true }}
-        w={88}
-        label={label}
-        placeholder={'0'}
-        value={value}
-        onChange={handleChange}
-      />
-    );
-  }
 
   if (fieldName === 'value' && trackingType === 'set progressions') {
     if (mode === 'read') {
@@ -71,6 +82,8 @@ export default function NumeralInput({
                 .setProgressions!.find((field) => field.id === fieldID)!
                 .value!.toString()
         }
+        label={label}
+        handleChange={handleChange}
       />
     );
   }
@@ -95,6 +108,8 @@ export default function NumeralInput({
             ? '0'
             : set.fields[fieldName]!.toString()
         }
+        label={label}
+        handleChange={handleChange}
       />
     );
   }
