@@ -7,6 +7,7 @@ import {
   Text,
   Stack,
   ActionIcon,
+  FocusTrap,
   useMatches,
 } from '@mantine/core';
 import type { TitleOrder, TitleSize } from '@mantine/core';
@@ -52,7 +53,6 @@ export default function TextInputWithEditUI({
               : 'h6',
     md: titleSize,
   });
-  console.log('variant', variant);
   return (
     <>
       {!isEditMode && (
@@ -90,16 +90,18 @@ export default function TextInputWithEditUI({
       )}
       {isEditMode && (
         <Stack maw={400} w="100%" gap={4}>
-          <TextInput
-            mod={
-              variant === 'title'
-                ? { istitleh1: titleOrder === 1, istitleh2: titleOrder === 2 }
-                : undefined
-            }
-            w="100%"
-            value={text}
-            onChange={onTextChange}
-          />
+          <FocusTrap active={true}>
+            <TextInput
+              mod={
+                variant === 'title'
+                  ? { istitleh1: titleOrder === 1, istitleh2: titleOrder === 2 }
+                  : undefined
+              }
+              w="100%"
+              value={text}
+              onChange={onTextChange}
+            />
+          </FocusTrap>
           <Group justify="flex-end">
             <Button
               onClick={() => onCancelClick()}
