@@ -141,7 +141,7 @@ export default function Hero() {
         <Group align="center" justify="flex-start" gap="md" w="100%">
           <Button
             component={Link}
-            to="/signup"
+            to="/auth/signup"
             variant="filled"
             size={useDefaultSize()}
             radius="md"
@@ -150,7 +150,7 @@ export default function Hero() {
           </Button>
           <Button
             component={Link}
-            to="/login"
+            to="/auth/login"
             variant="outline"
             size={useDefaultSize()}
             radius="md"

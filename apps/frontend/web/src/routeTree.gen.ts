@@ -12,16 +12,16 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteRouteImport } from './routes/_site/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as SiteIndexRouteImport } from './routes/_site/index'
-import { Route as SiteSignupRouteImport } from './routes/_site/signup'
-import { Route as SiteOnboardingCompleteRouteImport } from './routes/_site/onboardingComplete'
-import { Route as SiteOnboardingRouteImport } from './routes/_site/onboarding'
-import { Route as SiteLoginRouteImport } from './routes/_site/login'
-import { Route as SiteConfirmRouteImport } from './routes/_site/confirm'
 import { Route as SiteAboutRouteImport } from './routes/_site/about'
 import { Route as AuthWorkoutRouteRouteImport } from './routes/_auth/workout/route'
 import { Route as AuthDashboardRouteRouteImport } from './routes/_auth/dashboard/route'
 import { Route as AuthWorkoutIndexRouteImport } from './routes/_auth/workout/index'
 import { Route as AuthDashboardIndexRouteImport } from './routes/_auth/dashboard/index'
+import { Route as SiteOnboardOnboardingCompleteRouteImport } from './routes/_site/onboard/onboardingComplete'
+import { Route as SiteOnboardOnboardingRouteImport } from './routes/_site/onboard/onboarding'
+import { Route as SiteAuthSignupRouteImport } from './routes/_site/auth/signup'
+import { Route as SiteAuthLoginRouteImport } from './routes/_site/auth/login'
+import { Route as SiteAuthConfirmRouteImport } from './routes/_site/auth/confirm'
 import { Route as AuthWorkoutAddExerciseRouteImport } from './routes/_auth/workout/add-exercise'
 import { Route as AuthDashboardUserRouteImport } from './routes/_auth/dashboard/user'
 import { Route as AuthDashboardSettingsRouteImport } from './routes/_auth/dashboard/settings'
@@ -40,31 +40,6 @@ const AuthRouteRoute = AuthRouteRouteImport.update({
 const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteSignupRoute = SiteSignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteOnboardingCompleteRoute = SiteOnboardingCompleteRouteImport.update({
-  id: '/onboardingComplete',
-  path: '/onboardingComplete',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteOnboardingRoute = SiteOnboardingRouteImport.update({
-  id: '/onboarding',
-  path: '/onboarding',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteLoginRoute = SiteLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => SiteRouteRoute,
-} as any)
-const SiteConfirmRoute = SiteConfirmRouteImport.update({
-  id: '/confirm',
-  path: '/confirm',
   getParentRoute: () => SiteRouteRoute,
 } as any)
 const SiteAboutRoute = SiteAboutRouteImport.update({
@@ -91,6 +66,32 @@ const AuthDashboardIndexRoute = AuthDashboardIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthDashboardRouteRoute,
+} as any)
+const SiteOnboardOnboardingCompleteRoute =
+  SiteOnboardOnboardingCompleteRouteImport.update({
+    id: '/onboard/onboardingComplete',
+    path: '/onboard/onboardingComplete',
+    getParentRoute: () => SiteRouteRoute,
+  } as any)
+const SiteOnboardOnboardingRoute = SiteOnboardOnboardingRouteImport.update({
+  id: '/onboard/onboarding',
+  path: '/onboard/onboarding',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteAuthSignupRoute = SiteAuthSignupRouteImport.update({
+  id: '/auth/signup',
+  path: '/auth/signup',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteAuthLoginRoute = SiteAuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => SiteRouteRoute,
+} as any)
+const SiteAuthConfirmRoute = SiteAuthConfirmRouteImport.update({
+  id: '/auth/confirm',
+  path: '/auth/confirm',
+  getParentRoute: () => SiteRouteRoute,
 } as any)
 const AuthWorkoutAddExerciseRoute = AuthWorkoutAddExerciseRouteImport.update({
   id: '/add-exercise',
@@ -128,34 +129,34 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthDashboardRouteRouteWithChildren
   '/workout': typeof AuthWorkoutRouteRouteWithChildren
   '/about': typeof SiteAboutRoute
-  '/confirm': typeof SiteConfirmRoute
-  '/login': typeof SiteLoginRoute
-  '/onboarding': typeof SiteOnboardingRoute
-  '/onboardingComplete': typeof SiteOnboardingCompleteRoute
-  '/signup': typeof SiteSignupRoute
   '/dashboard/history': typeof AuthDashboardHistoryRoute
   '/dashboard/home': typeof AuthDashboardHomeRoute
   '/dashboard/library': typeof AuthDashboardLibraryRoute
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/dashboard/user': typeof AuthDashboardUserRoute
   '/workout/add-exercise': typeof AuthWorkoutAddExerciseRoute
+  '/auth/confirm': typeof SiteAuthConfirmRoute
+  '/auth/login': typeof SiteAuthLoginRoute
+  '/auth/signup': typeof SiteAuthSignupRoute
+  '/onboard/onboarding': typeof SiteOnboardOnboardingRoute
+  '/onboard/onboardingComplete': typeof SiteOnboardOnboardingCompleteRoute
   '/dashboard/': typeof AuthDashboardIndexRoute
   '/workout/': typeof AuthWorkoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof SiteIndexRoute
   '/about': typeof SiteAboutRoute
-  '/confirm': typeof SiteConfirmRoute
-  '/login': typeof SiteLoginRoute
-  '/onboarding': typeof SiteOnboardingRoute
-  '/onboardingComplete': typeof SiteOnboardingCompleteRoute
-  '/signup': typeof SiteSignupRoute
   '/dashboard/history': typeof AuthDashboardHistoryRoute
   '/dashboard/home': typeof AuthDashboardHomeRoute
   '/dashboard/library': typeof AuthDashboardLibraryRoute
   '/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/dashboard/user': typeof AuthDashboardUserRoute
   '/workout/add-exercise': typeof AuthWorkoutAddExerciseRoute
+  '/auth/confirm': typeof SiteAuthConfirmRoute
+  '/auth/login': typeof SiteAuthLoginRoute
+  '/auth/signup': typeof SiteAuthSignupRoute
+  '/onboard/onboarding': typeof SiteOnboardOnboardingRoute
+  '/onboard/onboardingComplete': typeof SiteOnboardOnboardingCompleteRoute
   '/dashboard': typeof AuthDashboardIndexRoute
   '/workout': typeof AuthWorkoutIndexRoute
 }
@@ -166,11 +167,6 @@ export interface FileRoutesById {
   '/_auth/dashboard': typeof AuthDashboardRouteRouteWithChildren
   '/_auth/workout': typeof AuthWorkoutRouteRouteWithChildren
   '/_site/about': typeof SiteAboutRoute
-  '/_site/confirm': typeof SiteConfirmRoute
-  '/_site/login': typeof SiteLoginRoute
-  '/_site/onboarding': typeof SiteOnboardingRoute
-  '/_site/onboardingComplete': typeof SiteOnboardingCompleteRoute
-  '/_site/signup': typeof SiteSignupRoute
   '/_site/': typeof SiteIndexRoute
   '/_auth/dashboard/history': typeof AuthDashboardHistoryRoute
   '/_auth/dashboard/home': typeof AuthDashboardHomeRoute
@@ -178,6 +174,11 @@ export interface FileRoutesById {
   '/_auth/dashboard/settings': typeof AuthDashboardSettingsRoute
   '/_auth/dashboard/user': typeof AuthDashboardUserRoute
   '/_auth/workout/add-exercise': typeof AuthWorkoutAddExerciseRoute
+  '/_site/auth/confirm': typeof SiteAuthConfirmRoute
+  '/_site/auth/login': typeof SiteAuthLoginRoute
+  '/_site/auth/signup': typeof SiteAuthSignupRoute
+  '/_site/onboard/onboarding': typeof SiteOnboardOnboardingRoute
+  '/_site/onboard/onboardingComplete': typeof SiteOnboardOnboardingCompleteRoute
   '/_auth/dashboard/': typeof AuthDashboardIndexRoute
   '/_auth/workout/': typeof AuthWorkoutIndexRoute
 }
@@ -188,34 +189,34 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/workout'
     | '/about'
-    | '/confirm'
-    | '/login'
-    | '/onboarding'
-    | '/onboardingComplete'
-    | '/signup'
     | '/dashboard/history'
     | '/dashboard/home'
     | '/dashboard/library'
     | '/dashboard/settings'
     | '/dashboard/user'
     | '/workout/add-exercise'
+    | '/auth/confirm'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/onboard/onboarding'
+    | '/onboard/onboardingComplete'
     | '/dashboard/'
     | '/workout/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/confirm'
-    | '/login'
-    | '/onboarding'
-    | '/onboardingComplete'
-    | '/signup'
     | '/dashboard/history'
     | '/dashboard/home'
     | '/dashboard/library'
     | '/dashboard/settings'
     | '/dashboard/user'
     | '/workout/add-exercise'
+    | '/auth/confirm'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/onboard/onboarding'
+    | '/onboard/onboardingComplete'
     | '/dashboard'
     | '/workout'
   id:
@@ -225,11 +226,6 @@ export interface FileRouteTypes {
     | '/_auth/dashboard'
     | '/_auth/workout'
     | '/_site/about'
-    | '/_site/confirm'
-    | '/_site/login'
-    | '/_site/onboarding'
-    | '/_site/onboardingComplete'
-    | '/_site/signup'
     | '/_site/'
     | '/_auth/dashboard/history'
     | '/_auth/dashboard/home'
@@ -237,6 +233,11 @@ export interface FileRouteTypes {
     | '/_auth/dashboard/settings'
     | '/_auth/dashboard/user'
     | '/_auth/workout/add-exercise'
+    | '/_site/auth/confirm'
+    | '/_site/auth/login'
+    | '/_site/auth/signup'
+    | '/_site/onboard/onboarding'
+    | '/_site/onboard/onboardingComplete'
     | '/_auth/dashboard/'
     | '/_auth/workout/'
   fileRoutesById: FileRoutesById
@@ -267,41 +268,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof SiteIndexRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/signup': {
-      id: '/_site/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SiteSignupRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/onboardingComplete': {
-      id: '/_site/onboardingComplete'
-      path: '/onboardingComplete'
-      fullPath: '/onboardingComplete'
-      preLoaderRoute: typeof SiteOnboardingCompleteRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/onboarding': {
-      id: '/_site/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof SiteOnboardingRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/login': {
-      id: '/_site/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof SiteLoginRouteImport
-      parentRoute: typeof SiteRouteRoute
-    }
-    '/_site/confirm': {
-      id: '/_site/confirm'
-      path: '/confirm'
-      fullPath: '/confirm'
-      preLoaderRoute: typeof SiteConfirmRouteImport
       parentRoute: typeof SiteRouteRoute
     }
     '/_site/about': {
@@ -338,6 +304,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/'
       preLoaderRoute: typeof AuthDashboardIndexRouteImport
       parentRoute: typeof AuthDashboardRouteRoute
+    }
+    '/_site/onboard/onboardingComplete': {
+      id: '/_site/onboard/onboardingComplete'
+      path: '/onboard/onboardingComplete'
+      fullPath: '/onboard/onboardingComplete'
+      preLoaderRoute: typeof SiteOnboardOnboardingCompleteRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/onboard/onboarding': {
+      id: '/_site/onboard/onboarding'
+      path: '/onboard/onboarding'
+      fullPath: '/onboard/onboarding'
+      preLoaderRoute: typeof SiteOnboardOnboardingRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/auth/signup': {
+      id: '/_site/auth/signup'
+      path: '/auth/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof SiteAuthSignupRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/auth/login': {
+      id: '/_site/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof SiteAuthLoginRouteImport
+      parentRoute: typeof SiteRouteRoute
+    }
+    '/_site/auth/confirm': {
+      id: '/_site/auth/confirm'
+      path: '/auth/confirm'
+      fullPath: '/auth/confirm'
+      preLoaderRoute: typeof SiteAuthConfirmRouteImport
+      parentRoute: typeof SiteRouteRoute
     }
     '/_auth/workout/add-exercise': {
       id: '/_auth/workout/add-exercise'
@@ -434,22 +435,22 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 
 interface SiteRouteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
-  SiteConfirmRoute: typeof SiteConfirmRoute
-  SiteLoginRoute: typeof SiteLoginRoute
-  SiteOnboardingRoute: typeof SiteOnboardingRoute
-  SiteOnboardingCompleteRoute: typeof SiteOnboardingCompleteRoute
-  SiteSignupRoute: typeof SiteSignupRoute
   SiteIndexRoute: typeof SiteIndexRoute
+  SiteAuthConfirmRoute: typeof SiteAuthConfirmRoute
+  SiteAuthLoginRoute: typeof SiteAuthLoginRoute
+  SiteAuthSignupRoute: typeof SiteAuthSignupRoute
+  SiteOnboardOnboardingRoute: typeof SiteOnboardOnboardingRoute
+  SiteOnboardOnboardingCompleteRoute: typeof SiteOnboardOnboardingCompleteRoute
 }
 
 const SiteRouteRouteChildren: SiteRouteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
-  SiteConfirmRoute: SiteConfirmRoute,
-  SiteLoginRoute: SiteLoginRoute,
-  SiteOnboardingRoute: SiteOnboardingRoute,
-  SiteOnboardingCompleteRoute: SiteOnboardingCompleteRoute,
-  SiteSignupRoute: SiteSignupRoute,
   SiteIndexRoute: SiteIndexRoute,
+  SiteAuthConfirmRoute: SiteAuthConfirmRoute,
+  SiteAuthLoginRoute: SiteAuthLoginRoute,
+  SiteAuthSignupRoute: SiteAuthSignupRoute,
+  SiteOnboardOnboardingRoute: SiteOnboardOnboardingRoute,
+  SiteOnboardOnboardingCompleteRoute: SiteOnboardOnboardingCompleteRoute,
 }
 
 const SiteRouteRouteWithChildren = SiteRouteRoute._addFileChildren(
