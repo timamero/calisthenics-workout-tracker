@@ -57,7 +57,7 @@ function ConfirmationView() {
       console.log('confirm-link || calling async function');
       asyncFunc();
     }
-  }, [handleConfirmUser, user, setStatus]);
+  }, [handleConfirmUser, user, setStatus, status]);
 
   console.log('confirm-link || status', status);
   console.log('confirm-link || user email', user?.email);
