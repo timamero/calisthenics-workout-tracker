@@ -5,6 +5,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import OnboardingComplete from '../screens/OnboardingComplete';
+import SuccessScreen from '../screens/SuccessScreen';
 
 const authScreenOptions = {
   title: '',
@@ -31,6 +32,10 @@ export const AuthStack = createNativeStackNavigator({
     Signup: {
       screen: SignupScreen,
       options: { ...authScreenOptions, title: 'Sign Up' },
+    },
+    Success: {
+      screen: SuccessScreen,
+      options: { ...authScreenOptions, title: 'Account created' },
     },
     Onboarding: {
       screen: OnboardingScreen,
