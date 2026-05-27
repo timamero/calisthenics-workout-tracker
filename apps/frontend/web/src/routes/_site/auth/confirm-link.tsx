@@ -17,7 +17,7 @@ import { useDefaultSize } from '../../../hooks';
 
 import DefaultLoader from '../../../components/common/DefaultLoader';
 
-export const Route = createFileRoute('/_site/auth/confirm')({
+export const Route = createFileRoute('/_site/auth/confirm-link')({
   // beforeLoad: () => {
   //   const user = useAuthStore.getState().user;
   //   if (!user) {
@@ -195,7 +195,7 @@ function ConfirmationView() {
         <Stack align="center" mt="lg">
           <Button
             component={Link}
-            to="/login"
+            to="/auth/login"
             type="button"
             size={defaultSize}
             variant="transparent"
