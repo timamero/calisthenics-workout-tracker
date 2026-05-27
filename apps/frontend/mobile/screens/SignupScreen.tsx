@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useTheme, TextInput, Text } from 'react-native-paper';
 import { Controller } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
+import { useAuthStore } from '@cwt/state/stores';
 
 import { siteContent } from '@cwt/content';
 import { useAuthSignUpMobile } from '@cwt/hooks';
@@ -14,9 +16,11 @@ import CustomButton from '../components/common/CustomButton';
 
 export default function SignupScreen() {
   // --- UI Hooks ---
+  const navigation = useNavigation<any>();
   const theme = useTheme() as CustomTheme;
 
   // --- Logic Hooks ---
+  const user = useAuthStore((state) => state.user);
   const auth = useAuthSignUpMobile(supabase);
 
   // --- Local State ---
@@ -35,6 +39,12 @@ export default function SignupScreen() {
 
     auth.handleSubmit(e);
   };
+
+  useEffect(() => {
+    if (user) {
+      navigation.navigate('Success');
+    }
+  }, [user, navigation]);
 
   return (
     <KeyboardAvoidingView
