@@ -30,13 +30,9 @@ export const Route = createFileRoute('/_site/auth/confirm-link')({
 });
 
 function ConfirmationView() {
-  // const navigate = useNavigate();
-
   const [userEmail, setUserEmail] = useState<string>('');
   const [isConfirmationSent, setIsConfirmationSent] = useState<boolean>(false);
-  // const [status, setStatus] = useState<'pending' | 'confirmed' | 'expired'>(
-  //   'pending',
-  // );
+
   const user = useAuthStore((state) => state.user);
   const defaultSize = useDefaultSize();
   const { status, setStatus, handleConfirmUser } = useConfirmUser(supabase);
@@ -47,15 +43,12 @@ function ConfirmationView() {
     const tokenHash = urlParams.get('token_hash');
 
     if (tokenHash && !user) {
-      console.log('confirm || Token found:', tokenHash);
-      console.log('confirming user');
-      // setToken(tokenParam)
-      // setEmail()
+      console.log('confirm-link || Token found:', tokenHash);
+      console.log('confirm-link ||confirming user');
       handleConfirmUser(tokenHash);
-      // Store it in localStorage, sessionStorage, or state
     } else {
-      console.log('confirmation || No token in URL');
-      setStatus('error');
+      console.log('confirm-link || No token in URL');
+      setStatus('idle');
     }
   }, [handleConfirmUser, user, setStatus]);
 
@@ -65,32 +58,7 @@ function ConfirmationView() {
     }
   }, [user, setStatus]);
 
-  console.log('confirm || status', status);
-
-  if (user && !user.user_metadata.email_verified) {
-    return (
-      <Container py="xl">
-        <Stack align="center" w="100%" gap={0}>
-          <Title
-            order={1}
-            mb="md"
-            fz={{ base: 'h3', md: 'h2' }}
-            lh="xxs"
-            ta="center"
-            style={(theme) => ({
-              letterSpacing: theme.other.letterSpacing.tight,
-            })}
-          >
-            Check your inbox
-          </Title>
-          <Text fw={500} fz={defaultSize} c="dark.3" mt={-12} ta="center">
-            We've sent a confirmation link to {user.email}. Click the link in
-            that email to verify your account and get started.
-          </Text>
-        </Stack>
-      </Container>
-    );
-  }
+  console.log('confirm-link || status', status);
 
   if (status === 'pending') {
     return <DefaultLoader />;
