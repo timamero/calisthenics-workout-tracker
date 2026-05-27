@@ -63,7 +63,7 @@ function SignUpView() {
     if (user) {
       if (!user.user_metadata.email_veriified) {
         navigate({
-          to: '/confirmation',
+          to: '/confirm',
         });
       }
     }
