@@ -1,4 +1,5 @@
 export { createUser } from "./createUser";
+export { confirmUser } from "./confirmUser";
 export { session } from "./session";
 export { signIn } from "./signIn";
 export { signOut } from "./signOut";
