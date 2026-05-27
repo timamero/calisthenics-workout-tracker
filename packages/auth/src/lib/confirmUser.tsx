@@ -9,7 +9,6 @@ export const confirmUser = async (
   supabase: SupabaseClient,
   tokenHash: string,
 ) => {
-  console.log('confirmUser || calling confirmUser');
   const { data, error } = await supabase.auth.verifyOtp({
     token_hash: tokenHash,
     type: 'email',

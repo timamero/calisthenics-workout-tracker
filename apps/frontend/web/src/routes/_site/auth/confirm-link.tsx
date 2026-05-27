@@ -56,15 +56,8 @@ function ConfirmationView() {
     if (status === 'idle') {
       console.log('confirm-link || calling async function');
       asyncFunc();
-      // setStatus('pending');
     }
   }, [handleConfirmUser, user, setStatus]);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     setStatus('confirmed');
-  //   }
-  // }, [user, setStatus]);
 
   console.log('confirm-link || status', status);
   console.log('confirm-link || user email', user?.email);
