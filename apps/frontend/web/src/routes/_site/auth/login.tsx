@@ -15,10 +15,11 @@ import {
   Text,
   Stack,
   Container,
+  Loader,
 } from '@mantine/core';
 
 import { siteContent } from '@cwt/content';
-import { useAuthLogin } from '@cwt/hooks';
+import { useAuthLogin, useResendConfirmation } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
 import { supabase } from '../../../services/supabaseClient';
@@ -46,6 +47,8 @@ function LoginView() {
   const auth = useAuthLogin(supabase);
   const user = useAuthStore((state) => state.user);
   console.log('login || user', user);
+  const { status, setStatus, handleResendConfirmation } =
+    useResendConfirmation(supabase);
 
   // --- Local State ---
   const [loading, setLoading] = useState(true);
@@ -55,6 +58,14 @@ function LoginView() {
     if (auth.authError) {
       auth.clearError();
     }
+    setStatus('idle');
+  };
+
+  const handleResendClick = () => {
+    handleResendConfirmation(
+      (document.getElementById('emailInput') as HTMLInputElement)?.value,
+    );
+    auth.clearError();
   };
 
   // --- Effects ---
@@ -73,7 +84,7 @@ function LoginView() {
   if (loading || user) {
     return <DefaultLoader />;
   }
-
+  console.log('login email', { ...auth.register('email') });
   return (
     <Container py="xl">
       <Stack align="center" w="100%" gap={0}>
@@ -96,6 +107,7 @@ function LoginView() {
       <Box maw={400} mx="auto" mt="lg">
         <form onSubmit={auth.handleSubmit}>
           <TextInput
+            id="emailInput"
             label="Email"
             placeholder="Enter your email"
             size={defaultSize}
@@ -120,13 +132,23 @@ function LoginView() {
                   type="button"
                   size={defaultSize}
                   variant="outline"
-                  onClick={() =>
-                    console.log('clicked resend confirmation link')
-                  }
+                  onClick={() => handleResendClick()}
                 >
                   Resend confirmation link
                 </Button>
               )}
+            {status === 'pending' && <Loader />}
+            {status === 'sent' && (
+              <Text>
+                We've sent a confirmation link to{' '}
+                {
+                  (document.getElementById('emailInput') as HTMLInputElement)
+                    ?.value
+                }
+                . Click the link in that email to verify your account and get
+                started.
+              </Text>
+            )}
           </Group>
           <Group mt="lg" justify="flex-end">
             <Button
