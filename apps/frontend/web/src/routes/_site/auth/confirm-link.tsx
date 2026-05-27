@@ -34,6 +34,7 @@ function ConfirmationView() {
   const [isConfirmationSent, setIsConfirmationSent] = useState<boolean>(false);
 
   const user = useAuthStore((state) => state.user);
+
   const defaultSize = useDefaultSize();
   const { status, setStatus, handleConfirmUser } = useConfirmUser(supabase);
 
