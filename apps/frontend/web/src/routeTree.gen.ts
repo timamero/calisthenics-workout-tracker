@@ -16,7 +16,7 @@ import { Route as SiteSignupRouteImport } from './routes/_site/signup'
 import { Route as SiteOnboardingCompleteRouteImport } from './routes/_site/onboardingComplete'
 import { Route as SiteOnboardingRouteImport } from './routes/_site/onboarding'
 import { Route as SiteLoginRouteImport } from './routes/_site/login'
-import { Route as SiteConfirmationRouteImport } from './routes/_site/confirmation'
+import { Route as SiteConfirmRouteImport } from './routes/_site/confirm'
 import { Route as SiteAboutRouteImport } from './routes/_site/about'
 import { Route as AuthWorkoutRouteRouteImport } from './routes/_auth/workout/route'
 import { Route as AuthDashboardRouteRouteImport } from './routes/_auth/dashboard/route'
@@ -62,9 +62,9 @@ const SiteLoginRoute = SiteLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => SiteRouteRoute,
 } as any)
-const SiteConfirmationRoute = SiteConfirmationRouteImport.update({
-  id: '/confirmation',
-  path: '/confirmation',
+const SiteConfirmRoute = SiteConfirmRouteImport.update({
+  id: '/confirm',
+  path: '/confirm',
   getParentRoute: () => SiteRouteRoute,
 } as any)
 const SiteAboutRoute = SiteAboutRouteImport.update({
@@ -128,7 +128,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthDashboardRouteRouteWithChildren
   '/workout': typeof AuthWorkoutRouteRouteWithChildren
   '/about': typeof SiteAboutRoute
-  '/confirmation': typeof SiteConfirmationRoute
+  '/confirm': typeof SiteConfirmRoute
   '/login': typeof SiteLoginRoute
   '/onboarding': typeof SiteOnboardingRoute
   '/onboardingComplete': typeof SiteOnboardingCompleteRoute
@@ -145,7 +145,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof SiteIndexRoute
   '/about': typeof SiteAboutRoute
-  '/confirmation': typeof SiteConfirmationRoute
+  '/confirm': typeof SiteConfirmRoute
   '/login': typeof SiteLoginRoute
   '/onboarding': typeof SiteOnboardingRoute
   '/onboardingComplete': typeof SiteOnboardingCompleteRoute
@@ -166,7 +166,7 @@ export interface FileRoutesById {
   '/_auth/dashboard': typeof AuthDashboardRouteRouteWithChildren
   '/_auth/workout': typeof AuthWorkoutRouteRouteWithChildren
   '/_site/about': typeof SiteAboutRoute
-  '/_site/confirmation': typeof SiteConfirmationRoute
+  '/_site/confirm': typeof SiteConfirmRoute
   '/_site/login': typeof SiteLoginRoute
   '/_site/onboarding': typeof SiteOnboardingRoute
   '/_site/onboardingComplete': typeof SiteOnboardingCompleteRoute
@@ -188,7 +188,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/workout'
     | '/about'
-    | '/confirmation'
+    | '/confirm'
     | '/login'
     | '/onboarding'
     | '/onboardingComplete'
@@ -205,7 +205,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
-    | '/confirmation'
+    | '/confirm'
     | '/login'
     | '/onboarding'
     | '/onboardingComplete'
@@ -225,7 +225,7 @@ export interface FileRouteTypes {
     | '/_auth/dashboard'
     | '/_auth/workout'
     | '/_site/about'
-    | '/_site/confirmation'
+    | '/_site/confirm'
     | '/_site/login'
     | '/_site/onboarding'
     | '/_site/onboardingComplete'
@@ -297,11 +297,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteLoginRouteImport
       parentRoute: typeof SiteRouteRoute
     }
-    '/_site/confirmation': {
-      id: '/_site/confirmation'
-      path: '/confirmation'
-      fullPath: '/confirmation'
-      preLoaderRoute: typeof SiteConfirmationRouteImport
+    '/_site/confirm': {
+      id: '/_site/confirm'
+      path: '/confirm'
+      fullPath: '/confirm'
+      preLoaderRoute: typeof SiteConfirmRouteImport
       parentRoute: typeof SiteRouteRoute
     }
     '/_site/about': {
@@ -434,7 +434,7 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 
 interface SiteRouteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
-  SiteConfirmationRoute: typeof SiteConfirmationRoute
+  SiteConfirmRoute: typeof SiteConfirmRoute
   SiteLoginRoute: typeof SiteLoginRoute
   SiteOnboardingRoute: typeof SiteOnboardingRoute
   SiteOnboardingCompleteRoute: typeof SiteOnboardingCompleteRoute
@@ -444,7 +444,7 @@ interface SiteRouteRouteChildren {
 
 const SiteRouteRouteChildren: SiteRouteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
-  SiteConfirmationRoute: SiteConfirmationRoute,
+  SiteConfirmRoute: SiteConfirmRoute,
   SiteLoginRoute: SiteLoginRoute,
   SiteOnboardingRoute: SiteOnboardingRoute,
   SiteOnboardingCompleteRoute: SiteOnboardingCompleteRoute,
