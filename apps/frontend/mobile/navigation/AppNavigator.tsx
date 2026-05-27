@@ -12,7 +12,8 @@ import WorkoutStack from './WorkoutStack';
 
 function useIsSignedIn() {
   const supabaseSession = useAuthStore((state) => state.session);
-  if (supabaseSession) {
+  const user = useAuthStore((state) => state.user);
+  if (supabaseSession && user && user.user_metadata.email_verified) {
     console.log('AppNavigator: User is signed in:');
     return true;
   }
@@ -20,9 +21,14 @@ function useIsSignedIn() {
 }
 function useIsSignedOut() {
   const supabaseSession = useAuthStore((state) => state.session);
-  if (supabaseSession) {
-    console.log('AppNavigator: User is signed out:');
+  const user = useAuthStore((state) => state.user);
+  if (supabaseSession && user && user.user_metadata.email_verified) {
     return false;
+  }
+  if (user && !user.user_metadata.email_verified) {
+    console.log('App Navigator: User is not confirmed');
+  } else {
+    console.log('AppNavigator: User is signed out:');
   }
   return true;
 }
