@@ -65,7 +65,7 @@ function LoginView() {
       });
     } else if (user && !user.user_metadata.email_verified) {
       navigate({
-        to: '/confirmation',
+        to: '/confirm',
       });
     }
     setLoading(false);
