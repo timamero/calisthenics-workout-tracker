@@ -21,12 +21,12 @@ import { siteContent } from '@cwt/content';
 import { useAuthLogin } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
-import { supabase } from '../../services/supabaseClient';
-import { useDefaultSize } from '../../hooks';
+import { supabase } from '../../../services/supabaseClient';
+import { useDefaultSize } from '../../../hooks';
 
-import DefaultLoader from '../../components/common/DefaultLoader';
+import DefaultLoader from '../../../components/common/DefaultLoader';
 
-export const Route = createFileRoute('/_site/login')({
+export const Route = createFileRoute('/_site/auth/login')({
   beforeLoad: () => {
     const user = useAuthStore.getState().user;
     if (user && user.user_metadata.email_verified) {
@@ -62,10 +62,6 @@ function LoginView() {
     if (user && user.user_metadata.email_verified) {
       navigate({
         to: '/dashboard/home',
-      });
-    } else if (user && !user.user_metadata.email_verified) {
-      navigate({
-        to: '/confirm',
       });
     }
     setLoading(false);

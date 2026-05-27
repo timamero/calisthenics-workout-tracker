@@ -18,12 +18,12 @@ import { siteContent } from '@cwt/content';
 import { useAuthSignUp } from '@cwt/hooks';
 import { useAuthStore } from '@cwt/state/stores';
 
-import { supabase } from '../../services/supabaseClient';
-import { useDefaultSize } from '../../hooks';
+import { supabase } from '../../../services/supabaseClient';
+import { useDefaultSize } from '../../../hooks';
 
-import DefaultLoader from '../../components/common/DefaultLoader';
+import DefaultLoader from '../../../components/common/DefaultLoader';
 
-export const Route = createFileRoute('/_site/signup')({
+export const Route = createFileRoute('/_site/auth/signup')({
   beforeLoad: () => {
     const user = useAuthStore.getState().user;
     if (user && user.user_metadata.email_verified) {
@@ -63,7 +63,7 @@ function SignUpView() {
     if (user) {
       if (!user.user_metadata.email_veriified) {
         navigate({
-          to: '/confirm',
+          to: '/auth/confirm',
         });
       }
     }
