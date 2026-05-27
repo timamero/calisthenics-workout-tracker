@@ -38,33 +38,42 @@ function ConfirmationView() {
   const { status, setStatus, handleConfirmUser } = useConfirmUser(supabase);
 
   useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const tokenHash = urlParams.get('token_hash');
+    const asyncFunc = async () => {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const tokenHash = urlParams.get('token_hash');
 
-    if (tokenHash && !user) {
-      console.log('confirm-link || Token found:', tokenHash);
-      console.log('confirm-link ||confirming user');
-      handleConfirmUser(tokenHash);
-    } else {
-      console.log('confirm-link || No token in URL');
-      setStatus('idle');
+      if (tokenHash && !user) {
+        console.log('confirm-link || Token found:', tokenHash);
+        console.log('confirm-link ||confirming user');
+        await handleConfirmUser(tokenHash);
+      }
+      // if (!tokenHash && status !== 'confirmed') {
+      //   setStatus('idle');
+      // }
+    };
+
+    if (status === 'idle') {
+      console.log('confirm-link || calling async function');
+      asyncFunc();
+      // setStatus('pending');
     }
   }, [handleConfirmUser, user, setStatus]);
 
-  useEffect(() => {
-    if (user) {
-      setStatus('confirmed');
-    }
-  }, [user, setStatus]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setStatus('confirmed');
+  //   }
+  // }, [user, setStatus]);
 
   console.log('confirm-link || status', status);
+  console.log('confirm-link || user email', user?.email);
 
   if (status === 'pending') {
     return <DefaultLoader />;
   }
 
-  if (status === 'confirmed') {
+  if (status === 'confirmed' && user) {
     return (
       <Container py="xl">
         <Stack align="center" w="100%" gap={0}>
