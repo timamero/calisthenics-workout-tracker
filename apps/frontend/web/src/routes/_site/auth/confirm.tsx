@@ -12,12 +12,12 @@ import {
 import { useAuthStore } from '@cwt/state/stores';
 import { useConfirmUser } from '@cwt/hooks';
 
-import { supabase } from '../../services/supabaseClient';
-import { useDefaultSize } from '../../hooks';
+import { supabase } from '../../../services/supabaseClient';
+import { useDefaultSize } from '../../../hooks';
 
-import DefaultLoader from '../../components/common/DefaultLoader';
+import DefaultLoader from '../../../components/common/DefaultLoader';
 
-export const Route = createFileRoute('/_site/confirm')({
+export const Route = createFileRoute('/_site/auth/confirm')({
   // beforeLoad: () => {
   //   const user = useAuthStore.getState().user;
   //   if (!user) {

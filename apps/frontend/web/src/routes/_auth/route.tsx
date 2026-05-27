@@ -30,7 +30,7 @@ export const Route = createFileRoute('/_auth')({
     const user = useAuthStore.getState().user;
     if (!user) {
       throw redirect({
-        to: '/login',
+        to: '/auth/login',
       });
     }
   },
@@ -139,7 +139,7 @@ function AuthLayout() {
   useEffect(() => {
     if (!user) {
       navigate({
-        to: '/login',
+        to: '/auth/login',
       });
     }
   }, [user, navigate]);
