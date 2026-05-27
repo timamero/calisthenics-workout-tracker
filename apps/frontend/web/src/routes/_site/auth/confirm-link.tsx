@@ -73,7 +73,8 @@ function ConfirmationView() {
             Email confirmed
           </Title>
           <Text fw={500} fz={defaultSize} c="dark.3" mt={-12} ta="center">
-            Your account is now active. Click below to access your account.
+            Your account is now active. Click below to access your account or
+            log in to the mobile app.
           </Text>
           <Stack align="center" mt="lg">
             <Button
