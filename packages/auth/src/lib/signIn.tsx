@@ -4,7 +4,7 @@
  * @returns {Promise<Object|null>} The signed in user object or null if an error occurred.
  * @throws Will log an error if signing in fails.
  */
-import { SupabaseClient } from "@supabase/supabase-js";
+import { SupabaseClient } from '@supabase/supabase-js';
 
 export const signIn = async (
   supabase: SupabaseClient,
@@ -17,7 +17,9 @@ export const signIn = async (
   });
 
   if (error) {
-    console.error("Error signing in user:", error);
+    if (error.message === 'Email not confirmed') {
+      return error;
+    }
     return null;
   }
   return data.user;

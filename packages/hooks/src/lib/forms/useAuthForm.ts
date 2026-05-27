@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type SupabaseClient } from '@supabase/supabase-js';
+import { AuthError } from '@supabase/supabase-js';
+import type { User, SupabaseClient } from '@supabase/supabase-js';
 
 import { signIn, updateUserName } from '@cwt/auth';
 import { createUser } from '@cwt/auth';
@@ -37,13 +38,23 @@ function useAuth(supabase: SupabaseClient) {
     setAuthError(null);
 
     try {
-      const user = await signIn(supabase, email, password);
-      if (!user) {
+      const data: User | AuthError | null = await signIn(
+        supabase,
+        email,
+        password,
+      );
+      if (!data) {
         setAuthError('Failed to sign in. Please check your credentials.');
         return null;
       }
-      setUser(user);
-      return user;
+      if (data instanceof AuthError) {
+        if (data.message === 'Email not confirmed') {
+          setAuthError('Please confirm your email before logging in.');
+        }
+        return null;
+      }
+      setUser(data);
+      return data;
     } catch (error) {
       const message =
         error instanceof Error ? error.message : 'An error occurred';
