@@ -10,7 +10,7 @@ import {
 } from '@mantine/core';
 
 import { useAuthStore } from '@cwt/state/stores';
-import { useConfirmUser } from '@cwt/hooks';
+import { useConfirmUser, useResendConfirmation } from '@cwt/hooks';
 
 import { supabase } from '../../../services/supabaseClient';
 import { useDefaultSize } from '../../../hooks';
@@ -18,22 +18,15 @@ import { useDefaultSize } from '../../../hooks';
 import DefaultLoader from '../../../components/common/DefaultLoader';
 
 export const Route = createFileRoute('/_site/auth/confirm-link')({
-  // beforeLoad: () => {
-  //   const user = useAuthStore.getState().user;
-  //   if (!user) {
-  //     throw redirect({
-  //       to: '/',
-  //     });
-  //   }
-  // },
   component: ConfirmationView,
 });
 
 function ConfirmationView() {
   const [userEmail, setUserEmail] = useState<string>('');
-  const [isConfirmationSent, setIsConfirmationSent] = useState<boolean>(false);
 
   const user = useAuthStore((state) => state.user);
+  const { status: resendStatus, handleResendConfirmation } =
+    useResendConfirmation(supabase);
 
   const defaultSize = useDefaultSize();
   const { status, setStatus, handleConfirmUser } = useConfirmUser(supabase);
@@ -49,9 +42,6 @@ function ConfirmationView() {
         console.log('confirm-link ||confirming user');
         await handleConfirmUser(tokenHash);
       }
-      // if (!tokenHash && status !== 'confirmed') {
-      //   setStatus('idle');
-      // }
     };
 
     if (status === 'idle') {
@@ -61,7 +51,6 @@ function ConfirmationView() {
   }, [handleConfirmUser, user, setStatus, status]);
 
   console.log('confirm-link || status', status);
-  console.log('confirm-link || user email', user?.email);
 
   if (status === 'pending') {
     return <DefaultLoader />;
@@ -132,16 +121,24 @@ function ConfirmationView() {
               type="button"
               size={defaultSize}
               variant="filled"
-              onClick={() => setIsConfirmationSent(true)}
+              onClick={() => handleResendConfirmation(userEmail)}
             >
               Resend confirmation
             </Button>
-            {isConfirmationSent && (
-              <Text fw={500} fz={defaultSize} c="dark.3" mt={-12} ta="center">
-                We've sent a confirmation link to {userEmail}. Click the link in
-                that email to verify your account and get started.
-              </Text>
-            )}
+            <Stack maw={480} mt="lg">
+              {resendStatus === 'sent' && (
+                <Text fw={500} fz={defaultSize} c="dark.3" mt={-12} ta="center">
+                  We've sent a confirmation link to {userEmail}. Click the link
+                  in that email to verify your account and get started.
+                </Text>
+              )}
+              {resendStatus === 'error' && (
+                <Text fw={500} fz={defaultSize} c="dark.3" mt={-12} ta="center">
+                  Something went wrong. Check the email and try sending it
+                  again.
+                </Text>
+              )}
+            </Stack>
           </Stack>
         </Stack>
       </Container>
