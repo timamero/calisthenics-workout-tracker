@@ -111,7 +111,23 @@ function LoginView() {
             error={auth.errors.password?.message}
             {...auth.register('password')}
           />
-          {auth.authError && <Text c="red">{auth.authError}</Text>}
+          <Group justify="space-between">
+            {auth.authError && <Text c="red">{auth.authError}</Text>}
+            {auth.authError &&
+              auth.authError ===
+                'Please confirm your email before logging in.' && (
+                <Button
+                  type="button"
+                  size={defaultSize}
+                  variant="outline"
+                  onClick={() =>
+                    console.log('clicked resend confirmation link')
+                  }
+                >
+                  Resend confirmation link
+                </Button>
+              )}
+          </Group>
           <Group mt="lg" justify="flex-end">
             <Button
               component={Link}
@@ -128,7 +144,11 @@ function LoginView() {
               size={defaultSize}
               onClick={handleSubmitClick}
               disabled={
-                auth.isLoading || auth.errors.email || auth.errors.password
+                auth.isLoading ||
+                auth.errors.email ||
+                auth.errors.password ||
+                auth.authError ===
+                  'Please confirm your email before logging in.'
                   ? true
                   : false
               }
