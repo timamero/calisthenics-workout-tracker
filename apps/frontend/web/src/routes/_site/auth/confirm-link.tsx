@@ -147,6 +147,41 @@ function ConfirmationView() {
     );
   }
 
+  if (user && user.user_metadata.email_verified) {
+    return (
+      <Container py="xl">
+        <Stack align="center" w="100%" gap={0}>
+          <Title
+            order={1}
+            mb="md"
+            fz={{ base: 'h3', md: 'h2' }}
+            lh="xxs"
+            ta="center"
+            style={(theme) => ({
+              letterSpacing: theme.other.letterSpacing.tight,
+            })}
+          >
+            Already confirmed
+          </Title>
+          <Text fw={500} fz={defaultSize} c="dark.3" mt={-12} ta="center">
+            This email address has already been confirmed.
+          </Text>
+          <Stack align="center" mt="lg">
+            <Button
+              component={Link}
+              to="/dashboard/home"
+              type="button"
+              size={defaultSize}
+              variant="filled"
+            >
+              Go to app
+            </Button>
+          </Stack>
+        </Stack>
+      </Container>
+    );
+  }
+
   return (
     <Container py="xl">
       <Stack align="center" w="100%" gap={0}>
