@@ -17,7 +17,8 @@
       "env": ["SUPABASE_URL", "SUPABASE_ANON_KEY"]
     },
     "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": ["^check-types"],
+      "cache": false
     },
     "dev": {
       "cache": false,
