@@ -12,6 +12,26 @@ export default defineConfig({
     }),
     react(),
   ],
+  build: {
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        // Drop console.log, console.warn, console.info, console.debug
+        // but NOT console.error
+        pure_funcs: [
+          'console.log',
+          'console.info',
+          'console.debug',
+          'console.warn',
+        ],
+        conditionals: true, // optimizes if/ternary statements
+        evaluate: true, // evaluates constant expressions at compile time
+      },
+      format: {
+        comments: 'some', // keeps comments containing @license, @preserve, or !
+      },
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
