@@ -38,7 +38,8 @@ export default function LoginScreen() {
   };
 
   const handleResendPress = () => {
-    handleResendConfirmation('REDACTED_EMAIL');
+    console.log('sending email to ', auth.getValues('email'));
+    handleResendConfirmation(auth.getValues('email'));
     auth.clearError();
   };
   return (
@@ -120,7 +121,7 @@ export default function LoginScreen() {
         {status === 'sent' && (
           <Text>
             {' '}
-            We&apos;ve sent a confirmation link to REDACTED_EMAIL.
+            We&apos;ve sent a confirmation link to {auth.getValues('email')}.
             Click the link in that email to verify your account and get started.
           </Text>
         )}

@@ -1,30 +1,30 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AuthError } from '@supabase/supabase-js';
-import type { User, SupabaseClient } from '@supabase/supabase-js';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AuthError } from "@supabase/supabase-js";
+import type { User, SupabaseClient } from "@supabase/supabase-js";
 
-import { signIn, updateUserName } from '@cwt/auth';
-import { createUser } from '@cwt/auth';
+import { signIn, updateUserName } from "@cwt/auth";
+import { createUser } from "@cwt/auth";
 import {
   AuthSchema,
   AuthSignUpSchema,
   type Auth,
   type AuthSignUp,
-} from '@cwt/schema/forms';
-import { useAuthStore } from '@cwt/state/stores';
+} from "@cwt/schema/forms";
+import { useAuthStore } from "@cwt/state/stores";
 
 const SIGNUP_DEFAULT_VALUES = {
-  email: '',
-  password: '',
-  username: '',
-  firstName: '',
-  lastName: '',
+  email: "",
+  password: "",
+  username: "",
+  firstName: "",
+  lastName: "",
 };
 
 const LOGIN_DEFAULT_VALUES = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
 };
 
 function useAuth(supabase: SupabaseClient) {
@@ -44,12 +44,12 @@ function useAuth(supabase: SupabaseClient) {
         password,
       );
       if (!data) {
-        setAuthError('Failed to sign in. Please check your credentials.');
+        setAuthError("Failed to sign in. Please check your credentials.");
         return null;
       }
       if (data instanceof AuthError) {
-        if (data.message === 'Email not confirmed') {
-          setAuthError('Please confirm your email before logging in.');
+        if (data.message === "Email not confirmed") {
+          setAuthError("Please confirm your email before logging in.");
         }
         return null;
       }
@@ -57,7 +57,7 @@ function useAuth(supabase: SupabaseClient) {
       return data;
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : 'An error occurred';
+        error instanceof Error ? error.message : "An error occurred";
       setAuthError(message);
       return null;
     } finally {
@@ -86,7 +86,7 @@ function useAuth(supabase: SupabaseClient) {
       );
 
       if (!user) {
-        setAuthError('Failed to create account. Please try again.');
+        setAuthError("Failed to create account. Please try again.");
         return null;
       }
 
@@ -94,7 +94,7 @@ function useAuth(supabase: SupabaseClient) {
       return user;
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : 'An error occurred';
+        error instanceof Error ? error.message : "An error occurred";
       setAuthError(message);
       return null;
     } finally {
@@ -112,6 +112,7 @@ export function useAuthLogin(supabase: SupabaseClient) {
 
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<Auth>({
@@ -124,6 +125,7 @@ export function useAuthLogin(supabase: SupabaseClient) {
     authError: auth.authError,
     clearError: auth.clearError,
     register,
+    getValues,
     handleSubmit: handleSubmit(auth.handleLogin),
     errors,
   };
@@ -154,6 +156,7 @@ export function useAuthLoginMobile(supabase: SupabaseClient) {
 
   const {
     control,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<Auth>({
@@ -166,6 +169,7 @@ export function useAuthLoginMobile(supabase: SupabaseClient) {
     authError: auth.authError,
     clearError: auth.clearError,
     control,
+    getValues,
     handleSubmit: handleSubmit(auth.handleLogin),
     errors,
   };
