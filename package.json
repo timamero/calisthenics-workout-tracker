@@ -3,6 +3,8 @@
   "scripts": {
     "build": "turbo run build",
     "build:web": "turbo run build --filter=@cwt/web",
+    "build:web:staging": "turbo run build:staging --filter=@cwt/web",
+    "build:web:production": "turbo run build:production --filter=@cwt/web",
     "build:api": "turbo run build --filter=@cwt/api",
     "build:auth": "turbo run build --filter=@cwt/auth",
     "build:content": "turbo run build --filter=@cwt/content",

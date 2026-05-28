@@ -33,6 +33,7 @@ declare module '@tanstack/react-router' {
 }
 
 export const App = () => {
+  console.log('main || mode is ', import.meta.env.MODE);
   useSupabaseAuth(supabase);
   return <RouterProvider router={router} />;
 };
