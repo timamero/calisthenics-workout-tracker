@@ -3,11 +3,17 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [
-        "dist/**",
-        "web-build/**",
-        "build/**"
-      ],
+      "outputs": ["dist/**", "web-build/**", "build/**"],
+      "env": ["SUPABASE_URL", "SUPABASE_ANON_KEY"]
+    },
+    "build:staging": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "web-build/**", "build/**"],
+      "env": ["SUPABASE_URL", "SUPABASE_ANON_KEY"]
+    },
+    "build:production": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "web-build/**", "build/**"],
       "env": ["SUPABASE_URL", "SUPABASE_ANON_KEY"]
     },
     "check-types": {
