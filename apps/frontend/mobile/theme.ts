@@ -116,7 +116,7 @@ const fontConfig = {
     }),
     fontSize: 32,
     letterSpacing: -0.32,
-    lineHeight: 40,
+    lineHeight: 42,
   },
   headlineMedium: {
     fontFamily: Platform.select({
@@ -127,7 +127,7 @@ const fontConfig = {
     }),
     fontSize: 24,
     letterSpacing: 0.25,
-    lineHeight: 28,
+    lineHeight: 32,
   },
   headlineSmall: {
     fontFamily: Platform.select({
@@ -138,7 +138,7 @@ const fontConfig = {
     }),
     fontSize: 20,
     letterSpacing: 0.25,
-    lineHeight: 24,
+    lineHeight: 26,
   },
   titleLarge: {
     fontFamily: Platform.select({
@@ -215,7 +215,7 @@ const fontConfig = {
     }),
     fontSize: 16,
     letterSpacing: 0.4,
-    lineHeight: 18,
+    lineHeight: 22,
   },
   labelMedium: {
     fontFamily: Platform.select({
