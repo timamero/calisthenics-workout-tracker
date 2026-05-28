@@ -81,7 +81,7 @@ function LoginView() {
   if (loading || user) {
     return <DefaultLoader />;
   }
-  console.log('login email', { ...auth.register('email') });
+
   return (
     <Container py="xl">
       <Stack align="center" w="100%" gap={0}>
