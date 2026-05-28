@@ -42,11 +42,6 @@ function SignUpView() {
   // --- Logic Hooks ---
   const auth = useAuthSignUp(supabase);
   const user = useAuthStore((state) => state.user);
-  console.log('signup || user', JSON.stringify(user));
-  console.log(
-    'signup || user.email_confirmed',
-    user?.user_metadata.email_verified,
-  );
 
   // --- Local State ---
   const [loading, setLoading] = useState(true);
