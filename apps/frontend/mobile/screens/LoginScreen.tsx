@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { useTheme, TextInput, Text, Button } from 'react-native-paper';
+import {
+  useTheme,
+  TextInput,
+  Text,
+  ActivityIndicator,
+} from 'react-native-paper';
 import { Controller } from 'react-hook-form';
 
 import { siteContent } from '@cwt/content';
-import { useAuthLoginMobile } from '@cwt/hooks';
+import { useAuthLoginMobile, useResendConfirmation } from '@cwt/hooks';
 
 import { CustomTheme } from '../theme';
 import { supabase } from '../services/supabaseClient';
+import CustomButton from '../components/common/CustomButton';
 
 export default function LoginScreen() {
   // --- UI Hooks ---
@@ -15,6 +21,8 @@ export default function LoginScreen() {
 
   // --- Logic Hooks ---
   const auth = useAuthLoginMobile(supabase);
+  const { status, setStatus, handleResendConfirmation } =
+    useResendConfirmation(supabase);
 
   // --- Local State ---
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
@@ -25,9 +33,14 @@ export default function LoginScreen() {
       auth.clearError();
     }
 
+    setStatus('idle');
     auth.handleSubmit(e);
   };
 
+  const handleResendPress = () => {
+    handleResendConfirmation('REDACTED_EMAIL');
+    auth.clearError();
+  };
   return (
     <View
       style={{
@@ -85,15 +98,34 @@ export default function LoginScreen() {
         )}
         name="password"
       />
+
       {auth.errors.password && (
         <Text style={{ color: theme.colors.error }}>
           {auth.errors.password?.message}
         </Text>
       )}
-      {auth.authError && (
-        <Text style={{ color: theme.colors.error }}>{auth.authError}</Text>
-      )}
-      <Button
+      <View>
+        {auth.authError && (
+          <Text style={{ color: theme.colors.error }}>{auth.authError}</Text>
+        )}
+        {auth.authError &&
+          auth.authError === 'Please confirm your email before logging in.' && (
+            <CustomButton mode="text" onPress={() => handleResendPress()}>
+              Resend confirmation link
+            </CustomButton>
+          )}
+        {status === 'pending' && (
+          <ActivityIndicator animating={true} color={theme.colors.lime4} />
+        )}
+        {status === 'sent' && (
+          <Text>
+            {' '}
+            We&apos;ve sent a confirmation link to REDACTED_EMAIL.
+            Click the link in that email to verify your account and get started.
+          </Text>
+        )}
+      </View>
+      <CustomButton
         mode="contained"
         buttonColor={theme.colors.primary}
         onPress={handleSubmitPress}
@@ -104,7 +136,7 @@ export default function LoginScreen() {
         }
       >
         Log In
-      </Button>
+      </CustomButton>
     </View>
   );
 }
