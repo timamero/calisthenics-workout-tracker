@@ -46,7 +46,6 @@ function LoginView() {
   // --- Logic Hooks ---
   const auth = useAuthLogin(supabase);
   const user = useAuthStore((state) => state.user);
-  console.log('login || user', user);
   const { status, setStatus, handleResendConfirmation } =
     useResendConfirmation(supabase);
 
@@ -62,9 +61,7 @@ function LoginView() {
   };
 
   const handleResendClick = () => {
-    handleResendConfirmation(
-      (document.getElementById('emailInput') as HTMLInputElement)?.value,
-    );
+    handleResendConfirmation(auth.getValues('email'));
     auth.clearError();
   };
 
@@ -140,12 +137,8 @@ function LoginView() {
             {status === 'pending' && <Loader />}
             {status === 'sent' && (
               <Text>
-                We've sent a confirmation link to{' '}
-                {
-                  (document.getElementById('emailInput') as HTMLInputElement)
-                    ?.value
-                }
-                . Click the link in that email to verify your account and get
+                We've sent a confirmation link to {auth.getValues('email')}.
+                Click the link in that email to verify your account and get
                 started.
               </Text>
             )}
