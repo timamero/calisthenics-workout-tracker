@@ -49,7 +49,10 @@ export default function SuccessScreen() {
       ) : (
         <>
           <Text variant="headlineMedium">The message has expired</Text>
-          <CustomButton onPress={() => navigation.navigate('Login')}>
+          <CustomButton
+            mode="outlined"
+            onPress={() => navigation.navigate('Login')}
+          >
             Go to login
           </CustomButton>
         </>
