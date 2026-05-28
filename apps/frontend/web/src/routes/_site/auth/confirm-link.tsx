@@ -38,19 +38,14 @@ function ConfirmationView() {
       const tokenHash = urlParams.get('token_hash');
 
       if (tokenHash && !user) {
-        console.log('confirm-link || Token found:', tokenHash);
-        console.log('confirm-link ||confirming user');
         await handleConfirmUser(tokenHash);
       }
     };
 
     if (status === 'idle') {
-      console.log('confirm-link || calling async function');
       asyncFunc();
     }
   }, [handleConfirmUser, user, setStatus, status]);
-
-  console.log('confirm-link || status', status);
 
   if (status === 'pending') {
     return <DefaultLoader />;

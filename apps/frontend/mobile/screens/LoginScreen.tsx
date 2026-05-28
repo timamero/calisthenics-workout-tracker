@@ -38,7 +38,6 @@ export default function LoginScreen() {
   };
 
   const handleResendPress = () => {
-    console.log('sending email to ', auth.getValues('email'));
     handleResendConfirmation(auth.getValues('email'));
     auth.clearError();
   };
