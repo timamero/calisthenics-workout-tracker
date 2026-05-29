@@ -3,7 +3,7 @@ import { FilterCheckbox, Attributes } from '@cwt/schema/exercises';
 export function updateSelections(
   selections: FilterCheckbox[],
   checkbox: FilterCheckbox,
-) {
+): FilterCheckbox[] {
   return selections.map((s) => {
     if (s.keyName === checkbox.keyName && s.selection === checkbox.selection) {
       return {
@@ -16,11 +16,15 @@ export function updateSelections(
   });
 }
 
-export function updateAppliedSelections(selections: FilterCheckbox[]) {
+export function updateAppliedSelections(
+  selections: FilterCheckbox[],
+): FilterCheckbox[] {
   return selections.filter((obj) => obj.value === true);
 }
 
-export function clearSelections(selections: FilterCheckbox[]) {
+export function clearSelections(
+  selections: FilterCheckbox[],
+): FilterCheckbox[] {
   return selections.map((s) => {
     if (s.value === true) {
       return {
@@ -36,7 +40,7 @@ export function clearSelections(selections: FilterCheckbox[]) {
 export function revertFilterSelections(
   selections: FilterCheckbox[],
   appliedAttributes: Attributes[],
-) {
+): FilterCheckbox[] {
   return selections.map((obj) => {
     if (appliedAttributes.includes(obj.selection)) {
       return {

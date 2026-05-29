@@ -60,13 +60,14 @@ export const createExerciseLibrarySlice: StateCreator<
 
       state.displayedExercises = result;
     }),
-  getExerciseByID: (id) => {
+  getExerciseByID: (id: number): ExerciseResponse => {
     return get().masterExercises!.find(
-      (exercise) => exercise.id === id,
+      (exercise: ExerciseResponse) => exercise.id === id,
     ) as ExerciseResponse;
   },
-  getExerciseNameByID: (id) => {
-    return get().masterExercises!.find((exercise) => exercise.id === id)
-      ?.name as string;
+  getExerciseNameByID: (id: number): string => {
+    return get().masterExercises!.find(
+      (exercise: ExerciseResponse) => exercise.id === id,
+    )?.name as string;
   },
 });

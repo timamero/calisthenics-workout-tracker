@@ -5,8 +5,8 @@ import {
   WorkoutLogRequest,
 } from '@cwt/schema/workouts';
 
-export const INITIAL_WORKOUT_LOG_TITLE: string = 'New workout log';
-export const INITIAL_WORKOUT_BUILD_TITLE: string = 'New workout template';
+export const INITIAL_WORKOUT_LOG_TITLE = 'New workout log' as const;
+export const INITIAL_WORKOUT_BUILD_TITLE = 'New workout template' as const;
 
 export const INITIALIZED_SET: Omit<Set, 'fields' | 'id'> = {
   completed: false,
@@ -47,14 +47,14 @@ export const DEFAULT_FIELDS: SetFields = {
   time: null,
   rest: null,
   setProgressions: null,
-};
+} as const;
 
 export const DEFAULT_REP_SET: Pick<SetFields, 'reps'> = {
   reps: 10,
-};
+} as const;
 export const DEFAULT_TIME_SET: Pick<SetFields, 'time'> = {
   time: 'PT30S',
-};
+} as const;
 export const DEFAULT_REST_SET: Pick<SetFields, 'rest'> = {
   rest: 'PT30S',
-};
+} as const;
