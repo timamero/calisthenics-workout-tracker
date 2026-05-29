@@ -11,7 +11,12 @@ import {
   updateSelections,
 } from './exerciseFilterActions';
 
-const exerciseAttributes = [
+interface ExerciseAttribute {
+  keyName: string;
+  attributes: readonly string[];
+}
+
+const exerciseAttributes: ExerciseAttribute[] = [
   {
     keyName: FilterCheckboxKeySchema.enum.target_muscles,
     attributes: Constants.public.Enums.muscles,
@@ -29,14 +34,18 @@ const exerciseAttributes = [
     attributes: Constants.public.Enums.difficulty_type,
   },
 ];
-const initialFilterCheckboxSelections: FilterCheckbox[] =
-  exerciseAttributes.flatMap((category) =>
-    category.attributes.map((attribute) => ({
-      keyName: category.keyName,
-      selection: attribute,
-      value: false,
-    })),
-  );
+const initialFilterCheckboxSelections: FilterCheckbox[] = (
+  exerciseAttributes as Array<{
+    keyName: FilterCheckbox['keyName'];
+    attributes: ReadonlyArray<FilterCheckbox['selection']>;
+  }>
+).flatMap((category: ExerciseAttribute) =>
+  category.attributes.map((attribute: string) => ({
+    keyName: category.keyName as FilterCheckbox['keyName'],
+    selection: attribute as FilterCheckbox['selection'],
+    value: false,
+  })),
+);
 
 export interface ExercisesFilterSlice {
   filterCheckboxSelections: FilterCheckbox[]; // List of all filters, this state changes when user toggles filter
