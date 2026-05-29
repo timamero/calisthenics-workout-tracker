@@ -8,8 +8,11 @@ import {
 } from "./contexts/WorkoutLogDetailContext";
 
 import { ExerciseDetailContext } from "./ExerciseDetailContext";
-import { SetContext } from "./SetContext";
-import { WorkoutDataItemContext } from "./WorkoutDataItemContext";
+import { SetContext, SetContextType } from "./SetContext";
+import {
+  WorkoutDataItemContext,
+  WorkoutDataItemContextType,
+} from "./WorkoutDataItemContext";
 
 export {
   WorkoutContextProvider,
@@ -19,6 +22,8 @@ export {
   type WorkoutLogDetailContextType,
   ExerciseDetailContext,
   SetContext,
+  type SetContextType,
   WorkoutDataItemContext,
+  type WorkoutDataItemContextType,
   type WorkoutContextType,
 };

@@ -1,6 +1,11 @@
 import { useContext } from "react";
 
-import { WorkoutDataItemContext, SetContext } from "@cwt/context";
+import {
+  WorkoutDataItemContext,
+  SetContext,
+  WorkoutDataItemContextType,
+  SetContextType,
+} from "@cwt/context";
 import { useWorkoutDraftStore } from "@cwt/state/stores";
 import type { Exercise } from "@cwt/schema/workouts";
 
@@ -12,23 +17,27 @@ import type { Exercise } from "@cwt/schema/workouts";
  * @returns A function that, when called with a boolean value, toggles the completed status of the set.
  */
 export default function useToggleCompleted() {
-  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
-  const set = useContext(SetContext)!.set;
-  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
-  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+  const workoutDataItemContext = useContext(
+    WorkoutDataItemContext,
+  ) as WorkoutDataItemContextType;
+  const exercise = workoutDataItemContext?.item as Exercise;
+  const parentSectionID = workoutDataItemContext?.parentSectionID;
+  const parentSupersetID = workoutDataItemContext?.parentSupersetID;
+  const setContext = useContext(SetContext) as SetContextType;
+  const set = setContext!.set;
 
   const toggleCompleted = useWorkoutDraftStore(
-    (state) => state.toggleCompleted
+    (state) => state.toggleCompleted,
   );
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setExerciseIDToMod = useWorkoutDraftStore(
-    (state) => state.setExerciseIDToMod
+    (state) => state.setExerciseIDToMod,
   );
   const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod
+    (state) => state.setSupersetIDToMod,
   );
   const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod
+    (state) => state.setSectionIDToMod,
   );
 
   const handleToggleCompleted = (value: boolean) => {

@@ -12,13 +12,13 @@ export type ExercisesGroupedBySetsType = {
   exercises: ExerciseInSetGroupType[];
 };
 
-interface WorkoutDataItemContextType {
+export type WorkoutDataItemContextType = {
   item: Exercise | Superset | Section | ExerciseInSetGroupType;
   parentType: "section" | "superset" | null;
   parentItemsLength?: number;
   parentSectionID: string | null;
   parentSupersetID: string | null;
-}
+};
 
 export const WorkoutDataItemContext =
   React.createContext<WorkoutDataItemContextType | null>(null);

@@ -1,6 +1,11 @@
 import { useContext } from "react";
 
-import { WorkoutDataItemContext, SetContext } from "@cwt/context";
+import {
+  SetContext,
+  SetContextType,
+  WorkoutDataItemContext,
+  WorkoutDataItemContextType,
+} from "@cwt/context";
 import { useWorkoutDraftStore } from "@cwt/state/stores";
 import type { Exercise } from "@cwt/schema/workouts";
 
@@ -17,25 +22,29 @@ import {
  * @returns A function that, when called, initiates the deletion process for the appropriate set.
  */
 function useDeleteSetLogic() {
-  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
-  const set = useContext(SetContext)!.set;
-  const setIndex = useContext(SetContext)!.setIndex;
-  const parentType = useContext(WorkoutDataItemContext)?.parentType;
-  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
-  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+  const workoutDataItemContext = useContext(
+    WorkoutDataItemContext,
+  ) as WorkoutDataItemContextType;
+  const exercise = workoutDataItemContext?.item as Exercise;
+  const parentType = workoutDataItemContext?.parentType;
+  const parentSectionID = workoutDataItemContext?.parentSectionID;
+  const parentSupersetID = workoutDataItemContext?.parentSupersetID;
+  const setContext = useContext(SetContext) as SetContextType;
+  const set = setContext!.set;
+  const setIndex = setContext!.setIndex;
 
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setSetIndexToMod = useWorkoutDraftStore(
-    (state) => state.setSetIndexToMod
+    (state) => state.setSetIndexToMod,
   );
   const setExerciseIDToMod = useWorkoutDraftStore(
-    (state) => state.setExerciseIDToMod
+    (state) => state.setExerciseIDToMod,
   );
   const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod
+    (state) => state.setSupersetIDToMod,
   );
   const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod
+    (state) => state.setSectionIDToMod,
   );
 
   const setIDs = () => {

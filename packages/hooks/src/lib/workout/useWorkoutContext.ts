@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { WorkoutContext } from "@cwt/context";
+import { WorkoutContext, WorkoutContextType } from "@cwt/context";
 
 export function useWorkoutContext() {
-  const context = useContext(WorkoutContext);
+  const context = useContext(WorkoutContext) as WorkoutContextType;
   if (!context) {
     throw new Error(
       "useWorkoutContext must be used within WorkoutContextProvider",

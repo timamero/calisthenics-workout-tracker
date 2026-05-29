@@ -1,7 +1,10 @@
 import { useContext } from "react";
 import { Section, Superset, Exercise } from "@cwt/schema/workouts";
 import { useWorkoutDraftStore } from "@cwt/state/stores";
-import { WorkoutDataItemContext } from "@cwt/context";
+import {
+  WorkoutDataItemContext,
+  WorkoutDataItemContextType,
+} from "@cwt/context";
 
 /**
  * Common logic for reordering items in a workout draft. Used by both web and mobile hooks.
@@ -9,24 +12,27 @@ import { WorkoutDataItemContext } from "@cwt/context";
  * @returns An object containing moveUp and moveDown functions.
  */
 function useReorderItemLogic(item: Section | Superset | Exercise) {
-  const parentType = useContext(WorkoutDataItemContext)?.parentType;
-  const parentSectionID = useContext(WorkoutDataItemContext)?.parentSectionID;
-  const parentSupersetID = useContext(WorkoutDataItemContext)?.parentSupersetID;
+  const workoutDataItemContext = useContext(
+    WorkoutDataItemContext,
+  ) as WorkoutDataItemContextType;
+  const parentType = workoutDataItemContext?.parentType;
+  const parentSectionID = workoutDataItemContext?.parentSectionID;
+  const parentSupersetID = workoutDataItemContext?.parentSupersetID;
 
   const reorderRootItem = useWorkoutDraftStore(
-    (state) => state.reorderRootItem
+    (state) => state.reorderRootItem,
   );
   const reorderNestedItem = useWorkoutDraftStore(
-    (state) => state.reorderNestedItem
+    (state) => state.reorderNestedItem,
   );
   const setExerciseIDToMod = useWorkoutDraftStore(
-    (state) => state.setExerciseIDToMod
+    (state) => state.setExerciseIDToMod,
   );
   const setSupersetIDToMod = useWorkoutDraftStore(
-    (state) => state.setSupersetIDToMod
+    (state) => state.setSupersetIDToMod,
   );
   const setSectionIDToMod = useWorkoutDraftStore(
-    (state) => state.setSectionIDToMod
+    (state) => state.setSectionIDToMod,
   );
 
   const setIDs = () => {

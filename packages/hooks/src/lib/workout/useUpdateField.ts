@@ -1,14 +1,20 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 
-import type { SetProgression, SetFields, Exercise } from '@cwt/schema/workouts';
-import { WorkoutDataItemContext } from '@cwt/context';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+import type { SetProgression, SetFields, Exercise } from "@cwt/schema/workouts";
+import {
+  WorkoutDataItemContext,
+  WorkoutDataItemContextType,
+} from "@cwt/context";
+import { useWorkoutDraftStore } from "@cwt/state/stores";
 
 export default function useUpdateField(
   parentSectionID?: string | null,
   parentSupersetID?: string | null,
 ) {
-  const exercise = useContext(WorkoutDataItemContext)?.item as Exercise;
+  const workoutDataItemContext = useContext(
+    WorkoutDataItemContext,
+  ) as WorkoutDataItemContextType;
+  const exercise = workoutDataItemContext?.item as Exercise;
   const setSetIDToMod = useWorkoutDraftStore((state) => state.setSetIDToMod);
   const setExerciseIDToMod = useWorkoutDraftStore(
     (state) => state.setExerciseIDToMod,
@@ -26,7 +32,7 @@ export default function useUpdateField(
 
   const handleSetFieldChange = (
     setID: string,
-    updatedField: Partial<SetFields> | Pick<SetProgression, 'value'>,
+    updatedField: Partial<SetFields> | Pick<SetProgression, "value">,
     exerciseID?: string,
   ) => {
     setSetIDToMod(setID);
@@ -38,7 +44,7 @@ export default function useUpdateField(
       setSectionIDToMod(parentSectionID);
     }
     if (useWorkoutDraftStore.getState().setProgressionIDToMod) {
-      updateSetProgressionField(updatedField as Pick<SetProgression, 'value'>);
+      updateSetProgressionField(updatedField as Pick<SetProgression, "value">);
     } else {
       updateField(updatedField as Partial<SetFields>);
     }

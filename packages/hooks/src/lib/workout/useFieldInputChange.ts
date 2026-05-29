@@ -1,8 +1,13 @@
-import { useContext, ChangeEvent } from 'react';
+import { useContext, ChangeEvent } from "react";
 
-import { WorkoutDataItemContext, SetContext } from '@cwt/context';
-import type { SetFields, SetProgression } from '@cwt/schema/workouts';
-import { useWorkoutDraftStore } from '@cwt/state/stores';
+import {
+  WorkoutDataItemContext,
+  SetContext,
+  WorkoutDataItemContextType,
+  SetContextType,
+} from "@cwt/context";
+import type { SetFields, SetProgression } from "@cwt/schema/workouts";
+import { useWorkoutDraftStore } from "@cwt/state/stores";
 
 /**
  * Hook to handle changes in input fields for a workout set.
@@ -13,23 +18,27 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
  * @returns A change handler function for the specified input field.
  */
 export default function useFieldInputChange(
-  fieldName: 'rest' | 'time' | 'reps' | 'weight' | 'value',
-  inputType: 'numeral' | 'duration' | 'select',
+  fieldName: "rest" | "time" | "reps" | "weight" | "value",
+  inputType: "numeral" | "duration" | "select",
   fieldID?: string, // Needed for updating set progression fields
 ) {
-  const set = useContext(SetContext)!.set;
-  const parentType = useContext(WorkoutDataItemContext)?.parentType;
-  const exerciseID = useContext(WorkoutDataItemContext)?.item.id;
-  const handleSetFieldChange = useContext(SetContext)!.handleSetFieldChange;
+  const workoutDataItemContext = useContext(
+    WorkoutDataItemContext,
+  ) as WorkoutDataItemContextType;
+  const parentType = workoutDataItemContext?.parentType;
+  const exerciseID = workoutDataItemContext?.item.id;
+  const setContext = useContext(SetContext) as SetContextType;
+  const set = setContext!.set;
+  const handleSetFieldChange = setContext!.handleSetFieldChange;
 
   const setSetProgressionIDToMod = useWorkoutDraftStore(
     (state) => state.setSetProgressionIDToMod,
   );
 
   const handleUpdateField = (
-    updatedField: Partial<SetFields> | Pick<SetProgression, 'value'>,
+    updatedField: Partial<SetFields> | Pick<SetProgression, "value">,
   ) => {
-    if (parentType === 'superset') {
+    if (parentType === "superset") {
       handleSetFieldChange(set.id, updatedField, exerciseID);
     } else {
       handleSetFieldChange(set.id, updatedField);
@@ -44,21 +53,21 @@ export default function useFieldInputChange(
     }
 
     const value =
-      typeof eventOrValue === 'object' &&
+      typeof eventOrValue === "object" &&
       eventOrValue !== null &&
-      'target' in eventOrValue
+      "target" in eventOrValue
         ? eventOrValue.target.value
         : eventOrValue;
 
-    if (inputType === 'select') {
+    if (inputType === "select") {
       const updatedField = { value: value };
       handleUpdateField(updatedField);
     }
 
     // Allow empty string for controlled input
-    if (value === '') {
-      const updatedField: Partial<SetFields> | Pick<SetProgression, 'value'> = {
-        [fieldName]: '',
+    if (value === "") {
+      const updatedField: Partial<SetFields> | Pick<SetProgression, "value"> = {
+        [fieldName]: "",
       };
       handleUpdateField(updatedField);
       return;
@@ -69,8 +78,8 @@ export default function useFieldInputChange(
       const num = Number(value);
       if (num >= 0 && num <= 999) {
         const formattedValue =
-          inputType === 'duration' ? 'PT' + value + 'S' : Number(value);
-        const updatedField: Partial<SetFields> | Pick<SetProgression, 'value'> =
+          inputType === "duration" ? "PT" + value + "S" : Number(value);
+        const updatedField: Partial<SetFields> | Pick<SetProgression, "value"> =
           {
             [fieldName]: formattedValue,
           };

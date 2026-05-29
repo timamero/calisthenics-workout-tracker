@@ -1,7 +1,10 @@
 import { useContext } from "react";
-import { WorkoutLogDetailContext } from "@cwt/context";
+import {
+  WorkoutLogDetailContext,
+  WorkoutLogDetailContextType,
+} from "@cwt/context";
 
-export function useWorkoutLogDetailContext() {
+export function useWorkoutLogDetailContext(): WorkoutLogDetailContextType {
   const context = useContext(WorkoutLogDetailContext);
   if (!context) {
     throw new Error(
@@ -9,7 +12,7 @@ export function useWorkoutLogDetailContext() {
     );
   }
 
-  return context;
+  return context as WorkoutLogDetailContextType;
 }
 
 export function useWorkoutLogDetailContextWeb() {
