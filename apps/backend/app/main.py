@@ -13,10 +13,19 @@ def get_settings():
     return config.Settings()
 
 
+SHOW_DOCS = (
+    config.settings.environment != "production"
+    or config.settings.environmnt != "staging"
+)
+
 app = FastAPI(
     title=get_settings().app_name,
     debug=get_settings().debug,
     version=get_settings().version,
+    # Disable Swagger UI and Redoc in production and staging
+    docs_url="/docs" if SHOW_DOCS else None,
+    redoc_url="/redoc" if SHOW_DOCS else None,
+    openapi_url="/openapi.json" if SHOW_DOCS else None,
 )
 
 # Add condition to set origins for local environment
