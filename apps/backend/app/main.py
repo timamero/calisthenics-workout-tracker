@@ -22,6 +22,10 @@ app = FastAPI(
     title=get_settings().app_name,
     debug=get_settings().debug,
     version=get_settings().version,
+    # Disable Swagger UI and Redoc in production and staging
+    docs_url="/docs" if SHOW_DOCS else None,
+    redoc_url="/redoc" if SHOW_DOCS else None,
+    openapi_url="/openapi.json" if SHOW_DOCS else None,
 )
 
 # Add condition to set origins for local environment
@@ -42,12 +46,17 @@ if config.settings.environment == "staging":
     origins.append(config.settings.staging_web_origin)
     origins.append(config.settings.staging_mobile_origin)
 
+if config.settings.environment == "production":
+    origins.append(config.settings.production_origin)
+    origins.append(config.settings.production_web_origin)
+    origins.append(config.settings.production_mobile_origin)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"],
 )
 
 app.include_router(api_router)
