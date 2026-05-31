@@ -8,7 +8,7 @@
 
 [build]
 builder      = "RAILPACK"
-buildCommand = "pip install poetry && poetry install --no-root --only main"
+buildCommand = "poetry install --no-root --only main"
 
 # Only rebuild when backend files change (monorepo best practice)
 watchPatterns = ["apps/backend/**"]
