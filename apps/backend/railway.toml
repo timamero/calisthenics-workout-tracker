@@ -15,11 +15,11 @@ watchPatterns = ["apps/backend/**"]
 
 [deploy]
 startCommand            = "poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000"
-healthcheckPath         = "/health"
+healthcheckPath         = "/"
 healthcheckTimeout      = 120
 restartPolicyType       = "ON_FAILURE"
 restartPolicyMaxRetries = 3
 
 # ── PR / preview environment overrides ────────────────────────────────────────
 [environments.pr.deploy]
-startCommand = "poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000"
+startCommand = "poetry run uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
