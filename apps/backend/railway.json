@@ -1,0 +1,8 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "providers": ["python"],
+  "packages": {
+    "python": "3.13",
+    "poetry": "latest"
+  }
+}
