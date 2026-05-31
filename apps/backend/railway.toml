@@ -1,10 +1,10 @@
 # Railway configuration for the backend service
 # Docs: https://docs.railway.com/config-as-code/reference
 #
-# IMPORTANT — monorepo placement:
-#   Save this file at apps/backend/railway.toml
-#   Then in Railway → Service Settings → Config File Path, set:
-#   /apps/backend/railway.toml
+# Placement:  apps/backend/railway.toml
+# Railway → Service Settings:
+#   Root Directory:   /apps/backend
+#   Config File Path: /apps/backend/railway.toml
  
 [build]
 builder      = "RAILPACK"
@@ -14,15 +14,12 @@ buildCommand = "poetry install --no-root --only main"
 watchPatterns = ["apps/backend/**"]
  
 [deploy]
-startCommand         = "poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000"
-healthcheckPath      = "/health"
-healthcheckTimeout   = 120                # seconds to wait for a healthy response
-restartPolicyType    = "ON_FAILURE"
+startCommand            = "poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000"
+healthcheckPath         = "/health"
+healthcheckTimeout      = 120
+restartPolicyType       = "ON_FAILURE"
 restartPolicyMaxRetries = 3
  
 # ── PR / preview environment overrides ────────────────────────────────────────
-# Disable --reload in production; enable it only for PR previews if desired.
-# (Remove or adjust if you do not use Railway PR environments.)
 [environments.pr.deploy]
-# startCommand = "poetry run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000"
 startCommand = "poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000"
