@@ -49,7 +49,8 @@ def read_exercise_item(exercise_id: str, request: Request):
     if not auth_header or not auth_header.startswith("Bearer "):
         if environment == "local":
             exercise = get_exercise_by_id(exercise_id)
-        raise HTTPException(status_code=401, detail="Authentication required")
+        else:
+            raise HTTPException(status_code=401, detail="Authentication required")
 
     else:
         access_token = auth_header.split(" ")[1]
