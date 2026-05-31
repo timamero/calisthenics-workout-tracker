@@ -74,7 +74,7 @@ export function updateSetProgressionFieldInSets(
 
       if (setProgressionFields) {
         fieldToUpdate = setProgressionFields.find(
-          (field) => field.id === setProgressionID,
+          (field: SetProgression) => field.id === setProgressionID,
         );
         if (fieldToUpdate) {
           trackingTypeUpdated = 'set progressions';
@@ -92,7 +92,7 @@ export function updateSetProgressionFieldInSets(
         setProgressionFields.length > 0
       ) {
         const updatedSetProgressionFields = setProgressionFields.map(
-          (field) => {
+          (field: SetProgression) => {
             if (field.id === setProgressionID) {
               return updatedSetProgressionField;
             }
@@ -120,7 +120,7 @@ export function createFields(
   exerciseID: number,
   selectedExercise: ExerciseResponse,
   getSetProgression: (id: number) => SetProgressionResponse,
-) {
+): SetFields {
   let fields = DEFAULT_FIELDS;
   if (tracking.includes('reps')) {
     fields = { ...fields, ...DEFAULT_REP_SET };

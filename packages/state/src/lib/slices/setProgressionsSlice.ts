@@ -22,9 +22,9 @@ export const createSetProgressionsSlice: StateCreator<
     set((state) => {
       state.setProgressions = setProgressions;
     }),
-  getSetProgressionByID: (id) => {
+  getSetProgressionByID: (id: number): SetProgressionResponse => {
     return get().setProgressions!.find(
-      (item) => item.id === id,
+      (item: SetProgressionResponse) => item.id === id,
     ) as SetProgressionResponse;
   },
 });

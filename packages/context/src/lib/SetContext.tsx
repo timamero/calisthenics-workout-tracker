@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 
-import type { SetProgression, Set, SetFields } from '@cwt/schema/workouts';
+import type { SetProgression, Set, SetFields } from "@cwt/schema/workouts";
 
-interface SetContextType {
+export type SetContextType = {
   set: Set;
   setIndex: number;
   handleSetFieldChange: (
     setID: string,
-    updatedField: Partial<SetFields> | Pick<SetProgression, 'value'>,
+    updatedField: Partial<SetFields> | Pick<SetProgression, "value">,
     exerciseID?: string,
   ) => void;
-}
+};
 
 export const SetContext = React.createContext<SetContextType | null>(null);

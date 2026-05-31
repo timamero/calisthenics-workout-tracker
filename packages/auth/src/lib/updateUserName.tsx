@@ -20,4 +20,5 @@ export const updateUserName = async (
   if (error) {
     console.error("Error creating user:", error);
   }
+  return null;
 };

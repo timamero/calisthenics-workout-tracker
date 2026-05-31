@@ -13,6 +13,11 @@ def get_settings():
     return config.Settings()
 
 
+SHOW_DOCS = (
+    config.settings.environment != "production"
+    or config.settings.environmnt != "staging"
+)
+
 app = FastAPI(
     title=get_settings().app_name,
     debug=get_settings().debug,
