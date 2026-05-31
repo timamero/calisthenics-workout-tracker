@@ -15,7 +15,7 @@ def get_settings():
 
 SHOW_DOCS = (
     config.settings.environment != "production"
-    or config.settings.environmnt != "staging"
+    or config.settings.environment != "staging"
 )
 
 app = FastAPI(
