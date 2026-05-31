@@ -1,6 +1,6 @@
-# Calisthenics Workout Tracker - Monorepo
+# Torque - Calisthenics Workout Tracker
 
-v0.1.0
+v0.1.0-alpha1
 
 ## About this monorepo
 

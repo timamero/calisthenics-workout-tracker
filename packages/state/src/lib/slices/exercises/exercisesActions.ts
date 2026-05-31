@@ -7,14 +7,14 @@ import {
 export function filterExercises(
   exercisesToFilter: ExerciseResponse[],
   appliedFilters: FilterCheckbox[],
-) {
-  const appliedFilterSelections = new Set(
+): ExerciseResponse[] {
+  const appliedFilterSelections: Set<string> = new Set(
     appliedFilters.map((f) => f.selection),
   );
 
   return exercisesToFilter.filter((exercise) =>
-    appliedFilters.every(({ keyName }) => {
-      const value = exercise[keyName];
+    appliedFilters.every(({ keyName }: FilterCheckbox) => {
+      const value = exercise[keyName as keyof ExerciseResponse];
 
       // Some exercise attributes are type string or list
       if (typeof value === 'string') {
@@ -28,14 +28,16 @@ export function filterExercises(
   );
 }
 
-export function sortExercises(exercises: ExerciseResponse[]) {
+export function sortExercises(
+  exercises: ExerciseResponse[],
+): ExerciseResponse[] {
   return [...exercises].sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function filterExercisesBySearch(
   exercises: ExerciseResponse[],
   search: string,
-) {
+): ExerciseResponse[] {
   return exercises.filter((obj) =>
     obj.name.toLowerCase().includes(search.toLowerCase()),
   );

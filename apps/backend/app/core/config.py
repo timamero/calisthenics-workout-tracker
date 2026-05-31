@@ -30,6 +30,13 @@ class Settings(BaseSettings):
     staging_mobile_origin: str = Field(
         default="", validation_alias="STAGING_MOBILE_ORIGIN"
     )
+    production_origin: str = Field(default="", validation_alias="PRODUCTION_ORIGIN")
+    production_web_origin: str = Field(
+        default="", validation_alias="PRODUCTION_WEB_ORIGIN"
+    )
+    production_mobile_origin: str = Field(
+        default="", validation_alias="PRODUCTION_MOBILE_ORIGIN"
+    )
 
     # Might use test_email and test_uid later for tests
     test_email: str = Field(default="", validation_alias="TEST_EMAIL")

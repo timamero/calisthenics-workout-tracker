@@ -69,14 +69,17 @@ export const createWorkoutLibrarySlice: StateCreator<
   },
   addWorkout: (workout, mode) =>
     set(
-      produce((state) => {
+      produce((state: WorkoutLibrarySlice) => {
         if (mode === 'build') {
           state.displayedWorkoutBuilds = [
-            workout,
+            workout as WorkoutBuildRequest | WorkoutBuildResponse,
             ...state.displayedWorkoutBuilds,
           ];
         } else {
-          state.displayedWorkoutLogs = [workout, ...state.displayedWorkoutLogs];
+          state.displayedWorkoutLogs = [
+            workout as WorkoutLogRequest | WorkoutLogResponse,
+            ...state.displayedWorkoutLogs,
+          ];
         }
       }),
     ),
