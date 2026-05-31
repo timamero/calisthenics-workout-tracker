@@ -46,6 +46,11 @@ if config.settings.environment == "staging":
     origins.append(config.settings.staging_web_origin)
     origins.append(config.settings.staging_mobile_origin)
 
+if config.settings.environment == "production":
+    origins.append(config.settings.production_origin)
+    origins.append(config.settings.production_web_origin)
+    origins.append(config.settings.production_mobile_origin)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
