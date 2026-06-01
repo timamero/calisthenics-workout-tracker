@@ -6,6 +6,7 @@
     "dev": "EXPO_TUNNEL_SUBDOMAIN=cal-workout-app expo start --tunnel",
     "web": "expo start --web",
     "dev-build": "eas build --platform android --profile development",
+    "production-build": "eas build --platform android --profile production",
     "preview-build": "eas build --platform android --profile preview",
     "postinstall": "cd ../../.. && pnpm install --filter=@cwt/state && pnpm install --filter=@cwt/schema && pnpm install --filter=@cwt/auth && pnpm install --filter=@cwt/api && pnpm install --filter=@cwt/mocks && pnpm install --filter=@cwt/hooks && pnpm install --filter=@cwt/utils && pnpm install --filter=@cwt/content && pnpm install --filter=@cwt/context && pnpm build:state && pnpm build:schema && pnpm build:auth && pnpm build:api && pnpm build:mocks && pnpm build:hooks && pnpm build:utils && pnpm build:content && pnpm build:context",
     "check-types": "tsc --noEmit",
