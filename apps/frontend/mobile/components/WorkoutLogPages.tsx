@@ -15,6 +15,8 @@ import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 import CardButton from '../components/common/CardButton';
 import Pill from './Pill';
+import EmptyWorkoutPlaceholder from './Workout/WorkoutData/EmptyWorkoutPlaceholder';
+import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
 
 export default function WorkoutLogPages() {
   const navigation = useNavigation<any>();
@@ -38,6 +40,7 @@ export default function WorkoutLogPages() {
 
   const data = chunk(workoutLogs, itemsPerPage);
 
+  if (data.length === 0) return <EmptyLogsPlaceholder />;
   const handlePageChangePress = (page: number) => {
     setPage(page);
 
