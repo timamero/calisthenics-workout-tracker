@@ -28,7 +28,7 @@ app = FastAPI(
     openapi_url="/openapi.json" if SHOW_DOCS else None,
 )
 
-# Add condition to set origins for local environment
+# Add condition to set origins for local integration environment
 origins = [
     "http://localhost:5173",  # Local web server
     "http://localhost:8081",  # Local mobile server
@@ -55,8 +55,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["Content-Type", "Authorization"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(api_router)
