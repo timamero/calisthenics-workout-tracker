@@ -13,7 +13,7 @@ environment: str = settings.environment
 router = APIRouter(prefix="/exercises")
 
 
-@router.get("/", response_model=List[ExerciseSchema])
+@router.get("", response_model=List[ExerciseSchema])
 def read_filtered_exercises(
     filter_query: Annotated[ExerciseFilterParams, Query()], request: Request
 ):
