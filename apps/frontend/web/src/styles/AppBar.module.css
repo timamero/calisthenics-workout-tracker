@@ -1,5 +1,6 @@
 .header {
-  border: 1px solid var(--mantine-color-lime-2);
+  border: 0px solid var(--mantine-color-lime-2);
+  border-bottom: 1px solid var(--mantine-color-lime-2);
 }
 
 .navbar {
