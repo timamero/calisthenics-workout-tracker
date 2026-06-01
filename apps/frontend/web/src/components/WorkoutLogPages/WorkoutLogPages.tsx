@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Title, Pagination, Stack, ScrollArea, Badge } from '@mantine/core';
+import {
+  Title,
+  Pagination,
+  Stack,
+  ScrollArea,
+  Badge,
+  // Text,
+} from '@mantine/core';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { chunk, formatDuration } from '@cwt/utils';
@@ -10,6 +17,7 @@ import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 import CardButton from '../../components/common/CardButton';
 import WorkoutMetadataItem from './WorkoutMetadataItem';
 import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
+import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
 
 export default function WorkoutLogPages() {
   const [activePage, setPage] = useState(1);
@@ -22,7 +30,7 @@ export default function WorkoutLogPages() {
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
 
-  if (logs.length === 0) return null;
+  if (logs.length === 0) return <EmptyLogsPlaceholder />;
 
   const chunkSize = logs.length >= 15 ? 15 : logs.length;
 
