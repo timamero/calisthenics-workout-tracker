@@ -7,7 +7,8 @@
     "newArchEnabled": true,
     "backgroundColor": "#F5F5F5",
     "android": {
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "app.torquefit"
     },
     "owner": "fcamero",
     "extra": {
