@@ -10,7 +10,6 @@
     "android": {
       "edgeToEdgeEnabled": true,
       "package": "app.torquefit",
-      "versionCode": 2,
       "versionName": "0.1.0"
     },
     "owner": "fcamero",
