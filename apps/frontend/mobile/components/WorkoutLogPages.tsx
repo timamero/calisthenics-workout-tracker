@@ -15,7 +15,6 @@ import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 import CardButton from '../components/common/CardButton';
 import Pill from './Pill';
-import EmptyWorkoutPlaceholder from './Workout/WorkoutData/EmptyWorkoutPlaceholder';
 import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
 
 export default function WorkoutLogPages() {
