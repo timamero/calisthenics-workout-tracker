@@ -1,5 +1,6 @@
 {
   "expo": {
+    "name": "Torque Calisthenics Tracker",
     "slug": "cwt-mobile",
     "version": "0.1.0",
     "orientation": "portrait",
@@ -8,7 +9,9 @@
     "backgroundColor": "#F5F5F5",
     "android": {
       "edgeToEdgeEnabled": true,
-      "package": "app.torquefit"
+      "package": "app.torquefit",
+      "versionCode": 2,
+      "versionName": "0.1.0"
     },
     "owner": "fcamero",
     "extra": {
