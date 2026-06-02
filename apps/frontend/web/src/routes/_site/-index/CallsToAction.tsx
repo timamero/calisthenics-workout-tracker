@@ -148,7 +148,7 @@ export default function CallsToAction() {
                 letterSpacing: theme.other.letterSpacing.wider,
               })}
             >
-              info@torquefit.com
+              info@torquefit.app
             </Text>
           </Stack>
         </Group>
