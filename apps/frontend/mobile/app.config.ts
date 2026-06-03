@@ -52,7 +52,6 @@ const getBackgroundColor = () => {
 export default ({ config }: any) => ({
   ...config,
   name: getAppName(),
-  slug: config.slug ?? 'cwt-mobile',
   icon: getIcon(),
   android: {
     ...config.android,
