@@ -3,26 +3,26 @@ const IS_PREVIEW = process.env.APP_VARIANT === 'preview';
 
 const getUniqueIdentifier = () => {
   if (IS_DEV) {
-    return 'com.fcamero.cwtmobile_development';
+    return 'app.torquefitdevelopment';
   }
 
   if (IS_PREVIEW) {
-    return 'com.fcamero.cwtmobile_preview';
+    return 'app.torquefitpreview';
   }
 
-  return 'com.fcamero.cwtmobile';
+  return 'app.torquefit';
 };
 
 const getAppName = () => {
   if (IS_DEV) {
-    return 'Torque-Dev';
+    return 'Torque Calisthenics Tracker - Dev';
   }
 
   if (IS_PREVIEW) {
-    return 'Torque-Preview';
+    return 'Torque Calisthenics Tracker - Preview';
   }
 
-  return 'Torque';
+  return 'Torque Calisthenics Tracker';
 };
 
 const getIcon = () => {
