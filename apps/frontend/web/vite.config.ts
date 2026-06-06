@@ -16,13 +16,15 @@ export default defineConfig({
     minify: 'terser',
     terserOptions: {
       compress: {
-        // Drop console.log, console.warn, console.info, console.debug
+        // Drop all console.* logs
         // but NOT console.error
         pure_funcs: [
           'console.log',
           'console.info',
           'console.debug',
           'console.warn',
+          'console.time',
+          'console.timeEnd',
         ],
         conditionals: true, // optimizes if/ternary statements
         evaluate: true, // evaluates constant expressions at compile time
