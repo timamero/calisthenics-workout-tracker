@@ -1,9 +1,12 @@
 from functools import lru_cache
+import time
 
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from typing_extensions import Annotated
+from pyrate_limiter import Duration, Limiter, Rate
 
+from fastapi_limiter.depends import RateLimiter
 from .core import config
 from .api.main import api_router
 
@@ -27,6 +30,8 @@ app = FastAPI(
     redoc_url="/redoc" if SHOW_DOCS else None,
     openapi_url="/openapi.json" if SHOW_DOCS else None,
 )
+
+START_TIME = time.time()
 
 # Add condition to set origins for local integration environment
 origins = [
@@ -61,13 +66,29 @@ app.add_middleware(
 
 app.include_router(api_router)
 
-
-@app.get("/")
-def read_root():
-    return {"HELLO": "WORLD"}
+# root_limit = Limiter(Rate(60, Duration.MINUTE))  # Max 60 requests per minute
+strict_root_limit = Limiter(Rate(3, Duration.MINUTE))  # Max 3 requests per minute
 
 
-@app.get("/info")
+@app.get(
+    "/",
+    dependencies=[Depends(RateLimiter(limiter=strict_root_limit))],
+    include_in_schema=False,
+)
+def read_root(settings: Annotated[config.Settings, Depends(get_settings)]):
+    return {
+        "status": "healthy",
+        "uptime_seconds": int(time.time() - START_TIME),
+        "version": settings.version,
+        "environment": settings.environment,
+    }
+
+
+@app.get(
+    "/info",
+    dependencies=[Depends(RateLimiter(limiter=strict_root_limit))],
+    include_in_schema=False,
+)
 async def info(settings: Annotated[config.Settings, Depends(get_settings)]):
     return {
         "app_name": settings.app_name,
