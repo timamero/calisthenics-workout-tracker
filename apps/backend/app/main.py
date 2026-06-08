@@ -5,8 +5,8 @@ from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from typing_extensions import Annotated
 from pyrate_limiter import Duration, Limiter, Rate
-
 from fastapi_limiter.depends import RateLimiter
+
 from .core import config
 from .api.main import api_router
 
