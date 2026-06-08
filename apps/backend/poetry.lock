@@ -492,6 +492,22 @@ all = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>
 standard = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "jinja2 (>=3.1.5)", "python-multipart (>=0.0.18)", "uvicorn[standard] (>=0.12.0)"]
 
 [[package]]
+name = "fastapi-limiter"
+version = "0.2.0"
+description = "A request rate limiter for fastapi"
+optional = false
+python-versions = "<4,>=3.9"
+groups = ["main"]
+files = [
+    {file = "fastapi_limiter-0.2.0-py3-none-any.whl", hash = "sha256:e576ebb29cc9614c2f38471c60ed0e849024e9a1b7a2aeb4c2a31a6d708b4aea"},
+    {file = "fastapi_limiter-0.2.0.tar.gz", hash = "sha256:b042259f6280056b5b2b3f506edd76c8e0648d7a5ce86c3485216a4a0fd0ec14"},
+]
+
+[package.dependencies]
+fastapi = "*"
+pyrate-limiter = ">=3.9.0"
+
+[[package]]
 name = "flake8"
 version = "7.3.0"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -1578,6 +1594,18 @@ files = [
 diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
+name = "pyrate-limiter"
+version = "4.2.0"
+description = "Python Rate-Limiter using Leaky-Bucket Algorithm"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "pyrate_limiter-4.2.0-py3-none-any.whl", hash = "sha256:3b7704effc267103080bf6656d6516574fba81f35d6d133f9aff7c396ba8214b"},
+    {file = "pyrate_limiter-4.2.0.tar.gz", hash = "sha256:d28fab36fde5c9ab84848c972f13e8e6e81e928e4cc26a7fd2aaee9ae63206b4"},
+]
+
+[[package]]
 name = "pyroaring"
 version = "1.1.0"
 description = "Library for handling efficiently sorted integer sets."
@@ -2405,4 +2433,4 @@ cffi = ["cffi (>=1.17,<2.0) ; platform_python_implementation != \"PyPy\" and pyt
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.14"
-content-hash = "48d257ec1e8e4f40b9610d0c52e726a347d8188bdb1ed090732dee969a35163d"
+content-hash = "6f85204d44d3d56efda9b63c6ea1a8527e38688e1f37d3dece19e84cdfd95588"
