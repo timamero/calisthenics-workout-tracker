@@ -24,11 +24,12 @@ environment: str = settings.environment
 router = APIRouter(prefix="/workout")
 
 standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
+standard_write_limit = Limiter(Rate(10, Duration.MINUTE))
 
 
 @router.post(
     "/build",
-    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+    dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
 )
 def save_build(
     build: WorkoutBuildRequestSchema, request: Request
@@ -53,7 +54,7 @@ def save_build(
 
 @router.post(
     "/log",
-    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+    dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
 )
 def save_log(
     log: WorkoutLogRequestSchema, request: Request
