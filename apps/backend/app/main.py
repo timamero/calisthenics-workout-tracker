@@ -1,8 +1,11 @@
 from functools import lru_cache
+import time
 
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from typing_extensions import Annotated
+from pyrate_limiter import Duration, Rate, Limiter
+from fastapi_limiter.depends import RateLimiter
 
 from .core import config
 from .api.main import api_router
@@ -27,6 +30,8 @@ app = FastAPI(
     redoc_url="/redoc" if SHOW_DOCS else None,
     openapi_url="/openapi.json" if SHOW_DOCS else None,
 )
+
+START_TIME = time.time()
 
 # Add condition to set origins for local integration environment
 origins = [
@@ -61,14 +66,56 @@ app.add_middleware(
 
 app.include_router(api_router)
 
+STRICT_RATE_LIMIT = 3
+STANDARD_RATE_LIMIT = 60
+strict_root_limit = Rate(
+    STRICT_RATE_LIMIT, Duration.MINUTE
+)  # Max 3 requests per minute
+standard_api_limit = Rate(
+    STANDARD_RATE_LIMIT, Duration.MINUTE
+)  # Max 60 requests per minute
+strict_root_limiter = RateLimiter(
+    limiter=Limiter(strict_root_limit)
+)  # Max 3 requests per minute
+standard_api_limiter = RateLimiter(
+    limiter=Limiter(standard_api_limit)
+)  # Max 60 requests per minute
 
-@app.get("/")
-def read_root():
-    return {"HELLO": "WORLD"}
+
+def get_strict_root_limiter() -> RateLimiter:
+    """Dependency function for strict root rate limiter."""
+    return strict_root_limiter
 
 
-@app.get("/info")
-async def info(settings: Annotated[config.Settings, Depends(get_settings)]):
+def get_standard_api_limiter() -> RateLimiter:
+    """Dependency function for standard API rate limiter."""
+    return standard_api_limiter
+
+
+@app.get(
+    "/",
+    dependencies=[Depends(get_strict_root_limiter())],
+    include_in_schema=False,
+)
+async def read_root(
+    settings: Annotated[config.Settings, Depends(get_settings)],
+):
+    return {
+        "status": "healthy",
+        "uptime_seconds": int(time.time() - START_TIME),
+        "version": settings.version,
+        "environment": settings.environment,
+    }
+
+
+@app.get(
+    "/info",
+    dependencies=[Depends(get_strict_root_limiter())],
+    include_in_schema=False,
+)
+async def info(
+    settings: Annotated[config.Settings, Depends(get_settings)],
+):
     return {
         "app_name": settings.app_name,
         "debug": settings.debug,

@@ -1,7 +1,9 @@
 from typing import List, Annotated
 import time
 
-from fastapi import APIRouter, Request, HTTPException, Query
+from fastapi import APIRouter, Request, HTTPException, Query, Depends
+from pyrate_limiter import Duration, Limiter, Rate
+from fastapi_limiter.depends import RateLimiter
 
 from app.schemas.exercise import ExerciseSchema, ExerciseFilterParams
 from app.api.utils.exercises import get_exercises, get_exercise_by_id
@@ -12,8 +14,14 @@ environment: str = settings.environment
 
 router = APIRouter(prefix="/exercises")
 
+standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
 
-@router.get("", response_model=List[ExerciseSchema])
+
+@router.get(
+    "",
+    response_model=List[ExerciseSchema],
+    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+)
 def read_filtered_exercises(
     filter_query: Annotated[ExerciseFilterParams, Query()], request: Request
 ):
@@ -40,7 +48,11 @@ def read_filtered_exercises(
     return exercises
 
 
-@router.get("/{exercise_id}", response_model=ExerciseSchema)
+@router.get(
+    "/{exercise_id}",
+    response_model=ExerciseSchema,
+    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+)
 def read_exercise_item(exercise_id: str, request: Request):
     """
     Retrieve a list of exercises.
