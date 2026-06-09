@@ -1,5 +1,7 @@
 from typing import List
-from fastapi import APIRouter, Request, HTTPException
+from fastapi import APIRouter, Request, HTTPException, Depends
+from pyrate_limiter import Duration, Limiter, Rate
+from fastapi_limiter.depends import RateLimiter
 
 from app.api.utils.setProgressions import get_set_progressions_list
 from app.schemas.setProgressions import SetProgressionsResponseSchema
@@ -14,8 +16,14 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
 
-@router.get("", response_model=List[SetProgressionsResponseSchema])
+
+@router.get(
+    "",
+    response_model=List[SetProgressionsResponseSchema],
+    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+)
 async def get_set_progressions(
     request: Request,
 ) -> List[SetProgressionsResponseSchema]:
