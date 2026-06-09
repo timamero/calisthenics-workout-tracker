@@ -4,7 +4,7 @@ import time
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from typing_extensions import Annotated
-from pyrate_limiter import Duration, Limiter, Rate
+from pyrate_limiter import Duration, Rate, Limiter
 from fastapi_limiter.depends import RateLimiter
 
 from .core import config
@@ -66,16 +66,40 @@ app.add_middleware(
 
 app.include_router(api_router)
 
-# root_limit = Limiter(Rate(60, Duration.MINUTE))  # Max 60 requests per minute
-strict_root_limit = Limiter(Rate(3, Duration.MINUTE))  # Max 3 requests per minute
+STRICT_RATE_LIMIT = 3
+STANDARD_RATE_LIMIT = 60
+strict_root_limit = Rate(
+    STRICT_RATE_LIMIT, Duration.MINUTE
+)  # Max 3 requests per minute
+standard_api_limit = Rate(
+    STANDARD_RATE_LIMIT, Duration.MINUTE
+)  # Max 60 requests per minute
+strict_root_limiter = RateLimiter(
+    limiter=Limiter(strict_root_limit)
+)  # Max 3 requests per minute
+standard_api_limiter = RateLimiter(
+    limiter=Limiter(standard_api_limit)
+)  # Max 60 requests per minute
+
+
+def get_strict_root_limiter() -> RateLimiter:
+    """Dependency function for strict root rate limiter."""
+    return strict_root_limiter
+
+
+def get_standard_api_limiter() -> RateLimiter:
+    """Dependency function for standard API rate limiter."""
+    return standard_api_limiter
 
 
 @app.get(
     "/",
-    dependencies=[Depends(RateLimiter(limiter=strict_root_limit))],
+    dependencies=[Depends(get_strict_root_limiter())],
     include_in_schema=False,
 )
-def read_root(settings: Annotated[config.Settings, Depends(get_settings)]):
+async def read_root(
+    settings: Annotated[config.Settings, Depends(get_settings)],
+):
     return {
         "status": "healthy",
         "uptime_seconds": int(time.time() - START_TIME),
@@ -86,10 +110,12 @@ def read_root(settings: Annotated[config.Settings, Depends(get_settings)]):
 
 @app.get(
     "/info",
-    dependencies=[Depends(RateLimiter(limiter=strict_root_limit))],
+    dependencies=[Depends(get_strict_root_limiter())],
     include_in_schema=False,
 )
-async def info(settings: Annotated[config.Settings, Depends(get_settings)]):
+async def info(
+    settings: Annotated[config.Settings, Depends(get_settings)],
+):
     return {
         "app_name": settings.app_name,
         "debug": settings.debug,
