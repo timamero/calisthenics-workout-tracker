@@ -41,6 +41,7 @@ def insert_workout_log(
     except Exception as e:
         print(f"Error saving workout: {e}")
 
+
 def update_workout_log(
     workout_log: WorkoutLogResponseSchema, access_token: str | None = None
 ):
@@ -56,7 +57,23 @@ def update_workout_log(
         )
         return response.data[0]
     except Exception as e:
-        print(f"Error saving workout: {e}")
+        print(f"Error updating workout: {e}")
+
+
+def delete_workout_log(
+    workout_log_id: int, access_token: str | None = None
+):
+    supabase = get_supabase_client(access_token)
+    try:
+        response = (
+            supabase.table("workout_logs")
+            .delete()
+            .eq("id", workout_log_id)
+            .execute()
+        )
+        return response.data[0]
+    except Exception as e:
+        print(f"Error deleting workout: {e}")
 
 
 def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
