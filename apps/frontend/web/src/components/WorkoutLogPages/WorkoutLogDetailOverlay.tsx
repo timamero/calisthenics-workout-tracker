@@ -7,6 +7,7 @@ import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 
 import WorkoutData from '../Workout/WorkoutData';
 import WorkoutMetadataItem from './WorkoutMetadataItem';
+import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
 
 export default function WorkoutLogDetailOverlay() {
   const workoutLogDetail = useWorkoutLogDetailContextWeb()
@@ -45,10 +46,14 @@ export default function WorkoutLogDetailOverlay() {
     >
       <Stack align="stretch" w="100%">
         <Stack mb="lg">
-          <Group justify="flex-end">
+          <Group justify="space-between">
             <Button variant="outline" color="dark" onClick={handleCloseModal}>
               Back to Workouts
             </Button>
+            <WorkoutLogDetailMenu
+              handleUpdateClick={() => console.log('clicked update')}
+              handleDeleteClick={() => console.log('clicked delete')}
+            />
           </Group>
           <Group justify="flex-start" mt="sm">
             <Title
