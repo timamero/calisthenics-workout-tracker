@@ -31,7 +31,7 @@ export default function WorkoutLogDetailMenu({
         </ActionIcon>
       </Menu.Target>
 
-      <Menu.Dropdown bg="gray.2" style={{ transform: 'translateX(-50%)' }}>
+      <Menu.Dropdown bg="gray.2">
         <Menu.Item
           // c="red"
           onClick={() => {
