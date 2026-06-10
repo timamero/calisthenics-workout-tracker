@@ -7,6 +7,7 @@ from app.api.utils.workout import (
     insert_workout_build,
     get_workout_builds,
     insert_workout_log,
+    update_workout_log,
     get_workout_logs,
 )
 from app.schemas.workout import (
@@ -14,7 +15,6 @@ from app.schemas.workout import (
     WorkoutBuildResponseSchema,
     WorkoutLogRequestSchema,
     WorkoutLogResponseSchema,
-    # WorkoutLogSchema,
 )
 
 from app.core.config import settings
@@ -72,6 +72,31 @@ def save_log(
     else:
         access_token = auth_header.split(" ")[1]
         workout_log = insert_workout_log(log, access_token)
+    if not workout_log:
+        raise HTTPException(status_code=400, detail="Invalid request")
+
+    return workout_log
+
+@router.put(
+    "/log",
+    dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
+)
+def update_log(
+    log: WorkoutLogResponseSchema, request: Request
+) -> WorkoutLogResponseSchema:
+    """
+    Update workout log.
+    """
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        if environment == "local":
+            workout_log = update_workout_log(log)
+        else:
+            raise HTTPException(status_code=401, detail="Authentication required")
+
+    else:
+        access_token = auth_header.split(" ")[1]
+        workout_log = update_workout_log(log, access_token)
     if not workout_log:
         raise HTTPException(status_code=400, detail="Invalid request")
 

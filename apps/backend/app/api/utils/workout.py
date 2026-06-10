@@ -6,7 +6,6 @@ from app.schemas.workout import (
     WorkoutBuildResponseSchema,
     WorkoutLogRequestSchema,
     WorkoutLogResponseSchema,
-    # WorkoutLogSchema,
 )
 
 
@@ -36,6 +35,23 @@ def insert_workout_log(
         response = (
             supabase.table("workout_logs")
             .insert(json=workout_log_dict, returning="representation")
+            .execute()
+        )
+        return response.data[0]
+    except Exception as e:
+        print(f"Error saving workout: {e}")
+
+def update_workout_log(
+    workout_log: WorkoutLogResponseSchema, access_token: str | None = None
+):
+    supabase = get_supabase_client(access_token)
+    try:
+        workout_log_dict = workout_log.model_dump(mode="json")
+
+        response = (
+            supabase.table("workout_logs")
+            .update(json=workout_log_dict, returning="representation")
+            .eq("id", workout_log.id)
             .execute()
         )
         return response.data[0]
