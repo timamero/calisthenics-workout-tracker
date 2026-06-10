@@ -6,6 +6,8 @@ export type WorkoutContextType = {
   appType: AppTypeSchema;
 
   webOverlayHandlers?: {
+    deleteLogOverlayOpened?: boolean;
+    deleteLogOverlayHandler?: UseDisclosureHandlers;
     deleteRootItemOverlayOpened?: boolean;
     deleteRootItemOverlayHandler?: UseDisclosureHandlers;
     deleteNestedItemOverlayOpened?: boolean;
