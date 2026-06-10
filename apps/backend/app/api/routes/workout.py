@@ -1,5 +1,7 @@
 from typing import List
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request, Depends
+from pyrate_limiter import Duration, Limiter, Rate
+from fastapi_limiter.depends import RateLimiter
 
 from app.api.utils.workout import (
     insert_workout_build,
@@ -21,8 +23,14 @@ environment: str = settings.environment
 
 router = APIRouter(prefix="/workout")
 
+standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
+standard_write_limit = Limiter(Rate(10, Duration.MINUTE))
 
-@router.post("/build")
+
+@router.post(
+    "/build",
+    dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
+)
 def save_build(
     build: WorkoutBuildRequestSchema, request: Request
 ) -> WorkoutBuildResponseSchema:
@@ -44,7 +52,10 @@ def save_build(
     return workout_build
 
 
-@router.post("/log")
+@router.post(
+    "/log",
+    dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
+)
 def save_log(
     log: WorkoutLogRequestSchema, request: Request
 ) -> WorkoutLogResponseSchema:
@@ -67,7 +78,10 @@ def save_log(
     return workout_log
 
 
-@router.get("/logs")
+@router.get(
+    "/logs",
+    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+)
 def read_workout_logs(request: Request) -> List[WorkoutLogResponseSchema]:
     """
     Retrieve list of workout logs
@@ -87,7 +101,10 @@ def read_workout_logs(request: Request) -> List[WorkoutLogResponseSchema]:
     return logs
 
 
-@router.get("/builds")
+@router.get(
+    "/builds",
+    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+)
 def read_workout_builds(request: Request) -> List[WorkoutBuildResponseSchema]:
     """
     Retrieve list of workout builds
