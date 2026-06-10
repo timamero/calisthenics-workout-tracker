@@ -60,16 +60,11 @@ def update_workout_log(
         print(f"Error updating workout: {e}")
 
 
-def delete_workout_log(
-    workout_log_id: int, access_token: str | None = None
-):
+def delete_workout_log(workout_log_id: int, access_token: str | None = None):
     supabase = get_supabase_client(access_token)
     try:
         response = (
-            supabase.table("workout_logs")
-            .delete()
-            .eq("id", workout_log_id)
-            .execute()
+            supabase.table("workout_logs").delete().eq("id", workout_log_id).execute()
         )
         return response.data[0]
     except Exception as e:
