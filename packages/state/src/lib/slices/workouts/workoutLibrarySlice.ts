@@ -30,6 +30,7 @@ export interface WorkoutLibrarySlice {
     workout: WorkoutBuildRequest | WorkoutLogRequest,
     mode: Mode,
   ) => void;
+  deleteWorkout: (workoutId: number) => void;
   completeWorkout: (
     workout: WorkoutBuildRequest | WorkoutLogRequest,
     mode: Mode,
@@ -83,6 +84,22 @@ export const createWorkoutLibrarySlice: StateCreator<
         }
       }),
     ),
+  deleteWorkout: (workoutId) =>
+    set((state) => {
+      // Filter out logs that have an `id` matching the provided workoutId.
+      // Some log types (requests) may not have `id`, so keep those.
+      state.masterWorkoutLogs = state.masterWorkoutLogs.filter((item) =>
+        typeof (item as WorkoutLogResponse).id === 'number'
+          ? (item as WorkoutLogResponse).id !== workoutId
+          : true,
+      );
+      // Also remove from displayed logs
+      state.displayedWorkoutLogs = state.displayedWorkoutLogs.filter((item) =>
+        typeof (item as WorkoutLogResponse).id === 'number'
+          ? (item as WorkoutLogResponse).id !== workoutId
+          : true,
+      );
+    }),
   completeWorkout: (workout, mode) => {
     get().addWorkout(workout, mode);
   },
