@@ -1,18 +1,51 @@
-import { useWorkoutContextWeb } from '@cwt/hooks';
-// import {
-//   useWorkoutDraftStore,
-//   // useWorkoutLibraryStore,
-//   // useWorkoutStopwatchStore,
-//   // useAuthStore,
-// } from '@cwt/state/stores';
+import {
+  useWorkoutLogDetailContextWeb,
+  useWorkoutContextWeb,
+} from '@cwt/hooks';
+import { useAuthStore, useWorkoutLibraryStore } from '@cwt/state/stores';
 
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
+import { deleteWorkoutLog } from '../../services/workoutsService';
 
 export default function DeleteLogConfirmationOverlay() {
+  const supabaseSession = useAuthStore((state) => state.session);
+  const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout);
+
+  const workoutLogId = useWorkoutLogDetailContextWeb().workout!.id;
+
   const deleteLogOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.deleteLogOverlayOpened;
   const deleteLogOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.deleteLogOverlayHandler;
+  const detailHandlers =
+    useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
+
+  if (!workoutLogId) {
+    console.error('Error: WorkoutID not found');
+    return null;
+  }
+  const handleDeleteLogClick = async () => {
+    if (!supabaseSession) {
+      console.error('Session not found');
+      return;
+    }
+    const body = JSON.stringify({ id: workoutLogId });
+
+    try {
+      const result = await deleteWorkoutLog(supabaseSession.access_token, body);
+      if (result) {
+        deleteWorkout(workoutLogId);
+        detailHandlers?.close();
+      } else {
+        console.error(
+          'Workout delete request failed to delete log with ID: ',
+          workoutLogId,
+        );
+      }
+    } catch (e) {
+      console.error('Error deleting log:', e);
+    }
+  };
 
   return (
     <ConfirmationOverlay
@@ -21,7 +54,7 @@ export default function DeleteLogConfirmationOverlay() {
       confirmButtonLabel="Delete"
       opened={deleteLogOverlayOpened!}
       handler={deleteLogOverlayHandler!}
-      onConfirmationClick={() => console.log('confirm delete log')}
+      onConfirmationClick={() => handleDeleteLogClick()}
     />
   );
 }
