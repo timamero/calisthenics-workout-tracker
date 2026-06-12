@@ -39,7 +39,26 @@ export function postWorkoutLog(baseUrl: string, token: string, body: BodyInit) {
       body,
     );
   } catch (error) {
-    console.error('Error posting workou log to API.', error);
+    console.error('Error posting workout log to API.', error);
+    throw error;
+  }
+}
+
+export function deleteWorkoutLog(
+  baseUrl: string,
+  token: string,
+  body: BodyInit,
+) {
+  try {
+    return apiFetch<WorkoutLogResponse>(
+      baseUrl,
+      '/workout/log',
+      'DELETE',
+      token,
+      body,
+    );
+  } catch (error) {
+    console.error('Error deleting workout log to API.', error);
     throw error;
   }
 }
