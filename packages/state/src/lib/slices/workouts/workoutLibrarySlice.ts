@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 import { produce } from 'immer';
 
 import type {
-  WorkoutLogRequest,
+  // WorkoutLogRequest,
   WorkoutLogResponse,
   WorkoutBuildRequest,
   WorkoutBuildResponse,
@@ -11,10 +11,10 @@ import type {
 
 export interface WorkoutLibrarySlice {
   loading: boolean;
-  masterWorkoutLogs: Array<WorkoutLogRequest | WorkoutLogResponse>;
-  masterWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
-  displayedWorkoutBuilds: Array<WorkoutBuildRequest | WorkoutBuildResponse>;
-  displayedWorkoutLogs: Array<WorkoutLogRequest | WorkoutLogResponse>;
+  masterWorkoutLogs: Array<WorkoutLogResponse>;
+  masterWorkoutBuilds: Array<WorkoutBuildResponse | WorkoutBuildResponse>;
+  displayedWorkoutBuilds: Array<WorkoutBuildResponse | WorkoutBuildResponse>;
+  displayedWorkoutLogs: Array<WorkoutLogResponse>;
   setLoading: (loading: boolean) => void;
   sortWorkoutLogsByDate: (
     logs: Array<WorkoutLogResponse>,
@@ -27,12 +27,12 @@ export interface WorkoutLibrarySlice {
     builds: Array<WorkoutBuildResponse>,
   ) => void;
   addWorkout: (
-    workout: WorkoutBuildRequest | WorkoutLogRequest,
+    workout: WorkoutBuildResponse | WorkoutLogResponse,
     mode: Mode,
   ) => void;
   deleteWorkout: (workoutId: number) => void;
   completeWorkout: (
-    workout: WorkoutBuildRequest | WorkoutLogRequest,
+    workout: WorkoutBuildResponse | WorkoutLogResponse,
     mode: Mode,
   ) => void;
 }
@@ -73,12 +73,12 @@ export const createWorkoutLibrarySlice: StateCreator<
       produce((state: WorkoutLibrarySlice) => {
         if (mode === 'build') {
           state.displayedWorkoutBuilds = [
-            workout as WorkoutBuildRequest | WorkoutBuildResponse,
+            workout as WorkoutBuildResponse | WorkoutBuildResponse,
             ...state.displayedWorkoutBuilds,
           ];
         } else {
           state.displayedWorkoutLogs = [
-            workout as WorkoutLogRequest | WorkoutLogResponse,
+            workout as WorkoutLogResponse,
             ...state.displayedWorkoutLogs,
           ];
         }
@@ -86,18 +86,11 @@ export const createWorkoutLibrarySlice: StateCreator<
     ),
   deleteWorkout: (workoutId) =>
     set((state) => {
-      // Filter out logs that have an `id` matching the provided workoutId.
-      // Some log types (requests) may not have `id`, so keep those.
-      state.masterWorkoutLogs = state.masterWorkoutLogs.filter((item) =>
-        typeof (item as WorkoutLogResponse).id === 'number'
-          ? (item as WorkoutLogResponse).id !== workoutId
-          : true,
+      state.masterWorkoutLogs = state.masterWorkoutLogs.filter(
+        (item) => item.id !== workoutId,
       );
-      // Also remove from displayed logs
-      state.displayedWorkoutLogs = state.displayedWorkoutLogs.filter((item) =>
-        typeof (item as WorkoutLogResponse).id === 'number'
-          ? (item as WorkoutLogResponse).id !== workoutId
-          : true,
+      state.displayedWorkoutLogs = state.displayedWorkoutLogs.filter(
+        (item) => item.id !== workoutId,
       );
     }),
   completeWorkout: (workout, mode) => {
