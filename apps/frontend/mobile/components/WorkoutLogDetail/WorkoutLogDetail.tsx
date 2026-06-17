@@ -12,6 +12,7 @@ import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
 import { globalStyles } from '../../styles/global';
 import WorkoutData from '../../components/Workout/WorkoutData';
+import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
 
 export default function WorkoutLogDetail() {
   const navigation = useNavigation<any>();
@@ -56,7 +57,8 @@ export default function WorkoutLogDetail() {
         style={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           paddingInline: 24,
           paddingBottom: 16,
           borderBottomWidth: 1,
@@ -70,6 +72,9 @@ export default function WorkoutLogDetail() {
         >
           Back to Workouts
         </Button>
+        <WorkoutLogDetailMenu
+          handleDeletePress={() => console.log('clicked delete')}
+        />
       </View>
       <ScrollView style={{ backgroundColor: theme.colors.background, flex: 1 }}>
         <Text
