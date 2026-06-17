@@ -18,6 +18,10 @@ vi.mock('@cwt/state/stores', () => ({
   useWorkoutDraftStore: vi.fn(),
 }));
 
+// vi.mock('../../../services/workoutsService', () => ({
+//   deleteWorkoutLog: vi.fn(),
+// }));
+
 let deleteWorkoutSpy: Mock<WorkoutLibrarySlice['deleteWorkout']>;
 let isDeleteOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = true;
@@ -142,7 +146,18 @@ describe('DeleteLogConfirmationOverlay', async () => {
     });
   });
 
-  // it('logs error and does not update store if API call fails', () => {});
+  it('logs error and does not update store if API call fails', async () => {
+    const deleteWorkoutLogSpy = vi.spyOn(workoutsService, 'deleteWorkoutLog');
+
+    render(<DeleteLogConfirmationOverlay />);
+
+    deleteWorkoutLogSpy.mockImplementation(() => {
+      throw new Error('Delete log failed');
+    });
+    fireEvent.click(screen.getByRole('button', { name: /^Delete$/i }));
+
+    expect(deleteWorkoutLogSpy).toThrow('Delete log failed');
+  });
 
   // it('returns early and logs error if session is not found', () => {});
 
