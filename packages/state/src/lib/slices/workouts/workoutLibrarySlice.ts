@@ -73,7 +73,7 @@ export const createWorkoutLibrarySlice: StateCreator<
       produce((state: WorkoutLibrarySlice) => {
         if (mode === 'build') {
           state.displayedWorkoutBuilds = [
-            workout as WorkoutBuildResponse | WorkoutBuildResponse,
+            workout as WorkoutBuildResponse,
             ...state.displayedWorkoutBuilds,
           ];
         } else {
