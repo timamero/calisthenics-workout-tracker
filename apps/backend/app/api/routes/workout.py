@@ -16,6 +16,7 @@ from app.schemas.workout import (
     WorkoutBuildResponseSchema,
     WorkoutLogRequestSchema,
     WorkoutLogResponseSchema,
+    DeleteWorkoutRequestSchema,
 )
 
 from app.core.config import settings
@@ -109,7 +110,9 @@ def update_log(
     "/log",
     dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
 )
-def delete_log(workout_log_id: int, request: Request) -> WorkoutLogResponseSchema:
+def delete_log(
+    workout_log_id: DeleteWorkoutRequestSchema, request: Request
+) -> WorkoutLogResponseSchema:
     """
     Delete workout log.
     """
