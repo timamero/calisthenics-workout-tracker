@@ -3,7 +3,10 @@ import { Button, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useWorkoutLogDetailContextMobile } from '@cwt/hooks';
+import {
+  useWorkoutLogDetailContextMobile,
+  useWorkoutContextMobile,
+} from '@cwt/hooks';
 import { formatDuration } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { WorkoutLogResponse } from '@cwt/schema/workouts';
@@ -13,6 +16,7 @@ import { CustomTheme } from '../../theme';
 import { globalStyles } from '../../styles/global';
 import WorkoutData from '../../components/Workout/WorkoutData';
 import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
+import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
 
 export default function WorkoutLogDetail() {
   const navigation = useNavigation<any>();
@@ -25,6 +29,10 @@ export default function WorkoutLogDetail() {
   const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
 
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+
+  const setIsDeleteLogOverlayVisible =
+    useWorkoutContextMobile().mobileOverlayHandlers
+      ?.setIsDeleteLogOverlayVisible;
 
   if (!workoutLogDetail) return null;
 
@@ -41,6 +49,14 @@ export default function WorkoutLogDetail() {
     setDetailWorkout(null);
     resetWorkout();
     navigation.navigate('App', { screen: 'History' });
+  };
+
+  const handleDeletePress = () => {
+    if (setIsDeleteLogOverlayVisible) {
+      setIsDeleteLogOverlayVisible(true);
+    } else {
+      console.error('setIsDeleteLogOverlayVisible not defined');
+    }
   };
   return (
     <View
@@ -72,9 +88,8 @@ export default function WorkoutLogDetail() {
         >
           Back to Workouts
         </Button>
-        <WorkoutLogDetailMenu
-          handleDeletePress={() => console.log('clicked delete')}
-        />
+        <WorkoutLogDetailMenu handleDeletePress={() => handleDeletePress()} />
+        <DeleteLogConfirmationOverlay />
       </View>
       <ScrollView style={{ backgroundColor: theme.colors.background, flex: 1 }}>
         <Text
