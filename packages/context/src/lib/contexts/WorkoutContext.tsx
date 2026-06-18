@@ -23,6 +23,8 @@ export type WorkoutContextType = {
   };
 
   mobileOverlayHandlers?: {
+    isDeleteLogOverlayVisible?: boolean;
+    setIsDeleteLogOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteRootItemOverlayVisible?: boolean;
     setIsDeleteRootItemOverlayVisible?: Dispatch<SetStateAction<boolean>>;
     isDeleteNestedItemOverlayVisible?: boolean;

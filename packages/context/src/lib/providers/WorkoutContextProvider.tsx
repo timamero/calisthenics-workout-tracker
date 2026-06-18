@@ -43,6 +43,8 @@ export default function WorkoutOverlaysContextProvider({
   };
 
   // Mobile
+  const [isDeleteLogOverlayVisible, setIsDeleteLogOverlayVisible] =
+    useState<boolean>(false);
   const [isDeleteRootItemOverlayVisible, setIsDeleteRootItemOverlayVisible] =
     useState<boolean>(false);
   const [
@@ -61,6 +63,8 @@ export default function WorkoutOverlaysContextProvider({
     useState<boolean>(false);
 
   const mobileOverlayHandlers = {
+    isDeleteLogOverlayVisible,
+    setIsDeleteLogOverlayVisible,
     isDeleteRootItemOverlayVisible: isDeleteRootItemOverlayVisible,
     setIsDeleteRootItemOverlayVisible: setIsDeleteRootItemOverlayVisible,
     isDeleteNestedItemOverlayVisible: isDeleteNestedItemOverlayVisible,
