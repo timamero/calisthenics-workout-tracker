@@ -4,7 +4,7 @@ from fastapi import Request
 from pyrate_limiter import Limiter, Rate, Duration
 from fastapi_limiter.depends import RateLimiter
 
-from .main import app, get_strict_root_limiter, get_standard_api_limiter
+from backend.app.main import app, get_strict_root_limiter, get_standard_api_limiter
 
 
 @pytest.fixture
