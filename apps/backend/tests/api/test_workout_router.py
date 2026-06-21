@@ -1,13 +1,63 @@
+import pytest
+
+from backend.app.api.routes.workout import settings
+
+
+from backend.app.schemas.workout import WorkoutLogResponseSchema
+
 # This file tests endpoint behavior using httpx.AsyncClient or httpx.Client against
 # FastAPI app. It needs to account for environment settings, authentication logic, and
 # rate limiting.
 
-# Unit tests to create:
+# Unit tests to create (fix the response object):
+mock_deleted_log_response: WorkoutLogResponseSchema = {
+    "id": 1,
+    "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    "workout_build_id": 1,
+    "date": "2025-08-13",
+    "title": "workout log 1",
+    "description": "example workout log",
+    "duration": "00:15:38",
+    "workout_data": '{"exercises": [{"sets": [{"fields": {"reps": 10}, '
+    '"completed": true, '
+    '"completed_at": "2025-08-13T05:20:00Z"}, {"fields": {"reps": 10, '
+    '"rest": 30}, "completed": true, "completed_at": "2025-08-13T05:20:00Z"}], '
+    '"tracked": ["reps"], "exercise_id": 1}, {"sets": [{"fields": '
+    '{"reps": 10, "weight": 20}, "completed": false, "completed_at": null}, '
+    '{"fields": {"reps": 10, "rest": 30, "weight": 20}, "completed": false, '
+    '"completed_at": null}], "tracked": ["reps", "weight"], '
+    '"exercise_id": 9}]}',
+    "rpe": "null",
+    "notes": "null",
+    "status": "draft",
+    "updated_at": "null",
+}
+
 
 # Local Env - Successful Deletion: Set settings.environment = "local", pass no
 # Authorization header, mock delete_workout_log to return a mock payload, and send a
 # DELETE request to /workout/log. Assert a 200 OK status and the matching response
 # schema.
+
+
+@pytest.mark.skip
+async def test_delete_workout(client, monkeypatch: pytest.MonkeyPatch):
+    # app.dependency_overrides[get_settings] = get_local_settings
+    monkeypatch.setattr(
+        settings,
+        "environment",
+        "local",
+    )
+    monkeypatch.setattr(
+        "backend.app.api.routes.workout.delete_workout_log",
+        lambda *args, **kwargs: mock_deleted_log_response,
+    )
+
+    response = await client.request("DELETE", "/workout/log", json={"id": "54"})
+
+    assert response.status_code == 200
+    # assert response.json() == mock_deleted_log_response
+
 
 # Non-Local Env - Unauthenticated: Set settings.environment = "production" (or any
 # non-local string), send a DELETE request without an Authorization header. Assert a

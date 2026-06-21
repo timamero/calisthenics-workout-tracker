@@ -21,7 +21,7 @@ from app.schemas.workout import (
 
 from app.core.config import settings
 
-environment: str = settings.environment
+# environment: str = settings.environment
 
 router = APIRouter(prefix="/workout")
 
@@ -41,7 +41,7 @@ def save_build(
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if settings.environment == "local":
             workout_build = insert_workout_build(build)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -66,7 +66,7 @@ def save_log(
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if settings.environment == "local":
             workout_log = insert_workout_log(log)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -92,7 +92,7 @@ def update_log(
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if settings.environment == "local":
             workout_log = update_workout_log(log)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -116,9 +116,11 @@ def delete_log(
     """
     Delete workout log.
     """
+    print(f"DEBUG settings id: {id(settings)}")
+    print(f"DEBUG environment: {settings.environment}")
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if settings.environment == "local":
             workout_log = delete_workout_log(workout_log_id)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -126,6 +128,7 @@ def delete_log(
     else:
         access_token = auth_header.split(" ")[1]
         workout_log = delete_workout_log(workout_log_id, access_token)
+        print(f"DEBUG workout_log: {workout_log}")  # 👈
     if not workout_log:
         raise HTTPException(status_code=400, detail="Invalid request")
 
@@ -142,7 +145,7 @@ def read_workout_logs(request: Request) -> List[WorkoutLogResponseSchema]:
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if settings.environment == "local":
             logs = get_workout_logs()
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -165,7 +168,7 @@ def read_workout_builds(request: Request) -> List[WorkoutBuildResponseSchema]:
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if settings.environment == "local":
             builds = get_workout_builds()
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
