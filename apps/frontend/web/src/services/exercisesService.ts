@@ -7,7 +7,7 @@ const environment = import.meta.env.VITE_ENVIRONMENT || null;
 
 export async function getExercises(token: string): Promise<ExerciseResponse[]> {
   try {
-    if (environment === 'local') {
+    if (environment === 'local-isolated') {
       console.log('Web: Local environment, return sample exercises.');
       return sampleExercises;
     }

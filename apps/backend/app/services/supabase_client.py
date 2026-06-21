@@ -6,12 +6,12 @@ url: str = settings.supabase_url
 
 environment: str = settings.environment
 if (
-    environment == "development"
+    environment == "local-integration"
     or environment == "staging"
     or environment == "production"
 ):
     key: str = settings.supabase_anon_key  # Use this key when integrating with frontend
-elif environment == "local":
+elif environment == "local-isolated":
     key: str = (
         settings.supabase_service_role_key
     )  # Use this key when using backend only

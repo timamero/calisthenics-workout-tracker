@@ -39,7 +39,7 @@ def save_build(
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if environment == "local-isolated":
             workout_build = insert_workout_build(build)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -64,7 +64,7 @@ def save_log(
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if environment == "local-isolated":
             workout_log = insert_workout_log(log)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -88,7 +88,7 @@ def read_workout_logs(request: Request) -> List[WorkoutLogResponseSchema]:
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if environment == "local-isolated":
             logs = get_workout_logs()
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -111,7 +111,7 @@ def read_workout_builds(request: Request) -> List[WorkoutBuildResponseSchema]:
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if environment == "local-isolated":
             builds = get_workout_builds()
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
