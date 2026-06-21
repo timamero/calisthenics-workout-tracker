@@ -16,7 +16,7 @@
     "build:utils": "turbo run build --filter=@cwt/utils",
     "build:packages": "pnpm build:api && pnpm build:auth && pnpm build:content && pnpm build:context && pnpm build:hooks && pnpm build:mocks && pnpm build:schema && pnpm build:state && pnpm build:utils",
     "lint": "turbo run lint",
-    "dev": "turbo run dev",
+    "dev": "turbo run dev --filter=@cwt/web --filter=@cwt/mobile --filter=@cwt/backend",
     "dev:backend": "turbo run dev --filter=@cwt/backend",
     "dev:web": "turbo run dev --filter=@cwt/web",
     "dev:mobile": "turbo run dev --filter=@cwt/mobile",

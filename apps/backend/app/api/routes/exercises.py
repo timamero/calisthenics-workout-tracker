@@ -31,7 +31,7 @@ def read_filtered_exercises(
     startTime = time.perf_counter()
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if environment == "local-isolated":
             exercises = get_exercises(filter_query)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
@@ -59,7 +59,7 @@ def read_exercise_item(exercise_id: str, request: Request):
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local":
+        if environment == "local-isolated":
             exercise = get_exercise_by_id(exercise_id)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
