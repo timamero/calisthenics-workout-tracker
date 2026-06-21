@@ -63,6 +63,7 @@ logs/
 .cache/
 .backup/
 .secrets.baseline
+security-review-for-public-repo-release.md
 examples/*
 */examples
 supabase/*
