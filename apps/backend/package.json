@@ -1,6 +1,6 @@
 {
   "name": "@cwt/backend",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.1-alpha.1",
   "private": true,
   "scripts": {
     "dev": "uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
