@@ -1,4 +1,4 @@
-# Torque - v0.1.0-alpha.2 Release Notes
+# Torque - v0.1.1-alpha.1 Release Notes
 
 **Release Date:** June 21, 2026  
 **Version:** 0.1.0-alpha.2  
@@ -16,11 +16,11 @@ This alpha release builds on v0.1.0-alpha.1 with backend rate limiting, clearer 
 
 API rate limiting is now enforced using `fastapi-limiter` and `pyrate-limiter`:
 
-| Scope | Limit | Routes |
-|-------|-------|--------|
-| Strict | 3 requests/minute | `GET /`, `GET /info` |
-| Standard read | 60 requests/minute | `GET /exercises`, `GET /exercises/{id}`, `GET /set-progressions`, `GET /workout/logs`, `GET /workout/builds` |
-| Standard write | 10 requests/minute | `POST /workout/build`, `POST /workout/log` |
+| Scope          | Limit              | Routes                                                                                                       |
+| -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------ |
+| Strict         | 3 requests/minute  | `GET /`, `GET /info`                                                                                         |
+| Standard read  | 60 requests/minute | `GET /exercises`, `GET /exercises/{id}`, `GET /set-progressions`, `GET /workout/logs`, `GET /workout/builds` |
+| Standard write | 10 requests/minute | `POST /workout/build`, `POST /workout/log`                                                                   |
 
 Requests exceeding a limit receive HTTP `429 Too Many Requests`.
 
@@ -35,10 +35,10 @@ Requests exceeding a limit receive HTTP `429 Too Many Requests`.
 
 Environment names were updated for clearer semantics across backend, web, and mobile:
 
-| Previous concept | New value | Behavior |
-|------------------|-----------|----------|
-| Local mock/offline mode | `local-isolated` | Frontend returns sample data; backend allows unauthenticated access in isolated mode; backend uses service role key |
-| Full-stack local dev | `local-integration` | Frontend calls live API; backend uses Supabase anon key |
+| Previous concept        | New value           | Behavior                                                                                                            |
+| ----------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Local mock/offline mode | `local-isolated`    | Frontend returns sample data; backend allows unauthenticated access in isolated mode; backend uses service role key |
+| Full-stack local dev    | `local-integration` | Frontend calls live API; backend uses Supabase anon key                                                             |
 
 Updated across:
 
@@ -97,11 +97,11 @@ Updated across:
 
 If upgrading from v0.1.0-alpha.1, update your local `.env` files:
 
-| App | Old (if used) | New |
-|-----|---------------|-----|
-| Backend | `ENVIRONMENT=local` or `development` | `ENVIRONMENT=local-isolated` or `local-integration` |
-| Web | `VITE_ENVIRONMENT=local` or `development` | `VITE_ENVIRONMENT=local-isolated` or `local-integration` |
-| Mobile | `EXPO_PUBLIC_ENVIRONMENT=local` or `development` | `EXPO_PUBLIC_ENVIRONMENT=local-isolated` or `local-integration` |
+| App     | Old (if used)                                    | New                                                             |
+| ------- | ------------------------------------------------ | --------------------------------------------------------------- |
+| Backend | `ENVIRONMENT=local` or `development`             | `ENVIRONMENT=local-isolated` or `local-integration`             |
+| Web     | `VITE_ENVIRONMENT=local` or `development`        | `VITE_ENVIRONMENT=local-isolated` or `local-integration`        |
+| Mobile  | `EXPO_PUBLIC_ENVIRONMENT=local` or `development` | `EXPO_PUBLIC_ENVIRONMENT=local-isolated` or `local-integration` |
 
 Or use the helper script:
 
