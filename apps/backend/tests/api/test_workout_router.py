@@ -2,14 +2,8 @@ import pytest
 
 from backend.app.api.routes.workout import settings
 
-
 from backend.app.schemas.workout import WorkoutLogResponseSchema
 
-# This file tests endpoint behavior using httpx.AsyncClient or httpx.Client against
-# FastAPI app. It needs to account for environment settings, authentication logic, and
-# rate limiting.
-
-# Unit tests to create (fix the response object):
 mock_deleted_log_response: WorkoutLogResponseSchema = {
     "id": 54,
     "created_at": "2026-06-23T06:48:01.28881+00:00",
@@ -167,7 +161,22 @@ mock_deleted_log_response: WorkoutLogResponseSchema = {
 
 # @pytest.mark.skip
 async def test_delete_workout(client, monkeypatch: pytest.MonkeyPatch):
-    # app.dependency_overrides[get_settings] = get_local_settings
+    """
+    Test the successful deletion of a workout log via the DELETE endpoint.
+
+    This test ensures that when a valid delete request is sent to the
+    `/workout/log` route, the application correctly handles the deletion
+    and returns the expected response.
+
+    **Mocks:**
+    * Forces the environment setting to "local".
+    * Patches `delete_workout_log` to bypass actual database/external operations
+      and return a predefined mock response (`mock_deleted_log_response`).
+
+    **Assertions:**
+    * HTTP status code is 200 (OK).
+    * The returned JSON payload matches the structure and ID of the mocked deleted log.
+    """
     monkeypatch.setattr(
         settings,
         "environment",
@@ -181,7 +190,8 @@ async def test_delete_workout(client, monkeypatch: pytest.MonkeyPatch):
     response = await client.request("DELETE", "/workout/log", json={"id": "54"})
 
     assert response.status_code == 200
-    # assert response.json() == mock_deleted_log_response
+    assert response.json()["id"] == mock_deleted_log_response["id"]
+    assert len(response.json().items()) == len(mock_deleted_log_response.items())
 
 
 # Non-Local Env - Unauthenticated: Set settings.environment = "production" (or any
