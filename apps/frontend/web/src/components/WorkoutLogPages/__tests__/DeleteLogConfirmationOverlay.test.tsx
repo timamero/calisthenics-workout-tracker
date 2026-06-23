@@ -38,6 +38,8 @@ let deleteLogOverlayHandlerSpy: {
 
 describe('DeleteLogConfirmationOverlay', async () => {
   beforeEach(async () => {
+    import.meta.env.VITE_ENVIRONMENT = 'local-isolated';
+
     deleteWorkoutSpy = vi.fn();
     isDeleteOverlayOpened = true;
     workoutLogDetailsOverlayHandlerSpy = {
@@ -133,7 +135,7 @@ describe('DeleteLogConfirmationOverlay', async () => {
 
   // TODO: Fix test: deletes workout and closes detail overlay on successful deletion
   // Error with assertion: expect(deleteWorkoutSpy).toHaveBeenCalled()
-  it.skip('deletes workout and closes detail overlay on successful deletion', async () => {
+  it('deletes workout and closes detail overlay on successful deletion', async () => {
     const deleteWorkoutLogSpy = vi.spyOn(workoutsService, 'deleteWorkoutLog');
 
     render(<DeleteLogConfirmationOverlay />);
