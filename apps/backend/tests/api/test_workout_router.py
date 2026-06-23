@@ -11,7 +11,7 @@ from backend.app.schemas.workout import WorkoutLogResponseSchema
 
 # Unit tests to create (fix the response object):
 mock_deleted_log_response: WorkoutLogResponseSchema = {
-    "id": 65,
+    "id": 54,
     "created_at": "2026-06-23T06:48:01.28881+00:00",
     "user_id": "ee98b2ee-4d06-4c42-803c-04e645dc26e4",
     "workout_build_id": None,
