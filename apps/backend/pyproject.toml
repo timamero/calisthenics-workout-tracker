@@ -1,9 +1,9 @@
 [project]
 name = "backend"
-version = "0.1.0-alpha.1"
+version = "0.1.1-alpha.1"
 description = ""
 authors = [
-    {name = "Fatima Camero",email = "54559570+timamero@users.noreply.github.com"}
+    {name = "Fatima Anne Camero",email = "54559570+timamero@users.noreply.github.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.11,<3.14"

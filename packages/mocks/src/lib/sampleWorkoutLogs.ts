@@ -4,7 +4,7 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
   {
     id: 1,
     created_at: "2025-09-01T08:00:00.000Z",
-    user_id: "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    user_id: "00000000-0000-4000-8000-000000000001",
     workout_build_id: 3,
     date: "2025-09-01T08:00:00.000Z",
     title: "Morning Push Workout",
@@ -54,7 +54,7 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
   {
     id: 2,
     created_at: "2025-09-02T09:00:00.000Z",
-    user_id: "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    user_id: "00000000-0000-4000-8000-000000000001",
     workout_build_id: 1,
     date: "2025-09-02T09:00:00.000Z",
     title: "Leg Day",
@@ -104,7 +104,7 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
   {
     id: 3,
     created_at: "2025-09-03T10:00:00.000Z",
-    user_id: "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    user_id: "00000000-0000-4000-8000-000000000001",
     workout_build_id: 2,
     date: "2025-09-03T10:00:00.000Z",
     title: "Core Blast",
@@ -154,10 +154,10 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
   {
     id: 4,
     created_at: "2025-09-04T11:00:00.000Z",
-    user_id: "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    user_id: "00000000-0000-4000-8000-000000000001",
     workout_build_id: 4,
     date: "2025-09-04T11:00:00.000Z",
-    title: "Push Day",
+    title: "Pull Day",
     description: "Back and biceps",
     duration: "00:55:00",
     workout_data: {
@@ -204,7 +204,7 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
   {
     id: 5,
     created_at: "2025-09-05T12:00:00.000Z",
-    user_id: "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    user_id: "00000000-0000-4000-8000-000000000001",
     workout_build_id: 5,
     date: "2025-09-05T12:00:00.000Z",
     title: "Active Recovery",
@@ -243,7 +243,7 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
   {
     id: 6,
     created_at: "2025-09-06T07:00:00.000Z",
-    user_id: "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    user_id: "00000000-0000-4000-8000-000000000001",
     workout_build_id: 6,
     date: "2025-09-06T07:00:00.000Z",
     title: "Advanced Push Session",
@@ -322,7 +322,7 @@ export const sampleWorkoutLogs: WorkoutLogResponse[] = [
   {
     id: 7,
     created_at: "2025-09-07T06:30:00.000Z",
-    user_id: "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    user_id: "00000000-0000-4000-8000-000000000001",
     workout_build_id: 7,
     date: "2025-09-07T06:30:00.000Z",
     title: "Upper Body Focus",

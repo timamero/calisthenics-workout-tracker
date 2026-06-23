@@ -33,14 +33,13 @@ app = FastAPI(
 
 START_TIME = time.time()
 
-# Add condition to set origins for local integration environment
 origins = [
     "http://localhost:5173",  # Local web server
     "http://localhost:8081",  # Local mobile server
     "http://127.0.0.1:8000",  # Origin for the local FastAPI server
 ]
 
-if config.settings.environment == "local":
+if config.settings.environment == "local-isolated":
     origins.append(config.settings.local_origin)
     origins.append(config.settings.local_web_origin)
     origins.append(config.settings.local_mobile_exp_origin)

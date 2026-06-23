@@ -1,6 +1,6 @@
 {
   "name": "@cwt/mobile",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.1-alpha.1",
   "main": "index.ts",
   "scripts": {
     "dev": "EXPO_TUNNEL_SUBDOMAIN=cal-workout-app expo start --tunnel",

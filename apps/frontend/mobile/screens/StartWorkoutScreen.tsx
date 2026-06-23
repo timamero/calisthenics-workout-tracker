@@ -67,7 +67,7 @@ export default function StartWorkoutScreen() {
   //   );
   // });
 
-  // temporarily disabled until v0.1.0-alpha.2
+  // temporarily disabled until v0.x.x-alpha.2
   // React.useEffect(() => {
   //   navigation.setOptions({
   //     headerRight: () => (

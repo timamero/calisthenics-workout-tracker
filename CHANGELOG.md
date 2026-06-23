@@ -5,6 +5,51 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0-alpha.2] - 2026-06-21
+
+### Added
+
+#### Backend API
+
+- API rate limiting via `fastapi-limiter` and `pyrate-limiter`
+  - Strict limit (3 requests/minute) on `GET /` and `GET /info`
+  - Standard read limit (60 requests/minute) on exercises, set progressions, and workout GET routes
+  - Standard write limit (10 requests/minute) on workout POST routes
+- Async backend test support with `pytest-asyncio`
+- Rate limiting tests and limiter reset fixtures for backend tests
+
+#### Developer Experience
+
+- `.env.example` files for backend, web, and mobile apps
+- `docs/public-release-security-checklist.md` for public release preparation
+- `docs/releases/v.0.1.0-alpha.1.md` release notes
+- Initial project `CHANGELOG.md`
+
+### Changed
+
+- Renamed environment modes for clarity:
+  - `local-isolated` — mock/sample data and relaxed local backend auth
+  - `local-integration` — full-stack local development with Supabase
+- Updated backend default `ENVIRONMENT` to `local-integration`
+- Updated backend Supabase client key selection based on new environment names
+- Updated web and mobile services to use `local-isolated` for sample data fallback
+- Updated `change-env.sh` to support `-l` (local-isolated) and `-i` (local-integration)
+- Hardened `.gitignore` rules across root, backend, web, and mobile (with `!.env.example`)
+- Sanitized mock user IDs to fake UUID `00000000-0000-4000-8000-000000000001`
+- Scoped root `pnpm dev` script to web, mobile, and backend packages only
+
+### Fixed
+
+- Web production build now strips `console.time` and `console.timeEnd` logs
+- Fixed typo in mobile `.env.example` for `local-integration`
+
+### Security
+
+- Added public-safe security checklist documentation for open-source release prep
+- Ignored private security audit file in root `.gitignore`
+
+---
+
 ## [0.1.0-alpha.1] - 2026-06-02
 
 ### Added
@@ -109,4 +154,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[0.1.0-alpha.1]: https://github.com/your-org/calisthenics-workout-tracker/releases/tag/v0.1.0-alpha.1
+[0.1.0-alpha.2]: https://github.com/timamero/calisthenics-workout-tracker/releases/tag/v0.1.1-alpha.1
+[0.1.0-alpha.1]: https://github.com/timamero/calisthenics-workout-tracker/releases/tag/v0.1.0-alpha.1
