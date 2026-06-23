@@ -11,28 +11,153 @@ from backend.app.schemas.workout import WorkoutLogResponseSchema
 
 # Unit tests to create (fix the response object):
 mock_deleted_log_response: WorkoutLogResponseSchema = {
-    "id": 1,
-    "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
-    "workout_build_id": 1,
-    "date": "2025-08-13",
-    "title": "workout log 1",
-    "description": "example workout log",
-    "duration": "00:15:38",
-    "workout_data": '{"exercises": [{"sets": [{"fields": {"reps": 10}, '
-    '"completed": true, '
-    '"completed_at": "2025-08-13T05:20:00Z"}, {"fields": {"reps": 10, '
-    '"rest": 30}, "completed": true, "completed_at": "2025-08-13T05:20:00Z"}], '
-    '"tracked": ["reps"], "exercise_id": 1}, {"sets": [{"fields": '
-    '{"reps": 10, "weight": 20}, "completed": false, "completed_at": null}, '
-    '{"fields": {"reps": 10, "rest": 30, "weight": 20}, "completed": false, '
-    '"completed_at": null}], "tracked": ["reps", "weight"], '
-    '"exercise_id": 9}]}',
-    "rpe": "null",
-    "notes": "null",
+    "id": 65,
+    "created_at": "2026-06-23T06:48:01.28881+00:00",
+    "user_id": "ee98b2ee-4d06-4c42-803c-04e645dc26e4",
+    "workout_build_id": None,
+    "date": "2026-06-23",
+    "title": "string",
+    "description": "string",
+    "duration": "3 days",
+    "workout_data": {
+        "data": [
+            {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "sets": [
+                    {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "fields": {
+                            "reps": 0,
+                            "rest": "string",
+                            "time": "string",
+                            "setProgressions": [
+                                {
+                                    "id": "00000000-0000-0000-0000-000000000000",
+                                    "value": 0,
+                                    "set_progression_id": 0,
+                                }
+                            ],
+                        },
+                        "completed": True,
+                        "completed_at": "string",
+                    }
+                ],
+                "type": "exercise",
+                "order": 0,
+                "tracked": ["string"],
+                "exercise_id": 0,
+            },
+            {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "name": "string",
+                "type": "section",
+                "items": [
+                    {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "sets": [
+                            {
+                                "id": "00000000-0000-0000-0000-000000000000",
+                                "fields": {
+                                    "reps": 0,
+                                    "rest": "string",
+                                    "time": "string",
+                                    "setProgressions": [
+                                        {
+                                            "id": "00000000-0000-"
+                                            "0000-0000-000000000000",
+                                            "value": 0,
+                                            "set_progression_id": 0,
+                                        }
+                                    ],
+                                },
+                                "completed": True,
+                                "completed_at": "string",
+                            }
+                        ],
+                        "type": "exercise",
+                        "order": 0,
+                        "tracked": ["string"],
+                        "exercise_id": 0,
+                    },
+                    {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "type": "superset",
+                        "order": 0,
+                        "exercises": [
+                            {
+                                "id": "00000000-0000-0000-0000-000000000000",
+                                "sets": [
+                                    {
+                                        "id": "00000000-0000-0000-0000-000000000000",
+                                        "fields": {
+                                            "reps": 0,
+                                            "rest": "string",
+                                            "time": "string",
+                                            "setProgressions": [
+                                                {
+                                                    "id": "00000000-0000-0000-"
+                                                    "0000-000000000000",
+                                                    "value": 0,
+                                                    "set_progression_id": 0,
+                                                }
+                                            ],
+                                        },
+                                        "completed": True,
+                                        "completed_at": "string",
+                                    }
+                                ],
+                                "type": "exercise",
+                                "order": 0,
+                                "tracked": ["string"],
+                                "exercise_id": 0,
+                            }
+                        ],
+                    },
+                ],
+                "order": 0,
+            },
+            {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "type": "superset",
+                "order": 0,
+                "exercises": [
+                    {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "sets": [
+                            {
+                                "id": "00000000-0000-0000-0000-000000000000",
+                                "fields": {
+                                    "reps": 0,
+                                    "rest": "string",
+                                    "time": "string",
+                                    "setProgressions": [
+                                        {
+                                            "id": "00000000-0000-0000-"
+                                            "0000-000000000000",
+                                            "value": 0,
+                                            "set_progression_id": 0,
+                                        }
+                                    ],
+                                },
+                                "completed": True,
+                                "completed_at": "string",
+                            }
+                        ],
+                        "type": "exercise",
+                        "order": 0,
+                        "tracked": ["string"],
+                        "exercise_id": 0,
+                    }
+                ],
+            },
+        ]
+    },
+    "rpe": 10,
+    "notes": "string",
     "status": "draft",
-    "updated_at": "null",
+    "updated_at": "2026-06-23T06:46:08.237+00:00",
+    "goal": "function",
 }
-
 
 # Local Env - Successful Deletion: Set settings.environment = "local", pass no
 # Authorization header, mock delete_workout_log to return a mock payload, and send a
@@ -40,7 +165,7 @@ mock_deleted_log_response: WorkoutLogResponseSchema = {
 # schema.
 
 
-@pytest.mark.skip
+# @pytest.mark.skip
 async def test_delete_workout(client, monkeypatch: pytest.MonkeyPatch):
     # app.dependency_overrides[get_settings] = get_local_settings
     monkeypatch.setattr(

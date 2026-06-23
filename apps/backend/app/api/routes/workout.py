@@ -76,7 +76,7 @@ def save_log(
         workout_log = insert_workout_log(log, access_token)
     if not workout_log:
         raise HTTPException(status_code=400, detail="Invalid request")
-
+    print("workout_log", workout_log)
     return workout_log
 
 
