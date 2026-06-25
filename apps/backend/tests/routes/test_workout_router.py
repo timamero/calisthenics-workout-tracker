@@ -153,11 +153,6 @@ mock_deleted_log_response: WorkoutLogResponseSchema = {
     "goal": "function",
 }
 
-# Local Env - Successful Deletion: Set settings.environment = "local", pass no
-# Authorization header, mock delete_workout_log to return a mock payload, and send a
-# DELETE request to /workout/log. Assert a 200 OK status and the matching response
-# schema.
-
 
 # @pytest.mark.skip
 async def test_delete_workout(client, monkeypatch: pytest.MonkeyPatch):
@@ -169,7 +164,7 @@ async def test_delete_workout(client, monkeypatch: pytest.MonkeyPatch):
     and returns the expected response.
 
     **Mocks:**
-    * Forces the environment setting to "local".
+    * Forces the environment setting to "local-isolated".
     * Patches `delete_workout_log` to bypass actual database/external operations
       and return a predefined mock response (`mock_deleted_log_response`).
 
@@ -194,14 +189,15 @@ async def test_delete_workout(client, monkeypatch: pytest.MonkeyPatch):
     assert len(response.json().items()) == len(mock_deleted_log_response.items())
 
 
-# Non-Local Env - Unauthenticated: Set settings.environment = "production" (or any
-# non-local string), send a DELETE request without an Authorization header. Assert a
-# 401 Unauthorized status.
+# TODO: Create the following tests
+# Non-local-isolation Env - Unauthenticated:
+# Set settings.environment = "local-integration" (or any non-local string), send a
+# DELETE request without an Authorization header. Assert a 401 Unauthorized status.
 
-# Non-Local Env - Authenticated Success: Set settings.environment = "production", send
-# a DELETE request with a Authorization: Bearer mock_token header. Mock
-# delete_workout_log to receive that token and return valid data. Assert a 200 OK
-# status.
+# Non-local-isolation Env - Authenticated Success:
+# Set settings.environment = "local-integration", send a DELETE request with a
+# Authorization: Bearer mock_token header. Mock delete_workout_log to receive that
+# token and return valid data. Assert a 200 OK status.
 
 # Invalid Request / Database Missing Data: Mock delete_workout_log to return None
 # (simulating a scenario where the ID doesn't exist or an error occurred). Send a valid

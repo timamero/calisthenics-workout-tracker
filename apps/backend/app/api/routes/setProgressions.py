@@ -8,8 +8,6 @@ from app.schemas.setProgressions import SetProgressionsResponseSchema
 
 from app.core.config import settings
 
-# environment: str = settings.environment
-
 router = APIRouter(
     prefix="/set-progressions",
     tags=["setProgressions"],

@@ -21,8 +21,6 @@ from app.schemas.workout import (
 
 from app.core.config import settings
 
-# environment: str = settings.environment
-
 router = APIRouter(prefix="/workout")
 
 standard_api_limit = Limiter(Rate(60, Duration.MINUTE))

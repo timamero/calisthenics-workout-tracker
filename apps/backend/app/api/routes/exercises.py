@@ -10,8 +10,6 @@ from app.api.utils.exercises import get_exercises, get_exercise_by_id
 
 from app.core.config import settings
 
-# environment: str = settings.environment
-
 router = APIRouter(prefix="/exercises")
 
 standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
