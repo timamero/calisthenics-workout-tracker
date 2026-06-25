@@ -114,8 +114,6 @@ def delete_log(
     """
     Delete workout log.
     """
-    print(f"DEBUG settings id: {id(settings)}")
-    print(f"DEBUG environment: {settings.environment}")
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
         if settings.environment == "local":
@@ -126,7 +124,6 @@ def delete_log(
     else:
         access_token = auth_header.split(" ")[1]
         workout_log = delete_workout_log(workout_log_id, access_token)
-        print(f"DEBUG workout_log: {workout_log}")  # 👈
     if not workout_log:
         raise HTTPException(status_code=400, detail="Invalid request")
 
