@@ -116,7 +116,7 @@ def delete_log(
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local":
+        if settings.environment == "local-isolated":
             workout_log = delete_workout_log(workout_log_id)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")

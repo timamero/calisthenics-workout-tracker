@@ -175,7 +175,7 @@ async def test_delete_workout(client, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(
         settings,
         "environment",
-        "local",
+        "local-isolated",
     )
     monkeypatch.setattr(
         "backend.app.api.routes.workout.delete_workout_log",
