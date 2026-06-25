@@ -3,6 +3,6 @@
   "compilerOptions": {
     "jsx": "react-native",
     "strict": true,
-    "types": ["@types/jest"]
+    "types": ["@types/jest", "jest"]
   }
 }
