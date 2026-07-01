@@ -10,6 +10,17 @@ Torque lets users log bodyweight workouts, track set progressions (challenge/ass
 
 **Release notes:** [docs/releases/](./docs/releases/)
 
+## Screenshots/Demos
+
+### Web
+
+https://github.com/user-attachments/assets/c631c329-59ae-4198-83be-f7a1377510c5
+
+https://github.com/user-attachments/assets/0f61a7f4-9f7e-4483-8a52-37fc91ed8b90
+
+https://github.com/user-attachments/assets/75627732-bdcc-48b9-a037-7bb640f046cd
+
+
 ---
 
 ## Status
