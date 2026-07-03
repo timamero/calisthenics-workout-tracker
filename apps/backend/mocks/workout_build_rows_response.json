@@ -3,7 +3,7 @@
     "id": 10,
     "created_at": "2025-09-09T20:20:08.805795Z",
     "title": "example post request from fast api",
-    "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    "user_id": "00000000-0000-4000-8000-000000000001",
     "description": "a workout template",
     "workout_data": {
       "exercises": [
@@ -38,7 +38,7 @@
     "id": 11,
     "created_at": "2025-09-10T04:07:03.064307Z",
     "title": "sanity request",
-    "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    "user_id": "00000000-0000-4000-8000-000000000001",
     "description": "a workout template",
     "workout_data": {
       "exercises": [
@@ -73,7 +73,7 @@
     "id": 12,
     "created_at": "2025-09-10T04:08:55.842826Z",
     "title": "sanity request with repsonse type",
-    "user_id": "57b33f04-60a7-46a2-959a-35a29ff35f61",
+    "user_id": "00000000-0000-4000-8000-000000000001",
     "description": "a workout template",
     "workout_data": {
       "exercises": [

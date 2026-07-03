@@ -8,7 +8,9 @@ class Settings(BaseSettings):
     )
     version: str = Field(default="0.1.0", validation_alias="VERSION")
     debug: bool = Field(default=False, validation_alias="DEBUG")
-    environment: str = Field(default="development", validation_alias="ENVIRONMENT")
+    environment: str = Field(
+        default="local-integration", validation_alias="ENVIRONMENT"
+    )
 
     supabase_url: str = Field(default="", validation_alias="SUPABASE_URL")
     supabase_anon_key: str = Field(default="", validation_alias="SUPABASE_ANON_KEY")

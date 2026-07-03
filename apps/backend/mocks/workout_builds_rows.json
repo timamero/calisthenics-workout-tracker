@@ -1,12 +1,12 @@
 {
-  "id":3,
-  "user_id":"57b33f04-60a7-46a2-959a-35a29ff35f61",
-  "title":"workout build 1",
-  "description":"first workout build",
-  "goal":"function",
-  "duration":null,
-  "workout_data":"{\"exercises\": [{\"sets\": [{\"fields\": {\"reps\": 5}, \"completed\": false, \"completed_at\": null}, {\"fields\": {\"reps\": 5, \"rest\": 30}, \"completed\": false, \"completed_at\": null}], \"tracked\": [\"reps\"], \"exercise_id\": 1}, {\"sets\": [{\"fields\": {\"reps\": 10, \"weight\": 20}, \"completed\": false, \"completed_at\": null}, {\"fields\": {\"reps\": 10, \"rest\": 30, \"weight\": 20}, \"completed\": false, \"completed_at\": null}], \"tracked\": [\"reps\", \"weight\"], \"exercise_id\": 9}]}",
-  "source":"manual",
-  "status":"draft",
-  "updated_at":null
+  "id": 3,
+  "user_id": "00000000-0000-4000-8000-000000000001",
+  "title": "workout build 1",
+  "description": "first workout build",
+  "goal": "function",
+  "duration": null,
+  "workout_data": "{\"exercises\": [{\"sets\": [{\"fields\": {\"reps\": 5}, \"completed\": false, \"completed_at\": null}, {\"fields\": {\"reps\": 5, \"rest\": 30}, \"completed\": false, \"completed_at\": null}], \"tracked\": [\"reps\"], \"exercise_id\": 1}, {\"sets\": [{\"fields\": {\"reps\": 10, \"weight\": 20}, \"completed\": false, \"completed_at\": null}, {\"fields\": {\"reps\": 10, \"rest\": 30, \"weight\": 20}, \"completed\": false, \"completed_at\": null}], \"tracked\": [\"reps\", \"weight\"], \"exercise_id\": 9}]}",
+  "source": "manual",
+  "status": "draft",
+  "updated_at": null
 }

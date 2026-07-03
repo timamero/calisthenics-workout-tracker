@@ -1,14 +1,14 @@
 {
-  "id":1,
-  "user_id":"57b33f04-60a7-46a2-959a-35a29ff35f61",
-  "workout_build_id":1,
-  "date":"2025-08-13",
-  "title":"workout log 1",
-  "description":"example workout log",
-  "duration":"00:15:38",
-  "workout_data":"{\"exercises\": [{\"sets\": [{\"fields\": {\"reps\": 10}, \"completed\": true, \"completed_at\": \"2025-08-13T05:20:00Z\"}, {\"fields\": {\"reps\": 10, \"rest\": 30}, \"completed\": true, \"completed_at\": \"2025-08-13T05:20:00Z\"}], \"tracked\": [\"reps\"], \"exercise_id\": 1}, {\"sets\": [{\"fields\": {\"reps\": 10, \"weight\": 20}, \"completed\": false, \"completed_at\": null}, {\"fields\": {\"reps\": 10, \"rest\": 30, \"weight\": 20}, \"completed\": false, \"completed_at\": null}], \"tracked\": [\"reps\", \"weight\"], \"exercise_id\": 9}]}",
-  "rpe":null,
-  "notes":null,
-  "status":"draft",
-  "updated_at":null
+  "id": 1,
+  "user_id": "00000000-0000-4000-8000-000000000001",
+  "workout_build_id": 1,
+  "date": "2025-08-13",
+  "title": "workout log 1",
+  "description": "example workout log",
+  "duration": "00:15:38",
+  "workout_data": "{\"exercises\": [{\"sets\": [{\"fields\": {\"reps\": 10}, \"completed\": true, \"completed_at\": \"2025-08-13T05:20:00Z\"}, {\"fields\": {\"reps\": 10, \"rest\": 30}, \"completed\": true, \"completed_at\": \"2025-08-13T05:20:00Z\"}], \"tracked\": [\"reps\"], \"exercise_id\": 1}, {\"sets\": [{\"fields\": {\"reps\": 10, \"weight\": 20}, \"completed\": false, \"completed_at\": null}, {\"fields\": {\"reps\": 10, \"rest\": 30, \"weight\": 20}, \"completed\": false, \"completed_at\": null}], \"tracked\": [\"reps\", \"weight\"], \"exercise_id\": 9}]}",
+  "rpe": null,
+  "notes": null,
+  "status": "draft",
+  "updated_at": null
 }

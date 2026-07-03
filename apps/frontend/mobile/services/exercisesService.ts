@@ -7,7 +7,7 @@ const environment = process.env.EXPO_PUBLIC_ENVIRONMENT || null;
 
 export async function getExercises(token: string): Promise<ExerciseResponse[]> {
   try {
-    if (environment === 'local') {
+    if (environment === 'local-isolated') {
       console.log('Mobile: Local environment, return sample exercises.');
       return sampleExercises;
     }

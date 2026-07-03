@@ -15,6 +15,7 @@ __pycache__/
 *.env
 .env
 .env.*
+!.env.example
 .pytest_cache
 
 # Poetry
@@ -63,6 +64,7 @@ logs/
 .cache/
 .backup/
 .secrets.baseline
+security-review-for-public-repo-release.md
 examples/*
 */examples
 supabase/*

@@ -11,7 +11,7 @@ export default function DashBoardLayout() {
     linkOptions({ label: 'Home', to: '/dashboard/home' }),
     linkOptions({ label: 'Exercises', to: '/dashboard/library' }),
     linkOptions({ label: 'Logs', to: '/dashboard/history' }),
-    // linkOptions({ label: 'Profile', to: '/dashboard/user' }), // temporarily disabled until v0.1.0-alpha.2
+    // linkOptions({ label: 'Profile', to: '/dashboard/user' }), // temporarily disabled until v0.x.x-alpha.2
     linkOptions({ label: 'Settings', to: '/dashboard/settings' }),
   ];
 

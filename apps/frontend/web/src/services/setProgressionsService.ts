@@ -9,7 +9,7 @@ export async function getSetProgressions(
   token: string,
 ): Promise<SetProgressionResponse[]> {
   try {
-    if (environment === 'local') {
+    if (environment === 'local-isolated') {
       console.log('Web: Local environment, return sample set progressions.');
       return sampleSetProgressions;
     }

@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # change-env.sh: Switches environment variables for backend, web, and mobile .env files
-# Usage: ./change-env.sh [-l | -d] [-b] [-w] [-m]
-#   -l: Set environment to local
-#   -d: Set environment to development
+# Usage: ./change-env.sh [-l | -i] [-b] [-w] [-m]
+#   -l: Set environment to local-isolated
+#   -i: Set environment to local-integration
 #   -b: Update backend .env (ENVIRONMENT)
 #   -w: Update web .env (VITE_ENVIRONMENT)
 #   -m: Update mobile .env (EXPO_PUBLIC_ENVIRONMENT)
@@ -18,13 +18,13 @@ UPDATE_WEB=false
 UPDATE_MOBILE=false
 
 # Parse options
-while getopts ":ldbwm" opt; do
+while getopts ":libwm" opt; do
   case $opt in
     l)
-      TARGET_ENV="local"
+      TARGET_ENV="local-isolated"
       ;;
-    d)
-      TARGET_ENV="development"
+    i)
+      TARGET_ENV="local-integration"
       ;;
     b)
       UPDATE_BACKEND=true
@@ -48,7 +48,7 @@ done
 
 # Check for required environment
 if [[ -z "$TARGET_ENV" ]]; then
-  echo "Error: You must specify -l (local) or -d (development)."
+  echo "Error: You must specify -l (local-isolated) or -i (local-integration)."
   exit 1
 fi
 
