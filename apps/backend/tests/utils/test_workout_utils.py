@@ -12,7 +12,7 @@ class TestDeleteWorkoutLogUtils:
         delete_workout_request_schema,
         deleted_workout_log_response,
     ):
-        """It returns the deleted workout row when Supabase succeeds."""
+        """Verify that it returns the deleted workout row when Supabase succeeds."""
         mock_supabase = supabase_delete_client_factory(
             response_data=deleted_workout_log_response,
         )
@@ -34,7 +34,7 @@ class TestDeleteWorkoutLogUtils:
         supabase_delete_client_factory,
         delete_workout_request_schema,
     ):
-        """It returns None and logs an error when Supabase raises."""
+        """Verify that it returns None and logs an error when Supabase raises."""
         mock_supabase = supabase_delete_client_factory(
             execute_exception=Exception("database down"),
         )

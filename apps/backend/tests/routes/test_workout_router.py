@@ -14,7 +14,7 @@ class TestDeleteWorkoutRouter:
         delete_workout_request_schema,
         deleted_workout_log_response,
     ):
-        """It returns the deleted workout log in local-isolated mode."""
+        """Verify that it returns the deleted workout log in local-isolated mode."""
         monkeypatch.setattr(settings, "environment", "local-isolated")
         mock_delete_workout_log = Mock(return_value=deleted_workout_log_response)
         monkeypatch.setattr(
@@ -39,7 +39,10 @@ class TestDeleteWorkoutRouter:
         monkeypatch: pytest.MonkeyPatch,
         delete_workout_request_schema,
     ):
-        """It rejects unauthenticated delete requests outside local-isolated mode."""
+        """
+        Verify that it rejects unauthenticated delete requests outside
+        local-isolated mode.
+        """
         monkeypatch.setattr(settings, "environment", "local-integration")
 
         response = await client.request(
@@ -59,7 +62,9 @@ class TestDeleteWorkoutRouter:
         delete_workout_request_schema,
         deleted_workout_log_response,
     ):
-        """It passes the bearer token to the delete helper and returns success."""
+        """
+        Verify that it passes the bearer token to the delete helper and returns success.
+        """
         monkeypatch.setattr(settings, "environment", "local-integration")
         mock_delete_workout_log = Mock(return_value=deleted_workout_log_response)
         monkeypatch.setattr(
@@ -92,7 +97,9 @@ class TestDeleteWorkoutRouter:
         monkeypatch: pytest.MonkeyPatch,
         delete_workout_request_schema,
     ):
-        """It returns a bad request response when deletion does not find a row."""
+        """
+        Verify that it returns a bad request response when deletion does not find a row.
+        """
         monkeypatch.setattr(settings, "environment", "local-isolated")
         mock_delete_workout_log = Mock(return_value=None)
         monkeypatch.setattr(
