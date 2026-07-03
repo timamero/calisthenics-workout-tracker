@@ -49,4 +49,4 @@ class TestDeleteWorkoutLogUtils:
         captured = capsys.readouterr()
 
         assert result is None
-        assert "Error deleting workout: database down" in captured.out
+        assert "Error deleting workout from database: database down" in captured.out
