@@ -1,7 +1,7 @@
 # Torque - v0.1.1-alpha.1 Release Notes
 
 **Release Date:** June 21, 2026  
-**Version:** 0.1.0-alpha.2  
+**Version:** 0.1.1-alpha.1  
 **Status:** Alpha Release
 
 ## Overview
@@ -141,5 +141,3 @@ cd apps/backend && poetry run pytest app/test_main.py -v
 ```
 
 ---
-
-**Thank you for trying Torque! Feedback on rate limits and environment setup is especially welcome for this release.**

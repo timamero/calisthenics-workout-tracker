@@ -417,5 +417,3 @@ For issues, questions, or feedback:
 See LICENSE file for details.
 
 ---
-
-**Thank you for trying Torque! We'd love to hear your feedback as we develop this application.**
