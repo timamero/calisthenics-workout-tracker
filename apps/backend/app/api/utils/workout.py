@@ -23,7 +23,7 @@ def insert_workout_build(
         )
         return response.data[0]
     except Exception as e:
-        print(f"Error saving workout: {e}")
+        print(f"Error saving workout build in database: {e}")
 
 
 def insert_workout_log(
@@ -40,7 +40,7 @@ def insert_workout_log(
         )
         return response.data[0]
     except Exception as e:
-        print(f"Error saving workout: {e}")
+        print(f"Error saving workout log in database: {e}")
 
 
 def update_workout_log(
@@ -58,12 +58,15 @@ def update_workout_log(
         )
         return response.data[0]
     except Exception as e:
-        print(f"Error updating workout: {e}")
+        print(f"Error updating workout in database: {e}")
 
 
 def delete_workout_log(
     workout_log_id: DeleteWorkoutRequestSchema, access_token: str | None = None
 ):
+    """
+    Delete workout log from supabase database.
+    """
     supabase = get_supabase_client(access_token)
     try:
         response = (
@@ -74,7 +77,7 @@ def delete_workout_log(
         )
         return response.data[0]
     except Exception as e:
-        print(f"Error deleting workout: {e}")
+        print(f"Error deleting workout from database: {e}")
 
 
 def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
@@ -88,7 +91,7 @@ def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponse
             response = select_query.execute()
         return response.data
     except Exception as e:
-        print(f"Error fetching workout_logs: {e}")
+        print(f"Error fetching workout_logs from database: {e}")
 
 
 def get_workout_builds(
@@ -104,4 +107,4 @@ def get_workout_builds(
             response = select_query.execute()
         return response.data
     except Exception as e:
-        print(f"Error fetching workout_builds: {e}")
+        print(f"Error fetching workout_builds from database: {e}")
