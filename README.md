@@ -1,7 +1,5 @@
 # Torque
 
-**An AI-assisted calisthenics workout tracker — built solo, currently in active development (v0.1.1-alpha.2).**
-
 Torque lets users log bodyweight workouts, track set progressions (challenge/assist variations), and build a training history — with an AI-generated workout feature planned for a later release.
 
 **Live demo:** [Torque](https://torquefit.app)
@@ -38,22 +36,49 @@ This project is under active development. The current build (`v0.1.1-alpha.1`) c
 
 ---
 
+## My Use of AI in This Project
+
+I use AI tools as a learning aid throughout this project, the way I'd use a senior developer for a second opinion, not as a replacement for writing the code myself. Specifically, I use AI for:
+
+- Scaffolding boilerplate before I customize and extend it
+- Debugging help when I'm stuck
+- Explaining unfamiliar parts of my own codebase as it grows
+- Vulnerability and security scanning
+- Sounding board for architecture and design decisions
+- Generating and refining body copy and documentation
+
+**The majority of the code, logic, and refactoring in this project is my own.** I treat AI output as a draft or suggestion to review, understand, and rewrite, not as code to copy in directly. I'm including this section because I believe in being transparent about how I work, and because learning to use AI well is itself a skill I want to demonstrate.
+
+---
+
+## Why This Project
+
+I started building this project in June 2025 to push myself toward production-level engineering and learn mobile development. The tech stack reflects technologies and frameworks I wanted to gain real expertise in, chosen alongside architecture decisions aimed at a strong developer experience for a team of one.
+Beyond the code, this project has been a chance for me to practice the non-technical side of building software, such as project management and an agile workflow. I adapted these processes for solo work, including sprint planning and retrospectives.
+
+---
+
 ## What it does (alpha.1)
 
 - **Account creation & login** — Supabase Auth
-- **Exercise library** — 100+ bodyweight exercises (push-ups, pull-ups, dips, squats, core, handstand progressions), each tagged with target muscles, equipment, and difficulty
+- **Exercise library** — 100+ bodyweight exercises (push-ups, pull-ups, dips, squats, core), each tagged with target muscles, equipment, and difficulty
 - **Workout builder** — log sets, reps, and timed holds; organize with sections and supersets; reorder freely
 - **Set progressions** — track challenge (added difficulty, e.g. weighted vest) and assist (reduced difficulty, e.g. resistance bands) variations per exercise
 - **Workout history** — chronological logbook of completed sessions
 
+---
+
 ## Roadmap
 
-| Version | Focus                                                                     |
-| ------- | ------------------------------------------------------------------------- |
-| alpha.2 | Progressions library, onboarding, profile/settings, calendar logbook view |
-| alpha.3 | Progression tracking — detailed status and history per skill              |
-| alpha.4 | AI workout generator (GPT 4o mini)                                        |
-| beta.1  | Testing, advanced auth, security hardening, UI/UX polish                  |
+| Version | Focus                                                                                         |
+| ------- | --------------------------------------------------------------------------------------------- |
+| alpha.2 | Workout Templates, enhanced workout logging, architecture refactoring and code reorganization |
+| alpha.3 | Progressions library, onboarding, profile/settings, calendar logbook view                     |
+| alpha.4 | Progression tracking — detailed status and history per skill                                  |
+| alpha.5 | AI workout generator (GPT 4o mini)                                                            |
+| beta.1  | Testing, advanced auth, security hardening, UI/UX polish                                      |
+| beta.2  | Performance monitoring                                                                        |
+| rc.1    | Google Cloud Run backend Migration                                                            |
 
 ---
 
@@ -147,6 +172,8 @@ calisthenics-workout-tracker/
 
 UI is **not** shared — web uses Mantine; mobile uses React Native Paper and native components.
 
+---
+
 ### Backend API surface
 
 | Route prefix            | Purpose                                     |
@@ -167,7 +194,10 @@ Rate limits: 3 req/min (health), 60 req/min (reads), 10 req/min (writes). See [C
 ### State & validation
 
 - **Zustand** (`@cwt/state`) for client-side workout drafting and app state
-- **Zod** (`@cwt/schema`) at API boundaries on the frontend; **Pydantic** on the backend
+
+- **Zod** (`@cwt/schema`) at API boundaries on the frontend;
+
+- **Pydantic** on the backend
 
 ### Testing
 
@@ -179,30 +209,17 @@ Rate limits: 3 req/min (health), 60 req/min (reads), 10 req/min (writes). See [C
 
 Further schema and release documentation: [`docs/`](./docs/).
 
+---
+
 ## Tech Stack
 
 **Frontend:** React, React Native (Expo), Vite, Mantine, TanStack Router, Zustand, Zod, React Hook Form
+
 **Backend:** FastAPI, Pydantic, Uvicorn, Pytest
+
 **Data & Infra:** Supabase, Cloudflare, Railway, Render
+
 **AI (alpha.4+):** GPT 4o mini
-
-## My Use of AI in This Project
-
-I use AI tools (Claude, ChatGPT) as a learning aid throughout this project, the way I'd use a senior developer for a second opinion, not as a replacement for writing the code myself. Specifically, I use AI for:
-
-- Scaffolding boilerplate before I customize and extend it
-- Debugging help when I'm stuck
-- Explaining unfamiliar parts of my own codebase as it grows
-- Vulnerability and security scanning
-- Sounding board for architecture and design decisions
-- Generating and refining body copy and documentation
-
-**The majority of the code, logic, and refactoring in this project is my own.** I treat AI output as a draft or suggestion to review, understand, and rewrite, not as code to copy in directly. I'm including this section because I believe in being transparent about how I work, and because learning to use AI well is itself a skill I want to demonstrate.
-
-## Why This Project
-
-I built this project to push myself toward production-level engineering and to learn mobile development. The tech stack reflects technologies and frameworks I wanted to gain real expertise in, chosen alongside architecture decisions aimed at a strong developer experience for a solo team.
-Beyond the code, this project has been a chance to practice the non-technical side of building software, project management and an agile workflow adapted for solo work, including sprint planning and retrospectives.
 
 ---
 
