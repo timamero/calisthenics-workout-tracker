@@ -90,7 +90,7 @@ def update_log(
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local":
+        if settings.environment == "local-isolated":
             workout_log = update_workout_log(log)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
