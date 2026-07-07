@@ -8,9 +8,11 @@ import ConfirmationOverlay from '../common/ConfirmationOverlay';
 import { deleteWorkoutLog } from '../../services/workoutsService';
 
 export default function DeleteLogConfirmationOverlay() {
+  // --- State Management ---
   const supabaseSession = useAuthStore((state) => state.session);
   const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout);
 
+  // --- Context ---
   const workoutLogId = useWorkoutLogDetailContextWeb().workout!.id;
 
   const deleteLogOverlayOpened =
@@ -21,9 +23,11 @@ export default function DeleteLogConfirmationOverlay() {
     useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
 
   if (!workoutLogId) {
-    console.error('Error: WorkoutID not found');
+    console.error('Error: Workout log not found.');
     return null;
   }
+
+  // --- Handlers ---
   const handleDeleteLogClick = async () => {
     if (!supabaseSession) {
       console.error('Session not found');
