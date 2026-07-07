@@ -52,7 +52,7 @@ export default function DeleteLogConfirmationOverlay() {
       const result = await deleteWorkoutLog(supabaseSession.access_token, body);
       if (result) {
         deleteWorkout(workoutLogId);
-        detailHandlers?.close();
+        detailHandlers.close();
       } else {
         console.error(
           'Workout delete request failed to delete log with ID: ',
@@ -69,8 +69,8 @@ export default function DeleteLogConfirmationOverlay() {
       title="Delete Log"
       message="Are you sure you want to delete this log?"
       confirmButtonLabel="Delete"
-      opened={deleteLogOverlayOpened!}
-      handler={deleteLogOverlayHandler!}
+      opened={deleteLogOverlayOpened}
+      handler={deleteLogOverlayHandler}
       onConfirmationClick={() => handleDeleteLogClick()}
     />
   );
