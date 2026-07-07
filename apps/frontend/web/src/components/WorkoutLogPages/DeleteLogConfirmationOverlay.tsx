@@ -13,19 +13,19 @@ export default function DeleteLogConfirmationOverlay() {
   const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout);
 
   // --- Context ---
-  const workoutLogId = useWorkoutLogDetailContextWeb().workout!.id;
-
   const deleteLogOverlayOpened =
     useWorkoutContextWeb().webOverlayHandlers?.deleteLogOverlayOpened;
   const deleteLogOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.deleteLogOverlayHandler;
   const detailHandlers =
     useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
-
-  if (!workoutLogId) {
+  
+  const workout = useWorkoutLogDetailContextWeb().workout
+  if (!workout) {
     console.error('Error: Workout log not found.');
     return null;
   }
+  const workoutLogId = workout.id;
 
   // --- Handlers ---
   const handleDeleteLogClick = async () => {
