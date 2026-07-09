@@ -6,6 +6,35 @@ import { type WorkoutLibrarySlice } from '@cwt/state/stores';
 
 import DeleteLogConfirmationOverlay from '../DeleteLogConfirmationOverlay';
 import * as workoutsService from '../../../services/workoutsService';
+import type { WorkoutContextType } from '@cwt/context';
+import type { UseDisclosureHandlers } from '@mantine/hooks';
+
+// Typed factory to satisfy full webOverlayHandlers shape while tests override only needed fields.
+type WebHandlers = NonNullable<WorkoutContextType['webOverlayHandlers']>;
+const makeDisclosure = (): UseDisclosureHandlers => ({
+  open: vi.fn(),
+  close: vi.fn(),
+  toggle: vi.fn(),
+});
+const makeWebHandlers = (
+  overrides: Partial<WebHandlers> = {},
+): WebHandlers => ({
+  deleteLogOverlayOpened: false,
+  deleteLogOverlayHandler: makeDisclosure(),
+  deleteRootItemOverlayOpened: false,
+  deleteRootItemOverlayHandler: makeDisclosure(),
+  deleteNestedItemOverlayOpened: false,
+  deleteNestedItemOverlayHandler: makeDisclosure(),
+  deleteSetOverlayOpened: false,
+  deleteSetOverlayHandler: makeDisclosure(),
+  deleteSetInSupersetOverlayOpened: false,
+  deleteSetInSupersetOverlayHandler: makeDisclosure(),
+  saveOverlayOpened: false,
+  saveOverlayHandler: makeDisclosure(),
+  cancelOverlayOpened: false,
+  cancelOverlayHandler: makeDisclosure(),
+  ...overrides,
+});
 
 vi.mock('@cwt/hooks', () => ({
   useWorkoutContextWeb: vi.fn(),
@@ -17,10 +46,6 @@ vi.mock('@cwt/state/stores', () => ({
   useWorkoutLibraryStore: vi.fn(),
   useWorkoutDraftStore: vi.fn(),
 }));
-
-// vi.mock('../../../services/workoutsService', () => ({
-//   deleteWorkoutLog: vi.fn(),
-// }));
 
 let deleteWorkoutSpy: Mock<WorkoutLibrarySlice['deleteWorkout']>;
 let isDeleteOverlayOpened: boolean = true;
@@ -72,12 +97,12 @@ describe('DeleteLogConfirmationOverlay', async () => {
       await import('@cwt/state/stores');
 
     vi.mocked(useWorkoutContextWeb).mockImplementation(() => ({
-      webOverlayHandlers: {
+      webOverlayHandlers: makeWebHandlers({
         get deleteLogOverlayOpened() {
           return isDeleteOverlayOpened;
         },
         deleteLogOverlayHandler: deleteLogOverlayHandlerSpy,
-      },
+      }),
     }));
 
     vi.mocked(useWorkoutDraftStore).mockImplementation((selector) => {
