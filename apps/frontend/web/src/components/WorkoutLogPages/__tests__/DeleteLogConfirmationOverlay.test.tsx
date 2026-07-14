@@ -128,8 +128,17 @@ describe('DeleteLogConfirmationOverlay', async () => {
       setWorkout: vi.fn(),
     });
 
-    vi.mocked(useAuthStore).mockReturnValue({
-      session: { access_token: 'test-token' },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vi.mocked(useAuthStore).mockImplementation((selector: any) => {
+      const mockState = {
+        session: { access_token: 'test-token' },
+      };
+      if (typeof selector == 'function') {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return selector(mockState as any);
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return mockState as any;
     });
 
     vi.mocked(useWorkoutLibraryStore).mockImplementation((selector) => {
@@ -174,19 +183,33 @@ describe('DeleteLogConfirmationOverlay', async () => {
   });
 
   it('logs error and does not update store if API call fails', async () => {
-    const deleteWorkoutLogSpy = vi.spyOn(workoutsService, 'deleteWorkoutLog');
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const deleteWorkoutLogSpy = vi
+      .spyOn(workoutsService, 'deleteWorkoutLog')
+      .mockRejectedValueOnce(new Error('Delete log failed'));
 
     render(<DeleteLogConfirmationOverlay />);
 
-    deleteWorkoutLogSpy.mockImplementation(() => {
-      throw new Error('Delete log failed');
-    });
     fireEvent.click(screen.getByRole('button', { name: /^Delete$/i }));
 
-    expect(deleteWorkoutLogSpy).toThrow('Delete log failed');
+    await waitFor(() => {
+      expect(deleteWorkoutLogSpy).toHaveBeenCalledWith(
+        'test-token',
+        JSON.stringify({ id: sampleWorkoutLogs[0].id }),
+      );
+    });
+
+    expect(deleteWorkoutSpy).not.toHaveBeenCalled();
+    expect(workoutLogDetailsOverlayHandlerSpy.close).not.toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'Error deleting log:',
+      expect.any(Error),
+    );
   });
 
-  // it('returns early and logs error if session is not found', () => {});
+  // it('clicking Delete without a session logs an error and does not call the API', () => {});
 
   // it('calls deleteWorkoutLog with access token and workout ID', () => {});
 });
