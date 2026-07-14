@@ -50,6 +50,7 @@ vi.mock('@cwt/state/stores', () => ({
 let deleteWorkoutSpy: Mock<WorkoutLibrarySlice['deleteWorkout']>;
 let isDeleteOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = true;
+let mockSession: { access_token: string } | null;
 let workoutLogDetailsOverlayHandlerSpy: {
   open: () => void;
   close: () => void;
@@ -67,6 +68,7 @@ describe('DeleteLogConfirmationOverlay', async () => {
 
     deleteWorkoutSpy = vi.fn();
     isDeleteOverlayOpened = true;
+    mockSession = { access_token: 'test-token' };
     workoutLogDetailsOverlayHandlerSpy = {
       open: vi.fn(() => {
         isLogDetailOverlayOpened = true;
@@ -131,7 +133,7 @@ describe('DeleteLogConfirmationOverlay', async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(useAuthStore).mockImplementation((selector: any) => {
       const mockState = {
-        session: { access_token: 'test-token' },
+        session: mockSession,
       };
       if (typeof selector == 'function') {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -209,7 +211,40 @@ describe('DeleteLogConfirmationOverlay', async () => {
     );
   });
 
-  // it('clicking Delete without a session logs an error and does not call the API', () => {});
+  it('clicking Delete without a session logs an error and does not call the API', async () => {
+    mockSession = null;
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const deleteWorkoutLogSpy = vi.spyOn(workoutsService, 'deleteWorkoutLog');
 
-  // it('calls deleteWorkoutLog with access token and workout ID', () => {});
+    render(<DeleteLogConfirmationOverlay />);
+
+    fireEvent.click(screen.getByRole('button', { name: /^Delete$/i }));
+
+    await waitFor(() => {
+      expect(consoleErrorSpy).toHaveBeenCalledWith('Session not found');
+    });
+
+    expect(deleteWorkoutLogSpy).not.toHaveBeenCalled();
+    expect(deleteWorkoutSpy).not.toHaveBeenCalled();
+    expect(workoutLogDetailsOverlayHandlerSpy.close).not.toHaveBeenCalled();
+  });
+
+  it('calls deleteWorkoutLog with access token and workout ID', async () => {
+    const deleteWorkoutLogSpy = vi
+      .spyOn(workoutsService, 'deleteWorkoutLog')
+      .mockResolvedValueOnce(sampleWorkoutLogs[0]);
+
+    render(<DeleteLogConfirmationOverlay />);
+
+    fireEvent.click(screen.getByRole('button', { name: /^Delete$/i }));
+
+    await waitFor(() => {
+      expect(deleteWorkoutLogSpy).toHaveBeenCalledWith(
+        'test-token',
+        JSON.stringify({ id: sampleWorkoutLogs[0].id }),
+      );
+    });
+  });
 });
