@@ -9,10 +9,14 @@ import ConfirmationDialog from '../common/ConfirmationDialog';
 import { deleteWorkoutLog } from '../../services/workoutsService';
 
 export default function DeleteLogConfirmationOverlay() {
+  // --- UI Hooks ---
   const navigation = useNavigation<any>();
+
+  // --- State Management ---
   const supabaseSession = useAuthStore((state) => state.session);
   const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout);
 
+  // --- Context ---
   const workoutLogDetail = useWorkoutLogDetailContextMobile().workout;
   const isDeleteLogOverlayVisible =
     useWorkoutContextMobile().mobileOverlayHandlers?.isDeleteLogOverlayVisible;
@@ -27,6 +31,7 @@ export default function DeleteLogConfirmationOverlay() {
     return null;
   }
 
+  // --- Handlers ---
   const handleDeleteLogPress = async () => {
     if (!supabaseSession) {
       console.error('Session not found');
