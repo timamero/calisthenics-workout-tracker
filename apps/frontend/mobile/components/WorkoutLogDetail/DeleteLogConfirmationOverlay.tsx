@@ -18,20 +18,42 @@ export default function DeleteLogConfirmationOverlay() {
 
   // --- Context ---
   const workout = useWorkoutLogDetailContextMobile().workout;
-  const isDeleteLogOverlayVisible =
-    useWorkoutContextMobile().mobileOverlayHandlers?.isDeleteLogOverlayVisible;
-  const setIsDeleteLogOverlayVisible =
-    useWorkoutContextMobile().mobileOverlayHandlers
-      ?.setIsDeleteLogOverlayVisible;
-
+  const workoutOverlayHandlers =
+    useWorkoutContextMobile().mobileOverlayHandlers;
+  const workoutLogDetailOverlayHandlers =
+    useWorkoutLogDetailContextMobile().mobileOverlayHandlers;
   const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
 
+  // --- Error Handling ---
   if (!workout) {
     console.error('Error: Workout log not found');
     return null;
   }
+  if (!workoutOverlayHandlers) {
+    console.error(
+      'Error: useWorkoutContextMobile().mobileOverlayHandlers is null',
+    );
+    return null;
+  }
+  if (!workoutLogDetailOverlayHandlers) {
+    console.error(
+      'Error: useWorkoutLogDetailContextMobile().mobileOverlayHandlers is null',
+    );
+    return null;
+  }
+  if (!setDetailWorkout) {
+    console.error(
+      'Error: useWorkoutLogDetailContextMobile().setWorkout is null',
+    );
+    return null;
+  }
 
+  // --- Variables ---
   const workoutLogId = workout.id;
+  const isDeleteLogOverlayVisible =
+    workoutOverlayHandlers.isDeleteLogOverlayVisible;
+  const setIsDeleteLogOverlayVisible =
+    workoutOverlayHandlers.setIsDeleteLogOverlayVisible;
 
   // --- Handlers ---
   const handleDeleteLogPress = async () => {
