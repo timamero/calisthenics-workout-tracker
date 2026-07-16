@@ -71,7 +71,7 @@ export async function deleteWorkoutLog(
   token: string,
   body: BodyInit,
 ): Promise<WorkoutLogResponse | null> {
-  if (environment === 'local') {
+  if (environment === 'local-isolated') {
     console.log('Mobile: Local environment, return workout log body.');
     return JSON.parse(body as string);
   }
