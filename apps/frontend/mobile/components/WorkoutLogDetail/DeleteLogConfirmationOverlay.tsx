@@ -17,7 +17,7 @@ export default function DeleteLogConfirmationOverlay() {
   const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout);
 
   // --- Context ---
-  const workoutLogDetail = useWorkoutLogDetailContextMobile().workout;
+  const workout = useWorkoutLogDetailContextMobile().workout;
   const isDeleteLogOverlayVisible =
     useWorkoutContextMobile().mobileOverlayHandlers?.isDeleteLogOverlayVisible;
   const setIsDeleteLogOverlayVisible =
@@ -26,10 +26,12 @@ export default function DeleteLogConfirmationOverlay() {
 
   const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
 
-  if (!workoutLogDetail?.id) {
-    console.error('Error: WorkoutID not found');
+  if (!workout) {
+    console.error('Error: Workout log not found');
     return null;
   }
+
+  const workoutLogId = workout.id;
 
   // --- Handlers ---
   const handleDeleteLogPress = async () => {
@@ -38,18 +40,18 @@ export default function DeleteLogConfirmationOverlay() {
       return;
     }
 
-    const body = JSON.stringify({ id: workoutLogDetail.id });
+    const body = JSON.stringify({ id: workoutLogId });
 
     try {
       const result = await deleteWorkoutLog(supabaseSession.access_token, body);
       if (result) {
-        deleteWorkout(workoutLogDetail.id);
+        deleteWorkout(workoutLogId);
         setDetailWorkout(null);
         navigation.navigate('App', { screen: 'History' });
       } else {
         console.error(
           'Workout delete request failed to delete log with ID: ',
-          workoutLogDetail.id,
+          workoutLogId,
         );
       }
     } catch (e) {
