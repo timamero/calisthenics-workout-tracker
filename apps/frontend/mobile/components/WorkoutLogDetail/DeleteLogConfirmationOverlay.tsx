@@ -39,8 +39,6 @@ export default function DeleteLogConfirmationOverlay() {
   const workout = useWorkoutLogDetailContextMobile().workout;
   const workoutOverlayHandlers =
     useWorkoutContextMobile().mobileOverlayHandlers;
-  const workoutLogDetailOverlayHandlers =
-    useWorkoutLogDetailContextMobile().mobileOverlayHandlers;
   const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
 
   // --- Error Handling ---
@@ -51,12 +49,6 @@ export default function DeleteLogConfirmationOverlay() {
   if (!workoutOverlayHandlers) {
     console.error(
       'Error: useWorkoutContextMobile().mobileOverlayHandlers is null',
-    );
-    return null;
-  }
-  if (!workoutLogDetailOverlayHandlers) {
-    console.error(
-      'Error: useWorkoutLogDetailContextMobile().mobileOverlayHandlers is null',
     );
     return null;
   }
