@@ -34,7 +34,6 @@ describe('DeleteConfirmationOverlay', () => {
   let isDeleteOverlayOpened: boolean = true;
   let setIsDeleteLogOverlayVisibleSpy = jest.fn();
   let setWorkoutSpy = jest.fn();
-  let deleteWorkoutSpy = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
