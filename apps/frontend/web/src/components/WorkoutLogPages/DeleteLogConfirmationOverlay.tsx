@@ -7,6 +7,25 @@ import { useAuthStore, useWorkoutLibraryStore } from '@cwt/state/stores';
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
 import { deleteWorkoutLog } from '../../services/workoutsService';
 
+/**
+ * DeleteLogConfirmationOverlay component is a confirmation dialog that appears
+ * when the user attempts to delete a workout log. It handles the deletion
+ * process and updates the state accordingly.
+ *
+ * The component uses various hooks to access the workout context,
+ * authentication state, and navigation. It also includes error handling to
+ * ensure that all necessary data is available before proceeding with the
+ * deletion.
+ *
+ * @component
+ * @example
+ * return (
+ *   <DeleteLogConfirmationOverlay />
+ * )
+ *
+ * @returns {JSX.Element | null} The DeleteLogConfirmationOverlay component or
+ * null if required data is missing.
+ */
 export default function DeleteLogConfirmationOverlay() {
   // --- State Management ---
   const supabaseSession = useAuthStore((state) => state.session);
@@ -18,6 +37,7 @@ export default function DeleteLogConfirmationOverlay() {
   const workoutLogDetailOverlayHandlers =
     useWorkoutLogDetailContextWeb().webOverlayHandlers;
 
+  // --- Error Handling ---
   if (!workout) {
     console.error('Error: Workout log not found.');
     return null;
@@ -33,8 +53,8 @@ export default function DeleteLogConfirmationOverlay() {
     return null;
   }
 
+  // --- Variables ---
   const workoutLogId = workout.id;
-
   const deleteLogOverlayOpened = workoutOverlayHandlers.deleteLogOverlayOpened;
   const deleteLogOverlayHandler =
     workoutOverlayHandlers.deleteLogOverlayHandler;
