@@ -4,14 +4,14 @@ from app.core.config import settings
 
 url: str = settings.supabase_url
 
-environment: str = settings.environment
+# environment: str = settings.environment
 if (
-    environment == "local-integration"
-    or environment == "staging"
-    or environment == "production"
+    settings.environment == "local-integration"
+    or settings.environment == "staging"
+    or settings.environment == "production"
 ):
     key: str = settings.supabase_anon_key  # Use this key when integrating with frontend
-elif environment == "local-isolated":
+elif settings.environment == "local-isolated":
     key: str = (
         settings.supabase_service_role_key
     )  # Use this key when using backend only

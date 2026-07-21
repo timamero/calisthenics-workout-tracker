@@ -33,4 +33,10 @@ export default tseslint.config(
       'prettier/prettier': 'warn',
     },
   },
+  {
+    files: ['src/utils/testUtils.tsx'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 );

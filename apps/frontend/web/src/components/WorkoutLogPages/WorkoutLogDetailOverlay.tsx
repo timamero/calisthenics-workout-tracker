@@ -3,18 +3,28 @@ import { Modal, Stack, Group, Button, Title } from '@mantine/core';
 import { formatDuration } from '@cwt/utils';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
+import {
+  useWorkoutLogDetailContextWeb,
+  useWorkoutContextWeb,
+} from '@cwt/hooks';
 
 import WorkoutData from '../Workout/WorkoutData';
 import WorkoutMetadataItem from './WorkoutMetadataItem';
+import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
+import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
 
 export default function WorkoutLogDetailOverlay() {
   const workoutLogDetail = useWorkoutLogDetailContextWeb()
     .workout as WorkoutLogResponse;
+
   const detailHandlers =
     useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
   const detailOpened =
     useWorkoutLogDetailContextWeb().webOverlayHandlers?.opened;
+
+  const deleteLogOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.deleteLogOverlayHandler;
+
   const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
 
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
@@ -45,10 +55,14 @@ export default function WorkoutLogDetailOverlay() {
     >
       <Stack align="stretch" w="100%">
         <Stack mb="lg">
-          <Group justify="flex-end">
+          <Group justify="space-between">
             <Button variant="outline" color="dark" onClick={handleCloseModal}>
               Back to Workouts
             </Button>
+            <WorkoutLogDetailMenu
+              handleUpdateClick={() => console.log('clicked update')}
+              handleDeleteClick={() => deleteLogOverlayHandler?.open()}
+            />
           </Group>
           <Group justify="flex-start" mt="sm">
             <Title
@@ -86,6 +100,7 @@ export default function WorkoutLogDetailOverlay() {
           <WorkoutData />
         </Stack>
       </Stack>
+      <DeleteLogConfirmationOverlay />
     </Modal>
   );
 }

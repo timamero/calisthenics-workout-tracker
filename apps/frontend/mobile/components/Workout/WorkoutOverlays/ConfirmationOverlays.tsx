@@ -123,7 +123,7 @@ export default function ConfirmationOverlays() {
       result = await postWorkoutLog(supabaseSession.access_token, body);
     }
     if (result) {
-      completeWorkout(workoutToSave, mode!);
+      completeWorkout(result, mode!);
       resetWorkout();
       resetTimer();
     } else {

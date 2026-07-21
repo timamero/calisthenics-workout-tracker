@@ -6,3 +6,5 @@ export { useExercisesFilterStore } from './exercises/exercisesFilterStore';
 export { useExercisesSearchStore } from './exercises/exercisesSearchStore';
 export { useSetProgressionsStore } from './setProgressionsStore';
 export { useAuthStore } from './authStore';
+
+export { type WorkoutLibrarySlice } from '../slices/workouts/workoutLibrarySlice';
