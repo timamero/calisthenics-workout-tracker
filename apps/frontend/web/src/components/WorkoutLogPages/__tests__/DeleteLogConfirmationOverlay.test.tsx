@@ -107,15 +107,14 @@ describe('DeleteLogConfirmationOverlay', async () => {
       }),
     }));
 
-    vi.mocked(useWorkoutDraftStore).mockImplementation((selector) => {
+    vi.mocked(useWorkoutDraftStore).mockImplementation((selector: unknown) => {
       const mockState = {
         setExerciseIDToMod: vi.fn(),
         setSupersetIDToMod: vi.fn(),
         setSectionIDToMod: vi.fn(),
       };
       if (typeof selector === 'function') {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return selector(mockState as any);
+        return selector(mockState);
       }
     });
 
@@ -130,28 +129,26 @@ describe('DeleteLogConfirmationOverlay', async () => {
       setWorkout: vi.fn(),
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.mocked(useAuthStore).mockImplementation((selector: any) => {
+    vi.mocked(useAuthStore).mockImplementation((selector: unknown) => {
       const mockState = {
         session: mockSession,
       };
       if (typeof selector == 'function') {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return selector(mockState as any);
+        return selector(mockState);
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return mockState as any;
+      return mockState;
     });
 
-    vi.mocked(useWorkoutLibraryStore).mockImplementation((selector) => {
-      const mockState = {
-        deleteWorkout: deleteWorkoutSpy,
-      };
-      if (typeof selector === 'function') {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return selector(mockState as any);
-      }
-    });
+    vi.mocked(useWorkoutLibraryStore).mockImplementation(
+      (selector: unknown) => {
+        const mockState = {
+          deleteWorkout: deleteWorkoutSpy,
+        };
+        if (typeof selector === 'function') {
+          return selector(mockState);
+        }
+      },
+    );
   });
 
   afterEach(() => {
