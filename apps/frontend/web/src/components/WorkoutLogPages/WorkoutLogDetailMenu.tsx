@@ -33,7 +33,6 @@ export default function WorkoutLogDetailMenu({
 
       <Menu.Dropdown bg="gray.2">
         <Menu.Item
-          // c="red"
           onClick={() => {
             setMenuOpened(false);
             handleUpdateClick();
@@ -43,7 +42,6 @@ export default function WorkoutLogDetailMenu({
           Update Log
         </Menu.Item>
         <Menu.Item
-          // c="red"
           onClick={() => {
             setMenuOpened(false);
             handleDeleteClick();
