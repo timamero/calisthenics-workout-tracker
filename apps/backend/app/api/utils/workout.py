@@ -77,7 +77,7 @@ def delete_workout_log(
         )
         return response.data[0]
     except Exception as e:
-        print(f"Error deleting workout from database: {e}")
+        print(f"Error deleting workout log from database: {e}")
 
 
 def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
