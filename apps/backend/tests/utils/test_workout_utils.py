@@ -4,7 +4,6 @@ from backend.app.api.utils import workout as workout_utils
 
 
 class TestDeleteWorkoutLogUtils:
-    # @pytest.mark.skip(reason="Run this test individually.")
     def test_delete_workout_log_returns_deleted_row(
         self,
         monkeypatch: pytest.MonkeyPatch,
@@ -26,7 +25,6 @@ class TestDeleteWorkoutLogUtils:
 
         assert result == deleted_workout_log_response
 
-    # @pytest.mark.skip(reason="Run this test individually.")
     def test_delete_workout_log_returns_none_on_exception(
         self,
         monkeypatch: pytest.MonkeyPatch,

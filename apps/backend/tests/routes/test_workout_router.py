@@ -6,7 +6,6 @@ from backend.app.api.routes.workout import settings
 
 
 class TestDeleteWorkoutRouter:
-    # @pytest.mark.skip(reason="Run this test individually.")
     async def test_delete_workout_local_isolated_returns_deleted_log(
         self,
         client,
@@ -32,7 +31,6 @@ class TestDeleteWorkoutRouter:
         assert response.json()["id"] == deleted_workout_log_response["id"]
         assert len(response.json().items()) == len(deleted_workout_log_response.items())
 
-    # @pytest.mark.skip(reason="Run this test individually.")
     async def test_delete_workout_requires_auth_in_non_local_environment(
         self,
         client,
@@ -54,7 +52,6 @@ class TestDeleteWorkoutRouter:
         assert response.status_code == 401
         assert response.json()["detail"] == "Authentication required"
 
-    # @pytest.mark.skip(reason="Run this test individually.")
     async def test_delete_workout_with_bearer_token_calls_helper(
         self,
         client,
@@ -90,7 +87,6 @@ class TestDeleteWorkoutRouter:
 
         assert response.json()["id"] == deleted_workout_log_response["id"]
 
-    # @pytest.mark.skip(reason="Run this test individually.")
     async def test_delete_workout_returns_400_when_helper_returns_none(
         self,
         client,
