@@ -49,6 +49,7 @@ def save_build(
 
     if not workout_build:
         raise HTTPException(status_code=400, detail="Invalid request")
+
     return workout_build
 
 
@@ -74,7 +75,7 @@ def save_log(
         workout_log = insert_workout_log(log, access_token)
     if not workout_log:
         raise HTTPException(status_code=400, detail="Invalid request")
-    print("workout_log", workout_log)
+
     return workout_log
 
 
@@ -150,6 +151,7 @@ def read_workout_logs(request: Request) -> List[WorkoutLogResponseSchema]:
         logs = get_workout_logs(access_token)
     if logs is None:
         raise HTTPException(status_code=400, detail="Invalid request")
+
     return logs
 
 
@@ -174,4 +176,5 @@ def read_workout_builds(request: Request) -> List[WorkoutBuildResponseSchema]:
 
     if builds is None:
         raise HTTPException(status_code=400, detail="Invalid request")
+
     return builds
