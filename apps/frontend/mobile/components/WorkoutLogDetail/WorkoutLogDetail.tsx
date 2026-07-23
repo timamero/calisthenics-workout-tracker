@@ -9,7 +9,6 @@ import {
 } from '@cwt/hooks';
 import { formatDuration } from '@cwt/utils';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import { Text } from '../../customText';
 import { CustomTheme } from '../../theme';
