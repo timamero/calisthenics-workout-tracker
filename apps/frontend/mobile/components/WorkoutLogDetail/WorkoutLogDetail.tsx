@@ -24,8 +24,7 @@ export default function WorkoutLogDetail() {
   const styles = globalStyles(theme);
   const { top, bottom } = useSafeAreaInsets();
 
-  const workoutLogDetail = useWorkoutLogDetailContextMobile()
-    .workout as WorkoutLogResponse;
+  const workout = useWorkoutLogDetailContextMobile().workout;
   const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
 
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
@@ -34,12 +33,10 @@ export default function WorkoutLogDetail() {
     useWorkoutContextMobile().mobileOverlayHandlers
       ?.setIsDeleteLogOverlayVisible;
 
-  if (!workoutLogDetail) return null;
+  if (!workout) return null;
 
-  const duration = workoutLogDetail.duration
-    ? formatDuration(workoutLogDetail.duration)
-    : null;
-  const date = new Date(workoutLogDetail.date).toLocaleString('en-US', {
+  const duration = workout.duration ? formatDuration(workout.duration) : null;
+  const date = new Date(workout.date).toLocaleString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -100,7 +97,7 @@ export default function WorkoutLogDetail() {
             paddingBlock: 16,
           }}
         >
-          {workoutLogDetail?.title}
+          {workout.title}
         </Text>
         <View
           style={{
@@ -136,7 +133,7 @@ export default function WorkoutLogDetail() {
                 {date}
               </Text>
             </View>
-            {workoutLogDetail?.description && (
+            {workout.description && (
               <View
                 style={{
                   display: 'flex',
@@ -158,11 +155,11 @@ export default function WorkoutLogDetail() {
                   variant="labelLarge"
                   style={{ color: theme.colors.onBackground, flexShrink: 1 }}
                 >
-                  {workoutLogDetail.description}
+                  {workout.description}
                 </Text>
               </View>
             )}
-            {workoutLogDetail?.goal && (
+            {workout.goal && (
               <View
                 style={{
                   display: 'flex',
@@ -184,7 +181,7 @@ export default function WorkoutLogDetail() {
                   variant="labelLarge"
                   style={{ color: theme.colors.onBackground, flexShrink: 1 }}
                 >
-                  {workoutLogDetail.goal.toUpperCase()}
+                  {workout.goal.toUpperCase()}
                 </Text>
               </View>
             )}
