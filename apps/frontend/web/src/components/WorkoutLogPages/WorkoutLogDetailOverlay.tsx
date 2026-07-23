@@ -13,24 +13,43 @@ import WorkoutMetadataItem from './WorkoutMetadataItem';
 import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
 import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
 
+/**
+ * WorkoutLogDetailOverlay component displays detailed information about a
+ * specific workout log in a modal overlay. It provides options to update
+ * or delete the workout log and shows relevant metadata such as date,
+ * description, goal, and duration.
+ *
+ * The component uses various hooks to access the workout log context,
+ * authentication state, and navigation. It also includes error handling to
+ * ensure that all necessary data is available before rendering the overlay.
+ *
+ * @component
+ * @example
+ * return (
+ *   <WorkoutLogDetailOverlay />
+ * )
+ * @returns {JSX.Element | null} The WorkoutLogDetailOverlay component
+ * or null if required data is missing.
+ */
 export default function WorkoutLogDetailOverlay() {
+  // --- State Management ---
+  const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const workoutLogDetail = useWorkoutLogDetailContextWeb()
     .workout as WorkoutLogResponse;
 
+  // --- Context ---
   const detailHandlers =
     useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
   const detailOpened =
     useWorkoutLogDetailContextWeb().webOverlayHandlers?.opened;
-
   const deleteLogOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.deleteLogOverlayHandler;
 
-  const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
-
-  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
-
+  // --- Error Handling ---
   if (!workoutLogDetail) return null;
 
+  // --- Variables ---
   const duration = formatDuration(workoutLogDetail.duration!);
   const date = new Date(workoutLogDetail.date).toLocaleString('en-US', {
     year: 'numeric',
@@ -38,6 +57,7 @@ export default function WorkoutLogDetailOverlay() {
     day: 'numeric',
   });
 
+  // --- Handlers ---
   const handleCloseModal = () => {
     if (detailHandlers && setDetailWorkout) {
       detailHandlers.close();
