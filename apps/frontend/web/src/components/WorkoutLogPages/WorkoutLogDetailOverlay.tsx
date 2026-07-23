@@ -39,17 +39,32 @@ export default function WorkoutLogDetailOverlay() {
     .workout as WorkoutLogResponse;
 
   // --- Context ---
-  const detailHandlers =
-    useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
-  const detailOpened =
-    useWorkoutLogDetailContextWeb().webOverlayHandlers?.opened;
-  const deleteLogOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.deleteLogOverlayHandler;
+  const workoutOverlayHandlers = useWorkoutContextWeb().webOverlayHandlers;
+  const workoutLogDetailOverlayHandlers =
+    useWorkoutLogDetailContextWeb().webOverlayHandlers;
 
   // --- Error Handling ---
-  if (!workoutLogDetail) return null;
+  if (!workoutLogDetail) {
+    console.error('Error: Workout log detail not found.');
+    return null;
+  }
+  if (!workoutOverlayHandlers) {
+    console.error('Error: useWorkoutContextWeb().webOverlayHandlers is null.');
+    return null;
+  }
+  if (!workoutLogDetailOverlayHandlers) {
+    console.error(
+      'Error: useWorkoutLogDetailContextWeb().webOverlayHandlers is null.',
+    );
+    return null;
+  }
 
   // --- Variables ---
+  const detailHandlers = workoutLogDetailOverlayHandlers.handlers;
+  const detailOpened = workoutLogDetailOverlayHandlers.opened;
+  const deleteLogOverlayHandler =
+    workoutOverlayHandlers.deleteLogOverlayHandler;
+
   const duration = formatDuration(workoutLogDetail.duration!);
   const date = new Date(workoutLogDetail.date).toLocaleString('en-US', {
     year: 'numeric',
@@ -81,7 +96,7 @@ export default function WorkoutLogDetailOverlay() {
             </Button>
             <WorkoutLogDetailMenu
               handleUpdateClick={() => console.log('clicked update')}
-              handleDeleteClick={() => deleteLogOverlayHandler?.open()}
+              handleDeleteClick={() => deleteLogOverlayHandler.open()}
             />
           </Group>
           <Group justify="flex-start" mt="sm">
@@ -92,18 +107,18 @@ export default function WorkoutLogDetailOverlay() {
               lh="xss"
               lts="var(--mantine-letter-spacing-tight)"
             >
-              {workoutLogDetail?.title}
+              {workoutLogDetail.title}
             </Title>
           </Group>
           <Stack gap="md" justify="flex-start">
             <WorkoutMetadataItem label="Date" data={date} />
-            {workoutLogDetail?.description && (
+            {workoutLogDetail.description && (
               <WorkoutMetadataItem
                 label="Description"
                 data={workoutLogDetail.description}
               />
             )}
-            {workoutLogDetail?.goal && (
+            {workoutLogDetail.goal && (
               <WorkoutMetadataItem
                 label="Workout Goal"
                 data={workoutLogDetail.goal.toLocaleUpperCase()}
