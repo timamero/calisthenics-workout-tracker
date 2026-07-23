@@ -20,9 +20,11 @@ async def client():
         yield ac
 
 
+STRICT_LIMIT = 3
+STANDARD_LIMIT = 60
 LIMITER_RESETS = {
-    get_strict_root_limiter: Rate(3, Duration.MINUTE),
-    get_standard_api_limiter: Rate(60, Duration.MINUTE),
+    get_strict_root_limiter: Rate(STRICT_LIMIT, Duration.MINUTE),
+    get_standard_api_limiter: Rate(STANDARD_LIMIT, Duration.MINUTE),
 }
 
 
