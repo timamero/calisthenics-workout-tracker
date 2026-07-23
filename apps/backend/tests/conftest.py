@@ -13,6 +13,7 @@ from backend.app.schemas.workout import DeleteWorkoutRequestSchema
 
 @pytest.fixture
 async def client():
+    """Provides an HTTP client for testing the FastAPI app."""
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
     ) as ac:
@@ -44,11 +45,19 @@ def reset_limiters():
 
 @pytest.fixture
 def delete_workout_request_schema() -> DeleteWorkoutRequestSchema:
+    """
+    Returns a DeleteWorkoutRequestSchema instance with a predefined ID for testing
+    purposes.
+    """
     return DeleteWorkoutRequestSchema(id=54)
 
 
 @pytest.fixture
 def deleted_workout_log_response() -> dict:
+    """
+    Returns a dictionary representing a deleted workout log response for testing
+    purposes.
+    """
     return {
         "id": 54,
         "created_at": datetime(2026, 6, 23, 6, 48, 1, 288810, tzinfo=timezone.utc),
@@ -109,6 +118,12 @@ def deleted_workout_log_response() -> dict:
 
 @pytest.fixture
 def supabase_delete_client_factory():
+    """
+    Returns a factory function that creates a mock Supabase client for testing
+    purposes. The factory function can be configured to return specific response data
+    or raise an exception when the execute method is called.
+    """
+
     def factory(
         response_data: dict | None = None,
         execute_exception: Exception | None = None,
