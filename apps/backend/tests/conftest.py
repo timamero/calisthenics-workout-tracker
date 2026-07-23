@@ -63,7 +63,7 @@ def deleted_workout_log_response() -> dict:
     purposes.
     """
     return {
-        "id": 54,
+        "id": WORKOUT_LOG_ID,
         "created_at": datetime(2026, 6, 23, 6, 48, 1, 288810, tzinfo=timezone.utc),
         "user_id": UUID("ee98b2ee-4d06-4c42-803c-04e645dc26e4"),
         "workout_build_id": None,
