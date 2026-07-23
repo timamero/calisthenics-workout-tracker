@@ -4,7 +4,6 @@ from app.core.config import settings
 
 url: str = settings.supabase_url
 
-# environment: str = settings.environment
 if (
     settings.environment == "local-integration"
     or settings.environment == "staging"
