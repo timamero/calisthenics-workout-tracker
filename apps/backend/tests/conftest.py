@@ -27,6 +27,8 @@ LIMITER_RESETS = {
     get_standard_api_limiter: Rate(STANDARD_LIMIT, Duration.MINUTE),
 }
 
+WORKOUT_LOG_ID = 54
+
 
 @pytest.fixture(autouse=True)
 def reset_limiters():
@@ -51,7 +53,7 @@ def delete_workout_request_schema() -> DeleteWorkoutRequestSchema:
     Returns a DeleteWorkoutRequestSchema instance with a predefined ID for testing
     purposes.
     """
-    return DeleteWorkoutRequestSchema(id=54)
+    return DeleteWorkoutRequestSchema(id=WORKOUT_LOG_ID)
 
 
 @pytest.fixture
