@@ -6,16 +6,18 @@ import DeleteLogConfirmationOverlay from '../DeleteLogConfirmationOverlay';
 import * as workoutsService from '../../../services/workoutsService';
 
 // ---- Mocks for React Navigation and Context Hooks --//
-const mockNavigate = jest.fn();
+// const mockNavigate = jest.fn();
+const mockReplace = jest.fn();
 const mockUseWorkoutContextMobile = jest.fn();
 const mockUseWorkoutLogDetailContextMobile = jest.fn();
 const mockUseAuthStore = jest.fn();
 const mockUseWorkoutLibraryStore = jest.fn();
+const mockUseWorkoutDraftStore = jest.fn();
 
 jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),
   useNavigation: () => ({
-    navigate: mockNavigate,
+    replace: mockReplace,
   }),
 }));
 
@@ -30,6 +32,8 @@ jest.mock('@cwt/state/stores', () => ({
   useAuthStore: (selector: unknown) => mockUseAuthStore(selector),
   useWorkoutLibraryStore: (selector: unknown) =>
     mockUseWorkoutLibraryStore(selector),
+  useWorkoutDraftStore: (selector: unknown) =>
+    mockUseWorkoutDraftStore(selector),
 }));
 
 describe('DeleteConfirmationOverlay', () => {
@@ -39,6 +43,7 @@ describe('DeleteConfirmationOverlay', () => {
   let deleteWorkoutSpy = jest.fn();
   let session: { access_token: string } | null;
   let deleteWorkoutLogSpy: jest.SpyInstance;
+  let resetWorkoutSpy = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -66,6 +71,11 @@ describe('DeleteConfirmationOverlay', () => {
 
     mockUseWorkoutLibraryStore.mockImplementation((selector: any) => {
       const mockState = { deleteWorkout: deleteWorkoutSpy };
+      return typeof selector === 'function' ? selector(mockState) : mockState;
+    });
+
+    mockUseWorkoutDraftStore.mockImplementation((selector: any) => {
+      const mockState = { resetWorkout: resetWorkoutSpy };
       return typeof selector === 'function' ? selector(mockState) : mockState;
     });
   });
@@ -102,7 +112,8 @@ describe('DeleteConfirmationOverlay', () => {
       );
       expect(deleteWorkoutSpy).toHaveBeenCalledWith(sampleWorkoutLogs[0].id);
       expect(setWorkoutSpy).toHaveBeenCalledWith(null);
-      expect(mockNavigate).toHaveBeenCalledWith('App', { screen: 'History' });
+      expect(resetWorkoutSpy).toHaveBeenCalled();
+      expect(mockReplace).toHaveBeenCalledWith('App', { screen: 'History' });
     });
   });
 
@@ -132,7 +143,8 @@ describe('DeleteConfirmationOverlay', () => {
 
     expect(deleteWorkoutSpy).not.toHaveBeenCalled();
     expect(setWorkoutSpy).not.toHaveBeenCalled();
-    expect(mockNavigate).not.toHaveBeenCalled();
+    expect(resetWorkoutSpy).not.toHaveBeenCalled();
+    expect(mockReplace).not.toHaveBeenCalled();
   });
 
   it('logs an error and does not call the API when there is no session', async () => {
@@ -154,6 +166,7 @@ describe('DeleteConfirmationOverlay', () => {
     expect(deleteWorkoutLogSpy).not.toHaveBeenCalled();
     expect(deleteWorkoutSpy).not.toHaveBeenCalled();
     expect(setWorkoutSpy).not.toHaveBeenCalled();
-    expect(mockNavigate).not.toHaveBeenCalled();
+    expect(resetWorkoutSpy).not.toHaveBeenCalled();
+    expect(mockReplace).not.toHaveBeenCalled();
   });
 });
