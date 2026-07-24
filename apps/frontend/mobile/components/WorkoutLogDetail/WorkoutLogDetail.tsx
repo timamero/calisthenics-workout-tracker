@@ -18,21 +18,40 @@ import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
 import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
 
 export default function WorkoutLogDetail() {
+  // --- UI Hooks ---
   const navigation = useNavigation<any>();
-  const theme = useTheme() as CustomTheme;
-  const styles = globalStyles(theme);
   const { top, bottom } = useSafeAreaInsets();
+  const theme = useTheme() as CustomTheme;
 
-  const workout = useWorkoutLogDetailContextMobile().workout;
-  const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
-
+  // --- State Management ---
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
-  const setIsDeleteLogOverlayVisible =
-    useWorkoutContextMobile().mobileOverlayHandlers
-      ?.setIsDeleteLogOverlayVisible;
+  // --- Context ---
+  const workout = useWorkoutLogDetailContextMobile().workout;
+  const setDetailWorkout = useWorkoutLogDetailContextMobile().setWorkout;
+  const workoutOverlayHandlers =
+    useWorkoutContextMobile().mobileOverlayHandlers;
 
-  if (!workout) return null;
+  // --- Error Handling ---
+  if (!workout) {
+    console.log('DEBUG: workout is null in WorkoutLogDetail');
+    console.error('Error: Workout log not found');
+    return null;
+  }
+
+  if (!workoutOverlayHandlers) {
+    console.error(
+      'Error: useWorkoutContextMobile().mobileOverlayHandlers is null',
+    );
+    return null;
+  }
+
+  // --- Styles ---
+  const styles = globalStyles(theme);
+
+  // --- Variables ---
+  const setIsDeleteLogOverlayVisible =
+    workoutOverlayHandlers.setIsDeleteLogOverlayVisible;
 
   const duration = workout.duration ? formatDuration(workout.duration) : null;
   const date = new Date(workout.date).toLocaleString('en-US', {
@@ -41,6 +60,7 @@ export default function WorkoutLogDetail() {
     day: 'numeric',
   });
 
+  // --- Handlers ---
   const handleCloseDetails = () => {
     setDetailWorkout(null);
     resetWorkout();
