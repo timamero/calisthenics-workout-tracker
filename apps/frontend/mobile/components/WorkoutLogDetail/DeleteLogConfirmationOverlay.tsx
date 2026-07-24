@@ -2,7 +2,11 @@ import {
   useWorkoutContextMobile,
   useWorkoutLogDetailContextMobile,
 } from '@cwt/hooks';
-import { useAuthStore, useWorkoutLibraryStore } from '@cwt/state/stores';
+import {
+  useAuthStore,
+  useWorkoutLibraryStore,
+  useWorkoutDraftStore,
+} from '@cwt/state/stores';
 import { useNavigation } from '@react-navigation/native';
 
 import ConfirmationDialog from '../common/ConfirmationDialog';
@@ -34,6 +38,7 @@ export default function DeleteLogConfirmationOverlay() {
   // --- State Management ---
   const supabaseSession = useAuthStore((state) => state.session);
   const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout);
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   // --- Context ---
   const workout = useWorkoutLogDetailContextMobile().workout;
@@ -80,7 +85,8 @@ export default function DeleteLogConfirmationOverlay() {
       if (result) {
         deleteWorkout(workoutLogId);
         setDetailWorkout(null);
-        navigation.navigate('App', { screen: 'History' });
+        resetWorkout();
+        navigation.replace('App', { screen: 'History' });
       } else {
         console.error(
           'Workout delete request failed to delete log with ID: ',
@@ -98,7 +104,7 @@ export default function DeleteLogConfirmationOverlay() {
       message="Are you sure you want to delete this log?"
       confirmButtonLabel="Delete"
       isVisible={isDeleteLogOverlayVisible || false}
-      handleHideDialog={setIsDeleteLogOverlayVisible!}
+      handleHideDialog={setIsDeleteLogOverlayVisible}
       onConfirmationPress={handleDeleteLogPress}
     />
   );
