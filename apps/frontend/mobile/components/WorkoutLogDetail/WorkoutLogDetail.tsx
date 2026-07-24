@@ -17,6 +17,24 @@ import WorkoutData from '../../components/Workout/WorkoutData';
 import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
 import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
 
+/**
+ * WorkoutLogDetail component displays detailed information about a specific
+ * workout log in a modal overlay. It provides options to update or delete the
+ * workout log and shows relevant metadata such as date, description, goal,
+ * and duration.
+ *
+ * The component uses various hooks to access the workout log context,
+ * authentication state, and navigation. It also includes error handling to
+ * ensure that all necessary data is available before rendering the overlay.
+ *
+ * @component
+ * @example
+ * return (
+ *   <WorkoutLogDetail />
+ * )
+ * @returns {JSX.Element | null} The WorkoutLogDetail component or null if required
+ * data is missing.
+ */
 export default function WorkoutLogDetail() {
   // --- UI Hooks ---
   const navigation = useNavigation<any>();
