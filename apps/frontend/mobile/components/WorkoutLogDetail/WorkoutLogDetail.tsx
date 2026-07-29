@@ -83,7 +83,7 @@ export default function WorkoutLogDetail() {
   const handleCloseDetails = () => {
     setDetailWorkout(null);
     resetWorkout();
-    navigation.navigate('App', { screen: 'History' });
+    navigation.replace('App', { screen: 'History' });
   };
 
   const handleDeletePress = () => {
