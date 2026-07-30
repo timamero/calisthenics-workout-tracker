@@ -3,23 +3,67 @@ import { Modal, Stack, Group, Button, Title } from '@mantine/core';
 import { formatDuration } from '@cwt/utils';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
+import {
+  useWorkoutLogDetailContextWeb,
+  useWorkoutContextWeb,
+} from '@cwt/hooks';
 
 import WorkoutData from '../Workout/WorkoutData';
 import WorkoutMetadataItem from './WorkoutMetadataItem';
+import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
+import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
 
+/**
+ * WorkoutLogDetailOverlay component displays detailed information about a
+ * specific workout log in a modal overlay. It provides options to update
+ * or delete the workout log and shows relevant metadata such as date,
+ * description, goal, and duration.
+ *
+ * The component uses various hooks to access the workout log context,
+ * authentication state, and navigation. It also includes error handling to
+ * ensure that all necessary data is available before rendering the overlay.
+ *
+ * @component
+ * @example
+ * return (
+ *   <WorkoutLogDetailOverlay />
+ * )
+ * @returns {JSX.Element | null} The WorkoutLogDetailOverlay component
+ * or null if required data is missing.
+ */
 export default function WorkoutLogDetailOverlay() {
+  // --- State Management ---
+  const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
   const workoutLogDetail = useWorkoutLogDetailContextWeb()
     .workout as WorkoutLogResponse;
-  const detailHandlers =
-    useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
-  const detailOpened =
-    useWorkoutLogDetailContextWeb().webOverlayHandlers?.opened;
-  const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
 
-  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+  // --- Context ---
+  const workoutOverlayHandlers = useWorkoutContextWeb().webOverlayHandlers;
+  const workoutLogDetailOverlayHandlers =
+    useWorkoutLogDetailContextWeb().webOverlayHandlers;
 
-  if (!workoutLogDetail) return null;
+  // --- Error Handling ---
+  if (!workoutLogDetail) {
+    console.error('Error: Workout log detail not found.');
+    return null;
+  }
+  if (!workoutOverlayHandlers) {
+    console.error('Error: useWorkoutContextWeb().webOverlayHandlers is null.');
+    return null;
+  }
+  if (!workoutLogDetailOverlayHandlers) {
+    console.error(
+      'Error: useWorkoutLogDetailContextWeb().webOverlayHandlers is null.',
+    );
+    return null;
+  }
+
+  // --- Variables ---
+  const detailHandlers = workoutLogDetailOverlayHandlers.handlers;
+  const detailOpened = workoutLogDetailOverlayHandlers.opened;
+  const deleteLogOverlayHandler =
+    workoutOverlayHandlers.deleteLogOverlayHandler;
 
   const duration = formatDuration(workoutLogDetail.duration!);
   const date = new Date(workoutLogDetail.date).toLocaleString('en-US', {
@@ -28,6 +72,7 @@ export default function WorkoutLogDetailOverlay() {
     day: 'numeric',
   });
 
+  // --- Handlers ---
   const handleCloseModal = () => {
     if (detailHandlers && setDetailWorkout) {
       detailHandlers.close();
@@ -45,10 +90,14 @@ export default function WorkoutLogDetailOverlay() {
     >
       <Stack align="stretch" w="100%">
         <Stack mb="lg">
-          <Group justify="flex-end">
+          <Group justify="space-between">
             <Button variant="outline" color="dark" onClick={handleCloseModal}>
               Back to Workouts
             </Button>
+            <WorkoutLogDetailMenu
+              handleUpdateClick={() => console.log('clicked update')}
+              handleDeleteClick={() => deleteLogOverlayHandler.open()}
+            />
           </Group>
           <Group justify="flex-start" mt="sm">
             <Title
@@ -58,18 +107,18 @@ export default function WorkoutLogDetailOverlay() {
               lh="xss"
               lts="var(--mantine-letter-spacing-tight)"
             >
-              {workoutLogDetail?.title}
+              {workoutLogDetail.title}
             </Title>
           </Group>
           <Stack gap="md" justify="flex-start">
             <WorkoutMetadataItem label="Date" data={date} />
-            {workoutLogDetail?.description && (
+            {workoutLogDetail.description && (
               <WorkoutMetadataItem
                 label="Description"
                 data={workoutLogDetail.description}
               />
             )}
-            {workoutLogDetail?.goal && (
+            {workoutLogDetail.goal && (
               <WorkoutMetadataItem
                 label="Workout Goal"
                 data={workoutLogDetail.goal.toLocaleUpperCase()}
@@ -86,6 +135,7 @@ export default function WorkoutLogDetailOverlay() {
           <WorkoutData />
         </Stack>
       </Stack>
+      <DeleteLogConfirmationOverlay />
     </Modal>
   );
 }

@@ -11,11 +11,11 @@ import { formatDuration, chunk } from '@cwt/utils';
 import { useWorkoutLogDetailContextMobile } from '@cwt/hooks';
 import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
-import { CustomTheme } from '../theme';
-import { Text } from '../customText';
-import CardButton from '../components/common/CardButton';
-import Pill from './Pill';
-import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
+import { CustomTheme } from '../../theme';
+import { Text } from '../../customText';
+import CardButton from '../../components/common/CardButton';
+import Pill from './../Pill';
+import EmptyLogsPlaceholder from './../EmptyLogsPlaceholder';
 
 export default function WorkoutLogPages() {
   const navigation = useNavigation<any>();

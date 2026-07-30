@@ -110,12 +110,18 @@ export default function ConfirmationOverlays() {
     const body = JSON.stringify(workoutToSave);
     let result: WorkoutBuildResponse | WorkoutLogResponse | null = null;
     if (mode === 'build') {
-      result = await postWorkoutBuild(supabaseSession.access_token, body);
+      result = (await postWorkoutBuild(
+        supabaseSession.access_token,
+        body,
+      )) as WorkoutBuildResponse;
     } else {
-      result = await postWorkoutLog(supabaseSession.access_token, body);
+      result = (await postWorkoutLog(
+        supabaseSession.access_token,
+        body,
+      )) as WorkoutLogResponse;
     }
     if (result) {
-      completeWorkout(workoutToSave, mode!);
+      completeWorkout(result, mode!);
       resetWorkout();
       resetTimer();
     } else {
