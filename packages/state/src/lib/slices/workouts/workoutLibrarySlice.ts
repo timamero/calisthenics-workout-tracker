@@ -2,9 +2,7 @@ import { StateCreator } from 'zustand';
 import { produce } from 'immer';
 
 import type {
-  // WorkoutLogRequest,
   WorkoutLogResponse,
-  WorkoutBuildRequest,
   WorkoutBuildResponse,
   Mode,
 } from '@cwt/schema/workouts';
@@ -12,8 +10,8 @@ import type {
 export interface WorkoutLibrarySlice {
   loading: boolean;
   masterWorkoutLogs: Array<WorkoutLogResponse>;
-  masterWorkoutBuilds: Array<WorkoutBuildResponse | WorkoutBuildResponse>;
-  displayedWorkoutBuilds: Array<WorkoutBuildResponse | WorkoutBuildResponse>;
+  masterWorkoutBuilds: Array<WorkoutBuildResponse>;
+  displayedWorkoutBuilds: Array<WorkoutBuildResponse>;
   displayedWorkoutLogs: Array<WorkoutLogResponse>;
   setLoading: (loading: boolean) => void;
   sortWorkoutLogsByDate: (
