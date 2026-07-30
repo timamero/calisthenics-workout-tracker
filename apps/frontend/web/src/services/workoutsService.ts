@@ -13,7 +13,6 @@ import { sampleWorkoutBuilds } from '@cwt/mocks';
 import { sampleWorkoutLogs } from '@cwt/mocks';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
-// const environment = import.meta.env.VITE_ENVIRONMENT || null;
 
 export async function getWorkoutBuilds(
   token: string,
