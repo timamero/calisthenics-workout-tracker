@@ -32,8 +32,8 @@
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "supabase": "^2.101.0",
-    "turbo": "^2.9.15"
+    "supabase": "^2.111.0",
+    "turbo": "^2.10.8"
   },
   "pnpm": {
     "overrides": {
