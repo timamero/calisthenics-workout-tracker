@@ -12,6 +12,23 @@ import WorkoutMetadataItem from './WorkoutMetadataItem';
 import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
 
+/**
+ * WorkoutLogPages component displays a paginated list of workout logs.
+ * Each log is presented as a card with relevant metadata, and users can
+ * click on a log to view its details in an overlay.
+ *
+ * The component uses state management hooks to access the workout logs
+ * and manage the current page. It also handles user interactions, such
+ * as clicking on a workout log to view its details.
+ *
+ * @component
+ * @example
+ * return (
+ *   <WorkoutLogPages />
+ * )
+ * @returns {JSX.Element | null} The WorkoutLogPages component or null if
+ * required data is missing.
+ */
 export default function WorkoutLogPages() {
   // --- Local State ---
   const [activePage, setPage] = useState(1);
