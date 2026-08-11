@@ -28,6 +28,12 @@ export default function WorkoutLogPages() {
   const detailHandlers =
     useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
 
+  // --- Error Handling ---
+  if (!logs) {
+    console.error('Error: Workout logs not found.');
+    return null;
+  }
+
   // --- Conditional Rendering ---
   if (logs.length === 0) return <EmptyLogsPlaceholder />;
 
