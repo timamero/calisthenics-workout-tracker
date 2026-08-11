@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  Title,
-  Pagination,
-  Stack,
-  ScrollArea,
-  Badge,
-  // Text,
-} from '@mantine/core';
+import { Title, Pagination, Stack, ScrollArea, Badge } from '@mantine/core';
 
 import { useWorkoutLibraryStore } from '@cwt/state/stores';
 import { chunk, formatDuration } from '@cwt/utils';
@@ -20,24 +13,29 @@ import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
 
 export default function WorkoutLogPages() {
+  // --- Local State ---
   const [activePage, setPage] = useState(1);
 
-  const detailHandlers =
-    useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
+  // --- State Management ---
+  const logs = useWorkoutLibraryStore((state) => state.displayedWorkoutLogs);
+  const setMode = useWorkoutDraftStore((state) => state.setMode);
+  const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
   const workoutLogDetail = useWorkoutLogDetailContextWeb()
     .workout as WorkoutLogResponse;
   const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
 
-  const logs = useWorkoutLibraryStore((state) => state.displayedWorkoutLogs);
-  const setMode = useWorkoutDraftStore((state) => state.setMode);
-  const setWorkoutData = useWorkoutDraftStore((state) => state.setWorkoutData);
+  // -- Context ---
+  const detailHandlers =
+    useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
 
+  // --- Conditional Rendering ---
   if (logs.length === 0) return <EmptyLogsPlaceholder />;
 
+  // --- Pagination Logic ---
   const chunkSize = logs.length >= 15 ? 15 : logs.length;
-
   const data = chunk(logs, chunkSize);
 
+  // --- Handlers ---
   const handleWorkoutLogClick = (workoutLog: WorkoutLogResponse) => {
     if (setDetailWorkout && detailHandlers) {
       setDetailWorkout(workoutLog);
@@ -47,6 +45,7 @@ export default function WorkoutLogPages() {
     }
   };
 
+  // --- Render Workout Log Items ---
   const items = data[activePage - 1].map((wo, i) => {
     const workoutTitle = wo.title ? wo.title : `Workout Log ${i + 1}`;
     const date = new Date(wo.date).toLocaleString('en-US', {
