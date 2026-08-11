@@ -24,6 +24,8 @@ export default function WorkoutLogPages() {
 
   const detailHandlers =
     useWorkoutLogDetailContextWeb().webOverlayHandlers?.handlers;
+  const workoutLogDetail = useWorkoutLogDetailContextWeb()
+    .workout as WorkoutLogResponse;
   const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
 
   const logs = useWorkoutLibraryStore((state) => state.displayedWorkoutLogs);
@@ -94,7 +96,7 @@ export default function WorkoutLogPages() {
         mt="sm"
         color="lime.2"
       />
-      <WorkoutLogDetailOverlay />
+      {workoutLogDetail && <WorkoutLogDetailOverlay />}
     </Stack>
   );
 }
