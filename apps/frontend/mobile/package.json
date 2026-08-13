@@ -4,6 +4,7 @@
   "main": "index.ts",
   "scripts": {
     "dev": "EXPO_TUNNEL_SUBDOMAIN=cal-workout-app expo start --tunnel",
+    "dev-tunnel": "pnpm dlx localtunnel --port 8080 --subdomain cal-workout-app",
     "web": "expo start --web",
     "dev-build": "eas build --platform android --profile development",
     "production-build": "eas build --platform android --profile production",

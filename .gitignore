@@ -61,6 +61,8 @@ logs/
 *.bak
 *.bak*
 *.tmp
+temp*
+temp/
 .cache/
 .backup/
 .secrets.baseline
