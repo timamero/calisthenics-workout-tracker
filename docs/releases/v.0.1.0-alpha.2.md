@@ -1,7 +1,7 @@
-# Torque - v0.1.1-alpha.1 Release Notes
+# Torque - v0.1.0-alpha2 Release Notes
 
 **Release Date:** June 21, 2026  
-**Version:** 0.1.1-alpha.1  
+**Version:** 0.1.0-alpha.2  
 **Status:** Alpha Release
 
 ## Overview

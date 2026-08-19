@@ -32,7 +32,7 @@ https://github.com/user-attachments/assets/60e5360b-529c-449a-8e0c-62006feb719a
 
 ## Status
 
-This project is under active development. The current build (`v0.1.1-alpha.1`) covers core account, logging, and history features — enough for a working demo, not yet feature-complete. See the [roadmap](#roadmap) below for what's next.
+This project is under active development. The current build (`v0.1.0-alpha.2`) covers core account, logging, and history features — enough for a working demo, not yet feature-complete. See the [roadmap](#roadmap) below for what's next.
 
 ---
 
@@ -70,15 +70,15 @@ Beyond the code, this project has been a chance for me to practice the non-techn
 
 ## Roadmap
 
-| Version | Focus                                                                                         |
-| ------- | --------------------------------------------------------------------------------------------- |
-| alpha.2 | Workout Templates, enhanced workout logging, architecture refactoring and code reorganization |
-| alpha.3 | Progressions library, onboarding, profile/settings, calendar logbook view                     |
-| alpha.4 | Progression tracking — detailed status and history per skill                                  |
-| alpha.5 | AI workout generator (GPT 4o mini)                                                            |
-| beta.1  | Testing, advanced auth, security hardening, UI/UX polish                                      |
-| beta.2  | Performance monitoring                                                                        |
-| rc.1    | Google Cloud Run backend Migration                                                            |
+| Version         | Focus                                                                                         |
+| --------------- | --------------------------------------------------------------------------------------------- |
+| alpha.x Phase 2 | Workout Templates, enhanced workout logging, architecture refactoring and code reorganization |
+| alpha.x Phase 3 | Progressions library, onboarding, profile/settings, calendar logbook view                     |
+| alpha.x Phase 4 | Progression tracking — detailed status and history per skill                                  |
+| alpha.x Phase 5 | AI workout generator (GPT 4o mini)                                                            |
+| beta.x Phase 1  | Testing, advanced auth, security hardening, UI/UX polish                                      |
+| beta.x Phase 2  | Performance monitoring                                                                        |
+| rc.x Phase 1    | Google Cloud Run backend Migration                                                            |
 
 ---
 
