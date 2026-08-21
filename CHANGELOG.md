@@ -5,6 +5,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0-alpha.3] - 2026-08-20
+
+### Added
+
+#### Frontend - Web Application
+
+- Delete workout log confirmation flow for workout detail pages and overlays
+- A dedicated delete confirmation overlay and menu action for workout log detail views
+- Test coverage for delete confirmation overlay behavior on the web app
+
+#### Frontend - Mobile Application
+
+- Delete workout log confirmation flow in the mobile workout detail experience
+- Mobile workout log detail screen and delete confirmation overlay support
+- Mobile tests covering delete confirmation behavior
+
+#### Backend API
+
+- Backend route coverage for deleting workout logs in local-isolated and authenticated modes
+- Workout utility and test updates to validate delete log behavior and error handling
+
+### Changed
+
+- Updated the workout log detail and workout context flows to better handle missing or stale workout logs during deletion
+- Refactored workout log page and overlay components for clarity and consistent state handling across web and mobile
+- Temporarily disabled unfinished About and onboarding routes by showing a maintenance message instead of exposing incomplete screens
+- Updated project version metadata and package version numbers to `0.1.0-alpha.3`
+- Refreshed generated route metadata and app-level wiring related to workout log detail pages
+
+### Fixed
+
+- Prevented missing workout log data from causing errors during delete operations
+- Corrected ordering and guard logic around overlay handlers so delete actions fail more gracefully when data is absent
+- Fixed typo and version-number inconsistencies in the release metadata and package files
+- Improved backend delete-workout-log validation and error handling for unauthorized and invalid requests
+
+### Developer Experience
+
+- Added backend test structure and utilities for workout deletion and workout helper validation
+- Removed unused/disabled code related to previous workout log flows and cleaned up route/test organization
+- Added the PR template and updated root workspace docs for the current release branch
+
+---
+
 ## [0.1.0-alpha.2] - 2026-06-21
 
 ### Added
