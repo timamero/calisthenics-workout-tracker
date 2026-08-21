@@ -107,6 +107,12 @@ async def read_root(
     }
 
 
+@app.get("/health", include_in_schema=False)
+async def health():
+    """"""
+    return {"status": "ok"}
+
+
 @app.get(
     "/info",
     dependencies=[Depends(get_strict_root_limiter())],
