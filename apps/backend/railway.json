@@ -2,7 +2,6 @@
   "$schema": "https://schema.railpack.com",
   "providers": ["python"],
   "packages": {
-    "python": "3.13",
-    "apt": ["libexpat1"]
+    "python": "3.13"
   }
 }
