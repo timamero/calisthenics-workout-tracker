@@ -58,7 +58,7 @@ Beyond the code, this project has been a chance for me to practice the non-techn
 
 ---
 
-## What it does (alpha.1)
+## What it does (alpha Phase 1.1)
 
 - **Account creation & login** — Supabase Auth
 - **Exercise library** — 100+ bodyweight exercises (push-ups, pull-ups, dips, squats, core), each tagged with target muscles, equipment, and difficulty
@@ -70,15 +70,15 @@ Beyond the code, this project has been a chance for me to practice the non-techn
 
 ## Roadmap
 
-| Version         | Focus                                                                                         |
-| --------------- | --------------------------------------------------------------------------------------------- |
-| alpha.x Phase 2 | Workout Templates, enhanced workout logging, architecture refactoring and code reorganization |
-| alpha.x Phase 3 | Progressions library, onboarding, profile/settings, calendar logbook view                     |
-| alpha.x Phase 4 | Progression tracking — detailed status and history per skill                                  |
-| alpha.x Phase 5 | AI workout generator (GPT 4o mini)                                                            |
-| beta.x Phase 1  | Testing, advanced auth, security hardening, UI/UX polish                                      |
-| beta.x Phase 2  | Performance monitoring                                                                        |
-| rc.x Phase 1    | Google Cloud Run backend Migration                                                            |
+| Version                   | Focus                                                                                         |
+| ------------------------- | --------------------------------------------------------------------------------------------- |
+| alpha Phase 1.2 (Current) | Workout Templates, enhanced workout logging, architecture refactoring and code reorganization |
+| alpha Phase 2             | Progressions library, onboarding, profile/settings, calendar logbook view                     |
+| alpha Phase 3             | Progression tracking — detailed status and history per skill                                  |
+| alpha Phase 4             | AI workout generator (GPT 4o mini)                                                            |
+| beta Phase 1              | Testing, advanced auth, security hardening, UI/UX polish                                      |
+| beta Phase 2              | Performance monitoring                                                                        |
+| rc Phase 1                | Google Cloud Run backend Migration                                                            |
 
 ---
 

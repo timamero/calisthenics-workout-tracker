@@ -47,7 +47,7 @@ function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
   );
 }
 
-// ─── What's in alpha.1 ───────────────────────────────────────────────────────
+// ─── What's in alpha phase 1 ───────────────────────────────────────────────────────
 
 export default function WhatsInAlpha() {
   const features = [
@@ -90,7 +90,7 @@ export default function WhatsInAlpha() {
             letterSpacing: theme.other.letterSpacing.widest,
           })}
         >
-          What's in alpha.1
+          What's in alpha
         </Text>
         <Title
           order={2}
