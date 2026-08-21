@@ -16,8 +16,21 @@ import type { ComboboxItem } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useState } from 'react';
 
+const IS_PAGE_DISABLED = true;
+
 export const Route = createFileRoute('/_site/onboard/onboarding')({
-  component: OnboardingView,
+  component: () => {
+    if (IS_PAGE_DISABLED) {
+      return (
+        <div style={{ padding: '2rem', textAlign: 'center' }}>
+          <h2>Under Maintenance</h2>
+          <p>This page is temporarily unavailable. Please check back soon!</p>
+        </div>
+      );
+    }
+
+    return <OnboardingView />;
+  },
 });
 
 function OnboardingView() {
