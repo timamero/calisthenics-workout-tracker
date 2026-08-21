@@ -1,7 +1,7 @@
 from functools import lru_cache
 import time
 
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 from typing_extensions import Annotated
 from pyrate_limiter import Duration, Rate, Limiter
@@ -107,9 +107,9 @@ async def read_root(
     }
 
 
-@app.get("/health", include_in_schema=False)
+@app.get("/health", include_in_schema=False, status_code=status.HTTP_200_OK)
 async def health():
-    """"""
+    """Health check endpoint to verify that the application is running."""
     return {"status": "ok"}
 
 
