@@ -3,6 +3,6 @@
   "providers": ["python"],
   "packages": {
     "python": "3.13",
-    "poetry": "latest"
+    "poetry": "2.1.4"
   }
 }
