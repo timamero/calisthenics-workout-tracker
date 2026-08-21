@@ -32,7 +32,7 @@ https://github.com/user-attachments/assets/60e5360b-529c-449a-8e0c-62006feb719a
 
 ## Status
 
-This project is under active development. The current build (`v0.1.0-alpha.2`) covers core account, logging, and history features — enough for a working demo, not yet feature-complete. See the [roadmap](#roadmap) below for what's next.
+This project is under active development. The current build (`v0.1.0-alpha.3`) covers core account, logging, and history features — enough for a working demo, not yet feature-complete. See the [roadmap](#roadmap) below for what's next.
 
 ---
 
