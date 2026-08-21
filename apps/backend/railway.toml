@@ -8,6 +8,7 @@
 
 [build]
 builder      = "RAILPACK"
+aptPackages  = ["libexpat1"]
 buildCommand = "poetry install --no-root --only main"
 
 # Only rebuild when backend files change (monorepo best practice)
