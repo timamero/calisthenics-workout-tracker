@@ -14,7 +14,7 @@ buildCommand = "poetry install --no-root --only main"
 watchPatterns = ["apps/backend/**"]
 
 [deploy]
-startCommand            = "poetry run uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"
+startCommand            = ".venv/bin/uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"
 healthcheckPath         = "/health"
 healthcheckTimeout      = 120
 restartPolicyType       = "ON_FAILURE"
@@ -22,4 +22,4 @@ restartPolicyMaxRetries = 3
 
 # ── PR / preview environment overrides ────────────────────────────────────────
 [environments.pr.deploy]
-startCommand = "poetry run uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"
+startCommand = ".venv/bin/uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"
