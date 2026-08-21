@@ -68,7 +68,7 @@ export default function Hero() {
               size={useDefaultSize()}
               radius="xl"
             >
-              Early Access — v0.1.0-alpha.1
+              Early Access — v0.1.0-alpha.3
             </Badge>
             <Badge
               ff="monospace"

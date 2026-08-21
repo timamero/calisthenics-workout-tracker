@@ -1,4 +1,4 @@
-from .main import STRICT_RATE_LIMIT
+from backend.app.main import STRICT_RATE_LIMIT
 
 
 async def test_read_root(client):

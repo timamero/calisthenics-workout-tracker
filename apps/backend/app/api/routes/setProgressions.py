@@ -8,8 +8,6 @@ from app.schemas.setProgressions import SetProgressionsResponseSchema
 
 from app.core.config import settings
 
-environment: str = settings.environment
-
 router = APIRouter(
     prefix="/set-progressions",
     tags=["setProgressions"],
@@ -33,7 +31,7 @@ async def get_set_progressions(
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        if environment == "local-isolated":
+        if settings.environment == "local-isolated":
             setProgressions = get_set_progressions_list()
         else:
             raise HTTPException(status_code=401, detail="Authentication required")

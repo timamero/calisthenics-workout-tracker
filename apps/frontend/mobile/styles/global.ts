@@ -12,4 +12,8 @@ export const globalStyles = (theme: CustomTheme) =>
       justifyContent: 'flex-start',
       backgroundColor: theme.colors.background,
     },
+    uppercaseLabel: {
+      color: theme.colors.onBackground,
+      textTransform: 'uppercase',
+    },
   });

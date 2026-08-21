@@ -1,8 +1,8 @@
-import { useState, type ReactNode } from "react";
-import { useDisclosure } from "@mantine/hooks";
+import { useState, type ReactNode } from 'react';
+import { useDisclosure } from '@mantine/hooks';
 
-import { WorkoutContext } from "../contexts/WorkoutContext";
-import { AppTypeSchema } from "@cwt/schema/common";
+import { WorkoutContext } from '../contexts/WorkoutContext';
+import { AppTypeSchema } from '@cwt/schema/common';
 
 export default function WorkoutOverlaysContextProvider({
   appType,
@@ -12,6 +12,8 @@ export default function WorkoutOverlaysContextProvider({
   children: ReactNode;
 }) {
   // Web
+  const [deleteLogOverlayOpened, deleteLogOverlayHandler] =
+    useDisclosure(false);
   const [deleteRootItemOverlayOpened, deleteRootItemOverlayHandler] =
     useDisclosure(false);
   const [deleteNestedItemOverlayOpened, deleteNestedItemOverlayHandler] =
@@ -24,21 +26,25 @@ export default function WorkoutOverlaysContextProvider({
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
 
   const webOverlayHandlers = {
-    deleteRootItemOverlayOpened: deleteRootItemOverlayOpened,
-    deleteRootItemOverlayHandler: deleteRootItemOverlayHandler,
-    deleteNestedItemOverlayOpened: deleteNestedItemOverlayOpened,
-    deleteNestedItemOverlayHandler: deleteNestedItemOverlayHandler,
-    deleteSetOverlayOpened: deleteSetOverlayOpened,
-    deleteSetOverlayHandler: deleteSetOverlayHandler,
-    deleteSetInSupersetOverlayOpened: deleteSetInSupersetOverlayOpened,
-    deleteSetInSupersetOverlayHandler: deleteSetInSupersetOverlayHandler,
-    saveOverlayOpened: saveOverlayOpened,
-    saveOverlayHandler: saveOverlayHandler,
-    cancelOverlayOpened: cancelOverlayOpened,
-    cancelOverlayHandler: cancelOverlayHandler,
+    deleteLogOverlayOpened,
+    deleteLogOverlayHandler,
+    deleteRootItemOverlayOpened,
+    deleteRootItemOverlayHandler,
+    deleteNestedItemOverlayOpened,
+    deleteNestedItemOverlayHandler,
+    deleteSetOverlayOpened,
+    deleteSetOverlayHandler,
+    deleteSetInSupersetOverlayOpened,
+    deleteSetInSupersetOverlayHandler,
+    saveOverlayOpened,
+    saveOverlayHandler,
+    cancelOverlayOpened,
+    cancelOverlayHandler,
   };
 
   // Mobile
+  const [isDeleteLogOverlayVisible, setIsDeleteLogOverlayVisible] =
+    useState<boolean>(false);
   const [isDeleteRootItemOverlayVisible, setIsDeleteRootItemOverlayVisible] =
     useState<boolean>(false);
   const [
@@ -57,15 +63,16 @@ export default function WorkoutOverlaysContextProvider({
     useState<boolean>(false);
 
   const mobileOverlayHandlers = {
-    isDeleteRootItemOverlayVisible: isDeleteRootItemOverlayVisible,
-    setIsDeleteRootItemOverlayVisible: setIsDeleteRootItemOverlayVisible,
-    isDeleteNestedItemOverlayVisible: isDeleteNestedItemOverlayVisible,
-    setIsDeleteNestedItemOverlayVisible: setIsDeleteNestedItemOverlayVisible,
-    isDeleteSetOverlayVisible: isDeleteSetOverlayVisible,
-    setIsDeleteSetOverlayVisible: setIsDeleteSetOverlayVisible,
-    isDeleteSetInSupersetOverlayVisible: isDeleteSetInSupersetOverlayVisible,
-    setIsDeleteSetInSupersetOverlayVisible:
-      setIsDeleteSetInSupersetOverlayVisible,
+    isDeleteLogOverlayVisible,
+    setIsDeleteLogOverlayVisible,
+    isDeleteRootItemOverlayVisible,
+    setIsDeleteRootItemOverlayVisible,
+    isDeleteNestedItemOverlayVisible,
+    setIsDeleteNestedItemOverlayVisible,
+    isDeleteSetOverlayVisible,
+    setIsDeleteSetOverlayVisible,
+    isDeleteSetInSupersetOverlayVisible,
+    setIsDeleteSetInSupersetOverlayVisible,
     isSaveWorkoutDialogVisible,
     setIsSaveWorkoutDialogVisible,
     isCancelWorkoutDialogVisible,
@@ -75,7 +82,7 @@ export default function WorkoutOverlaysContextProvider({
   return (
     <WorkoutContext.Provider
       value={
-        appType === "web"
+        appType === 'web'
           ? { appType, webOverlayHandlers }
           : { appType, mobileOverlayHandlers }
       }

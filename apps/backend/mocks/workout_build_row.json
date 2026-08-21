@@ -6,12 +6,12 @@
     "workout_data": {
       "exercises": [
         {
-          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "id": "00000000-0000-0000-0000-000000000000",
           "exercise_id": 0,
           "tracked": ["reps"],
           "sets": [
             {
-              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "id": "00000000-0000-0000-0000-000000000000",
               "fields": {
                 "reps": 10,
                 "rest": "PT30S"

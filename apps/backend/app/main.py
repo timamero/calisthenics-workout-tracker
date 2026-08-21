@@ -36,10 +36,10 @@ START_TIME = time.time()
 origins = [
     "http://localhost:5173",  # Local web server
     "http://localhost:8081",  # Local mobile server
-    "http://127.0.0.1:8000",  # Origin for the local FastAPI server
+    "http://127.0.0.1:8080",  # Origin for the local FastAPI server
 ]
 
-if config.settings.environment == "local-isolated":
+if config.settings.environment == "local-integration":
     origins.append(config.settings.local_origin)
     origins.append(config.settings.local_web_origin)
     origins.append(config.settings.local_mobile_exp_origin)

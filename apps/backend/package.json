@@ -1,9 +1,9 @@
 {
   "name": "@cwt/backend",
-  "version": "0.1.1-alpha.1",
+  "version": "0.1.0-alpha.3",
   "private": true,
   "scripts": {
-    "dev": "uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "dev": "uvicorn app.main:app --reload --host 0.0.0.0 --port 8080",
     "lint": "black . && flake8 .",
     "test": "pytest --ignore=./.venv",
     "setup": "make install"

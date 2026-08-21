@@ -111,3 +111,7 @@ class WorkoutLogResponseSchema(BaseModel):
     status: Literal["draft", "finalized", "archived"]
     updated_at: Optional[datetime]
     goal: Optional[Literal["function", "endurance", "hypertrophy", "strength", "power"]]
+
+
+class DeleteWorkoutRequestSchema(BaseModel):
+    id: int
