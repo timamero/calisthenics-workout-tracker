@@ -1488,6 +1488,21 @@ files = [
 dev = ["black", "build", "mypy", "pytest", "pytest-cov", "setuptools", "tox", "twine", "wheel"]
 
 [[package]]
+name = "railway-sdk"
+version = "0.2.0"
+description = "Thin Railway Infrastructure as Code authoring helpers (Python)"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "railway_sdk-0.2.0-py3-none-any.whl", hash = "sha256:a0fc16a272ee9a34b54e5302f80db933020c524a210cb1e2b76534c68dd17f01"},
+    {file = "railway_sdk-0.2.0.tar.gz", hash = "sha256:74348575a0a61425c35aa5757d069130e7c153a6e75fa642efdd44dcc843e473"},
+]
+
+[package.extras]
+dev = ["pytest (>=8)"]
+
+[[package]]
 name = "realtime"
 version = "2.31.0"
 description = ""
@@ -1946,4 +1961,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.14"
-content-hash = "7c6e6c9a6932bd56dfcebb6ea4455ea769d0e0ca1c27b8d002d3cd90625371c8"
+content-hash = "127e2488d5eedb220f892463a386d1b0f66690c3870a11d004ea55ed0598da96"
