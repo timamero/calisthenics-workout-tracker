@@ -20,8 +20,7 @@ def main(ctx=None):
             "builder": "RAILPACK",
             "watchPatterns": ["/apps/backend/**"],
         },
-        start='''poetry run python -c "import app.main; print(\'import ok\')" && poetry
-          run uvicorn app.main:app --host 0.0.0.0 --port "${PORT}"''',
+        start=".venv/bin/uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}",
         healthcheck="/health",
         replicas={"sfo": 1},
         env={
