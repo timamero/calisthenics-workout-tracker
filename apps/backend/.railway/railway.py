@@ -10,7 +10,7 @@ def main(ctx=None):
         "calisthenics-workout-tracker",
         source=github(
             "timamero/calisthenics-workout-tracker",
-            branch="CWT-489-update-railway-config",
+            branch="staging",
             checkSuites=False,
             rootDirectory="/apps/backend/",
         ),
