@@ -15,8 +15,10 @@ def main(ctx=None):
             rootDirectory="/apps/backend/",
         ),
         build={
-            "buildCommand": """poetry config virtualenvs.create false && poetry
-                install --no-root --only main""",
+            "buildCommand": (
+                "poetry config virtualenvs.create false && "
+                "poetry install --no-root --only main"
+            ),
             "buildEnvironment": "V3",
             "builder": "RAILPACK",
             "watchPatterns": ["/apps/backend/**"],
