@@ -9,7 +9,6 @@ from fastapi_limiter.depends import RateLimiter
 from app.schemas.exercise import ExerciseSchema, ExerciseFilterParams
 from app.api.utils.exercises import get_exercises, get_exercise_by_id
 
-from app.core.config import settings
 from app.core.dependencies import get_access_token
 
 router = APIRouter(prefix="/exercises")
@@ -32,10 +31,7 @@ def read_filtered_exercises(
     """
 
     startTime = time.perf_counter()
-    if settings.environment == "local-isolated":
-        exercises = get_exercises(filter_query)
-    else:
-        exercises = get_exercises(filter_query, token)
+    exercises = get_exercises(filter_query, token)
 
     if not exercises:
         raise HTTPException(status_code=400, detail="Invalid request")
@@ -57,10 +53,7 @@ def read_exercise_item(
     """
     Retrieve exercise by ID.
     """
-    if settings.environment == "local-isolated":
-        exercise = get_exercise_by_id(exercise_id)
-    else:
-        exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=token)
+    exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=token)
 
     if not exercise:
         raise HTTPException(status_code=400, detail="Invalid request")
