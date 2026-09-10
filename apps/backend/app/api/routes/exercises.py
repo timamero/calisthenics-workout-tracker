@@ -2,7 +2,7 @@ from typing import List, Annotated
 import time
 
 from fastapi import APIRouter, HTTPException, Query, Depends
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
 from pyrate_limiter import Duration, Limiter, Rate
 from fastapi_limiter.depends import RateLimiter
 
@@ -10,27 +10,12 @@ from app.schemas.exercise import ExerciseSchema, ExerciseFilterParams
 from app.api.utils.exercises import get_exercises, get_exercise_by_id
 
 from app.core.config import settings
+from app.core.dependencies import get_access_token
 
 router = APIRouter(prefix="/exercises")
 
+# TODO: Move standard_api_limit to dependencies
 standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
-
-bearer_scheme = HTTPBearer(auto_error=False)
-
-
-def get_access_token(
-    credentials: Annotated[
-        HTTPAuthorizationCredentials | None,
-        Depends(bearer_scheme),
-    ],
-) -> str | None:
-    if settings.environment == "local-isolated":
-        return None
-
-    if credentials is None:
-        raise HTTPException(status_code=401, detail="Authentication required")
-
-    return credentials.credentials
 
 
 @router.get(
