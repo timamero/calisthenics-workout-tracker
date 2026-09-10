@@ -15,14 +15,15 @@ router = APIRouter(prefix="/exercises")
 
 standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
 
 
-def header_token():
+async def get_current_token(
+    token: Annotated[str | None, Depends(oauth2_scheme)],
+) -> str | None:
     if settings.environment == "local-isolated":
         return None
-    else:
-        return oauth2_scheme
+    return token
 
 
 @router.get(
@@ -32,7 +33,7 @@ def header_token():
 )
 def read_filtered_exercises(
     filter_query: Annotated[ExerciseFilterParams, Query()],
-    token: Annotated[str, Depends(header_token())],
+    token: Annotated[str | None, Depends(get_current_token)] = None,
 ):
     """
     Retrieve a list of exercises.
