@@ -2,7 +2,7 @@ from typing import List, Annotated
 import time
 
 from fastapi import APIRouter, HTTPException, Query, Depends
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pyrate_limiter import Duration, Limiter, Rate
 from fastapi_limiter.depends import RateLimiter
 
@@ -15,15 +15,22 @@ router = APIRouter(prefix="/exercises")
 
 standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
+bearer_scheme = HTTPBearer(auto_error=False)
 
 
-async def get_current_token(
-    token: Annotated[str | None, Depends(oauth2_scheme)],
+def get_access_token(
+    credentials: Annotated[
+        HTTPAuthorizationCredentials | None,
+        Depends(bearer_scheme),
+    ],
 ) -> str | None:
     if settings.environment == "local-isolated":
         return None
-    return token
+
+    if credentials is None:
+        raise HTTPException(status_code=401, detail="Authentication required")
+
+    return credentials.credentials
 
 
 @router.get(
@@ -33,7 +40,7 @@ async def get_current_token(
 )
 def read_filtered_exercises(
     filter_query: Annotated[ExerciseFilterParams, Query()],
-    token: Annotated[str | None, Depends(get_current_token)] = None,
+    token: Annotated[str | None, Depends(get_access_token)],
 ):
     """
     Retrieve a list of exercises.
@@ -63,7 +70,7 @@ def read_filtered_exercises(
 )
 def read_exercise_item(
     exercise_id: str,
-    token: Annotated[str | None, Depends(get_current_token)] = None,
+    token: Annotated[str | None, Depends(get_access_token)],
 ):
     """
     Retrieve exercise by ID.
