@@ -4,6 +4,31 @@ from app.services.supabase_client import get_supabase_client
 from app.schemas.exercise import ExerciseFilterParams
 
 
+def filter_muscles_equipment_query_to_supabase_conditions(
+    filter_query: ExerciseFilterParams,
+) -> str:
+    """
+    Convert the filter query parameters for muscle and equipment into a
+    Supabase-compatible condition string.
+    """
+    muscles = filter_query.muscles
+    equipments = filter_query.equipments
+
+    conditions = ""
+
+    if muscles:
+        muscle_conditions = ",".join([f'target_muscles.cs.{{"{m}"}}' for m in muscles])
+        conditions = conditions + muscle_conditions
+
+    if equipments:
+        equipment_conditions = ",".join(
+            [f'required_equipment.cs.{{"{e}"}}' for e in equipments]
+        )
+        conditions = conditions + "," + equipment_conditions
+
+    return conditions
+
+
 def get_exercises(filter_query: ExerciseFilterParams, access_token: str | None = None):
 
     try:
@@ -15,31 +40,18 @@ def get_exercises(filter_query: ExerciseFilterParams, access_token: str | None =
             detail="Invalid Request: Error initializing Supabase client",
         )
 
-    muscles = filter_query.muscles
-    equipments = filter_query.equipments
-    difficulty = filter_query.difficulty
-    emphasis = filter_query.emphasis
-    q = filter_query.q
-
     try:
         query = supabase.table("exercises").select("*")
+        muscle_equipment_conditions = (
+            filter_muscles_equipment_query_to_supabase_conditions(filter_query)
+        )
 
-        conditions = ""
+        if muscle_equipment_conditions:
+            query = query.or_(muscle_equipment_conditions)
 
-        if muscles:
-            muscle_conditions = ",".join(
-                [f'target_muscles.cs.{{"{m}"}}' for m in muscles]
-            )
-            conditions = conditions + muscle_conditions
-
-        if equipments:
-            equipment_conditions = ",".join(
-                [f'required_equipment.cs.{{"{e}"}}' for e in equipments]
-            )
-            conditions = conditions + "," + equipment_conditions
-
-        if conditions:
-            query = query.or_(conditions)
+        difficulty = filter_query.difficulty
+        emphasis = filter_query.emphasis
+        q = filter_query.q
 
         if difficulty:
             query.eq("difficulty", difficulty)
