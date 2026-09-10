@@ -35,10 +35,7 @@ def read_filtered_exercises(
     if settings.environment == "local-isolated":
         exercises = get_exercises(filter_query)
     else:
-        if token:
-            exercises = get_exercises(filter_query, token)
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
+        exercises = get_exercises(filter_query, token)
 
     if not exercises:
         raise HTTPException(status_code=400, detail="Invalid request")
@@ -63,10 +60,7 @@ def read_exercise_item(
     if settings.environment == "local-isolated":
         exercise = get_exercise_by_id(exercise_id)
     else:
-        if token:
-            exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=token)
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
+        exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=token)
 
     if not exercise:
         raise HTTPException(status_code=400, detail="Invalid request")
