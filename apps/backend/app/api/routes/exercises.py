@@ -31,7 +31,7 @@ def read_filtered_exercises(
     """
 
     startTime = time.perf_counter()
-    exercises = get_exercises(filter_query, token)
+    exercises = get_exercises(filter_query=filter_query, access_token=token)
 
     if not exercises:
         raise HTTPException(status_code=400, detail="Invalid request")
