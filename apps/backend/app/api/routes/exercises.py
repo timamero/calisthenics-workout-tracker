@@ -1,7 +1,7 @@
 from typing import List, Annotated
 import time
 
-from fastapi import APIRouter, Request, HTTPException, Query, Depends
+from fastapi import APIRouter, HTTPException, Query, Depends
 from fastapi.security import OAuth2PasswordBearer
 from pyrate_limiter import Duration, Limiter, Rate
 from fastapi_limiter.depends import RateLimiter
@@ -61,22 +61,20 @@ def read_filtered_exercises(
     response_model=ExerciseSchema,
     dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
 )
-def read_exercise_item(exercise_id: str, request: Request):
+def read_exercise_item(
+    exercise_id: str,
+    token: Annotated[str | None, Depends(get_current_token)] = None,
+):
     """
-    Retrieve a list of exercises.
+    Retrieve exercise by ID.
     """
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local-isolated":
-            exercise = get_exercise_by_id(exercise_id)
+    if settings.environment == "local-isolated":
+        exercise = get_exercise_by_id(exercise_id)
+    else:
+        if token:
+            exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=token)
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
-
-    else:
-        access_token = auth_header.split(" ")[1]
-        exercise = get_exercise_by_id(
-            exercise_id=exercise_id, access_token=access_token
-        )
 
     if not exercise:
         raise HTTPException(status_code=400, detail="Invalid request")
