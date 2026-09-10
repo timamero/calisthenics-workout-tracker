@@ -39,16 +39,11 @@ def read_filtered_exercises(
     """
 
     startTime = time.perf_counter()
-    print("DEBUG1: token at start: ", token)
     if settings.environment == "local-isolated":
-        print("DEBUG1.1: getting exercises")
         exercises = get_exercises(filter_query)
-        print("DEBUG1.2: retrieved exercises")
     else:
         if token:
-            print("DEBUG3: token retriedved: ", token)
             exercises = get_exercises(filter_query, token)
-            print("DEBUG3.1: retrieved exercises")
         else:
             raise HTTPException(status_code=401, detail="Authentication required")
 
