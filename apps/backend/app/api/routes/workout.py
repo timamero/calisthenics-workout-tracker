@@ -1,5 +1,5 @@
-from typing import List
-from fastapi import APIRouter, HTTPException, Request, Depends
+from typing import List, Annotated
+from fastapi import APIRouter, HTTPException, Depends
 from pyrate_limiter import Duration, Limiter, Rate
 from fastapi_limiter.depends import RateLimiter
 
@@ -19,7 +19,7 @@ from app.schemas.workout import (
     DeleteWorkoutRequestSchema,
 )
 
-from app.core.config import settings
+from app.core.dependencies import get_access_token
 
 router = APIRouter(prefix="/workout")
 
@@ -32,20 +32,13 @@ standard_write_limit = Limiter(Rate(10, Duration.MINUTE))
     dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
 )
 def save_build(
-    build: WorkoutBuildRequestSchema, request: Request
+    build: WorkoutBuildRequestSchema,
+    token: Annotated[str | None, Depends(get_access_token)],
 ) -> WorkoutBuildResponseSchema:
     """
     Insert workout build.
     """
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local-isolated":
-            workout_build = insert_workout_build(build)
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
-    else:
-        access_token = auth_header.split(" ")[1]
-        workout_build = insert_workout_build(build, access_token)
+    workout_build = insert_workout_build(workout_build=build, access_token=token)
 
     if not workout_build:
         raise HTTPException(status_code=400, detail="Invalid request")
@@ -58,21 +51,14 @@ def save_build(
     dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
 )
 def save_log(
-    log: WorkoutLogRequestSchema, request: Request
+    log: WorkoutLogRequestSchema,
+    token: Annotated[str | None, Depends(get_access_token)],
 ) -> WorkoutLogResponseSchema:
     """
     Insert workout log.
     """
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local-isolated":
-            workout_log = insert_workout_log(log)
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
+    workout_log = insert_workout_log(workout_log=log, access_token=token)
 
-    else:
-        access_token = auth_header.split(" ")[1]
-        workout_log = insert_workout_log(log, access_token)
     if not workout_log:
         raise HTTPException(status_code=400, detail="Invalid request")
 
@@ -84,21 +70,14 @@ def save_log(
     dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
 )
 def update_log(
-    log: WorkoutLogResponseSchema, request: Request
+    log: WorkoutLogResponseSchema,
+    token: Annotated[str | None, Depends(get_access_token)],
 ) -> WorkoutLogResponseSchema:
     """
     Update workout log.
     """
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local-isolated":
-            workout_log = update_workout_log(log)
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
+    workout_log = update_workout_log(workout_log=log, access_token=token)
 
-    else:
-        access_token = auth_header.split(" ")[1]
-        workout_log = update_workout_log(log, access_token)
     if not workout_log:
         raise HTTPException(status_code=400, detail="Invalid request")
 
@@ -110,21 +89,14 @@ def update_log(
     dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
 )
 def delete_log(
-    workout_log_id: DeleteWorkoutRequestSchema, request: Request
+    workout_log_id: DeleteWorkoutRequestSchema,
+    token: Annotated[str | None, Depends(get_access_token)],
 ) -> WorkoutLogResponseSchema:
     """
     Delete workout log.
     """
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local-isolated":
-            workout_log = delete_workout_log(workout_log_id)
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
+    workout_log = delete_workout_log(workout_log_id=workout_log_id, access_token=token)
 
-    else:
-        access_token = auth_header.split(" ")[1]
-        workout_log = delete_workout_log(workout_log_id, access_token)
     if not workout_log:
         raise HTTPException(status_code=400, detail="Invalid request")
 
@@ -135,20 +107,14 @@ def delete_log(
     "/logs",
     dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
 )
-def read_workout_logs(request: Request) -> List[WorkoutLogResponseSchema]:
+def read_workout_logs(
+    token: Annotated[str | None, Depends(get_access_token)],
+) -> List[WorkoutLogResponseSchema]:
     """
     Retrieve list of workout logs
     """
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local-isolated":
-            logs = get_workout_logs()
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
+    logs = get_workout_logs(access_token=token)
 
-    else:
-        access_token = auth_header.split(" ")[1]
-        logs = get_workout_logs(access_token)
     if logs is None:
         raise HTTPException(status_code=400, detail="Invalid request")
 
@@ -159,20 +125,13 @@ def read_workout_logs(request: Request) -> List[WorkoutLogResponseSchema]:
     "/builds",
     dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
 )
-def read_workout_builds(request: Request) -> List[WorkoutBuildResponseSchema]:
+def read_workout_builds(
+    token: Annotated[str | None, Depends(get_access_token)],
+) -> List[WorkoutBuildResponseSchema]:
     """
     Retrieve list of workout builds
     """
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local-isolated":
-            builds = get_workout_builds()
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
-
-    else:
-        access_token = auth_header.split(" ")[1]
-        builds = get_workout_builds(access_token)
+    builds = get_workout_builds(access_token=token)
 
     if builds is None:
         raise HTTPException(status_code=400, detail="Invalid request")
