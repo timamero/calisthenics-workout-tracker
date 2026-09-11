@@ -85,7 +85,7 @@ def get_exercise_by_id(exercise_id: str, access_token: str | None = None):
             supabase.table("exercises")
             .select("*")
             .eq("id", exercise_id)
-            .single()
+            .maybe_single()
             .execute()
         )
         return response.data
