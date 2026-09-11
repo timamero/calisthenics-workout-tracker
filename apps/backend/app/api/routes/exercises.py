@@ -29,12 +29,8 @@ def read_filtered_exercises(
     """
     Retrieve a list of exercises.
     """
-
     startTime = time.perf_counter()
     exercises = get_exercises(filter_query=filter_query, access_token=token)
-
-    if not exercises:
-        raise HTTPException(status_code=400, detail="Invalid request")
 
     endTime = time.perf_counter()
     print(f"Retrieved exercises from supabase in {endTime - startTime:0.4f} seconds")
@@ -56,6 +52,6 @@ def read_exercise_item(
     exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=token)
 
     if not exercise:
-        raise HTTPException(status_code=400, detail="Invalid request")
+        raise HTTPException(status_code=404, detail="Exercise not found")
 
     return exercise
