@@ -40,8 +40,8 @@ def save_build(
     """
     workout_build = insert_workout_build(workout_build=build, access_token=token)
 
-    if not workout_build:
-        raise HTTPException(status_code=400, detail="Invalid request")
+    if workout_build is None:
+        raise HTTPException(status_code=404, detail="Workout not found")
 
     return workout_build
 
@@ -59,8 +59,8 @@ def save_log(
     """
     workout_log = insert_workout_log(workout_log=log, access_token=token)
 
-    if not workout_log:
-        raise HTTPException(status_code=400, detail="Invalid request")
+    if workout_log is None:
+        raise HTTPException(status_code=404, detail="Workout not found")
 
     return workout_log
 
@@ -78,8 +78,8 @@ def update_log(
     """
     workout_log = update_workout_log(workout_log=log, access_token=token)
 
-    if not workout_log:
-        raise HTTPException(status_code=400, detail="Invalid request")
+    if workout_log is None:
+        raise HTTPException(status_code=404, detail="Workout not found")
 
     return workout_log
 
@@ -97,7 +97,7 @@ def delete_log(
     """
     workout_log = delete_workout_log(workout_log_id=workout_log_id, access_token=token)
 
-    if not workout_log:
+    if workout_log is None:
         raise HTTPException(status_code=404, detail="Workout not found")
 
     return workout_log
@@ -116,7 +116,7 @@ def read_workout_logs(
     logs = get_workout_logs(access_token=token)
 
     if logs is None:
-        raise HTTPException(status_code=400, detail="Invalid request")
+        raise HTTPException(status_code=404, detail="Workout logs not found")
 
     return logs
 
@@ -134,6 +134,6 @@ def read_workout_builds(
     builds = get_workout_builds(access_token=token)
 
     if builds is None:
-        raise HTTPException(status_code=400, detail="Invalid request")
+        raise HTTPException(status_code=404, detail="Workout builds not found")
 
     return builds
