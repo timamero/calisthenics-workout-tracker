@@ -98,7 +98,7 @@ def delete_log(
     workout_log = delete_workout_log(workout_log_id=workout_log_id, access_token=token)
 
     if not workout_log:
-        raise HTTPException(status_code=400, detail="Invalid request")
+        raise HTTPException(status_code=404, detail="Workout not found")
 
     return workout_log
 
