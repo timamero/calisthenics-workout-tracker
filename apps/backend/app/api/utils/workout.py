@@ -1,5 +1,7 @@
 from typing import List
 
+from fastapi import HTTPException
+
 from app.services.supabase_client import get_supabase_client
 from app.schemas.workout import (
     WorkoutBuildRequestSchema,
@@ -24,6 +26,10 @@ def insert_workout_build(
         return response.data[0]
     except Exception as e:
         print(f"Error saving workout build in database: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error: Error saving workout build in database",
+        )
 
 
 def insert_workout_log(
@@ -41,6 +47,10 @@ def insert_workout_log(
         return response.data[0]
     except Exception as e:
         print(f"Error saving workout log in database: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error: Error saving workout log in database",
+        )
 
 
 def update_workout_log(
@@ -59,6 +69,10 @@ def update_workout_log(
         return response.data[0]
     except Exception as e:
         print(f"Error updating workout in database: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error: Error updating workout in database",
+        )
 
 
 def delete_workout_log(
@@ -78,6 +92,10 @@ def delete_workout_log(
         return response.data[0]
     except Exception as e:
         print(f"Error deleting workout log from database: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error: Error deleting workout log from database",
+        )
 
 
 def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
@@ -92,6 +110,10 @@ def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponse
         return response.data
     except Exception as e:
         print(f"Error fetching workout_logs from database: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error: Error fetching workout_logs from database",
+        )
 
 
 def get_workout_builds(
@@ -108,3 +130,7 @@ def get_workout_builds(
         return response.data
     except Exception as e:
         print(f"Error fetching workout_builds from database: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error: Error fetching workout_builds from database",
+        )
