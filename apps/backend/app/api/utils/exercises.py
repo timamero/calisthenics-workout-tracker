@@ -30,15 +30,7 @@ def filter_muscles_equipment_query_to_supabase_conditions(
 
 
 def get_exercises(filter_query: ExerciseFilterParams, access_token: str | None = None):
-
-    try:
-        supabase = get_supabase_client(access_token)
-    except Exception as e:
-        print(f"Error initializing Supabase client: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Invalid Request: Error initializing Supabase client",
-        )
+    supabase = get_supabase_client(access_token)
 
     try:
         query = supabase.table("exercises").select("*")
@@ -72,14 +64,8 @@ def get_exercises(filter_query: ExerciseFilterParams, access_token: str | None =
 
 
 def get_exercise_by_id(exercise_id: str, access_token: str | None = None):
-    try:
-        supabase = get_supabase_client(access_token)
-    except Exception as e:
-        print(f"Error initializing Supabase client: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Invalid Request: Error initializing Supabase client",
-        )
+    supabase = get_supabase_client(access_token)
+
     try:
         response = (
             supabase.table("exercises")
