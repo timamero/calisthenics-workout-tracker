@@ -51,7 +51,7 @@ def read_exercise_item(
     """
     exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=token)
 
-    if not exercise:
+    if exercise is None:
         raise HTTPException(status_code=404, detail="Exercise not found")
 
     return exercise
