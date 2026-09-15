@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import HTTPException
 
@@ -10,6 +10,10 @@ from app.schemas.workout import (
     WorkoutLogResponseSchema,
     DeleteWorkoutRequestSchema,
 )
+
+
+class WorkoutDatabaseError(Exception):
+    """Raised when a workout database operation fails."""
 
 
 def insert_workout_build(
@@ -77,7 +81,7 @@ def update_workout_log(
 
 def delete_workout_log(
     workout_log_id: DeleteWorkoutRequestSchema, access_token: str | None = None
-):
+) -> Optional[WorkoutLogResponseSchema]:
     """
     Delete workout log from supabase database.
     """
@@ -89,13 +93,15 @@ def delete_workout_log(
             .eq("id", workout_log_id.id)
             .execute()
         )
-        return response.data[0]
     except Exception as e:
-        print(f"Error deleting workout log from database: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Internal server error: Error deleting workout log from database",
-        )
+        raise WorkoutDatabaseError(
+            "Internal server error: Error deleting workout log from database"
+        ) from e
+
+    if not response.data:
+        return None
+
+    return response.data[0]
 
 
 def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
