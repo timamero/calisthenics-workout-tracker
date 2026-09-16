@@ -10,6 +10,7 @@ from app.api.utils.workout import (
     update_workout_log,
     delete_workout_log,
     get_workout_logs,
+    WorkoutDatabaseError,
 )
 from app.schemas.workout import (
     WorkoutBuildRequestSchema,
@@ -95,12 +96,20 @@ def delete_log(
     """
     Delete workout log.
     """
-    workout_log = delete_workout_log(workout_log_id=workout_log_id, access_token=token)
+    try:
+        deleted_workout_log = delete_workout_log(
+            workout_log_id=workout_log_id, access_token=token
+        )
+    except WorkoutDatabaseError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to delete workout log due to database error: {e}",
+        ) from e
 
-    if workout_log is None:
-        raise HTTPException(status_code=404, detail="Workout not found")
+    if deleted_workout_log is None:
+        raise HTTPException(status_code=404, detail="Workout log not found")
 
-    return workout_log
+    return deleted_workout_log
 
 
 @router.get(

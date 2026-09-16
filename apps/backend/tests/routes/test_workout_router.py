@@ -7,7 +7,7 @@ from backend.app.api.routes.workout import get_access_token
 
 
 class TestDeleteWorkoutLogRouter:
-    async def test_delete_workout_with_bearer_token_returns_deleted_log(
+    async def test_delete_workout_returns_deleted_log(
         self,
         client,
         monkeypatch: pytest.MonkeyPatch,
@@ -87,4 +87,4 @@ class TestDeleteWorkoutLogRouter:
         )
 
         assert response.status_code == 404
-        assert response.json()["detail"] == "Workout not found"
+        assert response.json()["detail"] == "Workout log not found"
