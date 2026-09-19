@@ -20,7 +20,7 @@ from app.schemas.workout import (
     DeleteWorkoutRequestSchema,
 )
 
-from app.core.dependencies import get_access_token
+from app.core.dependencies import get_access_token, verify_supabase_user
 
 router = APIRouter(prefix="/workout")
 
@@ -39,7 +39,13 @@ def save_build(
     """
     Insert workout build.
     """
-    workout_build = insert_workout_build(workout_build=build, access_token=token)
+    try:
+        workout_build = insert_workout_build(workout_build=build, access_token=token)
+    except WorkoutDatabaseError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to save workout build due to database error: {e}",
+        ) from e
 
     if workout_build is None:
         raise HTTPException(status_code=404, detail="Workout not found")
@@ -58,7 +64,13 @@ def save_log(
     """
     Insert workout log.
     """
-    workout_log = insert_workout_log(workout_log=log, access_token=token)
+    try:
+        workout_log = insert_workout_log(workout_log=log, access_token=token)
+    except WorkoutDatabaseError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to save workout log due to database error: {e}",
+        ) from e
 
     if workout_log is None:
         raise HTTPException(status_code=404, detail="Workout not found")
@@ -77,7 +89,13 @@ def update_log(
     """
     Update workout log.
     """
-    workout_log = update_workout_log(workout_log=log, access_token=token)
+    try:
+        workout_log = update_workout_log(workout_log=log, access_token=token)
+    except WorkoutDatabaseError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to update workout log due to database error: {e}",
+        ) from e
 
     if workout_log is None:
         raise HTTPException(status_code=404, detail="Workout not found")
@@ -114,7 +132,10 @@ def delete_log(
 
 @router.get(
     "/logs",
-    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+    dependencies=[
+        Depends(RateLimiter(limiter=standard_api_limit)),
+        Depends(verify_supabase_user),
+    ],
 )
 def read_workout_logs(
     token: Annotated[str | None, Depends(get_access_token)],
@@ -122,7 +143,13 @@ def read_workout_logs(
     """
     Retrieve list of workout logs
     """
-    logs = get_workout_logs(access_token=token)
+    try:
+        logs = get_workout_logs(access_token=token)
+    except WorkoutDatabaseError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to retrieve workout logs due to database error: {e}",
+        ) from e
 
     if logs is None:
         raise HTTPException(status_code=404, detail="Workout logs not found")
@@ -132,7 +159,10 @@ def read_workout_logs(
 
 @router.get(
     "/builds",
-    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+    dependencies=[
+        Depends(RateLimiter(limiter=standard_api_limit)),
+        Depends(verify_supabase_user),
+    ],
 )
 def read_workout_builds(
     token: Annotated[str | None, Depends(get_access_token)],
@@ -140,7 +170,13 @@ def read_workout_builds(
     """
     Retrieve list of workout builds
     """
-    builds = get_workout_builds(access_token=token)
+    try:
+        builds = get_workout_builds(access_token=token)
+    except WorkoutDatabaseError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to retrieve workout builds due to database error: {e}",
+        ) from e
 
     if builds is None:
         raise HTTPException(status_code=404, detail="Workout builds not found")
