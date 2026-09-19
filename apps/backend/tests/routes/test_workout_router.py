@@ -2,14 +2,12 @@ from unittest.mock import Mock, ANY
 
 import pytest
 
-from backend.app.main import app
-from backend.app.api.routes.workout import get_access_token
-
 
 class TestDeleteWorkoutLogRouter:
     async def test_delete_workout_returns_deleted_log(
         self,
         client,
+        mock_access_token,
         monkeypatch: pytest.MonkeyPatch,
         delete_workout_request_schema,
         deleted_workout_log_response,
@@ -34,6 +32,7 @@ class TestDeleteWorkoutLogRouter:
     async def test_delete_workout_calls_helper(
         self,
         client,
+        mock_access_token,
         monkeypatch: pytest.MonkeyPatch,
         delete_workout_request_schema,
         deleted_workout_log_response,
@@ -41,8 +40,6 @@ class TestDeleteWorkoutLogRouter:
         """
         Verify that the delete helper is called and returns success.
         """
-        app.dependency_overrides[get_access_token] = lambda: "mock_token"
-
         mock_delete_workout_log = Mock(return_value=deleted_workout_log_response)
         monkeypatch.setattr(
             "backend.app.api.routes.workout.delete_workout_log",
@@ -68,6 +65,7 @@ class TestDeleteWorkoutLogRouter:
     async def test_delete_workout_returns_404_when_helper_returns_none(
         self,
         client,
+        mock_access_token,
         monkeypatch: pytest.MonkeyPatch,
         delete_workout_request_schema,
     ):
