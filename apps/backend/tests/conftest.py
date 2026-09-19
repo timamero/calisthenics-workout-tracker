@@ -9,6 +9,7 @@ from uuid import UUID
 
 from backend.app.main import app, get_strict_root_limiter, get_standard_api_limiter
 from backend.app.schemas.workout import DeleteWorkoutRequestSchema
+from backend.app.api.routes.workout import get_access_token
 
 
 @pytest.fixture
@@ -151,3 +152,10 @@ def supabase_delete_client_factory():
         return supabase_client
 
     return factory
+
+
+@pytest.fixture
+def mock_access_token():
+    app.dependency_overrides[get_access_token] = lambda: "mock_token"
+    yield
+    app.dependency_overrides.pop(get_access_token, None)
