@@ -16,7 +16,12 @@ from backend.app.api.routes.workout import get_access_token
 async def client():
     """Provides an HTTP client for testing the FastAPI app."""
     async with AsyncClient(
-        transport=ASGITransport(app=app), base_url="http://test"
+        transport=ASGITransport(
+            app=app,
+            # Inspect 500 error responses rather than raise exceptions
+            raise_app_exceptions=False,
+        ),
+        base_url="http://test",
     ) as ac:
         yield ac
 
