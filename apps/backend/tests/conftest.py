@@ -9,7 +9,7 @@ from uuid import UUID
 
 from backend.app.main import app, get_strict_root_limiter, get_standard_api_limiter
 from backend.app.schemas.workout import DeleteWorkoutRequestSchema
-from backend.app.api.routes.workout import get_access_token
+from backend.app.api.routes.workout import get_access_token, verify_supabase_user
 
 
 @pytest.fixture
@@ -91,6 +91,47 @@ SAMPLE_WORKOUT_LOG = {
 }
 
 
+@pytest.fixture(autouse=True)
+def reset_limiters():
+    """Replaces the limiter with a fresh instance before each test."""
+    for limiter_func, rate in LIMITER_RESETS.items():
+        fresh = RateLimiter(limiter=Limiter(rate))
+
+        def make_override(limiter=fresh):
+            async def override_dependency(request: Request):
+                return await limiter(request, None)
+
+            return override_dependency
+
+        app.dependency_overrides[limiter_func()] = make_override()
+    yield
+    app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def delete_workout_request_schema() -> DeleteWorkoutRequestSchema:
+    """
+    Returns a DeleteWorkoutRequestSchema instance with a predefined ID for testing
+    purposes.
+    """
+    return DeleteWorkoutRequestSchema(id=WORKOUT_LOG_ID)
+
+
+@pytest.fixture
+def deleted_workout_log_response() -> dict:
+    """
+    Returns a dictionary representing a deleted workout log response for testing
+    purposes.
+    """
+    return SAMPLE_WORKOUT_LOG
+
+
+@pytest.fixture
+def workout_logs_response() -> list[dict]:
+    """Returns a list representing workout logs returned by the API."""
+    return [SAMPLE_WORKOUT_LOG]
+
+
 @pytest.fixture
 def supabase_delete_client_factory():
     """
@@ -125,7 +166,36 @@ def supabase_delete_client_factory():
 
 
 @pytest.fixture
+def supabase_logs_client_factory():
+    """Returns a mock Supabase client for workout-log list queries."""
+
+    def factory(
+        response_data: list[dict] | None = None,
+        execute_exception: Exception | None = None,
+    ):
+        supabase_client = Mock()
+        table_chain = Mock()
+        select_chain = Mock()
+        response = Mock()
+        response.data = [] if response_data is None else response_data
+
+        supabase_client.table.return_value = table_chain
+        table_chain.select.return_value = select_chain
+
+        if execute_exception is not None:
+            select_chain.execute.side_effect = execute_exception
+        else:
+            select_chain.execute.return_value = response
+
+        return supabase_client
+
+    return factory
+
+
+@pytest.fixture
 def mock_access_token():
     app.dependency_overrides[get_access_token] = lambda: "mock_token"
+    app.dependency_overrides[verify_supabase_user] = lambda: None
     yield
     app.dependency_overrides.pop(get_access_token, None)
+    app.dependency_overrides.pop(verify_supabase_user, None)
