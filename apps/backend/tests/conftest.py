@@ -30,95 +30,60 @@ LIMITER_RESETS = {
 
 WORKOUT_LOG_ID = 54
 
-
-@pytest.fixture(autouse=True)
-def reset_limiters():
-    """Replaces the limiter with a fresh instance before each test."""
-    for limiter_func, rate in LIMITER_RESETS.items():
-        fresh = RateLimiter(limiter=Limiter(rate))
-
-        def make_override(limiter=fresh):
-            async def override_dependency(request: Request):
-                return await limiter(request, None)
-
-            return override_dependency
-
-        app.dependency_overrides[limiter_func()] = make_override()
-    yield
-    app.dependency_overrides.clear()
-
-
-@pytest.fixture
-def delete_workout_request_schema() -> DeleteWorkoutRequestSchema:
-    """
-    Returns a DeleteWorkoutRequestSchema instance with a predefined ID for testing
-    purposes.
-    """
-    return DeleteWorkoutRequestSchema(id=WORKOUT_LOG_ID)
-
-
-@pytest.fixture
-def deleted_workout_log_response() -> dict:
-    """
-    Returns a dictionary representing a deleted workout log response for testing
-    purposes.
-    """
-    return {
-        "id": WORKOUT_LOG_ID,
-        "created_at": datetime(2026, 6, 23, 6, 48, 1, 288810, tzinfo=timezone.utc),
-        "user_id": UUID("ee98b2ee-4d06-4c42-803c-04e645dc26e4"),
-        "workout_build_id": None,
-        "date": datetime(2026, 6, 23, tzinfo=timezone.utc),
-        "title": "string",
-        "description": "string",
-        "duration": timedelta(days=3),
-        "workout_data": {
-            "data": [
-                {
-                    "id": UUID("00000000-0000-0000-0000-000000000001"),
-                    "exercise_id": 0,
-                    "tracked": ["string"],
-                    "order": 0,
-                    "type": "exercise",
-                    "sets": [
-                        {
-                            "id": UUID("00000000-0000-0000-0000-000000000002"),
-                            "completed": True,
-                            "completed_at": "2026-06-23T06:48:01.288810+00:00",
-                            "fields": {
-                                "reps": 0,
-                                "time": "string",
-                                "rest": "string",
-                                "setProgressions": [
-                                    {
-                                        "id": UUID(
-                                            "00000000-0000-0000-0000-000000000003"
-                                        ),
-                                        "set_progression_id": 0,
-                                        "value": 0,
-                                    }
-                                ],
-                            },
-                        }
-                    ],
-                }
-            ]
-        },
-        "rpe": 10,
-        "notes": "string",
-        "status": "draft",
-        "updated_at": datetime(
-            2026,
-            6,
-            23,
-            6,
-            46,
-            8,
-            237000,
-            tzinfo=timezone.utc,
-        ),
-        "goal": "function",
-    }
+SAMPLE_WORKOUT_LOG = {
+    "id": WORKOUT_LOG_ID,
+    "created_at": datetime(2026, 6, 23, 6, 48, 1, 288810, tzinfo=timezone.utc),
+    "user_id": UUID("ee98b2ee-4d06-4c42-803c-04e645dc26e4"),
+    "workout_build_id": None,
+    "date": datetime(2026, 6, 23, tzinfo=timezone.utc),
+    "title": "string",
+    "description": "string",
+    "duration": timedelta(days=3),
+    "workout_data": {
+        "data": [
+            {
+                "id": UUID("00000000-0000-0000-0000-000000000001"),
+                "exercise_id": 0,
+                "tracked": ["string"],
+                "order": 0,
+                "type": "exercise",
+                "sets": [
+                    {
+                        "id": UUID("00000000-0000-0000-0000-000000000002"),
+                        "completed": True,
+                        "completed_at": "2026-06-23T06:48:01.288810+00:00",
+                        "fields": {
+                            "reps": 0,
+                            "time": "string",
+                            "rest": "string",
+                            "setProgressions": [
+                                {
+                                    "id": UUID("00000000-0000-0000-0000-000000000003"),
+                                    "set_progression_id": 0,
+                                    "value": 0,
+                                }
+                            ],
+                        },
+                    }
+                ],
+            }
+        ]
+    },
+    "rpe": 10,
+    "notes": "string",
+    "status": "draft",
+    "updated_at": datetime(
+        2026,
+        6,
+        23,
+        6,
+        46,
+        8,
+        237000,
+        tzinfo=timezone.utc,
+    ),
+    "goal": "function",
+}
 
 
 @pytest.fixture
