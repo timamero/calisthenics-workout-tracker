@@ -2,6 +2,8 @@ from unittest.mock import Mock, ANY
 
 import pytest
 
+from app.api.utils.workout import WorkoutDatabaseError
+
 
 class TestDeleteWorkoutLogRouter:
     async def test_delete_workout_returns_deleted_log(
@@ -86,3 +88,49 @@ class TestDeleteWorkoutLogRouter:
 
         assert response.status_code == 404
         assert response.json()["detail"] == "Workout log not found"
+
+
+class TestGetWorkoutLogsRouter:
+    async def test_get_workout_logs_returns_logs(
+        self,
+        client,
+        mock_access_token,
+        monkeypatch: pytest.MonkeyPatch,
+        workout_logs_response,
+    ):
+        """Verify that it returns the workout logs from the helper."""
+        mock_get_workout_logs = Mock(return_value=workout_logs_response)
+        monkeypatch.setattr(
+            "backend.app.api.routes.workout.get_workout_logs",
+            mock_get_workout_logs,
+        )
+
+        response = await client.get("/workout/logs")
+
+        assert response.status_code == 200
+        assert len(response.json()) == len(workout_logs_response)
+        assert response.json()[0]["id"] == workout_logs_response[0]["id"]
+        mock_get_workout_logs.assert_called_once_with(access_token="mock_token")
+
+    async def test_get_workout_logs_returns_500_when_helper_raises_database_error(
+        self,
+        client,
+        mock_access_token,
+        monkeypatch: pytest.MonkeyPatch,
+    ):
+        """Verify that database errors become an internal server error response."""
+        mock_get_workout_logs = Mock(side_effect=WorkoutDatabaseError("database down"))
+        monkeypatch.setattr(
+            "backend.app.api.routes.workout.get_workout_logs",
+            mock_get_workout_logs,
+        )
+
+        response = await client.get("/workout/logs")
+
+        assert response.status_code == 500
+        assert (
+            "Unable to retrieve workout logs due to database error"
+            in response.json()["detail"]
+        )
+
+    # TODO: Add coverage for empty results, authentication, and rate limiting.
