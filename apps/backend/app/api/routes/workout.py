@@ -1,7 +1,5 @@
 from typing import List, Annotated
 from fastapi import APIRouter, HTTPException, Depends
-from pyrate_limiter import Duration, Limiter, Rate
-from fastapi_limiter.depends import RateLimiter
 
 from app.api.utils.workout import (
     insert_workout_build,
@@ -20,17 +18,19 @@ from app.schemas.workout import (
 )
 
 from app.core.exceptions import WorkoutDatabaseError
-from app.core.dependencies import get_access_token, verify_supabase_user
+from app.core.dependencies import (
+    get_access_token,
+    verify_supabase_user,
+    get_standard_api_limiter,
+    get_write_api_limiter,
+)
 
 router = APIRouter(prefix="/workout")
-
-standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
-standard_write_limit = Limiter(Rate(10, Duration.MINUTE))
 
 
 @router.post(
     "/build",
-    dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
+    dependencies=[Depends(get_write_api_limiter())],
 )
 def save_build(
     build: WorkoutBuildRequestSchema,
@@ -55,7 +55,7 @@ def save_build(
 
 @router.post(
     "/log",
-    dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
+    dependencies=[Depends(get_write_api_limiter())],
 )
 def save_log(
     log: WorkoutLogRequestSchema,
@@ -80,7 +80,7 @@ def save_log(
 
 @router.put(
     "/log",
-    dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
+    dependencies=[Depends(get_write_api_limiter())],
 )
 def update_log(
     log: WorkoutLogResponseSchema,
@@ -105,7 +105,7 @@ def update_log(
 
 @router.delete(
     "/log",
-    dependencies=[Depends(RateLimiter(limiter=standard_write_limit))],
+    dependencies=[Depends(get_write_api_limiter())],
 )
 def delete_log(
     workout_log_id: DeleteWorkoutRequestSchema,
@@ -133,7 +133,7 @@ def delete_log(
 @router.get(
     "/logs",
     dependencies=[
-        Depends(RateLimiter(limiter=standard_api_limit)),
+        Depends(get_standard_api_limiter()),
         Depends(verify_supabase_user),
     ],
 )
@@ -160,7 +160,7 @@ def read_workout_logs(
 @router.get(
     "/builds",
     dependencies=[
-        Depends(RateLimiter(limiter=standard_api_limit)),
+        Depends(get_standard_api_limiter()),
         Depends(verify_supabase_user),
     ],
 )

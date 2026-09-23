@@ -3,24 +3,18 @@ import time
 
 from fastapi import APIRouter, HTTPException, Query, Depends
 
-from pyrate_limiter import Duration, Limiter, Rate
-from fastapi_limiter.depends import RateLimiter
-
 from app.schemas.exercise import ExerciseSchema, ExerciseFilterParams
 from app.api.utils.exercises import get_exercises, get_exercise_by_id
 
-from app.core.dependencies import get_access_token
+from app.core.dependencies import get_access_token, get_standard_api_limiter
 
 router = APIRouter(prefix="/exercises")
-
-# TODO: Move standard_api_limit to dependencies
-standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
 
 
 @router.get(
     "",
     response_model=List[ExerciseSchema],
-    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+    dependencies=[Depends(get_standard_api_limiter())],
 )
 def read_filtered_exercises(
     filter_query: Annotated[ExerciseFilterParams, Query()],
@@ -40,7 +34,7 @@ def read_filtered_exercises(
 @router.get(
     "/{exercise_id}",
     response_model=ExerciseSchema,
-    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+    dependencies=[Depends(get_standard_api_limiter())],
 )
 def read_exercise_item(
     exercise_id: str,

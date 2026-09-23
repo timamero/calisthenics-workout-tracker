@@ -1,13 +1,11 @@
 from typing import List, Annotated
 
 from fastapi import APIRouter, HTTPException, Depends
-from pyrate_limiter import Duration, Limiter, Rate
-from fastapi_limiter.depends import RateLimiter
 
 from app.api.utils.setProgressions import get_set_progressions_list
 from app.schemas.setProgressions import SetProgressionsResponseSchema
 
-from app.core.dependencies import get_access_token
+from app.core.dependencies import get_access_token, get_standard_api_limiter
 
 router = APIRouter(
     prefix="/set-progressions",
@@ -15,13 +13,11 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
-
 
 @router.get(
     "",
     response_model=List[SetProgressionsResponseSchema],
-    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+    dependencies=[Depends(get_standard_api_limiter())],
 )
 async def get_set_progressions(
     token: Annotated[str | None, Depends(get_access_token)],

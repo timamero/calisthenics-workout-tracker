@@ -7,7 +7,11 @@ from unittest.mock import Mock
 from datetime import datetime, timedelta, timezone
 from uuid import UUID
 
-from backend.app.main import app, get_strict_root_limiter, get_standard_api_limiter
+from backend.app.main import app
+from backend.app.core.dependencies import (
+    get_strict_root_limiter,
+    get_standard_api_limiter,
+)
 from backend.app.schemas.workout import DeleteWorkoutRequestSchema
 from backend.app.api.routes.workout import get_access_token, verify_supabase_user
 
