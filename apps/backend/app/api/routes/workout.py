@@ -10,7 +10,6 @@ from app.api.utils.workout import (
     update_workout_log,
     delete_workout_log,
     get_workout_logs,
-    WorkoutDatabaseError,
 )
 from app.schemas.workout import (
     WorkoutBuildRequestSchema,
@@ -20,6 +19,7 @@ from app.schemas.workout import (
     DeleteWorkoutRequestSchema,
 )
 
+from app.core.exceptions import WorkoutDatabaseError
 from app.core.dependencies import get_access_token, verify_supabase_user
 
 router = APIRouter(prefix="/workout")

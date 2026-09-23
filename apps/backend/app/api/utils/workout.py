@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-
+from app.core.exceptions import WorkoutDatabaseError
 from app.services.supabase_client import get_supabase_client
 from app.schemas.workout import (
     WorkoutBuildRequestSchema,
@@ -9,10 +9,6 @@ from app.schemas.workout import (
     WorkoutLogResponseSchema,
     DeleteWorkoutRequestSchema,
 )
-
-
-class WorkoutDatabaseError(Exception):
-    """Raised when a workout database operation fails."""
 
 
 def insert_workout_build(
