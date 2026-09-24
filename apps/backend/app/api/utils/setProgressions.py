@@ -1,14 +1,13 @@
 from typing import List, Optional
 
-from fastapi import HTTPException
-
+from app.core.exceptions import WorkoutDatabaseError
 from app.schemas.setProgressions import SetProgressionsResponseSchema
 from app.services.supabase_client import get_supabase_client
 
 
 def get_set_progressions_list(
     access_token: Optional[str] = None,
-) -> List[SetProgressionsResponseSchema]:
+) -> Optional[List[SetProgressionsResponseSchema]]:
     """
     Retrieve list of all challenges and assists (set progressions) from the database.
     Args:
@@ -24,10 +23,12 @@ def get_set_progressions_list(
             .order("display_order")
             .execute()
         )
-        return [SetProgressionsResponseSchema(**item) for item in response.data]
     except Exception as e:
-        print(f"Error fetching challenges and assists: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Internal server error: Error fetching challenges and assists",
-        )
+        raise WorkoutDatabaseError(
+            "Internal server error: Error fetching challenges and assists"
+        ) from e
+
+    if not response.data:
+        return None
+
+    return [SetProgressionsResponseSchema(**item) for item in response.data]

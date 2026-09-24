@@ -1,5 +1,4 @@
-from fastapi import HTTPException
-
+from app.core.exceptions import WorkoutDatabaseError
 from app.services.supabase_client import get_supabase_client
 from app.schemas.exercise import ExerciseFilterParams
 
@@ -55,12 +54,15 @@ def get_exercises(filter_query: ExerciseFilterParams, access_token: str | None =
             query.ilike("name", f"%{q}%")
 
         response = query.execute()
-        return response.data
     except Exception as e:
-        print(f"Error fetching exercises: {e}")
-        raise HTTPException(
-            status_code=500, detail="Internal server error: Error fetching exercises"
-        )
+        raise WorkoutDatabaseError(
+            "Internal server error: Error fetching exercises"
+        ) from e
+
+    if not response.data:
+        return None
+
+    return response.data
 
 
 def get_exercise_by_id(exercise_id: str, access_token: str | None = None):
@@ -74,9 +76,12 @@ def get_exercise_by_id(exercise_id: str, access_token: str | None = None):
             .maybe_single()
             .execute()
         )
-        return response.data
     except Exception as e:
-        print(f"Error fetching exercise with ID {exercise_id}: {e}")
-        raise HTTPException(
-            status_code=500, detail="Internal server error: Error fetching exercise"
-        )
+        raise WorkoutDatabaseError(
+            "Internal server error: Error fetching exercise"
+        ) from e
+
+    if response.data is None:
+        return None
+
+    return response.data
