@@ -4,11 +4,10 @@ import time
 from fastapi import Depends, FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 from typing_extensions import Annotated
-from pyrate_limiter import Duration, Rate, Limiter
-from fastapi_limiter.depends import RateLimiter
 
 from .core import config
 from .api.main import api_router
+from .core.dependencies import get_strict_root_limiter
 
 
 @lru_cache
@@ -64,31 +63,6 @@ app.add_middleware(
 )
 
 app.include_router(api_router)
-
-STRICT_RATE_LIMIT = 3
-STANDARD_RATE_LIMIT = 60
-strict_root_limit = Rate(
-    STRICT_RATE_LIMIT, Duration.MINUTE
-)  # Max 3 requests per minute
-standard_api_limit = Rate(
-    STANDARD_RATE_LIMIT, Duration.MINUTE
-)  # Max 60 requests per minute
-strict_root_limiter = RateLimiter(
-    limiter=Limiter(strict_root_limit)
-)  # Max 3 requests per minute
-standard_api_limiter = RateLimiter(
-    limiter=Limiter(standard_api_limit)
-)  # Max 60 requests per minute
-
-
-def get_strict_root_limiter() -> RateLimiter:
-    """Dependency function for strict root rate limiter."""
-    return strict_root_limiter
-
-
-def get_standard_api_limiter() -> RateLimiter:
-    """Dependency function for standard API rate limiter."""
-    return standard_api_limiter
 
 
 @app.get(

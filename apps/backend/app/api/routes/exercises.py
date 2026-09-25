@@ -1,74 +1,79 @@
 from typing import List, Annotated
 import time
 
-from fastapi import APIRouter, Request, HTTPException, Query, Depends
-from pyrate_limiter import Duration, Limiter, Rate
-from fastapi_limiter.depends import RateLimiter
+from fastapi import APIRouter, HTTPException, Query, Depends
 
+from app.core.exceptions import WorkoutDatabaseError
 from app.schemas.exercise import ExerciseSchema, ExerciseFilterParams
 from app.api.utils.exercises import get_exercises, get_exercise_by_id
 
-from app.core.config import settings
+from app.core.dependencies import (
+    verify_supabase_user,
+    get_access_token,
+    get_standard_api_limiter,
+)
 
 router = APIRouter(prefix="/exercises")
-
-standard_api_limit = Limiter(Rate(60, Duration.MINUTE))
 
 
 @router.get(
     "",
     response_model=List[ExerciseSchema],
-    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+    dependencies=[
+        Depends(get_standard_api_limiter()),
+        Depends(verify_supabase_user),
+    ],
 )
 def read_filtered_exercises(
-    filter_query: Annotated[ExerciseFilterParams, Query()], request: Request
-):
+    filter_query: Annotated[ExerciseFilterParams, Query()],
+    token: Annotated[str | None, Depends(get_access_token)],
+) -> List[ExerciseSchema]:
     """
     Retrieve a list of exercises.
     """
-    startTime = time.perf_counter()
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local-isolated":
-            exercises = get_exercises(filter_query)
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
+    start_time = time.perf_counter()
 
-    else:
-        access_token = auth_header.split(" ")[1]
-        exercises = get_exercises(filter_query, access_token)
+    try:
+        exercises = get_exercises(filter_query=filter_query, access_token=token)
+    except WorkoutDatabaseError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to retrieve exercises due to database error: {e}",
+        ) from e
 
-    if not exercises:
-        raise HTTPException(status_code=400, detail="Invalid request")
+    end_time = time.perf_counter()
+    print(f"Retrieved exercises from supabase in {end_time - start_time:0.4f} seconds")
 
-    endTime = time.perf_counter()
-    print(f"Retrieved exercises from supabase in {endTime - startTime:0.4f} seconds")
+    if exercises is None:
+        raise HTTPException(status_code=404, detail="Exercises not found")
+
     return exercises
 
 
 @router.get(
     "/{exercise_id}",
     response_model=ExerciseSchema,
-    dependencies=[Depends(RateLimiter(limiter=standard_api_limit))],
+    dependencies=[
+        Depends(get_standard_api_limiter()),
+        Depends(verify_supabase_user),
+    ],
 )
-def read_exercise_item(exercise_id: str, request: Request):
+def read_exercise_item(
+    exercise_id: str,
+    token: Annotated[str | None, Depends(get_access_token)],
+) -> ExerciseSchema:
     """
-    Retrieve a list of exercises.
+    Retrieve exercise by ID.
     """
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        if settings.environment == "local-isolated":
-            exercise = get_exercise_by_id(exercise_id)
-        else:
-            raise HTTPException(status_code=401, detail="Authentication required")
+    try:
+        exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=token)
+    except WorkoutDatabaseError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to retrieve exercise due to database error: {e}",
+        ) from e
 
-    else:
-        access_token = auth_header.split(" ")[1]
-        exercise = get_exercise_by_id(
-            exercise_id=exercise_id, access_token=access_token
-        )
-
-    if not exercise:
-        raise HTTPException(status_code=400, detail="Invalid request")
+    if exercise is None:
+        raise HTTPException(status_code=404, detail="Exercise not found")
 
     return exercise

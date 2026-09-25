@@ -7,15 +7,25 @@ from unittest.mock import Mock
 from datetime import datetime, timedelta, timezone
 from uuid import UUID
 
-from backend.app.main import app, get_strict_root_limiter, get_standard_api_limiter
+from backend.app.main import app
+from backend.app.core.dependencies import (
+    get_strict_root_limiter,
+    get_standard_api_limiter,
+)
 from backend.app.schemas.workout import DeleteWorkoutRequestSchema
+from backend.app.api.routes.workout import get_access_token, verify_supabase_user
 
 
 @pytest.fixture
 async def client():
     """Provides an HTTP client for testing the FastAPI app."""
     async with AsyncClient(
-        transport=ASGITransport(app=app), base_url="http://test"
+        transport=ASGITransport(
+            app=app,
+            # Inspect 500 error responses rather than raise exceptions
+            raise_app_exceptions=False,
+        ),
+        base_url="http://test",
     ) as ac:
         yield ac
 
@@ -28,6 +38,61 @@ LIMITER_RESETS = {
 }
 
 WORKOUT_LOG_ID = 54
+
+SAMPLE_WORKOUT_LOG = {
+    "id": WORKOUT_LOG_ID,
+    "created_at": datetime(2026, 6, 23, 6, 48, 1, 288810, tzinfo=timezone.utc),
+    "user_id": UUID("ee98b2ee-4d06-4c42-803c-04e645dc26e4"),
+    "workout_build_id": None,
+    "date": datetime(2026, 6, 23, tzinfo=timezone.utc),
+    "title": "string",
+    "description": "string",
+    "duration": timedelta(days=3),
+    "workout_data": {
+        "data": [
+            {
+                "id": UUID("00000000-0000-0000-0000-000000000001"),
+                "exercise_id": 0,
+                "tracked": ["string"],
+                "order": 0,
+                "type": "exercise",
+                "sets": [
+                    {
+                        "id": UUID("00000000-0000-0000-0000-000000000002"),
+                        "completed": True,
+                        "completed_at": "2026-06-23T06:48:01.288810+00:00",
+                        "fields": {
+                            "reps": 0,
+                            "time": "string",
+                            "rest": "string",
+                            "setProgressions": [
+                                {
+                                    "id": UUID("00000000-0000-0000-0000-000000000003"),
+                                    "set_progression_id": 0,
+                                    "value": 0,
+                                }
+                            ],
+                        },
+                    }
+                ],
+            }
+        ]
+    },
+    "rpe": 10,
+    "notes": "string",
+    "status": "draft",
+    "updated_at": datetime(
+        2026,
+        6,
+        23,
+        6,
+        46,
+        8,
+        237000,
+        tzinfo=timezone.utc,
+    ),
+    "goal": "function",
+}
 
 
 @pytest.fixture(autouse=True)
@@ -62,62 +127,13 @@ def deleted_workout_log_response() -> dict:
     Returns a dictionary representing a deleted workout log response for testing
     purposes.
     """
-    return {
-        "id": WORKOUT_LOG_ID,
-        "created_at": datetime(2026, 6, 23, 6, 48, 1, 288810, tzinfo=timezone.utc),
-        "user_id": UUID("ee98b2ee-4d06-4c42-803c-04e645dc26e4"),
-        "workout_build_id": None,
-        "date": datetime(2026, 6, 23, tzinfo=timezone.utc),
-        "title": "string",
-        "description": "string",
-        "duration": timedelta(days=3),
-        "workout_data": {
-            "data": [
-                {
-                    "id": UUID("00000000-0000-0000-0000-000000000001"),
-                    "exercise_id": 0,
-                    "tracked": ["string"],
-                    "order": 0,
-                    "type": "exercise",
-                    "sets": [
-                        {
-                            "id": UUID("00000000-0000-0000-0000-000000000002"),
-                            "completed": True,
-                            "completed_at": "2026-06-23T06:48:01.288810+00:00",
-                            "fields": {
-                                "reps": 0,
-                                "time": "string",
-                                "rest": "string",
-                                "setProgressions": [
-                                    {
-                                        "id": UUID(
-                                            "00000000-0000-0000-0000-000000000003"
-                                        ),
-                                        "set_progression_id": 0,
-                                        "value": 0,
-                                    }
-                                ],
-                            },
-                        }
-                    ],
-                }
-            ]
-        },
-        "rpe": 10,
-        "notes": "string",
-        "status": "draft",
-        "updated_at": datetime(
-            2026,
-            6,
-            23,
-            6,
-            46,
-            8,
-            237000,
-            tzinfo=timezone.utc,
-        ),
-        "goal": "function",
-    }
+    return SAMPLE_WORKOUT_LOG
+
+
+@pytest.fixture
+def workout_logs_response() -> list[dict]:
+    """Returns a list representing workout logs returned by the API."""
+    return [SAMPLE_WORKOUT_LOG]
 
 
 @pytest.fixture
@@ -151,3 +167,39 @@ def supabase_delete_client_factory():
         return supabase_client
 
     return factory
+
+
+@pytest.fixture
+def supabase_logs_client_factory():
+    """Returns a mock Supabase client for workout-log list queries."""
+
+    def factory(
+        response_data: list[dict] | None = None,
+        execute_exception: Exception | None = None,
+    ):
+        supabase_client = Mock()
+        table_chain = Mock()
+        select_chain = Mock()
+        response = Mock()
+        response.data = [] if response_data is None else response_data
+
+        supabase_client.table.return_value = table_chain
+        table_chain.select.return_value = select_chain
+
+        if execute_exception is not None:
+            select_chain.execute.side_effect = execute_exception
+        else:
+            select_chain.execute.return_value = response
+
+        return supabase_client
+
+    return factory
+
+
+@pytest.fixture
+def mock_access_token():
+    app.dependency_overrides[get_access_token] = lambda: "mock_token"
+    app.dependency_overrides[verify_supabase_user] = lambda: None
+    yield
+    app.dependency_overrides.pop(get_access_token, None)
+    app.dependency_overrides.pop(verify_supabase_user, None)
