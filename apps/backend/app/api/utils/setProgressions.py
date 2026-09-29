@@ -5,7 +5,7 @@ from app.schemas.setProgressions import SetProgressionsResponseSchema
 from app.services.supabase_client import get_supabase_client
 
 
-def get_set_progressions_list(
+def get_set_progressions(
     access_token: Optional[str] = None,
 ) -> Optional[List[SetProgressionsResponseSchema]]:
     """
