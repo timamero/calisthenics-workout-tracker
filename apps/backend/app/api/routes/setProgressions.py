@@ -22,8 +22,7 @@ async def get_set_progressions(
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> List[SetProgressionsResponseSchema]:
     """
-    Get list of all challenges and assists.
-    Requires authentication.
+    Get list of all set progressions (challenges and assists)
     """
     setProgressions = get_set_progressions_list(access_token=token)
 
