@@ -3,7 +3,11 @@ from typing import List, Annotated
 from fastapi import APIRouter, HTTPException, Depends
 
 from app.api.utils.setProgressions import get_set_progressions
-from app.core.dependencies import get_access_token, get_standard_api_limiter
+from app.core.dependencies import (
+    get_access_token,
+    get_standard_api_limiter,
+    verify_supabase_user,
+)
 from app.schemas.setProgressions import SetProgressionsResponseSchema
 
 router = APIRouter(
@@ -16,7 +20,10 @@ router = APIRouter(
 @router.get(
     "",
     response_model=List[SetProgressionsResponseSchema],
-    dependencies=[Depends(get_standard_api_limiter())],
+    dependencies=[
+        Depends(get_standard_api_limiter()),
+        Depends(verify_supabase_user),
+    ],
 )
 async def read_set_progressions(
     token: Annotated[str | None, Depends(get_access_token)],

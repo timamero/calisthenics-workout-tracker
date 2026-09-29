@@ -29,7 +29,10 @@ router = APIRouter(prefix="/workout")
 
 @router.post(
     "/build",
-    dependencies=[Depends(get_write_api_limiter())],
+    dependencies=[
+        Depends(get_write_api_limiter()),
+        Depends(verify_supabase_user),
+    ],
 )
 def save_build(
     build: WorkoutBuildRequestSchema,
@@ -54,7 +57,10 @@ def save_build(
 
 @router.post(
     "/log",
-    dependencies=[Depends(get_write_api_limiter())],
+    dependencies=[
+        Depends(get_write_api_limiter()),
+        Depends(verify_supabase_user),
+    ],
 )
 def save_log(
     log: WorkoutLogRequestSchema,
@@ -79,7 +85,10 @@ def save_log(
 
 @router.put(
     "/log",
-    dependencies=[Depends(get_write_api_limiter())],
+    dependencies=[
+        Depends(get_write_api_limiter()),
+        Depends(verify_supabase_user),
+    ],
 )
 def update_log(
     log: WorkoutLogResponseSchema,
@@ -104,7 +113,10 @@ def update_log(
 
 @router.delete(
     "/log",
-    dependencies=[Depends(get_write_api_limiter())],
+    dependencies=[
+        Depends(get_write_api_limiter()),
+        Depends(verify_supabase_user),
+    ],
 )
 def delete_log(
     workout_log_id: DeleteWorkoutRequestSchema,
