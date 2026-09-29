@@ -3,9 +3,8 @@ from typing import List, Annotated
 from fastapi import APIRouter, HTTPException, Depends
 
 from app.api.utils.setProgressions import get_set_progressions_list
-from app.schemas.setProgressions import SetProgressionsResponseSchema
-
 from app.core.dependencies import get_access_token, get_standard_api_limiter
+from app.schemas.setProgressions import SetProgressionsResponseSchema
 
 router = APIRouter(
     prefix="/set-progressions",
