@@ -162,9 +162,6 @@ def read_workout_logs(
             detail=f"Unable to retrieve workout logs due to database error: {e}",
         ) from e
 
-    if logs is None:
-        raise HTTPException(status_code=404, detail="Workout logs not found")
-
     return logs
 
 
@@ -188,8 +185,5 @@ def read_workout_builds(
             status_code=500,
             detail=f"Unable to retrieve workout builds due to database error: {e}",
         ) from e
-
-    if builds is None:
-        raise HTTPException(status_code=404, detail="Workout builds not found")
 
     return builds
