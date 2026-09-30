@@ -1,9 +1,10 @@
-from typing import List
+from typing import Optional
 
+from app.core.exceptions import WorkoutDatabaseError
+from app.core.types import SupabaseRow, SupabaseRows
 from app.services.supabase_client import get_supabase_client
 from app.schemas.workout import (
     WorkoutBuildRequestSchema,
-    WorkoutBuildResponseSchema,
     WorkoutLogRequestSchema,
     WorkoutLogResponseSchema,
     DeleteWorkoutRequestSchema,
@@ -12,7 +13,19 @@ from app.schemas.workout import (
 
 def insert_workout_build(
     workout_build: WorkoutBuildRequestSchema, access_token: str | None = None
-) -> WorkoutBuildResponseSchema:
+) -> Optional[SupabaseRow]:
+    """Insert a workout build.
+
+    Args:
+        workout_build: Build data to insert.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        The inserted workout build, or None if no row was returned.
+
+    Raises:
+        WorkoutDatabaseError: If the insert fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         workout_build_dict = workout_build.model_dump(mode="json")
@@ -21,14 +34,32 @@ def insert_workout_build(
             .insert(json=workout_build_dict, returning="representation")
             .execute()
         )
-        return response.data[0]
     except Exception as e:
-        print(f"Error saving workout build in database: {e}")
+        raise WorkoutDatabaseError(
+            "Internal server error: Error saving workout build in database"
+        ) from e
+
+    if not response.data:
+        return None
+
+    return response.data[0]
 
 
 def insert_workout_log(
     workout_log: WorkoutLogRequestSchema, access_token: str | None = None
-):
+) -> Optional[SupabaseRow]:
+    """Insert a workout log.
+
+    Args:
+        workout_log: Log data to insert.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        The inserted workout log, or None if no row was returned.
+
+    Raises:
+        WorkoutDatabaseError: If the insert fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         workout_log_dict = workout_log.model_dump(mode="json")
@@ -38,14 +69,32 @@ def insert_workout_log(
             .insert(json=workout_log_dict, returning="representation")
             .execute()
         )
-        return response.data[0]
     except Exception as e:
-        print(f"Error saving workout log in database: {e}")
+        raise WorkoutDatabaseError(
+            "Internal server error: Error saving workout log in database"
+        ) from e
+
+    if not response.data:
+        return None
+
+    return response.data[0]
 
 
 def update_workout_log(
     workout_log: WorkoutLogResponseSchema, access_token: str | None = None
-):
+) -> Optional[SupabaseRow]:
+    """Update an existing workout log.
+
+    Args:
+        workout_log: Log data, including the ID to update.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        The updated workout log, or None if no row was updated.
+
+    Raises:
+        WorkoutDatabaseError: If the update fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         workout_log_dict = workout_log.model_dump(mode="json")
@@ -56,16 +105,31 @@ def update_workout_log(
             .eq("id", workout_log.id)
             .execute()
         )
-        return response.data[0]
     except Exception as e:
-        print(f"Error updating workout in database: {e}")
+        raise WorkoutDatabaseError(
+            "Internal server error: Error updating workout in database"
+        ) from e
+
+    if not response.data:
+        return None
+
+    return response.data[0]
 
 
 def delete_workout_log(
     workout_log_id: DeleteWorkoutRequestSchema, access_token: str | None = None
-):
-    """
-    Delete workout log from supabase database.
+) -> Optional[SupabaseRow]:
+    """Delete a workout log.
+
+    Args:
+        workout_log_id: ID of the log to delete.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        The deleted workout log, or None if no row was deleted.
+
+    Raises:
+        WorkoutDatabaseError: If the delete fails.
     """
     supabase = get_supabase_client(access_token)
     try:
@@ -75,36 +139,62 @@ def delete_workout_log(
             .eq("id", workout_log_id.id)
             .execute()
         )
-        return response.data[0]
     except Exception as e:
-        print(f"Error deleting workout log from database: {e}")
+        raise WorkoutDatabaseError(
+            "Internal server error: Error deleting workout log from database"
+        ) from e
+
+    if not response.data:
+        return None
+
+    return response.data[0]
 
 
-def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
+def get_workout_logs(access_token: str | None = None) -> SupabaseRows:
+    """Retrieve all workout logs.
+
+    Args:
+        access_token: Optional Supabase access token.
+
+    Returns:
+        A list of workout logs, possibly empty.
+
+    Raises:
+        WorkoutDatabaseError: If the query fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         select_query = supabase.table("workout_logs").select("*")
-        if access_token:
-            auth_user_id = supabase.auth.get_user(jwt=access_token).user.id
-            response = select_query.eq("user_id", auth_user_id).execute()
-        else:
-            response = select_query.execute()
-        return response.data
+        response = select_query.execute()
     except Exception as e:
-        print(f"Error fetching workout_logs from database: {e}")
+        raise WorkoutDatabaseError(
+            "Internal server error: Error fetching workout logs from database"
+        ) from e
+
+    return response.data
 
 
 def get_workout_builds(
     access_token: str | None = None,
-) -> List[WorkoutBuildResponseSchema]:
+) -> SupabaseRows:
+    """Retrieve all workout builds.
+
+    Args:
+        access_token: Optional Supabase access token.
+
+    Returns:
+        A list of workout builds, possibly empty.
+
+    Raises:
+        WorkoutDatabaseError: If the query fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         select_query = supabase.table("workout_builds").select("*")
-        if access_token:
-            auth_user_id = supabase.auth.get_user(jwt=access_token).user.id
-            response = select_query.eq("user_id", auth_user_id).execute()
-        else:
-            response = select_query.execute()
-        return response.data
+        response = select_query.execute()
     except Exception as e:
-        print(f"Error fetching workout_builds from database: {e}")
+        raise WorkoutDatabaseError(
+            "Internal server error: Error fetching workout builds from database"
+        ) from e
+
+    return response.data
