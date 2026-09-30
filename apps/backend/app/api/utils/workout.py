@@ -127,7 +127,7 @@ def get_workout_builds(
         response = select_query.execute()
     except Exception as e:
         raise WorkoutDatabaseError(
-            "Internal server error: Error fetching workout logs from database"
+            "Internal server error: Error fetching workout builds from database"
         ) from e
 
     return response.data
