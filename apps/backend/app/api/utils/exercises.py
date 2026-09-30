@@ -1,6 +1,8 @@
+from typing import List
+
 from app.core.exceptions import WorkoutDatabaseError
 from app.services.supabase_client import get_supabase_client
-from app.schemas.exercise import ExerciseFilterParams
+from app.schemas.exercise import ExerciseFilterParams, ExerciseSchema
 
 
 def filter_muscles_equipment_query_to_supabase_conditions(
@@ -28,7 +30,10 @@ def filter_muscles_equipment_query_to_supabase_conditions(
     return conditions
 
 
-def get_exercises(filter_query: ExerciseFilterParams, access_token: str | None = None):
+def get_exercises(
+    filter_query: ExerciseFilterParams, access_token: str | None = None
+) -> List[ExerciseSchema]:
+
     supabase = get_supabase_client(access_token)
 
     try:
@@ -58,9 +63,6 @@ def get_exercises(filter_query: ExerciseFilterParams, access_token: str | None =
         raise WorkoutDatabaseError(
             "Internal server error: Error fetching exercises"
         ) from e
-
-    if not response.data:
-        return None
 
     return response.data
 

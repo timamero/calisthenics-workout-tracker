@@ -44,9 +44,6 @@ def read_filtered_exercises(
     end_time = time.perf_counter()
     print(f"Retrieved exercises from supabase in {end_time - start_time:0.4f} seconds")
 
-    if exercises is None:
-        raise HTTPException(status_code=404, detail="Exercises not found")
-
     return exercises
 
 
