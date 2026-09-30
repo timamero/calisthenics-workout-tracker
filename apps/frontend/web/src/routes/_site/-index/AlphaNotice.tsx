@@ -14,7 +14,7 @@ export default function AlphaNotice() {
       <Text fz="xsplus" lh="xxl">
         You may encounter bugs, and workout data may not carry over between
         future releases if breaking changes are required. Your feedback during
-        this phase directly shapes what Torque becomes — thank you for being
+        this phase directly shapes what Torque Fit becomes — thank you for being
         part of it.
       </Text>
     </Alert>

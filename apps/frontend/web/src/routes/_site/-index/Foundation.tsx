@@ -62,8 +62,8 @@ export default function Foundation() {
           Bodyweight training works because physics doesn't care where you are.
         </Text>{' '}
         Gravity applies the same force whether you're in a boutique studio or
-        your living room at 6am. Torque helps you harness that force and build a
-        real training record from the ground up.
+        your living room at 6am. Torque Fit helps you harness that force and
+        build a real training record from the ground up.
       </Text>
       <SimpleGrid cols={{ base: 1, xs: 3 }} spacing="sm">
         <StatCard

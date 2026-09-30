@@ -46,8 +46,8 @@ export default function CallsToAction() {
               Your body is already the machine. Start using it.
             </Title>
             <Text fz="xsplus" c="dark.3" lh="lg" fw={300}>
-              The Torque web app is free and ready to go — no download needed.
-              Just open it and start logging.
+              The Torque Fit web app is free and ready to go — no download
+              needed. Just open it and start logging.
             </Text>
           </Box>
           <Stack

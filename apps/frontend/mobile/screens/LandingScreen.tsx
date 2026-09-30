@@ -48,7 +48,7 @@ export default function LandingScreen() {
             variant="headlineLarge"
             style={{ color: theme.colors.onBackground }}
           >
-            Torque
+            Torque Fit
           </Text>
           <View style={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
             <Text

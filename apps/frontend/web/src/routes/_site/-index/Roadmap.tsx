@@ -130,7 +130,7 @@ export default function Roadmap() {
         </Title>
       </Box>
       <Text fz="sm" c="dark.3" lh="xxl" fw={300}>
-        Alpha Phase 1 is the starting line. Here's where Torque is headed.
+        Alpha Phase 1 is the starting line. Here's where Torque Fit is headed.
       </Text>
       <SimpleGrid cols={{ base: 1, xs: 2, sm: 4 }} spacing="sm">
         {roadmap.map((r) => (

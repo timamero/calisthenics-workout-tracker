@@ -106,7 +106,7 @@ export default function Hero() {
                 letterSpacing: theme.other.letterSpacing.tight,
               })}
             >
-              Torque.
+              Torque Fit.
             </Title>
             <Text
               fz={{ base: 'xl', sm: 'xxl' }}

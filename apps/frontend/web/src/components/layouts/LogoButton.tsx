@@ -17,7 +17,7 @@ export default function LogoButton({ linkTo }: { linkTo: string }) {
           fw="bolder"
           size="lg"
         >
-          Torque
+          Torque Fit
         </Text>
       </Group>
     </UnstyledButton>
