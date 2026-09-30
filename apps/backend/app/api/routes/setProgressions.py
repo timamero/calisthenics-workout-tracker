@@ -34,6 +34,8 @@ async def read_set_progressions(
     setProgressions = get_set_progressions(access_token=token)
 
     if setProgressions is None:
-        raise HTTPException(status_code=400, detail="Invalid request")
+        raise HTTPException(
+            status_code=400, detail="Invalid request: Unable to fetch set progressions"
+        )
 
     return setProgressions
