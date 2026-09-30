@@ -38,8 +38,17 @@ def save_build(
     build: WorkoutBuildRequestSchema,
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> WorkoutBuildResponseSchema:
-    """
-    Insert workout build.
+    """Create a workout build.
+
+    Args:
+        build: Build data to insert.
+        token: Optional Supabase access token.
+
+    Returns:
+        The created workout build.
+
+    Raises:
+        HTTPException: If the insert fails or returns no workout.
     """
     try:
         workout_build = insert_workout_build(workout_build=build, access_token=token)
@@ -66,8 +75,17 @@ def save_log(
     log: WorkoutLogRequestSchema,
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> WorkoutLogResponseSchema:
-    """
-    Insert workout log.
+    """Create a workout log.
+
+    Args:
+        log: Log data to insert.
+        token: Optional Supabase access token.
+
+    Returns:
+        The created workout log.
+
+    Raises:
+        HTTPException: If the insert fails or returns no workout.
     """
     try:
         workout_log = insert_workout_log(workout_log=log, access_token=token)
@@ -94,8 +112,17 @@ def update_log(
     log: WorkoutLogResponseSchema,
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> WorkoutLogResponseSchema:
-    """
-    Update workout log.
+    """Update a workout log.
+
+    Args:
+        log: Updated log data.
+        token: Optional Supabase access token.
+
+    Returns:
+        The updated workout log.
+
+    Raises:
+        HTTPException: If the update fails or the log is not found.
     """
     try:
         workout_log = update_workout_log(workout_log=log, access_token=token)
@@ -122,8 +149,17 @@ def delete_log(
     workout_log_id: DeleteWorkoutRequestSchema,
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> WorkoutLogResponseSchema:
-    """
-    Delete workout log.
+    """Delete a workout log.
+
+    Args:
+        workout_log_id: ID of the log to delete.
+        token: Optional Supabase access token.
+
+    Returns:
+        The deleted workout log.
+
+    Raises:
+        HTTPException: If the delete fails or the log is not found.
     """
     try:
         deleted_workout_log = delete_workout_log(
@@ -151,8 +187,16 @@ def delete_log(
 def read_workout_logs(
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> List[WorkoutLogResponseSchema]:
-    """
-    Retrieve list of workout logs
+    """Retrieve all workout logs.
+
+    Args:
+        token: Optional Supabase access token.
+
+    Returns:
+        All workout logs, possibly an empty list.
+
+    Raises:
+        HTTPException: If the query fails.
     """
     try:
         logs = get_workout_logs(access_token=token)
@@ -175,8 +219,16 @@ def read_workout_logs(
 def read_workout_builds(
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> List[WorkoutBuildResponseSchema]:
-    """
-    Retrieve list of workout builds
+    """Retrieve all workout builds.
+
+    Args:
+        token: Optional Supabase access token.
+
+    Returns:
+        All workout builds, possibly an empty list.
+
+    Raises:
+        HTTPException: If the query fails.
     """
     try:
         builds = get_workout_builds(access_token=token)

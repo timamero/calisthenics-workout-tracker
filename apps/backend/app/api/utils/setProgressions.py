@@ -8,8 +8,16 @@ from app.services.supabase_client import get_supabase_client
 def get_set_progressions(
     access_token: Optional[str] = None,
 ) -> Optional[List[SetProgressionsResponseSchema]]:
-    """
-    Retrieve list of all set progressions (challenges and assists) from the database.
+    """Retrieve all set progressions.
+
+    Args:
+        access_token: Optional Supabase access token.
+
+    Returns:
+        Set progressions, or None if no rows are returned.
+
+    Raises:
+        WorkoutDatabaseError: If the query fails.
     """
     supabase = get_supabase_client(access_token)
     try:

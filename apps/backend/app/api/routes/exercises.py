@@ -28,8 +28,17 @@ def read_filtered_exercises(
     filter_query: Annotated[ExerciseFilterParams, Query()],
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> List[ExerciseSchema]:
-    """
-    Retrieve a list of exercises.
+    """Retrieve exercises matching the query filters.
+
+    Args:
+        filter_query: Filters for the exercise query.
+        token: Optional Supabase access token.
+
+    Returns:
+        Matching exercises, possibly an empty list.
+
+    Raises:
+        HTTPException: If the database query fails.
     """
     start_time = time.perf_counter()
 
@@ -59,8 +68,17 @@ def read_exercise_item(
     exercise_id: str,
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> ExerciseSchema:
-    """
-    Retrieve exercise by ID.
+    """Retrieve an exercise by ID.
+
+    Args:
+        exercise_id: Exercise ID to retrieve.
+        token: Optional Supabase access token.
+
+    Returns:
+        The matching exercise.
+
+    Raises:
+        HTTPException: If the query fails or the exercise is not found.
     """
     try:
         exercise = get_exercise_by_id(exercise_id=exercise_id, access_token=token)

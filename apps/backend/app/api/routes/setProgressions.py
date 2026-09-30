@@ -28,8 +28,16 @@ router = APIRouter(
 async def read_set_progressions(
     token: Annotated[str | None, Depends(get_access_token)],
 ) -> List[SetProgressionsResponseSchema]:
-    """
-    Get list of all set progressions (challenges and assists)
+    """Retrieve all set progressions.
+
+    Args:
+        token: Optional Supabase access token.
+
+    Returns:
+        All available set progressions.
+
+    Raises:
+        HTTPException: If set progressions cannot be retrieved.
     """
     setProgressions = get_set_progressions(access_token=token)
 

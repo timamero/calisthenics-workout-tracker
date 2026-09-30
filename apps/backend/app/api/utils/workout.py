@@ -14,6 +14,18 @@ from app.schemas.workout import (
 def insert_workout_build(
     workout_build: WorkoutBuildRequestSchema, access_token: str | None = None
 ) -> WorkoutBuildResponseSchema:
+    """Insert a workout build.
+
+    Args:
+        workout_build: Build data to insert.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        The inserted workout build, or None if no row was returned.
+
+    Raises:
+        WorkoutDatabaseError: If the insert fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         workout_build_dict = workout_build.model_dump(mode="json")
@@ -36,6 +48,18 @@ def insert_workout_build(
 def insert_workout_log(
     workout_log: WorkoutLogRequestSchema, access_token: str | None = None
 ):
+    """Insert a workout log.
+
+    Args:
+        workout_log: Log data to insert.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        The inserted workout log, or None if no row was returned.
+
+    Raises:
+        WorkoutDatabaseError: If the insert fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         workout_log_dict = workout_log.model_dump(mode="json")
@@ -59,6 +83,18 @@ def insert_workout_log(
 def update_workout_log(
     workout_log: WorkoutLogResponseSchema, access_token: str | None = None
 ):
+    """Update an existing workout log.
+
+    Args:
+        workout_log: Log data, including the ID to update.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        The updated workout log, or None if no row was updated.
+
+    Raises:
+        WorkoutDatabaseError: If the update fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         workout_log_dict = workout_log.model_dump(mode="json")
@@ -83,8 +119,17 @@ def update_workout_log(
 def delete_workout_log(
     workout_log_id: DeleteWorkoutRequestSchema, access_token: str | None = None
 ) -> Optional[WorkoutLogResponseSchema]:
-    """
-    Delete workout log from supabase database.
+    """Delete a workout log.
+
+    Args:
+        workout_log_id: ID of the log to delete.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        The deleted workout log, or None if no row was deleted.
+
+    Raises:
+        WorkoutDatabaseError: If the delete fails.
     """
     supabase = get_supabase_client(access_token)
     try:
@@ -106,6 +151,17 @@ def delete_workout_log(
 
 
 def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
+    """Retrieve all workout logs.
+
+    Args:
+        access_token: Optional Supabase access token.
+
+    Returns:
+        A list of workout logs, possibly empty.
+
+    Raises:
+        WorkoutDatabaseError: If the query fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         select_query = supabase.table("workout_logs").select("*")
@@ -121,6 +177,17 @@ def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponse
 def get_workout_builds(
     access_token: str | None = None,
 ) -> List[WorkoutBuildResponseSchema]:
+    """Retrieve all workout builds.
+
+    Args:
+        access_token: Optional Supabase access token.
+
+    Returns:
+        A list of workout builds, possibly empty.
+
+    Raises:
+        WorkoutDatabaseError: If the query fails.
+    """
     supabase = get_supabase_client(access_token)
     try:
         select_query = supabase.table("workout_builds").select("*")

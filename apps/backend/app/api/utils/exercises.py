@@ -8,9 +8,13 @@ from app.schemas.exercise import ExerciseFilterParams, ExerciseSchema
 def filter_muscles_equipment_query_to_supabase_conditions(
     filter_query: ExerciseFilterParams,
 ) -> str:
-    """
-    Convert the filter query parameters for muscle and equipment into a
-    Supabase-compatible condition string.
+    """Build Supabase conditions for muscle and equipment filters.
+
+    Args:
+        filter_query: Exercise filters to convert.
+
+    Returns:
+        A Supabase-compatible OR condition string.
     """
     muscles = filter_query.muscles
     equipments = filter_query.equipments
@@ -33,6 +37,18 @@ def filter_muscles_equipment_query_to_supabase_conditions(
 def get_exercises(
     filter_query: ExerciseFilterParams, access_token: str | None = None
 ) -> List[ExerciseSchema]:
+    """Retrieve exercises matching the supplied filters.
+
+    Args:
+        filter_query: Filters for the exercise query.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        Matching exercises, possibly an empty list.
+
+    Raises:
+        WorkoutDatabaseError: If the query fails.
+    """
 
     supabase = get_supabase_client(access_token)
 
@@ -68,6 +84,18 @@ def get_exercises(
 
 
 def get_exercise_by_id(exercise_id: str, access_token: str | None = None):
+    """Retrieve one exercise by ID.
+
+    Args:
+        exercise_id: Exercise ID to retrieve.
+        access_token: Optional Supabase access token.
+
+    Returns:
+        The matching exercise, or None if it does not exist.
+
+    Raises:
+        WorkoutDatabaseError: If the query fails.
+    """
     supabase = get_supabase_client(access_token)
 
     try:
