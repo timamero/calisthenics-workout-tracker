@@ -9,11 +9,7 @@ def get_set_progressions(
     access_token: Optional[str] = None,
 ) -> Optional[List[SetProgressionsResponseSchema]]:
     """
-    Retrieve list of all challenges and assists (set progressions) from the database.
-    Args:
-        access_token: Optional Supabase access token for authenticated requests
-    Returns:
-        List of SetProgressionsResponseSchema objects
+    Retrieve list of all set progressions (challenges and assists) from the database.
     """
     supabase = get_supabase_client(access_token)
     try:
