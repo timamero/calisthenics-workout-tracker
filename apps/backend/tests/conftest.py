@@ -22,8 +22,6 @@ async def client():
     async with AsyncClient(
         transport=ASGITransport(
             app=app,
-            # Inspect 500 error responses rather than raise exceptions
-            raise_app_exceptions=False,
         ),
         base_url="http://test",
     ) as ac:
