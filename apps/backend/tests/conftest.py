@@ -197,7 +197,8 @@ def supabase_logs_client_factory():
 
 
 @pytest.fixture
-def mock_access_token():
+def mock_auth_dependencies():
+    """Mocks the authentication dependencies to bypass actual auth checks."""
     app.dependency_overrides[get_access_token] = lambda: "mock_token"
     app.dependency_overrides[verify_supabase_user] = lambda: None
     yield

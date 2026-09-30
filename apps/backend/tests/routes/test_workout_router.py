@@ -9,7 +9,7 @@ class TestDeleteWorkoutLogRouter:
     async def test_delete_workout_returns_deleted_log(
         self,
         client,
-        mock_access_token,
+        mock_auth_dependencies,
         monkeypatch: pytest.MonkeyPatch,
         delete_workout_request_schema,
         deleted_workout_log_response,
@@ -34,7 +34,7 @@ class TestDeleteWorkoutLogRouter:
     async def test_delete_workout_calls_helper(
         self,
         client,
-        mock_access_token,
+        mock_auth_dependencies,
         monkeypatch: pytest.MonkeyPatch,
         delete_workout_request_schema,
         deleted_workout_log_response,
@@ -67,7 +67,7 @@ class TestDeleteWorkoutLogRouter:
     async def test_delete_workout_returns_404_when_helper_returns_none(
         self,
         client,
-        mock_access_token,
+        mock_auth_dependencies,
         monkeypatch: pytest.MonkeyPatch,
         delete_workout_request_schema,
     ):
@@ -94,7 +94,7 @@ class TestGetWorkoutLogsRouter:
     async def test_get_workout_logs_returns_logs(
         self,
         client,
-        mock_access_token,
+        mock_auth_dependencies,
         monkeypatch: pytest.MonkeyPatch,
         workout_logs_response,
     ):
@@ -115,7 +115,7 @@ class TestGetWorkoutLogsRouter:
     async def test_get_workout_logs_returns_500_when_helper_raises_database_error(
         self,
         client,
-        mock_access_token,
+        mock_auth_dependencies,
         monkeypatch: pytest.MonkeyPatch,
     ):
         """Verify that database errors become an internal server error response."""
