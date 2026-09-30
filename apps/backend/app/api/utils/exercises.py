@@ -1,8 +1,7 @@
-from typing import List
-
 from app.core.exceptions import WorkoutDatabaseError
+from app.core.types import SupabaseRow, SupabaseRows
 from app.services.supabase_client import get_supabase_client
-from app.schemas.exercise import ExerciseFilterParams, ExerciseSchema
+from app.schemas.exercise import ExerciseFilterParams
 
 
 def filter_muscles_equipment_query_to_supabase_conditions(
@@ -36,7 +35,7 @@ def filter_muscles_equipment_query_to_supabase_conditions(
 
 def get_exercises(
     filter_query: ExerciseFilterParams, access_token: str | None = None
-) -> List[ExerciseSchema]:
+) -> SupabaseRows:
     """Retrieve exercises matching the supplied filters.
 
     Args:
@@ -83,7 +82,9 @@ def get_exercises(
     return response.data
 
 
-def get_exercise_by_id(exercise_id: str, access_token: str | None = None):
+def get_exercise_by_id(
+    exercise_id: str, access_token: str | None = None
+) -> SupabaseRow | None:
     """Retrieve one exercise by ID.
 
     Args:

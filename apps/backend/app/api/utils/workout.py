@@ -1,10 +1,10 @@
-from typing import List, Optional
+from typing import Optional
 
 from app.core.exceptions import WorkoutDatabaseError
+from app.core.types import SupabaseRow, SupabaseRows
 from app.services.supabase_client import get_supabase_client
 from app.schemas.workout import (
     WorkoutBuildRequestSchema,
-    WorkoutBuildResponseSchema,
     WorkoutLogRequestSchema,
     WorkoutLogResponseSchema,
     DeleteWorkoutRequestSchema,
@@ -13,7 +13,7 @@ from app.schemas.workout import (
 
 def insert_workout_build(
     workout_build: WorkoutBuildRequestSchema, access_token: str | None = None
-) -> WorkoutBuildResponseSchema:
+) -> Optional[SupabaseRow]:
     """Insert a workout build.
 
     Args:
@@ -47,7 +47,7 @@ def insert_workout_build(
 
 def insert_workout_log(
     workout_log: WorkoutLogRequestSchema, access_token: str | None = None
-):
+) -> Optional[SupabaseRow]:
     """Insert a workout log.
 
     Args:
@@ -82,7 +82,7 @@ def insert_workout_log(
 
 def update_workout_log(
     workout_log: WorkoutLogResponseSchema, access_token: str | None = None
-):
+) -> Optional[SupabaseRow]:
     """Update an existing workout log.
 
     Args:
@@ -118,7 +118,7 @@ def update_workout_log(
 
 def delete_workout_log(
     workout_log_id: DeleteWorkoutRequestSchema, access_token: str | None = None
-) -> Optional[WorkoutLogResponseSchema]:
+) -> Optional[SupabaseRow]:
     """Delete a workout log.
 
     Args:
@@ -150,7 +150,7 @@ def delete_workout_log(
     return response.data[0]
 
 
-def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponseSchema]:
+def get_workout_logs(access_token: str | None = None) -> SupabaseRows:
     """Retrieve all workout logs.
 
     Args:
@@ -176,7 +176,7 @@ def get_workout_logs(access_token: str | None = None) -> List[WorkoutLogResponse
 
 def get_workout_builds(
     access_token: str | None = None,
-) -> List[WorkoutBuildResponseSchema]:
+) -> SupabaseRows:
     """Retrieve all workout builds.
 
     Args:

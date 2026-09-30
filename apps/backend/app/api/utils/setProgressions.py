@@ -1,20 +1,20 @@
-from typing import List, Optional
+from typing import Optional
 
 from app.core.exceptions import WorkoutDatabaseError
-from app.schemas.setProgressions import SetProgressionsResponseSchema
+from app.core.types import SupabaseRows
 from app.services.supabase_client import get_supabase_client
 
 
 def get_set_progressions(
     access_token: Optional[str] = None,
-) -> Optional[List[SetProgressionsResponseSchema]]:
+) -> SupabaseRows:
     """Retrieve all set progressions.
 
     Args:
         access_token: Optional Supabase access token.
 
     Returns:
-        Set progressions, or None if no rows are returned.
+        Set progressions, possibly an empty list.
 
     Raises:
         WorkoutDatabaseError: If the query fails.
@@ -32,7 +32,4 @@ def get_set_progressions(
             "Internal server error: Error fetching challenges and assists"
         ) from e
 
-    if not response.data:
-        return None
-
-    return [SetProgressionsResponseSchema(**item) for item in response.data]
+    return response.data
