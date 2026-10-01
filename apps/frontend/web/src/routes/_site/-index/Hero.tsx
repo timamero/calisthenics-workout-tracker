@@ -14,7 +14,13 @@ import { useDefaultSize } from '../../../hooks';
 
 export default function Hero() {
   return (
-    <Paper withBorder radius="lg" p="xl" mb="xl">
+    <Paper
+      withBorder
+      radius="lg"
+      p="xl"
+      mb="xl"
+      bg="radial-gradient(circle at 50% 50%, var(--mantine-color-lime-0), var(--mantine-color-elevation-3) 100%)"
+    >
       <Stack gap="lg">
         <Group justify="flex-end" align="center" wrap="wrap" gap="sm">
           <Badge
