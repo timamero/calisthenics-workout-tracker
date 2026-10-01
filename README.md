@@ -1,8 +1,8 @@
-# Torque
+# Torque Fit
 
-Torque lets users log bodyweight workouts, track set progressions (challenge/assist variations), and build a training history — with an AI-generated workout feature planned for a later release.
+Torque Fit lets users log bodyweight workouts, track set progressions (challenge/assist variations), and build a training history — with an AI-generated workout feature planned for a later release.
 
-**Live demo:** [Torque](https://torquefit.app)
+**Live demo:** [Torque Fit](https://torquefit.app)
 
 **Changelog:** [CHANGELOG.md](./CHANGELOG.md)
 

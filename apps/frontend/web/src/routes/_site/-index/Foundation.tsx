@@ -56,14 +56,14 @@ export default function Foundation() {
         </Title>
       </Box>
       <Text fz="sm" c="dark.3" lh="xxl" fw={300}>
-        A floor. A pull-up bar. A park bench. That's your gym — free, open 24
+        A floor. A pull-up bar. A park bench. That's your gym: free, open 24
         hours, and never crowded.{' '}
         <Text component="span" fw={500} c="var(--mantine-color-text)" inherit>
           Bodyweight training works because physics doesn't care where you are.
         </Text>{' '}
         Gravity applies the same force whether you're in a boutique studio or
-        your living room at 6am. Torque helps you harness that force and build a
-        real training record from the ground up.
+        your living room at 6am. Torque Fit helps you harness that force and
+        build a real training record from the ground up.
       </Text>
       <SimpleGrid cols={{ base: 1, xs: 3 }} spacing="sm">
         <StatCard
