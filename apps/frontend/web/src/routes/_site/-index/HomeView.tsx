@@ -6,6 +6,7 @@ import WhatsInAlpha from './WhatsInAlpha';
 import Foundation from './Foundation';
 import Roadmap from './Roadmap';
 import CallsToAction from './CallsToAction';
+import DevNotice from './DevNotice';
 
 // ─── Main landing page ───────────────────────────────────────────────────────
 
@@ -16,6 +17,8 @@ export default function HomeView() {
         <Hero />
 
         <AlphaNotice />
+
+        <DevNotice />
 
         <WhatsInAlpha />
 
