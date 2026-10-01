@@ -84,21 +84,21 @@ export default function Roadmap() {
       version: 'alpha Phase 2',
       title: 'Progressions library',
       description:
-        'Predefined skill progressions — pull-up, pistol squat, front lever — with structured exercise paths. Plus onboarding, profile, and a calendar logbook view.',
+        'Predefined skill progressions including pull-ups, pistol squats, and front levers with structured exercise paths. Plus onboarding, profile, and a calendar logbook view.',
       isCurrent: false,
     },
     {
       version: 'alpha Phase 3',
       title: 'Progression tracking',
       description:
-        "See your progress through each skill progression — completed steps, current exercises, and how far you've come.",
+        "See your progress through each skill progression, including completed steps, current exercises, and how far you've come.",
       isCurrent: false,
     },
     {
       version: 'alpha Phase 4',
       title: 'AI workout generator',
       description:
-        'Personalised workouts generated from your goals, fitness level, and available equipment — powered by AI.',
+        'Personalised workouts generated from your goals, fitness level, and available equipment, powered by AI.',
       isCurrent: false,
     },
   ];

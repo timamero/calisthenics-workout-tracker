@@ -56,7 +56,7 @@ export default function Foundation() {
         </Title>
       </Box>
       <Text fz="sm" c="dark.3" lh="xxl" fw={300}>
-        A floor. A pull-up bar. A park bench. That's your gym — free, open 24
+        A floor. A pull-up bar. A park bench. That's your gym: free, open 24
         hours, and never crowded.{' '}
         <Text component="span" fw={500} c="var(--mantine-color-text)" inherit>
           Bodyweight training works because physics doesn't care where you are.
