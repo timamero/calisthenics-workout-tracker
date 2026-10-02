@@ -7,8 +7,12 @@ if [ "${CF_PAGES_BRANCH:-}" == "main" ]; then
   echo "🚀 Running Production Build..."
   pnpm build:web:production
 
-elif [[ "${CF_PAGES_BRANCH:-}" == "develop" || "${CF_PAGES_BRANCH:-}" == staging ]]; then
+elif [[ "${CF_PAGES_BRANCH:-}" == "develop" || "${CF_PAGES_BRANCH:-}" == "staging" ]]; then
   echo "🧪 Running Staging Build for branch: $CF_PAGES_BRANCH"
+  pnpm build:web:staging
+
+elif [[ "${CF_PAGES_BRANCH:-}" == *-release/* ]]; then
+  echo "📦 Running Release Build for branch: $CF_PAGES_BRANCH"
   pnpm build:web:staging
 
 else
