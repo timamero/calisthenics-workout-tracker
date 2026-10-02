@@ -11,7 +11,7 @@ elif [[ "${CF_PAGES_BRANCH:-}" == "develop" || "${CF_PAGES_BRANCH:-}" == "stagin
   echo "🧪 Running Staging Build for branch: $CF_PAGES_BRANCH"
   pnpm build:web:staging
 
-elif [[ "${CF_PAGES_BRANCH:-}" == *-release/* ]]; then
+elif [[ "${CF_PAGES_BRANCH:-}" == *release* ]]; then
   echo "📦 Running Release Build for branch: $CF_PAGES_BRANCH"
   pnpm build:web:staging
 
