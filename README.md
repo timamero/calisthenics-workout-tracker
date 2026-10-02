@@ -1,8 +1,8 @@
-# Torque
+# Torque Fit
 
-Torque lets users log bodyweight workouts, track set progressions (challenge/assist variations), and build a training history — with an AI-generated workout feature planned for a later release.
+Torque Fit lets users log bodyweight workouts, track set progressions (challenge/assist variations), and build a training history — with an AI-generated workout feature planned for a later release.
 
-**Live demo:** [Torque](https://torquefit.app)
+**Live demo:** [Torque Fit](https://torquefit.app)
 
 **Changelog:** [CHANGELOG.md](./CHANGELOG.md)
 
@@ -12,27 +12,17 @@ Torque lets users log bodyweight workouts, track set progressions (challenge/ass
 
 ### Web
 
-https://github.com/user-attachments/assets/c631c329-59ae-4198-83be-f7a1377510c5
-
-https://github.com/user-attachments/assets/0f61a7f4-9f7e-4483-8a52-37fc91ed8b90
-
-https://github.com/user-attachments/assets/75627732-bdcc-48b9-a037-7bb640f046cd
+_Demos coming soon!_
 
 ### Mobile
 
-https://github.com/user-attachments/assets/70655694-d05a-479a-9221-d51201f0663a
-
-https://github.com/user-attachments/assets/e9fe9637-f7fc-4ead-902b-fb65578c8126
-
-https://github.com/user-attachments/assets/b8381776-0256-4bc0-9b85-51cfe1c2d0a2
-
-https://github.com/user-attachments/assets/60e5360b-529c-449a-8e0c-62006feb719a
+_Demos coming soon!_
 
 ---
 
 ## Status
 
-This project is under active development. The current build (`v0.1.0-alpha.3`) covers core account, logging, and history features — enough for a working demo, not yet feature-complete. See the [roadmap](#roadmap) below for what's next.
+This project is under active development. The current build (`v0.1.0-alpha.4`) covers core account, logging, and history features — enough for a working demo, not yet feature-complete. See the [roadmap](#roadmap) below for what's next.
 
 ---
 

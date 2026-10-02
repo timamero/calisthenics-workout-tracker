@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0-alpha.4] - 2026-10-01
+
+### Added
+
+#### Backend API
+
+- Centralized bearer-token extraction and Supabase user verification through shared FastAPI dependencies
+- Typed database error handling for workout operations, including consistent API responses for database failures and missing workout logs
+- Backend coverage for workout log retrieval and database error handling
+
+#### Deployment
+
+- Railway Infrastructure as Code configuration for the backend service
+- Railway configuration documentation and SDK dependency support
+
+#### Frontend
+
+- Developer note and updated alpha feedback contact messaging on the web landing page
+- Refreshed landing-page copy and presentation for the alpha release
+
+### Changed
+
+- Updated the product name from Torque to Torque Fit across the web app, mobile app, metadata, and README
+- Updated the landing page hero, feature descriptions, roadmap copy, and alpha notices to use the Torque Fit branding
+- Updated project and workspace package versions to `0.1.0-alpha.4`
+- Updated frontend, mobile, backend, and workspace dependencies and regenerated lockfiles
+- Replaced the legacy backend `railway.toml` configuration with Railway IaC
+
+### Fixed
+
+- Resolved mobile workspace package version mismatches that could cause build failures
+- Improved backend authentication and database error responses by removing duplicated route-level handling
+
+### Developer Experience
+
+- Added shared backend types and a custom workout database exception for clearer API utility contracts
+- Updated backend fixtures and route and utility tests for the centralized authentication and workout-log flows
+
 ## [0.1.0-alpha.3] - 2026-08-20
 
 ### Added

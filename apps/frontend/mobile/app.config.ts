@@ -15,14 +15,14 @@ const getUniqueIdentifier = () => {
 
 const getAppName = () => {
   if (IS_DEV) {
-    return 'Torque Calisthenics Tracker - Dev';
+    return 'Torque Fit Dev';
   }
 
   if (IS_PREVIEW) {
-    return 'Torque Calisthenics Tracker - Preview';
+    return 'Torque Fit Preview';
   }
 
-  return 'Torque Calisthenics Tracker';
+  return 'Torque Fit';
 };
 
 const getIcon = () => {

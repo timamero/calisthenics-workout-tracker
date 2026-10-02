@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from supabase import create_client, Client, ClientOptions
 
 from app.core.config import settings
@@ -14,13 +15,27 @@ elif settings.environment == "local-isolated":
     key: str = (
         settings.supabase_service_role_key
     )  # Use this key when using backend only
+else:
+    raise ValueError(
+        (
+            f"Invalid environment: {settings.environment}. Must be one of"
+            f" 'local-integration', 'staging', 'production', or 'local-isolated'."
+        )
+    )
 
 
 def get_supabase_client(access_token: str | None = None) -> Client:
-    if access_token:
-        options = ClientOptions(headers={"Authorization": f"Bearer {access_token}"})
-        client: Client = create_client(url, key, options)
-    else:
-        client: Client = create_client(url, key)
+    try:
+        if access_token:
+            options = ClientOptions(headers={"Authorization": f"Bearer {access_token}"})
+            client: Client = create_client(url, key, options)
+        else:
+            client: Client = create_client(url, key)
 
-    return client
+        return client
+    except Exception as e:
+        print(f"Error creating Supabase client: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Invalid Request: Error creating Supabase client",
+        )

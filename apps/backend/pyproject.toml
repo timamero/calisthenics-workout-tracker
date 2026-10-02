@@ -1,6 +1,6 @@
 [project]
 name = "backend"
-version = "0.1.0-alpha.3"
+version = "0.1.0-alpha.4"
 description = ""
 authors = [
     {name = "Fatima Anne Camero",email = "54559570+timamero@users.noreply.github.com"}
@@ -19,6 +19,7 @@ dependencies = [
     "cachetools (>=6.1.0,<7.0.0)",
     "supabase (>=2.17.0,<3.0.0)",
     "fastapi-limiter (>=0.2.0,<0.3.0)",
+    "railway-sdk (>=0.2.0,<0.3.0)",
 ]
 
 

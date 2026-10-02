@@ -55,7 +55,7 @@ export default function WhatsInAlpha() {
       icon: IoServerOutline,
       title: 'Exercise library',
       description:
-        '100+ predefined calisthenics exercises — push-ups, pull-ups, dips, squats, core work, and handstand progressions — searchable and ready to log.',
+        '100+ predefined calisthenics exercises, including push-ups, pull-ups, dips, squats, core work, and handstand progressions, searchable and ready to log.',
     },
     {
       icon: IoLayersOutline,
@@ -67,7 +67,7 @@ export default function WhatsInAlpha() {
       icon: IoSwapVertical,
       title: 'Set progressions',
       description:
-        "Track challenge and assist progressions — weighted vests, resistance bands, elevation changes — to log how you're making exercises harder or easier over time.",
+        "Track challenge and assist progressions such as weighted vests, resistance bands, and elevation changes to log how you're making exercises harder or easier over time.",
     },
     {
       icon: IoTimeOutline,
@@ -104,9 +104,9 @@ export default function WhatsInAlpha() {
         </Title>
       </Box>
       <Text fz="sm" c="dark.3" lh="xxl" fw={300}>
-        The first release focuses on the fundamentals — a solid exercise
-        library, a flexible workout builder, and a logbook to track your
-        sessions. The tools that matter most when you're getting started.
+        The first release focuses on the fundamentals: a solid exercise library,
+        a flexible workout builder, and a logbook to track your sessions. The
+        tools that matter most when you're getting started.
       </Text>
       <SimpleGrid cols={{ base: 1, xs: 2, sm: 4 }} spacing="sm">
         {features.map((f) => (
