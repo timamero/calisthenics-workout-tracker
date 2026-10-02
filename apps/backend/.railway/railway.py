@@ -6,11 +6,50 @@ PARTIAL = "calisthenics-workout-tracker"
 
 @define_railway
 def main(ctx=None):
+    if ctx is None:
+        raise ValueError("Railway context is required.")
+
+    if ctx.is_environment("staging"):
+        branch = "staging"
+        environment_env = {
+            "STAGING_MOBILE_ORIGIN": preserve(),
+            "STAGING_ORIGIN": preserve(),
+            "STAGING_WEB_ORIGIN": preserve(),
+        }
+    elif ctx.is_environment("production"):
+        branch = "main"
+        environment_env = {
+            "PRODUCTION_MOBILE_ORIGIN": preserve(),
+            "PRODUCTION_ORIGIN": preserve(),
+            "PRODUCTION_WEB_ORIGIN": preserve(),
+        }
+    else:
+        raise ValueError(f"Unsupported environment: {ctx.environment!r}")
+
+    common_env = {
+        "APP_NAME": preserve(),
+        "DEBUG": preserve(),
+        "ENVIRONMENT": preserve(),
+        "NO_CACHE": preserve(),
+        "POETRY_VERSION": preserve(),
+        "POETRY_VIRTUALENVS_CREATE": preserve(),
+        "POETRY_VIRTUALENVS_IN_PROJECT": preserve(),
+        "PORT": preserve(),
+        "RAILPACK_BUILD_APT_PACKAGES": preserve(),
+        "RAILPACK_DEPLOY_APT_PACKAGES": preserve(),
+        "RAILPACK_PYTHON_VERSION": preserve(),
+        "SUPABASE_ANON_KEY": preserve(),
+        "SUPABASE_JWTK_URL": preserve(),
+        "SUPABASE_JWT_KEY_ID": preserve(),
+        "SUPABASE_URL": preserve(),
+        "VERSION": preserve(),
+    }
+
     calisthenicsWorkoutTracker = service(
         "calisthenics-workout-tracker",
         source=github(
             "timamero/calisthenics-workout-tracker",
-            branch="staging",
+            branch=branch,
             checkSuites=False,
             rootDirectory="/apps/backend/",
         ),
@@ -27,25 +66,8 @@ def main(ctx=None):
         healthcheck="/health",
         replicas={"sfo": 1},
         env={
-            "APP_NAME": preserve(),
-            "DEBUG": preserve(),
-            "ENVIRONMENT": preserve(),
-            "NO_CACHE": preserve(),
-            "POETRY_VERSION": preserve(),
-            "POETRY_VIRTUALENVS_CREATE": preserve(),
-            "POETRY_VIRTUALENVS_IN_PROJECT": preserve(),
-            "PORT": preserve(),
-            "RAILPACK_BUILD_APT_PACKAGES": preserve(),
-            "RAILPACK_DEPLOY_APT_PACKAGES": preserve(),
-            "RAILPACK_PYTHON_VERSION": preserve(),
-            "STAGING_MOBILE_ORIGIN": preserve(),
-            "STAGING_ORIGIN": preserve(),
-            "STAGING_WEB_ORIGIN": preserve(),
-            "SUPABASE_ANON_KEY": preserve(),
-            "SUPABASE_JWTK_URL": preserve(),
-            "SUPABASE_JWT_KEY_ID": preserve(),
-            "SUPABASE_URL": preserve(),
-            "VERSION": preserve(),
+            **common_env,
+            **environment_env,
         },
     )
 
