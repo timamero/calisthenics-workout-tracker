@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Menu, ActionIcon } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
-import { IoEllipsisVertical, IoPencil } from 'react-icons/io5';
+import { IoEllipsisVertical, IoPencil, IoTrashBin } from 'react-icons/io5';
 
 interface WorkoutLogDetailMenuProps {
   handleUpdateClick: () => void;
@@ -32,16 +32,16 @@ export default function WorkoutLogDetailMenu({
       </Menu.Target>
 
       <Menu.Dropdown bg="gray.2">
-        {/* Temporarily disable */}
-        {/* <Menu.Item
+        <Menu.Item
           onClick={() => {
             setMenuOpened(false);
-            handleUpdateClick();
+            console.log('clicked update log');
+            // handleUpdateClick();
           }}
-          leftSection={<IoTrashBin size={18} />}
+          leftSection={<IoPencil size={18} />}
         >
           Update Log
-        </Menu.Item> */}
+        </Menu.Item>
         <Menu.Item
           onClick={() => {
             setMenuOpened(false);
