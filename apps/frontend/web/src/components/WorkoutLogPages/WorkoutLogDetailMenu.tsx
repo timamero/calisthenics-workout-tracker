@@ -47,7 +47,7 @@ export default function WorkoutLogDetailMenu({
             setMenuOpened(false);
             handleDeleteClick();
           }}
-          leftSection={<IoPencil size={18} />}
+          leftSection={<IoTrashBin size={18} />}
         >
           Delete Log
         </Menu.Item>
