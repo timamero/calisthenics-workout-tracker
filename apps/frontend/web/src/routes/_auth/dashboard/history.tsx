@@ -11,6 +11,7 @@ export const Route = createFileRoute('/_auth/dashboard/history')({
 
 function HistoryView() {
   return (
+    // TODO: Move this Context Provide to the auth route. The update page needs this context
     <WorkoutLogDetailContextProvider>
       <Container
         py="md"
