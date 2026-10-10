@@ -2,17 +2,17 @@ import { Outlet, useLocation } from '@tanstack/react-router';
 import { AppShell, Button, Stack, Group } from '@mantine/core';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-import { useWorkoutContextWeb } from '@cwt/hooks';
+// import { useWorkoutContextWeb } from '@cwt/hooks';
 
 import AddWorkoutItemMenu from '../Workout/AddWorkoutItemMenu';
 
 export default function WorkoutLayout() {
   const location = useLocation();
 
-  const cancelOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
-  const saveOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
+  // const cancelOverlayHandler =
+  //   useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
+  // const saveOverlayHandler =
+  //   useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
 
@@ -20,7 +20,7 @@ export default function WorkoutLayout() {
     <AppShell
       header={{
         height: 60,
-        collapsed: location.pathname === '/workout' ? false : true,
+        collapsed: location.pathname === '/update' ? false : true,
       }}
       navbar={{
         width: 300,
@@ -32,7 +32,8 @@ export default function WorkoutLayout() {
           base: mode === 'log' ? 60 : 120,
           md: mode === 'log' ? 80 : 160,
         },
-        collapsed: true,
+        collapsed:
+          mode === 'log' || location.pathname === '/update' ? false : true,
       }}
       padding="0"
     >
@@ -63,7 +64,7 @@ export default function WorkoutLayout() {
       </AppShell.Main>
       <AppShell.Footer>
         <Stack h="100%" justify="center" align="center" gap="sm" bg="gray.0">
-          {mode !== 'log' && <AddWorkoutItemMenu />}
+          <AddWorkoutItemMenu />
         </Stack>
       </AppShell.Footer>
     </AppShell>
