@@ -1,0 +1,21 @@
+import { createFileRoute } from '@tanstack/react-router';
+import AddExercise from '../../../components/Workout/AddExercise';
+import DefaultLoader from '../../../components/common/DefaultLoader';
+import { Stack } from '@mantine/core';
+
+export const Route = createFileRoute('/_auth/update/add-exercise')({
+  component: RouteComponent,
+  pendingComponent: Loader,
+});
+
+function Loader() {
+  return (
+    <Stack w="100%" h="100vh" justify="center">
+      <DefaultLoader />
+    </Stack>
+  );
+}
+
+function RouteComponent() {
+  return <AddExercise />;
+}

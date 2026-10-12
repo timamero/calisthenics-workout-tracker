@@ -1,3 +1,3 @@
 import WorkoutUpdate from './WorkoutUpdate';
 
-eport;
+export default WorkoutUpdate;
