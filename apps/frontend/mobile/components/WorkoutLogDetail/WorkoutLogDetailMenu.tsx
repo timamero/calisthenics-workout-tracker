@@ -23,6 +23,13 @@ export default function WorkoutLogDetailMenu({
       anchorPosition="bottom"
     >
       <Menu.Item
+        leadingIcon="pencil"
+        onPress={() => {
+          console.log('Clicked update log');
+        }}
+        title="Update Log"
+      />
+      <Menu.Item
         leadingIcon="trash-can"
         onPress={() => {
           closeMenu();
