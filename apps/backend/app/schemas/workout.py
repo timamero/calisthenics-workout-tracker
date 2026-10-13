@@ -115,3 +115,7 @@ class WorkoutLogResponseSchema(BaseModel):
 
 class DeleteWorkoutRequestSchema(BaseModel):
     id: int
+
+
+class UpdateWorkoutLogRequestSchema(WorkoutLogResponseSchema):
+    pass
