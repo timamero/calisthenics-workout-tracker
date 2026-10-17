@@ -12,7 +12,10 @@ from backend.app.core.dependencies import (
     get_strict_root_limiter,
     get_standard_api_limiter,
 )
-from backend.app.schemas.workout import DeleteWorkoutRequestSchema
+from backend.app.schemas.workout import (
+    DeleteWorkoutRequestSchema,
+    UpdateWorkoutLogRequestSchema,
+)
 from backend.app.api.routes.workout import get_access_token, verify_supabase_user
 
 
@@ -111,6 +114,24 @@ def reset_limiters():
 
 
 @pytest.fixture
+def update_workout_log_request_schema() -> UpdateWorkoutLogRequestSchema:
+    """
+    Returns a UpdateWorkoutLogRequestSchema instance with a predefined workout log for
+    testing purposes.
+    """
+    return UpdateWorkoutLogRequestSchema(**SAMPLE_WORKOUT_LOG)
+
+
+@pytest.fixture
+def update_workout_log_response() -> dict:
+    """
+    Returns a dictionary representing a updated workout log response for testing
+    purposes.
+    """
+    return SAMPLE_WORKOUT_LOG
+
+
+@pytest.fixture
 def delete_workout_request_schema() -> DeleteWorkoutRequestSchema:
     """
     Returns a DeleteWorkoutRequestSchema instance with a predefined ID for testing
@@ -132,6 +153,39 @@ def deleted_workout_log_response() -> dict:
 def workout_logs_response() -> list[dict]:
     """Returns a list representing workout logs returned by the API."""
     return [SAMPLE_WORKOUT_LOG]
+
+
+@pytest.fixture
+def supabase_update_client_factory():
+    """
+    Returns a factory function that creates a mock Supabase client for testing update
+    operations. The factory function can be configured to return specific response
+    data or raise an exception when the execute method is called.
+    """
+
+    def factory(
+        response_data: dict | None = None,
+        execute_exception: Exception | None = None,
+    ):
+        supabase_client = Mock()
+        table_chain = Mock()
+        update_chain = Mock()
+        eq_chain = Mock()
+        response = Mock()
+        response.data = [] if response_data is None else [response_data]
+
+        supabase_client.table.return_value = table_chain
+        table_chain.update.return_value = update_chain
+        update_chain.eq.return_value = eq_chain
+
+        if execute_exception is not None:
+            eq_chain.execute.side_effect = execute_exception
+        else:
+            eq_chain.execute.return_value = response
+
+        return supabase_client
+
+    return factory
 
 
 @pytest.fixture
