@@ -6,8 +6,8 @@ from app.services.supabase_client import get_supabase_client
 from app.schemas.workout import (
     WorkoutBuildRequestSchema,
     WorkoutLogRequestSchema,
-    WorkoutLogResponseSchema,
     DeleteWorkoutRequestSchema,
+    UpdateWorkoutLogRequestSchema,
 )
 
 
@@ -81,7 +81,7 @@ def insert_workout_log(
 
 
 def update_workout_log(
-    workout_log: WorkoutLogResponseSchema, access_token: str | None = None
+    workout_log: UpdateWorkoutLogRequestSchema, access_token: str | None = None
 ) -> Optional[SupabaseRow]:
     """Update an existing workout log.
 
