@@ -9,6 +9,7 @@ import { useAuthStore } from '@cwt/state/stores';
 import { MainTabs } from './MainTabs';
 import { AuthStack } from './AuthStack';
 import WorkoutStack from './WorkoutStack';
+import UpdateStack from './UpdateStack';
 
 function useIsSignedIn() {
   const supabaseSession = useAuthStore((state) => state.session);
@@ -67,6 +68,10 @@ const RootStack = createNativeStackNavigator({
         WorkoutStack: {
           screen: WorkoutStack,
           options: { headerShown: false },
+        },
+        UpdateStack: {
+          screen: UpdateStack,
+          // options: { headerShown: false },
         },
         WorkoutDetails: {
           screen: WorkoutLogDetailScreen,
