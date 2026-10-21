@@ -74,9 +74,9 @@ export default function UpdateLogConfirmationOverlay() {
 
   return (
     <ConfirmationOverlay
-      title="Delete Log"
-      message="Are you sure you want to delete this log?"
-      confirmButtonLabel="Delete"
+      title="Save Changes?"
+      message="Do you want to save the updates to this workout log?"
+      confirmButtonLabel="Save"
       opened={opened}
       handler={handler}
       onConfirmationClick={handleUpdateLogClick}
