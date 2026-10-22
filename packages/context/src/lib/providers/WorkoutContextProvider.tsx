@@ -12,6 +12,8 @@ export default function WorkoutOverlaysContextProvider({
   children: ReactNode;
 }) {
   // Web
+  const [updateLogOverlayOpened, updateLogOverlayHandler] =
+    useDisclosure(false);
   const [deleteLogOverlayOpened, deleteLogOverlayHandler] =
     useDisclosure(false);
   const [deleteRootItemOverlayOpened, deleteRootItemOverlayHandler] =
@@ -26,6 +28,8 @@ export default function WorkoutOverlaysContextProvider({
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
 
   const webOverlayHandlers = {
+    updateLogOverlayOpened,
+    updateLogOverlayHandler,
     deleteLogOverlayOpened,
     deleteLogOverlayHandler,
     deleteRootItemOverlayOpened,
@@ -43,6 +47,8 @@ export default function WorkoutOverlaysContextProvider({
   };
 
   // Mobile
+  const [isUpdateLogOverlayVisible, setIsUpdateLogOverlayVisible] =
+    useState<boolean>(false);
   const [isDeleteLogOverlayVisible, setIsDeleteLogOverlayVisible] =
     useState<boolean>(false);
   const [isDeleteRootItemOverlayVisible, setIsDeleteRootItemOverlayVisible] =
@@ -63,6 +69,8 @@ export default function WorkoutOverlaysContextProvider({
     useState<boolean>(false);
 
   const mobileOverlayHandlers = {
+    isUpdateLogOverlayVisible,
+    setIsUpdateLogOverlayVisible,
     isDeleteLogOverlayVisible,
     setIsDeleteLogOverlayVisible,
     isDeleteRootItemOverlayVisible,

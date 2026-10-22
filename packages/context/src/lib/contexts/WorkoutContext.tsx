@@ -6,6 +6,8 @@ export type WorkoutContextType = {
   appType: AppTypeSchema;
 
   webOverlayHandlers?: {
+    updateLogOverlayOpened: boolean;
+    updateLogOverlayHandler: UseDisclosureHandlers;
     deleteLogOverlayOpened: boolean;
     deleteLogOverlayHandler: UseDisclosureHandlers;
     deleteRootItemOverlayOpened: boolean;
@@ -23,6 +25,8 @@ export type WorkoutContextType = {
   };
 
   mobileOverlayHandlers?: {
+    isUpdateLogOverlayVisible: boolean;
+    setIsUpdateLogOverlayVisible: Dispatch<SetStateAction<boolean>>;
     isDeleteLogOverlayVisible: boolean;
     setIsDeleteLogOverlayVisible: Dispatch<SetStateAction<boolean>>;
     isDeleteRootItemOverlayVisible: boolean;
