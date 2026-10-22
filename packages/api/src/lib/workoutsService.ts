@@ -63,6 +63,25 @@ export function deleteWorkoutLog(
   }
 }
 
+export function updateWorkoutLog(
+  baseUrl: string,
+  token: string,
+  body: BodyInit,
+) {
+  try {
+    return apiFetch<WorkoutLogResponse>(
+      baseUrl,
+      '/workout/log',
+      'PUT',
+      token,
+      body,
+    );
+  } catch (error) {
+    console.error('Error updating workout log to API.', error);
+    throw error;
+  }
+}
+
 export async function postWorkoutBuild(
   baseUrl: string,
   token: string,
