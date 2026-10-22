@@ -29,6 +29,7 @@ export interface WorkoutLibrarySlice {
     mode: Mode,
   ) => void;
   deleteWorkout: (workoutId: number) => void;
+  updateWorkout: (updatedLog: WorkoutLogResponse) => void;
   completeWorkout: (
     workout: WorkoutBuildResponse | WorkoutLogResponse,
     mode: Mode,
@@ -89,6 +90,26 @@ export const createWorkoutLibrarySlice: StateCreator<
       );
       state.displayedWorkoutLogs = state.displayedWorkoutLogs.filter(
         (item) => item.id !== workoutId,
+      );
+    }),
+  updateWorkout: (updatedLog) =>
+    set((state) => {
+      let logIndex = state.masterWorkoutLogs.findIndex(
+        (x) => x.id == updatedLog.id,
+      );
+      state.masterWorkoutLogs = state.masterWorkoutLogs.map((log, ind) => {
+        if (ind === logIndex) {
+          return updatedLog;
+        }
+        return log;
+      });
+      state.displayedWorkoutLogs = state.displayedWorkoutLogs.map(
+        (log, ind) => {
+          if (ind === logIndex) {
+            return updatedLog;
+          }
+          return log;
+        },
       );
     }),
   completeWorkout: (workout, mode) => {
