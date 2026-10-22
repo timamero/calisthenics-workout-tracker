@@ -1,4 +1,4 @@
-type Method = 'GET' | 'POST' | 'DELETE';
+type Method = 'GET' | 'POST' | 'DELETE' | 'PUT';
 
 // Need to update later to add options for POST and DELETE requests
 export async function apiFetch<T>(
