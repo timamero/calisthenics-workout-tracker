@@ -143,7 +143,7 @@ describe('UpdateLogConfirmationOverlay', () => {
         JSON.stringify({ id: sampleWorkoutLogs[0].id }), // fix
       );
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'Error updateing log:',
+        'Error updating log:',
         expect.any(Error),
       );
     });
