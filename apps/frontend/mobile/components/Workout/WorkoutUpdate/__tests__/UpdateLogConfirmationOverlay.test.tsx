@@ -41,7 +41,7 @@ jest.mock('@cwt/state/stores', () => ({
     mockUseWorkoutDraftStore(selector),
 }));
 
-describe('DeleteConfirmationOverlay', () => {
+describe('UpdateLogConfirmationOverlay', () => {
   let isUpdateOverlayOpened = true;
   let setIsUpdateLogOverlayVisibleSpy = jest.fn();
   let setWorkoutSpy = jest.fn();
