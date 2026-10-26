@@ -1,5 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '../../../utils/testUtils';
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import { type NavigateFn } from '@tanstack/react-router';
 
 import { sampleWorkoutLogs } from '@cwt/mocks';
 import { type WorkoutLibrarySlice } from '@cwt/state/stores';
@@ -51,6 +52,7 @@ vi.mock('@cwt/state/stores', () => ({
   useWorkoutDraftStore: vi.fn(),
 }));
 
+let navigateSpy: NavigateFn;
 let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
 let isUpdateOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = true;
@@ -70,6 +72,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
   beforeEach(async () => {
     import.meta.env.VITE_ENVIRONMENT = 'local-isolated';
 
+    navigateSpy = vi.fn();
     updateWorkoutSpy = vi.fn();
     isUpdateOverlayOpened = true;
     mockSession = { access_token: 'test-token' };
@@ -181,7 +184,9 @@ describe('UpdateLogConfirmationOverlay', async () => {
       expect(updateLogOverlayHandlerSpy.close).toHaveBeenCalled();
       expect(updateWorkoutLogSpy).toHaveBeenCalled();
       expect(updateWorkoutSpy).toHaveBeenCalled();
-      // test redirect to history
+      expect(navigateSpy).toHaveBeenCalledWith(
+        expect.objectContaining({ to: '/dashboard/history' }),
+      );
       expect(workoutLogDetailsOverlayHandlerSpy.open).toHaveBeenCalled();
     });
   });
@@ -206,7 +211,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     });
 
     expect(updateWorkoutSpy).not.toHaveBeenCalled();
-    // test that redirect was not processed
+    expect(navigateSpy).not.toHaveBeenCalled();
     expect(workoutLogDetailsOverlayHandlerSpy.open).not.toHaveBeenCalled();
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       'Error updating log:',
@@ -231,7 +236,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
 
     expect(updateWorkoutLogSpy).not.toHaveBeenCalled();
     expect(updateWorkoutSpy).not.toHaveBeenCalled();
-    // test that redirect was not processed
+    expect(navigateSpy).not.toHaveBeenCalled();
     expect(workoutLogDetailsOverlayHandlerSpy.open).not.toHaveBeenCalled();
   });
 
