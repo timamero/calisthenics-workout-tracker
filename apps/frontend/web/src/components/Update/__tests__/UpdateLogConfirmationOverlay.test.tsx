@@ -21,6 +21,8 @@ const makeDisclosure = (): UseDisclosureHandlers => ({
 const makeWebHandlers = (
   overrides: Partial<WebHandlers> = {},
 ): WebHandlers => ({
+  updateLogOverlayOpened: false,
+  updateLogOverlayHandler: makeDisclosure(),
   deleteLogOverlayOpened: false,
   deleteLogOverlayHandler: makeDisclosure(),
   deleteRootItemOverlayOpened: false,
@@ -49,7 +51,7 @@ vi.mock('@cwt/state/stores', () => ({
   useWorkoutDraftStore: vi.fn(),
 }));
 
-let updateWorkoutSpy: Mock<WorkoutLibrarySlice['deleteWorkout']>; // fix
+let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
 let isUpdateOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = true;
 let mockSession: { access_token: string } | null;
@@ -105,8 +107,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
         get deleteLogOverlayOpened() {
           return isUpdateOverlayOpened;
         },
-        deleteLogOverlayHandler: updateLogOverlayHandlerSpy, // fix
-        // updateLogOverlayHandler: updateLogOverlayHandlerSpy,
+        updateLogOverlayHandler: updateLogOverlayHandlerSpy,
       }),
     }));
 
@@ -160,9 +161,9 @@ describe('UpdateLogConfirmationOverlay', async () => {
   it.skip('renders when updateLogOverlayOpened is true', () => {
     render(<UpdateLogConfirmationOverlay />);
 
-    const title = screen.getByRole('heading', { name: /Save Updated Log/i });
+    const title = screen.getByRole('heading', { name: /Save Changes?/i });
     const message = screen.getByText(
-      /Save changes to this log? This cannot be undone./i,
+      /Do you want to save the updates to this workout log?/i,
     );
 
     expect(title).toBeInTheDocument();
@@ -170,7 +171,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
   });
 
   it.skip('updates workout, redirects user to history route, and opens workout log detail on successful update', async () => {
-    const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'deleteWorkoutLog'); // fix
+    const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'updateWorkoutLog');
 
     render(<UpdateLogConfirmationOverlay />);
 
@@ -190,8 +191,8 @@ describe('UpdateLogConfirmationOverlay', async () => {
       .spyOn(console, 'error')
       .mockImplementation(() => {});
     const updateWorkoutLogSpy = vi
-      .spyOn(workoutsService, 'deleteWorkoutLog') // fix
-      .mockRejectedValueOnce(new Error('Save updated log failed'));
+      .spyOn(workoutsService, 'updateWorkoutLog')
+      .mockRejectedValueOnce(new Error('Update log failed'));
 
     render(<UpdateLogConfirmationOverlay />);
 
@@ -218,7 +219,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     const consoleErrorSpy = vi
       .spyOn(console, 'error')
       .mockImplementation(() => {});
-    const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'deleteWorkoutLog'); // fix
+    const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'updateWorkoutLog');
 
     render(<UpdateLogConfirmationOverlay />);
 
@@ -235,16 +236,16 @@ describe('UpdateLogConfirmationOverlay', async () => {
   });
 
   it.skip('calls updateWorkoutLog with access token and workout ID', async () => {
-    const deleteWorkoutLogSpy = vi
-      .spyOn(workoutsService, 'deleteWorkoutLog') // fix
-      .mockResolvedValueOnce(sampleWorkoutLogs[0]); // fix
+    const updateWorkoutLogSpy = vi
+      .spyOn(workoutsService, 'updateWorkoutLog')
+      .mockResolvedValueOnce(sampleWorkoutLogs[0]);
 
     render(<UpdateLogConfirmationOverlay />);
 
     fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
 
     await waitFor(() => {
-      expect(deleteWorkoutLogSpy).toHaveBeenCalledWith(
+      expect(updateWorkoutLogSpy).toHaveBeenCalledWith(
         'test-token',
         JSON.stringify({ log: sampleWorkoutLogs }),
       );
