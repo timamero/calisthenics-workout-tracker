@@ -19,6 +19,8 @@ const makeDisclosure = (): UseDisclosureHandlers => ({
 const makeWebHandlers = (
   overrides: Partial<WebHandlers> = {},
 ): WebHandlers => ({
+  updateLogOverlayOpened: false,
+  updateLogOverlayHandler: makeDisclosure(),
   deleteLogOverlayOpened: false,
   deleteLogOverlayHandler: makeDisclosure(),
   deleteRootItemOverlayOpened: false,
