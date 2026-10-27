@@ -8,3 +8,4 @@ export { useSetProgressionsStore } from './setProgressionsStore';
 export { useAuthStore } from './authStore';
 
 export { type WorkoutLibrarySlice } from '../slices/workouts/workoutLibrarySlice';
+export { type WorkoutDraftSlice } from '../slices/workouts/workoutDraftSlice';
