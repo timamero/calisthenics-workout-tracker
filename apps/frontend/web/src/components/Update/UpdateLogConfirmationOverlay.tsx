@@ -10,11 +10,7 @@ import {
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
 // import { deleteWorkoutLog } from '../../services/workoutsService';
 
-import { useDisclosure } from '@mantine/hooks';
-
 export default function UpdateLogConfirmationOverlay() {
-  const [opened, handler] = useDisclosure(false);
-
   // --- State Management ---
   const supabaseSession = useAuthStore((state) => state.session);
   // const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout);
@@ -43,9 +39,9 @@ export default function UpdateLogConfirmationOverlay() {
 
   // --- Variables ---
   const workoutLogId = workout.id;
-  // const deleteLogOverlayOpened = workoutOverlayHandlers.deleteLogOverlayOpened;
-  // const deleteLogOverlayHandler =
-  //   workoutOverlayHandlers.deleteLogOverlayHandler;
+  const updateLogOverlayOpened = workoutOverlayHandlers.updateLogOverlayOpened;
+  const updateLogOverlayHandler =
+    workoutOverlayHandlers.updateLogOverlayHandler;
   // const detailHandlers = workoutLogDetailOverlayHandlers.handlers;
 
   // --- Handlers ---
@@ -77,8 +73,8 @@ export default function UpdateLogConfirmationOverlay() {
       title="Save Changes?"
       message="Do you want to save the updates to this workout log?"
       confirmButtonLabel="Save"
-      opened={opened}
-      handler={handler}
+      opened={updateLogOverlayOpened}
+      handler={updateLogOverlayHandler}
       onConfirmationClick={handleUpdateLogClick}
     />
   );

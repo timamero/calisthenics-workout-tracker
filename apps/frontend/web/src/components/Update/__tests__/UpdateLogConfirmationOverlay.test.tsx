@@ -55,7 +55,7 @@ vi.mock('@cwt/state/stores', () => ({
 let navigateSpy: NavigateFn;
 let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
 let isUpdateOverlayOpened: boolean = true;
-let isLogDetailOverlayOpened: boolean = true;
+let isLogDetailOverlayOpened: boolean = false;
 let mockSession: { access_token: string } | null;
 let workoutLogDetailsOverlayHandlerSpy: {
   open: () => void;
@@ -107,7 +107,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
 
     vi.mocked(useWorkoutContextWeb).mockImplementation(() => ({
       webOverlayHandlers: makeWebHandlers({
-        get deleteLogOverlayOpened() {
+        get updateLogOverlayOpened() {
           return isUpdateOverlayOpened;
         },
         updateLogOverlayHandler: updateLogOverlayHandlerSpy,
@@ -161,7 +161,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
-  it.skip('renders when updateLogOverlayOpened is true', () => {
+  it('renders when updateLogOverlayOpened is true', () => {
     render(<UpdateLogConfirmationOverlay />);
 
     const title = screen.getByRole('heading', { name: /Save Changes?/i });
