@@ -1,4 +1,5 @@
 // See reference: https://stackoverflow.com/questions/77403631/using-react-testing-library-how-to-wrap-all-my-test-component-with-providers
+// https://tanstack.com/router/latest/docs/how-to/test-file-based-routing
 import { MantineProvider } from '@mantine/core';
 import { render, type RenderOptions } from '@testing-library/react';
 import { type ReactElement } from 'react';
