@@ -1,28 +1,41 @@
+import { useNavigate, linkOptions } from '@tanstack/react-router';
+
 import {
   useWorkoutLogDetailContextWeb,
   useWorkoutContextWeb,
 } from '@cwt/hooks';
 import {
   useAuthStore,
-  // useWorkoutLibraryStore
+  useWorkoutLibraryStore,
+  useWorkoutDraftStore,
 } from '@cwt/state/stores';
+import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
-// import { deleteWorkoutLog } from '../../services/workoutsService';
+import { updateWorkoutLog } from '../../services/workoutsService';
 
 export default function UpdateLogConfirmationOverlay() {
   // --- State Management ---
   const supabaseSession = useAuthStore((state) => state.session);
-  // const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout);
+  const updateWorkout = useWorkoutLibraryStore((state) => state.updateWorkout);
+  const workoutToSave = useWorkoutDraftStore(
+    (state) => state.workoutToSave,
+  ) as WorkoutLogResponse;
+
+  const historyLinkOptions = linkOptions({
+    to: '/dashboard/history',
+  });
+  // --- Hooks ---
+  const navigate = useNavigate();
 
   // --- Context ---
-  const workout = useWorkoutLogDetailContextWeb().workout;
+  // const workout = useWorkoutLogDetailContextWeb().workout;
   const workoutOverlayHandlers = useWorkoutContextWeb().webOverlayHandlers;
   const workoutLogDetailOverlayHandlers =
     useWorkoutLogDetailContextWeb().webOverlayHandlers;
 
   // --- Error Handling ---
-  if (!workout) {
+  if (!workoutToSave) {
     console.error('Error: Workout log not found.');
     return null;
   }
@@ -38,11 +51,11 @@ export default function UpdateLogConfirmationOverlay() {
   }
 
   // --- Variables ---
-  const workoutLogId = workout.id;
+  const workoutLogId = workoutToSave.id;
   const updateLogOverlayOpened = workoutOverlayHandlers.updateLogOverlayOpened;
   const updateLogOverlayHandler =
     workoutOverlayHandlers.updateLogOverlayHandler;
-  // const detailHandlers = workoutLogDetailOverlayHandlers.handlers;
+  const detailHandlers = workoutLogDetailOverlayHandlers.handlers;
 
   // --- Handlers ---
   const handleUpdateLogClick = async () => {
@@ -50,22 +63,24 @@ export default function UpdateLogConfirmationOverlay() {
       console.error('Session not found');
       return;
     }
-    const body = JSON.stringify({ id: workoutLogId });
-    console.log('DEBUG: body', body);
-    // try {
-    //   const result = await deleteWorkoutLog(supabaseSession.access_token, body);
-    //   if (result) {
-    //     deleteWorkout(workoutLogId);
-    //     detailHandlers.close();
-    //   } else {
-    //     console.error(
-    //       'Workout delete request failed to delete log with ID: ',
-    //       workoutLogId,
-    //     );
-    //   }
-    // } catch (e) {
-    //   console.error('Error deleting log:', e);
-    // }
+    // const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
+    const body = JSON.stringify(workoutToSave);
+    // console.log('DEBUG: body', body);
+    try {
+      const result = await updateWorkoutLog(supabaseSession.access_token, body);
+      if (result) {
+        updateWorkout(workoutToSave);
+        detailHandlers.close();
+        navigate(historyLinkOptions);
+      } else {
+        console.error(
+          'Workout update request failed to delete log with ID: ',
+          workoutLogId,
+        );
+      }
+    } catch (e) {
+      console.error('Error deleting log:', e);
+    }
   };
 
   return (

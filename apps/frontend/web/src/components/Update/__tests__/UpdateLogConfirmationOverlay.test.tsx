@@ -1,16 +1,15 @@
 import { render, screen, fireEvent, waitFor } from '../../../utils/testUtils';
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
-import { type NavigateFn } from '@tanstack/react-router';
+import { linkOptions, type NavigateFn } from '@tanstack/react-router';
 
 import { sampleWorkoutLogs } from '@cwt/mocks';
-import { type WorkoutLibrarySlice } from '@cwt/state/stores';
+import type { WorkoutLibrarySlice, WorkoutDraftSlice } from '@cwt/state/stores';
+import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import UpdateLogConfirmationOverlay from '../UpdateLogConfirmationOverlay';
 import * as workoutsService from '../../../services/workoutsService';
 import type { WorkoutContextType } from '@cwt/context';
 import type { UseDisclosureHandlers } from '@mantine/hooks';
-
-// TODO: Need to test that on successful update, user is redirected to history page
 
 // Typed factory to satisfy full webOverlayHandlers shape while tests override only needed fields.
 type WebHandlers = NonNullable<WorkoutContextType['webOverlayHandlers']>;
@@ -52,8 +51,21 @@ vi.mock('@cwt/state/stores', () => ({
   useWorkoutDraftStore: vi.fn(),
 }));
 
+vi.mock('@tanstack/react-router', async () => {
+  const actual = await vi.importActual<typeof import('@tanstack/react-router')>(
+    '@tanstack/react-router',
+  );
+
+  return {
+    ...actual,
+    useNavigate: () => navigateSpy,
+  };
+});
+
 let navigateSpy: NavigateFn;
 let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
+let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
+let workoutToSave: WorkoutLogResponse;
 let isUpdateOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = false;
 let mockSession: { access_token: string } | null;
@@ -74,6 +86,8 @@ describe('UpdateLogConfirmationOverlay', async () => {
 
     navigateSpy = vi.fn();
     updateWorkoutSpy = vi.fn();
+    setModeSpy = vi.fn();
+    workoutToSave = sampleWorkoutLogs[0];
     isUpdateOverlayOpened = true;
     mockSession = { access_token: 'test-token' };
     workoutLogDetailsOverlayHandlerSpy = {
@@ -116,6 +130,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
 
     vi.mocked(useWorkoutDraftStore).mockImplementation((selector: unknown) => {
       const mockState = {
+        workoutToSave: workoutToSave,
         setExerciseIDToMod: vi.fn(),
         setSupersetIDToMod: vi.fn(),
         setSectionIDToMod: vi.fn(),
@@ -173,7 +188,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     expect(message).toBeInTheDocument();
   });
 
-  it.skip('updates workout, redirects user to history route, and opens workout log detail on successful update', async () => {
+  it('updates workout, redirects user to history route, and opens workout log detail on successful update', async () => {
     const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'updateWorkoutLog');
 
     render(<UpdateLogConfirmationOverlay />);
@@ -184,10 +199,25 @@ describe('UpdateLogConfirmationOverlay', async () => {
       expect(updateLogOverlayHandlerSpy.close).toHaveBeenCalled();
       expect(updateWorkoutLogSpy).toHaveBeenCalled();
       expect(updateWorkoutSpy).toHaveBeenCalled();
+      expect(navigateSpy).toHaveBeenCalled();
       expect(navigateSpy).toHaveBeenCalledWith(
-        expect.objectContaining({ to: '/dashboard/history' }),
+        expect.objectContaining(
+          linkOptions({
+            to: '/dashboard/history',
+          }),
+        ),
       );
+    });
+  });
+
+  it.skip('opens workout log detail in read mode after a successful update', async () => {
+    render(<UpdateLogConfirmationOverlay />);
+
+    fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
+
+    await waitFor(() => {
       expect(workoutLogDetailsOverlayHandlerSpy.open).toHaveBeenCalled();
+      expect(setModeSpy).toHaveBeenCalledWith('read');
     });
   });
 
