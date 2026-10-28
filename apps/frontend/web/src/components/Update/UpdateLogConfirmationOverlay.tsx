@@ -21,6 +21,7 @@ export default function UpdateLogConfirmationOverlay() {
   const workoutToSave = useWorkoutDraftStore(
     (state) => state.workoutToSave,
   ) as WorkoutLogResponse;
+  const setMode = useWorkoutDraftStore((state) => state.setMode);
 
   const historyLinkOptions = linkOptions({
     to: '/dashboard/history',
@@ -70,11 +71,12 @@ export default function UpdateLogConfirmationOverlay() {
       const result = await updateWorkoutLog(supabaseSession.access_token, body);
       if (result) {
         updateWorkout(workoutToSave);
-        detailHandlers.close();
+        detailHandlers.open();
+        setMode('read');
         navigate(historyLinkOptions);
       } else {
         console.error(
-          'Workout update request failed to delete log with ID: ',
+          'Workout update request failed to update log with ID: ',
           workoutLogId,
         );
       }

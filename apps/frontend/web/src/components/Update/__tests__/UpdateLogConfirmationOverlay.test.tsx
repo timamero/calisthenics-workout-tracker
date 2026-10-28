@@ -131,6 +131,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     vi.mocked(useWorkoutDraftStore).mockImplementation((selector: unknown) => {
       const mockState = {
         workoutToSave: workoutToSave,
+        setMode: setModeSpy,
         setExerciseIDToMod: vi.fn(),
         setSupersetIDToMod: vi.fn(),
         setSectionIDToMod: vi.fn(),
@@ -210,7 +211,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     });
   });
 
-  it.skip('opens workout log detail in read mode after a successful update', async () => {
+  it('opens workout log detail in read mode after a successful update', async () => {
     render(<UpdateLogConfirmationOverlay />);
 
     fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
