@@ -250,7 +250,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     );
   });
 
-  it.skip('clicking Save without a session logs an error and does not call the API', async () => {
+  it('clicking Save without a session logs an error and does not call the API', async () => {
     mockSession = null;
     const consoleErrorSpy = vi
       .spyOn(console, 'error')
@@ -271,7 +271,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     expect(workoutLogDetailsOverlayHandlerSpy.open).not.toHaveBeenCalled();
   });
 
-  it.skip('calls updateWorkoutLog with access token and workout ID', async () => {
+  it('calls updateWorkoutLog with access token and workout log', async () => {
     const updateWorkoutLogSpy = vi
       .spyOn(workoutsService, 'updateWorkoutLog')
       .mockResolvedValueOnce(sampleWorkoutLogs[0]);
@@ -283,7 +283,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     await waitFor(() => {
       expect(updateWorkoutLogSpy).toHaveBeenCalledWith(
         'test-token',
-        JSON.stringify({ log: sampleWorkoutLogs }),
+        JSON.stringify(sampleWorkoutLogs[0]),
       );
     });
   });
