@@ -222,7 +222,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     });
   });
 
-  it.skip('logs error and does not update store if API call fails', async () => {
+  it('logs error and does not update store if API call fails', async () => {
     const consoleErrorSpy = vi
       .spyOn(console, 'error')
       .mockImplementation(() => {});
@@ -237,7 +237,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     await waitFor(() => {
       expect(updateWorkoutLogSpy).toHaveBeenCalledWith(
         'test-token',
-        JSON.stringify({ log: sampleWorkoutLogs }),
+        JSON.stringify(sampleWorkoutLogs[0]),
       );
     });
 
