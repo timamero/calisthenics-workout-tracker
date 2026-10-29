@@ -30,7 +30,6 @@ export default function UpdateLogConfirmationOverlay() {
   const navigate = useNavigate();
 
   // --- Context ---
-  // const workout = useWorkoutLogDetailContextWeb().workout;
   const workoutOverlayHandlers = useWorkoutContextWeb().webOverlayHandlers;
   const workoutLogDetailOverlayHandlers =
     useWorkoutLogDetailContextWeb().webOverlayHandlers;
@@ -64,9 +63,7 @@ export default function UpdateLogConfirmationOverlay() {
       console.error('Session not found');
       return;
     }
-    // const workoutToSave = useWorkoutDraftStore.getState().workoutToSave;
     const body = JSON.stringify(workoutToSave);
-    // console.log('DEBUG: body', body);
     try {
       const result = await updateWorkoutLog(supabaseSession.access_token, body);
       if (result) {
@@ -81,7 +78,7 @@ export default function UpdateLogConfirmationOverlay() {
         );
       }
     } catch (e) {
-      console.error('Error deleting log:', e);
+      console.error('Error updating log:', e);
     }
   };
 
