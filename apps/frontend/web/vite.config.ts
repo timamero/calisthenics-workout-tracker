@@ -9,6 +9,10 @@ export default defineConfig({
     tanstackRouter({
       target: 'react',
       autoCodeSplitting: true,
+      // Configure for test environment
+      routesDirectory: './src/routes',
+      generatedRouteTree: './src/routeTree.gen.ts',
+      disableLogging: true,
     }),
     react(),
   ],
@@ -36,6 +40,7 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    watch: false,
     environment: 'jsdom',
     setupFiles: ['./vitest-setup.ts'],
   },
