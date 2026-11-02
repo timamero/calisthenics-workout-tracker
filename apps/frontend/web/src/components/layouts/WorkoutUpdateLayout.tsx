@@ -6,7 +6,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import AddWorkoutItemMenu from '../Workout/AddWorkoutItemMenu';
 
-export default function WorkoutLayout() {
+export default function WorkoutUpdateLayout() {
   const location = useLocation();
 
   // const cancelOverlayHandler =
