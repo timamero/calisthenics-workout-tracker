@@ -60,6 +60,7 @@ export default function WorkoutUpdateLayout() {
         </Group>
       </AppShell.Header>
       <AppShell.Main style={{ display: 'flex' }}>
+        <p>lets go</p>
         <Outlet />
       </AppShell.Main>
       <AppShell.Footer>

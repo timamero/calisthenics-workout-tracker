@@ -1,11 +1,17 @@
 import {
-  fileRouteRender,
+  render,
   screen,
   // fireEvent,
   // waitFor,
 } from '../../../utils/testUtils';
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
-import { type HistoryState, type ParsedLocation } from '@tanstack/react-router';
+import {
+  createMemoryHistory,
+  createRootRoute,
+  createRoute,
+  createRouter,
+  RouterProvider,
+} from '@tanstack/react-router';
 
 import { sampleWorkoutLogs } from '@cwt/mocks';
 import type { WorkoutDraftSlice } from '@cwt/state/stores';
@@ -27,13 +33,6 @@ const makeDisclosure = (): UseDisclosureHandlers => ({
   close: vi.fn(),
   toggle: vi.fn(),
 });
-
-// https://tanstack.com/router/latest/docs/api/router/ParsedHistoryStateType
-type ParsedHistoryState = HistoryState & {
-  key?: string; // TODO: Remove in v2 - use __TSR_key instead
-  __TSR_key?: string;
-  __TSR_index: number;
-};
 
 const makeWebHandlers = (
   overrides: Partial<WebHandlers> = {},
@@ -57,10 +56,20 @@ const makeWebHandlers = (
   ...overrides,
 });
 
-vi.mock('@cwt/hooks', () => ({
-  useWorkoutContextWeb: vi.fn(),
-  useWorkoutLogDetailContextWeb: vi.fn(),
-}));
+// vi.mock('@cwt/hooks', () => ({
+//   useWorkoutContextWeb: vi.fn(),
+//   useWorkoutLogDetailContextWeb: vi.fn(),
+// }));
+vi.mock('@cwt/hooks', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@cwt/hooks')>();
+
+  return {
+    ...actual,
+    useWorkoutContextWeb: vi.fn(),
+    useWorkoutLogDetailContextWeb: vi.fn(),
+    // useAddSuperset: vi.fn(),
+  };
+});
 
 vi.mock('@cwt/state/stores', () => ({
   useAuthStore: vi.fn(),
@@ -68,18 +77,6 @@ vi.mock('@cwt/state/stores', () => ({
   useWorkoutDraftStore: vi.fn(),
 }));
 
-vi.mock('@tanstack/react-router', async () => {
-  const actual = await vi.importActual<typeof import('@tanstack/react-router')>(
-    '@tanstack/react-router',
-  );
-
-  return {
-    ...actual,
-    useLocation: () => locationSpy,
-  };
-});
-
-let locationSpy: ParsedLocation;
 // let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
 let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
 let workoutData: Array<Exercise | Section | Superset>;
@@ -94,20 +91,35 @@ let updateLogOverlayHandlerSpy: {
 
 // let title: string = sampleWorkoutLogs[0].title;
 
+async function renderWorkoutUpdateLayout() {
+  const rootRoute = createRootRoute({
+    component: WorkoutUpdateLayout,
+  });
+
+  const updateRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '/update',
+    component: () => null,
+  });
+
+  const routeTree = rootRoute.addChildren([updateRoute]);
+
+  const router = createRouter({
+    routeTree,
+    history: createMemoryHistory({
+      initialEntries: ['/update'],
+    }),
+  });
+
+  await router.load();
+
+  return render(<RouterProvider router={router} />);
+}
+
 describe('WorkoutUpdateLayout', async () => {
   beforeEach(async () => {
     import.meta.env.VITE_ENVIRONMENT = 'local-isolated';
 
-    locationSpy = {
-      pathname: '/update',
-      href: '',
-      search: {},
-      searchStr: '',
-      state: {} as ParsedHistoryState,
-      hash: '',
-      publicHref: '',
-      external: false,
-    };
     // updateWorkoutSpy = vi.fn();
     setModeSpy = vi.fn();
     workoutData = sampleWorkoutLogs[0].workout_data.data;
@@ -188,21 +200,20 @@ describe('WorkoutUpdateLayout', async () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
-  it.skip('renders with buttons and workout title', () => {
-    fileRouteRender(<WorkoutUpdateLayout />, {
-      initialLocation: '/_auth/update/',
-    });
+  it('renders with buttons and workout title', async () => {
+    // render(<WorkoutUpdateLayout />);
+    await renderWorkoutUpdateLayout();
 
-    // const cancelButton = screen.getByRole('button', { name: /Cancel/i });
+    const cancelButton = screen.getByRole('button', { name: /Cancel/i });
     const letsGoTest = screen.getByText(/lets go/i);
     // const cancelButton = screen.getByText(/Cancel/i);
     // const saveButton = screen.getByText(/Save/i);
-    // const saveButton = screen.getByRole('button', { name: /Save/i });
+    const saveButton = screen.getByRole('button', { name: /Save/i });
     // const titleText = screen.getByText(/Morning Push Workout/i);
 
     expect(letsGoTest).toBeInTheDocument();
-    // expect(cancelButton).toBeInTheDocument();
-    // expect(saveButton).toBeInTheDocument();
+    expect(cancelButton).toBeInTheDocument();
+    expect(saveButton).toBeInTheDocument();
     // expect(titleText).toBeInTheDocument();
   });
 });
