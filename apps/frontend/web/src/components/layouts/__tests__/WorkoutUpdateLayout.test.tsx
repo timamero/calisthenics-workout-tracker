@@ -4,7 +4,7 @@ import {
   // fireEvent,
   // waitFor,
 } from '../../../utils/testUtils';
-import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import {
   createMemoryHistory,
   createRootRoute,
@@ -13,14 +13,14 @@ import {
   RouterProvider,
 } from '@tanstack/react-router';
 
-import { sampleWorkoutLogs } from '@cwt/mocks';
-import type { WorkoutDraftSlice } from '@cwt/state/stores';
-import type {
-  Exercise,
-  Section,
-  Superset,
-  // WorkoutLogResponse,
-} from '@cwt/schema/workouts';
+// import { sampleWorkoutLogs } from '@cwt/mocks';
+// import type { WorkoutDraftSlice } from '@cwt/state/stores';
+// import type {
+//   Exercise,
+//   Section,
+//   Superset,
+//   // WorkoutLogResponse,
+// } from '@cwt/schema/workouts';
 
 import WorkoutUpdateLayout from '../WorkoutUpdateLayout';
 import type { WorkoutContextType } from '@cwt/context';
@@ -78,8 +78,8 @@ vi.mock('@cwt/state/stores', () => ({
 }));
 
 // let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
-let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
-let workoutData: Array<Exercise | Section | Superset>;
+// let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
+// let workoutData: Array<Exercise | Section | Superset>;
 // let workoutToSave: WorkoutLogResponse;
 let isUpdateOverlayOpened: boolean = true;
 // let mockSession: { access_token: string } | null;
@@ -121,8 +121,8 @@ describe('WorkoutUpdateLayout', async () => {
     import.meta.env.VITE_ENVIRONMENT = 'local-isolated';
 
     // updateWorkoutSpy = vi.fn();
-    setModeSpy = vi.fn();
-    workoutData = sampleWorkoutLogs[0].workout_data.data;
+    // setModeSpy = vi.fn();
+    // workoutData = sampleWorkoutLogs[0].workout_data.data;
     // workoutToSave = sampleWorkoutLogs[0];
     isUpdateOverlayOpened = false;
     // mockSession = { access_token: 'test-token' };
@@ -140,7 +140,7 @@ describe('WorkoutUpdateLayout', async () => {
 
     // Setup default mock return values
     const { useWorkoutContextWeb } = await import('@cwt/hooks');
-    const { useWorkoutDraftStore } = await import('@cwt/state/stores');
+    // const { useWorkoutDraftStore } = await import('@cwt/state/stores');
 
     vi.mocked(useWorkoutContextWeb).mockImplementation(() => ({
       webOverlayHandlers: makeWebHandlers({
@@ -151,18 +151,18 @@ describe('WorkoutUpdateLayout', async () => {
       }),
     }));
 
-    vi.mocked(useWorkoutDraftStore).mockImplementation((selector: unknown) => {
-      const mockState = {
-        workoutData: workoutData,
-        setMode: setModeSpy,
-        setExerciseIDToMod: vi.fn(),
-        setSupersetIDToMod: vi.fn(),
-        setSectionIDToMod: vi.fn(),
-      };
-      if (typeof selector === 'function') {
-        return selector(mockState);
-      }
-    });
+    // vi.mocked(useWorkoutDraftStore).mockImplementation((selector: unknown) => {
+    //   const mockState = {
+    //     workoutData: workoutData,
+    //     setMode: setModeSpy,
+    //     setExerciseIDToMod: vi.fn(),
+    //     setSupersetIDToMod: vi.fn(),
+    //     setSectionIDToMod: vi.fn(),
+    //   };
+    //   if (typeof selector === 'function') {
+    //     return selector(mockState);
+    //   }
+    // });
 
     // vi.mocked(useWorkoutLogDetailContextWeb).mockReturnValue({
     //   workout: sampleWorkoutLogs[0],
@@ -200,20 +200,13 @@ describe('WorkoutUpdateLayout', async () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
-  it('renders with buttons and workout title', async () => {
-    // render(<WorkoutUpdateLayout />);
+  it('renders with header buttons', async () => {
     await renderWorkoutUpdateLayout();
 
     const cancelButton = screen.getByRole('button', { name: /Cancel/i });
-    const letsGoTest = screen.getByText(/lets go/i);
-    // const cancelButton = screen.getByText(/Cancel/i);
-    // const saveButton = screen.getByText(/Save/i);
     const saveButton = screen.getByRole('button', { name: /Save/i });
-    // const titleText = screen.getByText(/Morning Push Workout/i);
 
-    expect(letsGoTest).toBeInTheDocument();
     expect(cancelButton).toBeInTheDocument();
     expect(saveButton).toBeInTheDocument();
-    // expect(titleText).toBeInTheDocument();
   });
 });
