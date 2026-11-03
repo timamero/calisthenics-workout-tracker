@@ -1,9 +1,4 @@
-import {
-  render,
-  screen,
-  // fireEvent,
-  // waitFor,
-} from '../../../utils/testUtils';
+import { render, screen, fireEvent, waitFor } from '../../../utils/testUtils';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import {
   createMemoryHistory,
@@ -208,5 +203,15 @@ describe('WorkoutUpdateLayout', async () => {
 
     expect(cancelButton).toBeInTheDocument();
     expect(saveButton).toBeInTheDocument();
+  });
+
+  it.skip('opens updateLogOverlay on Save button click', async () => {
+    await renderWorkoutUpdateLayout();
+
+    fireEvent.click(screen.getByRole('button', { name: /Save/i }));
+
+    await waitFor(() => {
+      expect(updateLogOverlayHandlerSpy.open).toHaveBeenCalled();
+    });
   });
 });
