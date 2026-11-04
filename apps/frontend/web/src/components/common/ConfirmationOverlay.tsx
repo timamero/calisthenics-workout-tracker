@@ -8,6 +8,7 @@ interface ConfirmationOverlayProps {
   title: string;
   message: string;
   confirmButtonLabel: string;
+  cancelButtonLabel?: string;
   onConfirmationClick: () => void;
 }
 
@@ -17,6 +18,7 @@ export default function ConfirmationOverlay({
   title,
   message,
   confirmButtonLabel,
+  cancelButtonLabel = 'Cancel',
   onConfirmationClick,
 }: ConfirmationOverlayProps) {
   const setExerciseID = useWorkoutDraftStore(
@@ -56,7 +58,7 @@ export default function ConfirmationOverlay({
       </Stack>
       <Group mt="lg" justify="flex-end">
         <Button color="gray" variant="outline" onClick={() => handleClose()}>
-          Cancel
+          {cancelButtonLabel}
         </Button>
         <Button
           color="orange"
