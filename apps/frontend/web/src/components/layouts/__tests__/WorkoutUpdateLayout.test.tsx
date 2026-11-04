@@ -205,7 +205,7 @@ describe('WorkoutUpdateLayout', async () => {
     expect(saveButton).toBeInTheDocument();
   });
 
-  it.skip('opens updateLogOverlay on Save button click', async () => {
+  it('opens updateLogOverlay on Save button click', async () => {
     await renderWorkoutUpdateLayout();
 
     fireEvent.click(screen.getByRole('button', { name: /Save/i }));

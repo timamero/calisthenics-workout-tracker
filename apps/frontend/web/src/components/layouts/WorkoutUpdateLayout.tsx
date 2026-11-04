@@ -2,7 +2,7 @@ import { Outlet, useLocation } from '@tanstack/react-router';
 import { AppShell, Button, Stack, Group } from '@mantine/core';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
-// import { useWorkoutContextWeb } from '@cwt/hooks';
+import { useWorkoutContextWeb } from '@cwt/hooks';
 
 import AddWorkoutItemMenu from '../Workout/AddWorkoutItemMenu';
 
@@ -11,8 +11,8 @@ export default function WorkoutUpdateLayout() {
 
   // const cancelOverlayHandler =
   //   useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
-  // const saveOverlayHandler =
-  //   useWorkoutContextWeb().webOverlayHandlers?.saveOverlayHandler;
+  const saveOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.updateLogOverlayHandler;
 
   const mode = useWorkoutDraftStore((state) => state.mode);
 
@@ -52,8 +52,7 @@ export default function WorkoutUpdateLayout() {
             variant="filled"
             size="md"
             radius="md"
-            // onClick={() => saveOverlayHandler!.open()}
-            onClick={() => console.log('clicked Save')}
+            onClick={() => saveOverlayHandler!.open()}
           >
             Save
           </Button>
