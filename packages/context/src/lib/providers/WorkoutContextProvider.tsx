@@ -1,8 +1,8 @@
-import { useState, type ReactNode } from 'react';
-import { useDisclosure } from '@mantine/hooks';
+import { useState, type ReactNode } from "react";
+import { useDisclosure } from "@mantine/hooks";
 
-import { WorkoutContext } from '../contexts/WorkoutContext';
-import { AppTypeSchema } from '@cwt/schema/common';
+import { WorkoutContext } from "../contexts/WorkoutContext";
+import { AppTypeSchema } from "@cwt/schema/common";
 
 export default function WorkoutOverlaysContextProvider({
   appType,
@@ -12,6 +12,8 @@ export default function WorkoutOverlaysContextProvider({
   children: ReactNode;
 }) {
   // Web
+  const [cancelUpdateLogOverlayOpened, cancelUpdateLogOverlayHandler] =
+    useDisclosure(false);
   const [updateLogOverlayOpened, updateLogOverlayHandler] =
     useDisclosure(false);
   const [deleteLogOverlayOpened, deleteLogOverlayHandler] =
@@ -28,6 +30,8 @@ export default function WorkoutOverlaysContextProvider({
   const [cancelOverlayOpened, cancelOverlayHandler] = useDisclosure(false);
 
   const webOverlayHandlers = {
+    cancelUpdateLogOverlayOpened,
+    cancelUpdateLogOverlayHandler,
     updateLogOverlayOpened,
     updateLogOverlayHandler,
     deleteLogOverlayOpened,
@@ -47,6 +51,8 @@ export default function WorkoutOverlaysContextProvider({
   };
 
   // Mobile
+  const [isCancelUpdateLogOverlayVisible, setIsCancelUpdateLogOverlayVisible] =
+    useState<boolean>(false);
   const [isUpdateLogOverlayVisible, setIsUpdateLogOverlayVisible] =
     useState<boolean>(false);
   const [isDeleteLogOverlayVisible, setIsDeleteLogOverlayVisible] =
@@ -69,6 +75,8 @@ export default function WorkoutOverlaysContextProvider({
     useState<boolean>(false);
 
   const mobileOverlayHandlers = {
+    isCancelUpdateLogOverlayVisible,
+    setIsCancelUpdateLogOverlayVisible,
     isUpdateLogOverlayVisible,
     setIsUpdateLogOverlayVisible,
     isDeleteLogOverlayVisible,
@@ -90,7 +98,7 @@ export default function WorkoutOverlaysContextProvider({
   return (
     <WorkoutContext.Provider
       value={
-        appType === 'web'
+        appType === "web"
           ? { appType, webOverlayHandlers }
           : { appType, mobileOverlayHandlers }
       }

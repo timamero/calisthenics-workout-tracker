@@ -1,11 +1,13 @@
-import { createContext, Dispatch, SetStateAction } from 'react';
-import { type UseDisclosureHandlers } from '@mantine/hooks';
-import { AppTypeSchema } from '@cwt/schema/common';
+import { createContext, Dispatch, SetStateAction } from "react";
+import { type UseDisclosureHandlers } from "@mantine/hooks";
+import { AppTypeSchema } from "@cwt/schema/common";
 
 export type WorkoutContextType = {
   appType: AppTypeSchema;
 
   webOverlayHandlers?: {
+    cancelUpdateLogOverlayOpened: boolean;
+    cancelUpdateLogOverlayHandler: UseDisclosureHandlers;
     updateLogOverlayOpened: boolean;
     updateLogOverlayHandler: UseDisclosureHandlers;
     deleteLogOverlayOpened: boolean;
@@ -25,6 +27,8 @@ export type WorkoutContextType = {
   };
 
   mobileOverlayHandlers?: {
+    isCancelUpdateLogOverlayVisible: boolean;
+    setIsCancelUpdateLogOverlayVisible: Dispatch<SetStateAction<boolean>>;
     isUpdateLogOverlayVisible: boolean;
     setIsUpdateLogOverlayVisible: Dispatch<SetStateAction<boolean>>;
     isDeleteLogOverlayVisible: boolean;
