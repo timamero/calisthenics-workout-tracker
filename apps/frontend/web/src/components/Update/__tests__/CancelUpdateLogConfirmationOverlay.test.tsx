@@ -191,6 +191,16 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
     expect(message).toBeInTheDocument();
   });
 
+  it.skip('resets workout draft state after successfully updating workout', async () => {
+    render(<CancelUpdateLogConfirmationOverlay />);
+
+    fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
+
+    await waitFor(() => {
+      // add tests here
+    });
+  });
+
   it('on Discard changes click, redirects user to history route', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 

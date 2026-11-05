@@ -191,6 +191,16 @@ describe('UpdateLogConfirmationOverlay', async () => {
     expect(message).toBeInTheDocument();
   });
 
+  it('resets workout draft state after successfully updating workout', async () => {
+    render(<UpdateLogConfirmationOverlay />);
+
+    fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
+
+    await waitFor(() => {
+      // add tests here
+    });
+  });
+
   it('updates workout, redirects user to history route, and opens workout log detail on successful update', async () => {
     const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'updateWorkoutLog');
 
