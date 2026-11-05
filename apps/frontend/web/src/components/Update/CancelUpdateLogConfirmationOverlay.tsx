@@ -1,33 +1,33 @@
-import { useNavigate, linkOptions } from '@tanstack/react-router';
+// import { useNavigate, linkOptions } from '@tanstack/react-router';
 
 import {
   useWorkoutLogDetailContextWeb,
   useWorkoutContextWeb,
 } from '@cwt/hooks';
 import {
-  useAuthStore,
-  useWorkoutLibraryStore,
+  // useAuthStore,
+  // useWorkoutLibraryStore,
   useWorkoutDraftStore,
 } from '@cwt/state/stores';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
-import { updateWorkoutLog } from '../../services/workoutsService';
+// import { updateWorkoutLog } from '../../services/workoutsService';
 
 export default function CancelUpdateLogConfirmationOverlay() {
   // --- State Management ---
-  const supabaseSession = useAuthStore((state) => state.session);
-  const updateWorkout = useWorkoutLibraryStore((state) => state.updateWorkout);
+  // const supabaseSession = useAuthStore((state) => state.session);
+  // const updateWorkout = useWorkoutLibraryStore((state) => state.updateWorkout);
   const workoutToSave = useWorkoutDraftStore(
     (state) => state.workoutToSave,
   ) as WorkoutLogResponse;
-  const setMode = useWorkoutDraftStore((state) => state.setMode);
+  // const setMode = useWorkoutDraftStore((state) => state.setMode);
 
-  const historyLinkOptions = linkOptions({
-    to: '/dashboard/history',
-  });
+  // const historyLinkOptions = linkOptions({
+  //   to: '/dashboard/history',
+  // });
   // --- Hooks ---
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // --- Context ---
   const workoutOverlayHandlers = useWorkoutContextWeb().webOverlayHandlers;
@@ -51,36 +51,37 @@ export default function CancelUpdateLogConfirmationOverlay() {
   }
 
   // --- Variables ---
-  const workoutLogId = workoutToSave.id;
-  const updateLogOverlayOpened = workoutOverlayHandlers.updateLogOverlayOpened;
-  const updateLogOverlayHandler =
-    workoutOverlayHandlers.updateLogOverlayHandler;
-  const detailHandlers = workoutLogDetailOverlayHandlers.handlers;
+  // const workoutLogId = workoutToSave.id;
+  const cancelUpdateLogOverlayOpened =
+    workoutOverlayHandlers.cancelUpdateLogOverlayOpened;
+  const cancelUpdateLogOverlayHandler =
+    workoutOverlayHandlers.cancelUpdateLogOverlayHandler;
+  // const detailHandlers = workoutLogDetailOverlayHandlers.handlers;
 
   // --- Handlers ---
-  const handleUpdateLogClick = async () => {
-    if (!supabaseSession) {
-      console.error('Session not found');
-      return;
-    }
-    const body = JSON.stringify(workoutToSave);
-    try {
-      const result = await updateWorkoutLog(supabaseSession.access_token, body);
-      if (result) {
-        updateWorkout(workoutToSave);
-        detailHandlers.open();
-        setMode('read');
-        navigate(historyLinkOptions);
-      } else {
-        console.error(
-          'Workout update request failed to update log with ID: ',
-          workoutLogId,
-        );
-      }
-    } catch (e) {
-      console.error('Error updating log:', e);
-    }
-  };
+  // const handleUpdateLogClick = async () => {
+  //   if (!supabaseSession) {
+  //     console.error('Session not found');
+  //     return;
+  //   }
+  //   const body = JSON.stringify(workoutToSave);
+  //   try {
+  //     const result = await updateWorkoutLog(supabaseSession.access_token, body);
+  //     if (result) {
+  //       updateWorkout(workoutToSave);
+  //       detailHandlers.open();
+  //       setMode('read');
+  //       navigate(historyLinkOptions);
+  //     } else {
+  //       console.error(
+  //         'Workout update request failed to update log with ID: ',
+  //         workoutLogId,
+  //       );
+  //     }
+  //   } catch (e) {
+  //     console.error('Error updating log:', e);
+  //   }
+  // };
 
   return (
     <ConfirmationOverlay
@@ -88,9 +89,9 @@ export default function CancelUpdateLogConfirmationOverlay() {
       message="You have unsaved changes. If you go back now, your edits will be lost."
       confirmButtonLabel="Discard changes"
       cancelButtonLabel="Keep editing"
-      opened={updateLogOverlayOpened}
-      handler={updateLogOverlayHandler}
-      onConfirmationClick={handleUpdateLogClick}
+      opened={cancelUpdateLogOverlayOpened}
+      handler={cancelUpdateLogOverlayHandler}
+      onConfirmationClick={() => console.log('clicked confirm button')}
     />
   );
 }

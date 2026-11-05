@@ -21,6 +21,8 @@ const makeDisclosure = (): UseDisclosureHandlers => ({
 const makeWebHandlers = (
   overrides: Partial<WebHandlers> = {},
 ): WebHandlers => ({
+  cancelUpdateLogOverlayOpened: false,
+  cancelUpdateLogOverlayHandler: makeDisclosure(),
   updateLogOverlayOpened: false,
   updateLogOverlayHandler: makeDisclosure(),
   deleteLogOverlayOpened: false,
@@ -66,7 +68,7 @@ let navigateSpy: NavigateFn;
 let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
 let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
 let workoutToSave: WorkoutLogResponse;
-let isUpdateOverlayOpened: boolean = true;
+let isCancelUpdateOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = false;
 let mockSession: { access_token: string } | null;
 let workoutLogDetailsOverlayHandlerSpy: {
@@ -74,8 +76,7 @@ let workoutLogDetailsOverlayHandlerSpy: {
   close: () => void;
   toggle: () => void;
 };
-// Todo: Create cancelUpdateLogOverlay handler and isCancelUpdateOverlayOpened variable in context
-let updateLogOverlayHandlerSpy: {
+let cancelUpdateLogOverlayHandlerSpy: {
   open: () => void;
   close: () => void;
   toggle: () => void;
@@ -89,7 +90,7 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
     updateWorkoutSpy = vi.fn();
     setModeSpy = vi.fn();
     workoutToSave = sampleWorkoutLogs[0];
-    isUpdateOverlayOpened = true;
+    isCancelUpdateOverlayOpened = true;
     mockSession = { access_token: 'test-token' };
     workoutLogDetailsOverlayHandlerSpy = {
       open: vi.fn(() => {
@@ -102,15 +103,15 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
         isLogDetailOverlayOpened = !isLogDetailOverlayOpened;
       }),
     };
-    updateLogOverlayHandlerSpy = {
+    cancelUpdateLogOverlayHandlerSpy = {
       open: vi.fn(() => {
-        isUpdateOverlayOpened = true;
+        isCancelUpdateOverlayOpened = true;
       }),
       close: vi.fn(() => {
-        isUpdateOverlayOpened = false;
+        isCancelUpdateOverlayOpened = false;
       }),
       toggle: vi.fn(() => {
-        isUpdateOverlayOpened = !isUpdateOverlayOpened;
+        isCancelUpdateOverlayOpened = !isCancelUpdateOverlayOpened;
       }),
     };
 
@@ -122,10 +123,10 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
 
     vi.mocked(useWorkoutContextWeb).mockImplementation(() => ({
       webOverlayHandlers: makeWebHandlers({
-        get updateLogOverlayOpened() {
-          return isUpdateOverlayOpened;
+        get cancelUpdateLogOverlayOpened() {
+          return isCancelUpdateOverlayOpened;
         },
-        updateLogOverlayHandler: updateLogOverlayHandlerSpy,
+        cancelUpdateLogOverlayHandler: cancelUpdateLogOverlayHandlerSpy,
       }),
     }));
 
@@ -190,13 +191,13 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
     expect(message).toBeInTheDocument();
   });
 
-  it.skip('on Discard changes click, redirects user to history route, opens workout log detail on successful update', async () => {
+  it.skip('on Discard changes click, redirects user to history route', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
     fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
 
     await waitFor(() => {
-      expect(updateLogOverlayHandlerSpy.close).toHaveBeenCalled();
+      expect(cancelUpdateLogOverlayHandlerSpy.close).toHaveBeenCalled();
       expect(navigateSpy).toHaveBeenCalled();
       expect(navigateSpy).toHaveBeenCalledWith(
         expect.objectContaining(
@@ -213,7 +214,7 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
     fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
 
     await waitFor(() => {
-      expect(updateLogOverlayHandlerSpy.close).toHaveBeenCalled();
+      expect(cancelUpdateLogOverlayHandlerSpy.close).toHaveBeenCalled();
       expect(navigateSpy).toHaveBeenCalled();
       expect(navigateSpy).toHaveBeenCalledWith(
         expect.objectContaining(
