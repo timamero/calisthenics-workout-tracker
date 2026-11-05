@@ -22,6 +22,7 @@ export default function UpdateLogConfirmationOverlay() {
     (state) => state.workoutToSave,
   ) as WorkoutLogResponse;
   const setMode = useWorkoutDraftStore((state) => state.setMode);
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   const historyLinkOptions = linkOptions({
     to: '/dashboard/history',
@@ -71,6 +72,7 @@ export default function UpdateLogConfirmationOverlay() {
         detailHandlers.open();
         setMode('read');
         navigate(historyLinkOptions);
+        resetWorkout();
       } else {
         console.error(
           'Workout update request failed to update log with ID: ',

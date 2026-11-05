@@ -22,6 +22,7 @@ export default function CancelUpdateLogConfirmationOverlay() {
     (state) => state.workoutToSave,
   ) as WorkoutLogResponse;
   const setMode = useWorkoutDraftStore((state) => state.setMode);
+  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   const historyLinkOptions = linkOptions({
     to: '/dashboard/history',
@@ -62,6 +63,7 @@ export default function CancelUpdateLogConfirmationOverlay() {
     detailHandlers.open();
     setMode('read');
     navigate(historyLinkOptions);
+    resetWorkout();
   };
 
   return (

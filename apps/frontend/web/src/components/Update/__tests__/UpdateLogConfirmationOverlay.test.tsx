@@ -67,6 +67,7 @@ vi.mock('@tanstack/react-router', async () => {
 let navigateSpy: NavigateFn;
 let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
 let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
+let resetWorkoutSpy: Mock<WorkoutDraftSlice['resetWorkout']>;
 let workoutToSave: WorkoutLogResponse;
 let isUpdateOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = false;
@@ -89,6 +90,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     navigateSpy = vi.fn();
     updateWorkoutSpy = vi.fn();
     setModeSpy = vi.fn();
+    resetWorkoutSpy = vi.fn();
     workoutToSave = sampleWorkoutLogs[0];
     isUpdateOverlayOpened = true;
     mockSession = { access_token: 'test-token' };
@@ -137,6 +139,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
         setExerciseIDToMod: vi.fn(),
         setSupersetIDToMod: vi.fn(),
         setSectionIDToMod: vi.fn(),
+        resetWorkout: resetWorkoutSpy,
       };
       if (typeof selector === 'function') {
         return selector(mockState);
@@ -197,7 +200,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
 
     await waitFor(() => {
-      // add tests here
+      expect(resetWorkoutSpy).toHaveBeenCalled();
     });
   });
 
