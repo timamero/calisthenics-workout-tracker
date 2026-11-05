@@ -179,7 +179,7 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
-  it.skip('renders when cancelUpdateLogOverlayOpened is true', () => {
+  it('renders when cancelUpdateLogOverlayOpened is true', () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
     const title = screen.getByRole('heading', { name: /Discard changes?/i });
@@ -191,7 +191,7 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
     expect(message).toBeInTheDocument();
   });
 
-  it.skip('on Discard changes click, redirects user to history route', async () => {
+  it('on Discard changes click, redirects user to history route', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
     fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
@@ -208,24 +208,18 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
       );
     });
   });
-  it.skip('on Keep editing click, cancelLogUpdateOverlay is not rendered', async () => {
+  it('on Keep editing click, cancelLogUpdateOverlay is not rendered', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
-    fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
+    fireEvent.click(screen.getByRole('button', { name: /^Keep editing$/i }));
 
     await waitFor(() => {
       expect(cancelUpdateLogOverlayHandlerSpy.close).toHaveBeenCalled();
-      expect(navigateSpy).toHaveBeenCalled();
-      expect(navigateSpy).toHaveBeenCalledWith(
-        expect.objectContaining(
-          linkOptions({
-            to: '/dashboard/history',
-          }),
-        ),
-      );
+      expect(navigateSpy).not.toHaveBeenCalled();
+      expect(navigateSpy).not.toHaveBeenCalled();
     });
   });
-  it.skip('on Discard changes click, workout is not updated', async () => {
+  it('on Discard changes click, workout is not updated', async () => {
     const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'updateWorkoutLog');
 
     render(<CancelUpdateLogConfirmationOverlay />);
@@ -238,7 +232,7 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
     });
   });
 
-  it.skip('on Discard changes click, opens workout log detail in read mode', async () => {
+  it('on Discard changes click, opens workout log detail in read mode', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
     fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
