@@ -18,6 +18,8 @@ export default function DurationInput({
   label,
   fieldName,
 }: DurationInputProps) {
+  console.log('DEBUG: label', label);
+  console.log('DEBUG: fieldName', fieldName);
   const set = useContext(SetContext)!.set;
 
   const handleChange = useFieldInputChange(fieldName, 'duration');
@@ -28,6 +30,12 @@ export default function DurationInput({
       : '0s';
     return <TextInputReading label={label} value={value} />;
   }
+
+  console.log('DEBUG: set.fields[fieldName]', set.fields[fieldName]);
+
+  const value = set.fields[fieldName]
+    ? getSecondsInDuration(set.fields[fieldName].toString())
+    : '0';
   return (
     <TextInput
       mod={{ isloginput: true }}
@@ -38,7 +46,7 @@ export default function DurationInput({
       pattern="^(0|[1-9][0-9]{0,2})$"
       min={0}
       max={999}
-      value={getSecondsInDuration(set.fields[fieldName]!.toString())}
+      value={value}
       onChange={handleChange}
       maxLength={3}
       placeholder="0-999"
