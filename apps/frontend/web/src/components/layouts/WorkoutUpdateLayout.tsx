@@ -7,14 +7,24 @@ import { useWorkoutContextWeb } from '@cwt/hooks';
 import AddWorkoutItemMenu from '../Workout/AddWorkoutItemMenu';
 
 export default function WorkoutUpdateLayout() {
+  // --- State Management ---
+  const mode = useWorkoutDraftStore((state) => state.mode);
+
+  // --- Hooks ---
   const location = useLocation();
 
-  const cancelOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.cancelUpdateLogOverlayHandler;
-  const saveOverlayHandler =
-    useWorkoutContextWeb().webOverlayHandlers?.updateLogOverlayHandler;
+  // --- Context ---
+  const workoutOverlayHandlers = useWorkoutContextWeb().webOverlayHandlers;
 
-  const mode = useWorkoutDraftStore((state) => state.mode);
+  if (!workoutOverlayHandlers) {
+    console.error('Error: useWorkoutContextWeb().webOverlayHandlers is null.');
+    return null;
+  }
+
+  // --- Variables ---
+  const cancelOverlayHandler =
+    workoutOverlayHandlers.cancelUpdateLogOverlayHandler;
+  const saveOverlayHandler = workoutOverlayHandlers.updateLogOverlayHandler;
 
   return (
     <AppShell
