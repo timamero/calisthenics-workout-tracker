@@ -9,7 +9,7 @@ interface WorkoutLogDetailMenuProps {
 }
 
 export default function WorkoutLogDetailMenu({
-  // handleUpdateClick,
+  handleUpdateClick,
   handleDeleteClick,
 }: WorkoutLogDetailMenuProps) {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -35,8 +35,7 @@ export default function WorkoutLogDetailMenu({
         <Menu.Item
           onClick={() => {
             setMenuOpened(false);
-            console.log('clicked update log');
-            // handleUpdateClick();
+            handleUpdateClick();
           }}
           leftSection={<IoPencil size={18} />}
         >
