@@ -9,7 +9,10 @@ import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import { MantineProvider } from '@mantine/core';
 
-import { WorkoutContextProvider } from '@cwt/context';
+import {
+  WorkoutContextProvider,
+  WorkoutLogDetailContextProvider,
+} from '@cwt/context';
 import { useSupabaseAuth } from '@cwt/hooks';
 
 import './styles/global.css';
@@ -45,7 +48,9 @@ if (!rootElement.innerHTML) {
       <MantineProvider theme={theme} cssVariablesResolver={resolver}>
         <WorkoutDraftProvider>
           <WorkoutContextProvider appType="web">
-            <App />
+            <WorkoutLogDetailContextProvider>
+              <App />
+            </WorkoutLogDetailContextProvider>
           </WorkoutContextProvider>
         </WorkoutDraftProvider>
       </MantineProvider>

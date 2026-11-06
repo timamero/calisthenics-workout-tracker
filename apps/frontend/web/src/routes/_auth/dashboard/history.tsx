@@ -1,8 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Container } from '@mantine/core';
 
-import { WorkoutLogDetailContextProvider } from '@cwt/context';
-
 import WorkoutLogPages from '../../../components/WorkoutLogPages';
 
 export const Route = createFileRoute('/_auth/dashboard/history')({
@@ -11,34 +9,31 @@ export const Route = createFileRoute('/_auth/dashboard/history')({
 
 function HistoryView() {
   return (
-    // TODO: Move this Context Provide to the auth route. The update page needs this context
-    <WorkoutLogDetailContextProvider>
-      <Container
-        py="md"
-        mih="100%"
-        style={{ display: 'flex', flexDirection: 'column' }}
+    <Container
+      py="md"
+      mih="100%"
+      style={{ display: 'flex', flexDirection: 'column' }}
+    >
+      <Stack
+        h="100%"
+        flex={1}
+        display="flex"
+        style={{ flexDirection: 'column' }}
       >
-        <Stack
-          h="100%"
-          flex={1}
-          display="flex"
-          style={{ flexDirection: 'column' }}
+        <Title
+          order={1}
+          mb="md"
+          fz={{ base: 'h3', md: 'h2' }}
+          lh="xxs"
+          ta="center"
+          style={(theme) => ({
+            letterSpacing: theme.other.letterSpacing.tight,
+          })}
         >
-          <Title
-            order={1}
-            mb="md"
-            fz={{ base: 'h3', md: 'h2' }}
-            lh="xxs"
-            ta="center"
-            style={(theme) => ({
-              letterSpacing: theme.other.letterSpacing.tight,
-            })}
-          >
-            Workouts
-          </Title>
-          <WorkoutLogPages />
-        </Stack>
-      </Container>
-    </WorkoutLogDetailContextProvider>
+          Workouts
+        </Title>
+        <WorkoutLogPages />
+      </Stack>
+    </Container>
   );
 }
