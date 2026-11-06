@@ -9,8 +9,8 @@ import AddWorkoutItemMenu from '../Workout/AddWorkoutItemMenu';
 export default function WorkoutUpdateLayout() {
   const location = useLocation();
 
-  // const cancelOverlayHandler =
-  //   useWorkoutContextWeb().webOverlayHandlers?.cancelOverlayHandler;
+  const cancelOverlayHandler =
+    useWorkoutContextWeb().webOverlayHandlers?.cancelUpdateLogOverlayHandler;
   const saveOverlayHandler =
     useWorkoutContextWeb().webOverlayHandlers?.updateLogOverlayHandler;
 
@@ -43,8 +43,7 @@ export default function WorkoutUpdateLayout() {
             variant="outline"
             size="md"
             radius="md"
-            // onClick={() => cancelOverlayHandler!.open()}
-            onClick={() => console.log('clicked Cancel')}
+            onClick={() => cancelOverlayHandler!.open()}
           >
             Cancel
           </Button>

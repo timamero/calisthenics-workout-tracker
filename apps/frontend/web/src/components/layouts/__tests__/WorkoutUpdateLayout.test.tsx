@@ -32,6 +32,8 @@ const makeDisclosure = (): UseDisclosureHandlers => ({
 const makeWebHandlers = (
   overrides: Partial<WebHandlers> = {},
 ): WebHandlers => ({
+  cancelUpdateLogOverlayOpened: false,
+  cancelUpdateLogOverlayHandler: makeDisclosure(),
   updateLogOverlayOpened: false,
   updateLogOverlayHandler: makeDisclosure(),
   deleteLogOverlayOpened: false,
@@ -76,9 +78,15 @@ vi.mock('@cwt/state/stores', () => ({
 // let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
 // let workoutData: Array<Exercise | Section | Superset>;
 // let workoutToSave: WorkoutLogResponse;
-let isUpdateOverlayOpened: boolean = true;
+let isUpdateOverlayOpened: boolean = false;
+let isCancelUpdateOverlayOpened: boolean = false;
 // let mockSession: { access_token: string } | null;
 let updateLogOverlayHandlerSpy: {
+  open: () => void;
+  close: () => void;
+  toggle: () => void;
+};
+let cancelUpdateLogOverlayHandlerSpy: {
   open: () => void;
   close: () => void;
   toggle: () => void;
@@ -132,6 +140,17 @@ describe('WorkoutUpdateLayout', async () => {
         isUpdateOverlayOpened = !isUpdateOverlayOpened;
       }),
     };
+    cancelUpdateLogOverlayHandlerSpy = {
+      open: vi.fn(() => {
+        isCancelUpdateOverlayOpened = true;
+      }),
+      close: vi.fn(() => {
+        isCancelUpdateOverlayOpened = false;
+      }),
+      toggle: vi.fn(() => {
+        isCancelUpdateOverlayOpened = !isCancelUpdateOverlayOpened;
+      }),
+    };
 
     // Setup default mock return values
     const { useWorkoutContextWeb } = await import('@cwt/hooks');
@@ -143,6 +162,10 @@ describe('WorkoutUpdateLayout', async () => {
           return isUpdateOverlayOpened;
         },
         updateLogOverlayHandler: updateLogOverlayHandlerSpy,
+        get cancelUpdateLogOverlayOpened() {
+          return isCancelUpdateOverlayOpened;
+        },
+        cancelUpdateLogOverlayHandler: cancelUpdateLogOverlayHandlerSpy,
       }),
     }));
 
@@ -204,6 +227,12 @@ describe('WorkoutUpdateLayout', async () => {
     expect(cancelButton).toBeInTheDocument();
     expect(saveButton).toBeInTheDocument();
   });
+  it('renders with overlays closed', async () => {
+    await renderWorkoutUpdateLayout();
+
+    expect(isUpdateOverlayOpened).toBe(false);
+    expect(isCancelUpdateOverlayOpened).toBe(false);
+  });
 
   it('opens updateLogOverlay on Save button click', async () => {
     await renderWorkoutUpdateLayout();
@@ -212,6 +241,18 @@ describe('WorkoutUpdateLayout', async () => {
 
     await waitFor(() => {
       expect(updateLogOverlayHandlerSpy.open).toHaveBeenCalled();
+      expect(isUpdateOverlayOpened).toBe(true);
+    });
+  });
+
+  it('opens cancelUpdateLogOverlay on Cancel button click', async () => {
+    await renderWorkoutUpdateLayout();
+
+    fireEvent.click(screen.getByRole('button', { name: /Cancel/i }));
+
+    await waitFor(() => {
+      expect(cancelUpdateLogOverlayHandlerSpy.open).toHaveBeenCalled();
+      expect(isCancelUpdateOverlayOpened).toBe(true);
     });
   });
 });
