@@ -22,7 +22,12 @@ export default function UpdateLogConfirmationOverlay() {
     (state) => state.workoutToSave,
   ) as WorkoutLogResponse;
   const setMode = useWorkoutDraftStore((state) => state.setMode);
-  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+  // const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+  // const initializeUpdatedWorkoutSave = useWorkoutDraftStore(
+  //   (state) => state.initializeUpdatedWorkoutToSave,
+  // );
+  const workoutLogDetail = useWorkoutLogDetailContextWeb().workout;
+  const setWorkoutLogDetail = useWorkoutLogDetailContextWeb().setWorkout;
 
   const historyLinkOptions = linkOptions({
     to: '/dashboard/history',
@@ -36,8 +41,8 @@ export default function UpdateLogConfirmationOverlay() {
     useWorkoutLogDetailContextWeb().webOverlayHandlers;
 
   // --- Error Handling ---
-  if (!workoutToSave) {
-    console.error('Error: Workout log not found.');
+  if (!workoutLogDetail) {
+    console.error('Error: Workout log detail not found.');
     return null;
   }
   if (!workoutOverlayHandlers) {
@@ -52,7 +57,7 @@ export default function UpdateLogConfirmationOverlay() {
   }
 
   // --- Variables ---
-  const workoutLogId = workoutToSave.id;
+  const workoutLogId = workoutLogDetail.id;
   const updateLogOverlayOpened = workoutOverlayHandlers.updateLogOverlayOpened;
   const updateLogOverlayHandler =
     workoutOverlayHandlers.updateLogOverlayHandler;
@@ -60,19 +65,26 @@ export default function UpdateLogConfirmationOverlay() {
 
   // --- Handlers ---
   const handleUpdateLogClick = async () => {
+    // initializeUpdatedWorkoutSave(workoutLogDetail);
+    console.log('updating workout with ', workoutToSave);
+
     if (!supabaseSession) {
       console.error('Session not found');
       return;
     }
+    // const workoutToSave = useWorkoutDraftStore.getState()
+    //   .workoutToSave as WorkoutLogResponse;
+
     const body = JSON.stringify(workoutToSave);
     try {
       const result = await updateWorkoutLog(supabaseSession.access_token, body);
       if (result) {
         updateWorkout(workoutToSave);
+        setWorkoutLogDetail(workoutToSave);
         detailHandlers.open();
         setMode('read');
         navigate(historyLinkOptions);
-        resetWorkout();
+        // resetWorkout();
       } else {
         console.error(
           'Workout update request failed to update log with ID: ',

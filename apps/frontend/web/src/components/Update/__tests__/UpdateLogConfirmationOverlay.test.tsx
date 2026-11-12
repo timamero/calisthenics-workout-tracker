@@ -8,7 +8,10 @@ import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import UpdateLogConfirmationOverlay from '../UpdateLogConfirmationOverlay';
 import * as workoutsService from '../../../services/workoutsService';
-import type { WorkoutContextType } from '@cwt/context';
+import type {
+  WorkoutContextType,
+  WorkoutLogDetailContextType,
+} from '@cwt/context';
 import type { UseDisclosureHandlers } from '@mantine/hooks';
 
 // Typed factory to satisfy full webOverlayHandlers shape while tests override only needed fields.
@@ -67,7 +70,7 @@ vi.mock('@tanstack/react-router', async () => {
 let navigateSpy: NavigateFn;
 let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
 let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
-let resetWorkoutSpy: Mock<WorkoutDraftSlice['resetWorkout']>;
+let setWorkoutLogDetailSpy: Mock<WorkoutLogDetailContextType['setWorkout']>;
 let workoutToSave: WorkoutLogResponse;
 let isUpdateOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = false;
@@ -90,7 +93,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
     navigateSpy = vi.fn();
     updateWorkoutSpy = vi.fn();
     setModeSpy = vi.fn();
-    resetWorkoutSpy = vi.fn();
+    setWorkoutLogDetailSpy = vi.fn();
     workoutToSave = sampleWorkoutLogs[0];
     isUpdateOverlayOpened = true;
     mockSession = { access_token: 'test-token' };
@@ -139,7 +142,6 @@ describe('UpdateLogConfirmationOverlay', async () => {
         setExerciseIDToMod: vi.fn(),
         setSupersetIDToMod: vi.fn(),
         setSectionIDToMod: vi.fn(),
-        resetWorkout: resetWorkoutSpy,
       };
       if (typeof selector === 'function') {
         return selector(mockState);
@@ -154,7 +156,7 @@ describe('UpdateLogConfirmationOverlay', async () => {
         },
         handlers: workoutLogDetailsOverlayHandlerSpy,
       },
-      setWorkout: vi.fn(),
+      setWorkout: setWorkoutLogDetailSpy,
     });
 
     vi.mocked(useAuthStore).mockImplementation((selector: unknown) => {
@@ -194,16 +196,6 @@ describe('UpdateLogConfirmationOverlay', async () => {
     expect(message).toBeInTheDocument();
   });
 
-  it('resets workout draft state after successfully updating workout', async () => {
-    render(<UpdateLogConfirmationOverlay />);
-
-    fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
-
-    await waitFor(() => {
-      expect(resetWorkoutSpy).toHaveBeenCalled();
-    });
-  });
-
   it('updates workout, redirects user to history route, and opens workout log detail on successful update', async () => {
     const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'updateWorkoutLog');
 
@@ -226,12 +218,13 @@ describe('UpdateLogConfirmationOverlay', async () => {
     });
   });
 
-  it('opens workout log detail in read mode after a successful update', async () => {
+  it('sets workout log detail and opens it in read mode after a successful update', async () => {
     render(<UpdateLogConfirmationOverlay />);
 
     fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
 
     await waitFor(() => {
+      expect(setWorkoutLogDetailSpy).toHaveBeenCalledWith(workoutToSave);
       expect(workoutLogDetailsOverlayHandlerSpy.open).toHaveBeenCalled();
       expect(setModeSpy).toHaveBeenCalledWith('read');
     });
@@ -259,6 +252,8 @@ describe('UpdateLogConfirmationOverlay', async () => {
     expect(updateWorkoutSpy).not.toHaveBeenCalled();
     expect(navigateSpy).not.toHaveBeenCalled();
     expect(workoutLogDetailsOverlayHandlerSpy.open).not.toHaveBeenCalled();
+    expect(setWorkoutLogDetailSpy).not.toHaveBeenCalled();
+    expect(setModeSpy).not.toHaveBeenCalled();
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       'Error updating log:',
       expect.any(Error),
