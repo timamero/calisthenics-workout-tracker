@@ -18,8 +18,6 @@ export default function DurationInput({
   label,
   fieldName,
 }: DurationInputProps) {
-  console.log('DEBUG: label', label);
-  console.log('DEBUG: fieldName', fieldName);
   const set = useContext(SetContext)!.set;
 
   const handleChange = useFieldInputChange(fieldName, 'duration');
@@ -27,15 +25,15 @@ export default function DurationInput({
   if (mode === 'read') {
     const value = set.fields[fieldName]
       ? getSecondsInDuration(set.fields[fieldName])
-      : '0s';
+      : '0';
     return <TextInputReading label={label} value={value} />;
   }
 
-  console.log('DEBUG: set.fields[fieldName]', set.fields[fieldName]);
-
   const value = set.fields[fieldName]
     ? getSecondsInDuration(set.fields[fieldName].toString())
-    : '0';
+    : set.fields[fieldName] === null
+      ? '0'
+      : getSecondsInDuration(set.fields[fieldName].toString());
   return (
     <TextInput
       mod={{ isloginput: true }}
