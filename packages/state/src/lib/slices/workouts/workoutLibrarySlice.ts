@@ -94,23 +94,18 @@ export const createWorkoutLibrarySlice: StateCreator<
     }),
   updateWorkout: (updatedLog) =>
     set((state) => {
-      let logIndex = state.masterWorkoutLogs.findIndex(
-        (x) => x.id == updatedLog.id,
-      );
-      state.masterWorkoutLogs = state.masterWorkoutLogs.map((log, ind) => {
-        if (ind === logIndex) {
+      state.masterWorkoutLogs = state.masterWorkoutLogs.map((log) => {
+        if (updatedLog.id === log.id) {
           return updatedLog;
         }
         return log;
       });
-      state.displayedWorkoutLogs = state.displayedWorkoutLogs.map(
-        (log, ind) => {
-          if (ind === logIndex) {
-            return updatedLog;
-          }
-          return log;
-        },
-      );
+      state.displayedWorkoutLogs = state.displayedWorkoutLogs.map((log) => {
+        if (updatedLog.id === log.id) {
+          return updatedLog;
+        }
+        return log;
+      });
     }),
   completeWorkout: (workout, mode) => {
     get().addWorkout(workout, mode);
