@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '../../../utils/testUtils';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import {
   createMemoryHistory,
   createRootRoute,
@@ -8,14 +8,8 @@ import {
   RouterProvider,
 } from '@tanstack/react-router';
 
-// import { sampleWorkoutLogs } from '@cwt/mocks';
-// import type { WorkoutDraftSlice } from '@cwt/state/stores';
-// import type {
-//   Exercise,
-//   Section,
-//   Superset,
-//   // WorkoutLogResponse,
-// } from '@cwt/schema/workouts';
+import { sampleWorkoutLogs } from '@cwt/mocks';
+import type { WorkoutDraftSlice } from '@cwt/state/stores';
 
 import WorkoutUpdateLayout from '../WorkoutUpdateLayout';
 import type { WorkoutContextType } from '@cwt/context';
@@ -53,10 +47,6 @@ const makeWebHandlers = (
   ...overrides,
 });
 
-// vi.mock('@cwt/hooks', () => ({
-//   useWorkoutContextWeb: vi.fn(),
-//   useWorkoutLogDetailContextWeb: vi.fn(),
-// }));
 vi.mock('@cwt/hooks', async (importOriginal) => {
   const actual = await importOriginal<typeof import('@cwt/hooks')>();
 
@@ -64,7 +54,6 @@ vi.mock('@cwt/hooks', async (importOriginal) => {
     ...actual,
     useWorkoutContextWeb: vi.fn(),
     useWorkoutLogDetailContextWeb: vi.fn(),
-    // useAddSuperset: vi.fn(),
   };
 });
 
@@ -74,13 +63,11 @@ vi.mock('@cwt/state/stores', () => ({
   useWorkoutDraftStore: vi.fn(),
 }));
 
-// let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
-// let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
-// let workoutData: Array<Exercise | Section | Superset>;
-// let workoutToSave: WorkoutLogResponse;
+let initializeUpdatedWorkoutToSaveSpy: Mock<
+  WorkoutDraftSlice['initializeUpdatedWorkoutToSave']
+>;
 let isUpdateOverlayOpened: boolean = false;
 let isCancelUpdateOverlayOpened: boolean = false;
-// let mockSession: { access_token: string } | null;
 let updateLogOverlayHandlerSpy: {
   open: () => void;
   close: () => void;
@@ -91,8 +78,6 @@ let cancelUpdateLogOverlayHandlerSpy: {
   close: () => void;
   toggle: () => void;
 };
-
-// let title: string = sampleWorkoutLogs[0].title;
 
 async function renderWorkoutUpdateLayout() {
   const rootRoute = createRootRoute({
@@ -123,12 +108,8 @@ describe('WorkoutUpdateLayout', async () => {
   beforeEach(async () => {
     import.meta.env.VITE_ENVIRONMENT = 'local-isolated';
 
-    // updateWorkoutSpy = vi.fn();
-    // setModeSpy = vi.fn();
-    // workoutData = sampleWorkoutLogs[0].workout_data.data;
-    // workoutToSave = sampleWorkoutLogs[0];
+    initializeUpdatedWorkoutToSaveSpy = vi.fn();
     isUpdateOverlayOpened = false;
-    // mockSession = { access_token: 'test-token' };
     updateLogOverlayHandlerSpy = {
       open: vi.fn(() => {
         isUpdateOverlayOpened = true;
@@ -153,8 +134,9 @@ describe('WorkoutUpdateLayout', async () => {
     };
 
     // Setup default mock return values
-    const { useWorkoutContextWeb } = await import('@cwt/hooks');
-    // const { useWorkoutDraftStore } = await import('@cwt/state/stores');
+    const { useWorkoutContextWeb, useWorkoutLogDetailContextWeb } =
+      await import('@cwt/hooks');
+    const { useWorkoutDraftStore } = await import('@cwt/state/stores');
 
     vi.mocked(useWorkoutContextWeb).mockImplementation(() => ({
       webOverlayHandlers: makeWebHandlers({
@@ -169,50 +151,35 @@ describe('WorkoutUpdateLayout', async () => {
       }),
     }));
 
-    // vi.mocked(useWorkoutDraftStore).mockImplementation((selector: unknown) => {
-    //   const mockState = {
-    //     workoutData: workoutData,
-    //     setMode: setModeSpy,
-    //     setExerciseIDToMod: vi.fn(),
-    //     setSupersetIDToMod: vi.fn(),
-    //     setSectionIDToMod: vi.fn(),
-    //   };
-    //   if (typeof selector === 'function') {
-    //     return selector(mockState);
-    //   }
-    // });
+    vi.mocked(useWorkoutDraftStore).mockImplementation((selector: unknown) => {
+      const mockState = {
+        initializeUpdatedWorkoutToSave: initializeUpdatedWorkoutToSaveSpy,
+      };
+      if (typeof selector === 'function') {
+        return selector(mockState);
+      }
+    });
 
-    // vi.mocked(useWorkoutLogDetailContextWeb).mockReturnValue({
-    //   workout: sampleWorkoutLogs[0],
-    //   webOverlayHandlers: {
-    //     get opened() {
-    //       return isLogDetailOverlayOpened;
-    //     },
-    //     handlers: workoutLogDetailsOverlayHandlerSpy,
-    //   },
-    //   setWorkout: vi.fn(),
-    // });
-
-    // vi.mocked(useAuthStore).mockImplementation((selector: unknown) => {
-    //   const mockState = {
-    //     session: mockSession,
-    //   };
-    //   if (typeof selector == 'function') {
-    //     return selector(mockState);
-    //   }
-    //   return mockState;
-    // });
-
-    // vi.mocked(useWorkoutLibraryStore).mockImplementation(
-    //   (selector: unknown) => {
-    //     const mockState = {
-    //       updateWorkout: updateWorkoutSpy,
-    //     };
-    //     if (typeof selector === 'function') {
-    //       return selector(mockState);
-    //     }
-    //   },
-    // );
+    vi.mocked(useWorkoutLogDetailContextWeb).mockReturnValue({
+      workout: sampleWorkoutLogs[0],
+      webOverlayHandlers: {
+        get opened() {
+          return false;
+        },
+        handlers: {
+          open: vi.fn(() => {
+            isUpdateOverlayOpened = true;
+          }),
+          close: vi.fn(() => {
+            isUpdateOverlayOpened = false;
+          }),
+          toggle: vi.fn(() => {
+            isUpdateOverlayOpened = !isUpdateOverlayOpened;
+          }),
+        },
+      },
+      setWorkout: vi.fn(),
+    });
   });
 
   afterEach(() => {
@@ -242,6 +209,18 @@ describe('WorkoutUpdateLayout', async () => {
     await waitFor(() => {
       expect(updateLogOverlayHandlerSpy.open).toHaveBeenCalled();
       expect(isUpdateOverlayOpened).toBe(true);
+    });
+  });
+
+  it('sets initializeUpdatedWorkoutToSave on Save button click', async () => {
+    await renderWorkoutUpdateLayout();
+
+    fireEvent.click(screen.getByRole('button', { name: /Save/i }));
+
+    await waitFor(() => {
+      expect(initializeUpdatedWorkoutToSaveSpy).toHaveBeenCalledWith(
+        sampleWorkoutLogs[0],
+      );
     });
   });
 
