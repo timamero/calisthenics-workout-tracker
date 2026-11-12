@@ -1,3 +1,4 @@
+import { useNavigate, linkOptions } from '@tanstack/react-router';
 import { Modal, Stack, Group, Button, Title } from '@mantine/core';
 
 import { formatDuration } from '@cwt/utils';
@@ -35,8 +36,23 @@ export default function WorkoutLogDetailOverlay() {
   // --- State Management ---
   const setDetailWorkout = useWorkoutLogDetailContextWeb().setWorkout;
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+  const setInitialWorkoutUpdateData = useWorkoutDraftStore(
+    (state) => state.setInitialWorkoutUpdateData,
+  );
+  const setMode = useWorkoutDraftStore((state) => state.setMode);
+  const setWorkoutTitle = useWorkoutDraftStore(
+    (state) => state.setWorkoutTitle,
+  );
   const workoutLogDetail = useWorkoutLogDetailContextWeb()
     .workout as WorkoutLogResponse;
+
+  // --- Navigation Options ---
+  const updateLinkOptions = linkOptions({
+    to: '/update',
+  });
+
+  // --- Hooks ---
+  const navigate = useNavigate();
 
   // --- Context ---
   const workoutOverlayHandlers = useWorkoutContextWeb().webOverlayHandlers;
@@ -81,6 +97,13 @@ export default function WorkoutLogDetailOverlay() {
     }
   };
 
+  const handleUpdateClick = () => {
+    setInitialWorkoutUpdateData(workoutLogDetail.workout_data.data);
+    setWorkoutTitle(workoutLogDetail.title || '');
+    setMode('edit');
+    navigate(updateLinkOptions);
+  };
+
   return (
     <Modal
       opened={detailOpened || false}
@@ -95,7 +118,7 @@ export default function WorkoutLogDetailOverlay() {
               Back to Workouts
             </Button>
             <WorkoutLogDetailMenu
-              handleUpdateClick={() => console.log('clicked update')}
+              handleUpdateClick={handleUpdateClick}
               handleDeleteClick={() => deleteLogOverlayHandler.open()}
             />
           </Group>
