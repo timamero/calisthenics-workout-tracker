@@ -4,23 +4,12 @@ import {
   useWorkoutLogDetailContextWeb,
   useWorkoutContextWeb,
 } from '@cwt/hooks';
-import {
-  // useAuthStore,
-  // useWorkoutLibraryStore,
-  useWorkoutDraftStore,
-} from '@cwt/state/stores';
-// import type { WorkoutLogResponse } from '@cwt/schema/workouts';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
-// import { updateWorkoutLog } from '../../services/workoutsService';
 
 export default function CancelUpdateLogConfirmationOverlay() {
   // --- State Management ---
-  // const supabaseSession = useAuthStore((state) => state.session);
-  // const updateWorkout = useWorkoutLibraryStore((state) => state.updateWorkout);
-  // const workoutToSave = useWorkoutDraftStore(
-  //   (state) => state.workoutToSave,
-  // ) as WorkoutLogResponse;
   const setMode = useWorkoutDraftStore((state) => state.setMode);
   const resetWorkoutUpdate = useWorkoutDraftStore(
     (state) => state.resetWorkoutUpdate,
@@ -38,10 +27,6 @@ export default function CancelUpdateLogConfirmationOverlay() {
     useWorkoutLogDetailContextWeb().webOverlayHandlers;
 
   // --- Error Handling ---
-  // if (!workoutToSave) {
-  //   console.error('Error: Workout log not found.');
-  //   return null;
-  // }
   if (!workoutOverlayHandlers) {
     console.error('Error: useWorkoutContextWeb().webOverlayHandlers is null.');
     return null;
