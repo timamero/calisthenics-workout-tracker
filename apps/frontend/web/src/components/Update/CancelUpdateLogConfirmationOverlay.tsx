@@ -9,7 +9,7 @@ import {
   // useWorkoutLibraryStore,
   useWorkoutDraftStore,
 } from '@cwt/state/stores';
-import type { WorkoutLogResponse } from '@cwt/schema/workouts';
+// import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import ConfirmationOverlay from '../common/ConfirmationOverlay';
 // import { updateWorkoutLog } from '../../services/workoutsService';
@@ -18,11 +18,13 @@ export default function CancelUpdateLogConfirmationOverlay() {
   // --- State Management ---
   // const supabaseSession = useAuthStore((state) => state.session);
   // const updateWorkout = useWorkoutLibraryStore((state) => state.updateWorkout);
-  const workoutToSave = useWorkoutDraftStore(
-    (state) => state.workoutToSave,
-  ) as WorkoutLogResponse;
+  // const workoutToSave = useWorkoutDraftStore(
+  //   (state) => state.workoutToSave,
+  // ) as WorkoutLogResponse;
   const setMode = useWorkoutDraftStore((state) => state.setMode);
-  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+  const resetWorkoutUpdate = useWorkoutDraftStore(
+    (state) => state.resetWorkoutUpdate,
+  );
 
   const historyLinkOptions = linkOptions({
     to: '/dashboard/history',
@@ -36,10 +38,10 @@ export default function CancelUpdateLogConfirmationOverlay() {
     useWorkoutLogDetailContextWeb().webOverlayHandlers;
 
   // --- Error Handling ---
-  if (!workoutToSave) {
-    console.error('Error: Workout log not found.');
-    return null;
-  }
+  // if (!workoutToSave) {
+  //   console.error('Error: Workout log not found.');
+  //   return null;
+  // }
   if (!workoutOverlayHandlers) {
     console.error('Error: useWorkoutContextWeb().webOverlayHandlers is null.');
     return null;
@@ -63,7 +65,7 @@ export default function CancelUpdateLogConfirmationOverlay() {
     detailHandlers.open();
     setMode('read');
     navigate(historyLinkOptions);
-    resetWorkout();
+    resetWorkoutUpdate();
   };
 
   return (

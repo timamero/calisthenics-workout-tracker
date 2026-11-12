@@ -67,7 +67,7 @@ vi.mock('@tanstack/react-router', async () => {
 let navigateSpy: NavigateFn;
 let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
 let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
-let resetWorkoutSpy: Mock<WorkoutDraftSlice['resetWorkout']>;
+let resetWorkoutUpdateSpy: Mock<WorkoutDraftSlice['resetWorkoutUpdate']>;
 let workoutToSave: WorkoutLogResponse;
 let isCancelUpdateOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = false;
@@ -90,7 +90,7 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
     navigateSpy = vi.fn();
     updateWorkoutSpy = vi.fn();
     setModeSpy = vi.fn();
-    resetWorkoutSpy = vi.fn();
+    resetWorkoutUpdateSpy = vi.fn();
     workoutToSave = sampleWorkoutLogs[0];
     isCancelUpdateOverlayOpened = true;
     mockSession = { access_token: 'test-token' };
@@ -139,7 +139,7 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
         setExerciseIDToMod: vi.fn(),
         setSupersetIDToMod: vi.fn(),
         setSectionIDToMod: vi.fn(),
-        resetWorkout: resetWorkoutSpy,
+        resetWorkoutUpdate: resetWorkoutUpdateSpy,
       };
       if (typeof selector === 'function') {
         return selector(mockState);
@@ -194,13 +194,13 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
     expect(message).toBeInTheDocument();
   });
 
-  it('resets workout draft state after successfully updating workout', async () => {
+  it('resets workout draft to inital state before redirect to update route', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
     fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
 
     await waitFor(() => {
-      expect(resetWorkoutSpy).toHaveBeenCalled();
+      expect(resetWorkoutUpdateSpy).toHaveBeenCalled();
     });
   });
 
