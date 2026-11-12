@@ -3,7 +3,6 @@ import { Stack, Container } from '@mantine/core';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import WorkoutData from '../Workout/WorkoutData';
-// import WorkoutOverlays from './WorkoutOverlays';
 import { TextInputWithEdit } from '../common/TextInputWithEdit';
 import UpdateLogConfirmationOverlay from './UpdateLogConfirmationOverlay';
 import CancelUpdateLogConfirmationOverlay from './CancelUpdateLogConfirmationOverlay';
@@ -14,8 +13,6 @@ export default function WorkoutUpdate() {
   const setWorkoutTitle = useWorkoutDraftStore(
     (state) => state.setWorkoutTitle,
   );
-  // console.log('DEBUG: mode:', mode);
-  // console.log('DEBUG: workoutTitle:', workoutTitle);
   return (
     <Container
       flex="1"
@@ -33,7 +30,6 @@ export default function WorkoutUpdate() {
           titleOrder={1}
           titleSize="h1"
         />
-        {/* display workout metadata */}
         <Stack pos="relative" h="100%" w="100%">
           <Stack
             pos="fixed"
@@ -87,7 +83,6 @@ export default function WorkoutUpdate() {
           <WorkoutData />
         </Stack>
       </Stack>
-      {/* <WorkoutOverlays /> */}
       <UpdateLogConfirmationOverlay />
       <CancelUpdateLogConfirmationOverlay />
     </Container>
