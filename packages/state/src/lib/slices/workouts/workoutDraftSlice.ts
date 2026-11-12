@@ -10,6 +10,7 @@ import type {
   Section,
   Superset,
   SetProgression,
+  WorkoutLogResponse,
 } from '@cwt/schema/workouts';
 import type { Tracking } from '@cwt/schema/exercises';
 
@@ -30,6 +31,7 @@ import { useSetProgressionsStore } from '../../stores/setProgressionsStore';
 interface WorkoutDraftState {
   mode: Mode | null;
   workoutData: Array<Exercise | Section | Superset>;
+  initialWorkoutUpdateData: Array<Exercise | Section | Superset>;
   workoutTitle: string | null;
   selectedExerciseIDToAdd: number | null;
   selectedSetIndexToMod: number | null;
@@ -49,6 +51,9 @@ interface WorkoutDraftAction {
   setMode: (mode: Mode) => void;
   setWorkoutData: (
     workoutData: Array<Exercise | Section | Superset> | null,
+  ) => void;
+  setInitialWorkoutUpdateData: (
+    initialWorkoutUpdateData: Array<Exercise | Section | Superset> | null,
   ) => void;
   setWorkoutTitle: (title: string) => void;
   setSectionTitle: (title: string) => void;
@@ -82,9 +87,11 @@ interface WorkoutDraftAction {
   // ) => Leverage | Assist;
   toggleCompleted: (value: boolean) => void;
   initializeWorkoutToSave: () => void;
+  initializeUpdatedWorkoutToSave: (workout: WorkoutLogResponse) => void;
   addUserIDToWorkoutToSave: (userID: string) => void;
   addDurationToWorkoutToSave: (duration: string) => void;
   resetWorkout: () => void;
+  resetWorkoutUpdate: () => void;
 }
 
 export type WorkoutDraftSlice = WorkoutDraftState & WorkoutDraftAction;
@@ -105,6 +112,7 @@ export const createWorkoutDraftSlice: StateCreator<
 > = (set, get) => ({
   mode: null,
   workoutData: [],
+  initialWorkoutUpdateData: [],
   workoutTitle: null,
   selectedExerciseIDToAdd: null,
   selectedSetIndexToMod: null,
@@ -134,6 +142,12 @@ export const createWorkoutDraftSlice: StateCreator<
     set((state) => {
       if (workoutData) {
         state.workoutData = workoutData;
+      }
+    }),
+  setInitialWorkoutUpdateData: (initialWorkoutUpdateData) =>
+    set((state) => {
+      if (initialWorkoutUpdateData) {
+        state.initialWorkoutUpdateData = initialWorkoutUpdateData;
       }
     }),
   setWorkoutTitle: (title) =>
@@ -1792,6 +1806,20 @@ export const createWorkoutDraftSlice: StateCreator<
 
       state.isWorkoutSavePending = true;
     }),
+  initializeUpdatedWorkoutToSave: (workout) =>
+    set((state) => {
+      console.log(
+        'DEBUG: initializeUpdateWorkoutToSave, title: ',
+        state.workoutTitle,
+      );
+      state.workoutToSave = {
+        ...workout,
+        workout_data: { data: state.workoutData },
+        title: state.workoutTitle || 'Untitled workout',
+      };
+
+      state.isWorkoutSavePending = true;
+    }),
   addUserIDToWorkoutToSave: (userID) =>
     set((state) => {
       if (state.workoutToSave) {
@@ -1817,6 +1845,12 @@ export const createWorkoutDraftSlice: StateCreator<
       workoutData: [],
       mode: null,
       workoutToSave: null,
+      isWorkoutSavePending: false,
+    })),
+  resetWorkoutUpdate: () =>
+    set((state) => ({
+      workoutData: state.initialWorkoutUpdateData,
+      mode: 'read',
       isWorkoutSavePending: false,
     })),
 });
