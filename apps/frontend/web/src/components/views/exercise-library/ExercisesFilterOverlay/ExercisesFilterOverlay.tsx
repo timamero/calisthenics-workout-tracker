@@ -8,7 +8,7 @@ import {
 } from '@cwt/state/stores';
 import { useFilterSelectors } from '@cwt/hooks';
 
-import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
+import WorkoutDraftContext from '../../../../contexts/WorkoutDraftContext';
 
 import FilterSelections from './FilterSelections';
 
