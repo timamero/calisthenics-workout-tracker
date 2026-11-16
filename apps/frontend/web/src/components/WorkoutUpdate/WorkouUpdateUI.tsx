@@ -2,7 +2,7 @@ import { Stack, Container } from '@mantine/core';
 
 import type { Mode } from '@cwt/schema/workouts';
 
-import { TextInputWithEdit } from '../common/TextInputWithEdit';
+import { TextInputWithEdit } from '../common/forms/TextInputWithEdit';
 
 interface WorkoutUpdateUIProps {
   mode: Mode;

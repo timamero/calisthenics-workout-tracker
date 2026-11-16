@@ -4,7 +4,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import WorkoutData from './WorkoutData';
 import WorkoutOverlays from './WorkoutOverlays';
-import { TextInputWithEdit } from '../common/TextInputWithEdit';
+import { TextInputWithEdit } from '../common/forms/TextInputWithEdit';
 
 export default function WorkoutDraft() {
   const mode = useWorkoutDraftStore((state) => state.mode);

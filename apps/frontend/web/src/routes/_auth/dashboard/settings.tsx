@@ -7,8 +7,8 @@ import { useUser } from '@cwt/hooks';
 
 import { supabase } from '../../../services/supabaseClient';
 
-import { TextInputWithEdit } from '../../../components/common/TextInputWithEdit';
-import DefaultLoader from '../../../components/common/DefaultLoader';
+import { TextInputWithEdit } from '../../../components/common/forms/TextInputWithEdit';
+import DefaultLoader from '../../../components/common/feedback/DefaultLoader';
 
 export const Route = createFileRoute('/_auth/dashboard/settings')({
   component: SettingsView,

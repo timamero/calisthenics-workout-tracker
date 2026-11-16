@@ -15,7 +15,7 @@ import { useConfirmUser, useResendConfirmation } from '@cwt/hooks';
 import { supabase } from '../../../services/supabaseClient';
 import { useDefaultSize } from '../../../hooks';
 
-import DefaultLoader from '../../../components/common/DefaultLoader';
+import DefaultLoader from '../../../components/common/feedback/DefaultLoader';
 
 export const Route = createFileRoute('/_site/auth/confirm-link')({
   component: ConfirmationView,

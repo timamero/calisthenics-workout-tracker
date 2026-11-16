@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import AddExercise from '../../../components/Workout/AddExercise';
-import DefaultLoader from '../../../components/common/DefaultLoader';
+import DefaultLoader from '../../../components/common/feedback/DefaultLoader';
 import { Stack } from '@mantine/core';
 
 export const Route = createFileRoute('/_auth/update/add-exercise')({

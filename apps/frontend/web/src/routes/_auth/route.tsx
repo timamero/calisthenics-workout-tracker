@@ -23,7 +23,7 @@ import {
   getWorkoutBuilds,
 } from '../../services/workoutsService';
 
-import DefaultLoader from '../../components/common/DefaultLoader';
+import DefaultLoader from '../../components/common/feedback/DefaultLoader';
 
 export const Route = createFileRoute('/_auth')({
   beforeLoad: () => {

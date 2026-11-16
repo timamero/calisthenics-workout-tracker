@@ -20,7 +20,7 @@ import {
   postWorkoutBuild,
   postWorkoutLog,
 } from '../../../services/workoutsService';
-import ConfirmationOverlay from '../../common/ConfirmationOverlay';
+import ConfirmationOverlay from '../../common/feedback/ConfirmationOverlay';
 
 export default function ConfirmationOverlays() {
   // --- States
