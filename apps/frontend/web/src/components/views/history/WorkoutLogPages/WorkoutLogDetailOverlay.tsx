@@ -9,7 +9,7 @@ import {
   useWorkoutContextWeb,
 } from '@cwt/hooks';
 
-import WorkoutData from '../Workout/WorkoutData';
+import WorkoutData from '../../../Workout/WorkoutData';
 import WorkoutMetadataItem from './WorkoutMetadataItem';
 import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
 import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
@@ -23,14 +23,6 @@ import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
  * The component uses various hooks to access the workout log context,
  * authentication state, and navigation. It also includes error handling to
  * ensure that all necessary data is available before rendering the overlay.
- *
- * @component
- * @example
- * return (
- *   <WorkoutLogDetailOverlay />
- * )
- * @returns {JSX.Element | null} The WorkoutLogDetailOverlay component
- * or null if required data is missing.
  */
 export default function WorkoutLogDetailOverlay() {
   // --- State Management ---

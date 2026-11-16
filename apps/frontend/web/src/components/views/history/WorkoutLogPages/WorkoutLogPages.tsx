@@ -7,7 +7,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
-import CardButton from '../common/buttons/CardButton';
+import CardButton from '../../../common/buttons/CardButton';
 import WorkoutMetadataItem from './WorkoutMetadataItem';
 import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
 import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';

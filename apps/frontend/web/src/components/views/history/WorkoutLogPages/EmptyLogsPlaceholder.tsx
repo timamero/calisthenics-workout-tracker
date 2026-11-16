@@ -2,7 +2,7 @@ import { Text, Stack } from '@mantine/core';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import LargeButton from '../common/buttons/LargeButton';
+import LargeButton from '../../../common/buttons/LargeButton';
 
 export default function EmptyLogsPlaceholder() {
   const initializeWorkout = useWorkoutDraftStore(

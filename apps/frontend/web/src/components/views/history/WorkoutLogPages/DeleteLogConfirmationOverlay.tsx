@@ -4,8 +4,8 @@ import {
 } from '@cwt/hooks';
 import { useAuthStore, useWorkoutLibraryStore } from '@cwt/state/stores';
 
-import ConfirmationOverlay from '../common/feedback/ConfirmationOverlay';
-import { deleteWorkoutLog } from '../../services/workoutsService';
+import ConfirmationOverlay from '../../../common/feedback/ConfirmationOverlay';
+import { deleteWorkoutLog } from '../../../../services/workoutsService';
 
 /**
  * DeleteLogConfirmationOverlay component is a confirmation dialog that appears
