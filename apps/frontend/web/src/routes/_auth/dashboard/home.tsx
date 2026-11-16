@@ -4,7 +4,7 @@ import { Title, Stack, Group, Text, Container } from '@mantine/core';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { startWorkoutContent } from '@cwt/content';
 
-import LargeButton from '../../../components/common/LargeButton';
+import LargeButton from '../../../components/common/buttons/LargeButton';
 
 export const Route = createFileRoute('/_auth/dashboard/home')({
   component: AppView,
