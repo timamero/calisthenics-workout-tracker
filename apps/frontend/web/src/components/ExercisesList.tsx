@@ -2,7 +2,7 @@ import { SimpleGrid } from '@mantine/core';
 
 import { useExerciseLibraryStore } from '@cwt/state/stores';
 
-import ExerciseCard from './ExerciseCard';
+import ExerciseCard from './views/exercise-library/ExerciseCard';
 
 export default function ExercisesList() {
   const exercises = useExerciseLibraryStore(

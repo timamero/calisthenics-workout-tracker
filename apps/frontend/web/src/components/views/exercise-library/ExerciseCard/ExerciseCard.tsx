@@ -13,7 +13,7 @@ import { type ExerciseResponse } from '@cwt/schema/exercises';
 
 import { ExerciseDetailContext } from '@cwt/context';
 
-import { getDifficultyVariant } from '../../utils';
+import { getDifficultyVariant } from '../../../../utils';
 import classes from './ExerciseCard.module.css';
 
 interface ExerciseCardProps {

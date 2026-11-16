@@ -16,8 +16,8 @@ import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 
 import ExercisesList from '../../../components/ExercisesList';
 import ExercisesFilterOverlay from '../../../components/ExercisesFilterOverlay';
-import ExerciseDetailOverlay from '../../../components/ExerciseDetailOverlay';
-import ExerciseSearchBar from '../../../components/ExerciseSearchBar';
+import ExerciseDetailOverlay from '../../../components/views/exercise-library/ExerciseDetailOverlay';
+import ExerciseSearchBar from '../../../components/views/exercise-library/ExerciseSearchBar';
 
 export const Route = createFileRoute('/_auth/dashboard/library')({
   component: LibraryView,

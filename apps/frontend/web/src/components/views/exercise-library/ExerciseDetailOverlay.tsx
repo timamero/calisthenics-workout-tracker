@@ -14,7 +14,7 @@ import {
 import { ExerciseDetailContext } from '@cwt/context';
 import type { Equipment, Muscle } from '@cwt/schema/exercises';
 
-import { getDifficultyVariant } from '../utils';
+import { getDifficultyVariant } from '../../../utils';
 
 interface ExerciseMetadataProps {
   title: string;
