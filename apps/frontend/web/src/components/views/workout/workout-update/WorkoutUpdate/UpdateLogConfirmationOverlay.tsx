@@ -11,8 +11,8 @@ import {
 } from '@cwt/state/stores';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
-import ConfirmationOverlay from '../common/feedback/ConfirmationOverlay';
-import { updateWorkoutLog } from '../../services/workoutsService';
+import ConfirmationOverlay from '../../../../common/feedback/ConfirmationOverlay';
+import { updateWorkoutLog } from '../../../../../services/workoutsService';
 
 export default function UpdateLogConfirmationOverlay() {
   // --- State Management ---

@@ -8,7 +8,7 @@ import {
   useWorkoutLogDetailContextWeb,
 } from '@cwt/hooks';
 
-import AddWorkoutItemMenu from '../Workout/AddWorkoutItemMenu';
+import AddWorkoutItemMenu from '../views/workout/workout-log/WorkoutLog/AddWorkoutItemMenu';
 
 export default function WorkoutUpdateLayout() {
   // --- State Management ---

@@ -1,4 +1,9 @@
-import { render, screen, fireEvent, waitFor } from '../../../utils/testUtils';
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+} from '../../../../../../utils/testUtils';
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import { linkOptions, type NavigateFn } from '@tanstack/react-router';
 
@@ -6,9 +11,12 @@ import { sampleWorkoutLogs } from '@cwt/mocks';
 import type { WorkoutLibrarySlice, WorkoutDraftSlice } from '@cwt/state/stores';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
-import CancelUpdateLogConfirmationOverlay from '../CancelUpdateLogConfirmationOverlay';
-import * as workoutsService from '../../../services/workoutsService';
-import type { WorkoutContextType } from '@cwt/context';
+import UpdateLogConfirmationOverlay from '../UpdateLogConfirmationOverlay';
+import * as workoutsService from '../../../../../../services/workoutsService';
+import type {
+  WorkoutContextType,
+  WorkoutLogDetailContextType,
+} from '@cwt/context';
 import type { UseDisclosureHandlers } from '@mantine/hooks';
 
 // Typed factory to satisfy full webOverlayHandlers shape while tests override only needed fields.
@@ -67,9 +75,9 @@ vi.mock('@tanstack/react-router', async () => {
 let navigateSpy: NavigateFn;
 let updateWorkoutSpy: Mock<WorkoutLibrarySlice['updateWorkout']>;
 let setModeSpy: Mock<WorkoutDraftSlice['setMode']>;
-let resetWorkoutUpdateSpy: Mock<WorkoutDraftSlice['resetWorkoutUpdate']>;
+let setWorkoutLogDetailSpy: Mock<WorkoutLogDetailContextType['setWorkout']>;
 let workoutToSave: WorkoutLogResponse;
-let isCancelUpdateOverlayOpened: boolean = true;
+let isUpdateOverlayOpened: boolean = true;
 let isLogDetailOverlayOpened: boolean = false;
 let mockSession: { access_token: string } | null;
 let workoutLogDetailsOverlayHandlerSpy: {
@@ -77,22 +85,22 @@ let workoutLogDetailsOverlayHandlerSpy: {
   close: () => void;
   toggle: () => void;
 };
-let cancelUpdateLogOverlayHandlerSpy: {
+let updateLogOverlayHandlerSpy: {
   open: () => void;
   close: () => void;
   toggle: () => void;
 };
 
-describe('CancelUpdateLogConfirmationOverlay', async () => {
+describe('UpdateLogConfirmationOverlay', async () => {
   beforeEach(async () => {
     import.meta.env.VITE_ENVIRONMENT = 'local-isolated';
 
     navigateSpy = vi.fn();
     updateWorkoutSpy = vi.fn();
     setModeSpy = vi.fn();
-    resetWorkoutUpdateSpy = vi.fn();
+    setWorkoutLogDetailSpy = vi.fn();
     workoutToSave = sampleWorkoutLogs[0];
-    isCancelUpdateOverlayOpened = true;
+    isUpdateOverlayOpened = true;
     mockSession = { access_token: 'test-token' };
     workoutLogDetailsOverlayHandlerSpy = {
       open: vi.fn(() => {
@@ -105,15 +113,15 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
         isLogDetailOverlayOpened = !isLogDetailOverlayOpened;
       }),
     };
-    cancelUpdateLogOverlayHandlerSpy = {
+    updateLogOverlayHandlerSpy = {
       open: vi.fn(() => {
-        isCancelUpdateOverlayOpened = true;
+        isUpdateOverlayOpened = true;
       }),
       close: vi.fn(() => {
-        isCancelUpdateOverlayOpened = false;
+        isUpdateOverlayOpened = false;
       }),
       toggle: vi.fn(() => {
-        isCancelUpdateOverlayOpened = !isCancelUpdateOverlayOpened;
+        isUpdateOverlayOpened = !isUpdateOverlayOpened;
       }),
     };
 
@@ -125,10 +133,10 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
 
     vi.mocked(useWorkoutContextWeb).mockImplementation(() => ({
       webOverlayHandlers: makeWebHandlers({
-        get cancelUpdateLogOverlayOpened() {
-          return isCancelUpdateOverlayOpened;
+        get updateLogOverlayOpened() {
+          return isUpdateOverlayOpened;
         },
-        cancelUpdateLogOverlayHandler: cancelUpdateLogOverlayHandlerSpy,
+        updateLogOverlayHandler: updateLogOverlayHandlerSpy,
       }),
     }));
 
@@ -139,7 +147,6 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
         setExerciseIDToMod: vi.fn(),
         setSupersetIDToMod: vi.fn(),
         setSectionIDToMod: vi.fn(),
-        resetWorkoutUpdate: resetWorkoutUpdateSpy,
       };
       if (typeof selector === 'function') {
         return selector(mockState);
@@ -154,7 +161,7 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
         },
         handlers: workoutLogDetailsOverlayHandlerSpy,
       },
-      setWorkout: vi.fn(),
+      setWorkout: setWorkoutLogDetailSpy,
     });
 
     vi.mocked(useAuthStore).mockImplementation((selector: unknown) => {
@@ -182,35 +189,29 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
-  it('renders when cancelUpdateLogOverlayOpened is true', () => {
-    render(<CancelUpdateLogConfirmationOverlay />);
+  it('renders when updateLogOverlayOpened is true', () => {
+    render(<UpdateLogConfirmationOverlay />);
 
-    const title = screen.getByRole('heading', { name: /Discard changes?/i });
+    const title = screen.getByRole('heading', { name: /Save Changes?/i });
     const message = screen.getByText(
-      /You have unsaved changes. If you go back now, your edits will be lost./i,
+      /Do you want to save the updates to this workout log?/i,
     );
 
     expect(title).toBeInTheDocument();
     expect(message).toBeInTheDocument();
   });
 
-  it('resets workout draft to inital state before redirect to update route', async () => {
-    render(<CancelUpdateLogConfirmationOverlay />);
+  it('updates workout, redirects user to history route, and opens workout log detail on successful update', async () => {
+    const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'updateWorkoutLog');
 
-    fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
+    render(<UpdateLogConfirmationOverlay />);
 
-    await waitFor(() => {
-      expect(resetWorkoutUpdateSpy).toHaveBeenCalled();
-    });
-  });
-
-  it('on Discard changes click, redirects user to history route', async () => {
-    render(<CancelUpdateLogConfirmationOverlay />);
-
-    fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
+    fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
 
     await waitFor(() => {
-      expect(cancelUpdateLogOverlayHandlerSpy.close).toHaveBeenCalled();
+      expect(updateLogOverlayHandlerSpy.close).toHaveBeenCalled();
+      expect(updateWorkoutLogSpy).toHaveBeenCalled();
+      expect(updateWorkoutSpy).toHaveBeenCalled();
       expect(navigateSpy).toHaveBeenCalled();
       expect(navigateSpy).toHaveBeenCalledWith(
         expect.objectContaining(
@@ -221,38 +222,84 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
       );
     });
   });
-  it('on Keep editing click, cancelLogUpdateOverlay is not rendered', async () => {
-    render(<CancelUpdateLogConfirmationOverlay />);
 
-    fireEvent.click(screen.getByRole('button', { name: /^Keep editing$/i }));
+  it('sets workout log detail and opens it in read mode after a successful update', async () => {
+    render(<UpdateLogConfirmationOverlay />);
 
-    await waitFor(() => {
-      expect(cancelUpdateLogOverlayHandlerSpy.close).toHaveBeenCalled();
-      expect(navigateSpy).not.toHaveBeenCalled();
-      expect(navigateSpy).not.toHaveBeenCalled();
-    });
-  });
-  it('on Discard changes click, workout is not updated', async () => {
-    const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'updateWorkoutLog');
-
-    render(<CancelUpdateLogConfirmationOverlay />);
-
-    fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
+    fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
 
     await waitFor(() => {
-      expect(updateWorkoutLogSpy).not.toHaveBeenCalled();
-      expect(updateWorkoutSpy).not.toHaveBeenCalled();
-    });
-  });
-
-  it('on Discard changes click, opens workout log detail in read mode', async () => {
-    render(<CancelUpdateLogConfirmationOverlay />);
-
-    fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
-
-    await waitFor(() => {
+      expect(setWorkoutLogDetailSpy).toHaveBeenCalledWith(workoutToSave);
       expect(workoutLogDetailsOverlayHandlerSpy.open).toHaveBeenCalled();
       expect(setModeSpy).toHaveBeenCalledWith('read');
+    });
+  });
+
+  it('logs error and does not update store if API call fails', async () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const updateWorkoutLogSpy = vi
+      .spyOn(workoutsService, 'updateWorkoutLog')
+      .mockRejectedValueOnce(new Error('Update log failed'));
+
+    render(<UpdateLogConfirmationOverlay />);
+
+    fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
+
+    await waitFor(() => {
+      expect(updateWorkoutLogSpy).toHaveBeenCalledWith(
+        'test-token',
+        JSON.stringify(sampleWorkoutLogs[0]),
+      );
+    });
+
+    expect(updateWorkoutSpy).not.toHaveBeenCalled();
+    expect(navigateSpy).not.toHaveBeenCalled();
+    expect(workoutLogDetailsOverlayHandlerSpy.open).not.toHaveBeenCalled();
+    expect(setWorkoutLogDetailSpy).not.toHaveBeenCalled();
+    expect(setModeSpy).not.toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'Error updating log:',
+      expect.any(Error),
+    );
+  });
+
+  it('clicking Save without a session logs an error and does not call the API', async () => {
+    mockSession = null;
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const updateWorkoutLogSpy = vi.spyOn(workoutsService, 'updateWorkoutLog');
+
+    render(<UpdateLogConfirmationOverlay />);
+
+    fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
+
+    await waitFor(() => {
+      expect(consoleErrorSpy).toHaveBeenCalledWith('Session not found');
+    });
+
+    expect(updateWorkoutLogSpy).not.toHaveBeenCalled();
+    expect(updateWorkoutSpy).not.toHaveBeenCalled();
+    expect(navigateSpy).not.toHaveBeenCalled();
+    expect(workoutLogDetailsOverlayHandlerSpy.open).not.toHaveBeenCalled();
+  });
+
+  it('calls updateWorkoutLog with access token and workout log', async () => {
+    const updateWorkoutLogSpy = vi
+      .spyOn(workoutsService, 'updateWorkoutLog')
+      .mockResolvedValueOnce(sampleWorkoutLogs[0]);
+
+    render(<UpdateLogConfirmationOverlay />);
+
+    fireEvent.click(screen.getByRole('button', { name: /^Save$/i }));
+
+    await waitFor(() => {
+      expect(updateWorkoutLogSpy).toHaveBeenCalledWith(
+        'test-token',
+        JSON.stringify(sampleWorkoutLogs[0]),
+      );
     });
   });
 });

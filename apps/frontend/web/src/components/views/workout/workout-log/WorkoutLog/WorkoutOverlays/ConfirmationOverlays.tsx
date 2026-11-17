@@ -19,8 +19,8 @@ import type {
 import {
   postWorkoutBuild,
   postWorkoutLog,
-} from '../../../services/workoutsService';
-import ConfirmationOverlay from '../../common/feedback/ConfirmationOverlay';
+} from '../../../../../../services/workoutsService';
+import ConfirmationOverlay from '../../../../../common/feedback/ConfirmationOverlay';
 
 export default function ConfirmationOverlays() {
   // --- States

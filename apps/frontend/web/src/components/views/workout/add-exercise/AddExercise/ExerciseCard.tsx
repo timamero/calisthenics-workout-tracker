@@ -9,7 +9,7 @@ import {
 } from '@mantine/core';
 import { type ExerciseResponse } from '@cwt/schema/exercises';
 
-import { getDifficultyVariant } from '../../../utils';
+import { getDifficultyVariant } from '../../../../../utils';
 import classes from './ExerciseCard.module.css';
 
 interface ExerciseCardProps {

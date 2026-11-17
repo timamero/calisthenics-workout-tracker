@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import AddExercise from '../../../components/Workout/AddExercise';
+import AddExercise from '../../../components/views/workout/add-exercise/AddExercise';
 import DefaultLoader from '../../../components/common/feedback/DefaultLoader';
 import { Stack } from '@mantine/core';
 

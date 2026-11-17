@@ -6,7 +6,7 @@ import {
 } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import ConfirmationOverlay from '../common/feedback/ConfirmationOverlay';
+import ConfirmationOverlay from '../../../../common/feedback/ConfirmationOverlay';
 
 export default function CancelUpdateLogConfirmationOverlay() {
   // --- State Management ---

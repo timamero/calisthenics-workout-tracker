@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Title, Stack, Container } from '@mantine/core';
 
-import WorkoutLogPages from '../../../components/WorkoutLogPages';
+import WorkoutLogPages from '../../../components/views/history/WorkoutLogPages';
 
 export const Route = createFileRoute('/_auth/dashboard/history')({
   component: HistoryView,

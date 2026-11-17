@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Stack } from '@mantine/core';
 
-import WorkoutDraft from '../../../components/Workout';
+import WorkoutLog from '../../../components/views/workout/workout-log/WorkoutLog';
 import DefaultLoader from '../../../components/common/feedback/DefaultLoader';
 
 export const Route = createFileRoute('/_auth/workout/')({
-  component: WorkoutView,
+  component: WorkoutLogView,
   pendingComponent: Loader,
 });
 
@@ -17,6 +17,6 @@ function Loader() {
   );
 }
 
-function WorkoutView() {
-  return <WorkoutDraft />;
+function WorkoutLogView() {
+  return <WorkoutLog />;
 }

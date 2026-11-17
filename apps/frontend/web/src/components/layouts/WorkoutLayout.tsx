@@ -15,7 +15,7 @@ import {
 } from '@cwt/state/stores';
 import { useWorkoutContextWeb } from '@cwt/hooks';
 
-import AddWorkoutItemMenu from '../Workout/AddWorkoutItemMenu';
+import AddWorkoutItemMenu from '../views/workout/workout-log/WorkoutLog/AddWorkoutItemMenu';
 
 export default function WorkoutLayout() {
   const location = useLocation();

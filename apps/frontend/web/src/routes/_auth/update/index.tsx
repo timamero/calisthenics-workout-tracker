@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Stack } from '@mantine/core';
 
-import WorkoutUpdate from '../../../components/WorkoutUpdate';
+import WorkoutUpdate from '../../../components/views/workout/workout-update/WorkoutUpdate';
 import DefaultLoader from '../../../components/common/feedback/DefaultLoader';
 
 export const Route = createFileRoute('/_auth/update/')({

@@ -3,7 +3,7 @@ import { Stack, Text } from '@mantine/core';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import type { Mode } from '@cwt/schema/workouts';
 
-import EmptyWorkoutPlaceholder from './EmptyWorkoutPlaceholder';
+import EmptyWorkoutPlaceholder from '../EmptyWorkoutPlaceholder';
 import WorkoutDataList from './WorkoutDataList';
 
 export default function WorkoutData() {
