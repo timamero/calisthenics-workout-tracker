@@ -10,9 +10,9 @@ import { useWorkoutContextMobile } from '@cwt/hooks';
 import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 import type { CustomTheme } from '../../../theme';
 import CustomButton from '../../common/buttons/CustomButton';
-import WorkoutDraftUI from './WorkoutDraftUI';
+import WorkoutLogUI from './WorkoutLogUI';
 
-export default function WorkoutDraft() {
+export default function WorkoutLog() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
@@ -79,7 +79,7 @@ export default function WorkoutDraft() {
   }, [setIsCancelWorkoutDialogVisible]);
 
   return (
-    <WorkoutDraftUI
+    <WorkoutLogUI
       scrollViewRef={workoutDataScrollViewRef}
       workoutTitle={workoutTitle!}
       setWorkoutTitle={setWorkoutTitle}

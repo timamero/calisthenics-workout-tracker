@@ -18,7 +18,7 @@ import WorkoutOverlays from '../WorkoutOverlays';
 import TextInputWithEdit from '../../common/forms/TextInputWithEdit';
 import BottomAppBar from '../BottomAppBar';
 
-interface WorkoutDraftUIProps {
+interface WorkoutLogUIProps {
   scrollViewRef: RefObject<ScrollView | null>;
   workoutTitle: string;
   setWorkoutTitle: (text: string) => void;
@@ -27,12 +27,12 @@ interface WorkoutDraftUIProps {
 
 const BOTTOM_APPBAR_HEIGHT = 80;
 
-export default function WorkoutDraftUI({
+export default function WorkoutLogUI({
   scrollViewRef,
   workoutTitle,
   setWorkoutTitle,
   mode,
-}: WorkoutDraftUIProps) {
+}: WorkoutLogUIProps) {
   const theme = useTheme() as CustomTheme;
   const { bottom } = useSafeAreaInsets();
 
