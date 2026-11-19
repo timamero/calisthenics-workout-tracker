@@ -1,6 +1,6 @@
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import WorkoutData from '../../../../workout-data/WorkoutData';
+import WorkoutData from '../../../../features/workout/WorkoutData';
 import WorkoutUpdateUI from './WorkouUpdateUI';
 import UpdateLogConfirmationOverlay from '../../../../overlays/workout/workout-update/UpdateLogConfirmationOverlay';
 import CancelUpdateLogConfirmationOverlay from '../../../../overlays/workout/workout-update/CancelUpdateLogConfirmationOverlay';

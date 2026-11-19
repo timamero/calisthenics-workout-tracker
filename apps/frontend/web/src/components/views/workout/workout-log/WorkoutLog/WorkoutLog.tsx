@@ -2,7 +2,7 @@ import { Stack, Container } from '@mantine/core';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import WorkoutData from '../../../../workout-data/WorkoutData';
+import WorkoutData from '../../../../features/workout/WorkoutData';
 import WorkoutOverlays from '../../../../overlays/workout/workout-log/WorkoutOverlays';
 import { TextInputWithEdit } from '../../../../common/forms/TextInputWithEdit';
 
