@@ -9,7 +9,7 @@ import { globalStyles } from '../styles/global';
 import { supabase } from '../services/supabaseClient';
 
 import { Text } from '../customText';
-import TextInputWithEdit from '../components/common/TextInputWithEdit';
+import TextInputWithEdit from '../components/common/forms/TextInputWithEdit';
 
 export default function SettingsScreen() {
   const theme = useTheme() as CustomTheme;

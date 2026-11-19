@@ -10,7 +10,7 @@ import {
 } from '@cwt/state/stores';
 import { useNavigation } from '@react-navigation/native';
 
-import ConfirmationDialog from '../../common/ConfirmationDialog';
+import ConfirmationDialog from '../../common/feedback/ConfirmationDialog';
 import { deleteWorkoutLog } from '../../../services/workoutsService'; // replace with updateWorkoutLog service
 
 export default function DeleteLogConfirmationOverlay() {

@@ -1,9 +1,9 @@
 import { View } from 'react-native';
 import { TextInput, useTheme, IconButton } from 'react-native-paper';
 
-import { CustomTheme } from '../../../theme';
-import { Text } from '../../../customText';
-import CustomButton from '../CustomButton';
+import { CustomTheme } from '../../../../theme';
+import { Text } from '../../../../customText';
+import CustomButton from '../../buttons/CustomButton';
 import { VariantProp } from 'react-native-paper/lib/typescript/components/Typography/types';
 
 interface TextInputWithEditUIProps {

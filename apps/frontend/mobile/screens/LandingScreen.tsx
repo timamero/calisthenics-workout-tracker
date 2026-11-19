@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CustomTheme } from '../theme';
-import CustomButton from '../components/common/CustomButton';
+import CustomButton from '../components/common/buttons/CustomButton';
 
 export default function LandingScreen() {
   const theme = useTheme() as CustomTheme;

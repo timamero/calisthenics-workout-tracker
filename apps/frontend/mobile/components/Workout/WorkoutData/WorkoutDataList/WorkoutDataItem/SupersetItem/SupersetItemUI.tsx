@@ -11,7 +11,7 @@ import { Text } from '../../../../../../customText';
 import ExercisesList from './ExercisesList';
 import ExerciseSetGroup from '../ExerciseSetGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
-import CustomButton from '../../../../../common/CustomButton';
+import CustomButton from '../../../../../common/buttons/CustomButton';
 
 interface SupersetItemUIProps {
   mode: Mode;

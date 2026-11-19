@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Card, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
-import { CustomTheme } from '../../theme';
+import { CustomTheme } from '../../../theme';
 
 interface LargeButtonProps {
   handlePress: () => void;

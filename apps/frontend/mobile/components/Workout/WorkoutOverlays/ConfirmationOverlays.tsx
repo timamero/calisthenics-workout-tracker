@@ -22,7 +22,7 @@ import {
   postWorkoutBuild,
   postWorkoutLog,
 } from '../../../services/workoutsService';
-import ConfirmationDialog from '../../common/ConfirmationDialog';
+import ConfirmationDialog from '../../common/feedback/ConfirmationDialog';
 
 export default function ConfirmationOverlays() {
   const isDeleteRootItemOverlayVisible =

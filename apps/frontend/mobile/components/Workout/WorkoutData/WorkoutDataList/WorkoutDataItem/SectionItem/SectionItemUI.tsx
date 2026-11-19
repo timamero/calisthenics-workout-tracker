@@ -12,7 +12,7 @@ import ExerciseItem from '../ExerciseItem';
 import SupersetItem from '../SupersetItem';
 import ReorderButtonGroup from '../../../../ReorderButtonGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
-import TextInputWithEdit from '../../../../../common/TextInputWithEdit';
+import TextInputWithEdit from '../../../../../common/forms/TextInputWithEdit';
 import AddItemMenu from './AddItemMenu';
 
 interface SectionItemUIProps {

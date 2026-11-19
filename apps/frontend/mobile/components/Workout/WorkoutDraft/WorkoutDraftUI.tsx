@@ -15,7 +15,7 @@ import type { CustomTheme } from '../../../theme';
 
 import WorkoutData from '../WorkoutData';
 import WorkoutOverlays from '../WorkoutOverlays';
-import TextInputWithEdit from '../../common/TextInputWithEdit';
+import TextInputWithEdit from '../../common/forms/TextInputWithEdit';
 import BottomAppBar from '../BottomAppBar';
 
 interface WorkoutDraftUIProps {

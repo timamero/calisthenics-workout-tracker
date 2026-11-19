@@ -10,7 +10,7 @@ import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
 import { globalStyles } from '../styles/global';
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
-import LargeButton from '../components/common/LargeButton';
+import LargeButton from '../components/common/buttons/LargeButton';
 
 export default function StartWorkoutScreen() {
   const navigation = useNavigation<any>();

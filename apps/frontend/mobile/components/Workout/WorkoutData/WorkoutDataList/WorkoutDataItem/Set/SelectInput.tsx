@@ -9,7 +9,7 @@ import {
 import { useFieldInputChange } from '@cwt/hooks';
 
 import { Text } from '../../../../../../customText';
-import CustomButton from '../../../../../common/CustomButton';
+import CustomButton from '../../../../../common/buttons/CustomButton';
 import type { CustomTheme } from '../../../../../../theme';
 import TextInputReading from './TextInputReading';
 

@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuthStore } from '@cwt/state/stores';
 
 import { CustomTheme } from '../theme';
-import CustomButton from '../components/common/CustomButton';
+import CustomButton from '../components/common/buttons/CustomButton';
 
 export default function SuccessScreen() {
   // --- UI Hooks ---

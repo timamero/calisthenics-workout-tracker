@@ -13,7 +13,7 @@ import { useAuthLoginMobile, useResendConfirmation } from '@cwt/hooks';
 
 import { CustomTheme } from '../theme';
 import { supabase } from '../services/supabaseClient';
-import CustomButton from '../components/common/CustomButton';
+import CustomButton from '../components/common/buttons/CustomButton';
 
 export default function LoginScreen() {
   // --- UI Hooks ---

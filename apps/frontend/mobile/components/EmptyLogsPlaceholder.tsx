@@ -9,7 +9,7 @@ import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 import { globalStyles } from '../styles/global';
 import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
-import LargeButton from './common/LargeButton';
+import LargeButton from './common/buttons/LargeButton';
 
 export default function EmptyLogsPlaceholder() {
   const navigation = useNavigation<any>();

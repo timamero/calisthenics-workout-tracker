@@ -13,7 +13,7 @@ import { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import { CustomTheme } from '../../theme';
 import { Text } from '../../customText';
-import CardButton from '../../components/common/CardButton';
+import CardButton from '../common/buttons/CardButton';
 import Pill from './../Pill';
 import EmptyLogsPlaceholder from './../EmptyLogsPlaceholder';
 

@@ -15,7 +15,7 @@ import { CustomTheme } from '../../theme';
 
 import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
 import FilterSelections from './FilterSelections';
-import CustomButton from '../common/CustomButton';
+import CustomButton from '../common/buttons/CustomButton';
 
 export default function FilterOverlay() {
   const theme = useTheme() as CustomTheme;

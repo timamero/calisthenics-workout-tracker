@@ -12,7 +12,7 @@ import { CustomTheme } from '../theme';
 import { globalStyles } from '../styles/global';
 import { supabase } from '../services/supabaseClient';
 
-import CustomButton from '../components/common/CustomButton';
+import CustomButton from '../components/common/buttons/CustomButton';
 
 export default function SignupScreen() {
   // --- UI Hooks ---

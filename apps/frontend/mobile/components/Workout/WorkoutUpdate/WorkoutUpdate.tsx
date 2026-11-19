@@ -9,7 +9,7 @@ import { useWorkoutContextMobile } from '@cwt/hooks';
 
 import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 import type { CustomTheme } from '../../../theme';
-import CustomButton from '../../common/CustomButton';
+import CustomButton from '../../common/buttons/CustomButton';
 import WorkoutUpdateUI from './WorkoutUpdateUI';
 
 export default function WorkoutDraft() {
