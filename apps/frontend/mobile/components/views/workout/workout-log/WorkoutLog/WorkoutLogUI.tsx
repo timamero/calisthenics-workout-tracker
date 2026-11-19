@@ -11,13 +11,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type { Mode } from '@cwt/schema/workouts';
 
-import type { CustomTheme } from '../../../theme';
+import type { CustomTheme } from '../../../../../theme';
 
-import WorkoutData from '../WorkoutData';
-import WorkoutOverlays from '../WorkoutOverlays';
-import TextInputWithEdit from '../../common/forms/TextInputWithEdit';
+import WorkoutData from '../../../../Workout/WorkoutData';
+import WorkoutOverlays from '../../../../Workout/WorkoutOverlays';
+import TextInputWithEdit from '../../../../common/forms/TextInputWithEdit';
+import BottomAppBar from '../../../../Workout/BottomAppBar';
 
-interface WorkoutUpdateUIProps {
+interface WorkoutLogUIProps {
   scrollViewRef: RefObject<ScrollView | null>;
   workoutTitle: string;
   setWorkoutTitle: (text: string) => void;
@@ -26,12 +27,12 @@ interface WorkoutUpdateUIProps {
 
 const BOTTOM_APPBAR_HEIGHT = 80;
 
-export default function WorkoutUpdateUI({
+export default function WorkoutLogUI({
   scrollViewRef,
   workoutTitle,
   setWorkoutTitle,
   mode,
-}: WorkoutUpdateUIProps) {
+}: WorkoutLogUIProps) {
   const theme = useTheme() as CustomTheme;
   const { bottom } = useSafeAreaInsets();
 
@@ -71,11 +72,11 @@ export default function WorkoutUpdateUI({
                 maxLength={70}
               />
             </View>
-            {/* Display workout metadata here */}
             <WorkoutData />
           </ScrollView>
         </KeyboardAvoidingView>
       </ImageBackground>
+      <BottomAppBar />
 
       <WorkoutOverlays />
     </View>

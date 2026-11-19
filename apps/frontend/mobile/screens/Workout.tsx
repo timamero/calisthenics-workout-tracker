@@ -7,7 +7,7 @@ import { useExerciseLibraryStore } from '@cwt/state/stores';
 import { Text } from '../customText';
 import { CustomTheme } from '../theme';
 
-import WorkoutDraft from '../components/Workout/WorkoutLog';
+import WorkoutDraft from '../components/views/workout/workout-log/WorkoutLog';
 
 export default function WorkoutScreen() {
   const theme = useTheme() as CustomTheme;

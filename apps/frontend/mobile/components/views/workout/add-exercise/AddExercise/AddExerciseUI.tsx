@@ -2,13 +2,13 @@ import { ScrollView, View } from 'react-native';
 import { useTheme, Surface } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { CustomTheme } from '../../../theme';
+import { CustomTheme } from '../../../../../theme';
 
 import ExerciseList from './ExerciseList';
-import Filter from '../../Filter';
-import SearchBar from '../../SearchBar';
-import FilterOverlay from '../../FilterOverlay';
-import CustomButton from '../../common/buttons/CustomButton';
+import Filter from '../../../../Filter';
+import SearchBar from '../../../../SearchBar';
+import FilterOverlay from '../../../../FilterOverlay';
+import CustomButton from '../../../../common/buttons/CustomButton';
 
 interface AddExerciseUIProps {
   selectedExerciseIDToAdd: number | null;

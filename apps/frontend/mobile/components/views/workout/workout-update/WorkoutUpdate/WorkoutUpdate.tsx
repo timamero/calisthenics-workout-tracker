@@ -7,12 +7,12 @@ import type { Mode } from '@cwt/schema/workouts';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useWorkoutContextMobile } from '@cwt/hooks';
 
-import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
-import type { CustomTheme } from '../../../theme';
-import CustomButton from '../../common/buttons/CustomButton';
-import WorkoutLogUI from './WorkoutLogUI';
+import WorkoutDraftContext from '../../../../../contexts/WorkoutDraftContext';
+import type { CustomTheme } from '../../../../../theme';
+import CustomButton from '../../../../common/buttons/CustomButton';
+import WorkoutUpdateUI from './WorkoutUpdateUI';
 
-export default function WorkoutLog() {
+export default function WorkoutDraft() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
@@ -50,9 +50,10 @@ export default function WorkoutLog() {
       headerRight: () => (
         <CustomButton
           mode="contained"
-          onPress={() => setIsSaveWorkoutDialogVisible(true)}
+          // onPress={() => setIsSaveWorkoutDialogVisible(true)}
+          onPress={() => console.log('pressed Save')}
         >
-          Finish
+          Save
         </CustomButton>
       ),
       headerTitle: () => null,
@@ -79,7 +80,7 @@ export default function WorkoutLog() {
   }, [setIsCancelWorkoutDialogVisible]);
 
   return (
-    <WorkoutLogUI
+    <WorkoutUpdateUI
       scrollViewRef={workoutDataScrollViewRef}
       workoutTitle={workoutTitle!}
       setWorkoutTitle={setWorkoutTitle}
