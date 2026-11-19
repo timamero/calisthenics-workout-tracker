@@ -2,8 +2,8 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import WorkoutData from '../../../../workout-data/WorkoutData';
 import WorkoutUpdateUI from './WorkouUpdateUI';
-import UpdateLogConfirmationOverlay from './UpdateLogConfirmationOverlay';
-import CancelUpdateLogConfirmationOverlay from './CancelUpdateLogConfirmationOverlay';
+import UpdateLogConfirmationOverlay from '../../../../overlays/workout/workout-update/UpdateLogConfirmationOverlay';
+import CancelUpdateLogConfirmationOverlay from '../../../../overlays/workout/workout-update/CancelUpdateLogConfirmationOverlay';
 
 /**
  * WorkoutUpdate component is responsible for rendering the workout update interface.

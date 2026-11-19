@@ -3,7 +3,7 @@ import { Stack, Container } from '@mantine/core';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
 import WorkoutData from '../../../../workout-data/WorkoutData';
-import WorkoutOverlays from './WorkoutOverlays';
+import WorkoutOverlays from '../../../../overlays/workout/workout-log/WorkoutOverlays';
 import { TextInputWithEdit } from '../../../../common/forms/TextInputWithEdit';
 
 export default function WorkoutLog() {

@@ -15,8 +15,8 @@ import { useClearExerciseSearchAndFilters } from '@cwt/hooks';
 import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 
 import ExercisesList from '../../../components/views/exercise-library/ExercisesList';
-import ExercisesFilterOverlay from '../../../components/views/exercise-library/ExercisesFilterOverlay';
-import ExerciseDetailOverlay from '../../../components/views/exercise-library/ExerciseDetailOverlay';
+import ExercisesFilterOverlay from '../../../components/overlays/exercise-library/ExercisesFilterOverlay';
+import ExerciseDetailOverlay from '../../../components/overlays/exercise-library/ExerciseDetailOverlay';
 import ExerciseSearchBar from '../../../components/views/exercise-library/ExerciseSearchBar';
 
 export const Route = createFileRoute('/_auth/dashboard/library')({

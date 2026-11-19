@@ -3,7 +3,7 @@ import { IoFilterOutline } from 'react-icons/io5';
 
 import ExercisesList from './ExercisesList';
 import ExerciseSearchBar from '../../../exercise-library/ExerciseSearchBar';
-import ExercisesFilterOverlay from '../../../exercise-library/ExercisesFilterOverlay';
+import ExercisesFilterOverlay from '../../../../overlays/exercise-library/ExercisesFilterOverlay';
 
 interface AddExerciseUIProps {
   selectedExerciseIDToAdd: number | null;

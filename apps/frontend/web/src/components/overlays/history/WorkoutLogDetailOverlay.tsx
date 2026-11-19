@@ -9,9 +9,9 @@ import {
   useWorkoutContextWeb,
 } from '@cwt/hooks';
 
-import WorkoutData from '../../../workout-data/WorkoutData';
-import WorkoutMetadataItem from './WorkoutMetadataItem';
-import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
+import WorkoutData from '../../workout-data/WorkoutData';
+import WorkoutMetadataItem from '../../views/history/WorkoutLogPages/WorkoutMetadataItem';
+import WorkoutLogDetailMenu from '../../views/history/WorkoutLogPages/WorkoutLogDetailMenu';
 import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
 
 /**

@@ -9,7 +9,7 @@ import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import CardButton from '../../../common/buttons/CardButton';
 import WorkoutMetadataItem from './WorkoutMetadataItem';
-import WorkoutLogDetailOverlay from './WorkoutLogDetailOverlay';
+import WorkoutLogDetailOverlay from '../../../overlays/history/WorkoutLogDetailOverlay';
 import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
 
 /**

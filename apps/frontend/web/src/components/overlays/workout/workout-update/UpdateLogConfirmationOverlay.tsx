@@ -11,8 +11,8 @@ import {
 } from '@cwt/state/stores';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
-import ConfirmationOverlay from '../../../../common/feedback/ConfirmationOverlay';
-import { updateWorkoutLog } from '../../../../../services/workoutsService';
+import ConfirmationOverlay from '../../../common/feedback/ConfirmationOverlay';
+import { updateWorkoutLog } from '../../../../services/workoutsService';
 
 export default function UpdateLogConfirmationOverlay() {
   // --- State Management ---
@@ -22,10 +22,6 @@ export default function UpdateLogConfirmationOverlay() {
     (state) => state.workoutToSave,
   ) as WorkoutLogResponse;
   const setMode = useWorkoutDraftStore((state) => state.setMode);
-  // const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
-  // const initializeUpdatedWorkoutSave = useWorkoutDraftStore(
-  //   (state) => state.initializeUpdatedWorkoutToSave,
-  // );
   const workoutLogDetail = useWorkoutLogDetailContextWeb().workout;
   const setWorkoutLogDetail = useWorkoutLogDetailContextWeb().setWorkout;
 
@@ -72,8 +68,6 @@ export default function UpdateLogConfirmationOverlay() {
       console.error('Session not found');
       return;
     }
-    // const workoutToSave = useWorkoutDraftStore.getState()
-    //   .workoutToSave as WorkoutLogResponse;
 
     const body = JSON.stringify(workoutToSave);
     try {
@@ -84,7 +78,6 @@ export default function UpdateLogConfirmationOverlay() {
         detailHandlers.open();
         setMode('read');
         navigate(historyLinkOptions);
-        // resetWorkout();
       } else {
         console.error(
           'Workout update request failed to update log with ID: ',

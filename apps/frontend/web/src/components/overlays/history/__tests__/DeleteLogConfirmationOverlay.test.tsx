@@ -3,14 +3,14 @@ import {
   screen,
   fireEvent,
   waitFor,
-} from '../../../../../utils/testUtils';
+} from '../../../../utils/testUtils';
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 
 import { sampleWorkoutLogs } from '@cwt/mocks';
 import { type WorkoutLibrarySlice } from '@cwt/state/stores';
 
 import DeleteLogConfirmationOverlay from '../DeleteLogConfirmationOverlay';
-import * as workoutsService from '../../../../../services/workoutsService';
+import * as workoutsService from '../../../../services/workoutsService';
 import type { WorkoutContextType } from '@cwt/context';
 import type { UseDisclosureHandlers } from '@mantine/hooks';
 
