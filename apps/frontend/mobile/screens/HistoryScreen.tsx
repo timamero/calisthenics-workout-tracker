@@ -4,7 +4,7 @@ import { useTheme } from 'react-native-paper';
 import { CustomTheme } from '../theme';
 import { globalStyles } from '../styles/global';
 
-import WorkoutLogPages from '../components/WorkoutLogPages';
+import WorkoutLogPages from '../components/views/history/WorkoutLogPages';
 
 export default function HistoryScreen() {
   const theme = useTheme() as CustomTheme;
