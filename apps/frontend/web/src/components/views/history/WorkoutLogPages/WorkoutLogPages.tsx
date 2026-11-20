@@ -20,14 +20,6 @@ import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
  * The component uses state management hooks to access the workout logs
  * and manage the current page. It also handles user interactions, such
  * as clicking on a workout log to view its details.
- *
- * @component
- * @example
- * return (
- *   <WorkoutLogPages />
- * )
- * @returns {JSX.Element | null} The WorkoutLogPages component or null if
- * required data is missing.
  */
 export default function WorkoutLogPages() {
   // --- Local State ---
