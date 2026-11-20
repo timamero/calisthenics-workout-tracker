@@ -43,7 +43,7 @@ export default function WorkoutUpdateUI({
       }}
     >
       <ImageBackground
-        source={require('../../../assets/grid.png')}
+        source={require('../../../../../assets/grid.png')}
         imageStyle={{ opacity: mode === 'build' || mode === 'edit' ? 1 : 0 }}
         style={{
           flex: 1,
