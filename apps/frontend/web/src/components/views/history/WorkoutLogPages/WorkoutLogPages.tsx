@@ -8,7 +8,7 @@ import { useWorkoutLogDetailContextWeb } from '@cwt/hooks';
 import type { WorkoutLogResponse } from '@cwt/schema/workouts';
 
 import CardButton from '../../../common/buttons/CardButton';
-import WorkoutMetadataItem from './WorkoutMetadataItem';
+import WorkoutMetadataItem from '../../../common/data-display/WorkoutMetadataItem';
 import WorkoutLogDetailOverlay from '../../../overlays/history/WorkoutLogDetailOverlay';
 import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
 

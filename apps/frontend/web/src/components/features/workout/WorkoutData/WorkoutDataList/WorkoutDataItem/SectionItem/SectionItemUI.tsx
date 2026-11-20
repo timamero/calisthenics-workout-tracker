@@ -4,7 +4,7 @@ import { Stack, Group, Box, Paper } from '@mantine/core';
 import type { Mode } from '@cwt/schema/workouts';
 
 import ItemsList from './ItemsList';
-import { TextInputWithEdit } from '../../../../../common/forms/TextInputWithEdit';
+import { TextInputWithEdit } from '../../../../../../common/forms/TextInputWithEdit';
 import ReorderButtonGroup from '../../../../ReorderButtonGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
 import AddItemMenu from './AddItemMenu';
