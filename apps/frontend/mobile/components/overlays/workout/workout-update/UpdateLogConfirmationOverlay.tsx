@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   useWorkoutContextMobile,
   useWorkoutLogDetailContextMobile,
@@ -10,25 +11,17 @@ import {
 import { useNavigation } from '@react-navigation/native';
 
 import ConfirmationDialog from '../../../common/feedback/ConfirmationDialog';
-import { deleteWorkoutLog } from '../../../../services/workoutsService';
+import { deleteWorkoutLog } from '../../../../services/workoutsService'; // replace with updateWorkoutLog service
 
-/**
- * DeleteLogConfirmationOverlay component is a confirmation dialog that appears
- * when the user attempts to delete a workout log. It handles the deletion
- * process and updates the state accordingly.
- *
- * The component uses various hooks to access the workout context,
- * authentication state, and navigation. It also includes error handling to
- * ensure that all necessary data is available before proceeding with the
- * deletion.
- */
 export default function DeleteLogConfirmationOverlay() {
+  const [isUpdateLogOverlayVisible, setIsUpdateLogOverlayVisible] =
+    useState<boolean>(false);
   // --- UI Hooks ---
   const navigation = useNavigation<any>();
 
   // --- State Management ---
   const supabaseSession = useAuthStore((state) => state.session);
-  const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout);
+  const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout); // replace with updateWorkout action
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   // --- Context ---
@@ -57,13 +50,13 @@ export default function DeleteLogConfirmationOverlay() {
 
   // --- Variables ---
   const workoutLogId = workout.id;
-  const isDeleteLogOverlayVisible =
-    workoutOverlayHandlers.isDeleteLogOverlayVisible;
-  const setIsDeleteLogOverlayVisible =
-    workoutOverlayHandlers.setIsDeleteLogOverlayVisible;
+  // const isDeleteLogOverlayVisible =
+  //   workoutOverlayHandlers.isDeleteLogOverlayVisible;
+  // const setIsDeleteLogOverlayVisible =
+  //   workoutOverlayHandlers.setIsDeleteLogOverlayVisible;
 
   // --- Handlers ---
-  const handleDeleteLogPress = async () => {
+  const handleUpdateLogPress = async () => {
     if (!supabaseSession) {
       console.error('Session not found');
       return;
@@ -72,31 +65,31 @@ export default function DeleteLogConfirmationOverlay() {
     const body = JSON.stringify({ id: workoutLogId });
 
     try {
-      const result = await deleteWorkoutLog(supabaseSession.access_token, body);
+      const result = await deleteWorkoutLog(supabaseSession.access_token, body); // replace with updateWorkoutLog service
       if (result) {
-        deleteWorkout(workoutLogId);
+        deleteWorkout(workoutLogId); // replace with updateWorkout action
         setDetailWorkout(null);
         resetWorkout();
-        navigation.replace('App', { screen: 'History' });
+        navigation.replace('App', { screen: 'History' }); // navigate to workout log detail screen
       } else {
         console.error(
-          'Workout delete request failed to delete log with ID: ',
+          'Workout update request failed to delete log with ID: ',
           workoutLogId,
         );
       }
     } catch (e) {
-      console.error('Error deleting log:', e);
+      console.error('Error updating log:', e);
     }
   };
 
   return (
     <ConfirmationDialog
-      title="Delete Log"
-      message="Are you sure you want to delete this log?"
-      confirmButtonLabel="Delete"
-      isVisible={isDeleteLogOverlayVisible || false}
-      handleHideDialog={setIsDeleteLogOverlayVisible}
-      onConfirmationPress={handleDeleteLogPress}
+      title="Save Changes?"
+      message="Do you want to save the updates to this workout log?"
+      confirmButtonLabel="Save"
+      isVisible={isUpdateLogOverlayVisible || false}
+      handleHideDialog={setIsUpdateLogOverlayVisible}
+      onConfirmationPress={handleUpdateLogPress}
     />
   );
 }

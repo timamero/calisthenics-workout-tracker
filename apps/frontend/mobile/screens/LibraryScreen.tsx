@@ -20,7 +20,7 @@ import { globalStyles } from '../styles/global';
 import ExerciseList from '../components/ExerciseList';
 import SearchBar from '../components/SearchBar';
 import Filter from '../components/Filter';
-import FilterOverlay from '../components/FilterOverlay';
+import FilterOverlay from '../components/overlays/exercise-library/FilterOverlay';
 import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
 
 export default function LibraryScreen() {

@@ -5,11 +5,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Equipment, Difficulty, Emphasis } from '@cwt/schema/exercises';
 
-import { Text } from '../customText';
-import { CustomTheme } from '../theme';
-import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
+import { Text } from '../../../customText';
+import { CustomTheme } from '../../../theme';
+import { ExerciseDetailContext } from '../../../contexts/ExerciseDetailContext';
 
-import Pill from './common/data-display/Pill';
+import Pill from './../../common/data-display/Pill';
 
 export default function ExerciseDetailOverlay() {
   const hideModal = React.useContext(ExerciseDetailContext)?.hideModal;

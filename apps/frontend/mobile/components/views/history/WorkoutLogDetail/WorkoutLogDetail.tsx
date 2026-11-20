@@ -15,7 +15,7 @@ import { CustomTheme } from '../../../../theme';
 import { globalStyles } from '../../../../styles/global';
 import WorkoutData from '../../../../components/Workout/WorkoutData';
 import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
-import DeleteLogConfirmationOverlay from './DeleteLogConfirmationOverlay';
+import DeleteLogConfirmationOverlay from '../../../overlays/history/DeleteLogConfirmationOverlay';
 
 /**
  * WorkoutLogDetail component displays detailed information about a specific

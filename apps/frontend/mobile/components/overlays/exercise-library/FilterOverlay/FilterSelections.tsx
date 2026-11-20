@@ -7,8 +7,8 @@ import { useExercisesFilterStore } from '@cwt/state/stores';
 
 import type { Attributes, FilterCheckboxKey } from '@cwt/schema/exercises';
 
-import { Text } from '../../customText';
-import { CustomTheme } from '../../theme';
+import { Text } from '../../../../customText';
+import { CustomTheme } from '../../../../theme';
 
 import FilterCheckbox from './FilterCheckbox';
 

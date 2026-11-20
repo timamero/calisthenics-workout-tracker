@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { useExercisesFilterStore } from '@cwt/state/stores';
 import type { Attributes, FilterCheckboxKey } from '@cwt/schema/exercises';
 
-import { CustomTheme } from '../../theme';
+import { CustomTheme } from '../../../../theme';
 
 interface FilterCheckboxProps {
   keyName: FilterCheckboxKey;

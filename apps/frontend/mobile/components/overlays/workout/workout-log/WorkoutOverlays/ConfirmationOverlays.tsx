@@ -17,12 +17,12 @@ import {
   cancelWorkoutConfirmationContent,
 } from '@cwt/content';
 
-import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
+import WorkoutDraftContext from '../../../../../contexts/WorkoutDraftContext';
 import {
   postWorkoutBuild,
   postWorkoutLog,
-} from '../../../services/workoutsService';
-import ConfirmationDialog from '../../common/feedback/ConfirmationDialog';
+} from '../../../../../services/workoutsService';
+import ConfirmationDialog from '../../../../common/feedback/ConfirmationDialog';
 
 export default function ConfirmationOverlays() {
   const isDeleteRootItemOverlayVisible =

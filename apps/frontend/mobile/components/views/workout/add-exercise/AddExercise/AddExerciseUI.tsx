@@ -7,7 +7,7 @@ import { CustomTheme } from '../../../../../theme';
 import ExerciseList from './ExerciseList';
 import Filter from '../../../../Filter';
 import SearchBar from '../../../../SearchBar';
-import FilterOverlay from '../../../../FilterOverlay';
+import FilterOverlay from '../../../../overlays/exercise-library/FilterOverlay';
 import CustomButton from '../../../../common/buttons/CustomButton';
 
 interface AddExerciseUIProps {

@@ -10,12 +10,12 @@ import {
 } from '@cwt/state/stores';
 import { useFilterSelectors } from '@cwt/hooks';
 
-import { Text } from '../../customText';
-import { CustomTheme } from '../../theme';
+import { Text } from '../../../../customText';
+import { CustomTheme } from '../../../../theme';
 
-import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
+import WorkoutDraftContext from '../../../../contexts/WorkoutDraftContext';
 import FilterSelections from './FilterSelections';
-import CustomButton from '../common/buttons/CustomButton';
+import CustomButton from '../../../common/buttons/CustomButton';
 
 export default function FilterOverlay() {
   const theme = useTheme() as CustomTheme;
