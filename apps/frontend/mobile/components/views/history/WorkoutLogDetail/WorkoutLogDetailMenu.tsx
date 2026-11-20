@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Menu, IconButton } from 'react-native-paper';
 
 interface WorkoutLogDetailProps {
-  // handleUpdatePress: () => void;
+  handleUpdatePress: () => void;
   handleDeletePress: () => void;
 }
 
 export default function WorkoutLogDetailMenu({
-  // handleUpdatePress,
+  handleUpdatePress,
   handleDeletePress,
 }: WorkoutLogDetailProps) {
   const [visible, setVisible] = useState(false);
@@ -25,7 +25,8 @@ export default function WorkoutLogDetailMenu({
       <Menu.Item
         leadingIcon="pencil"
         onPress={() => {
-          console.log('Clicked update log');
+          closeMenu();
+          handleUpdatePress();
         }}
         title="Update Log"
       />

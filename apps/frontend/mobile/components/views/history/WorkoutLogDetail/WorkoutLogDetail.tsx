@@ -85,6 +85,10 @@ export default function WorkoutLogDetail() {
       console.error('setIsDeleteLogOverlayVisible not defined');
     }
   };
+
+  const handleUpdatePress = () => {
+    console.log('clicked update log');
+  };
   return (
     <View style={[global.container, styles.screenContainer]}>
       <View style={styles.headerRow}>
@@ -95,7 +99,10 @@ export default function WorkoutLogDetail() {
         >
           Back to Workouts
         </Button>
-        <WorkoutLogDetailMenu handleDeletePress={() => handleDeletePress()} />
+        <WorkoutLogDetailMenu
+          handleDeletePress={handleDeletePress}
+          handleUpdatePress={handleUpdatePress}
+        />
         <DeleteLogConfirmationOverlay />
       </View>
       <ScrollView style={styles.scrollView}>
