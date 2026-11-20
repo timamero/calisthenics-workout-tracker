@@ -1,7 +1,7 @@
 import { Text, useTheme } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 
-import { CustomTheme } from '../theme';
+import { CustomTheme } from '../../../theme';
 
 interface PillProps {
   textColor: string;

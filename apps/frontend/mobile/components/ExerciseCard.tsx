@@ -8,7 +8,7 @@ import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
 import { CustomTheme } from '../theme';
 import { Text } from '../customText';
 
-import Pill from './Pill';
+import Pill from './common/data-display/Pill';
 
 interface ExerciseCardProps {
   exercise: ExerciseResponse;

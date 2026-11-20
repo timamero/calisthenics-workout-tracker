@@ -7,7 +7,7 @@ import { ExerciseResponse, Attributes } from '@cwt/schema/exercises';
 import { CustomTheme } from '../../../../../theme';
 import { Text } from '../../../../../customText';
 
-import Pill from '../../../../Pill';
+import Pill from '../../../../common/data-display/Pill';
 
 interface ExerciseCardProps {
   exercise: ExerciseResponse;
