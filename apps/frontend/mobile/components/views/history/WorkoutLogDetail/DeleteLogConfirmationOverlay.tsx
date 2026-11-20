@@ -9,8 +9,8 @@ import {
 } from '@cwt/state/stores';
 import { useNavigation } from '@react-navigation/native';
 
-import ConfirmationDialog from '../common/feedback/ConfirmationDialog';
-import { deleteWorkoutLog } from '../../services/workoutsService';
+import ConfirmationDialog from '../../../common/feedback/ConfirmationDialog';
+import { deleteWorkoutLog } from '../../../../services/workoutsService';
 
 /**
  * DeleteLogConfirmationOverlay component is a confirmation dialog that appears
@@ -21,15 +21,6 @@ import { deleteWorkoutLog } from '../../services/workoutsService';
  * authentication state, and navigation. It also includes error handling to
  * ensure that all necessary data is available before proceeding with the
  * deletion.
- *
- * @component
- * @example
- * return (
- *   <DeleteLogConfirmationOverlay />
- * )
- *
- * @returns {JSX.Element | null} The DeleteLogConfirmationOverlay component or
- * null if required data is missing.
  */
 export default function DeleteLogConfirmationOverlay() {
   // --- UI Hooks ---

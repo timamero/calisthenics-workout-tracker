@@ -1,9 +1,14 @@
-import { fireEvent, render, screen, waitFor } from '../../../utils/testUtils';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '../../../../../utils/testUtils';
 
 import { sampleWorkoutLogs } from '@cwt/mocks';
 
 import DeleteLogConfirmationOverlay from '../DeleteLogConfirmationOverlay';
-import * as workoutsService from '../../../services/workoutsService';
+import * as workoutsService from '../../../../../services/workoutsService';
 
 // ---- Mocks for React Navigation and Context Hooks --//
 // const mockNavigate = jest.fn();
