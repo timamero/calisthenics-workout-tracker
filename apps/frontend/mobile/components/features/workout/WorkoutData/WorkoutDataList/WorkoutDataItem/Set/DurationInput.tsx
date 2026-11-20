@@ -28,10 +28,15 @@ export default function DurationInput({
   if (mode === 'read') {
     const value = set.fields[fieldName]
       ? getSecondsInDuration(set.fields[fieldName])
-      : '0s';
+      : '0';
     return <TextInputReading label={label} value={value} labelWidth="auto" />;
   }
 
+  const value = set.fields[fieldName]
+    ? getSecondsInDuration(set.fields[fieldName].toString())
+    : set.fields[fieldName] === null
+      ? '0'
+      : getSecondsInDuration(set.fields[fieldName].toString());
   return (
     <View style={{ display: 'flex', gap: 4 }}>
       <Text variant="labelMedium">
@@ -52,7 +57,7 @@ export default function DurationInput({
           set.completed ? theme.colors.dark2 : theme.colors.onBackground
         }
         contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
-        value={getSecondsInDuration(set.fields[fieldName]!.toString())}
+        value={value}
         onChangeText={(text) => handleRestFieldChange(text)}
         disabled={set.completed}
       />
