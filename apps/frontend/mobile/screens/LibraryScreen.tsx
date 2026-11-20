@@ -17,11 +17,11 @@ import { Text } from '../customText';
 import { CustomTheme } from '../theme';
 import { globalStyles } from '../styles/global';
 
-import ExerciseList from '../components/ExerciseList';
-import SearchBar from '../components/SearchBar';
-import Filter from '../components/Filter';
+import ExerciseList from '../components/features/exercise-library/ExerciseList';
+import SearchBar from '../components/features/exercise-library/SearchBar';
+import Filter from '../components/features/exercise-library/Filter';
 import FilterOverlay from '../components/overlays/exercise-library/FilterOverlay';
-import ExerciseDetailOverlay from '../components/ExerciseDetailOverlay';
+import ExerciseDetailOverlay from '../components/overlays/exercise-library/ExerciseDetailOverlay';
 
 export default function LibraryScreen() {
   const theme = useTheme() as CustomTheme;

@@ -6,8 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useAddSupersetMobile } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { CustomTheme } from '../../theme';
-import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
+import { CustomTheme } from '../../../theme';
+import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 
 export default function AddWorkoutItemButtons() {
   const navigation = useNavigation<any>();

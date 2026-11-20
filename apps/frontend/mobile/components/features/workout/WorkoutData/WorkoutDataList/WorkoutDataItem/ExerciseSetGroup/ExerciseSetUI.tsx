@@ -2,8 +2,8 @@ import type { ReactNode } from 'react';
 import { useTheme, Divider } from 'react-native-paper';
 import { View } from 'react-native';
 
-import { Text } from '../../../../../../customText';
-import { CustomTheme } from '../../../../../../theme';
+import { Text } from '../../../../../../../customText';
+import { CustomTheme } from '../../../../../../../theme';
 
 interface ExerciseSetUIProps {
   exerciseName: string;

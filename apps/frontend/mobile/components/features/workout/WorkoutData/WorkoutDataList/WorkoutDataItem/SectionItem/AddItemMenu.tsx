@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Menu, IconButton, useTheme, Surface } from 'react-native-paper';
 
-import { CustomTheme } from '../../../../../../theme';
+import { CustomTheme } from '../../../../../../../theme';
 
 interface AddItemMenuProps {
   handleOpenAddExercisePress: () => void;

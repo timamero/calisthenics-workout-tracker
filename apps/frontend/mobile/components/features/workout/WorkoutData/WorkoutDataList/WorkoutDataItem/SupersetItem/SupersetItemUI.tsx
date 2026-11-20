@@ -6,12 +6,12 @@ import type { Mode, Superset } from '@cwt/schema/workouts';
 
 // import { ExerciseItemContainer } from '../ExerciseItem';
 import ReorderButtonGroup from '../../../../ReorderButtonGroup';
-import { CustomTheme } from '../../../../../../theme';
-import { Text } from '../../../../../../customText';
+import { CustomTheme } from '../../../../../../../theme';
+import { Text } from '../../../../../../../customText';
 import ExercisesList from './ExercisesList';
 import ExerciseSetGroup from '../ExerciseSetGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
-import CustomButton from '../../../../../common/buttons/CustomButton';
+import CustomButton from '../../../../../../common/buttons/CustomButton';
 
 interface SupersetItemUIProps {
   mode: Mode;

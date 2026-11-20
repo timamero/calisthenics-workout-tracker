@@ -4,8 +4,8 @@ import { useTheme } from 'react-native-paper';
 import { Mode } from '@cwt/schema/workouts';
 import { emptyWorkoutPlaceholderContent } from '@cwt/content';
 
-import { CustomTheme } from '../../../theme';
-import { Text } from '../../../customText';
+import { CustomTheme } from '../../../../theme';
+import { Text } from '../../../../customText';
 
 export default function EmptyWorkoutPlaceholder({ mode }: { mode: Mode }) {
   const theme = useTheme() as CustomTheme;

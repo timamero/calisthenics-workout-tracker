@@ -6,7 +6,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useDeleteItemMobile, useReorderItemMobile } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-import WorkoutDraftContext from '../../../../../../contexts/WorkoutDraftContext';
+import WorkoutDraftContext from '../../../../../../../contexts/WorkoutDraftContext';
 import SectionItemUI from './SectionItemUI';
 
 export default function SectionItem() {

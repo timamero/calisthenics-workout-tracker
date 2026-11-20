@@ -3,8 +3,8 @@ import { useTheme, Checkbox, IconButton } from 'react-native-paper';
 
 import { Mode } from '@cwt/schema/workouts';
 
-import { Text } from '../../../../../../customText';
-import { CustomTheme } from '../../../../../../theme';
+import { Text } from '../../../../../../../customText';
+import { CustomTheme } from '../../../../../../../theme';
 import FieldsList from './FieldsList';
 import SetProgressionFieldsList from './SetProgressionFieldsList';
 

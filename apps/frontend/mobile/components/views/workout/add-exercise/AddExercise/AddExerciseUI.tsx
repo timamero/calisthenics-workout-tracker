@@ -5,8 +5,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CustomTheme } from '../../../../../theme';
 
 import ExerciseList from './ExerciseList';
-import Filter from '../../../../Filter';
-import SearchBar from '../../../../SearchBar';
+import Filter from '../../../../features/exercise-library/Filter';
+import SearchBar from '../../../../features/exercise-library/SearchBar';
 import FilterOverlay from '../../../../overlays/exercise-library/FilterOverlay';
 import CustomButton from '../../../../common/buttons/CustomButton';
 

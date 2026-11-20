@@ -8,7 +8,7 @@ import {
   useExerciseLibraryStore,
 } from '@cwt/state/stores';
 
-import { CustomTheme } from '../theme';
+import { CustomTheme } from '../../../theme';
 
 const SearchBar = () => {
   const theme = useTheme() as CustomTheme;

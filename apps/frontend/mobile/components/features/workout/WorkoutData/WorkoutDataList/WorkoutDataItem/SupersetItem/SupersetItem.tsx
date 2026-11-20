@@ -10,7 +10,7 @@ import {
 } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-import WorkoutDraftContext from '../../../../../../contexts/WorkoutDraftContext';
+import WorkoutDraftContext from '../../../../../../../contexts/WorkoutDraftContext';
 import SupersetItemUI from './SupersetItemUI';
 
 export default function SupersetItem() {

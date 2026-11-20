@@ -1,8 +1,8 @@
 import { View, type DimensionValue } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { CustomTheme } from '../../../../../../theme';
-import { Text } from '../../../../../../customText';
+import { CustomTheme } from '../../../../../../../theme';
+import { Text } from '../../../../../../../customText';
 
 interface TextInputReadingProps {
   label: string;

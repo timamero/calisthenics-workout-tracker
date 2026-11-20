@@ -2,7 +2,7 @@ import { Group, Button, Stack, ActionIcon } from '@mantine/core';
 import { IoFilterOutline } from 'react-icons/io5';
 
 import ExercisesList from './ExercisesList';
-import ExerciseSearchBar from '../../../exercise-library/ExerciseSearchBar';
+import ExerciseSearchBar from '../../../../features/exercise-library/ExerciseSearchBar';
 import ExercisesFilterOverlay from '../../../../overlays/exercise-library/ExercisesFilterOverlay';
 
 interface AddExerciseUIProps {

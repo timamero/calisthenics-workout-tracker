@@ -9,9 +9,9 @@ import {
   useWorkoutStopwatchStore,
 } from '@cwt/state/stores';
 
-import WorkoutDraftContext from '../../contexts/WorkoutDraftContext';
+import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 import AddWorkoutItemButtons from './AddWorkoutItemButtons';
-import type { CustomTheme } from '../../theme';
+import type { CustomTheme } from '../../../theme';
 
 const BOTTOM_APPBAR_HEIGHT = 80;
 

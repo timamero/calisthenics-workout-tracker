@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { IconButton } from 'react-native-paper';
 import { View } from 'react-native';
 
-import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
+import WorkoutDraftContext from '../../../contexts/WorkoutDraftContext';
 
 const Filter = () => {
   const setIsExerciseFilterVisible =

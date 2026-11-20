@@ -6,8 +6,8 @@ import { SetContext } from '@cwt/context';
 import { useFieldInputChange } from '@cwt/hooks';
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { CustomTheme } from '../../../../../../theme';
-import { Text } from '../../../../../../customText';
+import { CustomTheme } from '../../../../../../../theme';
+import { Text } from '../../../../../../../customText';
 import TextInputReading from './TextInputReading';
 
 interface NumeralInputProps {

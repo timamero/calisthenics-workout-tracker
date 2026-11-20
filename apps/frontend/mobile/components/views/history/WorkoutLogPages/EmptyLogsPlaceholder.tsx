@@ -5,11 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useWorkoutDraftStore } from '@cwt/state/stores';
 
-import { CustomTheme } from '../theme';
-import { Text } from '../customText';
-import { globalStyles } from '../styles/global';
-import WorkoutDraftContext from '../contexts/WorkoutDraftContext';
-import LargeButton from './common/buttons/LargeButton';
+import { CustomTheme } from '../../../../theme';
+import { Text } from '../../../../customText';
+import { globalStyles } from '../../../../styles/global';
+import WorkoutDraftContext from '../../../../contexts/WorkoutDraftContext';
+import LargeButton from '../../../common/buttons/LargeButton';
 
 export default function EmptyLogsPlaceholder() {
   const navigation = useNavigation<any>();

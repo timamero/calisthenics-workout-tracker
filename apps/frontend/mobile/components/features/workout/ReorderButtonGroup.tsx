@@ -4,7 +4,7 @@ import { IconButton, useTheme } from 'react-native-paper';
 
 import { WorkoutDataItemContext } from '@cwt/context';
 
-import { CustomTheme } from '../../theme';
+import { CustomTheme } from '../../../theme';
 
 interface ReorderButtonProps {
   isFirst: boolean;

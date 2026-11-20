@@ -15,7 +15,7 @@ import { CustomTheme } from '../../../../theme';
 import { Text } from '../../../../customText';
 import CardButton from '../../../common/buttons/CardButton';
 import Pill from '../../../common/data-display/Pill';
-import EmptyLogsPlaceholder from './../../../EmptyLogsPlaceholder';
+import EmptyLogsPlaceholder from './EmptyLogsPlaceholder';
 
 export default function WorkoutLogPages() {
   const navigation = useNavigation<any>();

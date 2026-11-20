@@ -8,9 +8,9 @@ import {
 } from '@cwt/state/stores';
 import { useFieldInputChange } from '@cwt/hooks';
 
-import { Text } from '../../../../../../customText';
-import CustomButton from '../../../../../common/buttons/CustomButton';
-import type { CustomTheme } from '../../../../../../theme';
+import { Text } from '../../../../../../../customText';
+import CustomButton from '../../../../../../common/buttons/CustomButton';
+import type { CustomTheme } from '../../../../../../../theme';
 import TextInputReading from './TextInputReading';
 
 interface SelectInputProps {

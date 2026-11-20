@@ -4,11 +4,11 @@ import { View, StyleSheet, Keyboard, Platform } from 'react-native';
 
 import { ExerciseResponse, Attributes } from '@cwt/schema/exercises';
 
-import { ExerciseDetailContext } from '../contexts/ExerciseDetailContext';
-import { CustomTheme } from '../theme';
-import { Text } from '../customText';
+import { ExerciseDetailContext } from '../../../contexts/ExerciseDetailContext';
+import { CustomTheme } from '../../../theme';
+import { Text } from '../../../customText';
 
-import Pill from './common/data-display/Pill';
+import Pill from '../../common/data-display/Pill';
 
 interface ExerciseCardProps {
   exercise: ExerciseResponse;

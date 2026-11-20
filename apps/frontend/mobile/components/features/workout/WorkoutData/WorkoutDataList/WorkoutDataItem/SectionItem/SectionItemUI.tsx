@@ -5,14 +5,14 @@ import type { Mode, Section } from '@cwt/schema/workouts';
 import { useAddSupersetMobile } from '@cwt/hooks';
 import { WorkoutDataItemContext } from '@cwt/context';
 
-import { CustomTheme } from '../../../../../../theme';
+import { CustomTheme } from '../../../../../../../theme';
 // import { Text } from '../../../../../../customText';
 
 import ExerciseItem from '../ExerciseItem';
 import SupersetItem from '../SupersetItem';
 import ReorderButtonGroup from '../../../../ReorderButtonGroup';
 import WorkoutItemMenu from '../WorkoutItemMenu';
-import TextInputWithEdit from '../../../../../common/forms/TextInputWithEdit';
+import TextInputWithEdit from '../../../../../../common/forms/TextInputWithEdit';
 import AddItemMenu from './AddItemMenu';
 
 interface SectionItemUIProps {

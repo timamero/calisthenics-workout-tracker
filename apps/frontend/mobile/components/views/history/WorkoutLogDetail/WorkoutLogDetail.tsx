@@ -13,7 +13,7 @@ import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { Text } from '../../../../customText';
 import { CustomTheme } from '../../../../theme';
 import { globalStyles } from '../../../../styles/global';
-import WorkoutData from '../../../../components/Workout/WorkoutData';
+import WorkoutData from '../../../features/workout/WorkoutData';
 import WorkoutLogDetailMenu from './WorkoutLogDetailMenu';
 import DeleteLogConfirmationOverlay from '../../../overlays/history/DeleteLogConfirmationOverlay';
 

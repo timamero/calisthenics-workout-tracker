@@ -13,10 +13,10 @@ import type { Mode } from '@cwt/schema/workouts';
 
 import type { CustomTheme } from '../../../../../theme';
 
-import WorkoutData from '../../../../Workout/WorkoutData';
-import WorkoutOverlays from '../../../../Workout/WorkoutOverlays';
+import WorkoutData from '../../../../features/workout/WorkoutData';
+import WorkoutOverlays from '../../../../overlays/workout/workout-log/WorkoutOverlays';
 import TextInputWithEdit from '../../../../common/forms/TextInputWithEdit';
-import BottomAppBar from '../../../../Workout/BottomAppBar';
+import BottomAppBar from '../../../../features/workout/BottomAppBar';
 
 interface WorkoutLogUIProps {
   scrollViewRef: RefObject<ScrollView | null>;

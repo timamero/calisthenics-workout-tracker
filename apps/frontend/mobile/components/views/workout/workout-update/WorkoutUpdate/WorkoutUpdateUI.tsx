@@ -13,8 +13,8 @@ import type { Mode } from '@cwt/schema/workouts';
 
 import type { CustomTheme } from '../../../../../theme';
 
-import WorkoutData from '../../../../Workout/WorkoutData';
-import WorkoutOverlays from '../../../../Workout/WorkoutOverlays';
+import WorkoutData from '../../../../features/workout/WorkoutData';
+import WorkoutOverlays from '../../../../overlays/workout/workout-log/WorkoutOverlays';
 import TextInputWithEdit from '../../../../common/forms/TextInputWithEdit';
 
 interface WorkoutUpdateUIProps {
