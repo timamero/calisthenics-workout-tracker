@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { View } from 'react-native';
 import { TextInput, useTheme } from 'react-native-paper';
+import { useRoute } from '@react-navigation/native';
 
 import { getSecondsInDuration } from '@cwt/utils';
 import { SetContext } from '@cwt/context';
@@ -21,10 +22,14 @@ export default function DurationInput({
   fieldName,
 }: DurationInputProps) {
   const theme = useTheme() as CustomTheme;
+  const route = useRoute();
 
   const set = useContext(SetContext)!.set;
   const handleRestFieldChange = useFieldInputChange(fieldName, 'duration');
   const mode = useWorkoutDraftStore((state) => state.mode);
+
+  const isDisabled = set.completed && route.name === 'Workout';
+
   if (mode === 'read') {
     const value = set.fields[fieldName]
       ? getSecondsInDuration(set.fields[fieldName])
@@ -49,17 +54,15 @@ export default function DurationInput({
         placeholderTextColor="grey"
         style={{
           height: 32,
-          backgroundColor: set.completed
+          backgroundColor: isDisabled
             ? theme.colors.gray2
             : theme.colors.background,
         }}
-        textColor={
-          set.completed ? theme.colors.dark2 : theme.colors.onBackground
-        }
+        textColor={isDisabled ? theme.colors.dark2 : theme.colors.onBackground}
         contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
         value={value}
         onChangeText={(text) => handleRestFieldChange(text)}
-        disabled={set.completed}
+        disabled={isDisabled}
       />
     </View>
   );

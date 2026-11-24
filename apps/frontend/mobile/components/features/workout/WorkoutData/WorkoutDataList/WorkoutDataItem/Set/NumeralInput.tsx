@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { View } from 'react-native';
 import { TextInput, useTheme } from 'react-native-paper';
+import { useRoute } from '@react-navigation/native';
 
 import { SetContext } from '@cwt/context';
 import { useFieldInputChange } from '@cwt/hooks';
@@ -24,6 +25,7 @@ export default function NumeralInput({
   trackingType = null,
 }: NumeralInputProps) {
   const theme = useTheme() as CustomTheme;
+  const route = useRoute();
   const set = useContext(SetContext)!.set;
 
   const handleNumeralFieldChange = useFieldInputChange(
@@ -32,6 +34,8 @@ export default function NumeralInput({
     fieldID,
   );
   const mode = useWorkoutDraftStore((state) => state.mode);
+
+  const isDisabled = set.completed && route.name === 'Workout';
 
   if (fieldName === 'value') {
     if (mode === 'read') {
@@ -66,16 +70,16 @@ export default function NumeralInput({
           placeholderTextColor="grey"
           keyboardType="number-pad"
           contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
-          disabled={set.completed}
+          disabled={isDisabled}
           style={{
             height: 32,
             width: 64,
-            backgroundColor: set.completed
+            backgroundColor: isDisabled
               ? theme.colors.gray2
               : theme.colors.background,
           }}
           textColor={
-            set.completed ? theme.colors.dark2 : theme.colors.onBackground
+            isDisabled ? theme.colors.dark2 : theme.colors.onBackground
           }
           value={
             set.fields.setProgressions!.find((field) => field.id === fieldID)!
@@ -118,17 +122,15 @@ export default function NumeralInput({
         placeholderTextColor="grey"
         keyboardType="number-pad"
         contentStyle={{ fontFamily: 'SourceCodePro-Regular' }}
-        disabled={set.completed}
+        disabled={isDisabled}
         style={{
           height: 32,
           width: 64,
-          backgroundColor: set.completed
+          backgroundColor: isDisabled
             ? theme.colors.gray2
             : theme.colors.background,
         }}
-        textColor={
-          set.completed ? theme.colors.dark2 : theme.colors.onBackground
-        }
+        textColor={isDisabled ? theme.colors.dark2 : theme.colors.onBackground}
         value={
           set.fields.reps === undefined || set.fields.reps === null
             ? '0'

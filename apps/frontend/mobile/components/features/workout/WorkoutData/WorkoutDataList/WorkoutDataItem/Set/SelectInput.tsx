@@ -1,6 +1,8 @@
 import { useContext, useState } from 'react';
 import { View } from 'react-native';
 import { useTheme, Menu } from 'react-native-paper';
+import { useRoute } from '@react-navigation/native';
+
 import { SetContext } from '@cwt/context';
 import {
   useSetProgressionsStore,
@@ -30,6 +32,7 @@ export default function SelectInput({
   trackingType = null,
 }: SelectInputProps) {
   const theme = useTheme() as CustomTheme;
+  const route = useRoute();
 
   const set = useContext(SetContext)!.set;
   const mode = useWorkoutDraftStore((state) => state.mode);
@@ -61,6 +64,8 @@ export default function SelectInput({
 
   const closeMenu = () => setVisible(false);
 
+  const isDisabled = set.completed && route.name === 'Workout';
+
   if (mode === 'read') {
     return (
       <TextInputReading
@@ -91,7 +96,7 @@ export default function SelectInput({
               borderWidth: 1,
               borderColor: theme.colors.outline,
             }}
-            disabled={set.completed}
+            disabled={isDisabled}
             labelStyle={{ fontFamily: 'SourceCodePro-Regular' }}
             onPress={openMenu}
             theme={{

@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 import { useTheme, Checkbox, IconButton } from 'react-native-paper';
+import { useRoute } from '@react-navigation/native';
 
 import { Mode } from '@cwt/schema/workouts';
 
@@ -32,6 +33,7 @@ export default function SetUI({
   onDeleteSetPress,
 }: SetUIProps) {
   const theme = useTheme() as CustomTheme;
+  const route = useRoute();
   const borderBottomWidth =
     setsLength && setsLength > 0 && setIndex !== setsLength - 1 ? 1 : 0;
   return (
@@ -92,7 +94,7 @@ export default function SetUI({
           <SetProgressionFieldsList />
         </View>
       </View>
-      {mode === 'log' && (
+      {(mode === 'log' || route.name === 'Update') && (
         <View
           style={{
             display: 'flex',
