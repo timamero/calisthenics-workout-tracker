@@ -12,7 +12,7 @@ import type { CustomTheme } from '../../../../../theme';
 import CustomButton from '../../../../common/buttons/CustomButton';
 import WorkoutUpdateUI from './WorkoutUpdateUI';
 
-export default function WorkoutDraft() {
+export default function WorkoutUpdate() {
   const theme = useTheme() as CustomTheme;
   const navigation = useNavigation<any>();
 
