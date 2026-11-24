@@ -34,7 +34,6 @@ export default function WorkoutUpdateUI({
 }: WorkoutUpdateUIProps) {
   const theme = useTheme() as CustomTheme;
   const { bottom } = useSafeAreaInsets();
-
   return (
     <View
       style={{
@@ -71,7 +70,6 @@ export default function WorkoutUpdateUI({
                 maxLength={70}
               />
             </View>
-            {/* Display workout metadata here */}
             <WorkoutData />
           </ScrollView>
         </KeyboardAvoidingView>
