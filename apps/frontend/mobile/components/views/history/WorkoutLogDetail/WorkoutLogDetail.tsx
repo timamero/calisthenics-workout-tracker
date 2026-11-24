@@ -35,6 +35,13 @@ export default function WorkoutLogDetail() {
 
   // --- State Management ---
   const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+  const setInitialWorkoutUpdateData = useWorkoutDraftStore(
+    (state) => state.setInitialWorkoutUpdateData,
+  );
+  const setMode = useWorkoutDraftStore((state) => state.setMode);
+  const setWorkoutTitle = useWorkoutDraftStore(
+    (state) => state.setWorkoutTitle,
+  );
 
   // --- Context ---
   const workout = useWorkoutLogDetailContextMobile().workout;
@@ -87,7 +94,10 @@ export default function WorkoutLogDetail() {
   };
 
   const handleUpdatePress = () => {
-    console.log('clicked update log');
+    setInitialWorkoutUpdateData(workout.workout_data.data);
+    setWorkoutTitle(workout.title || '');
+    setMode('edit');
+    navigation.replace('UpdateStack', { screen: 'UpdateStack' });
   };
   return (
     <View style={[global.container, styles.screenContainer]}>
