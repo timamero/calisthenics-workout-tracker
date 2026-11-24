@@ -71,7 +71,7 @@ const RootStack = createNativeStackNavigator({
         },
         UpdateStack: {
           screen: UpdateStack,
-          // options: { headerShown: false },
+          options: { headerShown: false },
         },
         WorkoutDetails: {
           screen: WorkoutLogDetailScreen,
