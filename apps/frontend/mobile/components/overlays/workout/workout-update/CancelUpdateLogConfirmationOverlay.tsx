@@ -1,27 +1,24 @@
-import { useState } from 'react';
 import {
   useWorkoutContextMobile,
   useWorkoutLogDetailContextMobile,
 } from '@cwt/hooks';
-import {
-  useAuthStore,
-  useWorkoutLibraryStore,
-  useWorkoutDraftStore,
-} from '@cwt/state/stores';
+// import {
+//   useAuthStore,
+//   useWorkoutLibraryStore,
+//   useWorkoutDraftStore,
+// } from '@cwt/state/stores';
 import { useNavigation } from '@react-navigation/native';
 
 import ConfirmationDialog from '../../../common/feedback/ConfirmationDialog';
 
 export default function CancelUpdateLogConfirmationOverlay() {
-  const [isCancelUpdateLogOverlayVisible, setIsCancelUpdateLogOverlayVisible] =
-    useState<boolean>(false);
   // --- UI Hooks ---
   const navigation = useNavigation<any>();
 
   // --- State Management ---
-  const supabaseSession = useAuthStore((state) => state.session);
-  const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout); // replace with updateWorkout action
-  const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+  // const supabaseSession = useAuthStore((state) => state.session);
+  // const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout); // replace with updateWorkout action
+  // const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
 
   // --- Context ---
   const workout = useWorkoutLogDetailContextMobile().workout;
@@ -49,10 +46,10 @@ export default function CancelUpdateLogConfirmationOverlay() {
 
   // --- Variables ---
   const workoutLogId = workout.id;
-  // const isDeleteLogOverlayVisible =
-  //   workoutOverlayHandlers.isDeleteLogOverlayVisible;
-  // const setIsDeleteLogOverlayVisible =
-  //   workoutOverlayHandlers.setIsDeleteLogOverlayVisible;
+  const isCancelUpdateLogOverlayVisible =
+    workoutOverlayHandlers.isCancelUpdateLogOverlayVisible;
+  const setIsCancelUpdateLogOverlayVisible =
+    workoutOverlayHandlers.setIsCancelUpdateLogOverlayVisible;
 
   // --- Handlers ---
   const handleConfirmationPress = async () => {
@@ -61,9 +58,9 @@ export default function CancelUpdateLogConfirmationOverlay() {
 
   return (
     <ConfirmationDialog
-      title="Save Changes?"
-      message="Do you want to save the updates to this workout log?"
-      confirmButtonLabel="Save"
+      title="Discard changes?"
+      message="You have unsaved changes. If you go back now, your edits will be lost."
+      confirmButtonLabel="Discard changes"
       isVisible={isCancelUpdateLogOverlayVisible || false}
       handleHideDialog={setIsCancelUpdateLogOverlayVisible}
       onConfirmationPress={handleConfirmationPress}

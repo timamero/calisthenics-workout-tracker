@@ -86,13 +86,13 @@ describe('CancelUpdateLogConfirmationOverlay', () => {
     jest.clearAllMocks();
   });
 
-  it.skip('renders when isCancelUpdateLogOverlayVisible is true', () => {
+  it('renders when isCancelUpdateLogOverlayVisible is true', () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
     expect(screen.getByText(/Discard changes\?/i)).toBeOnTheScreen();
     expect(
       screen.getByText(
-        /You have unsaved changes\. If you go back now, your edits will be lost\./i,
+        /You have unsaved changes. If you go back now, your edits will be lost./i,
       ),
     ).toBeOnTheScreen();
   });
