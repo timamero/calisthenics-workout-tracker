@@ -107,7 +107,7 @@ describe('CancelUpdateLogConfirmationOverlay', () => {
     });
   });
 
-  it.skip('returns to workout details in read mode on discard', async () => {
+  it('returns to workout details in read mode on discard', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
     fireEvent.press(screen.getByText('Discard changes', { exact: true }));

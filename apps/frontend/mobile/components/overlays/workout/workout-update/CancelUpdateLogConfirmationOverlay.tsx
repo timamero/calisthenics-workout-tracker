@@ -21,6 +21,7 @@ export default function CancelUpdateLogConfirmationOverlay() {
   const resetWorkoutUpdate = useWorkoutDraftStore(
     (state) => state.resetWorkoutUpdate,
   );
+  const setMode = useWorkoutDraftStore((state) => state.setMode);
 
   // --- Context ---
   const workout = useWorkoutLogDetailContextMobile().workout;
@@ -56,6 +57,8 @@ export default function CancelUpdateLogConfirmationOverlay() {
   // --- Handlers ---
   const handleConfirmationPress = async () => {
     resetWorkoutUpdate();
+    setMode('read');
+    navigation.replace('WorkoutDetails');
   };
 
   return (
