@@ -2,11 +2,11 @@ import {
   useWorkoutContextMobile,
   useWorkoutLogDetailContextMobile,
 } from '@cwt/hooks';
-// import {
-//   useAuthStore,
-//   useWorkoutLibraryStore,
-//   useWorkoutDraftStore,
-// } from '@cwt/state/stores';
+import {
+  // useAuthStore,
+  // useWorkoutLibraryStore,
+  useWorkoutDraftStore,
+} from '@cwt/state/stores';
 import { useNavigation } from '@react-navigation/native';
 
 import ConfirmationDialog from '../../../common/feedback/ConfirmationDialog';
@@ -18,7 +18,9 @@ export default function CancelUpdateLogConfirmationOverlay() {
   // --- State Management ---
   // const supabaseSession = useAuthStore((state) => state.session);
   // const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout); // replace with updateWorkout action
-  // const resetWorkout = useWorkoutDraftStore((state) => state.resetWorkout);
+  const resetWorkoutUpdate = useWorkoutDraftStore(
+    (state) => state.resetWorkoutUpdate,
+  );
 
   // --- Context ---
   const workout = useWorkoutLogDetailContextMobile().workout;
@@ -53,7 +55,7 @@ export default function CancelUpdateLogConfirmationOverlay() {
 
   // --- Handlers ---
   const handleConfirmationPress = async () => {
-    console.log('Pressed discard changes');
+    resetWorkoutUpdate();
   };
 
   return (

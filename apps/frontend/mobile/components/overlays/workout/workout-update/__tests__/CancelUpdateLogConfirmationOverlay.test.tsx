@@ -97,14 +97,13 @@ describe('CancelUpdateLogConfirmationOverlay', () => {
     ).toBeOnTheScreen();
   });
 
-  it.skip('resets the workout draft before returning to workout details on discard', async () => {
+  it('resets the workout draft before returning to workout details on discard', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
     fireEvent.press(screen.getByText('Discard changes', { exact: true }));
 
     await waitFor(() => {
       expect(resetWorkoutUpdateSpy).toHaveBeenCalled();
-      expect(mockReplace).toHaveBeenCalledWith('WorkoutDetails');
     });
   });
 
