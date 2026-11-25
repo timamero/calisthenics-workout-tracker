@@ -199,7 +199,7 @@ describe('CancelUpdateLogConfirmationOverlay', async () => {
     expect(message).toBeInTheDocument();
   });
 
-  it('resets workout draft to inital state before redirect to update route', async () => {
+  it('resets workout draft to inital state before redirect to history route', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
     fireEvent.click(screen.getByRole('button', { name: /^Discard changes$/i }));
