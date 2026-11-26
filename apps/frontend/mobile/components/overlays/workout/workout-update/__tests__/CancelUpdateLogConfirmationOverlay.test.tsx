@@ -118,17 +118,17 @@ describe('CancelUpdateLogConfirmationOverlay', () => {
     });
   });
 
-  it.skip('dismisses the dialog without navigating when keeping the edits', async () => {
+  it('dismisses the dialog without navigating when keeping the edits', async () => {
     render(<CancelUpdateLogConfirmationOverlay />);
 
-    fireEvent.press(screen.getByText('Cancel', { exact: true }));
+    fireEvent.press(screen.getByText('Keep editing', { exact: true }));
 
     await waitFor(() => {
       expect(setIsCancelUpdateLogOverlayVisibleSpy).toHaveBeenCalledWith(false);
+      expect(mockReplace).not.toHaveBeenCalled();
+      expect(resetWorkoutUpdateSpy).not.toHaveBeenCalled();
+      expect(setModeSpy).not.toHaveBeenCalled();
     });
-
-    expect(mockReplace).not.toHaveBeenCalled();
-    expect(resetWorkoutUpdateSpy).not.toHaveBeenCalled();
   });
 
   it.skip('does not update the workout when discarding changes', async () => {

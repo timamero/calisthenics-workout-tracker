@@ -2,11 +2,7 @@ import {
   useWorkoutContextMobile,
   useWorkoutLogDetailContextMobile,
 } from '@cwt/hooks';
-import {
-  // useAuthStore,
-  // useWorkoutLibraryStore,
-  useWorkoutDraftStore,
-} from '@cwt/state/stores';
+import { useWorkoutDraftStore } from '@cwt/state/stores';
 import { useNavigation } from '@react-navigation/native';
 
 import ConfirmationDialog from '../../../common/feedback/ConfirmationDialog';
@@ -16,8 +12,6 @@ export default function CancelUpdateLogConfirmationOverlay() {
   const navigation = useNavigation<any>();
 
   // --- State Management ---
-  // const supabaseSession = useAuthStore((state) => state.session);
-  // const deleteWorkout = useWorkoutLibraryStore((state) => state.deleteWorkout); // replace with updateWorkout action
   const resetWorkoutUpdate = useWorkoutDraftStore(
     (state) => state.resetWorkoutUpdate,
   );
@@ -66,6 +60,7 @@ export default function CancelUpdateLogConfirmationOverlay() {
       title="Discard changes?"
       message="You have unsaved changes. If you go back now, your edits will be lost."
       confirmButtonLabel="Discard changes"
+      cancelButtonLabel="Keep editing"
       isVisible={isCancelUpdateLogOverlayVisible || false}
       handleHideDialog={setIsCancelUpdateLogOverlayVisible}
       onConfirmationPress={handleConfirmationPress}
