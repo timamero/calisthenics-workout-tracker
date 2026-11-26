@@ -6,6 +6,7 @@ interface ConfirmationDialogProps {
   message: string;
   title: string;
   confirmButtonLabel: string;
+  cancelButtonLabel?: string;
   handleHideDialog: React.Dispatch<React.SetStateAction<boolean>>;
   onConfirmationPress: () => void;
 }
@@ -15,6 +16,7 @@ export default function ConfirmationDialog({
   message,
   title,
   confirmButtonLabel,
+  cancelButtonLabel = 'Cancel',
   handleHideDialog,
   onConfirmationPress,
 }: ConfirmationDialogProps) {
@@ -26,7 +28,9 @@ export default function ConfirmationDialog({
           <Text variant="bodyMedium">{message}</Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={() => handleHideDialog(false)}>Cancel</Button>
+          <Button onPress={() => handleHideDialog(false)}>
+            {cancelButtonLabel}
+          </Button>
           <Button
             onPress={() => {
               onConfirmationPress();
