@@ -131,11 +131,8 @@ describe('CancelUpdateLogConfirmationOverlay', () => {
     });
   });
 
-  it.skip('does not update the workout when discarding changes', async () => {
-    const updateWorkoutLogSpy = jest.spyOn(
-      workoutsService,
-      'deleteWorkoutLog', // replace with updateWorkoutLog after it is created
-    );
+  it('does not update the workout when discarding changes', async () => {
+    const updateWorkoutLogSpy = jest.spyOn(workoutsService, 'updateWorkoutLog');
 
     render(<CancelUpdateLogConfirmationOverlay />);
 
@@ -143,9 +140,8 @@ describe('CancelUpdateLogConfirmationOverlay', () => {
 
     await waitFor(() => {
       expect(resetWorkoutUpdateSpy).toHaveBeenCalled();
+      expect(updateWorkoutLogSpy).not.toHaveBeenCalled();
+      expect(updateWorkoutSpy).not.toHaveBeenCalled();
     });
-
-    expect(updateWorkoutLogSpy).not.toHaveBeenCalled();
-    expect(updateWorkoutSpy).not.toHaveBeenCalled();
   });
 });

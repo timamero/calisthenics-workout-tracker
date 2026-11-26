@@ -4,6 +4,7 @@ import {
   postWorkoutBuild as apiPostWorkoutBuild,
   postWorkoutLog as apiPostWorkoutLog,
   deleteWorkoutLog as apiDeleteWorkoutLog,
+  updateWorkoutLog as apiUpdateWorkoutLog,
 } from '@cwt/api';
 import type {
   WorkoutBuildResponse,
@@ -79,4 +80,18 @@ export async function deleteWorkoutLog(
     'Mobile: Full stack development environment, deleting log from database.',
   );
   return apiDeleteWorkoutLog(baseUrl, token, body);
+}
+
+export async function updateWorkoutLog(
+  token: string,
+  body: BodyInit,
+): Promise<WorkoutLogResponse | null> {
+  if (environment === 'local-isolated') {
+    console.log('Mobile: Local environment, return workout log body.');
+    return JSON.parse(body as string);
+  }
+  console.log(
+    'Mobile: Full stack development environment, updating log in database.',
+  );
+  return apiUpdateWorkoutLog(baseUrl, token, body);
 }
